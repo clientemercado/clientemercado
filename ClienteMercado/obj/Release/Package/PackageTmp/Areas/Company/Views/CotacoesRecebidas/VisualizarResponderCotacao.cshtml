@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Responder a Cotacao Recebida";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <!-- BEGIN VALIDATION STATES-->
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="far fa-edit"></i> Responder a Cotação
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <!-- BEGIN FORM-->
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group" id="cabecalho" style="">
+                        <label class="col-md-2 control-label"><b>Central Compras:</b></label>
+                        <div class="col-md-4">
+                            <h5>0001 - GRUPO de COMPRAS NOVEMBRO/2018</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><b>Ramo Atividade:</b></label>
+                        <div class="col-md-4">
+                            <h5>Materiais de Construção / Construção Civil</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><b>Administradora:</b></label>
+                        <div class="col-md-4">
+                            <h5>ABC Materiais de Construção Ltda.</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><b>Cidade:</b></label>
+                        <div class="col-md-4">
+                            <h5>Vitória-ES</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><b>Usuário Resp:</b></label>
+                        <div class="col-md-4">
+                            <h5>Manoelino Maia</h5>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="@Url.Action("Index", "CotacoesRecebidas", new { Area = "Company" })" class="btn default button-previous">
+                                    <i class="fas fa-arrow-left"></i> Voltar
+                                </a>
+                                <a href="@Url.Action("EmpresasParticipantesCentralCompras", "CotacoesRecebidas", new { Area = "Company" })" class="btn  blue button-submit">
+                                    Empresas Cotantes <i class="fas fa-clipboard-list"></i>
+                                </a>
+                                <a href="javascript:;" class="btn btn-warning">Responder a Cotação <i class="fa fa-sign-out"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th class="numeric">
+                                            <input type="checkbox" class="icheck">
+                                        </th>
+                                        <th width="20%">
+                                            Produto
+                                        </th>
+                                        <th>
+                                            Marca
+                                        </th>
+                                        <th class="numeric">
+                                            Quant.
+                                        </th>
+                                        <th class="numeric">
+                                            Unid.
+                                        </th>
+                                        <th class="numeric">
+                                            R$ Vlr Tabela
+                                        </th>
+                                        <th class="numeric">
+                                            R$ Vlr Diferenciado
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="icheck">
+                                        </td>
+                                        <td>
+                                            Cimento CPII-32
+                                        </td>
+                                        <td>
+                                            qualquer
+                                        </td>
+                                        <td class="numeric">
+                                            1.000,00
+                                        </td>
+                                        <td class="numeric">
+                                            <input type="text" name="name" id="inUnidadeItemPedido" data-required="1" size="10" value="Sc 50Kg" class="form-control" />
+                                        </td>
+                                        <td class="numeric">
+                                            <input type="text" name="name" id="inValorTabelaItemPedido" data-required="1" size="10" value="0,00" class="form-control" />
+                                        </td>
+                                        <td class="numeric">
+                                            <input type="text" name="name" id="inValorRespostaItemPedido" data-required="1" size="10" value="0,00" class="form-control" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="icheck">
+                                        </td>
+                                        <td>
+                                            Cimentcola
+                                        </td>
+                                        <td>
+                                            qualquer
+                                        </td>
+                                        <td class="numeric">
+                                            200,00
+                                        </td>
+                                        <td class="numeric">
+                                            <input type="text" name="name" id="inUnidadeItemPedido" data-required="1" size="10" value="Sc 20Kg" class="form-control" />
+                                        </td>
+                                        <td class="numeric">
+                                            <input type="text" name="name" id="inUnidadeItemPedido" data-required="1" size="10" value="0,00" class="form-control" />
+                                        </td>
+                                        <td class="numeric">
+                                            <input type="text" name="name" id="inUnidadeItemPedido" data-required="1" size="10" value="0,00" class="form-control" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" align="right"><b>Total:</b>&nbsp;</td>
+                                        <td class="numeric">
+                                            <input type="text" name="name" id="inUnidadeItemPedido" data-required="1" size="10" value="0,00" class="form-control" />
+                                        </td>
+                                        <td class="numeric">
+                                            <input type="text" name="name" id="inUnidadeItemPedido" data-required="1" size="10" value="0,00" class="form-control" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <label class=""><b>Perguntas do Comprador:</b></label>
+                        </div>
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th width="100%">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- END FORM-->
+        </div>
+    </div>
+    <!-- END VALIDATION STATES-->
+</div>

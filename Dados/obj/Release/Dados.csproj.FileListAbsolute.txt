@@ -1,0 +1,12 @@
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\Dominio.dll.config
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\Dominio.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\Dominio.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\EntityFramework.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\EntityFramework.SqlServer.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\Modelo.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\Modelo.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\EntityFramework.xml
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\bin\Release\EntityFramework.SqlServer.xml
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\obj\Release\Dados.csprojResolveAssemblyReference.cache
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\obj\Release\Dominio.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dados\obj\Release\Dominio.pdb

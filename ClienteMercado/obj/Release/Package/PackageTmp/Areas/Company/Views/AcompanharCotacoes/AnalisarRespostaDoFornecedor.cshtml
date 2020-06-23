@@ -1,0 +1,675 @@
+﻿@model  ClienteMercado.UI.Core.ViewModel.DadosDaCotacaoViewModel
+
+@{
+    ViewBag.Title = "Analisar Resposta Do Fornecedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.css" />
+
+<style>
+    .HideColHead {
+        display: none
+    }
+
+    .HideCol {
+        display: none
+    }
+
+    th {
+        background-color: #CDC9C9;
+        color: white;
+    }
+
+    .status {
+        font-size: 9pt;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    .sweet-alert button.cancel {
+        background-color: #337ab7;
+        color: white;
+    }
+
+        .sweet-alert button.cancel:hover {
+            background-color: #337ab7;
+            color: white;
+        }
+
+    .ui-pnotify {
+        top: 100px; /*Replace the 25px with the top that you need*/
+        right: 25px;
+        position: absolute;
+        height: auto;
+        z-index: 9999
+    }
+
+        .ui-pnotify.customsuccess .ui-pnotify-container {
+            background-color: #337ab7 !important;
+        }
+
+        .ui-pnotify.customsuccess .ui-pnotify-text {
+            font-size: 11px
+        }
+
+        .ui-pnotify.customsuccess .ui-pnotify-title,
+        .ui-pnotify.customsuccess .ui-pnotify-text,
+        .ui-pnotify.customsuccess .ui-pnotify-icon,
+        .ui-pnotify.customsuccess .ui-pnotify-sticker,
+        .ui-pnotify.customsuccess .ui-pnotify-closer {
+            color: #FFF !important;
+        }
+</style>
+
+<div class="row">
+    @*<div class="col-md-12">*@
+    <!-- BEGIN VALIDATION STATES-->
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fas fa-clipboard-list"></i> Acompanhar Cotações / Analisar Resposta Do Fornecedor
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <!-- BEGIN FORM-->
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group" id="cabecalho" style="">
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Central Compras:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inNomeCentralCompras</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Ramo Atividade:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inRamoAtividadeCC</h5>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group" id="cabecalho" style="">
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Fornecedor:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inNomeFantasiaEmpresaCotada</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Responsável:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inNomeUsuarioRespDaEmpresaCotada</h5>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="@Url.Action("MapaDaCotacao", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = Model.iCM })" class="btn default button-previous">
+                                    <i class="fas fa-arrow-left"></i> Voltar
+                                </a>
+
+                                @{
+                                    if (Model.inCodEmpresaLogada == Model.inCodEmpresaADM)
+                                    {
+                                        if (Model.inCodEmpresaFornecedoraComRespostaEmAnalise > 0)
+                                        {
+                                            if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
+                                            {
+                                                if (Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados == Model.quantidadeEmpresasParticipantesDestaCotacao)
+                                                {
+                                                    <a href="#" id="" class="btn btn-success"> <i class="far fa-check-circle"></i> Negociação Aceita</a>
+                                                    <a href="#" id="inEfetuarPedido" class="btn blue button-submit"> <i class="fas fa-file-signature"></i> Fazer Pedido</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" id="inSolicitarConfirmacao" class="btn  blue button-submit"> <i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados == Model.quantidadeEmpresasParticipantesDestaCotacao)
+                                                {
+                                                    <a href="#" id="" class="btn btn-info"> <i class="far fa-check-circle"></i> <b>Cotação Encerrada</b></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" id="inConfirmarAceiteDaNegociacao" class="btn btn-warning"> <i class="fas fa-search"></i> Cotação em Análise</a>
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (Model.possuiContraProposta == "sim")
+                                            {
+                                                <a href="#" id="inCancelarContraProposta" class="btn btn-danger"> <i class="far fa-edit"></i> Cancelar Contra-Proposta</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" id="inEnviarContraProposta" class="btn blue button-submit"> <i class="far fa-edit"></i> Contra-Proposta</a>
+                                            }
+
+                                            <a href="#" id="inSolicitarConfirmacao" class="btn blue button-submit"> <i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                        }
+                                    }
+
+                                    if ((Model.existeSolicitacaoDeConfirmacaoAprovandoRespostaDosFornecedores == "sim") && (Model.inCodEmpresaLogada != Model.inCodEmpresaADM))
+                                    {
+                                        if (Model.negociacaoDoAdmComFornecedoresAceita == "nao")
+                                        {
+                                            if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
+                                            {
+                                                <a href="#" id="inConfirmarAceiteDaNegociacao" class="btn btn-warning"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
+                                                <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" id="inConfirmarAceiteDaNegociacao" class="btn btn-warning"> <i class="fas fa-search"></i> Cotação em Análise</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
+                                            {
+                                                <a href="#" id="" class="btn btn-success"> <i class="far fa-check-circle"></i> Negociação Aceita</a>
+                                            }
+                                            else
+                                            {
+                                                if (Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados == Model.quantidadeEmpresasParticipantesDestaCotacao)
+                                                {
+                                                    <a href="#" id="" class="btn btn-info"> <i class="far fa-check-circle"></i> <b>Cotação Encerrada</b></a>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            </div>
+
+                            @{
+                                if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
+                                {
+                                    <div class="col-md-2">
+                                        <font color="#3297E0" size="3"><b>Participantes:</b></font>&nbsp;&nbsp;<font size="3"><b>@Model.quantidadeEmpresasParticipantesDestaCotacao</b></font>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <font color="#3297E0" size="3"><b>Já confirmaram:</b></font>&nbsp;&nbsp;<font size="3" color="@Model.corQuantidadeConfirmada"><b>@Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados</b></font>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-3"></div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <div id="statusParticipantes" class="form-group" style="display:none;">
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table id="gridEmpresasParceiras" class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th data-column-id="" data-type="numeric" data-identifier="true" data-visible="false" data-width="4%">&nbsp;</th>
+                                        <th data-column-id="" data-width="26%" data-header-align="left" data-align="left">Empresa Parceira</th>
+                                        <th data-column-id="" data-width="15%" data-header-align="left" data-align="left">Status</th>
+                                        <th data-column-id="" data-width="10%" data-header-align="left" data-align="left"></th>
+                                        <th data-column-id="" data-width="45%" data-header-align="left" data-align="left"></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table id="gridItesnCotadosRespondidos" class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th data-column-id="idItemCotacao" data-type="numeric" data-identifier="true" data-visible="false" data-width="4%">&nbsp;</th>
+                                        <th data-column-id="descricaoProdutoCotacao" data-width="26%" data-header-align="left" data-align="left">Produto</th>
+                                        <th data-column-id="marcaProduto" data-width="15%" data-header-align="left" data-align="left">Marca</th>
+                                        <th data-column-id="quantidadeProdutoCotacao" data-width="10%" data-header-align="center" data-align="right">Quant.</th>
+                                        <th data-column-id="unidadeProdutoCotacao" data-width="10%" data-header-align="center" data-align="center">Unid.</th>
+                                        <th data-column-id="valorTabela" data-width="15%" data-header-align="center" data-align="right">R$ Vlr Tabela</th>
+                                        <th data-column-id="valorDiferenciado" data-width="20%" data-header-align="center" data-align="right">R$ Vlr Diferenciado</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <font color="#3297E0"><label class=""><i class="far fa-comments"></i> <b>Pergunte ao Fornecedor:</b></label></font>
+                        </div>
+                        <div class="portlet-body flip-scroll col-md-12">
+                            @{
+                                if (Model.inCodEmpresaADM == Model.inCodEmpresaLogada)
+                                {
+                                    <div id="texto_chat_alternativo" style="border:0px;">
+                                        <input type="text" name="name" id="TEXTO_CHAT_COTACAO_USUARIO_COTANTE_ALTERNATIVO" data-required="1" size="20" class="form-control cotacao" placeholder="digite sua pergunta..." />
+                                    </div>
+                                    <div id="texto_chat_principal" style="border:0px; display:none">
+                                        <input type="text" name="name" id="TEXTO_CHAT_COTACAO_USUARIO_COTANTE" data-required="1" size="20" class="form-control cotacao" placeholder="digite sua pergunta..." />
+                                        <div align="right"><small class="caracteres"></small></div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div id="texto_chat_alternativo" style="border:0px;">
+                                        <input type="text" name="name" id="TEXTO_CHAT_COTACAO_USUARIO_COTANTE_ALTERNATIVO" data-required="1" size="20" class="form-control cotacao" placeholder="digite sua pergunta..." disabled />
+                                    </div>
+                                    <div id="texto_chat_principal" style="border:0px; display:none">
+                                        <input type="text" name="name" id="TEXTO_CHAT_COTACAO_USUARIO_COTANTE" data-required="1" size="20" class="form-control cotacao" placeholder="digite sua pergunta..." disabled />
+                                        <div align="right"><small class="caracteres"></small></div>
+                                    </div>
+                                }
+                            }
+                            <br />
+                            <!-- TRANSCRIÇÃO do DIÁLOGO ENTRE COTANTE e FORNECEDOR -->
+                            <div role="tabpanel" class="tab-pane active" id="dialogos">
+                                <table id="dialogo_entre_cotante_efornecedor" class="table table-striped table-hover"></table>
+                            </div>
+                        </div>
+                        <div id="botao_enviar" class="col-md-12" style="align-content:center; display:none">
+                            <a href="#" id="enviarPerguntaOuResposta" class="btn btn-primary btn-large" title="Enviar conteúdo digitado como PERGUNTA ou RESPOSTA"><i class="fa fa-share"></i> Enviar</i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+            <input type="hidden" id="inCCC" value="@Model.cCC" />
+            <input type="hidden" id="ineA" value="@Model.ineACriptografado" />
+            <input type="hidden" id="inICM" value="@Model.iCM" />
+            <input type="hidden" id="iniCCF" value="@Model.iCCF" />
+            <input type="hidden" id="inCodigoEmpresaAdmCC" value="@Model.inCodEmpresaADM" />
+            <input type="hidden" id="inCodigoEmpresaLogada" value="@Model.inCodEmpresaLogada" />
+            <input type="hidden" id="inIdEmpresaFornecedora" value="@Model.idEmpresaFornecedoraCotada" />
+            <input type="hidden" id="inCodigoEmpresaFornecedoraComRespostaEmAnalise" value="@Model.inCodEmpresaFornecedoraComRespostaEmAnalise" />
+            <input type="hidden" id="idUsuarioEmpresaFornecedoraCotada" value="@Model.idUsuarioEmpresaFornecedoraCotada" />
+            <input type="hidden" id="inVerParticipantes" value="" />
+            <input type="hidden" id="inPossuiContraPropostaEnviada" value="@Model.possuiContraProposta" />
+            <input type="hidden" id="ID_FORNECEDOR_COTACAO_ANALISADA" value="0" />
+        </div>
+    </div>
+    <!-- END VALIDATION STATES-->
+    @*</div>*@
+</div>
+
+<script>
+    jQuery(document).ready(function () {
+
+        /*
+         CONTINUAR AQUI...
+
+         A FAZER:
+           0) PARA OS ASSOCIADOS, QUANDO HOUVER CONTRA-PROPOSTA, MOSTRAR AVISO;
+           1) CRIAR NOVO GRID HTML COM BOOTGRID PARA PREENCHER SEPARADAMENTE NESTE GRID A CONTRA-PROPOSTA. EXIBIR EM UMA COR DIFERENTE(PENSAR A RESPEITO);
+           2) AO FAZER O PEDIDO:
+              - TICAR TODOS OS ITENS COM "V" VERDE DE ACEITE E SETAR FLAG DE ACEITE NO BANCO PRO USUÁRIO ADM;
+              - GERAR O PEDIDO;
+              - ENVIAR COMUNICAÇÃO AO FORNECEDOR;
+         */
+
+        carregarGrid();
+        carregarChat();
+
+        //Desabilita / Habilita o campo para digitação do texto de PERGUNTA / RESPOSTA
+        $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE_ALTERNATIVO").focus(function () {
+            $("#texto_chat_alternativo").hide();
+            $("#texto_chat_principal").show();
+            $("#botao_enviar").show();
+
+            $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").val('');
+            $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").focus();
+        });
+
+        $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").focus(function () {
+            $("#botao_enviar").show();
+        });
+
+        //SOLICITAR CONFIRMAÇÃO aos demais PARTICIPANTES da COTAÇÃO, PRETENCENTES À CENTRAL COMPRAS
+        $("#inSolicitarConfirmacao").click(function () {
+            debugger;
+
+            if ($('#inPossuiContraPropostaEnviada').val() == 'sim') {
+                swal({ title: "ATENÇÃO:\n\nVocê enviou uma CONTRA-PROPOSTA a esse fornecedor.\n\Favor aguardar a resposta do fornecedor ou clique em CANCELAR CONTRA-PROPOSTA e o botão de SOLICITAR CONFIRMAÇÃO será liberado.", type: "warning", confirmButtonColor: "#337ab7" });
+            }
+            else {
+                $.ajax({
+                    url: "/AcompanharCotacoes/SolicitarConfirmacaoDaCotacaoAosDemaisCotantes",
+                    dataType: 'json',
+                    cache: false,
+                    async: true,
+                    data: {
+                        'cCC': $('#inCCC').val(),
+                        'eA': $('#ineA').val(),
+                        'iCM': $("#inICM").val(),
+                        'idFor': $('#inIdEmpresaFornecedora').val()
+                    },
+                    success: function (data) {
+                        debugger;
+
+                        if (data.confirmacaoSolicitada == "Ok") {
+
+                            //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                            new PNotify({
+                                title: 'Sucesso!',
+                                text: 'SOLICITAÇÕES de CONFIRMAÇÃO da Cotação enviadas com Sucesso!',
+                                type: 'success',
+                                styling: 'bootstrap3',
+                                icons: 'bootstrap3',
+                                addclass: 'customsuccess',
+                                animateSpeed: 'fast',
+                                mouseReset: true,
+                                Buttons: {
+                                    closer: true
+                                }
+                            });
+
+                            /*
+                             OBS: DEMAIS COMPORTAMENTOS AQUI!...
+                             */
+
+                            //RECARREGAR a PÁGINA
+                            window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
+                        }
+                    }
+                });
+            }
+        });
+
+        //Botão GERAR CONTRA-PROPOSTA para a EMPRESA FORNECEDORA onde for clicado
+        $("#inEnviarContraProposta").click(function () {
+            $.ajax({
+                url: "/AcompanharCotacoes/GerarContraPropostaAoFornecedorEmQuestao",
+                dataType: 'json',
+                cache: false,
+                async: true,
+                data: {
+                    'idCotacaoFilha': $("#iniCCF").val(),
+                    'idFornecedor': $('#inIdEmpresaFornecedora').val(),
+                    'cCC': $('#inCCC').val(),
+                    'codEmpresaAdm': $('#inCodigoEmpresaAdmCC').val()
+
+                },
+                success: function (data) {
+                    debugger;
+
+                    if (data.contraPropostaGerada == "Ok") {
+                        //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                        new PNotify({
+                            title: 'SUCESSO!',
+                            text: 'CONTRA PROPOSTA enviada ao FORNECEDOR com SUCESSO!',
+                            type: 'success',
+                            styling: 'bootstrap3',
+                            icons: 'bootstrap3',
+                            addclass: 'customsuccess',
+                            animateSpeed: 'fast',
+                            mouseReset: true,
+                            Buttons: {
+                                closer: true
+                            }
+                        });
+
+                        //RECARREGAR a PÁGINA
+                        window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
+                    }
+                }
+            });
+        });
+
+        //Botão CANCELAR ENVIO da CONTRA-PROPOSTA para a EMPRESA FORNECEDORA
+        $("#inCancelarContraProposta").click(function () {
+            $.ajax({
+                url: "/AcompanharCotacoes/CancelarContraPropostaAoFornecedorEmQuestao",
+                dataType: 'json',
+                cache: false,
+                async: true,
+                data: {
+                    'idCotacaoFilha': $("#iniCCF").val()
+                },
+                success: function (data) {
+                    debugger;
+
+                    if (data.contraPropostaGeradaCancelada == "Ok") {
+                        //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                        new PNotify({
+                            title: 'SUCESSO!',
+                            text: 'A CONTRA PROPOSTA enviada ao FORNECEDOR foi CANCELADA com SUCESSO!',
+                            type: 'success',
+                            styling: 'bootstrap3',
+                            icons: 'bootstrap3',
+                            addclass: 'customsuccess',
+                            animateSpeed: 'fast',
+                            mouseReset: true,
+                            Buttons: {
+                                closer: true
+                            }
+                        });
+
+                        //RECARREGAR a PÁGINA
+                        window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
+                    }
+                }
+            });
+        });
+
+        //Registra a PERGUNTA ou RESPOSTA, enviando-a ao FORNECEDOR COTADO
+        $("#enviarPerguntaOuResposta").click(function () {
+            if ($("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").val() != '') {
+                debugger;
+
+                textoPerguntaOuResposta = $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").val();
+
+                $.ajax({
+                    url: "/AcompanharCotacoes/GravarDialogoEntreCotanteDaCCEFornecedor",
+                    dataType: 'json',
+                    cache: false,
+                    async: true,
+                    data: {
+                        'idCotacaoFilha': $("#iniCCF").val(),
+                        'idUsuarioEmpresaCotada': $('#idUsuarioEmpresaFornecedoraCotada').val(),
+                        'textoPerguntaOuResposta': textoPerguntaOuResposta
+                    },
+                    success: function (data) {
+                        debugger;
+
+                        $("#texto_chat_principal").val('');
+                        $("#texto_chat_principal").hide();
+                        $("#texto_chat_alternativo").hide();
+                        $("#botao_enviar").hide();
+                        $('#dialogo_entre_cotante_efornecedor td').parent().remove(); //Limpar / Remover linha
+
+                        carregarChat();
+                    }
+                });
+            }
+            else {
+                alert("ATENÇÃO!!\n\nDigite a PERGUNTA ou RESPOSTA a ser encaminhada ao vendedor!");
+
+                $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").val('');
+                $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").focus();
+            }
+        });
+
+        //BOTÃO de CONFIRMAÇÃO de ACEITE da NEGOCIAÇÃO
+        $("#inConfirmarAceiteDaNegociacao").click(function () {
+            //-------------------------------------------------------------
+            $.ajax({
+                url: "/AcompanharCotacoes/RegistrarAceiteDaNegociacaoDoAdmDaCCComOFornecedor",
+                dataType: 'json',
+                cache: false,
+                async: true,
+                data: {
+                    'cCC': $('#inCCC').val(),
+                    'iCM': $("#inICM").val(),
+                    'idEmpresaLogada': $('#inCodigoEmpresaLogada').val()
+                },
+                success: function (data) {
+                    debugger;
+
+                    if (data.confirmacaoNegociacao == "Ok") {
+                        //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                        new PNotify({
+                            title: 'SUCESSO!',
+                            text: 'Registramos o seu ACEITE para a negociação da COTAÇÃO em questão!',
+                            type: 'success',
+                            styling: 'bootstrap3',
+                            icons: 'bootstrap3',
+                            addclass: 'customsuccess',
+                            animateSpeed: 'fast',
+                            mouseReset: true,
+                            Buttons: {
+                                closer: true
+                            }
+                        });
+
+                        //$('#inConfirmarAceiteDaNegociacao').hide();
+                        //$('#inNegociacaoAceita').show();
+
+                        //RECARREGAR a PÁGINA
+                        window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
+                    }
+                }
+            });
+            //-------------------------------------------------------------
+        });
+
+        //Contador REGRESSIVO de caracteres do campo TEXTAREA
+        $(document).on("input", "#TEXTO_CHAT_COTACAO_USUARIO_COTANTE", function () {
+            var limite = 200;
+            var informativo = " caracteres restantes";
+            var caracteresDigitados = $(this).val().length;
+            var caracteresRestantes = (limite - caracteresDigitados);
+
+            if (caracteresRestantes <= 0) {
+                var comentario = $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").val();
+                $("#TEXTO_CHAT_COTACAO_USUARIO_COTANTE").val(comentario.substr(0, limite));
+                $(".caracteres").text("0 " + informativo);
+            } else {
+                $(".caracteres").text(caracteresRestantes + " " + informativo);
+            }
+        });
+
+        //HABILITA / DESABILITA campos do CHAT
+        $(".habiliteCampo").click(function () {
+            $("#texto_chat_principal").val('');
+            $("#texto_chat_principal").hide();
+            $("#botao_enviar").hide();
+
+            $('#ID_FORNECEDOR_COTACAO_ANALISADA').val('');
+        });
+
+    });
+
+    function carregarGrid() {
+        debugger;
+
+        //CARREGA a LISTA de ITENS COTADOS RESPONDIDOS pelo FORNECEDOR
+        var grid = $('#gridItesnCotadosRespondidos').bootgrid({
+            ajax: true,
+            navigation: 0, //CABEÇALHO: 2 - Exibe só RODAPÉ
+            columnSelection: false, //SELETOR de COLUNA: True - Habilita / False - Desabilita
+            url: "/AcompanharCotacoes/BuscaListaDeItensDaCotacaoRespondidaPeloFornecedor",
+            post: function () {
+                /* PARÂMETROS a serem enviados na REQUISIÇÃO AJAX */
+                return {
+                    'iCM': $('#inICM').val(),
+                    'iCCF': $('#iniCCF').val()
+                };
+            },
+            selection: true,
+            multiSelect: true,
+            rowSelect: true,
+            keepSelection: true,
+            formatters: {
+                //"commands": function (column, row) {
+                //    var value = row.msgCotacaoEnviada;
+
+                //    if ((value != "") && (value != null)) {
+                //        return "<font color=\"#0000FF\"><span><b>" + row.msgCotacaoEnviada + "</b></span></font>";
+                //    }
+                //}
+            }
+        }).on("loaded.rs.jquery.bootgrid", function () {  //Método EXECUTADO após o carregamento do GRID
+
+            //var quantRegistros = grid.bootgrid("getTotalRowCount");
+
+            //if ($('#inCotacaoMasterEnviada').val() == "nao") {
+            //    debugger;
+
+            //    if ($('#inCodigoEmpresaLogada').val() == $('#inCodigoEmpresaAdmCC').val()) {
+            //        $('#inEnviarCotacao').show();
+            //    }
+
+            //    $('#gridFornecedoresSelecionados').show();
+
+            //    if ($('#inCodigoEmpresaLogada').val() != $('#inCodigoEmpresaAdmCC').val()) {
+            //        $('#div1Filtro').hide();
+            //        $('#div2Filtro').hide();
+            //    }
+
+            //    $('#gridFornecedoresSelecionadosCotacaoJahEnviada').hide();
+            //}
+            //else {
+            //    $('#inEnviarCotacao').hide();
+            //    $('#gridFornecedoresSelecionados').hide();
+            //    $('#div1Filtro').hide();
+            //    $('#div2Filtro').hide();
+            //    $('#gridFornecedoresSelecionadosCotacaoJahEnviada').show()
+            //    $('#gridFornecedoresSelecionadosCotacaoJahEnviada').bootgrid('reload');
+            //}
+        });
+    };
+
+    function carregarChat() {
+        //Carregar DIÁLOGO do COTANTE com o FORNECEDOR
+        $.ajax({
+            type: "POST",
+            url: "/AcompanharCotacoes/CarregarDialogoEntreCotanteEFornecedor",
+            dataType: "json",
+            data: {
+                'idCotacaoFilha': $("#iniCCF").val()
+            },
+            success: function (data) {
+                var quantosDialogos = data.length;
+                var contadorMsg = 1;
+
+                if (quantosDialogos > 0) {
+                    $.each(data, function (index, chat) {
+
+                        //Inserir no Grid
+                        if (contadorMsg & 1) {
+                            $('<table><tr><td width="2%"></td><td width="90%"><font color="#337ab7"><i class="fa fa-comment fa-2x"></i> </font><font color="#000000">' + chat.texto_chat + '</font></td></tr></table>').appendTo('#dialogo_entre_cotante_efornecedor');
+                        } else {
+                            $('<table><tr style="border-style: dotted; border-bottom-width: 1px; border-top-width: 0; border-right-width: 0; border-left-width: 0; border-bottom-color: #C0C0C0;"><td><font color="#FFFFFF">vazio</font></td><td></td><td width="100%"><font color=""><i class="fa fa-comments fa-2x"></i> </font><font color="#000000">' + chat.texto_chat + '<font color="#A9A9A9"> - ' + chat.data_chat + '</font></font></td></tr></table>').appendTo('#dialogo_entre_cotante_efornecedor');
+                        }
+
+                        contadorMsg = (parseInt(contadorMsg) + parseInt(1));
+                    });
+
+                    //Controla todo o processo de CHAT
+                    if (quantosDialogos & 1) {
+                        //Habilita campo para PERGUNTA / RESPOSTA
+                        $("#texto_chat_alternativo").hide();
+                    }
+                    else {
+                        //Desabilita campo para PERGUNTA / RESPOSTA
+                        $("#texto_chat_alternativo").show();
+                    }
+                }
+                else {
+                    //Habilita campo para PERGUNTA / RESPOSTA
+                    $("#texto_chat_alternativo").show();
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,15 @@
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\Negocios.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\Negocios.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\Dominio.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\Modelo.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\EntityFramework.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\Dominio.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\Modelo.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\EntityFramework.xml
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\obj\Release\Negocios.csprojResolveAssemblyReference.cache
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\obj\Release\Negocios.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\obj\Release\Negocios.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\Util.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\System.Web.Mvc.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\Util.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Release\System.Web.Mvc.xml

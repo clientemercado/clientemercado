@@ -1,0 +1,5 @@
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Debug\Negocios.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\bin\Debug\Negocios.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\obj\Debug\Negocios.csproj.CoreCompileInputs.cache
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\obj\Debug\Negocios.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Negocios\obj\Debug\Negocios.pdb

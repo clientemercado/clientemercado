@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="cliente_mercadoModelStoreContainer" CdmEntityContainer="cliente_mercadoEntities">
+    <EntitySetMapping Name="avaliacao_empresa_cotada">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.avaliacao_empresa_cotada">
+        <MappingFragment StoreEntitySet="avaliacao_empresa_cotada">
+          <ScalarProperty Name="ID_AVALIACAO_EMPRESA_COTADA" ColumnName="ID_AVALIACAO_EMPRESA_COTADA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_MASTER" ColumnName="ID_CODIGO_COTACAO_MASTER" />
+          <ScalarProperty Name="ID_CODIGO_CLASSIFICACAO_EMPRESA" ColumnName="ID_CODIGO_CLASSIFICACAO_EMPRESA" />
+          <ScalarProperty Name="DATA_AVALIACAO_EMPRESA_COTADA" ColumnName="DATA_AVALIACAO_EMPRESA_COTADA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_AVALIOU" ColumnName="ID_CODIGO_EMPRESA_USUARIO_AVALIOU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="avaliacao_usuario_empresa_cotada">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.avaliacao_usuario_empresa_cotada">
+        <MappingFragment StoreEntitySet="avaliacao_usuario_empresa_cotada">
+          <ScalarProperty Name="ID_AVALIACAO_USUARIO_EMPRESA_COTADA" ColumnName="ID_AVALIACAO_USUARIO_EMPRESA_COTADA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_MASTER" ColumnName="ID_CODIGO_COTACAO_MASTER" />
+          <ScalarProperty Name="ID_CODIGO_CLASSIFICACAO_USUARIO" ColumnName="ID_CODIGO_CLASSIFICACAO_USUARIO" />
+          <ScalarProperty Name="DATA_AVALIACAO_USUARIO_EMPRESA_COTADA" ColumnName="DATA_AVALIACAO_USUARIO_EMPRESA_COTADA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_AVALIOU" ColumnName="ID_CODIGO_EMPRESA_USUARIO_AVALIOU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bairros_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.bairros_empresa_usuario">
+        <MappingFragment StoreEntitySet="bairros_empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_CIDADE_EMPRESA_USUARIO" ColumnName="ID_CODIGO_CIDADE_EMPRESA_USUARIO" />
+          <ScalarProperty Name="NOME_BAIRRO_EMPRESA_USUARIO" ColumnName="NOME_BAIRRO_EMPRESA_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="chat_cotacao">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.chat_cotacao">
+        <MappingFragment StoreEntitySet="chat_cotacao">
+          <ScalarProperty Name="ID_CODIGO_CHAT_COTACAO" ColumnName="ID_CODIGO_CHAT_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_FILHA" ColumnName="ID_CODIGO_COTACAO_FILHA" />
+          <ScalarProperty Name="DATA_CHAT_COTACAO" ColumnName="DATA_CHAT_COTACAO" />
+          <ScalarProperty Name="HORA_CHAT_COTACAO" ColumnName="HORA_CHAT_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_COTANTE_COTADA" ColumnName="ID_CODIGO_EMPRESA_USUARIO_COTANTE_COTADA" />
+          <ScalarProperty Name="TEXTO_CHAT_COTACAO" ColumnName="TEXTO_CHAT_COTACAO" />
+          <ScalarProperty Name="ORDEM_EXIBICAO_CHAT_COTACAO" ColumnName="ORDEM_EXIBICAO_CHAT_COTACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cidades_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.cidades_empresa_usuario">
+        <MappingFragment StoreEntitySet="cidades_empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_CIDADE_EMPRESA_USUARIO" ColumnName="ID_CODIGO_CIDADE_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_UF" ColumnName="ID_UF" />
+          <ScalarProperty Name="NOME_CIDADE_EMPRESA_USUARIO" ColumnName="NOME_CIDADE_EMPRESA_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="classificacao_empresa_cotada">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.classificacao_empresa_cotada">
+        <MappingFragment StoreEntitySet="classificacao_empresa_cotada">
+          <ScalarProperty Name="ID_CODIGO_CLASSIFICACAO_EMPRESA" ColumnName="ID_CODIGO_CLASSIFICACAO_EMPRESA" />
+          <ScalarProperty Name="DESCRICAO_CLASSIFICACAO_EMPRESA" ColumnName="DESCRICAO_CLASSIFICACAO_EMPRESA" />
+          <ScalarProperty Name="PONTUACAO_CLASSIFICACAO_EMPRESA" ColumnName="PONTUACAO_CLASSIFICACAO_EMPRESA" />
+          <ScalarProperty Name="CLASSIFICACAO_ATIVA" ColumnName="CLASSIFICACAO_ATIVA" />
+          <ScalarProperty Name="DATA_CADASTRO_CLASSIFICACAO_EMPRESA" ColumnName="DATA_CADASTRO_CLASSIFICACAO_EMPRESA" />
+          <ScalarProperty Name="DATA_INATIVOU_CLASSIFICACAO_EMPRESA" ColumnName="DATA_INATIVOU_CLASSIFICACAO_EMPRESA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU_CLASSIFICACAO_EMPRESA" ColumnName="ID_CODIGO_EMPRESA_USUARIO_INATIVOU_CLASSIFICACAO_EMPRESA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="classificacao_usuario_empresa_cotada">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.classificacao_usuario_empresa_cotada">
+        <MappingFragment StoreEntitySet="classificacao_usuario_empresa_cotada">
+          <ScalarProperty Name="ID_CODIGO_CLASSIFICACAO_USUARIO" ColumnName="ID_CODIGO_CLASSIFICACAO_USUARIO" />
+          <ScalarProperty Name="DESCRICAO_CLASSIFICACAO_USUARIO" ColumnName="DESCRICAO_CLASSIFICACAO_USUARIO" />
+          <ScalarProperty Name="PONTUACAO_CLASSIFICACAO_USUARIO" ColumnName="PONTUACAO_CLASSIFICACAO_USUARIO" />
+          <ScalarProperty Name="CLASSIFICACAO_ATIVA" ColumnName="CLASSIFICACAO_ATIVA" />
+          <ScalarProperty Name="DATA_CADASTRO_CLASSIFICACAO_USUARIO" ColumnName="DATA_CADASTRO_CLASSIFICACAO_USUARIO" />
+          <ScalarProperty Name="DATA_INATIVOU_CLASSIFICACAO_USUARIO" ColumnName="DATA_INATIVOU_CLASSIFICACAO_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU_CLASSIFICACAO_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO_INATIVOU_CLASSIFICACAO_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cotacao_filha">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.cotacao_filha">
+        <MappingFragment StoreEntitySet="cotacao_filha">
+          <ScalarProperty Name="ID_CODIGO_COTACAO_FILHA" ColumnName="ID_CODIGO_COTACAO_FILHA" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_MASTER" ColumnName="ID_CODIGO_COTACAO_MASTER" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_EMPRESA_COTADA" ColumnName="ID_CODIGO_EMPRESA_USUARIO_EMPRESA_COTADA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO_COTADA" ColumnName="ID_CODIGO_EMPRESA_USUARIO_USUARIO_COTADA" />
+          <ScalarProperty Name="DATA_RESPOSTA_COTACAO_FILHA" ColumnName="DATA_RESPOSTA_COTACAO_FILHA" />
+          <ScalarProperty Name="RESPONDIDA_COTACAO_FILHA" ColumnName="RESPONDIDA_COTACAO_FILHA" />
+          <ScalarProperty Name="PRECO_LOTE_ITENS_COTACAO" ColumnName="PRECO_LOTE_ITENS_COTACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cotacao_master">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.cotacao_master">
+        <MappingFragment StoreEntitySet="cotacao_master">
+          <ScalarProperty Name="ID_CODIGO_COTACAO_MASTER" ColumnName="ID_CODIGO_COTACAO_MASTER" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_EMPRESA_COTANTE" ColumnName="ID_CODIGO_EMPRESA_USUARIO_EMPRESA_COTANTE" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO_COTANTE" ColumnName="ID_CODIGO_EMPRESA_USUARIO_USUARIO_COTANTE" />
+          <ScalarProperty Name="NOME_COTACAO" ColumnName="NOME_COTACAO" />
+          <ScalarProperty Name="DATA_CRIACAO_COTACAO" ColumnName="DATA_CRIACAO_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_TIPOS_FRETE" ColumnName="ID_CODIGO_TIPOS_FRETE" />
+          <ScalarProperty Name="CONDICAO_PAGAMENTO_COTACAO" ColumnName="CONDICAO_PAGAMENTO_COTACAO" />
+          <ScalarProperty Name="OBSERVACAO_COTACAO" ColumnName="OBSERVACAO_COTACAO" />
+          <ScalarProperty Name="PERCENTUAL_RESPONDIDA_COTACAO" ColumnName="PERCENTUAL_RESPONDIDA_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_STATUS_COTACAO" ColumnName="ID_CODIGO_STATUS_COTACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cotacao_negociacao">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.cotacao_negociacao">
+        <MappingFragment StoreEntitySet="cotacao_negociacao">
+          <ScalarProperty Name="ID_CODIGO_COTACAO_NEGOCIACAO" ColumnName="ID_CODIGO_COTACAO_NEGOCIACAO" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_FILHA" ColumnName="ID_CODIGO_COTACAO_FILHA" />
+          <ScalarProperty Name="ID_CODIGO_ITENS_COTACAO" ColumnName="ID_CODIGO_ITENS_COTACAO" />
+          <ScalarProperty Name="DESCRICAO_PRODUTO_EDITADO_COTADA" ColumnName="DESCRICAO_PRODUTO_EDITADO_COTADA" />
+          <ScalarProperty Name="PRECO_ITENS_COTACAO" ColumnName="PRECO_ITENS_COTACAO" />
+          <ScalarProperty Name="QUANTIDADE_ITENS_COTACAO" ColumnName="QUANTIDADE_ITENS_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_TIPO_RESPOSTA_COTACAO" ColumnName="ID_CODIGO_TIPO_RESPOSTA_COTACAO" />
+          <ScalarProperty Name="PRODUTO_COTADO" ColumnName="PRODUTO_COTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="doc_identificador_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.doc_identificador_empresa_usuario">
+        <MappingFragment StoreEntitySet="doc_identificador_empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_DOC_IDENTIFICADOR_EMPRESA_USUARIO" ColumnName="ID_CODIGO_DOC_IDENTIFICADOR_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_EMPRESA" ColumnName="ID_CODIGO_EMPRESA_USUARIO_EMPRESA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="empresa_fabricante_marcas">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.empresa_fabricante_marcas">
+        <MappingFragment StoreEntitySet="empresa_fabricante_marcas">
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" ColumnName="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" />
+          <ScalarProperty Name="DESCRICAO_EMPRESA_FABRICANTE_MARCAS" ColumnName="DESCRICAO_EMPRESA_FABRICANTE_MARCAS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.empresa_usuario">
+        <MappingFragment StoreEntitySet="empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_TIPO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_TIPO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_DOC_IDENTIFICADOR_EMPRESA_USUARIO" ColumnName="ID_CODIGO_DOC_IDENTIFICADOR_EMPRESA_USUARIO" />
+          <ScalarProperty Name="NOME_EMPRESA_USUARIO" ColumnName="NOME_EMPRESA_USUARIO" />
+          <ScalarProperty Name="NOME_FANTASIA_EMPRESA_USUARIO" ColumnName="NOME_FANTASIA_EMPRESA_USUARIO" />
+          <ScalarProperty Name="LOGOMARCA_EMPRESA_USUARIO" ColumnName="LOGOMARCA_EMPRESA_USUARIO" />
+          <ScalarProperty Name="USUARIO_MASTER_EMPRESA_USUARIO" ColumnName="USUARIO_MASTER_EMPRESA_USUARIO" />
+          <ScalarProperty Name="RECEBER_EMAILS_EMPRESA_USUARIO" ColumnName="RECEBER_EMAILS_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DATA_CADASTRO_EMPRESA_USUARIO" ColumnName="DATA_CADASTRO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DATA_ULTIMA_ATUALIZACAO_EMPRESA_USUARIO" ColumnName="DATA_ULTIMA_ATUALIZACAO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ATIVA_INATIVA_EMPRESA_USUARIO" ColumnName="ATIVA_INATIVA_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DATA_INATIVOU_EMPRESA_USUARIO" ColumnName="DATA_INATIVOU_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" ColumnName="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" />
+          <ScalarProperty Name="EMPRESA_ADM" ColumnName="EMPRESA_ADM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="empresa_usuario_logins">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.empresa_usuario_logins">
+        <MappingFragment StoreEntitySet="empresa_usuario_logins">
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_LOGINS" ColumnName="ID_CODIGO_EMPRESA_USUARIO_LOGINS" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="LOGIN_EMPRESA_USUARIO_LOGINS" ColumnName="LOGIN_EMPRESA_USUARIO_LOGINS" />
+          <ScalarProperty Name="SENHA_EMPRESA_USUARIO_LOGINS" ColumnName="SENHA_EMPRESA_USUARIO_LOGINS" />
+          <ScalarProperty Name="LEMBRETE_EMPRESA_USUARIO_LOGINS" ColumnName="LEMBRETE_EMPRESA_USUARIO_LOGINS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enderecos_cep_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.enderecos_cep_empresa_usuario">
+        <MappingFragment StoreEntitySet="enderecos_cep_empresa_usuario">
+          <ScalarProperty Name="ID_CEP_ENDERECO_EMPRESA_USUARIO" ColumnName="ID_CEP_ENDERECO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CEP_SEQUENCIAL_ENDERECO" ColumnName="ID_CEP_SEQUENCIAL_ENDERECO" />
+          <ScalarProperty Name="ENDERECO_EMPRESA_USUARIO" ColumnName="ENDERECO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enderecos_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.enderecos_empresa_usuario">
+        <MappingFragment StoreEntitySet="enderecos_empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_ENDERECO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_ENDERECO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CEP_ENDERECO_EMPRESA_USUARIO" ColumnName="ID_CEP_ENDERECO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CEP_SEQUENCIAL_ENDERECO" ColumnName="ID_CEP_SEQUENCIAL_ENDERECO" />
+          <ScalarProperty Name="NUMERO_ENDERECO_EMPRESA_USUARIO" ColumnName="NUMERO_ENDERECO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="COMPLEMENTO_ENDERECO_EMPRESA_USUARIO" ColumnName="COMPLEMENTO_ENDERECO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="REFERENCIA_ENDERECO_EMPRESA_USUARIO" ColumnName="REFERENCIA_ENDERECO_EMPRESA_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enderecos_internet">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.enderecos_internet">
+        <MappingFragment StoreEntitySet="enderecos_internet">
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="EMAIL1_EMPRESA_USUARIO" ColumnName="EMAIL1_EMPRESA_USUARIO" />
+          <ScalarProperty Name="EMAIL2_EMPRESA_USUARIO" ColumnName="EMAIL2_EMPRESA_USUARIO" />
+          <ScalarProperty Name="PAGINA_HOME_EMPRESA_USUARIO" ColumnName="PAGINA_HOME_EMPRESA_USUARIO" />
+          <ScalarProperty Name="PAGINA_FUN_EMPRESA_USUARIO" ColumnName="PAGINA_FUN_EMPRESA_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estados_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.estados_empresa_usuario">
+        <MappingFragment StoreEntitySet="estados_empresa_usuario">
+          <ScalarProperty Name="ID_UF" ColumnName="ID_UF" />
+          <ScalarProperty Name="NOME_ESTADO_EMPRESA_USUARIO" ColumnName="NOME_ESTADO_EMPRESA_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="financeiro_cobranca_faturamento">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.financeiro_cobranca_faturamento">
+        <MappingFragment StoreEntitySet="financeiro_cobranca_faturamento">
+          <ScalarProperty Name="ID_CODIGO_COBRANCA_FATURAMENTO" ColumnName="ID_CODIGO_COBRANCA_FATURAMENTO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO_USUARIO" />
+          <ScalarProperty Name="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" ColumnName="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" />
+          <ScalarProperty Name="OBSERVACAO_BOLETO_COBRANCA_FATURAMENTO" ColumnName="OBSERVACAO_BOLETO_COBRANCA_FATURAMENTO" />
+          <ScalarProperty Name="PARCELA_PAGA_COBRANCA_FATURAMENTO" ColumnName="PARCELA_PAGA_COBRANCA_FATURAMENTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="itens_cotacao">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.itens_cotacao">
+        <MappingFragment StoreEntitySet="itens_cotacao">
+          <ScalarProperty Name="ID_CODIGO_ITENS_COTACAO" ColumnName="ID_CODIGO_ITENS_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_MASTER" ColumnName="ID_CODIGO_COTACAO_MASTER" />
+          <ScalarProperty Name="ID_CODIGO_PRODUTO" ColumnName="ID_CODIGO_PRODUTO" />
+          <ScalarProperty Name="ID_CODIGO_PEDIDO" ColumnName="ID_CODIGO_PEDIDO" />
+          <ScalarProperty Name="FOTO_TIPO_ITENS_COTACAO" ColumnName="FOTO_TIPO_ITENS_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_TIPO_ITENS_COTACAO" ColumnName="ID_CODIGO_TIPO_ITENS_COTACAO" />
+          <ScalarProperty Name="QUANTIDADE_ITENS_COTACAO" ColumnName="QUANTIDADE_ITENS_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_UNIDADE_PRODUTO" ColumnName="ID_CODIGO_UNIDADE_PRODUTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="itens_pedido">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.itens_pedido">
+        <MappingFragment StoreEntitySet="itens_pedido">
+          <ScalarProperty Name="ID_CODIGO_ITENS_PEDIDO" ColumnName="ID_CODIGO_ITENS_PEDIDO" />
+          <ScalarProperty Name="ID_CODIGO_PEDIDO" ColumnName="ID_CODIGO_PEDIDO" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_NEGOCIACAO" ColumnName="ID_CODIGO_COTACAO_NEGOCIACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="modulos">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.modulo">
+        <MappingFragment StoreEntitySet="modulos">
+          <ScalarProperty Name="ID_CODIGO_MODULO" ColumnName="ID_CODIGO_MODULO" />
+          <ScalarProperty Name="DESCRICAO_MODULO" ColumnName="DESCRICAO_MODULO" />
+          <ScalarProperty Name="TEMPO_LIMITE_USO_MODULO" ColumnName="TEMPO_LIMITE_USO_MODULO" />
+          <ScalarProperty Name="CAMINHO_ACESSO_MODULO" ColumnName="CAMINHO_ACESSO_MODULO" />
+          <ScalarProperty Name="OBSERVACAO_MODULO" ColumnName="OBSERVACAO_MODULO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedidoes">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.pedido">
+        <MappingFragment StoreEntitySet="pedido">
+          <ScalarProperty Name="ID_CODIGO_PEDIDO" ColumnName="ID_CODIGO_PEDIDO" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_MASTER" ColumnName="ID_CODIGO_COTACAO_MASTER" />
+          <ScalarProperty Name="ID_CODIGO_COTACAO_FILHA" ColumnName="ID_CODIGO_COTACAO_FILHA" />
+          <ScalarProperty Name="DATA_PEDIDO" ColumnName="DATA_PEDIDO" />
+          <ScalarProperty Name="DATA_ENTREGA_PEDIDO" ColumnName="DATA_ENTREGA_PEDIDO" />
+          <ScalarProperty Name="CONFIRMADO_PEDIDO" ColumnName="CONFIRMADO_PEDIDO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="produtoes">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.produto">
+        <MappingFragment StoreEntitySet="produto">
+          <ScalarProperty Name="ID_CODIGO_PRODUTO" ColumnName="ID_CODIGO_PRODUTO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" ColumnName="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" />
+          <ScalarProperty Name="DESCRICAO_PRODUTO" ColumnName="DESCRICAO_PRODUTO" />
+          <ScalarProperty Name="ID_CODIGO_UNIDADE_PRODUTO" ColumnName="ID_CODIGO_UNIDADE_PRODUTO" />
+          <ScalarProperty Name="PRECO_PRODUTO" ColumnName="PRECO_PRODUTO" />
+          <ScalarProperty Name="DATA_CADASTRO_PRODUTO" ColumnName="DATA_CADASTRO_PRODUTO" />
+          <ScalarProperty Name="PRODUTO_ATIVO" ColumnName="PRODUTO_ATIVO" />
+          <ScalarProperty Name="DATA_INATIVOU_PRODUTO" ColumnName="DATA_INATIVOU_PRODUTO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" ColumnName="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="profissao_usuario_empresa">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.profissao_usuario_empresa">
+        <MappingFragment StoreEntitySet="profissao_usuario_empresa">
+          <ScalarProperty Name="ID_CODIGO_PROFISSAO_USUARIO_EMPRESA" ColumnName="ID_CODIGO_PROFISSAO_USUARIO_EMPRESA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_PROFISSAO" ColumnName="ID_CODIGO_PROFISSAO" />
+          <ScalarProperty Name="PROFISSAO_ATIVA_USUARIO_EMPRESA" ColumnName="PROFISSAO_ATIVA_USUARIO_EMPRESA" />
+          <ScalarProperty Name="DATA_CADASTRO_PROFISSAO_USUARIO_EMPRESA" ColumnName="DATA_CADASTRO_PROFISSAO_USUARIO_EMPRESA" />
+          <ScalarProperty Name="DATA_INATIVOU_PROFISSAO_USUARIO_EMPRESA" ColumnName="DATA_INATIVOU_PROFISSAO_USUARIO_EMPRESA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" ColumnName="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="profissoes_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.profissoes_usuario">
+        <MappingFragment StoreEntitySet="profissoes_usuario">
+          <ScalarProperty Name="ID_CODIGO_PROFISSAO" ColumnName="ID_CODIGO_PROFISSAO" />
+          <ScalarProperty Name="DESCRICAO_PROFISSAO" ColumnName="DESCRICAO_PROFISSAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ramo_atividade_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.ramo_atividade_empresa_usuario">
+        <MappingFragment StoreEntitySet="ramo_atividade_empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_RAMO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_RAMO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DESCRICAO_RAMO_EMPRESA" ColumnName="DESCRICAO_RAMO_EMPRESA" />
+          <ScalarProperty Name="DATA_ATIVACAO_RAMO_EMPRESA" ColumnName="DATA_ATIVACAO_RAMO_EMPRESA" />
+          <ScalarProperty Name="DATA_DESATIVACAO_RAMO_EMPRESA" ColumnName="DATA_DESATIVACAO_RAMO_EMPRESA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" ColumnName="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="status_cotacao">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.status_cotacao">
+        <MappingFragment StoreEntitySet="status_cotacao">
+          <ScalarProperty Name="ID_CODIGO_STATUS_COTACAO" ColumnName="ID_CODIGO_STATUS_COTACAO" />
+          <ScalarProperty Name="DESCRICAO_STATUS_COTACAO" ColumnName="DESCRICAO_STATUS_COTACAO" />
+          <ScalarProperty Name="DATA_INCLUSAO_STATUS_COTACAO" ColumnName="DATA_INCLUSAO_STATUS_COTACAO" />
+          <ScalarProperty Name="ATIVO_STATUS_COTACAO" ColumnName="ATIVO_STATUS_COTACAO" />
+          <ScalarProperty Name="DATA_INATIVOU_STATUS_COTACAO" ColumnName="DATA_INATIVOU_STATUS_COTACAO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" ColumnName="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="telefones_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.telefones_empresa_usuario">
+        <MappingFragment StoreEntitySet="telefones_empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_TELEFONES_EMPRESA_USUARIO" ColumnName="ID_CODIGO_TELEFONES_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" ColumnName="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DDD_TELEFONE_EMPRESA_USUARIO" ColumnName="DDD_TELEFONE_EMPRESA_USUARIO" />
+          <ScalarProperty Name="TELEFONE_EMPRESA_USUARIO" ColumnName="TELEFONE_EMPRESA_USUARIO" />
+          <ScalarProperty Name="RAMAL_TELEFONE_EMPRESA_USUARIO" ColumnName="RAMAL_TELEFONE_EMPRESA_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_contrato_empresa_usuario_cotada">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.tipo_contrato_empresa_usuario_cotada">
+        <MappingFragment StoreEntitySet="tipo_contrato_empresa_usuario_cotada">
+          <ScalarProperty Name="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" ColumnName="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="ID_CODIGO_TIPO_CONTRATO_COTADA" ColumnName="ID_CODIGO_TIPO_CONTRATO_COTADA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.tipo_empresa_usuario">
+        <MappingFragment StoreEntitySet="tipo_empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_TIPO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_TIPO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DESCRICAO_TIPO_EMPRESA_USUARIO" ColumnName="DESCRICAO_TIPO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="FISICA_JURIDICA_EMPRESA_USUARIO" ColumnName="FISICA_JURIDICA_EMPRESA_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_resposta_cotacao">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.tipo_resposta_cotacao">
+        <MappingFragment StoreEntitySet="tipo_resposta_cotacao">
+          <ScalarProperty Name="ID_CODIGO_TIPO_RESPOSTA_COTACAO" ColumnName="ID_CODIGO_TIPO_RESPOSTA_COTACAO" />
+          <ScalarProperty Name="DESCRICAO_TIPO_RESPOSTA_COTACAO" ColumnName="DESCRICAO_TIPO_RESPOSTA_COTACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipos_contrato">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.tipos_contrato">
+        <MappingFragment StoreEntitySet="tipos_contrato">
+          <ScalarProperty Name="ID_CODIGO_TIPO_CONTRATO_COTADA" ColumnName="ID_CODIGO_TIPO_CONTRATO_COTADA" />
+          <ScalarProperty Name="CODIGO_REFERENCIA_TIPO_COTRATO_COTADA" ColumnName="CODIGO_REFERENCIA_TIPO_COTRATO_COTADA" />
+          <ScalarProperty Name="DESCRICAO_TIPO_CONTRATO_COTADA" ColumnName="DESCRICAO_TIPO_CONTRATO_COTADA" />
+          <ScalarProperty Name="VALOR_MENSAL_TIPO_CONTRATO_COTADA" ColumnName="VALOR_MENSAL_TIPO_CONTRATO_COTADA" />
+          <ScalarProperty Name="DIAS_TOLERANCIA_COBRANCA_ANTES_POS_VENCIMENTO" ColumnName="DIAS_TOLERANCIA_COBRANCA_ANTES_POS_VENCIMENTO" />
+          <ScalarProperty Name="DATA_CADASTRO_TIPO_CONTRATO" ColumnName="DATA_CADASTRO_TIPO_CONTRATO" />
+          <ScalarProperty Name="ATIVO_TIPO_CONTRATO_COTADA" ColumnName="ATIVO_TIPO_CONTRATO_COTADA" />
+          <ScalarProperty Name="DATA_INATIVOU_TIPO_CONTRATO_COTADA" ColumnName="DATA_INATIVOU_TIPO_CONTRATO_COTADA" />
+          <ScalarProperty Name="ID_USUARIO_INATIVOU" ColumnName="ID_USUARIO_INATIVOU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipos_frete">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.tipos_frete">
+        <MappingFragment StoreEntitySet="tipos_frete">
+          <ScalarProperty Name="ID_CODIGO_TIPOS_FRETE" ColumnName="ID_CODIGO_TIPOS_FRETE" />
+          <ScalarProperty Name="DESCRICAO_TIPOS_FRETE" ColumnName="DESCRICAO_TIPOS_FRETE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipos_item_cotacao">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.tipos_item_cotacao">
+        <MappingFragment StoreEntitySet="tipos_item_cotacao">
+          <ScalarProperty Name="ID_CODIGO_TIPO_ITENS_COTACAO" ColumnName="ID_CODIGO_TIPO_ITENS_COTACAO" />
+          <ScalarProperty Name="DESCRICAO_TIPO_ITENS_COTACAO" ColumnName="DESCRICAO_TIPO_ITENS_COTACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipos_telefone_empresa_usuario">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.tipos_telefone_empresa_usuario">
+        <MappingFragment StoreEntitySet="tipos_telefone_empresa_usuario">
+          <ScalarProperty Name="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" ColumnName="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DESCRICAO_TIPOS_TELEFONE" ColumnName="DESCRICAO_TIPOS_TELEFONE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="unidades_produto">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.unidades_produto">
+        <MappingFragment StoreEntitySet="unidades_produto">
+          <ScalarProperty Name="ID_CODIGO_UNIDADE_PRODUTO" ColumnName="ID_CODIGO_UNIDADE_PRODUTO" />
+          <ScalarProperty Name="DESCRICAO_UNIDADE_PRODUTO" ColumnName="DESCRICAO_UNIDADE_PRODUTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario_historico_empresas">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.usuario_historico_empresas">
+        <MappingFragment StoreEntitySet="usuario_historico_empresas">
+          <ScalarProperty Name="ID_HISTORICO_USUARIO_EMPRESAS" ColumnName="ID_HISTORICO_USUARIO_EMPRESAS" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DATA_INICIO_SISTEMA_USUARIO_EMPRESA" ColumnName="DATA_INICIO_SISTEMA_USUARIO_EMPRESA" />
+          <ScalarProperty Name="DATA_FIM_SISTEMA_USUARIO_EMPRESA" ColumnName="DATA_FIM_SISTEMA_USUARIO_EMPRESA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario_modulo">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.usuario_modulo">
+        <MappingFragment StoreEntitySet="usuario_modulo">
+          <ScalarProperty Name="ID_CODIGO_USUARIO_MODULO" ColumnName="ID_CODIGO_USUARIO_MODULO" />
+          <ScalarProperty Name="ID_CODIGO_MODULO" ColumnName="ID_CODIGO_MODULO" />
+          <ScalarProperty Name="ID_CODIGO_EMPRESA_USUARIO" ColumnName="ID_CODIGO_EMPRESA_USUARIO" />
+          <ScalarProperty Name="DATA_LIMITE_USO_MODULO" ColumnName="DATA_LIMITE_USO_MODULO" />
+          <ScalarProperty Name="DATA_ATIVOU_MODULO" ColumnName="DATA_ATIVOU_MODULO" />
+          <ScalarProperty Name="MODULO_ATIVO_USUARIO" ColumnName="MODULO_ATIVO_USUARIO" />
+          <ScalarProperty Name="DATA_INATIVOU_MODULO" ColumnName="DATA_INATIVOU_MODULO" />
+          <ScalarProperty Name="ID_EMPRESA_USUARIO_USUARIO_INATIVOU_MODULO" ColumnName="ID_EMPRESA_USUARIO_USUARIO_INATIVOU_MODULO" />
+          <ScalarProperty Name="MODULO_PAGO" ColumnName="MODULO_PAGO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario_modulo_historico_empresas">
+      <EntityTypeMapping TypeName="cliente_mercadoModel.usuario_modulo_historico_empresas">
+        <MappingFragment StoreEntitySet="usuario_modulo_historico_empresas">
+          <ScalarProperty Name="ID_CODIGO_HISTORICO_MODULO_USUARIO_EMPRESAS" ColumnName="ID_CODIGO_HISTORICO_MODULO_USUARIO_EMPRESAS" />
+          <ScalarProperty Name="ID_HISTORICO_USUARIO_EMPRESAS" ColumnName="ID_HISTORICO_USUARIO_EMPRESAS" />
+          <ScalarProperty Name="ID_CODIGO_MODULO" ColumnName="ID_CODIGO_MODULO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

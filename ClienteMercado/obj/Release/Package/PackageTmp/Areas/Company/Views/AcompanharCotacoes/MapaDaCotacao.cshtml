@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "Mapa Da Cotacao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @*<div class="col-md-12">*@
+    <!-- BEGIN VALIDATION STATES-->
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="far fa-copy"></i> Acompanhar Cotações / Mapa da Cotação
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <!-- BEGIN FORM-->
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group" id="cabecalho" style="">
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Central Compras:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inNomeCentralCompras</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Ramo Atividade:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inRamoAtividadeCC</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Administradora:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inEmpresaLogadaAdmCC</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Cidade:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inCidadeEmpresaAdmCC</h5>
+                        </div>
+                        <label class="col-md-2 control-label"><font color="#3297E0"><b>Usuário Resp:</b></font></label>
+                        <div class="col-md-4">
+                            <h5>@Model.inNomeUsuarioRespEmpresaAdmCC</h5>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="@Url.Action("CotacoesDaCentralDeCompras", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC })" class="btn default button-previous">
+                                    <i class="fas fa-arrow-left"></i> Voltar
+                                </a>
+                                <a href="@Url.Action("VisualizarItensCotadosPorEmpresa", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = Model.iCM })" class="btn  blue button-submit">
+                                    <i class="fas fa-clipboard-list"></i> Itens Cotados (por Empresa)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table class="table table-bordered table-striped table-condensed flip-content">
+                                <!-- INÍCIO -->
+                                <thead>
+                                    <tr>
+                                        <td colspan="3"><font color="#FF0000" size="2">&nbsp;</font>&nbsp;</td>
+                                        @{
+                                            foreach (var nomeEmpresa in Model.listaDeEmpresasCotadas)
+                                            {
+                                                if (nomeEmpresa.idEmpresaCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
+                                                {
+                                                    if (Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados == Model.quantidadeEmpresasParticipantesDestaCotacao)
+                                                    {
+                                                        <!-- Vencedora - VERDE -->
+                                                        <td align="center" bgcolor="#008000" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="white" title="COTAÇÃO VENCEDORA">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <!-- Em análise - VERMELHA -->
+                                                        <td align="center" bgcolor="#FF0000" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="white" title="COTAÇÃO em ANÁLISE">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados == Model.quantidadeEmpresasParticipantesDestaCotacao)
+                                                    {
+                                                        <!-- Cotações não aceitas - CINZA -->
+                                                        <td align="center" bgcolor="#DCDCDC" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="COTAÇÃO NÃO ACEITA">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <!-- Cotações ue poderão ser analisadas - AMARELO -->
+                                                        <td align="center" bgcolor="#FFD700" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="AGUARDANDO ANÁLISE">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#0672a7" style="color:White;"><b>&nbsp;Descrição</b></td>
+                                        <td align="center" bgcolor="#0672a7" style="color:White;"><b>Quant.</b></td>
+                                        <td align="center" bgcolor="#0672a7" style="color:White;"><b>Unid.</b></td>
+                                        @{
+                                            for (int i = 0; i < Model.listaDeEmpresasCotadas.Count; i++)
+                                            {
+                                                <td nowrap bgcolor="#0672a7" style="color:White;"><b>R$ Unit.</b></td>
+                                            }
+                                        }
+                                        <td nowrap align="center" bgcolor="#0672a7" style="color:White;"><b>Menor<br>R$ Unit.</b></td>
+                                        <td nowrap align="center" bgcolor="#0672a7" style="color:White;"><b>Sub Total</b></td>
+                                    </tr>
+                                </thead>
+                                @{
+                                    foreach (var produtosCotados in Model.listaDeProdutosCotados)
+                                    {
+                                        <tr bgcolor="">
+                                            <td style=""><b>@produtosCotados.descricaoProdutoCotacao</b></td>
+                                            <td align="center" style=""><font color="#3297E0"><b>@produtosCotados.quantidadeProdutoCotacao</b></font></td>
+                                            <td align="center" style=""><font color="#3297E0"><b>@produtosCotados.unidadeProdutoCotacao</b></font></td>
+
+                                            @for (int i = 0; i < Model.listaDeEmpresasCotadas.Count; i++)
+                                            {
+                                                <td nowrap style="" align="right">0,00</td>
+                                            }
+
+                                            <td nowrap style="" align="right">0,00</td>
+                                            <td nowrap style="" align="right">0,00</td>
+                                        </tr>
+                                    }
+                                }
+
+                                <tr bgcolor="#e7e7e7">
+                                    <td colspan="3" align="right"><b>TOTAL</b></td>
+
+                                    @for (int i = 0; i < Model.listaDeEmpresasCotadas.Count; i++)
+                                    {
+                                        <td nowrap style="" align="right">&nbsp;</td>
+                                    }
+
+                                    <td>&nbsp;</td>
+                                    <td align="right"><b>R$&nbsp;0,00</b></td>
+                                </tr>
+                            </table>
+
+                            <!-- FIM -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr bgcolor="#FFFF99">
+                                        <td colspan="7" align="center"><font color="black"><b>FORNECEDORES</b></font>&nbsp;</td>
+                                    </tr>
+                                    <tr bgcolor="#EEE9E9">
+                                        <th style="text-align: center;"><b>Fornecedores</b></th>
+                                        <th style="text-align: center;"><b>Contato</b></th>
+                                        <th style="text-align: center;"><b>Cond. Pag.</b></th>
+                                        <th style="text-align: center;"><b>Frete</b></th>
+                                        <th style="text-align: center;"><b>Dt. Entrega</b></th>
+                                        <th style="text-align: center;"><b>Obs:</b></th>
+                                        <th style="text-align: center;"><b>R$ Total</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var nomeEmpresa in Model.listaDeEmpresasCotadas)
+                                        {
+                                            <tr>
+                                                <td style="text-align: left;"><b>@nomeEmpresa.nomeFantasiaEmpresaCotada</b></td>
+                                                <td style="text-align: right;"><b>@nomeEmpresa.telefoneEmpresaCotada</b></td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+            <input type="hidden" id="inCCC" value="@Model.cCC" />
+            <input type="hidden" id="inICM" value="@Model.iCM" />
+        </div>
+    </div>
+    <!-- END VALIDATION STATES-->
+    @*</div>*@
+</div>

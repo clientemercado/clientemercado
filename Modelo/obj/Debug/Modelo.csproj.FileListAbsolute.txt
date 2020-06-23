@@ -1,0 +1,12 @@
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\Modelo.dll.config
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\Modelo.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\Modelo.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\EntityFramework.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\EntityFramework.SqlServer.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\System.Web.Mvc.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\EntityFramework.xml
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\EntityFramework.SqlServer.xml
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\bin\Debug\System.Web.Mvc.xml
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\obj\Debug\Modelo.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Modelo\obj\Debug\Modelo.pdb

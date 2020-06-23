@@ -1,0 +1,4 @@
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dominio\bin\Debug\Dominio.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dominio\bin\Debug\Dominio.pdb
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dominio\obj\Debug\Dominio.dll
+C:\COMPRARCOM\PROJETO\ClienteMercado\Dominio\obj\Debug\Dominio.pdb

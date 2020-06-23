@@ -1,0 +1,1394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="cliente_mercadoModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="cliente_mercadoEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="avaliacao_empresa_cotada" EntityType="cliente_mercadoModel.avaliacao_empresa_cotada" />
+    <EntitySet Name="avaliacao_usuario_empresa_cotada" EntityType="cliente_mercadoModel.avaliacao_usuario_empresa_cotada" />
+    <EntitySet Name="bairros_empresa_usuario" EntityType="cliente_mercadoModel.bairros_empresa_usuario" />
+    <EntitySet Name="chat_cotacao" EntityType="cliente_mercadoModel.chat_cotacao" />
+    <EntitySet Name="cidades_empresa_usuario" EntityType="cliente_mercadoModel.cidades_empresa_usuario" />
+    <EntitySet Name="classificacao_empresa_cotada" EntityType="cliente_mercadoModel.classificacao_empresa_cotada" />
+    <EntitySet Name="classificacao_usuario_empresa_cotada" EntityType="cliente_mercadoModel.classificacao_usuario_empresa_cotada" />
+    <EntitySet Name="cotacao_filha" EntityType="cliente_mercadoModel.cotacao_filha" />
+    <EntitySet Name="cotacao_master" EntityType="cliente_mercadoModel.cotacao_master" />
+    <EntitySet Name="cotacao_negociacao" EntityType="cliente_mercadoModel.cotacao_negociacao" />
+    <EntitySet Name="doc_identificador_empresa_usuario" EntityType="cliente_mercadoModel.doc_identificador_empresa_usuario" />
+    <EntitySet Name="empresa_fabricante_marcas" EntityType="cliente_mercadoModel.empresa_fabricante_marcas" />
+    <EntitySet Name="empresa_usuario" EntityType="cliente_mercadoModel.empresa_usuario" />
+    <EntitySet Name="empresa_usuario_logins" EntityType="cliente_mercadoModel.empresa_usuario_logins" />
+    <EntitySet Name="enderecos_cep_empresa_usuario" EntityType="cliente_mercadoModel.enderecos_cep_empresa_usuario" />
+    <EntitySet Name="enderecos_empresa_usuario" EntityType="cliente_mercadoModel.enderecos_empresa_usuario" />
+    <EntitySet Name="enderecos_internet" EntityType="cliente_mercadoModel.enderecos_internet" />
+    <EntitySet Name="estados_empresa_usuario" EntityType="cliente_mercadoModel.estados_empresa_usuario" />
+    <EntitySet Name="financeiro_cobranca_faturamento" EntityType="cliente_mercadoModel.financeiro_cobranca_faturamento" />
+    <EntitySet Name="itens_cotacao" EntityType="cliente_mercadoModel.itens_cotacao" />
+    <EntitySet Name="itens_pedido" EntityType="cliente_mercadoModel.itens_pedido" />
+    <EntitySet Name="modulos" EntityType="cliente_mercadoModel.modulo" />
+    <EntitySet Name="pedidoes" EntityType="cliente_mercadoModel.pedido" />
+    <EntitySet Name="produtoes" EntityType="cliente_mercadoModel.produto" />
+    <EntitySet Name="profissao_usuario_empresa" EntityType="cliente_mercadoModel.profissao_usuario_empresa" />
+    <EntitySet Name="profissoes_usuario" EntityType="cliente_mercadoModel.profissoes_usuario" />
+    <EntitySet Name="ramo_atividade_empresa_usuario" EntityType="cliente_mercadoModel.ramo_atividade_empresa_usuario" />
+    <EntitySet Name="status_cotacao" EntityType="cliente_mercadoModel.status_cotacao" />
+    <EntitySet Name="telefones_empresa_usuario" EntityType="cliente_mercadoModel.telefones_empresa_usuario" />
+    <EntitySet Name="tipo_contrato_empresa_usuario_cotada" EntityType="cliente_mercadoModel.tipo_contrato_empresa_usuario_cotada" />
+    <EntitySet Name="tipo_empresa_usuario" EntityType="cliente_mercadoModel.tipo_empresa_usuario" />
+    <EntitySet Name="tipo_resposta_cotacao" EntityType="cliente_mercadoModel.tipo_resposta_cotacao" />
+    <EntitySet Name="tipos_contrato" EntityType="cliente_mercadoModel.tipos_contrato" />
+    <EntitySet Name="tipos_frete" EntityType="cliente_mercadoModel.tipos_frete" />
+    <EntitySet Name="tipos_item_cotacao" EntityType="cliente_mercadoModel.tipos_item_cotacao" />
+    <EntitySet Name="tipos_telefone_empresa_usuario" EntityType="cliente_mercadoModel.tipos_telefone_empresa_usuario" />
+    <EntitySet Name="unidades_produto" EntityType="cliente_mercadoModel.unidades_produto" />
+    <EntitySet Name="usuario_historico_empresas" EntityType="cliente_mercadoModel.usuario_historico_empresas" />
+    <EntitySet Name="usuario_modulo" EntityType="cliente_mercadoModel.usuario_modulo" />
+    <EntitySet Name="usuario_modulo_historico_empresas" EntityType="cliente_mercadoModel.usuario_modulo_historico_empresas" />
+    <AssociationSet Name="FK__avaliacao__ID_CO__4E88ABD4" Association="cliente_mercadoModel.FK__avaliacao__ID_CO__4E88ABD4">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="avaliacao_empresa_cotada" EntitySet="avaliacao_empresa_cotada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__avaliacao__ID_CO__4F7CD00D" Association="cliente_mercadoModel.FK__avaliacao__ID_CO__4F7CD00D">
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+      <End Role="avaliacao_empresa_cotada" EntitySet="avaliacao_empresa_cotada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__avaliacao__ID_CO__5070F446" Association="cliente_mercadoModel.FK__avaliacao__ID_CO__5070F446">
+      <End Role="classificacao_empresa_cotada" EntitySet="classificacao_empresa_cotada" />
+      <End Role="avaliacao_empresa_cotada" EntitySet="avaliacao_empresa_cotada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__avaliacao__ID_CO__534D60F1" Association="cliente_mercadoModel.FK__avaliacao__ID_CO__534D60F1">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="avaliacao_usuario_empresa_cotada" EntitySet="avaliacao_usuario_empresa_cotada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__avaliacao__ID_CO__5441852A" Association="cliente_mercadoModel.FK__avaliacao__ID_CO__5441852A">
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+      <End Role="avaliacao_usuario_empresa_cotada" EntitySet="avaliacao_usuario_empresa_cotada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__avaliacao__ID_CO__5535A963" Association="cliente_mercadoModel.FK__avaliacao__ID_CO__5535A963">
+      <End Role="classificacao_usuario_empresa_cotada" EntitySet="classificacao_usuario_empresa_cotada" />
+      <End Role="avaliacao_usuario_empresa_cotada" EntitySet="avaliacao_usuario_empresa_cotada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bairros_e__ID_CO__5AEE82B9" Association="cliente_mercadoModel.FK__bairros_e__ID_CO__5AEE82B9">
+      <End Role="cidades_empresa_usuario" EntitySet="cidades_empresa_usuario" />
+      <End Role="bairros_empresa_usuario" EntitySet="bairros_empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__enderecos__ID_CO__151B244E" Association="cliente_mercadoModel.FK__enderecos__ID_CO__151B244E">
+      <End Role="bairros_empresa_usuario" EntitySet="bairros_empresa_usuario" />
+      <End Role="enderecos_cep_empresa_usuario" EntitySet="enderecos_cep_empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chat_cota__ID_CO__6383C8BA" Association="cliente_mercadoModel.FK__chat_cota__ID_CO__6383C8BA">
+      <End Role="cotacao_filha" EntitySet="cotacao_filha" />
+      <End Role="chat_cotacao" EntitySet="chat_cotacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chat_cota__ID_CO__6477ECF3" Association="cliente_mercadoModel.FK__chat_cota__ID_CO__6477ECF3">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="chat_cotacao" EntitySet="chat_cotacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cidades_e__ID_UF__5812160E" Association="cliente_mercadoModel.FK__cidades_e__ID_UF__5812160E">
+      <End Role="estados_empresa_usuario" EntitySet="estados_empresa_usuario" />
+      <End Role="cidades_empresa_usuario" EntitySet="cidades_empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_f__ID_CO__5DCAEF64" Association="cliente_mercadoModel.FK__cotacao_f__ID_CO__5DCAEF64">
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+      <End Role="cotacao_filha" EntitySet="cotacao_filha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_f__ID_CO__5EBF139D" Association="cliente_mercadoModel.FK__cotacao_f__ID_CO__5EBF139D">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="cotacao_filha" EntitySet="cotacao_filha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_f__ID_CO__5FB337D6" Association="cliente_mercadoModel.FK__cotacao_f__ID_CO__5FB337D6">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="cotacao_filha" EntitySet="cotacao_filha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_n__ID_CO__2BFE89A6" Association="cliente_mercadoModel.FK__cotacao_n__ID_CO__2BFE89A6">
+      <End Role="cotacao_filha" EntitySet="cotacao_filha" />
+      <End Role="cotacao_negociacao" EntitySet="cotacao_negociacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pedido__ID_CODIG__6EF57B66" Association="cliente_mercadoModel.FK__pedido__ID_CODIG__6EF57B66">
+      <End Role="cotacao_filha" EntitySet="cotacao_filha" />
+      <End Role="pedido" EntitySet="pedidoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_m__ID_CO__440B1D61" Association="cliente_mercadoModel.FK__cotacao_m__ID_CO__440B1D61">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_m__ID_CO__44FF419A" Association="cliente_mercadoModel.FK__cotacao_m__ID_CO__44FF419A">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_m__ID_CO__45F365D3" Association="cliente_mercadoModel.FK__cotacao_m__ID_CO__45F365D3">
+      <End Role="tipos_frete" EntitySet="tipos_frete" />
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_m__ID_CO__4AB81AF0" Association="cliente_mercadoModel.FK__cotacao_m__ID_CO__4AB81AF0">
+      <End Role="status_cotacao" EntitySet="status_cotacao" />
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__itens_cot__ID_CO__71D1E811" Association="cliente_mercadoModel.FK__itens_cot__ID_CO__71D1E811">
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+      <End Role="itens_cotacao" EntitySet="itens_cotacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pedido__ID_CODIG__6E01572D" Association="cliente_mercadoModel.FK__pedido__ID_CODIG__6E01572D">
+      <End Role="cotacao_master" EntitySet="cotacao_master" />
+      <End Role="pedido" EntitySet="pedidoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_n__ID_CO__2CF2ADDF" Association="cliente_mercadoModel.FK__cotacao_n__ID_CO__2CF2ADDF">
+      <End Role="itens_cotacao" EntitySet="itens_cotacao" />
+      <End Role="cotacao_negociacao" EntitySet="cotacao_negociacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cotacao_n__ID_CO__2EDAF651" Association="cliente_mercadoModel.FK__cotacao_n__ID_CO__2EDAF651">
+      <End Role="tipo_resposta_cotacao" EntitySet="tipo_resposta_cotacao" />
+      <End Role="cotacao_negociacao" EntitySet="cotacao_negociacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__itens_ped__ID_CO__531856C7" Association="cliente_mercadoModel.FK__itens_ped__ID_CO__531856C7">
+      <End Role="cotacao_negociacao" EntitySet="cotacao_negociacao" />
+      <End Role="itens_pedido" EntitySet="itens_pedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK__doc_ident__ID_CO__7F2BE32F" Association="cliente_mercadoModel.FK__doc_ident__ID_CO__7F2BE32F">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="doc_identificador_empresa_usuario" EntitySet="doc_identificador_empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__produto__ID_CODI__6754599E" Association="cliente_mercadoModel.FK__produto__ID_CODI__6754599E">
+      <End Role="empresa_fabricante_marcas" EntitySet="empresa_fabricante_marcas" />
+      <End Role="produto" EntitySet="produtoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__empresa_u__ID_CO__02084FDA" Association="cliente_mercadoModel.FK__empresa_u__ID_CO__02084FDA">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="empresa_usuario_logins" EntitySet="empresa_usuario_logins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__empresa_u__ID_CO__164452B1" Association="cliente_mercadoModel.FK__empresa_u__ID_CO__164452B1">
+      <End Role="tipo_empresa_usuario" EntitySet="tipo_empresa_usuario" />
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__enderecos__ID_CO__1F98B2C1" Association="cliente_mercadoModel.FK__enderecos__ID_CO__1F98B2C1">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="enderecos_empresa_usuario" EntitySet="enderecos_empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__enderecos__ID_CO__2645B050" Association="cliente_mercadoModel.FK__enderecos__ID_CO__2645B050">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="enderecos_internet" EntitySet="enderecos_internet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__financeir__ID_CO__55F4C372" Association="cliente_mercadoModel.FK__financeir__ID_CO__55F4C372">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="financeiro_cobranca_faturamento" EntitySet="financeiro_cobranca_faturamento" />
+    </AssociationSet>
+    <AssociationSet Name="FK__financeir__ID_CO__56E8E7AB" Association="cliente_mercadoModel.FK__financeir__ID_CO__56E8E7AB">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="financeiro_cobranca_faturamento" EntitySet="financeiro_cobranca_faturamento" />
+    </AssociationSet>
+    <AssociationSet Name="FK__profissao__ID_CO__31B762FC" Association="cliente_mercadoModel.FK__profissao__ID_CO__31B762FC">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="profissao_usuario_empresa" EntitySet="profissao_usuario_empresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ramo_ativ__ID_CO__37703C52" Association="cliente_mercadoModel.FK__ramo_ativ__ID_CO__37703C52">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="ramo_atividade_empresa_usuario" EntitySet="ramo_atividade_empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__telefones__ID_CO__3C34F16F" Association="cliente_mercadoModel.FK__telefones__ID_CO__3C34F16F">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="telefones_empresa_usuario" EntitySet="telefones_empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tipo_cont__ID_CO__40F9A68C" Association="cliente_mercadoModel.FK__tipo_cont__ID_CO__40F9A68C">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="tipo_contrato_empresa_usuario_cotada" EntitySet="tipo_contrato_empresa_usuario_cotada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_h__ID_CO__44CA3770" Association="cliente_mercadoModel.FK__usuario_h__ID_CO__44CA3770">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="usuario_historico_empresas" EntitySet="usuario_historico_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_m__ID_CO__498EEC8D" Association="cliente_mercadoModel.FK__usuario_m__ID_CO__498EEC8D">
+      <End Role="empresa_usuario" EntitySet="empresa_usuario" />
+      <End Role="usuario_modulo" EntitySet="usuario_modulo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__financeir__ID_TI__57DD0BE4" Association="cliente_mercadoModel.FK__financeir__ID_TI__57DD0BE4">
+      <End Role="tipo_contrato_empresa_usuario_cotada" EntitySet="tipo_contrato_empresa_usuario_cotada" />
+      <End Role="financeiro_cobranca_faturamento" EntitySet="financeiro_cobranca_faturamento" />
+    </AssociationSet>
+    <AssociationSet Name="FK__itens_cot__ID_CO__72C60C4A" Association="cliente_mercadoModel.FK__itens_cot__ID_CO__72C60C4A">
+      <End Role="produto" EntitySet="produtoes" />
+      <End Role="itens_cotacao" EntitySet="itens_cotacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__itens_cot__ID_CO__73BA3083" Association="cliente_mercadoModel.FK__itens_cot__ID_CO__73BA3083">
+      <End Role="pedido" EntitySet="pedidoes" />
+      <End Role="itens_cotacao" EntitySet="itens_cotacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__itens_cot__ID_CO__76969D2E" Association="cliente_mercadoModel.FK__itens_cot__ID_CO__76969D2E">
+      <End Role="tipos_item_cotacao" EntitySet="tipos_item_cotacao" />
+      <End Role="itens_cotacao" EntitySet="itens_cotacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__itens_cot__ID_CO__787EE5A0" Association="cliente_mercadoModel.FK__itens_cot__ID_CO__787EE5A0">
+      <End Role="unidades_produto" EntitySet="unidades_produto" />
+      <End Role="itens_cotacao" EntitySet="itens_cotacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__itens_ped__ID_CO__5224328E" Association="cliente_mercadoModel.FK__itens_ped__ID_CO__5224328E">
+      <End Role="pedido" EntitySet="pedidoes" />
+      <End Role="itens_pedido" EntitySet="itens_pedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_m__ID_CO__489AC854" Association="cliente_mercadoModel.FK__usuario_m__ID_CO__489AC854">
+      <End Role="modulos" EntitySet="modulos" />
+      <End Role="usuario_modulo" EntitySet="usuario_modulo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_m__ID_CO__4F47C5E3" Association="cliente_mercadoModel.FK__usuario_m__ID_CO__4F47C5E3">
+      <End Role="modulos" EntitySet="modulos" />
+      <End Role="usuario_modulo_historico_empresas" EntitySet="usuario_modulo_historico_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__produto__ID_CODI__68487DD7" Association="cliente_mercadoModel.FK__produto__ID_CODI__68487DD7">
+      <End Role="unidades_produto" EntitySet="unidades_produto" />
+      <End Role="produto" EntitySet="produtoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__profissao__ID_CO__32AB8735" Association="cliente_mercadoModel.FK__profissao__ID_CO__32AB8735">
+      <End Role="profissoes_usuario" EntitySet="profissoes_usuario" />
+      <End Role="profissao_usuario_empresa" EntitySet="profissao_usuario_empresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK__telefones__ID_CO__3D2915A8" Association="cliente_mercadoModel.FK__telefones__ID_CO__3D2915A8">
+      <End Role="tipos_telefone_empresa_usuario" EntitySet="tipos_telefone_empresa_usuario" />
+      <End Role="telefones_empresa_usuario" EntitySet="telefones_empresa_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tipo_cont__ID_CO__41EDCAC5" Association="cliente_mercadoModel.FK__tipo_cont__ID_CO__41EDCAC5">
+      <End Role="tipos_contrato" EntitySet="tipos_contrato" />
+      <End Role="tipo_contrato_empresa_usuario_cotada" EntitySet="tipo_contrato_empresa_usuario_cotada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_m__ID_HI__4E53A1AA" Association="cliente_mercadoModel.FK__usuario_m__ID_HI__4E53A1AA">
+      <End Role="usuario_historico_empresas" EntitySet="usuario_historico_empresas" />
+      <End Role="usuario_modulo_historico_empresas" EntitySet="usuario_modulo_historico_empresas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="avaliacao_empresa_cotada">
+    <Key>
+      <PropertyRef Name="ID_AVALIACAO_EMPRESA_COTADA" />
+    </Key>
+    <Property Name="ID_AVALIACAO_EMPRESA_COTADA" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_COTACAO_MASTER" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_CLASSIFICACAO_EMPRESA" Type="Int32" Nullable="false" />
+    <Property Name="DATA_AVALIACAO_EMPRESA_COTADA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_AVALIOU" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__4E88ABD4" FromRole="avaliacao_empresa_cotada" ToRole="empresa_usuario" />
+    <NavigationProperty Name="cotacao_master" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__4F7CD00D" FromRole="avaliacao_empresa_cotada" ToRole="cotacao_master" />
+    <NavigationProperty Name="classificacao_empresa_cotada" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__5070F446" FromRole="avaliacao_empresa_cotada" ToRole="classificacao_empresa_cotada" />
+  </EntityType>
+  <EntityType Name="avaliacao_usuario_empresa_cotada">
+    <Key>
+      <PropertyRef Name="ID_AVALIACAO_USUARIO_EMPRESA_COTADA" />
+    </Key>
+    <Property Name="ID_AVALIACAO_USUARIO_EMPRESA_COTADA" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_COTACAO_MASTER" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_CLASSIFICACAO_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="DATA_AVALIACAO_USUARIO_EMPRESA_COTADA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_AVALIOU" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__534D60F1" FromRole="avaliacao_usuario_empresa_cotada" ToRole="empresa_usuario" />
+    <NavigationProperty Name="cotacao_master" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__5441852A" FromRole="avaliacao_usuario_empresa_cotada" ToRole="cotacao_master" />
+    <NavigationProperty Name="classificacao_usuario_empresa_cotada" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__5535A963" FromRole="avaliacao_usuario_empresa_cotada" ToRole="classificacao_usuario_empresa_cotada" />
+  </EntityType>
+  <EntityType Name="bairros_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_CIDADE_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="NOME_BAIRRO_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="cidades_empresa_usuario" Relationship="cliente_mercadoModel.FK__bairros_e__ID_CO__5AEE82B9" FromRole="bairros_empresa_usuario" ToRole="cidades_empresa_usuario" />
+    <NavigationProperty Name="enderecos_cep_empresa_usuario" Relationship="cliente_mercadoModel.FK__enderecos__ID_CO__151B244E" FromRole="bairros_empresa_usuario" ToRole="enderecos_cep_empresa_usuario" />
+  </EntityType>
+  <EntityType Name="chat_cotacao">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_CHAT_COTACAO" />
+    </Key>
+    <Property Name="ID_CODIGO_CHAT_COTACAO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_COTACAO_FILHA" Type="Int32" Nullable="false" />
+    <Property Name="DATA_CHAT_COTACAO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HORA_CHAT_COTACAO" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_COTANTE_COTADA" Type="Int32" Nullable="false" />
+    <Property Name="TEXTO_CHAT_COTACAO" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ORDEM_EXIBICAO_CHAT_COTACAO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cotacao_filha" Relationship="cliente_mercadoModel.FK__chat_cota__ID_CO__6383C8BA" FromRole="chat_cotacao" ToRole="cotacao_filha" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__chat_cota__ID_CO__6477ECF3" FromRole="chat_cotacao" ToRole="empresa_usuario" />
+  </EntityType>
+  <EntityType Name="cidades_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_CIDADE_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_CIDADE_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_UF" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="NOME_CIDADE_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="bairros_empresa_usuario" Relationship="cliente_mercadoModel.FK__bairros_e__ID_CO__5AEE82B9" FromRole="cidades_empresa_usuario" ToRole="bairros_empresa_usuario" />
+    <NavigationProperty Name="estados_empresa_usuario" Relationship="cliente_mercadoModel.FK__cidades_e__ID_UF__5812160E" FromRole="cidades_empresa_usuario" ToRole="estados_empresa_usuario" />
+  </EntityType>
+  <EntityType Name="classificacao_empresa_cotada">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_CLASSIFICACAO_EMPRESA" />
+    </Key>
+    <Property Name="ID_CODIGO_CLASSIFICACAO_EMPRESA" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_CLASSIFICACAO_EMPRESA" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PONTUACAO_CLASSIFICACAO_EMPRESA" Type="Int32" Nullable="false" />
+    <Property Name="CLASSIFICACAO_ATIVA" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_CADASTRO_CLASSIFICACAO_EMPRESA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_INATIVOU_CLASSIFICACAO_EMPRESA" Type="DateTime" Precision="3" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU_CLASSIFICACAO_EMPRESA" Type="Int32" />
+    <NavigationProperty Name="avaliacao_empresa_cotada" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__5070F446" FromRole="classificacao_empresa_cotada" ToRole="avaliacao_empresa_cotada" />
+  </EntityType>
+  <EntityType Name="classificacao_usuario_empresa_cotada">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_CLASSIFICACAO_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_CLASSIFICACAO_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_CLASSIFICACAO_USUARIO" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PONTUACAO_CLASSIFICACAO_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="CLASSIFICACAO_ATIVA" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_CADASTRO_CLASSIFICACAO_USUARIO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_INATIVOU_CLASSIFICACAO_USUARIO" Type="DateTime" Precision="3" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU_CLASSIFICACAO_USUARIO" Type="Int32" />
+    <NavigationProperty Name="avaliacao_usuario_empresa_cotada" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__5535A963" FromRole="classificacao_usuario_empresa_cotada" ToRole="avaliacao_usuario_empresa_cotada" />
+  </EntityType>
+  <EntityType Name="cotacao_filha">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_COTACAO_FILHA" />
+    </Key>
+    <Property Name="ID_CODIGO_COTACAO_FILHA" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_COTACAO_MASTER" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_EMPRESA_COTADA" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO_COTADA" Type="Int32" Nullable="false" />
+    <Property Name="DATA_RESPOSTA_COTACAO_FILHA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RESPONDIDA_COTACAO_FILHA" Type="Boolean" Nullable="false" />
+    <Property Name="PRECO_LOTE_ITENS_COTACAO" Type="Int32" />
+    <NavigationProperty Name="chat_cotacao" Relationship="cliente_mercadoModel.FK__chat_cota__ID_CO__6383C8BA" FromRole="cotacao_filha" ToRole="chat_cotacao" />
+    <NavigationProperty Name="cotacao_master" Relationship="cliente_mercadoModel.FK__cotacao_f__ID_CO__5DCAEF64" FromRole="cotacao_filha" ToRole="cotacao_master" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__cotacao_f__ID_CO__5EBF139D" FromRole="cotacao_filha" ToRole="empresa_usuario" />
+    <NavigationProperty Name="empresa_usuario1" Relationship="cliente_mercadoModel.FK__cotacao_f__ID_CO__5FB337D6" FromRole="cotacao_filha" ToRole="empresa_usuario" />
+    <NavigationProperty Name="cotacao_negociacao" Relationship="cliente_mercadoModel.FK__cotacao_n__ID_CO__2BFE89A6" FromRole="cotacao_filha" ToRole="cotacao_negociacao" />
+    <NavigationProperty Name="pedidoes" Relationship="cliente_mercadoModel.FK__pedido__ID_CODIG__6EF57B66" FromRole="cotacao_filha" ToRole="pedido" />
+  </EntityType>
+  <EntityType Name="cotacao_master">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+    </Key>
+    <Property Name="ID_CODIGO_COTACAO_MASTER" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_EMPRESA_COTANTE" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO_COTANTE" Type="Int32" Nullable="false" />
+    <Property Name="NOME_COTACAO" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="DATA_CRIACAO_COTACAO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ID_CODIGO_TIPOS_FRETE" Type="Int32" />
+    <Property Name="CONDICAO_PAGAMENTO_COTACAO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="OBSERVACAO_COTACAO" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="PERCENTUAL_RESPONDIDA_COTACAO" Type="Int32" />
+    <Property Name="ID_CODIGO_STATUS_COTACAO" Type="Int32" />
+    <NavigationProperty Name="avaliacao_empresa_cotada" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__4F7CD00D" FromRole="cotacao_master" ToRole="avaliacao_empresa_cotada" />
+    <NavigationProperty Name="avaliacao_usuario_empresa_cotada" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__5441852A" FromRole="cotacao_master" ToRole="avaliacao_usuario_empresa_cotada" />
+    <NavigationProperty Name="cotacao_filha" Relationship="cliente_mercadoModel.FK__cotacao_f__ID_CO__5DCAEF64" FromRole="cotacao_master" ToRole="cotacao_filha" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__cotacao_m__ID_CO__440B1D61" FromRole="cotacao_master" ToRole="empresa_usuario" />
+    <NavigationProperty Name="empresa_usuario1" Relationship="cliente_mercadoModel.FK__cotacao_m__ID_CO__44FF419A" FromRole="cotacao_master" ToRole="empresa_usuario" />
+    <NavigationProperty Name="tipos_frete" Relationship="cliente_mercadoModel.FK__cotacao_m__ID_CO__45F365D3" FromRole="cotacao_master" ToRole="tipos_frete" />
+    <NavigationProperty Name="status_cotacao" Relationship="cliente_mercadoModel.FK__cotacao_m__ID_CO__4AB81AF0" FromRole="cotacao_master" ToRole="status_cotacao" />
+    <NavigationProperty Name="itens_cotacao" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__71D1E811" FromRole="cotacao_master" ToRole="itens_cotacao" />
+    <NavigationProperty Name="pedidoes" Relationship="cliente_mercadoModel.FK__pedido__ID_CODIG__6E01572D" FromRole="cotacao_master" ToRole="pedido" />
+  </EntityType>
+  <EntityType Name="cotacao_negociacao">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_COTACAO_NEGOCIACAO" />
+    </Key>
+    <Property Name="ID_CODIGO_COTACAO_NEGOCIACAO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_COTACAO_FILHA" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_ITENS_COTACAO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRICAO_PRODUTO_EDITADO_COTADA" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PRECO_ITENS_COTACAO" Type="Int32" Nullable="false" />
+    <Property Name="QUANTIDADE_ITENS_COTACAO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_TIPO_RESPOSTA_COTACAO" Type="Int32" Nullable="false" />
+    <Property Name="PRODUTO_COTADO" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="cotacao_filha" Relationship="cliente_mercadoModel.FK__cotacao_n__ID_CO__2BFE89A6" FromRole="cotacao_negociacao" ToRole="cotacao_filha" />
+    <NavigationProperty Name="itens_cotacao" Relationship="cliente_mercadoModel.FK__cotacao_n__ID_CO__2CF2ADDF" FromRole="cotacao_negociacao" ToRole="itens_cotacao" />
+    <NavigationProperty Name="tipo_resposta_cotacao" Relationship="cliente_mercadoModel.FK__cotacao_n__ID_CO__2EDAF651" FromRole="cotacao_negociacao" ToRole="tipo_resposta_cotacao" />
+    <NavigationProperty Name="itens_pedido" Relationship="cliente_mercadoModel.FK__itens_ped__ID_CO__531856C7" FromRole="cotacao_negociacao" ToRole="itens_pedido" />
+  </EntityType>
+  <EntityType Name="doc_identificador_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_DOC_IDENTIFICADOR_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_DOC_IDENTIFICADOR_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_EMPRESA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__doc_ident__ID_CO__7F2BE32F" FromRole="doc_identificador_empresa_usuario" ToRole="empresa_usuario" />
+  </EntityType>
+  <EntityType Name="empresa_fabricante_marcas">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" />
+    </Key>
+    <Property Name="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_EMPRESA_FABRICANTE_MARCAS" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="produtoes" Relationship="cliente_mercadoModel.FK__produto__ID_CODI__6754599E" FromRole="empresa_fabricante_marcas" ToRole="produto" />
+  </EntityType>
+  <EntityType Name="empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_TIPO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_DOC_IDENTIFICADOR_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="NOME_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="NOME_FANTASIA_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="LOGOMARCA_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="USUARIO_MASTER_EMPRESA_USUARIO" Type="Boolean" Nullable="false" />
+    <Property Name="RECEBER_EMAILS_EMPRESA_USUARIO" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_CADASTRO_EMPRESA_USUARIO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_ULTIMA_ATUALIZACAO_EMPRESA_USUARIO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ATIVA_INATIVA_EMPRESA_USUARIO" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_INATIVOU_EMPRESA_USUARIO" Type="DateTime" Precision="3" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" Type="Int32" />
+    <Property Name="EMPRESA_ADM" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="avaliacao_empresa_cotada" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__4E88ABD4" FromRole="empresa_usuario" ToRole="avaliacao_empresa_cotada" />
+    <NavigationProperty Name="avaliacao_usuario_empresa_cotada" Relationship="cliente_mercadoModel.FK__avaliacao__ID_CO__534D60F1" FromRole="empresa_usuario" ToRole="avaliacao_usuario_empresa_cotada" />
+    <NavigationProperty Name="chat_cotacao" Relationship="cliente_mercadoModel.FK__chat_cota__ID_CO__6477ECF3" FromRole="empresa_usuario" ToRole="chat_cotacao" />
+    <NavigationProperty Name="cotacao_filha" Relationship="cliente_mercadoModel.FK__cotacao_f__ID_CO__5EBF139D" FromRole="empresa_usuario" ToRole="cotacao_filha" />
+    <NavigationProperty Name="cotacao_filha1" Relationship="cliente_mercadoModel.FK__cotacao_f__ID_CO__5FB337D6" FromRole="empresa_usuario" ToRole="cotacao_filha" />
+    <NavigationProperty Name="cotacao_master" Relationship="cliente_mercadoModel.FK__cotacao_m__ID_CO__440B1D61" FromRole="empresa_usuario" ToRole="cotacao_master" />
+    <NavigationProperty Name="cotacao_master1" Relationship="cliente_mercadoModel.FK__cotacao_m__ID_CO__44FF419A" FromRole="empresa_usuario" ToRole="cotacao_master" />
+    <NavigationProperty Name="doc_identificador_empresa_usuario" Relationship="cliente_mercadoModel.FK__doc_ident__ID_CO__7F2BE32F" FromRole="empresa_usuario" ToRole="doc_identificador_empresa_usuario" />
+    <NavigationProperty Name="empresa_usuario_logins" Relationship="cliente_mercadoModel.FK__empresa_u__ID_CO__02084FDA" FromRole="empresa_usuario" ToRole="empresa_usuario_logins" />
+    <NavigationProperty Name="tipo_empresa_usuario" Relationship="cliente_mercadoModel.FK__empresa_u__ID_CO__164452B1" FromRole="empresa_usuario" ToRole="tipo_empresa_usuario" />
+    <NavigationProperty Name="enderecos_empresa_usuario" Relationship="cliente_mercadoModel.FK__enderecos__ID_CO__1F98B2C1" FromRole="empresa_usuario" ToRole="enderecos_empresa_usuario" />
+    <NavigationProperty Name="enderecos_internet" Relationship="cliente_mercadoModel.FK__enderecos__ID_CO__2645B050" FromRole="empresa_usuario" ToRole="enderecos_internet" />
+    <NavigationProperty Name="financeiro_cobranca_faturamento" Relationship="cliente_mercadoModel.FK__financeir__ID_CO__55F4C372" FromRole="empresa_usuario" ToRole="financeiro_cobranca_faturamento" />
+    <NavigationProperty Name="financeiro_cobranca_faturamento1" Relationship="cliente_mercadoModel.FK__financeir__ID_CO__56E8E7AB" FromRole="empresa_usuario" ToRole="financeiro_cobranca_faturamento" />
+    <NavigationProperty Name="profissao_usuario_empresa" Relationship="cliente_mercadoModel.FK__profissao__ID_CO__31B762FC" FromRole="empresa_usuario" ToRole="profissao_usuario_empresa" />
+    <NavigationProperty Name="ramo_atividade_empresa_usuario" Relationship="cliente_mercadoModel.FK__ramo_ativ__ID_CO__37703C52" FromRole="empresa_usuario" ToRole="ramo_atividade_empresa_usuario" />
+    <NavigationProperty Name="telefones_empresa_usuario" Relationship="cliente_mercadoModel.FK__telefones__ID_CO__3C34F16F" FromRole="empresa_usuario" ToRole="telefones_empresa_usuario" />
+    <NavigationProperty Name="tipo_contrato_empresa_usuario_cotada" Relationship="cliente_mercadoModel.FK__tipo_cont__ID_CO__40F9A68C" FromRole="empresa_usuario" ToRole="tipo_contrato_empresa_usuario_cotada" />
+    <NavigationProperty Name="usuario_historico_empresas" Relationship="cliente_mercadoModel.FK__usuario_h__ID_CO__44CA3770" FromRole="empresa_usuario" ToRole="usuario_historico_empresas" />
+    <NavigationProperty Name="usuario_modulo" Relationship="cliente_mercadoModel.FK__usuario_m__ID_CO__498EEC8D" FromRole="empresa_usuario" ToRole="usuario_modulo" />
+  </EntityType>
+  <EntityType Name="empresa_usuario_logins">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO_LOGINS" />
+    </Key>
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_LOGINS" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="LOGIN_EMPRESA_USUARIO_LOGINS" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="SENHA_EMPRESA_USUARIO_LOGINS" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="LEMBRETE_EMPRESA_USUARIO_LOGINS" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__empresa_u__ID_CO__02084FDA" FromRole="empresa_usuario_logins" ToRole="empresa_usuario" />
+  </EntityType>
+  <EntityType Name="enderecos_cep_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CEP_ENDERECO_EMPRESA_USUARIO" />
+      <PropertyRef Name="ID_CEP_SEQUENCIAL_ENDERECO" />
+    </Key>
+    <Property Name="ID_CEP_ENDERECO_EMPRESA_USUARIO" Type="Int64" Nullable="false" />
+    <Property Name="ID_CEP_SEQUENCIAL_ENDERECO" Type="Int32" Nullable="false" />
+    <Property Name="ENDERECO_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="bairros_empresa_usuario" Relationship="cliente_mercadoModel.FK__enderecos__ID_CO__151B244E" FromRole="enderecos_cep_empresa_usuario" ToRole="bairros_empresa_usuario" />
+  </EntityType>
+  <EntityType Name="enderecos_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_ENDERECO_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_ENDERECO_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CEP_ENDERECO_EMPRESA_USUARIO" Type="Int64" Nullable="false" />
+    <Property Name="ID_CEP_SEQUENCIAL_ENDERECO" Type="Int32" />
+    <Property Name="NUMERO_ENDERECO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="COMPLEMENTO_ENDERECO_EMPRESA_USUARIO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="REFERENCIA_ENDERECO_EMPRESA_USUARIO" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__enderecos__ID_CO__1F98B2C1" FromRole="enderecos_empresa_usuario" ToRole="empresa_usuario" />
+  </EntityType>
+  <EntityType Name="enderecos_internet">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      <PropertyRef Name="EMAIL1_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="EMAIL1_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="EMAIL2_EMPRESA_USUARIO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PAGINA_HOME_EMPRESA_USUARIO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PAGINA_FUN_EMPRESA_USUARIO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__enderecos__ID_CO__2645B050" FromRole="enderecos_internet" ToRole="empresa_usuario" />
+  </EntityType>
+  <EntityType Name="estados_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_UF" />
+    </Key>
+    <Property Name="ID_UF" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="NOME_ESTADO_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="cidades_empresa_usuario" Relationship="cliente_mercadoModel.FK__cidades_e__ID_UF__5812160E" FromRole="estados_empresa_usuario" ToRole="cidades_empresa_usuario" />
+  </EntityType>
+  <EntityType Name="financeiro_cobranca_faturamento">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_COBRANCA_FATURAMENTO" />
+    </Key>
+    <Property Name="ID_CODIGO_COBRANCA_FATURAMENTO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" Type="Int32" Nullable="false" />
+    <Property Name="OBSERVACAO_BOLETO_COBRANCA_FATURAMENTO" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="PARCELA_PAGA_COBRANCA_FATURAMENTO" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__financeir__ID_CO__55F4C372" FromRole="financeiro_cobranca_faturamento" ToRole="empresa_usuario" />
+    <NavigationProperty Name="empresa_usuario1" Relationship="cliente_mercadoModel.FK__financeir__ID_CO__56E8E7AB" FromRole="financeiro_cobranca_faturamento" ToRole="empresa_usuario" />
+    <NavigationProperty Name="tipo_contrato_empresa_usuario_cotada" Relationship="cliente_mercadoModel.FK__financeir__ID_TI__57DD0BE4" FromRole="financeiro_cobranca_faturamento" ToRole="tipo_contrato_empresa_usuario_cotada" />
+  </EntityType>
+  <EntityType Name="itens_cotacao">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_ITENS_COTACAO" />
+    </Key>
+    <Property Name="ID_CODIGO_ITENS_COTACAO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_COTACAO_MASTER" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_PRODUTO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_PEDIDO" Type="Int32" />
+    <Property Name="FOTO_TIPO_ITENS_COTACAO" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ID_CODIGO_TIPO_ITENS_COTACAO" Type="Int32" />
+    <Property Name="QUANTIDADE_ITENS_COTACAO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_UNIDADE_PRODUTO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cotacao_master" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__71D1E811" FromRole="itens_cotacao" ToRole="cotacao_master" />
+    <NavigationProperty Name="cotacao_negociacao" Relationship="cliente_mercadoModel.FK__cotacao_n__ID_CO__2CF2ADDF" FromRole="itens_cotacao" ToRole="cotacao_negociacao" />
+    <NavigationProperty Name="produto" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__72C60C4A" FromRole="itens_cotacao" ToRole="produto" />
+    <NavigationProperty Name="pedido" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__73BA3083" FromRole="itens_cotacao" ToRole="pedido" />
+    <NavigationProperty Name="tipos_item_cotacao" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__76969D2E" FromRole="itens_cotacao" ToRole="tipos_item_cotacao" />
+    <NavigationProperty Name="unidades_produto" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__787EE5A0" FromRole="itens_cotacao" ToRole="unidades_produto" />
+  </EntityType>
+  <EntityType Name="itens_pedido">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_ITENS_PEDIDO" />
+    </Key>
+    <Property Name="ID_CODIGO_ITENS_PEDIDO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_PEDIDO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_COTACAO_NEGOCIACAO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cotacao_negociacao" Relationship="cliente_mercadoModel.FK__itens_ped__ID_CO__531856C7" FromRole="itens_pedido" ToRole="cotacao_negociacao" />
+    <NavigationProperty Name="pedido" Relationship="cliente_mercadoModel.FK__itens_ped__ID_CO__5224328E" FromRole="itens_pedido" ToRole="pedido" />
+  </EntityType>
+  <EntityType Name="modulo">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_MODULO" />
+    </Key>
+    <Property Name="ID_CODIGO_MODULO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_MODULO" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="TEMPO_LIMITE_USO_MODULO" Type="Int32" Nullable="false" />
+    <Property Name="CAMINHO_ACESSO_MODULO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="OBSERVACAO_MODULO" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="usuario_modulo" Relationship="cliente_mercadoModel.FK__usuario_m__ID_CO__489AC854" FromRole="modulos" ToRole="usuario_modulo" />
+    <NavigationProperty Name="usuario_modulo_historico_empresas" Relationship="cliente_mercadoModel.FK__usuario_m__ID_CO__4F47C5E3" FromRole="modulos" ToRole="usuario_modulo_historico_empresas" />
+  </EntityType>
+  <EntityType Name="pedido">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_PEDIDO" />
+    </Key>
+    <Property Name="ID_CODIGO_PEDIDO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_COTACAO_MASTER" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_COTACAO_FILHA" Type="Int32" Nullable="false" />
+    <Property Name="DATA_PEDIDO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_ENTREGA_PEDIDO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CONFIRMADO_PEDIDO" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="cotacao_filha" Relationship="cliente_mercadoModel.FK__pedido__ID_CODIG__6EF57B66" FromRole="pedido" ToRole="cotacao_filha" />
+    <NavigationProperty Name="cotacao_master" Relationship="cliente_mercadoModel.FK__pedido__ID_CODIG__6E01572D" FromRole="pedido" ToRole="cotacao_master" />
+    <NavigationProperty Name="itens_cotacao" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__73BA3083" FromRole="pedido" ToRole="itens_cotacao" />
+    <NavigationProperty Name="itens_pedido" Relationship="cliente_mercadoModel.FK__itens_ped__ID_CO__5224328E" FromRole="pedido" ToRole="itens_pedido" />
+  </EntityType>
+  <EntityType Name="produto">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_PRODUTO" />
+    </Key>
+    <Property Name="ID_CODIGO_PRODUTO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" Type="Int32" Nullable="false" />
+    <Property Name="DESCRICAO_PRODUTO" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ID_CODIGO_UNIDADE_PRODUTO" Type="Int32" Nullable="false" />
+    <Property Name="PRECO_PRODUTO" Type="Int32" />
+    <Property Name="DATA_CADASTRO_PRODUTO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PRODUTO_ATIVO" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_INATIVOU_PRODUTO" Type="DateTime" Precision="3" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" Type="Int32" />
+    <NavigationProperty Name="empresa_fabricante_marcas" Relationship="cliente_mercadoModel.FK__produto__ID_CODI__6754599E" FromRole="produto" ToRole="empresa_fabricante_marcas" />
+    <NavigationProperty Name="itens_cotacao" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__72C60C4A" FromRole="produto" ToRole="itens_cotacao" />
+    <NavigationProperty Name="unidades_produto" Relationship="cliente_mercadoModel.FK__produto__ID_CODI__68487DD7" FromRole="produto" ToRole="unidades_produto" />
+  </EntityType>
+  <EntityType Name="profissao_usuario_empresa">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_PROFISSAO_USUARIO_EMPRESA" />
+    </Key>
+    <Property Name="ID_CODIGO_PROFISSAO_USUARIO_EMPRESA" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_PROFISSAO" Type="Int32" Nullable="false" />
+    <Property Name="PROFISSAO_ATIVA_USUARIO_EMPRESA" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_CADASTRO_PROFISSAO_USUARIO_EMPRESA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_INATIVOU_PROFISSAO_USUARIO_EMPRESA" Type="Int32" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" Type="Int32" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__profissao__ID_CO__31B762FC" FromRole="profissao_usuario_empresa" ToRole="empresa_usuario" />
+    <NavigationProperty Name="profissoes_usuario" Relationship="cliente_mercadoModel.FK__profissao__ID_CO__32AB8735" FromRole="profissao_usuario_empresa" ToRole="profissoes_usuario" />
+  </EntityType>
+  <EntityType Name="profissoes_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_PROFISSAO" />
+    </Key>
+    <Property Name="ID_CODIGO_PROFISSAO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_PROFISSAO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="profissao_usuario_empresa" Relationship="cliente_mercadoModel.FK__profissao__ID_CO__32AB8735" FromRole="profissoes_usuario" ToRole="profissao_usuario_empresa" />
+  </EntityType>
+  <EntityType Name="ramo_atividade_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_RAMO_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_RAMO_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRICAO_RAMO_EMPRESA" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="DATA_ATIVACAO_RAMO_EMPRESA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_DESATIVACAO_RAMO_EMPRESA" Type="DateTime" Precision="3" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" Type="Int32" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__ramo_ativ__ID_CO__37703C52" FromRole="ramo_atividade_empresa_usuario" ToRole="empresa_usuario" />
+  </EntityType>
+  <EntityType Name="status_cotacao">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_STATUS_COTACAO" />
+    </Key>
+    <Property Name="ID_CODIGO_STATUS_COTACAO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_STATUS_COTACAO" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="DATA_INCLUSAO_STATUS_COTACAO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ATIVO_STATUS_COTACAO" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_INATIVOU_STATUS_COTACAO" Type="DateTime" Precision="3" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO_INATIVOU" Type="Int32" />
+    <NavigationProperty Name="cotacao_master" Relationship="cliente_mercadoModel.FK__cotacao_m__ID_CO__4AB81AF0" FromRole="status_cotacao" ToRole="cotacao_master" />
+  </EntityType>
+  <EntityType Name="telefones_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_TELEFONES_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_TELEFONES_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="DDD_TELEFONE_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="TELEFONE_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="RAMAL_TELEFONE_EMPRESA_USUARIO" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__telefones__ID_CO__3C34F16F" FromRole="telefones_empresa_usuario" ToRole="empresa_usuario" />
+    <NavigationProperty Name="tipos_telefone_empresa_usuario" Relationship="cliente_mercadoModel.FK__telefones__ID_CO__3D2915A8" FromRole="telefones_empresa_usuario" ToRole="tipos_telefone_empresa_usuario" />
+  </EntityType>
+  <EntityType Name="tipo_contrato_empresa_usuario_cotada">
+    <Key>
+      <PropertyRef Name="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" />
+    </Key>
+    <Property Name="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_TIPO_CONTRATO_COTADA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__tipo_cont__ID_CO__40F9A68C" FromRole="tipo_contrato_empresa_usuario_cotada" ToRole="empresa_usuario" />
+    <NavigationProperty Name="financeiro_cobranca_faturamento" Relationship="cliente_mercadoModel.FK__financeir__ID_TI__57DD0BE4" FromRole="tipo_contrato_empresa_usuario_cotada" ToRole="financeiro_cobranca_faturamento" />
+    <NavigationProperty Name="tipos_contrato" Relationship="cliente_mercadoModel.FK__tipo_cont__ID_CO__41EDCAC5" FromRole="tipo_contrato_empresa_usuario_cotada" ToRole="tipos_contrato" />
+  </EntityType>
+  <EntityType Name="tipo_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_TIPO_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_TIPO_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_TIPO_EMPRESA_USUARIO" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="FISICA_JURIDICA_EMPRESA_USUARIO" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__empresa_u__ID_CO__164452B1" FromRole="tipo_empresa_usuario" ToRole="empresa_usuario" />
+  </EntityType>
+  <EntityType Name="tipo_resposta_cotacao">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_TIPO_RESPOSTA_COTACAO" />
+    </Key>
+    <Property Name="ID_CODIGO_TIPO_RESPOSTA_COTACAO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_TIPO_RESPOSTA_COTACAO" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="cotacao_negociacao" Relationship="cliente_mercadoModel.FK__cotacao_n__ID_CO__2EDAF651" FromRole="tipo_resposta_cotacao" ToRole="cotacao_negociacao" />
+  </EntityType>
+  <EntityType Name="tipos_contrato">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_TIPO_CONTRATO_COTADA" />
+    </Key>
+    <Property Name="ID_CODIGO_TIPO_CONTRATO_COTADA" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CODIGO_REFERENCIA_TIPO_COTRATO_COTADA" Type="Int32" Nullable="false" />
+    <Property Name="DESCRICAO_TIPO_CONTRATO_COTADA" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="VALOR_MENSAL_TIPO_CONTRATO_COTADA" Type="Int32" Nullable="false" />
+    <Property Name="DIAS_TOLERANCIA_COBRANCA_ANTES_POS_VENCIMENTO" Type="Int32" Nullable="false" />
+    <Property Name="DATA_CADASTRO_TIPO_CONTRATO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ATIVO_TIPO_CONTRATO_COTADA" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_INATIVOU_TIPO_CONTRATO_COTADA" Type="DateTime" Precision="3" />
+    <Property Name="ID_USUARIO_INATIVOU" Type="Int32" />
+    <NavigationProperty Name="tipo_contrato_empresa_usuario_cotada" Relationship="cliente_mercadoModel.FK__tipo_cont__ID_CO__41EDCAC5" FromRole="tipos_contrato" ToRole="tipo_contrato_empresa_usuario_cotada" />
+  </EntityType>
+  <EntityType Name="tipos_frete">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_TIPOS_FRETE" />
+    </Key>
+    <Property Name="ID_CODIGO_TIPOS_FRETE" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_TIPOS_FRETE" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="cotacao_master" Relationship="cliente_mercadoModel.FK__cotacao_m__ID_CO__45F365D3" FromRole="tipos_frete" ToRole="cotacao_master" />
+  </EntityType>
+  <EntityType Name="tipos_item_cotacao">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_TIPO_ITENS_COTACAO" />
+    </Key>
+    <Property Name="ID_CODIGO_TIPO_ITENS_COTACAO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_TIPO_ITENS_COTACAO" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="itens_cotacao" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__76969D2E" FromRole="tipos_item_cotacao" ToRole="itens_cotacao" />
+  </EntityType>
+  <EntityType Name="tipos_telefone_empresa_usuario">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" />
+    </Key>
+    <Property Name="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_TIPOS_TELEFONE" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="telefones_empresa_usuario" Relationship="cliente_mercadoModel.FK__telefones__ID_CO__3D2915A8" FromRole="tipos_telefone_empresa_usuario" ToRole="telefones_empresa_usuario" />
+  </EntityType>
+  <EntityType Name="unidades_produto">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_UNIDADE_PRODUTO" />
+    </Key>
+    <Property Name="ID_CODIGO_UNIDADE_PRODUTO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRICAO_UNIDADE_PRODUTO" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="itens_cotacao" Relationship="cliente_mercadoModel.FK__itens_cot__ID_CO__787EE5A0" FromRole="unidades_produto" ToRole="itens_cotacao" />
+    <NavigationProperty Name="produtoes" Relationship="cliente_mercadoModel.FK__produto__ID_CODI__68487DD7" FromRole="unidades_produto" ToRole="produto" />
+  </EntityType>
+  <EntityType Name="usuario_historico_empresas">
+    <Key>
+      <PropertyRef Name="ID_HISTORICO_USUARIO_EMPRESAS" />
+    </Key>
+    <Property Name="ID_HISTORICO_USUARIO_EMPRESAS" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="DATA_INICIO_SISTEMA_USUARIO_EMPRESA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_FIM_SISTEMA_USUARIO_EMPRESA" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__usuario_h__ID_CO__44CA3770" FromRole="usuario_historico_empresas" ToRole="empresa_usuario" />
+    <NavigationProperty Name="usuario_modulo_historico_empresas" Relationship="cliente_mercadoModel.FK__usuario_m__ID_HI__4E53A1AA" FromRole="usuario_historico_empresas" ToRole="usuario_modulo_historico_empresas" />
+  </EntityType>
+  <EntityType Name="usuario_modulo">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_USUARIO_MODULO" />
+    </Key>
+    <Property Name="ID_CODIGO_USUARIO_MODULO" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CODIGO_MODULO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_EMPRESA_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="DATA_LIMITE_USO_MODULO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_ATIVOU_MODULO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MODULO_ATIVO_USUARIO" Type="Boolean" Nullable="false" />
+    <Property Name="DATA_INATIVOU_MODULO" Type="DateTime" Precision="3" />
+    <Property Name="ID_EMPRESA_USUARIO_USUARIO_INATIVOU_MODULO" Type="Int32" />
+    <Property Name="MODULO_PAGO" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="empresa_usuario" Relationship="cliente_mercadoModel.FK__usuario_m__ID_CO__498EEC8D" FromRole="usuario_modulo" ToRole="empresa_usuario" />
+    <NavigationProperty Name="modulo" Relationship="cliente_mercadoModel.FK__usuario_m__ID_CO__489AC854" FromRole="usuario_modulo" ToRole="modulos" />
+  </EntityType>
+  <EntityType Name="usuario_modulo_historico_empresas">
+    <Key>
+      <PropertyRef Name="ID_CODIGO_HISTORICO_MODULO_USUARIO_EMPRESAS" />
+    </Key>
+    <Property Name="ID_CODIGO_HISTORICO_MODULO_USUARIO_EMPRESAS" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_HISTORICO_USUARIO_EMPRESAS" Type="Int32" Nullable="false" />
+    <Property Name="ID_CODIGO_MODULO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="modulo" Relationship="cliente_mercadoModel.FK__usuario_m__ID_CO__4F47C5E3" FromRole="usuario_modulo_historico_empresas" ToRole="modulos" />
+    <NavigationProperty Name="usuario_historico_empresas" Relationship="cliente_mercadoModel.FK__usuario_m__ID_HI__4E53A1AA" FromRole="usuario_modulo_historico_empresas" ToRole="usuario_historico_empresas" />
+  </EntityType>
+  <Association Name="FK__avaliacao__ID_CO__4E88ABD4">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="avaliacao_empresa_cotada" Type="cliente_mercadoModel.avaliacao_empresa_cotada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="avaliacao_empresa_cotada">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__avaliacao__ID_CO__4F7CD00D">
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="1" />
+    <End Role="avaliacao_empresa_cotada" Type="cliente_mercadoModel.avaliacao_empresa_cotada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Principal>
+      <Dependent Role="avaliacao_empresa_cotada">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__avaliacao__ID_CO__5070F446">
+    <End Role="classificacao_empresa_cotada" Type="cliente_mercadoModel.classificacao_empresa_cotada" Multiplicity="1" />
+    <End Role="avaliacao_empresa_cotada" Type="cliente_mercadoModel.avaliacao_empresa_cotada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="classificacao_empresa_cotada">
+        <PropertyRef Name="ID_CODIGO_CLASSIFICACAO_EMPRESA" />
+      </Principal>
+      <Dependent Role="avaliacao_empresa_cotada">
+        <PropertyRef Name="ID_CODIGO_CLASSIFICACAO_EMPRESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__avaliacao__ID_CO__534D60F1">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="avaliacao_usuario_empresa_cotada" Type="cliente_mercadoModel.avaliacao_usuario_empresa_cotada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="avaliacao_usuario_empresa_cotada">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__avaliacao__ID_CO__5441852A">
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="1" />
+    <End Role="avaliacao_usuario_empresa_cotada" Type="cliente_mercadoModel.avaliacao_usuario_empresa_cotada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Principal>
+      <Dependent Role="avaliacao_usuario_empresa_cotada">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__avaliacao__ID_CO__5535A963">
+    <End Role="classificacao_usuario_empresa_cotada" Type="cliente_mercadoModel.classificacao_usuario_empresa_cotada" Multiplicity="1" />
+    <End Role="avaliacao_usuario_empresa_cotada" Type="cliente_mercadoModel.avaliacao_usuario_empresa_cotada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="classificacao_usuario_empresa_cotada">
+        <PropertyRef Name="ID_CODIGO_CLASSIFICACAO_USUARIO" />
+      </Principal>
+      <Dependent Role="avaliacao_usuario_empresa_cotada">
+        <PropertyRef Name="ID_CODIGO_CLASSIFICACAO_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bairros_e__ID_CO__5AEE82B9">
+    <End Role="cidades_empresa_usuario" Type="cliente_mercadoModel.cidades_empresa_usuario" Multiplicity="1" />
+    <End Role="bairros_empresa_usuario" Type="cliente_mercadoModel.bairros_empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cidades_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_CIDADE_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="bairros_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_CIDADE_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__enderecos__ID_CO__151B244E">
+    <End Role="bairros_empresa_usuario" Type="cliente_mercadoModel.bairros_empresa_usuario" Multiplicity="1" />
+    <End Role="enderecos_cep_empresa_usuario" Type="cliente_mercadoModel.enderecos_cep_empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bairros_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="enderecos_cep_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_BAIRRO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chat_cota__ID_CO__6383C8BA">
+    <End Role="cotacao_filha" Type="cliente_mercadoModel.cotacao_filha" Multiplicity="1" />
+    <End Role="chat_cotacao" Type="cliente_mercadoModel.chat_cotacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_filha">
+        <PropertyRef Name="ID_CODIGO_COTACAO_FILHA" />
+      </Principal>
+      <Dependent Role="chat_cotacao">
+        <PropertyRef Name="ID_CODIGO_COTACAO_FILHA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chat_cota__ID_CO__6477ECF3">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="chat_cotacao" Type="cliente_mercadoModel.chat_cotacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="chat_cotacao">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO_COTANTE_COTADA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cidades_e__ID_UF__5812160E">
+    <End Role="estados_empresa_usuario" Type="cliente_mercadoModel.estados_empresa_usuario" Multiplicity="1" />
+    <End Role="cidades_empresa_usuario" Type="cliente_mercadoModel.cidades_empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados_empresa_usuario">
+        <PropertyRef Name="ID_UF" />
+      </Principal>
+      <Dependent Role="cidades_empresa_usuario">
+        <PropertyRef Name="ID_UF" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_f__ID_CO__5DCAEF64">
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="1" />
+    <End Role="cotacao_filha" Type="cliente_mercadoModel.cotacao_filha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Principal>
+      <Dependent Role="cotacao_filha">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_f__ID_CO__5EBF139D">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="cotacao_filha" Type="cliente_mercadoModel.cotacao_filha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="cotacao_filha">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO_EMPRESA_COTADA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_f__ID_CO__5FB337D6">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="cotacao_filha" Type="cliente_mercadoModel.cotacao_filha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="cotacao_filha">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO_COTADA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_n__ID_CO__2BFE89A6">
+    <End Role="cotacao_filha" Type="cliente_mercadoModel.cotacao_filha" Multiplicity="1" />
+    <End Role="cotacao_negociacao" Type="cliente_mercadoModel.cotacao_negociacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_filha">
+        <PropertyRef Name="ID_CODIGO_COTACAO_FILHA" />
+      </Principal>
+      <Dependent Role="cotacao_negociacao">
+        <PropertyRef Name="ID_CODIGO_COTACAO_FILHA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pedido__ID_CODIG__6EF57B66">
+    <End Role="cotacao_filha" Type="cliente_mercadoModel.cotacao_filha" Multiplicity="1" />
+    <End Role="pedido" Type="cliente_mercadoModel.pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_filha">
+        <PropertyRef Name="ID_CODIGO_COTACAO_FILHA" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="ID_CODIGO_COTACAO_FILHA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_m__ID_CO__440B1D61">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO_EMPRESA_COTANTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_m__ID_CO__44FF419A">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO_COTANTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_m__ID_CO__45F365D3">
+    <End Role="tipos_frete" Type="cliente_mercadoModel.tipos_frete" Multiplicity="0..1" />
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipos_frete">
+        <PropertyRef Name="ID_CODIGO_TIPOS_FRETE" />
+      </Principal>
+      <Dependent Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_TIPOS_FRETE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_m__ID_CO__4AB81AF0">
+    <End Role="status_cotacao" Type="cliente_mercadoModel.status_cotacao" Multiplicity="0..1" />
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status_cotacao">
+        <PropertyRef Name="ID_CODIGO_STATUS_COTACAO" />
+      </Principal>
+      <Dependent Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_STATUS_COTACAO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__itens_cot__ID_CO__71D1E811">
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="1" />
+    <End Role="itens_cotacao" Type="cliente_mercadoModel.itens_cotacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Principal>
+      <Dependent Role="itens_cotacao">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pedido__ID_CODIG__6E01572D">
+    <End Role="cotacao_master" Type="cliente_mercadoModel.cotacao_master" Multiplicity="1" />
+    <End Role="pedido" Type="cliente_mercadoModel.pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_master">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="ID_CODIGO_COTACAO_MASTER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_n__ID_CO__2CF2ADDF">
+    <End Role="itens_cotacao" Type="cliente_mercadoModel.itens_cotacao" Multiplicity="1" />
+    <End Role="cotacao_negociacao" Type="cliente_mercadoModel.cotacao_negociacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="itens_cotacao">
+        <PropertyRef Name="ID_CODIGO_ITENS_COTACAO" />
+      </Principal>
+      <Dependent Role="cotacao_negociacao">
+        <PropertyRef Name="ID_CODIGO_ITENS_COTACAO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cotacao_n__ID_CO__2EDAF651">
+    <End Role="tipo_resposta_cotacao" Type="cliente_mercadoModel.tipo_resposta_cotacao" Multiplicity="1" />
+    <End Role="cotacao_negociacao" Type="cliente_mercadoModel.cotacao_negociacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_resposta_cotacao">
+        <PropertyRef Name="ID_CODIGO_TIPO_RESPOSTA_COTACAO" />
+      </Principal>
+      <Dependent Role="cotacao_negociacao">
+        <PropertyRef Name="ID_CODIGO_TIPO_RESPOSTA_COTACAO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__itens_ped__ID_CO__531856C7">
+    <End Role="cotacao_negociacao" Type="cliente_mercadoModel.cotacao_negociacao" Multiplicity="1" />
+    <End Role="itens_pedido" Type="cliente_mercadoModel.itens_pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cotacao_negociacao">
+        <PropertyRef Name="ID_CODIGO_COTACAO_NEGOCIACAO" />
+      </Principal>
+      <Dependent Role="itens_pedido">
+        <PropertyRef Name="ID_CODIGO_COTACAO_NEGOCIACAO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__doc_ident__ID_CO__7F2BE32F">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="doc_identificador_empresa_usuario" Type="cliente_mercadoModel.doc_identificador_empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="doc_identificador_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__produto__ID_CODI__6754599E">
+    <End Role="empresa_fabricante_marcas" Type="cliente_mercadoModel.empresa_fabricante_marcas" Multiplicity="1" />
+    <End Role="produto" Type="cliente_mercadoModel.produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_fabricante_marcas">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" />
+      </Principal>
+      <Dependent Role="produto">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_FABRICANTE_MARCAS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__empresa_u__ID_CO__02084FDA">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="empresa_usuario_logins" Type="cliente_mercadoModel.empresa_usuario_logins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="empresa_usuario_logins">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__empresa_u__ID_CO__164452B1">
+    <End Role="tipo_empresa_usuario" Type="cliente_mercadoModel.tipo_empresa_usuario" Multiplicity="1" />
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_TIPO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_TIPO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__enderecos__ID_CO__1F98B2C1">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="enderecos_empresa_usuario" Type="cliente_mercadoModel.enderecos_empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="enderecos_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__enderecos__ID_CO__2645B050">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="enderecos_internet" Type="cliente_mercadoModel.enderecos_internet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="enderecos_internet">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__financeir__ID_CO__55F4C372">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="financeiro_cobranca_faturamento" Type="cliente_mercadoModel.financeiro_cobranca_faturamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="financeiro_cobranca_faturamento">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__financeir__ID_CO__56E8E7AB">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="financeiro_cobranca_faturamento" Type="cliente_mercadoModel.financeiro_cobranca_faturamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="financeiro_cobranca_faturamento">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__profissao__ID_CO__31B762FC">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="profissao_usuario_empresa" Type="cliente_mercadoModel.profissao_usuario_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="profissao_usuario_empresa">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ramo_ativ__ID_CO__37703C52">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="ramo_atividade_empresa_usuario" Type="cliente_mercadoModel.ramo_atividade_empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="ramo_atividade_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__telefones__ID_CO__3C34F16F">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="telefones_empresa_usuario" Type="cliente_mercadoModel.telefones_empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="telefones_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tipo_cont__ID_CO__40F9A68C">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="tipo_contrato_empresa_usuario_cotada" Type="cliente_mercadoModel.tipo_contrato_empresa_usuario_cotada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="tipo_contrato_empresa_usuario_cotada">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_h__ID_CO__44CA3770">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="usuario_historico_empresas" Type="cliente_mercadoModel.usuario_historico_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="usuario_historico_empresas">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_m__ID_CO__498EEC8D">
+    <End Role="empresa_usuario" Type="cliente_mercadoModel.empresa_usuario" Multiplicity="1" />
+    <End Role="usuario_modulo" Type="cliente_mercadoModel.usuario_modulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="usuario_modulo">
+        <PropertyRef Name="ID_CODIGO_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__financeir__ID_TI__57DD0BE4">
+    <End Role="tipo_contrato_empresa_usuario_cotada" Type="cliente_mercadoModel.tipo_contrato_empresa_usuario_cotada" Multiplicity="1" />
+    <End Role="financeiro_cobranca_faturamento" Type="cliente_mercadoModel.financeiro_cobranca_faturamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_contrato_empresa_usuario_cotada">
+        <PropertyRef Name="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" />
+      </Principal>
+      <Dependent Role="financeiro_cobranca_faturamento">
+        <PropertyRef Name="ID_TIPO_CONTRATO_EMPRESA_USUARIO_COTADA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__itens_cot__ID_CO__72C60C4A">
+    <End Role="produto" Type="cliente_mercadoModel.produto" Multiplicity="1" />
+    <End Role="itens_cotacao" Type="cliente_mercadoModel.itens_cotacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="produto">
+        <PropertyRef Name="ID_CODIGO_PRODUTO" />
+      </Principal>
+      <Dependent Role="itens_cotacao">
+        <PropertyRef Name="ID_CODIGO_PRODUTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__itens_cot__ID_CO__73BA3083">
+    <End Role="pedido" Type="cliente_mercadoModel.pedido" Multiplicity="0..1" />
+    <End Role="itens_cotacao" Type="cliente_mercadoModel.itens_cotacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pedido">
+        <PropertyRef Name="ID_CODIGO_PEDIDO" />
+      </Principal>
+      <Dependent Role="itens_cotacao">
+        <PropertyRef Name="ID_CODIGO_PEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__itens_cot__ID_CO__76969D2E">
+    <End Role="tipos_item_cotacao" Type="cliente_mercadoModel.tipos_item_cotacao" Multiplicity="0..1" />
+    <End Role="itens_cotacao" Type="cliente_mercadoModel.itens_cotacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipos_item_cotacao">
+        <PropertyRef Name="ID_CODIGO_TIPO_ITENS_COTACAO" />
+      </Principal>
+      <Dependent Role="itens_cotacao">
+        <PropertyRef Name="ID_CODIGO_TIPO_ITENS_COTACAO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__itens_cot__ID_CO__787EE5A0">
+    <End Role="unidades_produto" Type="cliente_mercadoModel.unidades_produto" Multiplicity="1" />
+    <End Role="itens_cotacao" Type="cliente_mercadoModel.itens_cotacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unidades_produto">
+        <PropertyRef Name="ID_CODIGO_UNIDADE_PRODUTO" />
+      </Principal>
+      <Dependent Role="itens_cotacao">
+        <PropertyRef Name="ID_CODIGO_UNIDADE_PRODUTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__itens_ped__ID_CO__5224328E">
+    <End Role="pedido" Type="cliente_mercadoModel.pedido" Multiplicity="1" />
+    <End Role="itens_pedido" Type="cliente_mercadoModel.itens_pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pedido">
+        <PropertyRef Name="ID_CODIGO_PEDIDO" />
+      </Principal>
+      <Dependent Role="itens_pedido">
+        <PropertyRef Name="ID_CODIGO_PEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_m__ID_CO__489AC854">
+    <End Role="modulos" Type="cliente_mercadoModel.modulo" Multiplicity="1" />
+    <End Role="usuario_modulo" Type="cliente_mercadoModel.usuario_modulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="modulos">
+        <PropertyRef Name="ID_CODIGO_MODULO" />
+      </Principal>
+      <Dependent Role="usuario_modulo">
+        <PropertyRef Name="ID_CODIGO_MODULO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_m__ID_CO__4F47C5E3">
+    <End Role="modulos" Type="cliente_mercadoModel.modulo" Multiplicity="1" />
+    <End Role="usuario_modulo_historico_empresas" Type="cliente_mercadoModel.usuario_modulo_historico_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="modulos">
+        <PropertyRef Name="ID_CODIGO_MODULO" />
+      </Principal>
+      <Dependent Role="usuario_modulo_historico_empresas">
+        <PropertyRef Name="ID_CODIGO_MODULO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__produto__ID_CODI__68487DD7">
+    <End Role="unidades_produto" Type="cliente_mercadoModel.unidades_produto" Multiplicity="1" />
+    <End Role="produto" Type="cliente_mercadoModel.produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unidades_produto">
+        <PropertyRef Name="ID_CODIGO_UNIDADE_PRODUTO" />
+      </Principal>
+      <Dependent Role="produto">
+        <PropertyRef Name="ID_CODIGO_UNIDADE_PRODUTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__profissao__ID_CO__32AB8735">
+    <End Role="profissoes_usuario" Type="cliente_mercadoModel.profissoes_usuario" Multiplicity="1" />
+    <End Role="profissao_usuario_empresa" Type="cliente_mercadoModel.profissao_usuario_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="profissoes_usuario">
+        <PropertyRef Name="ID_CODIGO_PROFISSAO" />
+      </Principal>
+      <Dependent Role="profissao_usuario_empresa">
+        <PropertyRef Name="ID_CODIGO_PROFISSAO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__telefones__ID_CO__3D2915A8">
+    <End Role="tipos_telefone_empresa_usuario" Type="cliente_mercadoModel.tipos_telefone_empresa_usuario" Multiplicity="1" />
+    <End Role="telefones_empresa_usuario" Type="cliente_mercadoModel.telefones_empresa_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipos_telefone_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" />
+      </Principal>
+      <Dependent Role="telefones_empresa_usuario">
+        <PropertyRef Name="ID_CODIGO_TIPOS_TELEFONE_EMPRESA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tipo_cont__ID_CO__41EDCAC5">
+    <End Role="tipos_contrato" Type="cliente_mercadoModel.tipos_contrato" Multiplicity="1" />
+    <End Role="tipo_contrato_empresa_usuario_cotada" Type="cliente_mercadoModel.tipo_contrato_empresa_usuario_cotada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipos_contrato">
+        <PropertyRef Name="ID_CODIGO_TIPO_CONTRATO_COTADA" />
+      </Principal>
+      <Dependent Role="tipo_contrato_empresa_usuario_cotada">
+        <PropertyRef Name="ID_CODIGO_TIPO_CONTRATO_COTADA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_m__ID_HI__4E53A1AA">
+    <End Role="usuario_historico_empresas" Type="cliente_mercadoModel.usuario_historico_empresas" Multiplicity="1" />
+    <End Role="usuario_modulo_historico_empresas" Type="cliente_mercadoModel.usuario_modulo_historico_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario_historico_empresas">
+        <PropertyRef Name="ID_HISTORICO_USUARIO_EMPRESAS" />
+      </Principal>
+      <Dependent Role="usuario_modulo_historico_empresas">
+        <PropertyRef Name="ID_HISTORICO_USUARIO_EMPRESAS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
