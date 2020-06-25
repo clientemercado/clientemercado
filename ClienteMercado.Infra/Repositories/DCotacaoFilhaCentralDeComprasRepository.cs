@@ -202,6 +202,19 @@ namespace ClienteMercado.Infra.Repositories
             }
         }
 
+        //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras
+        public void SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM, int iCCF, int idFor)
+        {
+            cotacao_filha_central_compras dadosCotacaoFilhaCC = 
+                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_CODIGO_EMPRESA == idFor)));
+
+            if (dadosCotacaoFilhaCC != null)
+            {
+                dadosCotacaoFilhaCC.SOLICITAR_CONFIRMACAO_ACEITE_COTACAO = true;
+                _contexto.SaveChanges();
+            }
+        }
+
         //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
         public void SetarComoNaoReceBimentoDePedidoParaACotacao(int iCM, int iCCF)
         {

@@ -180,6 +180,12 @@ namespace ClienteMercado.Domain.Services
             dcotacaofilhacentraldecompras.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
         }
 
+        //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras
+        public void SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM, int iCCF, int idFor)
+        {
+            dcotacaofilhacentraldecompras.SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(iCM, iCCF, idFor);
+        }
+
         ////BUSCAR APENAS 1 COTAÇÃO na LISTA de COTAÇÕES ENVIADAS
         //public List<ListaDeCotacoesEnviadasParaEmpresasCotadasViewModel> BuscarUmaCotacaoEnviadasConformeCotacaoMaster(int iCM)
         //{

@@ -37,6 +37,8 @@ namespace ClienteMercado.Data.Entities
 
         public System.DateTime DATA_RECEBEU_COTACAO_CENTRAL_COMPRAS { get; set; }
 
+        public bool SOLICITAR_CONFIRMACAO_ACEITE_COTACAO { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string FORMA_PAGAMENTO_COTACAO_FILHA_CENTRAL_COMPRAS { get; set; }

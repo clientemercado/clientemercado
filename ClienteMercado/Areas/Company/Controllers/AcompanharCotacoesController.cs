@@ -1415,7 +1415,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //SOLICITAR CONFIRMAÇÃO de PREÇO aos DEMAIS COTANTES
-        public JsonResult SolicitarConfirmacaoDaCotacaoAosDemaisCotantes(int cCC, string eA, int iCM, int idFor)
+        public JsonResult SolicitarConfirmacaoDaCotacaoAosDemaisCotantes(int cCC, string eA, int iCM, int iCCF, int idFor) 
         {
             try
             {
@@ -1436,6 +1436,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
                 NCentralDeComprasService negociosCentralDeCompras = new NCentralDeComprasService();
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMaster = new NCotacaoMasterCentralDeComprasService();
+                NCotacaoFilhaCentralDeComprasService negociosCotacaoFilha = new NCotacaoFilhaCentralDeComprasService();
 
                 //BUSCA DADOS da CENTRAL de COMPRAS
                 central_de_compras dadoscentralDeCompras =
@@ -1444,6 +1445,12 @@ namespace ClienteMercado.Areas.Company.Controllers
                 //SETAR FLAG SOLICITAR_CONFIRMACAO_COTACAO como TRUE na tabela cotacao_master_central_compras 
                 //(OBs: REGISTRA TBM o FORNECEDOR q está tendo sua RESPOSTA de COTAÇÃO AVALIADA)
                 negociosCotacaoMaster.SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(iCM, idFor);
+
+                //===========================================================================================================================
+                //TESTAR ISSO <-- CONTINUAR AQUI...
+                //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras
+                negociosCotacaoFilha.SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(iCM, iCCF, idFor);
+                //===========================================================================================================================
 
                 //SETAR FLAG SOLICITAR_CONFIRMACAO_COTACAO como TRUE na tabela cotacao_individual_empresa_central_compras
                 List<cotacao_individual_empresa_central_compras> listaDeCotacoesIndividuais =
@@ -1587,7 +1594,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 //PEGAR ID da EMPRESA LOGADA na CENTRAL de COMPRAS
                 empresas_participantes_central_de_compras dadosEmpresaParticipante = 
-                    negociosEmpresasParticipantesCC.BuscarDadosDaEmpresaParticipanteDaCCPorIDdaEmpresa(cCC, idEmpresaLogada);
+                    negociosEmpresasParticipantesCC.BuscarDadosDaEmpresaParticipanteDaCCPorIDdaEmpresa(cCC, idEmpresaLogada); 
 
                 //SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
                 cotacao_individual_empresa_central_compras cotacaoIndividualConfirmada = 
