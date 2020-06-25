@@ -1414,7 +1414,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        //Carrega DIÁLOGOS entre COTANTE e FORNECEDOR
+        //SOLICITAR CONFIRMAÇÃO de PREÇO aos DEMAIS COTANTES
         public JsonResult SolicitarConfirmacaoDaCotacaoAosDemaisCotantes(int cCC, string eA, int iCM, int idFor)
         {
             try
