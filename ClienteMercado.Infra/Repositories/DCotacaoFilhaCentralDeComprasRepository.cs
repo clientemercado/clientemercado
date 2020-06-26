@@ -25,8 +25,21 @@ namespace ClienteMercado.Infra.Repositories
         //QUANTIDADE de EMPRESAS respondendo a COTAÇÃO
         public int BuscarQuantidadeDeEmpresasRespondendoACotacaoDaCC(int iD_COTACAO_MASTER_CENTRAL_COMPRAS)
         {
+            //List<cotacao_filha_central_compras> cotacoesFilhasEnviadas = 
+            //    _contexto.cotacao_filha_central_compras.Where(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iD_COTACAO_MASTER_CENTRAL_COMPRAS)).ToList();
+
+            //return cotacoesFilhasEnviadas.Count;
+
+            var query = " SELECT ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS, ID_COTACAO_MASTER_CENTRAL_COMPRAS, ID_CODIGO_EMPRESA, ID_CODIGO_USUARIO, " +
+                        " ID_TIPO_FRETE, RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS, DATA_RESPOSTA_COTACAO_FILHA_CENTRAL_COMPRAS, FORMA_PAGAMENTO_COTACAO_FILHA_CENTRAL_COMPRAS, " +
+                        " TIPO_DESCONTO, PERCENTUAL_DESCONTO, PRECO_LOTE_ITENS_COTACAO_CENTRAL_COMPRAS, OBSERVACAO_COTACAO_CENTRAL_COMPRAS, RECEBEU_CONTRA_PROPOSTA, " +
+                        " ACEITOU_CONTRA_PROPOSTA, DATA_RECEBEU_COTACAO_CENTRAL_COMPRAS, ID_CODIGO_PEDIDO_CENTRAL_COMPRAS, RECEBEU_PEDIDO, DATA_RECEBEU_PEDIDO, " +
+                        " CONFIRMOU_PEDIDO, DATA_CONFIRMOU_PEDIDO, SOLICITAR_CONFIRMACAO_ACEITE_COTACAO " +
+                        " FROM cotacao_filha_central_compras " +
+                        " WHERE ID_COTACAO_MASTER_CENTRAL_COMPRAS = " + iD_COTACAO_MASTER_CENTRAL_COMPRAS;
+
             List<cotacao_filha_central_compras> cotacoesFilhasEnviadas = 
-                _contexto.cotacao_filha_central_compras.Where(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iD_COTACAO_MASTER_CENTRAL_COMPRAS)).ToList();
+                _contexto.Database.SqlQuery<cotacao_filha_central_compras>(query).ToList();
 
             return cotacoesFilhasEnviadas.Count;
         }

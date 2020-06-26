@@ -608,45 +608,48 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     percentualIdealConfirmado = ((cotacoesIndividuaisDasEmpresasDaCC.Count * 100) / 100);
 
-                    if (cotacoesIndividuaisQueRegistraramAceiteDaRespostaDoFornecedor.Count < percentualIdealConfirmado)
+                    if (dadosCotacaoFilha.SOLICITAR_CONFIRMACAO_ACEITE_COTACAO)
                     {
-                        viewModelAnalisarResposta.corQuantidadeConfirmada = "#FF0000";
-                        viewModelAnalisarResposta.todosCotantesAceitaramNegociacao = "nao";
-
-                        //ATUALIZAR STATUS
-                        viewModelAnalisarResposta.mensagemStatus = "AGUARDANDO - RESPOSTA COTANTES";
-                    }
-                    else
-                    {
-                        viewModelAnalisarResposta.corQuantidadeConfirmada = "#32CD32";
-                        viewModelAnalisarResposta.todosCotantesAceitaramNegociacao = "sim";
-
-                        //SETAR NEGOCIAÇÃO COMO ACEITA por TODOS os COTANTES da CENTRAL de COMPRAS
-                        if (dadosDaCotacaoMaster.NEGOCIACAO_COTACAO_ACEITA == false)
+                        if (cotacoesIndividuaisQueRegistraramAceiteDaRespostaDoFornecedor.Count < percentualIdealConfirmado)
                         {
-                            negociosCotacaoMaster.SetarEstaNegociaçãoComoAceitaPelosCotantes(iCM);
+                            viewModelAnalisarResposta.corQuantidadeConfirmada = "#FF0000";
+                            viewModelAnalisarResposta.todosCotantesAceitaramNegociacao = "nao";
+
+                            //ATUALIZAR STATUS
+                            viewModelAnalisarResposta.mensagemStatus = "AGUARDANDO - RESPOSTA COTANTES";
                         }
-
-                        //ATUALIZAR STATUS
-                        if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == true)
+                        else
                         {
-                            if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
+                            viewModelAnalisarResposta.corQuantidadeConfirmada = "#32CD32";
+                            viewModelAnalisarResposta.todosCotantesAceitaramNegociacao = "sim";
+
+                            //SETAR NEGOCIAÇÃO COMO ACEITA por TODOS os COTANTES da CENTRAL de COMPRAS
+                            if (dadosDaCotacaoMaster.NEGOCIACAO_COTACAO_ACEITA == false)
                             {
-                                viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - FOI ACEITA PELO FORNECEDOR";
+                                negociosCotacaoMaster.SetarEstaNegociaçãoComoAceitaPelosCotantes(iCM);
                             }
-                            else
-                            {
-                                viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
-                            }
-                        }
 
-                        if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == false))
-                        {
-                            viewModelAnalisarResposta.mensagemStatus = textoMsgStatus + " - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
-                        }
-                        else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
-                        {
-                            viewModelAnalisarResposta.mensagemStatus = textoMsgStatus + " - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                            //ATUALIZAR STATUS
+                            if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == true)
+                            {
+                                if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
+                                {
+                                    viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - FOI ACEITA PELO FORNECEDOR";
+                                }
+                                else
+                                {
+                                    viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                                }
+                            }
+
+                            if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == false))
+                            {
+                                viewModelAnalisarResposta.mensagemStatus = textoMsgStatus + " - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
+                            }
+                            else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
+                            {
+                                viewModelAnalisarResposta.mensagemStatus = textoMsgStatus + " - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                            }
                         }
                     }
 
