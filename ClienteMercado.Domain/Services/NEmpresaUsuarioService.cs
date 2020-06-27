@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using ClienteMercado.Data.Entities;
-using System.Text.RegularExpressions;
-using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.Mail;
 using ClienteMercado.Utils.Sms;
-using ClienteMercado.Infra.Repositories;
-using System.Collections.Generic;
 using ClienteMercado.Utils.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ClienteMercado.Domain.Services
 {
@@ -194,7 +194,7 @@ namespace ClienteMercado.Domain.Services
         }
 
         //CARREGAR DADOS das EMPRESAS SELECIONADAS para receber a COTAÇÃO
-        public List<ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel> 
+        public List<ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel>
             BuscarListaDeEmpresasSelecionadasParaRecerACotacaoDaCentralDeCompras(int[] empresasSelecionadas)
         {
             return dempresausuario.BuscarListaDeEmpresasSelecionadasParaRecerACotacaoDaCentralDeCompras(empresasSelecionadas);
@@ -209,7 +209,7 @@ namespace ClienteMercado.Domain.Services
         //CARREGAR os DADOS das EMPRESAS que ANEXARAM COTAÇÃO
         public List<ListaEstilizadaDeEmpresasViewModel> CarregarDadosDasEmpresasQueAnexaramCotacao(int[] idsEmpresas, int[] idsCotacoesIndividuais)
         {
-            List<ListaEstilizadaDeEmpresasViewModel> dadosDasEmpresasQueAnexaramCotacao = 
+            List<ListaEstilizadaDeEmpresasViewModel> dadosDasEmpresasQueAnexaramCotacao =
                 dempresausuario.CarregarDadosDasEmpresasQueAnexaramCotacao(idsEmpresas, idsCotacoesIndividuais);
 
             //POPULAR o campo alias 'quantidadeProdutoCotado' com o valor de QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS, fazendo o CAST do DECIMAL pro STRING
@@ -217,7 +217,7 @@ namespace ClienteMercado.Domain.Services
             {
                 for (int j = 0; j < dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa.Count; j++)
                 {
-                    dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].quantidadeProdutoCotado = 
+                    dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].quantidadeProdutoCotado =
                         dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS.ToString();
                 }
             }

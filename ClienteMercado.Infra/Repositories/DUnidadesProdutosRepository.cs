@@ -1,9 +1,7 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Base;
 using System.Collections.Generic;
 using System.Linq;
-using ClienteMercado.Data.Contexto;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Infra.Base;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -18,7 +16,7 @@ namespace ClienteMercado.Infra.Repositories
         //Consultar dados da UNIDADE do PRODUTO da COTAÇÃO
         public unidades_produtos ConsultarDadosDaUnidadeDoProduto(int idUnidadeProduto)
         {
-            unidades_produtos dadosDaUnidadeProduto = 
+            unidades_produtos dadosDaUnidadeProduto =
                 _contexto.unidades_produtos.FirstOrDefault(m => (m.ID_CODIGO_UNIDADE_PRODUTO.Equals(idUnidadeProduto)));
 
             return dadosDaUnidadeProduto;
@@ -27,7 +25,7 @@ namespace ClienteMercado.Infra.Repositories
         //BUSCAR UNIDADE
         public string ConsultarDescricaoDaUnidadeDoProduto(int idUnidade)
         {
-            unidades_produtos dadosDaUnidade = 
+            unidades_produtos dadosDaUnidade =
                 _contexto.unidades_produtos.FirstOrDefault(m => (m.ID_CODIGO_UNIDADE_PRODUTO == idUnidade));
 
             return dadosDaUnidade.DESCRICAO_UNIDADE_PRODUTO;

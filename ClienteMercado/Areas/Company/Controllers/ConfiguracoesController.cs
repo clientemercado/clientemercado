@@ -2,10 +2,7 @@
 using ClienteMercado.Domain.Services;
 using ClienteMercado.UI.Core.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ClienteMercado.Areas.Company.Controllers

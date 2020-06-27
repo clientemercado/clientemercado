@@ -1,11 +1,11 @@
-﻿using ClienteMercado.Infra.Repositories;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 
 namespace ClienteMercado.Domain.Services
 {
     public class NFinanceiroCobrancaFaturamentoUsuarioProfissionalService
     {
-        DFinanceiroCobrancaFaturamentoUsuarioProfissionalRepository dfinanceirocobrancafaturamentousuarioprofissional = 
+        DFinanceiroCobrancaFaturamentoUsuarioProfissionalRepository dfinanceirocobrancafaturamentousuarioprofissional =
             new DFinanceiroCobrancaFaturamentoUsuarioProfissionalRepository();
 
         //Gravando cobrança ClienteMercado para o Profissional de Serviços

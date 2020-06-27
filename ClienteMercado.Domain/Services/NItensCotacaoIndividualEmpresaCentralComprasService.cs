@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
+using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ClienteMercado.Domain.Services
@@ -33,7 +33,7 @@ namespace ClienteMercado.Domain.Services
             }
 
             if (listaDeItensDaCotacaoIndividual.Count > 0)
-             {
+            {
                 NProdutosServicosEmpresaProfissionalService negociosProdutosServicos = new NProdutosServicosEmpresaProfissionalService();
                 NUnidadesProdutosService negociosUnidadeProduto = new NUnidadesProdutosService();
                 NEmpresasProdutosEmbalagensService negociosProdutosEmbalagens = new NEmpresasProdutosEmbalagensService();
@@ -45,7 +45,7 @@ namespace ClienteMercado.Domain.Services
                     listaDeItensDaCotacaoIndividual[i].idProduto = listaDeItensDaCotacaoIndividual[i].ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS;
 
                     //BUSCAR NOME do PRODUTO
-                    produtos_servicos_empresa_profissional dadosDoProdutoDaCotacao = 
+                    produtos_servicos_empresa_profissional dadosDoProdutoDaCotacao =
                         negociosProdutosServicos.ConsultarDadosDoProdutoDaCotacao(listaDeItensDaCotacaoIndividual[i].ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS);
                     listaDeItensDaCotacaoIndividual[i].descricaoProdutoCotado = dadosDoProdutoDaCotacao.DESCRICAO_PRODUTO_SERVICO.ToUpper();
 
@@ -55,13 +55,13 @@ namespace ClienteMercado.Domain.Services
                     listaDeItensDaCotacaoIndividual[i].codUnidadeProduto = dadosDaUnidadeProduto.ID_CODIGO_UNIDADE_PRODUTO;
 
                     //BUSCAR EMBALAGEM do PRODUTO COTADO
-                    empresas_produtos_embalagens dadosDaEmbalagem = 
+                    empresas_produtos_embalagens dadosDaEmbalagem =
                         negociosProdutosEmbalagens.ConsultarDadosDaEmbalagemDoProduto(listaDeItensDaCotacaoIndividual[i].ID_EMPRESAS_PRODUTOS_EMBALAGENS);
                     listaDeItensDaCotacaoIndividual[i].embalagemProduto = dadosDaEmbalagem.DESCRICAO_PRODUTO_EMBALAGEM;
                     listaDeItensDaCotacaoIndividual[i].codEmbalagemProduto = dadosDaEmbalagem.ID_EMPRESAS_PRODUTOS_EMBALAGENS;
 
                     //BUSCAR EMPRESA FABRICANTE/MARCA
-                    empresas_fabricantes_marcas dadosDoFabricanteMarca = 
+                    empresas_fabricantes_marcas dadosDoFabricanteMarca =
                         negociosFabricantesMarcas.ConsultarEmpresaFabricanteOuMarca(listaDeItensDaCotacaoIndividual[i].ID_CODIGO_EMPRESA_FABRICANTE_MARCAS);
                     listaDeItensDaCotacaoIndividual[i].marcaProdutoCotado = dadosDoFabricanteMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS;
                     listaDeItensDaCotacaoIndividual[i].codMarcaProdutoCotado = dadosDoFabricanteMarca.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS.ToString();
@@ -77,7 +77,7 @@ namespace ClienteMercado.Domain.Services
                         listaDeItensDaCotacaoIndividual[i].msgCotacaoEnviada = "EM COTACAO";
                     }
                 }
-             }
+            }
 
             return listaDeItensDaCotacaoIndividual;
         }
@@ -129,7 +129,7 @@ namespace ClienteMercado.Domain.Services
             bool cotacaoEnviada = false;
             NCotacaoMasterCentralDeComprasService negociosCotacaoMaster = new NCotacaoMasterCentralDeComprasService();
 
-            List<ListaDeDadosAgrupadosDasCotacoesIndividuaisDaCCViewModel> listaDeItensAgrupadosDasCotacoesIndividuais = 
+            List<ListaDeDadosAgrupadosDasCotacoesIndividuaisDaCCViewModel> listaDeItensAgrupadosDasCotacoesIndividuais =
                 dRepository.CarregarListaDeItensAgrupadosDasCotacoesIndividuais(listaIdsCotacoesIndividuais);
 
             //VERIFICA se a COTAÇÃO já foi ENVIADA aos FORNECEDORES
@@ -147,22 +147,22 @@ namespace ClienteMercado.Domain.Services
                 listaDeItensAgrupadosDasCotacoesIndividuais[i].numeroItem = (i + 1);
 
                 //BUSCAR NOME do PRODUTO
-                listaDeItensAgrupadosDasCotacoesIndividuais[i].descricaoProdutoCotacaoIndividual = 
+                listaDeItensAgrupadosDasCotacoesIndividuais[i].descricaoProdutoCotacaoIndividual =
                     negociosProdutosServico.ConsultarDescricaoDoProduto(listaDeItensAgrupadosDasCotacoesIndividuais[i].ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS);
 
                 //BUSCAR MARCA
-                listaDeItensAgrupadosDasCotacoesIndividuais[i].marcaFabricanteProdutoCotacaoIndividual = 
+                listaDeItensAgrupadosDasCotacoesIndividuais[i].marcaFabricanteProdutoCotacaoIndividual =
                     negociosFabricantesMarcas.ConsultarDescricaoDaEmpresaFabricanteOuMarca(listaDeItensAgrupadosDasCotacoesIndividuais[i].ID_CODIGO_EMPRESA_FABRICANTE_MARCAS);
 
                 //BUSCAR UNIDADE
-                listaDeItensAgrupadosDasCotacoesIndividuais[i].unidadeProdutoCotacaoIndividual = 
+                listaDeItensAgrupadosDasCotacoesIndividuais[i].unidadeProdutoCotacaoIndividual =
                     negociosUnidades.ConsultarDescricaoDaUnidadeDoProduto(listaDeItensAgrupadosDasCotacoesIndividuais[i].ID_CODIGO_UNIDADE_PRODUTO);
 
                 //BUSCAR EMBALAGEM
-                listaDeItensAgrupadosDasCotacoesIndividuais[i].embalagemProdutoCotacaoIndividual = 
+                listaDeItensAgrupadosDasCotacoesIndividuais[i].embalagemProdutoCotacaoIndividual =
                     negociosEmbalagens.ConsultarDescricaoDaEmbalagemDoProduto(listaDeItensAgrupadosDasCotacoesIndividuais[i].ID_EMPRESAS_PRODUTOS_EMBALAGENS);
 
-                listaDeItensAgrupadosDasCotacoesIndividuais[i].quantidadeDoProdutoEmbalagem = 
+                listaDeItensAgrupadosDasCotacoesIndividuais[i].quantidadeDoProdutoEmbalagem =
                     String.Format("{0:0.00}", listaDeItensAgrupadosDasCotacoesIndividuais[i].QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS);
 
                 if (cotacaoEnviada)

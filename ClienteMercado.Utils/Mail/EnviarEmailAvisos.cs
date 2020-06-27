@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Web;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Web;
 
 namespace ClienteMercado.Utils.Mail
 {

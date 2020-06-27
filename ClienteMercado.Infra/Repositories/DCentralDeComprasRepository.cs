@@ -4,8 +4,8 @@ using ClienteMercado.Utils.Net;
 using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -51,7 +51,7 @@ namespace ClienteMercado.Infra.Repositories
                             "INNER JOIN central_de_compras CC ON(CC.ID_GRUPO_ATIVIDADES = " + obj.ID_GRUPO_ATIVIDADES + ") " +
                             "WHERE EP.ID_CODIGO_EMPRESA = " + obj.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS + " AND EP.ID_CENTRAL_COMPRAS IN(SELECT CC2.ID_CENTRAL_COMPRAS FROM central_de_compras CC2 WHERE CC2.ID_GRUPO_ATIVIDADES = " + obj.ID_GRUPO_ATIVIDADES + ")";
 
-                    List<ListaDeParticipacoesDaEmpresaEmCentraisDeComprasViewModel> listaDeCentraisQueParticipa = 
+                    List<ListaDeParticipacoesDaEmpresaEmCentraisDeComprasViewModel> listaDeCentraisQueParticipa =
                         _contexto.Database.SqlQuery<ListaDeParticipacoesDaEmpresaEmCentraisDeComprasViewModel>(query).ToList();
 
                     if (listaDeCentraisQueParticipa.Count > 0)
@@ -59,7 +59,7 @@ namespace ClienteMercado.Infra.Repositories
                         var idCentralCompras = listaDeCentraisQueParticipa[0].ID_CENTRAL_COMPRAS;
 
                         //DADOS da CENTRAL de COMPRAS da qual já é participante
-                        central_de_compras centralDeComprasDaQualEParticipante = 
+                        central_de_compras centralDeComprasDaQualEParticipante =
                             _contexto.central_de_compras.FirstOrDefault(m => (m.ID_CENTRAL_COMPRAS == idCentralCompras));
 
                         if (centralDeComprasDaQualEParticipante != null)
@@ -146,7 +146,7 @@ namespace ClienteMercado.Infra.Repositories
 
         //CARREGA LISTA de CENTRAIS de COMPRAS
         public List<ListaCentraisComprasViewModel> CarregarListaAutoCompleteCentraisDeCompras(string term)
-        { 
+        {
             var query = "SELECT * FROM central_de_compras CC WHERE CC.NOME_CENTRAL_COMPRAS LIKE '%" + term + "%' AND ID_CENTRAL_COMPRAS IN(SELECT ID_CENTRAL_COMPRAS FROM empresas_participantes_central_de_compras WHERE ID_CODIGO_EMPRESA = " + idEmpresa + ")";
 
             var result = _contexto.Database.SqlQuery<ListaCentraisComprasViewModel>(query).ToList();
@@ -156,7 +156,7 @@ namespace ClienteMercado.Infra.Repositories
         //CONSULTAR DADOS sobre a CENTRAL de COMPRAS
         public central_de_compras ConsultarDadosGeraisSobreACentralDeComprasPeloID(int codCentralCompras)
         {
-            central_de_compras dadosCC = 
+            central_de_compras dadosCC =
                 _contexto.central_de_compras.FirstOrDefault(m => (m.ID_CENTRAL_COMPRAS == codCentralCompras));
 
             return dadosCC;
@@ -165,7 +165,7 @@ namespace ClienteMercado.Infra.Repositories
         //EXCLUIR a CENTRAL de COMPRAS
         public void ExcluirACentralDeCompras(int codCentralCompras, int codEmpresaAdm)
         {
-            central_de_compras centralDeComprasAExcluir = 
+            central_de_compras centralDeComprasAExcluir =
                 _contexto.central_de_compras.FirstOrDefault(m => ((m.ID_CENTRAL_COMPRAS == codCentralCompras) && (m.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS == codEmpresaAdm)));
 
             if (centralDeComprasAExcluir != null)
@@ -178,7 +178,7 @@ namespace ClienteMercado.Infra.Repositories
         //CARREGAR os DADOS da CENTRAL de COMPRAS
         public central_de_compras ConsultarDadosDaCentralDeCompras(int codCentralCompras, int codEmpresaAdm)
         {
-            central_de_compras dadosDaCcentralDeCompras = 
+            central_de_compras dadosDaCcentralDeCompras =
                 _contexto.central_de_compras.FirstOrDefault(m => (m.ID_CENTRAL_COMPRAS == codCentralCompras) && (m.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS == codEmpresaAdm));
 
             return dadosDaCcentralDeCompras;

@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -25,7 +25,7 @@ namespace ClienteMercado.Infra.Repositories
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
                 financeiro_cobranca_faturamento_usuario_empresa financeiroCobrancaFaturamentoUsuarioEmpresa =
-                    _contexto.financeiro_cobranca_faturamento_usuario_empresa.FirstOrDefault(m => m.ID_CODIGO_USUARIO.Equals(obj.ID_CODIGO_USUARIO) && 
+                    _contexto.financeiro_cobranca_faturamento_usuario_empresa.FirstOrDefault(m => m.ID_CODIGO_USUARIO.Equals(obj.ID_CODIGO_USUARIO) &&
                     m.ID_CODIGO_EMPRESA.Equals(m.ID_CODIGO_EMPRESA) && m.PARCELA_PAGA_COBRANCA_FATURAMENTO == false);
 
                 return financeiroCobrancaFaturamentoUsuarioEmpresa;

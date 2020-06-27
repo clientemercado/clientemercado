@@ -1,10 +1,10 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
 using ClienteMercado.Utils.Net;
-using System.Linq;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
-using ClienteMercado.Utils.ViewModel;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -41,15 +41,15 @@ namespace ClienteMercado.Infra.Repositories
         //GRAVAR a COTAÇÃO INDIVIDUAL
         public cotacao_individual_empresa_central_compras GerarRegistroDeCotacaoIndividual(cotacao_individual_empresa_central_compras obj)
         {
-            cotacao_individual_empresa_central_compras cotacaoJaRegistrada = 
-                _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == obj.ID_COTACAO_MASTER_CENTRAL_COMPRAS) 
+            cotacao_individual_empresa_central_compras cotacaoJaRegistrada =
+                _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == obj.ID_COTACAO_MASTER_CENTRAL_COMPRAS)
                 && (m.ID_EMPRESA_CENTRAL_COMPRAS == obj.ID_EMPRESA_CENTRAL_COMPRAS)));
 
             if (cotacaoJaRegistrada == null)
             {
-                cotacao_individual_empresa_central_compras dadosDoRegistroDaCotacaoIndividual = 
+                cotacao_individual_empresa_central_compras dadosDoRegistroDaCotacaoIndividual =
                     _contexto.cotacao_individual_empresa_central_compras.Add(obj);
-                    _contexto.SaveChanges();
+                _contexto.SaveChanges();
 
                 return dadosDoRegistroDaCotacaoIndividual;
             }
@@ -82,8 +82,8 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR FLAG SOLICITAR_CONFIRMACAO_COTACAO como TRUE
         public List<cotacao_individual_empresa_central_compras> SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM)
         {
-            List<cotacao_individual_empresa_central_compras> listaCotacoesIndividuaisDaCotacaoMaster = 
-                _contexto.cotacao_individual_empresa_central_compras.Where(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) 
+            List<cotacao_individual_empresa_central_compras> listaCotacoesIndividuaisDaCotacaoMaster =
+                _contexto.cotacao_individual_empresa_central_compras.Where(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)
                 && (m.COTACAO_INDIVIDUAL_ANEXADA == true) && (m.NEGOCIACAO_COTACAO_ACEITA == false))).ToList();
 
             for (int i = 0; i < listaCotacoesIndividuaisDaCotacaoMaster.Count; i++)
@@ -99,7 +99,7 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
         public cotacao_individual_empresa_central_compras SetarFlagConfirmandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(int iCM, int idEmpresaCC)
         {
-            cotacao_individual_empresa_central_compras dadosDaCotacaoIndividual = 
+            cotacao_individual_empresa_central_compras dadosDaCotacaoIndividual =
                 _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_EMPRESA_CENTRAL_COMPRAS == idEmpresaCC)));
 
             if (dadosDaCotacaoIndividual != null)
@@ -151,12 +151,12 @@ namespace ClienteMercado.Infra.Repositories
         {
             cotacao_individual_empresa_central_compras dadosDaCotacaoIndividual = new cotacao_individual_empresa_central_compras();
 
-            empresas_participantes_central_de_compras dadosEmpresasParticipantes = 
+            empresas_participantes_central_de_compras dadosEmpresasParticipantes =
                 _contexto.empresas_participantes_central_de_compras.FirstOrDefault(m => ((m.ID_CENTRAL_COMPRAS == codCentralCompras) && (m.ID_CODIGO_EMPRESA == idEmpresa)));
 
             if (dadosEmpresasParticipantes != null)
             {
-                dadosDaCotacaoIndividual = 
+                dadosDaCotacaoIndividual =
                     _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_EMPRESA_CENTRAL_COMPRAS == dadosEmpresasParticipantes.ID_EMPRESA_CENTRAL_COMPRAS)));
 
                 if (dadosDaCotacaoIndividual != null)
@@ -207,8 +207,8 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR como ANEXADO
         public void AnexarMinhaCotacaoNaCotacaoMaster(int iPCC, int iCM)
         {
-            cotacao_individual_empresa_central_compras buscarCotacaoIndividual = 
-                _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) 
+            cotacao_individual_empresa_central_compras buscarCotacaoIndividual =
+                _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)
                 && (m.ID_EMPRESA_CENTRAL_COMPRAS == iPCC)));
 
             if (buscarCotacaoIndividual != null)
@@ -235,7 +235,7 @@ namespace ClienteMercado.Infra.Repositories
         //CARREGAR dados da COTAÇÃO INDIVIDUAL gerada (Se a empresa logada possuir...)
         public cotacao_individual_empresa_central_compras CarregarDadosDaCotacao(int iCM, int idEmpresaCC)
         {
-            cotacao_individual_empresa_central_compras dadosDaCotacaoIndividual = 
+            cotacao_individual_empresa_central_compras dadosDaCotacaoIndividual =
                 _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_EMPRESA_CENTRAL_COMPRAS == idEmpresaCC)));
 
             return dadosDaCotacaoIndividual;

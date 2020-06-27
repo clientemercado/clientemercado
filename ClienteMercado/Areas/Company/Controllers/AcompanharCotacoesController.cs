@@ -481,7 +481,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                         negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = dadosCotacaoFilha.ID_CODIGO_EMPRESA });
                     usuario_empresa dadosDoUsuarioDaEmpresaFornecedora =
                         negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresaFornecedoraPeloIdDaEmpresa(dadosDaEmpresaCotada.ID_CODIGO_EMPRESA);
-                    empresa_usuario_logins dadosContatoUsuarioEmpresaFornecedora = 
+                    empresa_usuario_logins dadosContatoUsuarioEmpresaFornecedora =
                         negociosLoginUsuarioEmpresa.ConsultarDadosDeContatoDoUsuarioDaEmpresaCotada(Sessao.IdEmpresaUsuario);
 
                     if (dadosDoUsuarioDaEmpresaFornecedora.NICK_NAME_USUARIO != null)
@@ -497,7 +497,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //---------------------------------------------------------------------------------------------
                     //Busca os dados do CHAT entre a EMPRESA COTANTE e a EMPRESA FORNECEDORA
-                    List <chat_cotacao_central_compras> listaConversasApuradasNoChat =
+                    List<chat_cotacao_central_compras> listaConversasApuradasNoChat =
                         negociosChatCotacaoCentralCompras.BuscarChatEntreEmpresaCotanteEFornecedor(dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS);
 
                     valor = listaConversasApuradasNoChat.Count;
@@ -544,6 +544,12 @@ namespace ClienteMercado.Areas.Company.Controllers
                     viewModelAnalisarResposta.quantidadeEmpresasParticipantesDestaCotacao = cotacoesIndividuaisDasEmpresasDaCC.Count;
                     viewModelAnalisarResposta.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados = cotacoesIndividuaisQueRegistraramAceiteDaRespostaDoFornecedor.Count;
 
+                    //VERIFICAR se a COTAÇÃO JÁ FOI RESPONDIDA
+                    if (dadosCotacaoFilha.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS)
+                    {
+                        viewModelAnalisarResposta.cotacaoRespondida = "sim";
+                    }
+                    
                     //VERIFICAR SE JÁ FOI ENVIADO CONTRA-PROPOSTA A ALGUM OUTRO FORNECEDOR
                     if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == false)
                     {
@@ -739,7 +745,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                         negociosGrupoAtividadesEmpresa.ConsultarDadosDoGrupoDeAtividadesDaEmpresa(new grupo_atividades_empresa { ID_GRUPO_ATIVIDADES = dadosDaCentralDeCompras.ID_GRUPO_ATIVIDADES });
                     List<ListaDadosDeLocalizacaoViewModel> dadosLocalizacaoEmpresaADM = negociosLocalizacao.ConsultarDadosDaLocalizacaoPeloCodigo(dadosEmpresaADM.ID_CODIGO_ENDERECO_EMPRESA_USUARIO);
 
-                    List<ListaDeIdsDeEmpresasQueAnexaramACotacaoViewModel> listaDeIdsDeEmpresasQueAnexaramCotacao = 
+                    List<ListaDeIdsDeEmpresasQueAnexaramACotacaoViewModel> listaDeIdsDeEmpresasQueAnexaramCotacao =
                         negociosCotacaoIndividualDasEmpresasParticipantesDaCC.BuscarListaDeIdsDeEmpresasQueAnexaramACotacao(iCM);
 
                     //POPULAR VIEW MODEL
@@ -755,7 +761,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     viewModelItensCotados.inRamoAtividadeCC = dadosGruposAtividadesCC.DESCRICAO_ATIVIDADE;
                     viewModelItensCotados.inCodRamoAtividadeCC = dadosGruposAtividadesCC.ID_GRUPO_ATIVIDADES;
                     viewModelItensCotados.inCidadeEmpresaAdmCC = dadosLocalizacaoEmpresaADM[0].CIDADE_EMPRESA_USUARIO + "-" + dadosLocalizacaoEmpresaADM[0].UF_EMPRESA_USUARIO;
-                    viewModelItensCotados.listaDeEmpresasQueAnexaramCotacaoESeusItensCotados = 
+                    viewModelItensCotados.listaDeEmpresasQueAnexaramCotacaoESeusItensCotados =
                         ListaDeDeEmpresasQueAnexaramCotacaoEItensCotados(listaDeIdsDeEmpresasQueAnexaramCotacao);
 
                     //viewModelItensCotados.listaDeEmpresasCotadas = ListaDeEmpresasCotadasParaFornecimento(iCM);
@@ -991,7 +997,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //CARREGAR DADOS DE APENAS 1 PRODUTO COTADO PARA TODAS AS EMPRESAS NESSA COTAÇÃO
                     List<ListaProdutoUnicoCotadoPorEmpresaViewModel> listaDoProdutoCotadoPorEmpresa =
-                        negociosItensCotacaoCentralDeCompras.CarregarDadosDeUmProdutoCotadoEmTodasAsEmpresasFornecedoras(listaIdsCotacaoFilhas, 
+                        negociosItensCotacaoCentralDeCompras.CarregarDadosDeUmProdutoCotadoEmTodasAsEmpresasFornecedoras(listaIdsCotacaoFilhas,
                         itensDaCotacao[i].ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS);
 
                     unidadeProduto = negociosUnidadesProdutos.ConsultarDescricaoDaUnidadeDoProduto(itemDaCotacaoIndividual.ID_CODIGO_UNIDADE_PRODUTO);
@@ -1084,7 +1090,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     listaCotacaoesDaCentralCompras[i].quantasEmpresasJahResponderam = quantidadeDeEmpresasJahResponderamACotacao;
 
-                    empresas_participantes_central_de_compras dadosEmpresaPartcipanteCC = 
+                    empresas_participantes_central_de_compras dadosEmpresaPartcipanteCC =
                         negociosEmpresasParticipantesCC.ConsultarSeEmpresaParticipaDaCentralDeCompras(cCC);
 
                     //VERIFICANDO se TEM / NÃO TEM COTAÇÃO ANEXADA
@@ -1243,11 +1249,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     marcaDoProdutoCotado = negociosEmpresasfabricantesMarcas.ConsultarDescricaoDaEmpresaFabricanteOuMarca(itemDaCotacaoIndividual.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS);
 
                     //CONSULTAR SE o PRODUTO JÁ FOI PEDIDO A ALGUM FORNECEDOR
-                    itens_pedido_central_compras itemJahPedido = 
+                    itens_pedido_central_compras itemJahPedido =
                         negociosItensPedidoCC.ConsultarSeOProdutoJahFoiPedido(itensDaCotacao[i].ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS);
 
                     //CONSULTAR SE o PRODUTO FOI PEDIDO ao FORNECEDOR cuja RESPOSTA está sendo ANALISADA
-                    itemPedidoCC = 
+                    itemPedidoCC =
                         negociosItensPedidoCC.ConsultarSeOFornecedorRecebeuPedidoParaEsteProduto(itensDaCotacao[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS);
 
                     if ((itemJahPedido != null) && (itemPedidoCC == false))
@@ -1277,7 +1283,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     somaTotalCalculado = (somaTotalCalculado + totalCalculado);
 
-                    menorPreco = 
+                    menorPreco =
                         negociosItensCotacaoCentralDeCompras.BuscarMenorPrecoDeUmProdutoEntreAsRespostaDeUmaCotacao(itensDaCotacao[i].ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS);
 
                     ehMenorPreco = itensDaCotacao[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS == menorPreco ? "sim" : "nao";
@@ -1383,7 +1389,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 List<ChatEntreUsuarioEFornecedor> listaDeConversasEntreCotanteEFornecedorNoChat = new List<ChatEntreUsuarioEFornecedor>();
 
                 //Busca os dados do CHAT entre o COTANTE e o FORNECEDOR
-                List<chat_cotacao_central_compras> listaConversasApuradasNoChat = 
+                List<chat_cotacao_central_compras> listaConversasApuradasNoChat =
                     negociosChatCotacaoCC.BuscarChatEntreUsuarioAdmDaCCEFornecedor(idCotacaoFilha);  //CONTINUAR AQUI
 
                 if (listaConversasApuradasNoChat != null)
@@ -1418,7 +1424,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //SOLICITAR CONFIRMAÇÃO de PREÇO aos DEMAIS COTANTES
-        public JsonResult SolicitarConfirmacaoDaCotacaoAosDemaisCotantes(int cCC, string eA, int iCM, int iCCF, int idFor) 
+        public JsonResult SolicitarConfirmacaoDaCotacaoAosDemaisCotantes(int cCC, string eA, int iCM, int iCCF, int idFor)
         {
             try
             {
@@ -1460,8 +1466,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     negociosCotacaoIndividual.SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(iCM);
 
                 //SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE, para o ADM da CENTRAL de COMPRAS, na tabela cotacao_individual_empresa_central_compras
-                cotacao_individual_empresa_central_compras dadosDaCotacaoIndividualDoADMdaCC = 
-                    negociosCotacaoIndividual.SetarFlagDeAceitacaoDaNegociacaoDaCotacaoRespondidaPelosFornecedores(codCentralCompras, iCM, 
+                cotacao_individual_empresa_central_compras dadosDaCotacaoIndividualDoADMdaCC =
+                    negociosCotacaoIndividual.SetarFlagDeAceitacaoDaNegociacaoDaCotacaoRespondidaPelosFornecedores(codCentralCompras, iCM,
                     dadoscentralDeCompras.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS);
 
                 //REFAZ a LISTA eliminando a EMPRESA ADM, que ao SOLICITAR CONFIRMAÇÂO dos integrantes da CENTRAL COMPRAS, já deu como aceita a negociação de sua parte
@@ -1596,11 +1602,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NCotacaoIndividualEmpresaCentralComprasService negociosCotacaoIndividual = new NCotacaoIndividualEmpresaCentralComprasService();
 
                 //PEGAR ID da EMPRESA LOGADA na CENTRAL de COMPRAS
-                empresas_participantes_central_de_compras dadosEmpresaParticipante = 
-                    negociosEmpresasParticipantesCC.BuscarDadosDaEmpresaParticipanteDaCCPorIDdaEmpresa(cCC, idEmpresaLogada); 
+                empresas_participantes_central_de_compras dadosEmpresaParticipante =
+                    negociosEmpresasParticipantesCC.BuscarDadosDaEmpresaParticipanteDaCCPorIDdaEmpresa(cCC, idEmpresaLogada);
 
                 //SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
-                cotacao_individual_empresa_central_compras cotacaoIndividualConfirmada = 
+                cotacao_individual_empresa_central_compras cotacaoIndividualConfirmada =
                     negociosCotacaoIndividual.SetarFlagConfirmandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(iCM, dadosEmpresaParticipante.ID_EMPRESA_CENTRAL_COMPRAS);
 
                 resultado = new { confirmacaoNegociacao = "Ok" };
@@ -1820,7 +1826,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string todosItensPedidos = "nao";
                 string dataLimiteAcatamentoDoPedido = ((DateTime.Now.AddDays(1)).Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString());
                 string smsMensagem = "";
-                string telefoneUsuarioADM ="";
+                string telefoneUsuarioADM = "";
                 string urlParceiroEnvioSms = "";
                 string textoMsgStatus = "PEDIDO FEITO";
 
@@ -1846,7 +1852,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     dadosPedidoCC.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS = iCM;
                     dadosPedidoCC.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS = iCCF;
                     dadosPedidoCC.VALOR_PEDIDO_CENTRAL_COMPRAS = Convert.ToDecimal(somaItensDoPedido);
-                    dadosPedidoCC.DATA_PEDIDO_CENTRAL_COMPRAS = DateTime.Now; 
+                    dadosPedidoCC.DATA_PEDIDO_CENTRAL_COMPRAS = DateTime.Now;
                     dadosPedidoCC.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS = Convert.ToDateTime("1900-01-01");
                     dadosPedidoCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS = false;
 
@@ -2067,7 +2073,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     }
                 }
 
-                    return Json(resultado, JsonRequestBehavior.AllowGet);
+                return Json(resultado, JsonRequestBehavior.AllowGet);
                 //================================================================================
             }
             catch (Exception erro)
@@ -2102,7 +2108,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 for (int i = 0; i < listaIDsItensPedidosAExcluir.Length; i++)
                 {
                     //EXCLUIR o ITEM do PEDIDO
-                    itemPedidoExcluido = 
+                    itemPedidoExcluido =
                         negociosItensPedidoCC.ExcluirItemDoPedido(Convert.ToInt32(listaIDsItensPedidosAExcluir[i]), idPedido);
 
                     if (itemPedidoExcluido)
@@ -2192,7 +2198,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                 }
                 //-------------------------------------------------------------------------
 
-                resultado = new {
+                resultado = new
+                {
                     itemExcluido = "sim",
                     todosItensPedidos = todosItensPedidos,
                     mensagemStatus = mensagemDoStatus
@@ -2284,7 +2291,8 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception erro) {
+            catch (Exception erro)
+            {
 
                 throw erro;
             }

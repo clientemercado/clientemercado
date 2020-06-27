@@ -11,7 +11,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                pedido_usuario_cotante gravarPedidoUsuarioCotante = 
+                pedido_usuario_cotante gravarPedidoUsuarioCotante =
                     _contexto.pedido_usuario_cotante.Add(obj);
                 _contexto.SaveChanges();
 
@@ -25,8 +25,8 @@ namespace ClienteMercado.Infra.Repositories
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
                 var temPedido = "nao";
-                pedido_usuario_cotante verificaSeExistePedido = 
-                    _contexto.pedido_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE == idCotacaoMaster) 
+                pedido_usuario_cotante verificaSeExistePedido =
+                    _contexto.pedido_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE == idCotacaoMaster)
                     && (m.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE == idCotacaoFilha));
 
                 if (verificaSeExistePedido != null)

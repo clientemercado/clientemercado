@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using ClienteMercado.Utils.Net;
 using ClienteMercado.Utils.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -18,9 +18,9 @@ namespace ClienteMercado.Infra.Repositories
         {
             //Na mesma cidade do COTANTE
             List<empresa_usuario> empresasFornecedoras =
-                _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada)) && (m.enderecos_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.Equals(idCidadeCotante)) 
-                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idEstadoCotante)) 
-                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada)) && (m.enderecos_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.Equals(idCidadeCotante))
+                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idEstadoCotante))
+                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                 && (m.ID_CODIGO_EMPRESA != idEmpresa)).Take(quantFornecedores).ToList();
 
             return empresasFornecedoras;
@@ -35,7 +35,7 @@ namespace ClienteMercado.Infra.Repositories
                 List<empresa_usuario> empresasFornecedoras =
                     _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada)) && (m.enderecos_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.Equals(idOutraCidade))
                     && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idEstadoCotante))
-                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                     && (m.ID_CODIGO_EMPRESA != idEmpresa)).Take(quantFornecedores).ToList();
 
                 return empresasFornecedoras;
@@ -46,7 +46,7 @@ namespace ClienteMercado.Infra.Repositories
                 List<empresa_usuario> empresasFornecedoras =
                     _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada))
                     && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idEstadoCotante))
-                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                     && (m.ID_CODIGO_EMPRESA != idEmpresa)).Take(quantFornecedores).ToList();
 
                 return empresasFornecedoras;
@@ -63,7 +63,7 @@ namespace ClienteMercado.Infra.Repositories
                     _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada))
                     && (m.enderecos_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.Equals(idOutraCidadeOutroEstado))
                     && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idOutroEstado))
-                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                     && (m.ID_CODIGO_EMPRESA != idEmpresa)).Take(quantFornecedores).ToList();
 
                 return empresasFornecedoras;
@@ -74,7 +74,7 @@ namespace ClienteMercado.Infra.Repositories
                 List<empresa_usuario> empresasFornecedoras =
                     _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada))
                     && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idOutroEstado))
-                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                     && (m.ID_CODIGO_EMPRESA != idEmpresa)).Take(quantFornecedores).ToList();
 
                 return empresasFornecedoras;
@@ -87,7 +87,7 @@ namespace ClienteMercado.Infra.Repositories
             //Busca fornecedores em TODO o PAÍS
             List<empresa_usuario> empresasFornecedoras =
                 _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada))
-                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                 && (m.ID_CODIGO_EMPRESA != idEmpresa)).Take(quantFornecedores).ToList();
 
             return empresasFornecedoras;
@@ -117,7 +117,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //CARREGA LISTA de FORNECEDORES conforme LOCAL SELECIONADO
-        public List<ListaEstilizadaDeEmpresasViewModel> BuscarListaDePossiveisFornecedorasParaACentralDeCompras(int codRamoAtividade, int quantosFornecedores, int localBusca, 
+        public List<ListaEstilizadaDeEmpresasViewModel> BuscarListaDePossiveisFornecedorasParaACentralDeCompras(int codRamoAtividade, int quantosFornecedores, int localBusca,
             int uFSelecionada, int codEAdmDaCC, int cCC)
         {
             //localBusca - 1 --> MEU ESTADO
@@ -134,7 +134,7 @@ namespace ClienteMercado.Infra.Repositories
 
             //EMPRESAS da CENTRAL de COMPRAS não podem receber a COTAÇÃO da CC que participam
             //----------------------------------------------------------------------------------------------------
-            List<empresas_participantes_central_de_compras> listaEmpresasDestaCC = 
+            List<empresas_participantes_central_de_compras> listaEmpresasDestaCC =
                 dEmpresasParticipantesCentralDeCompras.BuscarListaDeEmpresasConfirmadasComoParticipantesDaCC(cCC);
 
             for (int i = 0; i < listaEmpresasDestaCC.Count; i++)
@@ -226,7 +226,7 @@ namespace ClienteMercado.Infra.Repositories
             List<empresa_usuario> empresasFornecedoras =
                 _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada)) && (m.enderecos_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.Equals(idCidadeCotante))
                 && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idEstadoCotante))
-                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                 && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
 
             return empresasFornecedoras;
@@ -241,7 +241,7 @@ namespace ClienteMercado.Infra.Repositories
                 List<empresa_usuario> empresasFornecedoras =
                     _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada)) && (m.enderecos_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.Equals(idOutraCidade))
                     && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idEstadoCotante))
-                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                     && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
 
                 return empresasFornecedoras;
@@ -252,7 +252,7 @@ namespace ClienteMercado.Infra.Repositories
                 List<empresa_usuario> empresasFornecedoras =
                     _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada))
                     && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idEstadoCotante))
-                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                     && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
 
                 return empresasFornecedoras;
@@ -269,7 +269,7 @@ namespace ClienteMercado.Infra.Repositories
                     _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada))
                     && (m.enderecos_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.Equals(idOutraCidadeOutroEstado))
                     && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idOutroEstado))
-                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                     && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
 
                 return empresasFornecedoras;
@@ -280,7 +280,7 @@ namespace ClienteMercado.Infra.Repositories
                 List<empresa_usuario> empresasFornecedoras =
                     _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada))
                     && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.Equals(idOutroEstado))
-                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                    && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                     && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
 
                 return empresasFornecedoras;
@@ -293,7 +293,7 @@ namespace ClienteMercado.Infra.Repositories
             //Busa fornecedores em TODO o país
             List<empresa_usuario> empresasFornecedoras =
                 _contexto.empresa_usuario.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(categoriaASerCotada))
-                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante)) 
+                && (m.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.Equals(idPaisCotante))
                 && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
 
             return empresasFornecedoras;

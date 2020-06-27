@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ClienteMercado.Models
+﻿namespace ClienteMercado.Models
 {
     //Dados para montagem do ACOMPANHAMENTO das COTAÇÕES
     public class AcompanharCotacaoUsuarioEmpresa

@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using ClienteMercado.Data.Entities;
-using System.Collections.Generic;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Base;
 using ClienteMercado.Utils.Net;
 using ClienteMercado.Utils.ViewModel;
-using ClienteMercado.Infra.Base;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -15,108 +15,108 @@ namespace ClienteMercado.Infra.Repositories
         //Gravar Empresa e Usuário Master
         public empresa_usuario GravarEmpresaUsuario(empresa_usuario obj)
         {
-                empresa_usuario empresaUsuario =
-                    _contexto.empresa_usuario.Add(obj);
-                    _contexto.SaveChanges();
+            empresa_usuario empresaUsuario =
+                _contexto.empresa_usuario.Add(obj);
+            _contexto.SaveChanges();
 
-                return empresaUsuario;
+            return empresaUsuario;
         }
 
         //Consultar e-mail para o Cadastro da Empresa
         public empresa_usuario ConsultarEmailEmpresa(empresa_usuario obj)
         {
-                empresa_usuario email =
-                    _contexto.empresa_usuario.FirstOrDefault(m => m.EMAIL1_EMPRESA.Equals(obj.EMAIL1_EMPRESA));
+            empresa_usuario email =
+                _contexto.empresa_usuario.FirstOrDefault(m => m.EMAIL1_EMPRESA.Equals(obj.EMAIL1_EMPRESA));
 
-                return email;
+            return email;
         }
 
         //Consultar e-mail para o Cadastro do Usuário da Empresa
         public empresa_usuario_logins ConsultarEmailUsuarioEmpresa(empresa_usuario_logins obj)
         {
-                empresa_usuario_logins email =
-                    _contexto.empresa_usuario_logins.FirstOrDefault(m => m.EMAIL1_USUARIO.Equals(obj.EMAIL1_USUARIO));
+            empresa_usuario_logins email =
+                _contexto.empresa_usuario_logins.FirstOrDefault(m => m.EMAIL1_USUARIO.Equals(obj.EMAIL1_USUARIO));
 
-                return email;
+            return email;
         }
 
         //Buscar dados da Empresa para usos diversos
         public empresa_usuario BuscarDadosEmpresaUsuario(int idEmpresa)
         {
-                empresa_usuario dadosEmpresa =
-                    _contexto.empresa_usuario.FirstOrDefault(m => m.ID_CODIGO_EMPRESA.Equals(idEmpresa));
+            empresa_usuario dadosEmpresa =
+                _contexto.empresa_usuario.FirstOrDefault(m => m.ID_CODIGO_EMPRESA.Equals(idEmpresa));
 
-                return dadosEmpresa;
+            return dadosEmpresa;
         }
 
         //Buscar dados da Empresa para enviar ao MOIP
         public empresa_usuario BuscarDadosEmpresaUsuarioParaFinanceiro(empresa_usuario obj)
         {
-                empresa_usuario dadosEmpresa =
-                    _contexto.empresa_usuario.FirstOrDefault(m => m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA));
+            empresa_usuario dadosEmpresa =
+                _contexto.empresa_usuario.FirstOrDefault(m => m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA));
 
-                return dadosEmpresa;
+            return dadosEmpresa;
         }
 
         //Atualizar o Tipo de contrato na Empresa
         public empresa_usuario AtualizarTipoDeContratoNaEmpresa(empresa_usuario obj)
         {
-                empresa_usuario atualizarCadastroEmpresa =
-                    _contexto.empresa_usuario.Find(obj.ID_CODIGO_EMPRESA);
-                    atualizarCadastroEmpresa.ID_CODIGO_TIPO_CONTRATO_COTADA = obj.ID_CODIGO_TIPO_CONTRATO_COTADA;
-                    atualizarCadastroEmpresa.ID_GRUPO_ATIVIDADES = obj.ID_GRUPO_ATIVIDADES;
-                    _contexto.SaveChanges();
+            empresa_usuario atualizarCadastroEmpresa =
+                _contexto.empresa_usuario.Find(obj.ID_CODIGO_EMPRESA);
+            atualizarCadastroEmpresa.ID_CODIGO_TIPO_CONTRATO_COTADA = obj.ID_CODIGO_TIPO_CONTRATO_COTADA;
+            atualizarCadastroEmpresa.ID_GRUPO_ATIVIDADES = obj.ID_GRUPO_ATIVIDADES;
+            _contexto.SaveChanges();
 
-                return atualizarCadastroEmpresa;
+            return atualizarCadastroEmpresa;
         }
 
         //Confirmar o Cadastro da Empresa e do Usuário Master
         public usuario_empresa ConfirmarCadastroUsuarioEmpresa(usuario_empresa obj)
         {
-                usuario_empresa confirmaCadastroUsuarioEmpresa = 
-                    _contexto.usuario_empresa.Find(obj.ID_CODIGO_USUARIO);
-                confirmaCadastroUsuarioEmpresa.CADASTRO_CONFIRMADO = true;
-                _contexto.SaveChanges();
+            usuario_empresa confirmaCadastroUsuarioEmpresa =
+                _contexto.usuario_empresa.Find(obj.ID_CODIGO_USUARIO);
+            confirmaCadastroUsuarioEmpresa.CADASTRO_CONFIRMADO = true;
+            _contexto.SaveChanges();
 
-                return confirmaCadastroUsuarioEmpresa;
+            return confirmaCadastroUsuarioEmpresa;
         }
 
         //Buscar dados do Usuário Master para enviar ao MOIP
         public usuario_empresa BuscarDadosUsuarioEmpresaParaFinanceiro(usuario_empresa obj)
         {
-                usuario_empresa dadosUsuario =
-                    _contexto.usuario_empresa.FirstOrDefault(m => m.ID_CODIGO_USUARIO.Equals(obj.ID_CODIGO_USUARIO));
+            usuario_empresa dadosUsuario =
+                _contexto.usuario_empresa.FirstOrDefault(m => m.ID_CODIGO_USUARIO.Equals(obj.ID_CODIGO_USUARIO));
 
-                return dadosUsuario;
+            return dadosUsuario;
         }
 
         //Consultar dados do Usuário Master
         public usuario_empresa BuscarDadosDoUsuarioMaster(usuario_empresa obj)
         {
-                usuario_empresa dadosUsuarioMaster =
-                    _contexto.usuario_empresa.FirstOrDefault(
-                        m => ((m.ID_CODIGO_EMPRESA == obj.ID_CODIGO_EMPRESA) && (m.USUARIO_MASTER == true)));
+            usuario_empresa dadosUsuarioMaster =
+                _contexto.usuario_empresa.FirstOrDefault(
+                    m => ((m.ID_CODIGO_EMPRESA == obj.ID_CODIGO_EMPRESA) && (m.USUARIO_MASTER == true)));
 
-                return dadosUsuarioMaster;
+            return dadosUsuarioMaster;
         }
 
         //Gravar novo Usuário em Empresa já cadastrada
         public usuario_empresa GravarNovoUsuarioEmEmpresaJaCadastrada(usuario_empresa obj)
         {
-                usuario_empresa usuarioEmpresa = 
-                    _contexto.usuario_empresa.Add(obj);
-                    _contexto.SaveChanges();
+            usuario_empresa usuarioEmpresa =
+                _contexto.usuario_empresa.Add(obj);
+            _contexto.SaveChanges();
 
-                return usuarioEmpresa;
+            return usuarioEmpresa;
         }
 
         //Consultar dados da EMPRESA
         public empresa_usuario ConsultarDadosDaEmpresa(empresa_usuario obj)
         {
-                empresa_usuario dadosEmpresa =
-                    _contexto.empresa_usuario.FirstOrDefault(m => (m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA)));
+            empresa_usuario dadosEmpresa =
+                _contexto.empresa_usuario.FirstOrDefault(m => (m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA)));
 
-                return dadosEmpresa;
+            return dadosEmpresa;
         }
 
         //POPULAR LISTA de EMPRESAS para TESTE do MAPA de COTAÇÃO
@@ -137,7 +137,7 @@ namespace ClienteMercado.Infra.Repositories
                   CHECAR A TABELA empresas_participantes_central_de_compras
              */
 
-            var query = "SELECT TOP 30 EU.ID_CODIGO_EMPRESA as idEmpresa, EU.NOME_FANTASIA_EMPRESA as nomeEmpresa, EU.EMAIL1_EMPRESA as eMailEmpresa, " + 
+            var query = "SELECT TOP 30 EU.ID_CODIGO_EMPRESA as idEmpresa, EU.NOME_FANTASIA_EMPRESA as nomeEmpresa, EU.EMAIL1_EMPRESA as eMailEmpresa, " +
                         "(EE.TIPO_LOGRADOURO_EMPRESA_USUARIO + ' ' + EE.LOGRADOURO_CEP_EMPRESA_USUARIO + ',  - ' + BE.BAIRRO_CIDADE_EMPRESA_USUARIO) AS logradouroEmpresa, " +
                         "CE.CIDADE_EMPRESA_USUARIO AS cidadeEmpresa, EEU.UF_EMPRESA_USUARIO AS ufEmpresa, UE.NOME_USUARIO AS usuarioContatoEmpresa " +
                         "FROM empresa_usuario EU " +
@@ -160,7 +160,7 @@ namespace ClienteMercado.Infra.Repositories
 
             query = "SELECT EU.ID_CODIGO_EMPRESA AS idEmpresa, EU.NOME_FANTASIA_EMPRESA AS nomeEmpresa, EU.EMAIL1_EMPRESA AS eMail1_Empresa, EU.EMAIL2_EMPRESA AS eMail2_Empresa, " +
                     "UE.ID_CODIGO_USUARIO AS idUsuarioContatoResponsavel, UE.NICK_NAME_USUARIO AS nickNameUsuarioContatoEmpresa, UE.NOME_USUARIO AS nomeUsuarioContatoEmpresa, " +
-                    "UL.EMAIL1_USUARIO AS eMaiL1_UsuarioContatoEmpresa, UL.EMAIL2_USUARIO AS eMaiL2_UsuarioContatoEmpresa, UE.TELEFONE1_USUARIO_EMPRESA AS celular1_UsuarioContatoEmpresa, " + 
+                    "UL.EMAIL1_USUARIO AS eMaiL1_UsuarioContatoEmpresa, UL.EMAIL2_USUARIO AS eMaiL2_UsuarioContatoEmpresa, UE.TELEFONE1_USUARIO_EMPRESA AS celular1_UsuarioContatoEmpresa, " +
                     "UE.TELEFONE2_USUARIO_EMPRESA AS celular2_UsuarioContatoEmpresa " +
                     "FROM empresa_usuario EU " +
                     "INNER JOIN usuario_empresa UE ON(UE.ID_CODIGO_EMPRESA = EU.ID_CODIGO_EMPRESA AND UE.USUARIO_MASTER = 1) " + //DESCOMENTAR ISSO DEPOIS
@@ -212,7 +212,8 @@ namespace ClienteMercado.Infra.Repositories
                         "WHERE EU.ID_CODIGO_EMPRESA = " + idsEmpresas[i];
                 var resultado = _contexto.Database.SqlQuery<ListaEstilizadaDeEmpresasViewModel>(query).ToList();
 
-                resultEmpresas.Add(new ListaEstilizadaDeEmpresasViewModel {
+                resultEmpresas.Add(new ListaEstilizadaDeEmpresasViewModel
+                {
                     idEmpresa = resultado[0].idEmpresa,
                     nomeEmpresa = resultado[0].nomeEmpresa,
                     cidadeEmpresa = resultado[0].cidadeEmpresa,
@@ -275,7 +276,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //CARREGAR DADOS das EMPRESAS que NÃO ANEXARAM COTAÇÃO
-        public List<ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel> 
+        public List<ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel>
             BuscarListaDeEmpresasPeloCodigo(string listaIdsEmpresasNaoCotantes)
         {
             var query = "";
@@ -298,18 +299,18 @@ namespace ClienteMercado.Infra.Repositories
         {
             var cidade = "";
 
-            empresa_usuario dadosEmpresaAdmCC = 
+            empresa_usuario dadosEmpresaAdmCC =
                 _contexto.empresa_usuario.FirstOrDefault(m => (m.ID_CODIGO_EMPRESA == iD_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS));
 
             if (dadosEmpresaAdmCC != null)
             {
-                enderecos_empresa_usuario dadosEnderecoEmpresaAdmCC = 
+                enderecos_empresa_usuario dadosEnderecoEmpresaAdmCC =
                     _contexto.enderecos_empresa_usuario.FirstOrDefault(m => (m.ID_CODIGO_ENDERECO_EMPRESA_USUARIO == dadosEmpresaAdmCC.ID_CODIGO_ENDERECO_EMPRESA_USUARIO));
 
-                cidades_empresa_usuario dadosCidadeEmpresaAdmCC = 
+                cidades_empresa_usuario dadosCidadeEmpresaAdmCC =
                     _contexto.cidades_empresa_usuario.FirstOrDefault(m => (m.ID_CIDADE_EMPRESA_USUARIO == dadosEnderecoEmpresaAdmCC.ID_CIDADE_EMPRESA_USUARIO));
 
-                estados_empresa_usuario dadosEstadoEmpresaAdmCC = 
+                estados_empresa_usuario dadosEstadoEmpresaAdmCC =
                     _contexto.estados_empresa_usuario.FirstOrDefault(m => (m.ID_ESTADOS_EMPRESA_USUARIO == dadosCidadeEmpresaAdmCC.ID_ESTADOS_EMPRESA_USUARIO));
 
                 cidade = (dadosCidadeEmpresaAdmCC.CIDADE_EMPRESA_USUARIO + "-" + dadosEstadoEmpresaAdmCC.UF_EMPRESA_USUARIO);
@@ -339,7 +340,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             bool atualiza = false;
 
-            empresa_usuario dadosDaEmpresaASerAtualizada = 
+            empresa_usuario dadosDaEmpresaASerAtualizada =
                 _contexto.empresa_usuario.FirstOrDefault(m => (m.ID_CODIGO_EMPRESA == idEmpresa));
 
             if (dadosDaEmpresaASerAtualizada != null)
@@ -425,7 +426,7 @@ namespace ClienteMercado.Infra.Repositories
         //BUSCAR DADOS da EMPRESA COTADA
         public empresa_usuario BuscarDadosEmpresaCotada(int idEmpresa)
         {
-            empresa_usuario dadosDaEmpresaCotada = 
+            empresa_usuario dadosDaEmpresaCotada =
                 _contexto.empresa_usuario.FirstOrDefault(m => (m.ID_CODIGO_EMPRESA == idEmpresa));
 
             return dadosDaEmpresaCotada;

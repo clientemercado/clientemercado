@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ClienteMercado.Data.Contexto;
-using ClienteMercado.Data.Entities;
-
-namespace ClienteMercado.Infra.Repositories
+﻿namespace ClienteMercado.Infra.Repositories
 {
     public class DRamosAtividadesProfissionalRepository
     {

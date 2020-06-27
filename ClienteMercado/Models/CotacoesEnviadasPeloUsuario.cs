@@ -3,7 +3,7 @@
     public class CotacoesEnviadasPeloUsuario
     {
         //Classe para montagem da lista de Cotações ENVIADAS pelo usuário
-        public CotacoesEnviadasPeloUsuario(int _idCotacaoMaster, string _nomeDaCotacao, string _dataEnvioDaCotacao, string _dataEncerramentoDaCotacao, string _descricaoCategoria, 
+        public CotacoesEnviadasPeloUsuario(int _idCotacaoMaster, string _nomeDaCotacao, string _dataEnvioDaCotacao, string _dataEncerramentoDaCotacao, string _descricaoCategoria,
             int _numeroParticipantes, int _quantosFornedoresResponderam, string _descricaoStatus, bool _virouPedido)
         {
             idCotacaoMaster = _idCotacaoMaster;

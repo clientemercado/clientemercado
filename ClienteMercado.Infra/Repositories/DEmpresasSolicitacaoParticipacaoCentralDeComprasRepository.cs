@@ -1,8 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
-using System.Linq;
-using System;
 using ClienteMercado.Utils.Net;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -32,7 +31,7 @@ namespace ClienteMercado.Infra.Repositories
         //VERIFICAR se a EMPRESA LOGADA possui SOLICITAÇÃO de PARTICIPAÇÂO na CENTRAL de COMPRAS
         public empresas_solicitacao_participacao_central_de_compras BuscaSolicitacaoDeParticipacaoNaCCDaEmpresaLogada(int? idCC)
         {
-            empresas_solicitacao_participacao_central_de_compras dadosSolicitacaoDaEmpresa = 
+            empresas_solicitacao_participacao_central_de_compras dadosSolicitacaoDaEmpresa =
                 _contexto.empresas_solicitacao_participacao_central_de_compras.FirstOrDefault(m => ((m.ID_CENTRAL_COMPRAS == idCC) && (m.ID_CODIGO_EMPRESA_SOLICITANTE == idEmpresa)));
 
             return dadosSolicitacaoDaEmpresa;

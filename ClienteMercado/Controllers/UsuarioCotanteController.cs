@@ -1,19 +1,19 @@
-﻿using System;
-using System.Web.Mvc;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Globalization;
-using System.Collections;
-using System.Text.RegularExpressions;
-using System.Web.Services;
-using ClienteMercado.Utils.ViewModel;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Utils.Utilitarios;
-using ClienteMercado.Utils.Mail;
-using ClienteMercado.Utils.Sms;
+﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Domain.Services;
+using ClienteMercado.Models;
+using ClienteMercado.Utils.Mail;
+using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.Sms;
+using ClienteMercado.Utils.Utilitarios;
+using ClienteMercado.Utils.ViewModel;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web.Mvc;
+using System.Web.Services;
 
 namespace ClienteMercado.Controllers
 {
@@ -89,7 +89,7 @@ namespace ClienteMercado.Controllers
 
                     dadosDaConsultaDoGrupoDeAtividades.ID_GRUPO_ATIVIDADES = dadosDaCotacaoMasterDoUsuarioCotante.ID_GRUPO_ATIVIDADES;
 
-                    grupo_atividades_empresa dadosDoGrupoDeAtividadesPesquisado = 
+                    grupo_atividades_empresa dadosDoGrupoDeAtividadesPesquisado =
                         negociosGrupoDeAtividades.ConsultarDadosDoGrupoDeAtividadesDaEmpresa(dadosDaConsultaDoGrupoDeAtividades);
 
                     if (dadosDoGrupoDeAtividadesPesquisado != null)
@@ -381,9 +381,9 @@ namespace ClienteMercado.Controllers
 
                     quantidadeItens = string.Format("{0:0,0.00}", itensDaCotacaoUsuarioCotante[i].QUANTIDADE_ITENS_COTACAO); //Formata a quantidade para exibição
 
-                    produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioCotante[i].ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE, 0, 
-                        itensDaCotacaoUsuarioCotante[i].ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, itensDaCotacaoUsuarioCotante[i].ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE, 
-                        dadosDoProduto.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "",quantidadeItens, "0",
+                    produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioCotante[i].ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE, 0,
+                        itensDaCotacaoUsuarioCotante[i].ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, itensDaCotacaoUsuarioCotante[i].ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE,
+                        dadosDoProduto.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItens, "0",
                         dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, "", 0, "", 0, "", "", 0, 0, "", "", "", "", 0));
                 }
             }
@@ -402,7 +402,7 @@ namespace ClienteMercado.Controllers
             NCotacaoFilhaUsuarioCotanteService negociosCotacaoFilhaUsuarioCotante = new NCotacaoFilhaUsuarioCotanteService();
             List<FornecedoresCotados> fornecedoresRespondendoACotacao = new List<FornecedoresCotados>();
 
-            List<cotacao_filha_usuario_cotante> dadosDaCotacaoFilhaUsuarioCotante = 
+            List<cotacao_filha_usuario_cotante> dadosDaCotacaoFilhaUsuarioCotante =
                 negociosCotacaoFilhaUsuarioCotante.ConsultarFornecedoresQueEstaoRespondendoACotacao(idCotacaoMaster);
 
             if (dadosDaCotacaoFilhaUsuarioCotante.Count > 0)
@@ -434,7 +434,7 @@ namespace ClienteMercado.Controllers
                     List<ChatEntreUsuarioEFornecedor> listaDeConversasEntreCotanteEFornecedorNoChat = new List<ChatEntreUsuarioEFornecedor>();
 
                     //Busca os dados do CHAT entre o COTANTE e o FORNECEDOR
-                    List<chat_cotacao_usuario_cotante> listaConversasApuradasNoChat = 
+                    List<chat_cotacao_usuario_cotante> listaConversasApuradasNoChat =
                         negociosChatCotacaoUsuarioCotante.BuscarChatEntreUsuarioCOtanteEFornecedor(dadosDaCotacaoFilhaUsuarioCotante[i].ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE);
 
                     valor = listaConversasApuradasNoChat.Count;
@@ -535,20 +535,20 @@ namespace ClienteMercado.Controllers
             if (produtosCotacao != "" && servicosCotacao == "")
             {
                 lista = (from t in listaAtividadesEProdutosEmpresa
-                             where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && t.TIPO_PRODUTO_SERVICO == produtosCotacao
-                             select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
+                         where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && t.TIPO_PRODUTO_SERVICO == produtosCotacao
+                         select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
             }
             else if (servicosCotacao != "" && produtosCotacao == "")
             {
                 lista = (from t in listaAtividadesEProdutosEmpresa
-                             where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && t.TIPO_PRODUTO_SERVICO == servicosCotacao
-                             select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
+                         where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && t.TIPO_PRODUTO_SERVICO == servicosCotacao
+                         select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
             }
             else if (produtosCotacao != "" && servicosCotacao != "")
             {
                 lista = (from t in listaAtividadesEProdutosEmpresa
-                             where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && (t.TIPO_PRODUTO_SERVICO == produtosCotacao || t.TIPO_PRODUTO_SERVICO== servicosCotacao)
-                             select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
+                         where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && (t.TIPO_PRODUTO_SERVICO == produtosCotacao || t.TIPO_PRODUTO_SERVICO == servicosCotacao)
+                         select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
             }
 
             return Json(lista, JsonRequestBehavior.AllowGet);
@@ -619,7 +619,7 @@ namespace ClienteMercado.Controllers
         }
 
         //Carrega lista de Fornecedores para Cotações Direcionadas
-        public JsonResult BuscaFornecedoresCotacaoDirecionada(int categoriaASerCotada, int quantFornecedores, int tipoPorCidade, int tipoPorUF, int idOutraCidade, int idOutroEstado, int idOutraCidadeOutroEstado, 
+        public JsonResult BuscaFornecedoresCotacaoDirecionada(int categoriaASerCotada, int quantFornecedores, int tipoPorCidade, int tipoPorUF, int idOutraCidade, int idOutroEstado, int idOutraCidadeOutroEstado,
             int idCidadeCotante, int idEstadoCotante, int idPaisCotante)
         {
             try
@@ -643,7 +643,7 @@ namespace ClienteMercado.Controllers
                 else if ((tipoPorCidade == 0) && (tipoPorUF == 2))
                 {
                     //Buscar fornecedores de OUTRO ESTADO (TODAS as cidades do estado ou CIDADE ESPECÍFICA)
-                    listFornecedores = negocioFornecedores.BuscarFornecedoresEmOutroEstadoDirecionada(categoriaASerCotada, quantFornecedores, idOutroEstado, idOutraCidadeOutroEstado, 
+                    listFornecedores = negocioFornecedores.BuscarFornecedoresEmOutroEstadoDirecionada(categoriaASerCotada, quantFornecedores, idOutroEstado, idOutraCidadeOutroEstado,
                         idPaisCotante);
                 }
                 else if ((tipoPorCidade == 0) && (tipoPorUF == 3))
@@ -750,9 +750,9 @@ namespace ClienteMercado.Controllers
 
                 //Resultado a ser retornado
                 var resultado = new
-                                    {
-                                        quantidadeFornecedores = listFornecedores.Count
-                                    };
+                {
+                    quantidadeFornecedores = listFornecedores.Count
+                };
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
             }
@@ -767,7 +767,7 @@ namespace ClienteMercado.Controllers
         public ActionResult PerfilUsuarioCotanteCotacaoDirecionada(PerfilUsuarioCotante cotacaoDirecionada, FormCollection form)
         {
             //Definindo as variáveis pertinentes ao método em questão
-            string[] listaIDsProdutosServicos, listaDescricaoDosProdutosOuServicosASeremCotados, listaIDsUnidadesDeMedida ,listaIDsFornecedores, listaIDsUsuariosVendedores, listaQuantidadeCadaItem, 
+            string[] listaIDsProdutosServicos, listaDescricaoDosProdutosOuServicosASeremCotados, listaIDsUnidadesDeMedida, listaIDsFornecedores, listaIDsUsuariosVendedores, listaQuantidadeCadaItem,
                 listaIDsMarcasFabricantes, listaDescricaoMarcasFabricantes;
 
             ArrayList listaIDsItensCotacaoUsuarioCotante = new ArrayList();
@@ -808,7 +808,7 @@ namespace ClienteMercado.Controllers
                 NUsuarioEmpresaService negociosUsuarioEmpresa = new NUsuarioEmpresaService();
                 List<usuario_empresa> listaDadosUsuariosVendedoresQueReceberaoACotacao = new List<usuario_empresa>();
 
-                listaDadosUsuariosVendedoresQueReceberaoACotacao = 
+                listaDadosUsuariosVendedoresQueReceberaoACotacao =
                     negociosUsuarioEmpresa.ConsultarDadosDosUsuariosVendedoresQueReceberaoAvisoDeCotacao(listaIDsUsuariosVendedores);
 
                 //Gerar a COTAÇÂO MASTER (COTAÇAO_MASTER_USUARIO_COTANTE)
@@ -831,7 +831,7 @@ namespace ClienteMercado.Controllers
                     //Busca quantidade de registros de cotação do Usuário Cotante, para montar a cotação
                     List<cotacao_master_usuario_cotante> registrosDeCotacaoUsuarioCotante = new List<cotacao_master_usuario_cotante>();
 
-                    registrosDeCotacaoUsuarioCotante = 
+                    registrosDeCotacaoUsuarioCotante =
                         negociosCotacaoMasterUsuarioCotante.VerificarAQuantidadeDeCotacoesExistentesParaMontagemDoNomeDefaultDaCotacao(Convert.ToInt32(Sessao.IdUsuarioLogado));
 
                     if (registrosDeCotacaoUsuarioCotante.Count > 0)
@@ -844,7 +844,7 @@ namespace ClienteMercado.Controllers
                         dadosDaCotacaoMasterUsuarioCotante.NOME_COTACAO_USUARIO_COTANTE = "00001";
                     }
                 }
-                
+
                 dadosDaCotacaoMasterUsuarioCotante.DATA_CRIACAO_COTACAO_USUARIO_COTANTE = DateTime.Now;
 
                 if (cotacaoDirecionada.DATA_ENCERRAMENTO_COTACAO_DIRECIONADA != null)
@@ -945,7 +945,7 @@ namespace ClienteMercado.Controllers
                         dadosItensCotacaoUsuarioCotante.QUANTIDADE_ITENS_COTACAO = Convert.ToDecimal(listaQuantidadeCadaItem[i], new CultureInfo("en-US"));
 
                         //Gravar Itens que estarão ligado à COTACAO_MASTER_USUARIO_COTANTE
-                        gravandoItensDaCotacaoUsuarioCotante = 
+                        gravandoItensDaCotacaoUsuarioCotante =
                             negociosItensCotacaoUsuarioCotante.GravarItensDaCotacaoMasterDoUsuarioCotante(dadosItensCotacaoUsuarioCotante);
 
                         if (gravandoItensDaCotacaoUsuarioCotante != null)
@@ -986,7 +986,7 @@ namespace ClienteMercado.Controllers
                             if (gerarCotacaoFilha != null)
                             {
                                 //Salvando os itens da COTAÇÃO FILHA (ITENS_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE)
-                                NItensCotacaoFilhaNegociacaoUsuarioCotanteService negociosItensCotacaoFilhaNegociacaoUsuarioCotante = 
+                                NItensCotacaoFilhaNegociacaoUsuarioCotanteService negociosItensCotacaoFilhaNegociacaoUsuarioCotante =
                                     new NItensCotacaoFilhaNegociacaoUsuarioCotanteService();
                                 itens_cotacao_filha_negociacao_usuario_cotante dadosItensCotacaoFilhaUsuarioCotante = new itens_cotacao_filha_negociacao_usuario_cotante();
 
@@ -1089,7 +1089,7 @@ namespace ClienteMercado.Controllers
         public ActionResult PerfilUsuarioCotanteCotacaoAvulsa(PerfilUsuarioCotante cotacaoAvulsa, FormCollection form)
         {
             //Definindo as variáveis pertinentes ao método em questão
-            string[] listaIDsProdutosServicos, listaDescricaoDosProdutosOuServicosASeremCotados, listaIDsUnidadesDeMedida, listaQuantidadeCadaItem, listaIDsMarcasFabricantes, 
+            string[] listaIDsProdutosServicos, listaDescricaoDosProdutosOuServicosASeremCotados, listaIDsUnidadesDeMedida, listaQuantidadeCadaItem, listaIDsMarcasFabricantes,
                 listaDescricaoMarcasFabricantes;
 
             ArrayList listaIDsItensCotacaoUsuarioCotante = new ArrayList();
@@ -1162,7 +1162,7 @@ namespace ClienteMercado.Controllers
                     var dataSugerida = DateTime.Now.AddDays(1);
                     dadosDaCotacaoMasterUsuarioCotante.DATA_ENCERRAMENTO_COTACAO_USUARIO_COTANTE = dataSugerida;
                 }
-                
+
                 dadosDaCotacaoMasterUsuarioCotante.ID_TIPO_FRETE = 2; //Por default FOB (1-CIF (Fornecedor paga) , 2-FOB (Cliente paga))
                 dadosDaCotacaoMasterUsuarioCotante.ID_GRUPO_ATIVIDADES = cotacaoAvulsa.ID_CATEGORIA_ATIVIDADES_ACOTAR_AVULSA;
                 dadosDaCotacaoMasterUsuarioCotante.PERCENTUAL_RESPONDIDA_COTACAO_USUARIO_COTANTE = 0; //Inicia por default com 0
@@ -1535,10 +1535,10 @@ namespace ClienteMercado.Controllers
                                 produtoCotado = "sim";
                             }
 
-                            produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioCotante[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE, idCotacaoFilha, 
-                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE, 
-                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "",quantidadeItensFormatado, 
-                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "", 
+                            produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioCotante[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE, idCotacaoFilha,
+                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE,
+                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItensFormatado,
+                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "",
                                 quantidadeFotosAnexadas, listaFotosProdutosAlternativos, "", 0, 0, "", "", "", "", 0));
 
                             quantidadeFotosAnexadas = 0;
@@ -1640,10 +1640,10 @@ namespace ClienteMercado.Controllers
                                 produtoCotado = "sim";
                             }
 
-                            produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioEmpresa[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_EMPRESA, idCotacaoFilha, 
-                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_EMPRESA, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA, 
-                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "",quantidadeItensFormatado, 
-                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "", 
+                            produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioEmpresa[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_EMPRESA, idCotacaoFilha,
+                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_EMPRESA, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA,
+                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItensFormatado,
+                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "",
                                 quantidadeFotosAnexadas, listaFotosProdutosAlternativos, "", 0, 0, "", "", "", "", 0));
 
                             quantidadeFotosAnexadas = 0;
@@ -1681,7 +1681,7 @@ namespace ClienteMercado.Controllers
 
                 NCotacaoFilhaUsuarioCotanteService negociosCotacaoFilhaUsuarioCotante = new NCotacaoFilhaUsuarioCotanteService();
                 cotacao_filha_usuario_cotante dadosCotacaoFilhaUsuarioCotante = new cotacao_filha_usuario_cotante();
-                NItensCotacaoFilhaNegociacaoUsuarioCotanteProdutosAlternativosService negociosFotosProdutosAlternativos = 
+                NItensCotacaoFilhaNegociacaoUsuarioCotanteProdutosAlternativosService negociosFotosProdutosAlternativos =
                     new NItensCotacaoFilhaNegociacaoUsuarioCotanteProdutosAlternativosService();
 
                 //BUSCAR dados da COTAÇÃO FILHA
@@ -1908,10 +1908,10 @@ namespace ClienteMercado.Controllers
                                 dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE,
                                 dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItensFormatado,
                                 quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto,
-                                dadosConsultadosCotacaoFilhaUsuarioCotante.PERCENTUAL_DESCONTO, valorASerExibidoNaColunaDesconto, quantidadeFotosAnexadas, 
-                                listaFotosProdutosAlternativos, "", somaValorDoProdutoSemDesconto, somaValorDoProdutoComDesconto, 
-                                dadosConsultadosCotacaoFilhaUsuarioCotante.DATA_RESPOSTA_COTACAO_FILHA_USUARIO_COTANTE.ToShortDateString(), 
-                                dadosConsultadosCotacaoFilhaUsuarioCotante.FORMA_PAGAMENTO_COTACAO_FILHA_USUARIO_COTANTE, 
+                                dadosConsultadosCotacaoFilhaUsuarioCotante.PERCENTUAL_DESCONTO, valorASerExibidoNaColunaDesconto, quantidadeFotosAnexadas,
+                                listaFotosProdutosAlternativos, "", somaValorDoProdutoSemDesconto, somaValorDoProdutoComDesconto,
+                                dadosConsultadosCotacaoFilhaUsuarioCotante.DATA_RESPOSTA_COTACAO_FILHA_USUARIO_COTANTE.ToShortDateString(),
+                                dadosConsultadosCotacaoFilhaUsuarioCotante.FORMA_PAGAMENTO_COTACAO_FILHA_USUARIO_COTANTE,
                                 dadosConsultadosCotacaoFilhaUsuarioCotante.OBSERVACAO_COTACAO_USUARIO_COTANTE, tipoDeFrete, 0));
 
                             quantidadeFotosAnexadas = 0;
@@ -1986,7 +1986,7 @@ namespace ClienteMercado.Controllers
                             }
                             else
                             {
-                                listaIdsCotacoesEnviadas = 
+                                listaIdsCotacoesEnviadas =
                                     (listaIdsCotacoesEnviadas + "," + dadosConsultadosCotacaoFilhaUsuarioCotante[a].ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE.ToString());
                             }
                         }
@@ -2015,19 +2015,19 @@ namespace ClienteMercado.Controllers
                             itens_cotacao_usuario_cotante dadosDoProdutoDaCotacaoMaster = negociosItensCotacaoMasterUsuarioCotante.ConsultarDadosDosItensDaCotacaoFilha(dadosItemCotacaoUsuarioCotante);
 
                             //Buscar dados do PRODUTO
-                            produtos_servicos_empresa_profissional dadosDoProdutoEmSi = 
+                            produtos_servicos_empresa_profissional dadosDoProdutoEmSi =
                                 negociosProdutos.ConsultarDadosDoProdutoDaCotacao(dadosDoProdutoDaCotacaoMaster.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS);
 
                             //Buscar dados da MARCA do PRODUTO
-                            empresas_fabricantes_marcas dadosFabrincanteOuMarca = 
+                            empresas_fabricantes_marcas dadosFabrincanteOuMarca =
                                 negociosFabricantesMarcas.ConsultarEmpresaFabricanteOuMarca(dadosDoProdutoDaCotacaoMaster.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS);
 
                             //Buscar dados da UNIDADE do PRODUTO
-                            unidades_produtos dadosDaUnidadeProduto = 
+                            unidades_produtos dadosDaUnidadeProduto =
                                 negociosUnidadeProduto.ConsultarDadosDaUnidadeDoProduto(dadosDoProdutoDaCotacaoMaster.ID_CODIGO_UNIDADE_PRODUTO);
 
                             //BUSCAR as IMAGENS armazenadas para PRODUTOS ALTERNATIVOS (Obs: Enviadas pela EMPRESA que respondeu a cotação)
-                            List<fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante> imagensArmazenadas = 
+                            List<fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante> imagensArmazenadas =
                                 negociosFotosProdutosAlternativos.ConsultarRegistrosDasFotosDosProdutosAnexadosNaCotacaoDoUsuarioCotante(valoresCotadosPorProduto[i].ID_PRODUTO_COTADO);
 
                             if (imagensArmazenadas.Count > 0)
@@ -2045,7 +2045,7 @@ namespace ClienteMercado.Controllers
                                 valorDoProduto = string.Format("{0:0,0.00}", valoresCotadosPorProduto[i].PRECO_ITENS_COTACAO_USUARIO_COTANTE);
 
                                 //APLICAR o DESCONTO conforme o TIPO respondido na COTAÇÃO
-                                if ((dadosCotacaoFilhaUsuarioCotante.TIPO_DESCONTO == 0) || (dadosCotacaoFilhaUsuarioCotante.TIPO_DESCONTO == 1) 
+                                if ((dadosCotacaoFilhaUsuarioCotante.TIPO_DESCONTO == 0) || (dadosCotacaoFilhaUsuarioCotante.TIPO_DESCONTO == 1)
                                     || (dadosCotacaoFilhaUsuarioCotante.TIPO_DESCONTO == 3))
                                 {
                                     //SEM DESCONTO APLICADO ou DESCONTO APLICADO SOMENTE nos PRODUTOS da COTAÇÃO
@@ -2116,11 +2116,11 @@ namespace ClienteMercado.Controllers
                                 tipoDeFrete = "FOB - CLIENTE PAGA";
                             }
 
-                            produtosDaCotacao.Add(new ProdutosDaCotacao(valoresCotadosPorProduto[i].ID_PRODUTO_COTADO, valoresCotadosPorProduto[i].ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE, 
-                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE, 
-                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, dadosDaEmpresaCotada.NOME_FANTASIA_EMPRESA, 
-                                quantidadeItensFormatado, quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, 
-                                valorTotalDoProduto, dadosCotacaoFilhaUsuarioCotante.PERCENTUAL_DESCONTO, valorDoProdutoComDescontoParaExibicao, quantidadeFotosAnexadas, 
+                            produtosDaCotacao.Add(new ProdutosDaCotacao(valoresCotadosPorProduto[i].ID_PRODUTO_COTADO, valoresCotadosPorProduto[i].ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE,
+                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE,
+                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, dadosDaEmpresaCotada.NOME_FANTASIA_EMPRESA,
+                                quantidadeItensFormatado, quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado,
+                                valorTotalDoProduto, dadosCotacaoFilhaUsuarioCotante.PERCENTUAL_DESCONTO, valorDoProdutoComDescontoParaExibicao, quantidadeFotosAnexadas,
                                 listaFotosProdutosAlternativos, itemComMenorPreco, 0, 0, valoresCotadosPorProduto[i].DATA_RESPOSTA_COTACAO_FILHA_USUARIO_COTANTE.ToShortDateString(),
                                 valoresCotadosPorProduto[i].FORMA_PAGAMENTO_COTACAO_FILHA_USUARIO_COTANTE, valoresCotadosPorProduto[i].OBSERVACAO_COTACAO_USUARIO_COTANTE, tipoDeFrete, 0));
 
@@ -2158,7 +2158,7 @@ namespace ClienteMercado.Controllers
                 string virouPedido = "";
                 //int totalDeRegistros = 0;
 
-                List<ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel> listaTotalPorCotacaoRespondida = 
+                List<ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel> listaTotalPorCotacaoRespondida =
                     new List<ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel>();
 
                 if (tipoCotacao == "uc")
@@ -2173,7 +2173,7 @@ namespace ClienteMercado.Controllers
                     empresa_usuario dadosDaEmpresaCotada = new empresa_usuario();
 
                     //BUSCAR Qtde ITENS COTADOS
-                    List<itens_cotacao_usuario_cotante> itensDaCotacaoMasterUsuarioCotante = 
+                    List<itens_cotacao_usuario_cotante> itensDaCotacaoMasterUsuarioCotante =
                         negociosItensCotacaoMasterUsuarioCotante.ConsultarItensDaCotacaoDoUsuarioCotante(idCotacaoMaster);
 
                     if (itensDaCotacaoMasterUsuarioCotante.Count > 0)
@@ -2192,7 +2192,7 @@ namespace ClienteMercado.Controllers
                         dadosDaEmpresaCotada = negociosEmpresaUsuario.ConsultarDadosDaEmpresa(dadosEmpresaUsuario);
 
                         //VERIFICAR QUANTIDADE de ITENS COTADOS
-                        quantidadeDeItensCotados = 
+                        quantidadeDeItensCotados =
                             negociosItensCotacaoFilhaUsuarioCotante.ConsultarQuantidadeDeItensRespondidosPeloUsuarioCotante(dadosConsultadosCotacaoFilhaUsuarioCotante[i].ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE);
 
                         if (quantidadeDeItensCotados == quantidadeDeItensASeremCotados)
@@ -2239,8 +2239,8 @@ namespace ClienteMercado.Controllers
                         virouPedido = negociosPedidoUsuarioCotante.VerificarSeExistePedidoParaEstaCotacao(idCotacaoMaster, dadosConsultadosCotacaoFilhaUsuarioCotante[i].ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE);
 
                         listaTotalPorCotacaoRespondida.Add(new ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel(dadosConsultadosCotacaoFilhaUsuarioCotante[i].ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE,
-                            dadosDaEmpresaCotada.NOME_FANTASIA_EMPRESA, dadosConsultadosCotacaoFilhaUsuarioCotante[i].DATA_RESPOSTA_COTACAO_FILHA_USUARIO_COTANTE.ToString(), 
-                            cotadosParcialTotal, dadosConsultadosCotacaoFilhaUsuarioCotante[i].PRECO_LOTE_ITENS_COTACAO_USUARIO_COTANTE, 
+                            dadosDaEmpresaCotada.NOME_FANTASIA_EMPRESA, dadosConsultadosCotacaoFilhaUsuarioCotante[i].DATA_RESPOSTA_COTACAO_FILHA_USUARIO_COTANTE.ToString(),
+                            cotadosParcialTotal, dadosConsultadosCotacaoFilhaUsuarioCotante[i].PRECO_LOTE_ITENS_COTACAO_USUARIO_COTANTE,
                             dadosConsultadosCotacaoFilhaUsuarioCotante[i].PERCENTUAL_DESCONTO, tipoDeDesconto, valorDoDesconto, valorDoProdutoComDesconto, virouPedido, ""));
                     }
                 }
@@ -2300,7 +2300,7 @@ namespace ClienteMercado.Controllers
                             for (int i = 0; i < dadosItensRespondidosNaCotacaoFilha.Count; i++)
                             {
                                 dadosItenPedidoUsuarioCotante.ID_CODIGO_PEDIDO_USUARIO_COTANTE = idPedidoGeradoUsuarioCotante;
-                                dadosItenPedidoUsuarioCotante.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE = 
+                                dadosItenPedidoUsuarioCotante.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE =
                                     dadosItensRespondidosNaCotacaoFilha[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE;
 
                                 idItemPedido = negociosItensPedidoUsuarioCotante.GravarItemDoPedido(dadosItenPedidoUsuarioCotante);

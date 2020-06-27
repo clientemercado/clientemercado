@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Base;
 using System.Collections.Generic;
 using System.Linq;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Infra.Base;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -11,7 +10,7 @@ namespace ClienteMercado.Infra.Repositories
         //VERIFICAR se a COTAÇÃO se já se converteu em PEDIDO
         public pedido_central_compras VerificaSeACotacaoPossuiPedido(int iCM)
         {
-            pedido_central_compras cotacaoComPedido = 
+            pedido_central_compras cotacaoComPedido =
                 _contexto.pedido_central_compras.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS == iCM));
 
             return cotacaoComPedido;
@@ -20,9 +19,9 @@ namespace ClienteMercado.Infra.Repositories
         //GERAR o PEDIDO feito pelo USUÁRIO ADM da CENTRAL de COMPRAS (Independente do Pedido ser TOTAL ou PARCIAL)
         public int GerarPedidoCC(pedido_central_compras obj)
         {
-            pedido_central_compras gravarPedidoCC = 
+            pedido_central_compras gravarPedidoCC =
                 _contexto.pedido_central_compras.Add(obj);
-                _contexto.SaveChanges();
+            _contexto.SaveChanges();
 
             return gravarPedidoCC.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS;
         }
@@ -30,7 +29,7 @@ namespace ClienteMercado.Infra.Repositories
         //VERIFICAR se o FORNECEDOR recebeu PEDIDO para ESTA COTAÇÃO
         public pedido_central_compras VerificarSeEstaCotacaoRecebeuPedido(int iCM, int iCCF)
         {
-            pedido_central_compras recebeuPedidoParaACotacao = 
+            pedido_central_compras recebeuPedidoParaACotacao =
                 _contexto.pedido_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF)));
 
             return recebeuPedidoParaACotacao;
@@ -39,7 +38,7 @@ namespace ClienteMercado.Infra.Repositories
         //ATUALIZAR o VALOR TOTAL REGISTRADO para o PEDIDO
         public void AtualizarValorDoPedido(pedido_central_compras obj)
         {
-            pedido_central_compras dadosDoPedidoAAtualizar = 
+            pedido_central_compras dadosDoPedidoAAtualizar =
                 _contexto.pedido_central_compras.FirstOrDefault(m => (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == obj.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS));
 
             if (dadosDoPedidoAAtualizar != null)
@@ -71,7 +70,7 @@ namespace ClienteMercado.Infra.Repositories
         //VERIFICAR TODOS os PEDIDOS para ESTA COTAÇÃO
         public List<pedido_central_compras> BuscarTodosOsPedidosParaACotacao(int iCM)
         {
-            List<pedido_central_compras> listaDePedidosDaCotacao = 
+            List<pedido_central_compras> listaDePedidosDaCotacao =
                 _contexto.pedido_central_compras.Where(m => (m.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)).ToList();
 
             return listaDePedidosDaCotacao;
@@ -80,7 +79,7 @@ namespace ClienteMercado.Infra.Repositories
         //BUSCAR DADOS do PEDIDO - ATUALIZAR o VALOR TOTAL REGISTRADO para o PEDIDO
         public pedido_central_compras ConsultarDadosDoPedidoPeloCodigo(int idPedidoGeradoCC)
         {
-            pedido_central_compras dadosDoPedidoDaCC = 
+            pedido_central_compras dadosDoPedidoDaCC =
                 _contexto.pedido_central_compras.FirstOrDefault(m => (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedidoGeradoCC));
 
             return dadosDoPedidoDaCC;

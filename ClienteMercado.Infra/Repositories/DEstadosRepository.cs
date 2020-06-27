@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -22,7 +21,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                estados_empresa_usuario dadosDoEstado = 
+                estados_empresa_usuario dadosDoEstado =
                     _contexto.estados_empresa_usuario.FirstOrDefault(m => (m.ID_ESTADOS_EMPRESA_USUARIO.Equals(idEstado)));
 
                 return dadosDoEstado;

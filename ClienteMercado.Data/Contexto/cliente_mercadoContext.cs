@@ -1,8 +1,8 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using ClienteMercado.Data.Entities;
-using System.Data.Entity.Validation;
+﻿using ClienteMercado.Data.Entities;
 using System;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.Entity.Validation;
 
 namespace ClienteMercado.Data.Contexto
 {
@@ -62,7 +62,7 @@ namespace ClienteMercado.Data.Contexto
         public DbSet<grupo_atividades_empresa> grupo_atividades_empresa { get; set; }
         public DbSet<tipos_contratos_servicos> tipos_contratos_servicos { get; set; }
         public DbSet<meios_pagamento_fatura_servicos> meios_pagamento_fatura_servicos { get; set; }
-        public DbSet<financeiro_cobranca_faturamento_usuario_empresa> financeiro_cobranca_faturamento_usuario_empresa { get; set; } 
+        public DbSet<financeiro_cobranca_faturamento_usuario_empresa> financeiro_cobranca_faturamento_usuario_empresa { get; set; }
         public DbSet<financeiro_cobranca_faturamento_usuario_profissional> financeiro_cobranca_faturamento_usuario_profissional { get; set; }
         public DbSet<cards_empresa> cards_empresa { get; set; }
         public DbSet<cards_usuario_empresa> cards_usuario_empresa { get; set; }

@@ -1,7 +1,7 @@
-﻿using ClienteMercado.Infra.Repositories;
-using ClienteMercado.Data.Entities;
-using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
+using System;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
@@ -71,7 +71,7 @@ namespace ClienteMercado.Domain.Services
         }
 
         //BUSCAR LISTA de COTAÇÕES RECEBIDAS FILTRADAS
-        public List<ListaDeCotacoesRecebidasPeloFornecedorViewModel> BuscarListaDeCotacoesRecebidasPeloFornecedorConformeFiltro(int tipoFiltragem, int codPesquisar, 
+        public List<ListaDeCotacoesRecebidasPeloFornecedorViewModel> BuscarListaDeCotacoesRecebidasPeloFornecedorConformeFiltro(int tipoFiltragem, int codPesquisar,
             int idGrupoAtividadesFiltro)
         {
             var statusDaCotacaorecebida = "";
@@ -92,7 +92,7 @@ namespace ClienteMercado.Domain.Services
                 int quantidadeDeEmpresasJahResponderamACotacao =
                     negociosCotacaoFilhaCC.BuscarQuantidadeDeEmpresasJahResponderamACotacao(listaDeCotacaoesRecebidas[i].ID_COTACAO_MASTER_CENTRAL_COMPRAS);
                 //BUSCA LISTA DE COTAÇÕES-ENVIADAS verificando se ALGUMA DELAS já recebeu uma CONTRA_PROPOSTA
-                List<cotacao_filha_central_compras> quantidadeDeContraPospostasPraEstaCotacao = 
+                List<cotacao_filha_central_compras> quantidadeDeContraPospostasPraEstaCotacao =
                     negociosCotacaoFilhaCC.BuscarListaDeCotacoesFilhaQueReceberamContraProposta(listaDeCotacaoesRecebidas[i].ID_COTACAO_MASTER_CENTRAL_COMPRAS);
 
                 //CARREGAR LISTA de EMPRESAS que JÁ REGISTRARAM o ACEITE dos VALORES COTADOS
@@ -130,7 +130,7 @@ namespace ClienteMercado.Domain.Services
                 }
 
                 //VERIFICAR se a COTAÇÃO se já se converteu em PEDIDO
-                pedido_central_compras dadosDoPedido = 
+                pedido_central_compras dadosDoPedido =
                     negociosPedidosDaCotacaoCC.VerificaSeACotacaoPossuiPedido(listaDeCotacaoesRecebidas[i].ID_COTACAO_MASTER_CENTRAL_COMPRAS);
 
                 if (dadosDoPedido != null)
@@ -138,7 +138,7 @@ namespace ClienteMercado.Domain.Services
                     statusDaCotacaorecebida = "ENCERRADA";
                 }
 
-                listaDeCotacaoesRecebidas[i].statusDaCotacao = statusDaCotacaorecebida;  
+                listaDeCotacaoesRecebidas[i].statusDaCotacao = statusDaCotacaorecebida;
             }
 
             return listaDeCotacaoesRecebidas;
@@ -184,6 +184,12 @@ namespace ClienteMercado.Domain.Services
         public void SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM, int iCCF, int idFor)
         {
             dcotacaofilhacentraldecompras.SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(iCM, iCCF, idFor);
+        }
+
+        //SETAR ESTA COTAÇÃO como RESPONDIDA por este FORNECEDOR
+        public void SetarComoRespondidaEstaCotacaoPorEsteFornecedor(int iCM, int iCCF)
+        {
+            dcotacaofilhacentraldecompras.SetarComoRespondidaEstaCotacaoPorEsteFornecedor(iCM, iCCF);
         }
 
         ////BUSCAR APENAS 1 COTAÇÃO na LISTA de COTAÇÕES ENVIADAS

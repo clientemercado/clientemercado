@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Domain.Services;
+using ClienteMercado.Models;
+using ClienteMercado.Utils.Mail;
+using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.Utilitarios;
+using System;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Security;
-using ClienteMercado.Models;
-using ClienteMercado.Data.Entities;
-using System.Text.RegularExpressions;
-using ClienteMercado.Utils.Utilitarios;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Utils.Mail;
-using ClienteMercado.Domain.Services;
 
 namespace ClienteMercado.Controllers
 {
@@ -135,7 +135,7 @@ namespace ClienteMercado.Controllers
                                 /*
                                 Define o destino do usuário no sistema, de acordo com situação financeira no sistema (VINCENDO / VENCIDO)
                                 */
-                                if ((DateTime.Now.Date >= dataComparativa.Date) && (DateTime.Now.Date <= financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.Date) 
+                                if ((DateTime.Now.Date >= dataComparativa.Date) && (DateTime.Now.Date <= financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.Date)
                                     && (financeiroCobrancaFaturamentoUsuarioEmpresa.PARCELA_PAGA_COBRANCA_FATURAMENTO == false))
                                 {
                                     //Status VINCENDO - A VENCER
@@ -159,12 +159,12 @@ namespace ClienteMercado.Controllers
                                                 //Redireciona para a Action responsável por montar o Aviso de Pagamento de assinatura, passando os parâmetros necessários
                                                 return RedirectToAction("AvisoAssinatura", "FinanceiroClienteMercado",
                                                     new
-                                                    { 
+                                                    {
                                                         dcPC = MD5Crypt.Criptografar("Plano " + buscarDetalhesTipoContratoDeServico.DESCRICAO_TIPO_CONTRATO_COTADA),
                                                         vPC = MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
                                                         iRF = MD5Crypt.Criptografar(idCobranca),
                                                         dVF = MD5Crypt.Criptografar(financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.ToShortDateString()),
-                                                        sF  = MD5Crypt.Criptografar("vincendo"),
+                                                        sF = MD5Crypt.Criptografar("vincendo"),
                                                         tpL = tipoLogin,
                                                         nmU = nomeUsuarioLogado,
                                                         nmE = nomeEmpresaLogado
@@ -192,10 +192,10 @@ namespace ClienteMercado.Controllers
                                                     new
                                                     {
                                                         dcPC = MD5Crypt.Criptografar("Plano " + buscarDetalhesTipoContratoDeServico.DESCRICAO_TIPO_CONTRATO_COTADA),
-                                                        vPC =  MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
-                                                        iRF =  MD5Crypt.Criptografar(idCobranca),
+                                                        vPC = MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
+                                                        iRF = MD5Crypt.Criptografar(idCobranca),
                                                         dVF = MD5Crypt.Criptografar(financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.ToShortDateString()),
-                                                        sF  = MD5Crypt.Criptografar("vincendo"),
+                                                        sF = MD5Crypt.Criptografar("vincendo"),
                                                         tpL = tipoLogin,
                                                         nmU = nomeUsuarioLogado,
                                                         nmE = nomeEmpresaLogado
@@ -230,7 +230,7 @@ namespace ClienteMercado.Controllers
                                                         vPC = MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
                                                         iRF = MD5Crypt.Criptografar(idCobranca),
                                                         dVF = MD5Crypt.Criptografar(financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.ToShortDateString()),
-                                                        sF  = MD5Crypt.Criptografar("vincendo"),
+                                                        sF = MD5Crypt.Criptografar("vincendo"),
                                                         tpL = tipoLogin,
                                                         nmU = nomeUsuarioLogado,
                                                         nmE = nomeEmpresaLogado
@@ -260,7 +260,7 @@ namespace ClienteMercado.Controllers
                                                         vPC = MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
                                                         iRF = MD5Crypt.Criptografar(idCobranca),
                                                         dVF = MD5Crypt.Criptografar(financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.ToShortDateString()),
-                                                        sF  = MD5Crypt.Criptografar("vincendo"),
+                                                        sF = MD5Crypt.Criptografar("vincendo"),
                                                         tpL = tipoLogin,
                                                         nmU = nomeUsuarioLogado,
                                                         nmE = nomeEmpresaLogado
@@ -270,7 +270,7 @@ namespace ClienteMercado.Controllers
 
                                     }
                                 }
-                                else if ((DateTime.Now.Date > financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.Date) 
+                                else if ((DateTime.Now.Date > financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.Date)
                                     && (financeiroCobrancaFaturamentoUsuarioEmpresa.PARCELA_PAGA_COBRANCA_FATURAMENTO == false))
                                 {
                                     //Status VENCIDO - BLOQUEADO PARA ACESSO
@@ -300,7 +300,7 @@ namespace ClienteMercado.Controllers
                                                         vPC = MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
                                                         iRF = MD5Crypt.Criptografar(idCobranca),
                                                         dVF = MD5Crypt.Criptografar(financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.ToShortDateString()),
-                                                        sF  = MD5Crypt.Criptografar("vencido"),
+                                                        sF = MD5Crypt.Criptografar("vencido"),
                                                         tpL = tipoLogin,
                                                         nmU = nomeUsuarioLogado,
                                                         nmE = nomeEmpresaLogado
@@ -331,7 +331,7 @@ namespace ClienteMercado.Controllers
                                                         vPC = MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
                                                         iRF = MD5Crypt.Criptografar(idCobranca),
                                                         dVF = MD5Crypt.Criptografar(financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.ToShortDateString()),
-                                                        sF  = MD5Crypt.Criptografar("vencido"),
+                                                        sF = MD5Crypt.Criptografar("vencido"),
                                                         tpL = tipoLogin,
                                                         nmU = nomeUsuarioLogado,
                                                         nmE = nomeEmpresaLogado
@@ -359,14 +359,14 @@ namespace ClienteMercado.Controllers
                                             if (buscarDetalhesTipoContratoDeServico != null)
                                             {
                                                 //Redireciona para a Action responsável por montar o Aviso de Pagamento de assinatura, passando os parâmetros necessários
-                                                return RedirectToAction("AvisoAssinatura", "FinanceiroClienteMercado", 
+                                                return RedirectToAction("AvisoAssinatura", "FinanceiroClienteMercado",
                                                     new
                                                     {
                                                         dcPC = MD5Crypt.Criptografar("Plano " + buscarDetalhesTipoContratoDeServico.DESCRICAO_TIPO_CONTRATO_COTADA),
                                                         vPC = MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
                                                         iRF = MD5Crypt.Criptografar(idCobranca),
                                                         dVF = MD5Crypt.Criptografar(financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.ToShortDateString()),
-                                                        sF  = MD5Crypt.Criptografar("vencido"),
+                                                        sF = MD5Crypt.Criptografar("vencido"),
                                                         tpL = tipoLogin,
                                                         nmU = nomeUsuarioLogado,
                                                         nmE = nomeEmpresaLogado
@@ -397,7 +397,7 @@ namespace ClienteMercado.Controllers
                                                         vPC = MD5Crypt.Criptografar(Regex.Replace(buscarDetalhesTipoContratoDeServico.VALOR_MENSAL_TIPO_CONTRATO_COTADA.ToString(), "[.,]", "")),
                                                         iRF = MD5Crypt.Criptografar(idCobranca),
                                                         dVF = MD5Crypt.Criptografar(financeiroCobrancaFaturamentoUsuarioEmpresa.VENCIMENTO_FATURA_USUARIO_EMPRESA.ToShortDateString()),
-                                                        sF  = MD5Crypt.Criptografar("vencido"),
+                                                        sF = MD5Crypt.Criptografar("vencido"),
                                                         tpL = tipoLogin,
                                                         nmU = nomeUsuarioLogado,
                                                         nmE = nomeEmpresaLogado
@@ -426,7 +426,7 @@ namespace ClienteMercado.Controllers
                             else
                             {
                                 //Se o tipo de contrato da empresa for 1 - EMPRESA COTANTE
-                                return RedirectToAction("PerfilUsuarioEmpresa", "UsuarioEmpresa", 
+                                return RedirectToAction("PerfilUsuarioEmpresa", "UsuarioEmpresa",
                                     new
                                     {
                                         nmU = nomeUsuarioLogado,
@@ -672,22 +672,22 @@ namespace ClienteMercado.Controllers
                     {
                         Sessao.IdUsuarioLogado = usuarioCotanteLogins.usuario_cotante.ID_CODIGO_USUARIO_COTANTE;
 
-                        return RedirectToAction("PerfilUsuarioCotante", "UsuarioCotante", 
+                        return RedirectToAction("PerfilUsuarioCotante", "UsuarioCotante",
                             new
                             {
-                                nmU     = MD5Crypt.Criptografar(ManipulacaoStrings.pegarParteNomeUsuario(usuarioCotanteLogins.usuario_cotante.NICK_NAME_USUARIO_COTANTE)),
-                                cloG    = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.ID_CODIGO_ENDERECO_EMPRESA_USUARIO.ToString()),
-                                cbaiR   = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.enderecos_empresa_usuario.bairros_empresa_usuario.ID_BAIRRO_EMPRESA_USUARIO.ToString()),
-                                cciD    = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.enderecos_empresa_usuario.cidades_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.ToString()),
-                                cesT    = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.ToString()),
-                                ccouT   = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.paises_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.ToString())
+                                nmU = MD5Crypt.Criptografar(ManipulacaoStrings.pegarParteNomeUsuario(usuarioCotanteLogins.usuario_cotante.NICK_NAME_USUARIO_COTANTE)),
+                                cloG = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.ID_CODIGO_ENDERECO_EMPRESA_USUARIO.ToString()),
+                                cbaiR = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.enderecos_empresa_usuario.bairros_empresa_usuario.ID_BAIRRO_EMPRESA_USUARIO.ToString()),
+                                cciD = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.enderecos_empresa_usuario.cidades_empresa_usuario.ID_CIDADE_EMPRESA_USUARIO.ToString()),
+                                cesT = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO.ToString()),
+                                ccouT = MD5Crypt.Criptografar(usuarioCotanteLogins.usuario_cotante.enderecos_empresa_usuario.cidades_empresa_usuario.estados_empresa_usuario.paises_empresa_usuario.ID_PAISES_EMPRESA_USUARIO.ToString())
                             });
                     }
                 }
 
             }
 
-            loginUsuario.SENHA_EMPRESA_USUARIO= string.Empty;
+            loginUsuario.SENHA_EMPRESA_USUARIO = string.Empty;
             ModelState.Clear();
 
             return View(loginUsuario).ComMensagem("Usuário ou Senha inválidos para tipo de Login selecionado.");
@@ -938,7 +938,7 @@ namespace ClienteMercado.Controllers
                     profissional_usuario_logins profissionalServicosLogins = new profissional_usuario_logins();
 
                     profissionalServicosLogins.ID_CODIGO_USUARIO_PROFISSIONAL = (Int32)Sessao.IdUsuarioLogado;
-                    profissionalServicosLogins.SENHA_PROFISSIONAL_USUARIO_LOGINS = 
+                    profissionalServicosLogins.SENHA_PROFISSIONAL_USUARIO_LOGINS =
                         Hash.GerarHashMd5(cadastroNovaSenhaUsuario.SENHA_EMPRESA_USUARIO_LOGINS);
 
                     profissional_usuario_logins alteraSenhaProfissionalServicos =

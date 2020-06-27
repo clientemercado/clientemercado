@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Domain.Services;
+using ClienteMercado.Models;
+using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.Utilitarios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using ClienteMercado.Models;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Utils.Utilitarios;
-using ClienteMercado.Domain.Services;
 
 namespace ClienteMercado.Controllers
 {
@@ -115,12 +115,12 @@ namespace ClienteMercado.Controllers
 
                     //if (profissionalUsuario != null)
                     //{
-                        Sessao.IdUsuarioLogado =
-                            profissionalUsuarioLogins.usuario_profissional.ID_CODIGO_USUARIO_PROFISSIONAL;
-                        Sessao.IdEmpresaUsuario =
-                            profissionalUsuarioLogins.usuario_profissional.profissional_usuario
-                                .ID_CODIGO_PROFISSIONAL_USUARIO;
-                        primeiroAcesso = true;
+                    Sessao.IdUsuarioLogado =
+                        profissionalUsuarioLogins.usuario_profissional.ID_CODIGO_USUARIO_PROFISSIONAL;
+                    Sessao.IdEmpresaUsuario =
+                        profissionalUsuarioLogins.usuario_profissional.profissional_usuario
+                            .ID_CODIGO_PROFISSIONAL_USUARIO;
+                    primeiroAcesso = true;
                     //}
                 }
 
@@ -137,7 +137,7 @@ namespace ClienteMercado.Controllers
                                  nmE = MD5Crypt.Criptografar(profissionalUsuarioLogins.usuario_profissional.profissional_usuario.NOME_COMERCIAL_PROFISSIONAL_USUARIO)
                              });
                 }
-                
+
                 return RedirectToAction("PerfilUsuarioProfissional", "UsuarioProfissional",
                         new
                         {
@@ -224,7 +224,7 @@ namespace ClienteMercado.Controllers
                 if (configurarPerfil.ID_CODIGO_TIPO_CONTRATO_COTADA != 1)//Trata dos tipos de contrato que exijam pagamento
                 {
                     //Salvando e gerando o registro financeiro da cobrança para o profissional de serviços
-                    NFinanceiroCobrancaFaturamentoUsuarioProfissionalService negocioFinanceiroCobrancaFaturamentoUsuarioProfissional = 
+                    NFinanceiroCobrancaFaturamentoUsuarioProfissionalService negocioFinanceiroCobrancaFaturamentoUsuarioProfissional =
                         new NFinanceiroCobrancaFaturamentoUsuarioProfissionalService();
 
                     financeiro_cobranca_faturamento_usuario_profissional novoCobrancaFaturamentoUsuarioProfissional

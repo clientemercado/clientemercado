@@ -4,7 +4,7 @@ namespace ClienteMercado.Models
 {
     public class CadastroNovaSenha
     {
-        public int ID_CODIGO_USUARIO_LOGADO{ get; set; }
+        public int ID_CODIGO_USUARIO_LOGADO { get; set; }
 
         [Required(ErrorMessage = "* Informe a nova Senha")]
         [MaxLength(20)]

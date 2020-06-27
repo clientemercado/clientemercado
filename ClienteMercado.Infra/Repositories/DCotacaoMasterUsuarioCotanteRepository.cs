@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using ClienteMercado.Utils.Net;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -28,7 +28,7 @@ namespace ClienteMercado.Infra.Repositories
             {
                 cotacao_master_usuario_cotante cotacaoMasterUsuarioCotante =
                     _contexto.cotacao_master_usuario_cotante.Add(obj);
-                    _contexto.SaveChanges();
+                _contexto.SaveChanges();
 
                 return cotacaoMasterUsuarioCotante;
             }
@@ -42,7 +42,7 @@ namespace ClienteMercado.Infra.Repositories
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
                 List<cotacao_master_usuario_cotante> cotacoesDoUsuario =
-                    _contexto.cotacao_master_usuario_cotante.Where(m => (m.ID_CODIGO_USUARIO_COTANTE.Equals(idUsuario)) 
+                    _contexto.cotacao_master_usuario_cotante.Where(m => (m.ID_CODIGO_USUARIO_COTANTE.Equals(idUsuario))
                     && (m.ID_CODIGO_TIPO_COTACAO.Equals(1))).OrderByDescending(m => m.DATA_CRIACAO_COTACAO_USUARIO_COTANTE).ToList();
 
                 return cotacoesDoUsuario;
@@ -93,12 +93,12 @@ namespace ClienteMercado.Infra.Repositories
                 //Traz as COTAÇÕES AVULSAS, se o USUARIO responsável por responder a COTAÇÃO AVULSA tiver permissão para tal.
                 //if (dadosUsuarioEmpresa.VER_COTACAO_AVULSA)
                 //{
-                    idGrupoAtividades = dadosUsuarioEmpresa.empresa_usuario.ID_GRUPO_ATIVIDADES;
+                idGrupoAtividades = dadosUsuarioEmpresa.empresa_usuario.ID_GRUPO_ATIVIDADES;
 
-                    //Busca COTAÇÕES AVULSAS habilitadas para a categoria do USUÁRIO logado (COTACÃO MASTER)
-                    cotacoesAvulsasEnviadasPeloUsuarioCotante =
-                        _contexto.cotacao_master_usuario_cotante.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(idGrupoAtividades))
-                        && (m.ID_CODIGO_TIPO_COTACAO.Equals(2))).ToList();
+                //Busca COTAÇÕES AVULSAS habilitadas para a categoria do USUÁRIO logado (COTACÃO MASTER)
+                cotacoesAvulsasEnviadasPeloUsuarioCotante =
+                    _contexto.cotacao_master_usuario_cotante.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(idGrupoAtividades))
+                    && (m.ID_CODIGO_TIPO_COTACAO.Equals(2))).ToList();
                 //}
 
                 return cotacoesAvulsasEnviadasPeloUsuarioCotante;
@@ -112,7 +112,7 @@ namespace ClienteMercado.Infra.Repositories
             {
                 System.DateTime dataDeHoje = DateTime.Now;
 
-                cotacao_master_usuario_cotante atualizarStatusDaCotacaoMaster = 
+                cotacao_master_usuario_cotante atualizarStatusDaCotacaoMaster =
                     _contexto.cotacao_master_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster)));
 
                 if (atualizarStatusDaCotacaoMaster != null)
@@ -146,7 +146,7 @@ namespace ClienteMercado.Infra.Repositories
                     }
                     else
                     {
-                        if ((dataDeHoje.Date > atualizarStatusDaCotacaoMaster.DATA_ENCERRAMENTO_COTACAO_USUARIO_COTANTE.Date) 
+                        if ((dataDeHoje.Date > atualizarStatusDaCotacaoMaster.DATA_ENCERRAMENTO_COTACAO_USUARIO_COTANTE.Date)
                             && (atualizarStatusDaCotacaoMaster.ID_CODIGO_STATUS_COTACAO != 3))
                         {
                             //Atualiza o STATUS para 'ENCERRADA'

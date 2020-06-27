@@ -2,7 +2,7 @@
 {
     public class ChatEntreUsuarioEFornecedor
     {
-        public ChatEntreUsuarioEFornecedor(int _id_cotacaoFilha, int _id_codigo_usuario_empresa_cotada, string _autor_dialogo, string _data_chat, string _texto_chat, 
+        public ChatEntreUsuarioEFornecedor(int _id_cotacaoFilha, int _id_codigo_usuario_empresa_cotada, string _autor_dialogo, string _data_chat, string _texto_chat,
             int _ordem_exibicao)
         {
             id_cotacaoFilha = _id_cotacaoFilha;

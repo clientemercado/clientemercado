@@ -2,9 +2,9 @@
 {
     public class ProdutosDaCotacao
     {
-        public ProdutosDaCotacao(int _id_codigo_cotacao_filha_negociacao, int _id_cotacao_filha, int _id_codigo_cotacao_master, int _id_codigo_item, string _nome_produto, 
-            string _marca_produto, string _empresa_cotada, string _quantidade_produto_exibicao, string _quantidade_real_produto, string _unidade_produto, string _valor_produto, 
-            string _produto_cotado, string _total_por_produto, decimal _percentual_desconto, string _total_por_produto_com_desconto, int _quantidade_imagens_anexadas, 
+        public ProdutosDaCotacao(int _id_codigo_cotacao_filha_negociacao, int _id_cotacao_filha, int _id_codigo_cotacao_master, int _id_codigo_item, string _nome_produto,
+            string _marca_produto, string _empresa_cotada, string _quantidade_produto_exibicao, string _quantidade_real_produto, string _unidade_produto, string _valor_produto,
+            string _produto_cotado, string _total_por_produto, decimal _percentual_desconto, string _total_por_produto_com_desconto, int _quantidade_imagens_anexadas,
             string _fotos_produtos_alternativos, string _menor_valor, decimal _total_produtos_sem_desconto, decimal _total_produtos_com_desconto, string _data_resposta,
             string _forma_pagamento, string _observacao, string _tipoFrete, decimal _valorFrete)
         {

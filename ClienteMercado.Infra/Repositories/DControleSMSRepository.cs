@@ -10,7 +10,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             controle_sms_usuario_empresa controleSms =
                 _contexto.controle_sms_usuario_empresa.Add(obj);
-                _contexto.SaveChanges();
+            _contexto.SaveChanges();
 
             return controleSms;
         }

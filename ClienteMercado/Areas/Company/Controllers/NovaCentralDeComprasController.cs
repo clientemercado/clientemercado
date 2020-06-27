@@ -8,11 +8,11 @@ using ClienteMercado.Utils.Utilitarios;
 using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Services;
-using System.Diagnostics;
 
 namespace ClienteMercado.Areas.Company.Controllers
 {
@@ -46,8 +46,8 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     empresa_usuario dadosEmpresa = negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = Convert.ToInt32(Sessao.IdEmpresaUsuario) });
                     usuario_empresa dadosUsuarioEmpresa = negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(Convert.ToInt32(Sessao.IdEmpresaUsuario));
-                    grupo_atividades_empresa dadosGruposAtividadesEmpresa = 
-                        negociosGrupoAtividadesEmpresa.ConsultarDadosDoGrupoDeAtividadesDaEmpresa(new grupo_atividades_empresa { ID_GRUPO_ATIVIDADES = dadosEmpresa.ID_GRUPO_ATIVIDADES});
+                    grupo_atividades_empresa dadosGruposAtividadesEmpresa =
+                        negociosGrupoAtividadesEmpresa.ConsultarDadosDoGrupoDeAtividadesDaEmpresa(new grupo_atividades_empresa { ID_GRUPO_ATIVIDADES = dadosEmpresa.ID_GRUPO_ATIVIDADES });
                     List<ListaDadosDeLocalizacaoViewModel> dadosLocalizacao = negociosLocalizacao.ConsultarDadosDaLocalizacaoPeloCodigo(dadosEmpresa.ID_CODIGO_ENDERECO_EMPRESA_USUARIO);
 
                     //POPULAR VIEW MODEL
@@ -288,7 +288,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 central_de_compras dadoscentralDeCompras = negociosCentralDeCompras.ConsultarDadosDaCentralDeCompras(codCentralCompras, codEmpresaAdm);
 
                 //CARREGAR DADOS das EMPRESAS SELECIONADAS para COMPOR a CENTRAL de COMPRAS RECÉM CRIADA
-                List<ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel> dadosEmpresasSelecionadas = 
+                List<ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel> dadosEmpresasSelecionadas =
                     negociosEmpresaUsuario.BuscarListaDeEmpresasSelecionadasParaParceriaNaCentralDeCompras(empresasSelecionadas);
 
                 //---------------------------------------------------------------------------------------------
@@ -332,8 +332,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                                  " <BOTÃO> link PARA PÁGINA EXPLICATIVA " +
                                  "<br><br><br>Atenciosamente,<br></td></tr><tr><td><br>&nbsp;&nbsp;Equipe ClienteMercado<br>";
 
-                    bool emailConviteAEmpresasParceiras = 
-                        enviarEmailsConvites.EnviandoEmailConviteParcerias(dadosEmpresasSelecionadas[i].eMail1_Empresa, dadosEmpresasSelecionadas[i].eMail2_Empresa, 
+                    bool emailConviteAEmpresasParceiras =
+                        enviarEmailsConvites.EnviandoEmailConviteParcerias(dadosEmpresasSelecionadas[i].eMail1_Empresa, dadosEmpresasSelecionadas[i].eMail2_Empresa,
                             dadosEmpresasSelecionadas[i].eMaiL1_UsuarioContatoEmpresa, dadosEmpresasSelecionadas[i].eMaiL2_UsuarioContatoEmpresa, assuntoEmail, corpoEmail);
                 }
 

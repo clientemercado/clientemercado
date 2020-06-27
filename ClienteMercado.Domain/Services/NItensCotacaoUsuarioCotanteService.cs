@@ -1,12 +1,12 @@
-﻿using ClienteMercado.Infra.Repositories;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
 {
     public class NItensCotacaoUsuarioCotanteService
     {
-        DItensCotacaoUsuarioCotanteRepository dcotacaomasterusuariocotante = 
+        DItensCotacaoUsuarioCotanteRepository dcotacaomasterusuariocotante =
             new DItensCotacaoUsuarioCotanteRepository();
 
         //Gravar os Itens que fazem parte da Cotação Master do Usuário Cotante

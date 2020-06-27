@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Domain.Services;
+using ClienteMercado.Models;
+using ClienteMercado.Utils.Mail;
+using ClienteMercado.Utils.Utilitarios;
+using ClienteMercado.Utils.Validation;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Services;
-using ClienteMercado.Models;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Utils.Utilitarios;
-using ClienteMercado.Utils.Mail;
-using ClienteMercado.Utils.Validation;
-using ClienteMercado.Domain.Services;
 
 namespace ClienteMercado.Controllers
 {
@@ -19,7 +19,7 @@ namespace ClienteMercado.Controllers
 
         public ActionResult CadastroProfissional()
         {
-           CadastroProfissionalUsuario usuario = new CadastroProfissionalUsuario();
+            CadastroProfissionalUsuario usuario = new CadastroProfissionalUsuario();
             var lista = ListagemPaises();
             //var listaGruposAtividades = ListagemGruposAtividades();
 
@@ -48,7 +48,7 @@ namespace ClienteMercado.Controllers
         private static List<SelectListItem> ListagemGruposAtividades()
         {
             //Buscar os Grupos de Atividades da empresariais
-            NGruposAtividadesEmpresaProfissionalService negocioGruposAtividadesEmpresaProfissional = 
+            NGruposAtividadesEmpresaProfissionalService negocioGruposAtividadesEmpresaProfissional =
                 new NGruposAtividadesEmpresaProfissionalService();
             List<grupo_atividades_empresa> listaGruposAtividades =
                 negocioGruposAtividadesEmpresaProfissional.ListaGruposAtividadesEmpresaProfissional();
@@ -317,11 +317,11 @@ namespace ClienteMercado.Controllers
                         cadastroDoUsuarioProfissionalDeServicos.TELEFONE1_PROFISSIONAL_USUARIO;
                     novoUsuarioProfissional.RECEBER_EMAILS_USUARIO_PROFISSIONAL =
                         cadastroDoUsuarioProfissionalDeServicos.RECEBER_EMAILS_PROFISSIONAL_USUARIO;
-                    novoUsuarioProfissional.DATA_CADASTRO_USUARIO_PROFISSIONAL= DateTime.Now;
+                    novoUsuarioProfissional.DATA_CADASTRO_USUARIO_PROFISSIONAL = DateTime.Now;
                     novoUsuarioProfissional.DATA_ULTIMA_ATUALIZACAO_USUARIO_PROFISSIONAL = DateTime.Now;
                     novoUsuarioProfissional.ATIVA_INATIVO_USUARIO_PROFISSIONAL =
                         cadastroDoUsuarioProfissionalDeServicos.ATIVA_INATIVO_PROFISSIONAL_USUARIO;
-                                        novoUsuarioProfissional.CADASTRO_CONFIRMADO = false;
+                    novoUsuarioProfissional.CADASTRO_CONFIRMADO = false;
                     novoUsuarioProfissional.USUARIO_MASTER = cadastroDoUsuarioProfissionalDeServicos.USUARIO_MASTER;
 
                     //Salvando dados para o Login do Usuário

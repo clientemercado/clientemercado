@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Domain.Services;
+using ClienteMercado.Models;
+using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.Validation;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Services;
-using ClienteMercado.Models;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Utils.Validation;
-using ClienteMercado.Domain.Services;
 
 namespace ClienteMercado.Controllers
 {

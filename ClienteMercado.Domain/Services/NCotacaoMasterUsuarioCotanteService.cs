@@ -1,7 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
-using System.Collections.Generic;
-using System;
 using ClienteMercado.Infra.Repositories;
+using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
 {

@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {

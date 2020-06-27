@@ -1,8 +1,8 @@
-﻿using ClienteMercado.Infra.Repositories;
-using ClienteMercado.Data.Entities;
-using System.Collections.Generic;
-using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace ClienteMercado.Domain.Services
@@ -42,7 +42,7 @@ namespace ClienteMercado.Domain.Services
         }
 
         //CARREGAR DADOS DE APENAS 1 PRODUTO COTADO PARA TODAS AS EMPRESAS NESSA COTAÇÃO
-        public List<ListaProdutoUnicoCotadoPorEmpresaViewModel> CarregarDadosDeUmProdutoCotadoEmTodasAsEmpresasFornecedoras(int[] listaIdsCotacaoFilhas, 
+        public List<ListaProdutoUnicoCotadoPorEmpresaViewModel> CarregarDadosDeUmProdutoCotadoEmTodasAsEmpresasFornecedoras(int[] listaIdsCotacaoFilhas,
             int idItemDaCotacaoIndividual)
         {
             int temMenorPreco = 0;
@@ -51,12 +51,12 @@ namespace ClienteMercado.Domain.Services
 
             DItensCotacaoFilhaNegociacaoCentralDeComprasRepository dRepositoryItensCotacao = new DItensCotacaoFilhaNegociacaoCentralDeComprasRepository();
 
-            List<ListaProdutoUnicoCotadoPorEmpresaViewModel> ListaUmProdutoCotadoEmTodasAsEmpresas = 
+            List<ListaProdutoUnicoCotadoPorEmpresaViewModel> ListaUmProdutoCotadoEmTodasAsEmpresas =
                 dRepository.CarregarDadosDeUmProdutoCotadoEmTodasAsEmpresasFornecedoras(listaIdsCotacaoFilhas, idItemDaCotacaoIndividual);
 
             for (int i = 0; i < ListaUmProdutoCotadoEmTodasAsEmpresas.Count; i++)
             {
-                menorPreco = 
+                menorPreco =
                     dRepositoryItensCotacao.BuscarMenorPrecoDeUmProdutoEntreAsRespostaDeUmaCotacao(ListaUmProdutoCotadoEmTodasAsEmpresas[i].ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS);
 
                 for (int a = 0; a < ListaUmProdutoCotadoEmTodasAsEmpresas.Count; a++)
@@ -75,7 +75,7 @@ namespace ClienteMercado.Domain.Services
                         ListaUmProdutoCotadoEmTodasAsEmpresas[i].menorPreco = "sim";
                         ListaUmProdutoCotadoEmTodasAsEmpresas[i].precoMenor = ListaUmProdutoCotadoEmTodasAsEmpresas[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
 
-                        totalMenorPrecoVsQuantidade = 
+                        totalMenorPrecoVsQuantidade =
                             (ListaUmProdutoCotadoEmTodasAsEmpresas[i].QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS * ListaUmProdutoCotadoEmTodasAsEmpresas[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS);
 
                         if (ListaUmProdutoCotadoEmTodasAsEmpresas[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS > 0)
@@ -93,7 +93,7 @@ namespace ClienteMercado.Domain.Services
                     //QUANDO NÃO TEM O MENOR PREÇO na LISTA
                     ListaUmProdutoCotadoEmTodasAsEmpresas[i].menorPreco = "nao";
 
-                    totalMenorPrecoVsQuantidade = 
+                    totalMenorPrecoVsQuantidade =
                         (ListaUmProdutoCotadoEmTodasAsEmpresas[i].QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS * ListaUmProdutoCotadoEmTodasAsEmpresas[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS);
 
                     ListaUmProdutoCotadoEmTodasAsEmpresas[i].valorTotalUnitarioVsQuantidade = totalMenorPrecoVsQuantidade.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
@@ -126,7 +126,7 @@ namespace ClienteMercado.Domain.Services
                 DCotacaoFilhaCentralDeComprasRepository dRepositoryCotacaoFilhaRecebida = new DCotacaoFilhaCentralDeComprasRepository();
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
 
-                cotacao_filha_central_compras dadosDaCotacaoFilha = 
+                cotacao_filha_central_compras dadosDaCotacaoFilha =
                     dRepositoryCotacaoFilhaRecebida.ConsultarDadosDaCotacaoFilhaCCPeloIdCotacao(idCotacaoFilha);
 
                 List<ListaDeItensCotadosViewModel> listaDeItensDaCotacao = dRepository.CarregarOsItensDeUmaCotacaoRecebida(idCotacaoFilha);
@@ -136,11 +136,11 @@ namespace ClienteMercado.Domain.Services
                 {
                     listaDeItensDaCotacao[i].idItemCotado = listaDeItensDaCotacao[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS;
                     listaDeItensDaCotacao[i].produtoCotado = listaDeItensDaCotacao[i].DESCRICAO_PRODUTO_EDITADO_COTADA_CENTRAL_COMPRAS;
-                    listaDeItensDaCotacao[i].quantidadeProdutoCotado = 
+                    listaDeItensDaCotacao[i].quantidadeProdutoCotado =
                         listaDeItensDaCotacao[i].QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
-                    listaDeItensDaCotacao[i].valorTabelaProdutoCotado = 
+                    listaDeItensDaCotacao[i].valorTabelaProdutoCotado =
                         listaDeItensDaCotacao[i].PRECO_UNITARIO_ITENS_TABELA_COTACAO_CENTRAL_COMPRAS.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
-                    listaDeItensDaCotacao[i].valorRespondidoProdutoCotado = 
+                    listaDeItensDaCotacao[i].valorRespondidoProdutoCotado =
                         listaDeItensDaCotacao[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
                     listaDeItensDaCotacao[i].unidadeProdutoCotado = listaDeItensDaCotacao[i].unidadeProdutoCotado;
 
@@ -181,7 +181,8 @@ namespace ClienteMercado.Domain.Services
         }
 
         //SALVAR PREÇOS RESPONDIDOS para a COTAÇÃO RECEBIDA
-        public bool ResponderACotacaoPelaPrimeiraVez(int idCotacaoFilha, string[] idsItensCotados2, string[] valoresTabelaItensCotados2, string[] valoresDiferenciadosItensCotados2)
+        public bool ResponderACotacaoPelaPrimeiraVez(int idCotacaoFilha, string[] idsItensCotados2, string[] valoresTabelaItensCotados2, 
+            string[] valoresDiferenciadosItensCotados2)
         {
             bool respostaItensGravada = false;
             int idItemCotado;

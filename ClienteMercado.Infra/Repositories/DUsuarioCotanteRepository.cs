@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -38,8 +37,8 @@ namespace ClienteMercado.Infra.Repositories
             {
                 usuario_cotante confirmaCadastroUsuarioCotante =
                              _contexto.usuario_cotante.Find(obj.ID_CODIGO_USUARIO_COTANTE);
-                             confirmaCadastroUsuarioCotante.CADASTRO_CONFIRMADO = true;
-                             _contexto.SaveChanges();
+                confirmaCadastroUsuarioCotante.CADASTRO_CONFIRMADO = true;
+                _contexto.SaveChanges();
 
                 return confirmaCadastroUsuarioCotante;
             }
@@ -50,7 +49,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                usuario_cotante dadosDoUsuarioCotante = 
+                usuario_cotante dadosDoUsuarioCotante =
                     _contexto.usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_USUARIO_COTANTE.Equals(obj.ID_CODIGO_USUARIO_COTANTE)));
 
                 return dadosDoUsuarioCotante;

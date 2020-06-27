@@ -1,5 +1,5 @@
-﻿using ClienteMercado.Infra.Repositories;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 
 namespace ClienteMercado.Domain.Services
 {

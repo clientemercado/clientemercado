@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ClienteMercado.Data.Contexto;
+using ClienteMercado.Data.Entities;
+using ClienteMercado.Utils.Net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Data.Contexto;
-using ClienteMercado.Data.Entities;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -29,7 +29,7 @@ namespace ClienteMercado.Infra.Repositories
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
                 List<cotacao_master_usuario_empresa> cotacoesDoUsuario =
-                    _contexto.cotacao_master_usuario_empresa.Where(m => (m.ID_CODIGO_USUARIO.Equals(idUsuario)) 
+                    _contexto.cotacao_master_usuario_empresa.Where(m => (m.ID_CODIGO_USUARIO.Equals(idUsuario))
                     && (m.ID_CODIGO_TIPO_COTACAO.Equals(1))).OrderByDescending(m => m.DATA_CRIACAO_COTACAO_USUARIO_EMPRESA).ToList();
 
                 return cotacoesDoUsuario;
@@ -83,10 +83,10 @@ namespace ClienteMercado.Infra.Repositories
                 //{
                 idGrupoAtividades = dadosUsuarioEmpresa.empresa_usuario.ID_GRUPO_ATIVIDADES;
 
-                    //Busca COTAÇÕES AVULSAS habilitadas para a categoria do USUÁRIO logado (COTACÃO MASTER)
-                    cotacoesAvulsasEnviadasPeloUsuarioEmpresa =
-                        _contexto.cotacao_master_usuario_empresa.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(idGrupoAtividades))
-                        && (m.ID_CODIGO_TIPO_COTACAO.Equals(2)) && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
+                //Busca COTAÇÕES AVULSAS habilitadas para a categoria do USUÁRIO logado (COTACÃO MASTER)
+                cotacoesAvulsasEnviadasPeloUsuarioEmpresa =
+                    _contexto.cotacao_master_usuario_empresa.Where(m => (m.ID_GRUPO_ATIVIDADES.Equals(idGrupoAtividades))
+                    && (m.ID_CODIGO_TIPO_COTACAO.Equals(2)) && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
                 //}
 
                 return cotacoesAvulsasEnviadasPeloUsuarioEmpresa;

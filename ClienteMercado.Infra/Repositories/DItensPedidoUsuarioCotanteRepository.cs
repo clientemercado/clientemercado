@@ -1,10 +1,5 @@
 ﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -15,9 +10,9 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                itens_pedido_usuario_cotante gravarItenPedido = 
+                itens_pedido_usuario_cotante gravarItenPedido =
                     _contexto.itens_pedido_usuario_cotante.Add(obj);
-                    _contexto.SaveChanges();
+                _contexto.SaveChanges();
 
                 return gravarItenPedido.ID_CODIGO_ITENS_PEDIDO_USUARIO_COTANTE;
             }

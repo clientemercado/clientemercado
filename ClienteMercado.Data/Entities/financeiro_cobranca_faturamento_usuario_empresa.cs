@@ -36,7 +36,7 @@ namespace ClienteMercado.Data.Entities
         [Required]
         public bool PARCELA_PAGA_COBRANCA_FATURAMENTO { get; set; }
 
-        public System.DateTime  DATA_PAGAMENTO_COBRANCA_FATURAMENTO { get; set; }
+        public System.DateTime DATA_PAGAMENTO_COBRANCA_FATURAMENTO { get; set; }
 
         [ForeignKey("ID_CODIGO_TIPO_CONTRATO_COTADA")]
         public virtual tipos_contratos_servicos tipos_contratos_servicos { get; set; }

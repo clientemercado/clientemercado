@@ -43,7 +43,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     empresa_usuario dadosEmpresa = negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
                     usuario_empresa dadosUsuarioEmpresa = negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(Convert.ToInt32(Session["IdUsuarioLogado"]));
-                    empresa_usuario_logins dadosLoginEmpresaUsuario = 
+                    empresa_usuario_logins dadosLoginEmpresaUsuario =
                         negociosEmpresaUsuarioLogins.ConsultarDadosDeContatoDoUsuario(Convert.ToInt32(Session["IdUsuarioLogado"]));
 
                     //POPULAR VIEW MODEL - DADOS EMPRESA
@@ -407,46 +407,46 @@ namespace ClienteMercado.Areas.Company.Controllers
         [WebMethod]
         public ActionResult BuscaEndereco(string cepDigitado)
         {
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                cepDigitado = Regex.Replace(cepDigitado, "[.-]", "");
+
+                try
                 {
-                    cepDigitado = Regex.Replace(cepDigitado, "[.-]", "");
+                    NCepService negocio = new NCepService();
+                    enderecos_empresa_usuario buscaCepAfins = new enderecos_empresa_usuario();
 
-                    try
+                    buscaCepAfins.CEP_ENDERECO_EMPRESA_USUARIO = Convert.ToInt64(cepDigitado);
+                    enderecos_empresa_usuario enderecos_empresa_usuario = negocio.ConsultarCep(buscaCepAfins);
+
+                    if (enderecos_empresa_usuario != null)
                     {
-                        NCepService negocio = new NCepService();
-                        enderecos_empresa_usuario buscaCepAfins = new enderecos_empresa_usuario();
+                        var enderecoCep =
+                            new
+                            {
+                                id_endereco = enderecos_empresa_usuario.ID_CODIGO_ENDERECO_EMPRESA_USUARIO,
+                                endereco = enderecos_empresa_usuario.TIPO_LOGRADOURO_EMPRESA_USUARIO + " " + enderecos_empresa_usuario.LOGRADOURO_CEP_EMPRESA_USUARIO,
+                                estado = enderecos_empresa_usuario.cidades_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO,
+                                cidade = enderecos_empresa_usuario.cidades_empresa_usuario.CIDADE_EMPRESA_USUARIO,
+                                bairro = enderecos_empresa_usuario.bairros_empresa_usuario.BAIRRO_CIDADE_EMPRESA_USUARIO
+                            };
 
-                        buscaCepAfins.CEP_ENDERECO_EMPRESA_USUARIO = Convert.ToInt64(cepDigitado);
-                        enderecos_empresa_usuario enderecos_empresa_usuario = negocio.ConsultarCep(buscaCepAfins);
-
-                        if (enderecos_empresa_usuario != null)
-                        {
-                            var enderecoCep =
-                                new
-                                {
-                                    id_endereco = enderecos_empresa_usuario.ID_CODIGO_ENDERECO_EMPRESA_USUARIO,
-                                    endereco = enderecos_empresa_usuario.TIPO_LOGRADOURO_EMPRESA_USUARIO + " " + enderecos_empresa_usuario.LOGRADOURO_CEP_EMPRESA_USUARIO,
-                                    estado = enderecos_empresa_usuario.cidades_empresa_usuario.ID_ESTADOS_EMPRESA_USUARIO,
-                                    cidade = enderecos_empresa_usuario.cidades_empresa_usuario.CIDADE_EMPRESA_USUARIO,
-                                    bairro = enderecos_empresa_usuario.bairros_empresa_usuario.BAIRRO_CIDADE_EMPRESA_USUARIO
-                                };
-
-                            return Json(enderecoCep, "text/x-json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
-                        }
-                    }
-                    catch (Exception erro)
-                    {
-                        //ModelState.AddModelError("", "Erro ao checar CEP");
-                        throw erro;
+                        return Json(enderecoCep, "text/x-json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
                     }
                 }
+                catch (Exception erro)
+                {
+                    //ModelState.AddModelError("", "Erro ao checar CEP");
+                    throw erro;
+                }
+            }
 
             return Json(cepDigitado, "text/x-json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
         }
 
         //ATUALIZAR DADOS da EMPRESA e do USUÁRIO
-        public ActionResult CompletarDadosEmpresaEUsuario(string cnpjEmpresa, string razaoSocialEmpresa, string nomeFantasiaEmpresa, string email1Empresa, string telefone1Empresa, 
-            int idPais, int idEnderecoEmpresa, string complementoEndEmpresa, string cpfUsuario, string nomeUsuario, string apelidoUsuario, string emai1lUsuario, 
+        public ActionResult CompletarDadosEmpresaEUsuario(string cnpjEmpresa, string razaoSocialEmpresa, string nomeFantasiaEmpresa, string email1Empresa, string telefone1Empresa,
+            int idPais, int idEnderecoEmpresa, string complementoEndEmpresa, string cpfUsuario, string nomeUsuario, string apelidoUsuario, string emai1lUsuario,
             string telefone1Usuario, string telefone2Usuario, string receberEmailsEmpresa)
         {
             var resultado = new { dadosAtualizados = "nOk" };
@@ -471,7 +471,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 dadosDaEmpresa.NOME_FANTASIA_EMPRESA = nomeFantasiaEmpresa;
             }
-            
+
             dadosDaEmpresa.ID_CODIGO_ENDERECO_EMPRESA_USUARIO = idEnderecoEmpresa;
             dadosDaEmpresa.COMPLEMENTO_ENDERECO_EMPRESA_USUARIO = complementoEndEmpresa;
             dadosDaEmpresa.EMAIL1_EMPRESA = email1Empresa;
@@ -481,7 +481,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 dadosDaEmpresa.PAIS_EMPRESA_USUARIO = idPais;
             }
-                        
+
             dadosDaEmpresa.DATA_ULTIMA_ATUALIZACAO_EMPRESA = DateTime.Now;
 
             //GRAVAR DADOS ATUALIZADOS da EMPRESA
@@ -564,7 +564,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 dadosEmpresa.ID_GRUPO_ATIVIDADES_ATACADO = codAtacadista;
             }
-            
+
             if (codVarejista >= 0)
             {
                 dadosEmpresa.ID_GRUPO_ATIVIDADES_VAREJO = codVarejista;

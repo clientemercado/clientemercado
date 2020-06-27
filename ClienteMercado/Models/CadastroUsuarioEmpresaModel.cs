@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using ClienteMercado.Data.Entities;
 
 namespace ClienteMercado.Models
 {
 
-   //[ComparaPropriedades("SENHA_EMPRESA_USUARIO_LOGINS", "CONFIRMAR_SENHA_EMPRESA_USUARIO_LOGINS", ErrorMessage = "A confirmação da senha não bate com a senha original")]
+    //[ComparaPropriedades("SENHA_EMPRESA_USUARIO_LOGINS", "CONFIRMAR_SENHA_EMPRESA_USUARIO_LOGINS", ErrorMessage = "A confirmação da senha não bate com a senha original")]
 
     public class CadastroUsuarioEmpresa
     {

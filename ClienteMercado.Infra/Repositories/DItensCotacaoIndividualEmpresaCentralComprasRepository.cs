@@ -1,9 +1,8 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
-using System.Linq;
 using ClienteMercado.Utils.ViewModel;
 using System.Collections.Generic;
-using System;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -13,15 +12,15 @@ namespace ClienteMercado.Infra.Repositories
         public itens_cotacao_individual_empresa_central_compras GravarItemNaCotacaoIndividualDaEmpresa(itens_cotacao_individual_empresa_central_compras obj)
         {
             itens_cotacao_individual_empresa_central_compras itemJaAdicionadoNestaCotacao =
-                _contexto.itens_cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == obj.ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS) 
-                && (m.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS == obj.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS) 
-                && (m.ID_CODIGO_UNIDADE_PRODUTO == obj.ID_CODIGO_UNIDADE_PRODUTO) 
+                _contexto.itens_cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == obj.ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS)
+                && (m.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS == obj.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS)
+                && (m.ID_CODIGO_UNIDADE_PRODUTO == obj.ID_CODIGO_UNIDADE_PRODUTO)
                 && (m.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS == obj.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS)
                 && (m.ID_EMPRESAS_PRODUTOS_EMBALAGENS == obj.ID_EMPRESAS_PRODUTOS_EMBALAGENS)));
 
             if (itemJaAdicionadoNestaCotacao == null)
             {
-                itens_cotacao_individual_empresa_central_compras itemAdicionado = 
+                itens_cotacao_individual_empresa_central_compras itemAdicionado =
                     _contexto.itens_cotacao_individual_empresa_central_compras.Add(obj);
                 _contexto.SaveChanges();
 
@@ -48,7 +47,7 @@ namespace ClienteMercado.Infra.Repositories
         //EXCLUIR ITEM da COTAÇÃO
         public void ExcluirItemDaCotacao(int codItemCotacao, int iCM)
         {
-            itens_cotacao_individual_empresa_central_compras itemASerExcluido = 
+            itens_cotacao_individual_empresa_central_compras itemASerExcluido =
                 _contexto.itens_cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == codItemCotacao) && (m.ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == iCM)));
 
             if (itemASerExcluido != null)
@@ -78,7 +77,7 @@ namespace ClienteMercado.Infra.Repositories
         public void GravarItemEditadoNaCotacaoIndividualEmpresa(itens_cotacao_individual_empresa_central_compras obj)
         {
             itens_cotacao_individual_empresa_central_compras itemASerEditado =
-                            _contexto.itens_cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == obj.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS) 
+                            _contexto.itens_cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == obj.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS)
                             && (m.ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == obj.ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS)));
 
             if (itemASerEditado != null)

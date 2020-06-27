@@ -1,8 +1,7 @@
-﻿using ClienteMercado.Infra.Repositories;
-using ClienteMercado.Data.Entities;
-using System.Collections.Generic;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
-using System;
+using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
 {
@@ -69,10 +68,10 @@ namespace ClienteMercado.Domain.Services
         }
 
         //CARREGA LISTA de FORNECEDORES conforme LOCAL SELECIONADO
-        public List<ListaEstilizadaDeEmpresasViewModel> BuscarListaDePossiveisFornecedorasParaACentralDeCompras(int codRamoAtividade, int quantosFornecedores, int localBusca, 
+        public List<ListaEstilizadaDeEmpresasViewModel> BuscarListaDePossiveisFornecedorasParaACentralDeCompras(int codRamoAtividade, int quantosFornecedores, int localBusca,
             int uFSelecionada, int codEAdmDaCC, int cCC)
         {
-            List<ListaEstilizadaDeEmpresasViewModel> listaPossiveisFornecedores = 
+            List<ListaEstilizadaDeEmpresasViewModel> listaPossiveisFornecedores =
                 dfornecedores.BuscarListaDePossiveisFornecedorasParaACentralDeCompras(codRamoAtividade, quantosFornecedores, localBusca, uFSelecionada, codEAdmDaCC, cCC);
 
             for (int i = 0; i < listaPossiveisFornecedores.Count; i++)
@@ -88,7 +87,7 @@ namespace ClienteMercado.Domain.Services
         //CARREGA LISTA de FORNECEDORES que RECEBERAM a COTAÇÃO
         public List<ListaEstilizadaDeEmpresasViewModel> BuscarListaDeFornecedoresQueReceberamACotacao(int iCM, string idsEmpresasCotadas)
         {
-            List<ListaEstilizadaDeEmpresasViewModel> listaDeFornecedoresCotados = 
+            List<ListaEstilizadaDeEmpresasViewModel> listaDeFornecedoresCotados =
                 dfornecedores.BuscarListaDeFornecedoresQueReceberamACotacao(iCM, idsEmpresasCotadas);
 
             for (int i = 0; i < listaDeFornecedoresCotados.Count; i++)

@@ -1,12 +1,12 @@
-﻿using ClienteMercado.Infra.Repositories;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
 {
     public class NItensCotacaoFilhaNegociacaoUsuarioCotanteProdutosAlternativosService
     {
-        DItensCotacaoFilhaNegociacaoUsuarioCotanteProdutosAlternativosRepository ditenscotacaofilhausuariocotanteprodutosalternativos = 
+        DItensCotacaoFilhaNegociacaoUsuarioCotanteProdutosAlternativosRepository ditenscotacaofilhausuariocotanteprodutosalternativos =
             new DItensCotacaoFilhaNegociacaoUsuarioCotanteProdutosAlternativosRepository();
 
         //Gravar IMAGENS dos PRODUTOS ALTERNATIVOS para os itens da cotação enviada pelo USUÁRIO COTANTE

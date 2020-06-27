@@ -3,10 +3,10 @@ using ClienteMercado.Domain.Services;
 using ClienteMercado.Utils.Net;
 using ClienteMercado.Utils.Validation;
 using System;
+using System.Data.Entity.Validation;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Services;
-using System.Data.Entity.Validation;
 
 namespace ClienteMercado.Areas.Acesso.Controllers
 {

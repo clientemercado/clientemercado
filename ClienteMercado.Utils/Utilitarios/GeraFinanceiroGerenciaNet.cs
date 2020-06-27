@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Net;
-using System.Text;
-using System.Xml;
 
 namespace ClienteMercado.Utils.Utilitarios
 {
     public class GeraFinanceiroGerenciaNet
     {
-        public bool GerarFinanceiro(string _descricaoPlano, string _valorMensalidade, string _vencimento, bool _primeiroPagamento, 
-            string _nomeUsuarioEmpresaCobrado, string _enderecoDoCobrado, string _cidadeDoCobrado, string _bairroDoCobrado, string _cepDoCobrado, 
+        public bool GerarFinanceiro(string _descricaoPlano, string _valorMensalidade, string _vencimento, bool _primeiroPagamento,
+            string _nomeUsuarioEmpresaCobrado, string _enderecoDoCobrado, string _cidadeDoCobrado, string _bairroDoCobrado, string _cepDoCobrado,
             string _estadoDoCobrado, string _cpfCnpjcnpjDoCobrado)
         {
             try

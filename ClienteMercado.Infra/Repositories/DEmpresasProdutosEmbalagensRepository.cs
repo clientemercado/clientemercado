@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
 using ClienteMercado.Utils.ViewModel;
-using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -48,7 +48,7 @@ namespace ClienteMercado.Infra.Repositories
         //BUSCAR EMBALAGEM
         public string ConsultarDescricaoDaEmbalagemDoProduto(int idEmbalagens)
         {
-            empresas_produtos_embalagens dadosEmbalagem = 
+            empresas_produtos_embalagens dadosEmbalagem =
                 _contexto.empresas_produtos_embalagens.FirstOrDefault(m => (m.ID_EMPRESAS_PRODUTOS_EMBALAGENS == idEmbalagens));
 
             return dadosEmbalagem.DESCRICAO_PRODUTO_EMBALAGEM;
@@ -59,7 +59,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             try
             {
-                empresas_produtos_embalagens dadosDaEmbalagem = 
+                empresas_produtos_embalagens dadosDaEmbalagem =
                     _contexto.empresas_produtos_embalagens.FirstOrDefault(m => (m.ID_EMPRESAS_PRODUTOS_EMBALAGENS == idEmbalagem));
 
                 return dadosDaEmbalagem;

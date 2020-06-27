@@ -1,5 +1,5 @@
-﻿using System.Net;
-using System.IO;
+﻿using System.IO;
+using System.Net;
 using System.Runtime.Serialization.Json;
 
 namespace ClienteMercado.Utils.Sms

@@ -3,8 +3,8 @@
     public class CotacoesRecebidasPeloUsuario
     {
         //Classe para montagem da lista de Cotações RECEBIDAS pelo usuário
-        public CotacoesRecebidasPeloUsuario(string _tipoCotacao, int _idCotacaoFilha, int _idCotacaoMaster, string _nomeDaCotacao, string _cotacaoRecebida, string _dataEnvioDaCotacao, string _dataEncerramentoDaCotacao, 
-            string _descricaoCategoria, int _numeroParticipantes, bool _cotacaoRespondida, int _quantosFornedoresResponderam, string _dataRespostaDaCotacao, string _statusDaCotacao, bool _venceuCotacao, 
+        public CotacoesRecebidasPeloUsuario(string _tipoCotacao, int _idCotacaoFilha, int _idCotacaoMaster, string _nomeDaCotacao, string _cotacaoRecebida, string _dataEnvioDaCotacao, string _dataEncerramentoDaCotacao,
+            string _descricaoCategoria, int _numeroParticipantes, bool _cotacaoRespondida, int _quantosFornedoresResponderam, string _dataRespostaDaCotacao, string _statusDaCotacao, bool _venceuCotacao,
             string _virouPedido)
         {
             tipoCotacao = _tipoCotacao;

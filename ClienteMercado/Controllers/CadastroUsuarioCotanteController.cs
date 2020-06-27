@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Domain.Services;
+using ClienteMercado.Models;
+using ClienteMercado.Utils.Mail;
+using ClienteMercado.Utils.Utilitarios;
+using ClienteMercado.Utils.Validation;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Services;
-using ClienteMercado.Models;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Utils.Utilitarios;
-using ClienteMercado.Utils.Mail;
-using ClienteMercado.Utils.Validation;
-using ClienteMercado.Domain.Services;
 
 namespace ClienteMercado.Controllers
 {
@@ -22,7 +22,7 @@ namespace ClienteMercado.Controllers
             CadastroUsuarioCotante usuario = new CadastroUsuarioCotante();
 
             usuario.ListagemPaises = ListagemPaises();
-            usuario.ListagemEstados = ListagemEstados();            
+            usuario.ListagemEstados = ListagemEstados();
 
             return View(usuario);
         }
@@ -89,7 +89,7 @@ namespace ClienteMercado.Controllers
 
                         if (cpfValido)
                         {
-                            NCpfService negocio = new NCpfService(); 
+                            NCpfService negocio = new NCpfService();
                             usuario_cotante novoCpf = new usuario_cotante();
 
                             novoCpf.CPF_USUARIO_COTANTE = cpfDigitado;
@@ -187,7 +187,7 @@ namespace ClienteMercado.Controllers
                     NLoginService negocio = new NLoginService();
                     usuario_cotante_logins checarLogin = new usuario_cotante_logins();
 
-                    checarLogin.LOGIN_USUARIO_COTANTE_LOGINS= loginDigitado;
+                    checarLogin.LOGIN_USUARIO_COTANTE_LOGINS = loginDigitado;
                     usuario_cotante_logins usuarioCotanteLogins = negocio.ChecarExistenciaLoginUsuarioCotante(checarLogin);
 
                     if (usuarioCotanteLogins != null)

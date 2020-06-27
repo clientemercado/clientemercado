@@ -1,6 +1,6 @@
-﻿using ClienteMercado.Infra.Repositories;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.Mail;
-using ClienteMercado.Data.Entities;
 
 namespace ClienteMercado.Domain.Services
 {

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Web;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Web;
 
 namespace ClienteMercado.Utils.Mail
 {
@@ -19,7 +19,7 @@ namespace ClienteMercado.Utils.Mail
                 //Alteração de Senha
                 link2 = "Login/ForgotPas/" + _tipoLogin + "/" + _parametro1 + "/" + _parametro2 + "'>";//_tipoLogin (de acordo com o usuário), _parametro1 (Login), _parametro2 (Senha)
             }
-            else if (_tipoDeEmail ==2)
+            else if (_tipoDeEmail == 2)
             {
                 //Confirmar cadastro de Usuários de Empresas
                 link2 = "UsuarioEmpresa/ConfirmarCadastroUsuario/" + _parametro1 + "/" + _parametro2 + "'>";
@@ -115,7 +115,7 @@ namespace ClienteMercado.Utils.Mail
 
                 return true;
             }
-            catch(Exception erro)
+            catch (Exception erro)
             {
                 throw erro;
             }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using ClienteMercado.Utils.Net;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -15,7 +15,7 @@ namespace ClienteMercado.Infra.Repositories
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
                 cotacao_filha_usuario_empresa buscarDadosDaCotacao =
-                    _contexto.cotacao_filha_usuario_empresa.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_EMPRESA.Equals(obj.ID_CODIGO_COTACAO_FILHA_USUARIO_EMPRESA)) 
+                    _contexto.cotacao_filha_usuario_empresa.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_EMPRESA.Equals(obj.ID_CODIGO_COTACAO_FILHA_USUARIO_EMPRESA))
                     && (m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA)) && (m.ID_CODIGO_USUARIO.Equals(obj.ID_CODIGO_USUARIO)));
 
                 return buscarDadosDaCotacao;
@@ -223,7 +223,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                cotacao_filha_usuario_empresa dadosConsultadosDaCotacaoFilhaUsuarioEmpresa = 
+                cotacao_filha_usuario_empresa dadosConsultadosDaCotacaoFilhaUsuarioEmpresa =
                     _contexto.cotacao_filha_usuario_empresa.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_EMPRESA.Equals(obj.ID_CODIGO_COTACAO_FILHA_USUARIO_EMPRESA)));
 
                 return dadosConsultadosDaCotacaoFilhaUsuarioEmpresa;

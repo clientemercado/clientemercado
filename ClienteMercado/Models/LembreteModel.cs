@@ -16,6 +16,6 @@ namespace ClienteMercado.Models
         [RegularExpression(".+\\@.+\\..+", ErrorMessage = "E-mail inválido")]
         [DataType(DataType.EmailAddress)]
         [DisplayName("E-mail cadastrado: ")]
-        public string EMAIL_ENVIO_SENHA{ get; set; }
+        public string EMAIL_ENVIO_SENHA { get; set; }
     }
 }

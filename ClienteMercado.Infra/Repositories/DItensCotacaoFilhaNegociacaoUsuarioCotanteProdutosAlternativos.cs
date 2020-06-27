@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -29,7 +28,7 @@ namespace ClienteMercado.Infra.Repositories
 
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante excluirFotosProdutosAlternativos = 
+                fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante excluirFotosProdutosAlternativos =
                     _contexto.fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante.FirstOrDefault(m => m.ID_CODIGO_ITEM_ALTERNATIVO_COTACAO_FILHA_USUARIO_COTANTE.Equals(idImagemPRodutoAlternativo));
 
                 if (excluirFotosProdutosAlternativos != null)
@@ -51,7 +50,7 @@ namespace ClienteMercado.Infra.Repositories
 
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                List<fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante> excluirFotosProdutosAlternativos = 
+                List<fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante> excluirFotosProdutosAlternativos =
                     _contexto.fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE.Equals(idProdutoCotacao))).ToList();
 
                 for (int i = 0; i < excluirFotosProdutosAlternativos.Count; i++)
@@ -81,7 +80,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                List<fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante> fotosArmazenadas = 
+                List<fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante> fotosArmazenadas =
                     _contexto.fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante
                     .Where(m => m.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE.Equals(idProdutoCotacao)).ToList();
 

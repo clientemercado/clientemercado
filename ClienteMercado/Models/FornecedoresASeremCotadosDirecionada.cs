@@ -2,7 +2,7 @@
 {
     public class FornecedoresASeremCotadosDirecionada
     {
-        public FornecedoresASeremCotadosDirecionada(int _id_codigo_empresa, int _id_grupo_atividades, string _nome_fantasia_empresa, string _cidade_localizacao_empresa_fornecedor, string _estado_localizacao_empresa_fornecedor, 
+        public FornecedoresASeremCotadosDirecionada(int _id_codigo_empresa, int _id_grupo_atividades, string _nome_fantasia_empresa, string _cidade_localizacao_empresa_fornecedor, string _estado_localizacao_empresa_fornecedor,
             string _logomarca_empresa_usuario, int _id_codigo_endereco_empresa_usuario, int _id_codigo_usuario_vendedor, string _nome_usuario_vendedor)
         {
             ID_CODIGO_EMPRESA = _id_codigo_empresa;

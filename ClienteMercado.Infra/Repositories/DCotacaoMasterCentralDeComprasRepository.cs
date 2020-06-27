@@ -1,10 +1,9 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
-using System.Linq;
+using ClienteMercado.Utils.Net;
 using ClienteMercado.Utils.ViewModel;
 using System.Collections.Generic;
-using System;
-using ClienteMercado.Utils.Net;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -15,14 +14,14 @@ namespace ClienteMercado.Infra.Repositories
         {
             cotacao_master_central_compras cotacaoMasterGerada = new cotacao_master_central_compras();
 
-            cotacao_master_central_compras dadosDaCotacaoMaster = 
+            cotacao_master_central_compras dadosDaCotacaoMaster =
                 _contexto.cotacao_master_central_compras.FirstOrDefault(m => ((m.ID_CENTRAL_COMPRAS == obj.ID_CENTRAL_COMPRAS) && (m.NOME_COTACAO_CENTRAL_COMPRAS == obj.NOME_COTACAO_CENTRAL_COMPRAS)));
 
             if (dadosDaCotacaoMaster == null)
             {
-                cotacaoMasterGerada = 
+                cotacaoMasterGerada =
                     _contexto.cotacao_master_central_compras.Add(obj);
-                    _contexto.SaveChanges();
+                _contexto.SaveChanges();
 
                 return cotacaoMasterGerada;
             }
@@ -44,7 +43,7 @@ namespace ClienteMercado.Infra.Repositories
         //CONSULTAR DADOS da COTACAO MASTER
         public cotacao_master_central_compras ConsultarDadosDaCotacaoMasterCC(int iCM)
         {
-            cotacao_master_central_compras dadosDaCotacaoMaster = 
+            cotacao_master_central_compras dadosDaCotacaoMaster =
                 _contexto.cotacao_master_central_compras.FirstOrDefault(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM));
 
             return dadosDaCotacaoMaster;
@@ -63,7 +62,7 @@ namespace ClienteMercado.Infra.Repositories
             {
                 cotacaoEnviada = result.COTACAO_ENVIADA_FORNECEDORES;
             }
-            
+
             return cotacaoEnviada;
         }
 
@@ -124,7 +123,7 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR COTAÇÃO MASTER COMO COM CONTRA-PROPOSTA RECEBIDA
         public void SetarCampoDeContraProposta(int iCM)
         {
-            cotacao_master_central_compras dadosCotacaoMaster = 
+            cotacao_master_central_compras dadosCotacaoMaster =
                 _contexto.cotacao_master_central_compras.FirstOrDefault(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM));
 
             if (dadosCotacaoMaster != null)
@@ -137,7 +136,7 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR FLAG SOLICITAR_CONFIRMACAO_COTACAO como TRUE na tabela cotacao_master_central_compras
         public void SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM, int idFor)
         {
-            cotacao_master_central_compras dadosDaCotacaoMaster = 
+            cotacao_master_central_compras dadosDaCotacaoMaster =
                 _contexto.cotacao_master_central_compras.FirstOrDefault(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM));
 
             if (dadosDaCotacaoMaster != null)
@@ -152,7 +151,7 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR COTAÇÃO MASTER como ENVIADA
         public void SetarCotacaoMasterComoEnviadaAosFornecedores(int iCM)
         {
-            cotacao_master_central_compras dadosDaCotacaoMaster = 
+            cotacao_master_central_compras dadosDaCotacaoMaster =
                 _contexto.cotacao_master_central_compras.FirstOrDefault(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM));
 
             if (dadosDaCotacaoMaster != null)
@@ -167,7 +166,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             var nomeCotacaoMaster = "";
 
-            cotacao_master_central_compras dadosDaCotacaoMaster = 
+            cotacao_master_central_compras dadosDaCotacaoMaster =
                 _contexto.cotacao_master_central_compras.FirstOrDefault(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM));
 
             if (dadosDaCotacaoMaster != null)

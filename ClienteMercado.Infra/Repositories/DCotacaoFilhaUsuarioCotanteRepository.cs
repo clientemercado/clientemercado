@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using ClienteMercado.Utils.Net;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -14,7 +14,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             cotacao_filha_usuario_cotante cotacaoFilhaUsuarioCotante =
                 _contexto.cotacao_filha_usuario_cotante.Add(obj);
-                _contexto.SaveChanges();
+            _contexto.SaveChanges();
 
             return cotacaoFilhaUsuarioCotante;
         }
@@ -24,7 +24,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             int idEmpresa = Convert.ToInt32(Sessao.IdEmpresaUsuario);
 
-            List<cotacao_filha_usuario_cotante> buscarFornecedores = 
+            List<cotacao_filha_usuario_cotante> buscarFornecedores =
                 _contexto.cotacao_filha_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster)) && (m.ID_CODIGO_EMPRESA != idEmpresa)).ToList();
 
             return buscarFornecedores;
@@ -33,17 +33,17 @@ namespace ClienteMercado.Infra.Repositories
         //Buscar QUANTIDADE de FORNECEDORES que estao respondendo uma determinada COTAÇÃO
         public int ConsultarQuantidadeDeFornecedoresQueEstaoRespondendoACotacao(int idCotacaoMaster)
         {
-            List<cotacao_filha_usuario_cotante> quantidadeDeFornecedoresRespondendo = 
+            List<cotacao_filha_usuario_cotante> quantidadeDeFornecedoresRespondendo =
                 _contexto.cotacao_filha_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster))).ToList();
 
-                return quantidadeDeFornecedoresRespondendo.Count;
+            return quantidadeDeFornecedoresRespondendo.Count;
         }
 
         //Buscar QUANTOS FORNECEDORES já responderam a COTAÇÃO
         public int ConsultarQuantidadeDeFornecedoresQueJaResponderamACotacao(int idCotacaoMaster)
         {
-            List<cotacao_filha_usuario_cotante> quantidadeDeFornecedoresQueResponderam = 
-                _contexto.cotacao_filha_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster)) 
+            List<cotacao_filha_usuario_cotante> quantidadeDeFornecedoresQueResponderam =
+                _contexto.cotacao_filha_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster))
                 && (m.RESPONDIDA_COTACAO_FILHA_USUARIO_COTANTE == true)).ToList();
 
             return quantidadeDeFornecedoresQueResponderam.Count;
@@ -93,8 +93,8 @@ namespace ClienteMercado.Infra.Repositories
         //Consulta os dados da COTAÇÃO FILHA enviada pelo USUÁRIO COTANTE, a ser respondida pelo FORNECEDOR
         public cotacao_filha_usuario_cotante ConsultarDadosDaCotacaoFilhaUsuarioCotanteASerRespondida(cotacao_filha_usuario_cotante obj)
         {
-            cotacao_filha_usuario_cotante buscarDadosDaCotacao = 
-                _contexto.cotacao_filha_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE.Equals(obj.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE)) 
+            cotacao_filha_usuario_cotante buscarDadosDaCotacao =
+                _contexto.cotacao_filha_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE.Equals(obj.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE))
                 && (m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA)) && (m.ID_CODIGO_USUARIO.Equals(obj.ID_CODIGO_USUARIO)));
 
             return buscarDadosDaCotacao;
@@ -108,8 +108,8 @@ namespace ClienteMercado.Infra.Repositories
             int idUsuarioLogado = (int)Sessao.IdUsuarioLogado;
 
             cotacao_filha_usuario_cotante buscarDadosDaCotacao =
-                _contexto.cotacao_filha_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster) 
-                && (m.ID_CODIGO_EMPRESA.Equals(idEmpresaLogada)) 
+                _contexto.cotacao_filha_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster)
+                && (m.ID_CODIGO_EMPRESA.Equals(idEmpresaLogada))
                 && (m.ID_CODIGO_USUARIO.Equals(idUsuarioLogado))));
 
             return buscarDadosDaCotacao;
@@ -118,7 +118,7 @@ namespace ClienteMercado.Infra.Repositories
         //Gravar dados em RESPOSTA à COTAÇÃO FILHA enviada pelo USUÁRIO COTANTE
         public cotacao_filha_usuario_cotante GravarDadosEmRespostaACotacaoFilhaEnviadaPeloUsuarioCotante(cotacao_filha_usuario_cotante obj)
         {
-            cotacao_filha_usuario_cotante cotacaoASerRespondida = 
+            cotacao_filha_usuario_cotante cotacaoASerRespondida =
                 _contexto.cotacao_filha_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE.Equals(obj.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE)));
 
             if (cotacaoASerRespondida != null)
@@ -147,30 +147,30 @@ namespace ClienteMercado.Infra.Repositories
             double percentualRespondido = 0;
 
             //Verifica quantas COTAÇÕES foram RESPONDIDAS
-            List<cotacao_filha_usuario_cotante> cotacoesJaRespondidas = 
-                _contexto.cotacao_filha_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster)) 
+            List<cotacao_filha_usuario_cotante> cotacoesJaRespondidas =
+                _contexto.cotacao_filha_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster))
                 && (m.RESPONDIDA_COTACAO_FILHA_USUARIO_COTANTE.Equals(true))).ToList();
 
-                if (cotacoesJaRespondidas.Count > 0)
-                {
-                    //Verifica quantas COTAÇÕES foram ENVIADAS
-                    List<cotacao_filha_usuario_cotante> cotacoesEnviadas = 
-                        _contexto.cotacao_filha_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster))).ToList();
+            if (cotacoesJaRespondidas.Count > 0)
+            {
+                //Verifica quantas COTAÇÕES foram ENVIADAS
+                List<cotacao_filha_usuario_cotante> cotacoesEnviadas =
+                    _contexto.cotacao_filha_usuario_cotante.Where(m => (m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster))).ToList();
 
-                    //Atualizar STATUS da COTAÇÃO
-                    dadosCotacaoMasterUsuarioCotante.AtualizarStatusDaCotacao(idCotacaoMaster, cotacoesJaRespondidas.Count);
+                //Atualizar STATUS da COTAÇÃO
+                dadosCotacaoMasterUsuarioCotante.AtualizarStatusDaCotacao(idCotacaoMaster, cotacoesJaRespondidas.Count);
 
-                    //Calcula o PERCENTUAL já respondido
-                    percentualRespondido = (((double)cotacoesJaRespondidas.Count/cotacoesEnviadas.Count)*100);
-                }
+                //Calcula o PERCENTUAL já respondido
+                percentualRespondido = (((double)cotacoesJaRespondidas.Count / cotacoesEnviadas.Count) * 100);
+            }
 
-                return percentualRespondido;
+            return percentualRespondido;
         }
 
         //BUSCANDO DADOS da COTAÇÃO FILHA, pela EMPRESA COTANTE
         public cotacao_filha_usuario_cotante ConsultarDadosDaCotacaoFilhaPeloUsuarioCotante(cotacao_filha_usuario_cotante obj)
         {
-            cotacao_filha_usuario_cotante dadosConsultadosDaCotacaoFilhaUsuarioCotante = 
+            cotacao_filha_usuario_cotante dadosConsultadosDaCotacaoFilhaUsuarioCotante =
                 _contexto.cotacao_filha_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE.Equals(obj.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE)));
 
             return dadosConsultadosDaCotacaoFilhaUsuarioCotante;
@@ -179,7 +179,7 @@ namespace ClienteMercado.Infra.Repositories
         //BUSCANDO DADOS de TODAS as COTAÇÕES disparadas pelo USUÁRIO COTANTE
         public List<cotacao_filha_usuario_cotante> ConsultarTodasAsCotacoesFilhasEnviadasParaUmaDeterminadaCotacaoMasterPeloUsuarioCotante(int idCotacaoMaster)
         {
-            List<cotacao_filha_usuario_cotante> cotacoesFilhaDisparadas = 
+            List<cotacao_filha_usuario_cotante> cotacoesFilhaDisparadas =
                 _contexto.cotacao_filha_usuario_cotante.Where(m => m.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE.Equals(idCotacaoMaster)).ToList();
 
             return cotacoesFilhaDisparadas;

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Collections;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using System;
+using System.Collections;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -47,7 +47,7 @@ namespace ClienteMercado.Infra.Repositories
         //Consultar e trazer o e-mail do Usuário Master
         public empresa_usuario_logins BuscarEmailDoUsuarioMaster(int idMaster)
         {
-            empresa_usuario_logins eMailDoUsuarioMaster = 
+            empresa_usuario_logins eMailDoUsuarioMaster =
                 _contexto.empresa_usuario_logins.FirstOrDefault(m => m.ID_CODIGO_USUARIO.Equals(idMaster));
 
             return eMailDoUsuarioMaster;
@@ -63,7 +63,7 @@ namespace ClienteMercado.Infra.Repositories
             {
                 int idFornecedor = Convert.ToInt32(listaIDsFornecedores[i]);
 
-                empresa_usuario_logins emailFornecedores = 
+                empresa_usuario_logins emailFornecedores =
                     _contexto.empresa_usuario_logins.FirstOrDefault(m => m.ID_CODIGO_USUARIO.Equals(idFornecedor));
 
                 if (emailFornecedores != null)
@@ -78,11 +78,11 @@ namespace ClienteMercado.Infra.Repositories
         //Grava alteração de Senha do Usuário de Empresa que fez solicitação
         public empresa_usuario_logins GravarNovaSenhaUsuarioEmpresa(empresa_usuario_logins obj)
         {
-            empresa_usuario_logins novaSenhaUsuarioEmpresa = 
+            empresa_usuario_logins novaSenhaUsuarioEmpresa =
                 _contexto.empresa_usuario_logins.Find(obj.ID_CODIGO_USUARIO);
-                novaSenhaUsuarioEmpresa.SENHA_EMPRESA_USUARIO_LOGINS = obj.SENHA_EMPRESA_USUARIO_LOGINS;
+            novaSenhaUsuarioEmpresa.SENHA_EMPRESA_USUARIO_LOGINS = obj.SENHA_EMPRESA_USUARIO_LOGINS;
 
-                _contexto.SaveChanges();
+            _contexto.SaveChanges();
 
             return novaSenhaUsuarioEmpresa;
         }
@@ -90,7 +90,7 @@ namespace ClienteMercado.Infra.Repositories
         //CONSULTA DADOS de CONTATO do USUÁRIO
         public empresa_usuario_logins ConsultarDadosDeContatoDoUsuarioDaEmpresaCotada(int? idEmpresaUsuario)
         {
-            empresa_usuario_logins dadosDeContato = 
+            empresa_usuario_logins dadosDeContato =
                 _contexto.empresa_usuario_logins.FirstOrDefault(m => (m.ID_CODIGO_USUARIO == idEmpresaUsuario));
 
             return dadosDeContato;
@@ -135,11 +135,11 @@ namespace ClienteMercado.Infra.Repositories
         //Grava alteração de Senha do Usuário Profissional de Serviços que fez solicitação
         public profissional_usuario_logins GravarNovaSenhaProfissionalServicos(profissional_usuario_logins obj)
         {
-            profissional_usuario_logins novaSenhaProfissionalServicos = 
+            profissional_usuario_logins novaSenhaProfissionalServicos =
                 _contexto.profissional_usuario_logins.Find(obj.ID_CODIGO_USUARIO_PROFISSIONAL);
-                novaSenhaProfissionalServicos.SENHA_PROFISSIONAL_USUARIO_LOGINS = obj.SENHA_PROFISSIONAL_USUARIO_LOGINS;
+            novaSenhaProfissionalServicos.SENHA_PROFISSIONAL_USUARIO_LOGINS = obj.SENHA_PROFISSIONAL_USUARIO_LOGINS;
 
-                _contexto.SaveChanges();
+            _contexto.SaveChanges();
 
             return novaSenhaProfissionalServicos;
         }
@@ -170,11 +170,11 @@ namespace ClienteMercado.Infra.Repositories
         //Grava alteração de Senha do Usuário Cotante que fez solicitação
         public usuario_cotante_logins GravarNovaSenhaUsuarioCotante(usuario_cotante_logins obj)
         {
-            usuario_cotante_logins novaSenhaUsuarioCotante = 
+            usuario_cotante_logins novaSenhaUsuarioCotante =
                 _contexto.usuario_cotante_logins.Find(obj.ID_CODIGO_USUARIO_COTANTE);
-                novaSenhaUsuarioCotante.SENHA_USUARIO_COTANTE_LOGINS = obj.SENHA_USUARIO_COTANTE_LOGINS;
+            novaSenhaUsuarioCotante.SENHA_USUARIO_COTANTE_LOGINS = obj.SENHA_USUARIO_COTANTE_LOGINS;
 
-               _contexto.SaveChanges();
+            _contexto.SaveChanges();
 
             return novaSenhaUsuarioCotante;
         }

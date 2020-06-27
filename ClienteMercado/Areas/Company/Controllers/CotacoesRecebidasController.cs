@@ -8,8 +8,6 @@ using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Services;
 
@@ -50,7 +48,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     grupo_atividades_empresa dadosGruposAtividadesEmpresa =
                         negociosGrupoAtividadesEmpresa.ConsultarDadosDoGrupoDeAtividadesDaEmpresa(new grupo_atividades_empresa { ID_GRUPO_ATIVIDADES = dadosEmpresa.ID_GRUPO_ATIVIDADES });
-                    List<ListaDadosDeLocalizacaoViewModel> dadosLocalizacao = 
+                    List<ListaDadosDeLocalizacaoViewModel> dadosLocalizacao =
                         negociosLocalizacao.ConsultarDadosDaLocalizacaoPeloCodigo(dadosEmpresa.ID_CODIGO_ENDERECO_EMPRESA_USUARIO);
 
                     //POPULAR VIEW MODEL
@@ -125,17 +123,17 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //CARREGAR os DADOS da CENTRAL de COMPRAS
                     central_de_compras dadosDaCentralDeCompras = negociosCentralDeCompras.ConsultarDadosGeraisSobreACentralDeComprasPeloID(cCC);
 
-                    empresa_usuario dadosEmpresaADM = 
+                    empresa_usuario dadosEmpresaADM =
                         negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = dadosDaCentralDeCompras.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS });
                     usuario_empresa dadosUsuarioEmpresaADM =
                         negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(dadosDaCentralDeCompras.ID_CODIGO_USUARIO_ADM_CENTRAL_COMPRAS);
 
-                    empresa_usuario dadosEmpresaLogada = 
+                    empresa_usuario dadosEmpresaLogada =
                         negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = Convert.ToInt32(Sessao.IdEmpresaUsuario) });
                     usuario_empresa dadosUsuarioEmpresaLogada =
                         negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(Convert.ToInt32(Sessao.IdEmpresaUsuario));
 
-                    grupo_atividades_empresa dadosGruposAtividadesCC = 
+                    grupo_atividades_empresa dadosGruposAtividadesCC =
                         negociosGrupoAtividadesEmpresa.ConsultarDadosDoGrupoDeAtividadesDaEmpresa(new grupo_atividades_empresa { ID_GRUPO_ATIVIDADES = dadosDaCentralDeCompras.ID_GRUPO_ATIVIDADES });
                     List<ListaDadosDeLocalizacaoViewModel> dadosLocalizacaoEmpresaADM =
                         negociosLocalizacao.ConsultarDadosDaLocalizacaoPeloCodigo(dadosEmpresaADM.ID_CODIGO_ENDERECO_EMPRESA_USUARIO);
@@ -174,9 +172,9 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     DadosDaCotacaoViewModel viewModelEnviarResposta = new DadosDaCotacaoViewModel();
 
-                    empresa_usuario dadosEmpresa = 
+                    empresa_usuario dadosEmpresa =
                         negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
-                    usuario_empresa dadosUsuarioEmpresa = 
+                    usuario_empresa dadosUsuarioEmpresa =
                         negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(Convert.ToInt32(Session["IdUsuarioLogado"]));
 
                     //POPULAR VIEW MODEL
@@ -532,7 +530,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilha = new NCotacaoFilhaCentralDeComprasService();
 
                 //BUSCAR LISTA de COTAÇÕES RECEBIDAS FILTRADAS
-                List<ListaDeCotacoesRecebidasPeloFornecedorViewModel> listaDeCotacoesFiltradas = 
+                List<ListaDeCotacoesRecebidasPeloFornecedorViewModel> listaDeCotacoesFiltradas =
                     negociosCotacaoFilha.BuscarListaDeCotacoesRecebidasPeloFornecedorConformeFiltro(tipoFiltragem, codPesquisar, idGrupoAtividadesFiltro);
 
                 return Json(
@@ -559,7 +557,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             NCotacaoIndividualEmpresaCentralComprasService negociosCotacaoIndividual = new NCotacaoIndividualEmpresaCentralComprasService();
 
             //CARREGAR LISTA de EMPRESAS COTANTES participantes desta COTAÇÃO
-            List<ListaDeEmpresasCotantesDeUmaCotacaoViewModel> listaDeEmpresasCotantesDestaCotacao = 
+            List<ListaDeEmpresasCotantesDeUmaCotacaoViewModel> listaDeEmpresasCotantesDestaCotacao =
                 negociosCotacaoIndividual.BuscarListaDeEmpresasCotantesNestaCotacao(iCM, cCC);
 
             return Json(
@@ -582,11 +580,11 @@ namespace ClienteMercado.Areas.Company.Controllers
             NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoFilha = new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
 
             //DADOS da COTAÇÃO FILHA RECEBIDA pela EMPRESA em questão
-            cotacao_filha_central_compras dadosCotacaoFilha = 
+            cotacao_filha_central_compras dadosCotacaoFilha =
                 negociosCotacaoFilha.ConsultarDadosDaCotacaoFilhaCCPeloCodigoDaEmpresaFornecedora(iCM, idEmpresaCotada);
 
             //CARREGAR ITENS da COTAÇÃO RECEBIDA
-            List<ListaDeItensCotadosViewModel> listaDeItensDaCotacaoFilhaDaCC = 
+            List<ListaDeItensCotadosViewModel> listaDeItensDaCotacaoFilhaDaCC =
                 negociosItensCotacaoFilha.CarregarOsItensDeUmaCotacaoRecebida(dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS);
 
             return Json(
@@ -623,7 +621,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //RESPONDER a COTAÇÃO pela PRIMEIRA VEZ
         [WebMethod]
-        public ActionResult ResponderACotacaoAosFornecedores(int iCM, int idEmpresaCotada, string codCotacao, string idsItensCotados, string valoresTabelaItensCotados, 
+        public ActionResult ResponderACotacaoAosFornecedores(int iCM, int idEmpresaCotada, string codCotacao, string idsItensCotados, string valoresTabelaItensCotados,
             string valoresDiferenciadosItensCotados)
         {
             try
@@ -646,11 +644,14 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 //SALVAR PREÇOS RESPONDIDOS para a COTAÇÃO RECEBIDA
                 bool cotacaoRespondida =
-                    negociosItensCotacaoFilha.ResponderACotacaoPelaPrimeiraVez(dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS, idsItensCotados2, valoresTabelaItensCotados2,
-                    valoresDiferenciadosItensCotados2);
+                    negociosItensCotacaoFilha.ResponderACotacaoPelaPrimeiraVez(dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS, idsItensCotados2, 
+                    valoresTabelaItensCotados2, valoresDiferenciadosItensCotados2);
 
                 if (cotacaoRespondida)
                 {
+                    //SETAR ESTA COTAÇÃO como RESPONDIDA por este FORNECEDOR
+                    negociosCotacaoFilha.SetarComoRespondidaEstaCotacaoPorEsteFornecedor(iCM, dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS);
+
                     resultado = new { cotacaoRespondida = "sim" };
                 }
 
@@ -757,7 +758,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //Montagem da lista de Fornecedores
                     for (int a = 0; a < listaConversasApuradasNoChat.Count; a++)
                     {
-                        empresa_usuario dadosEmpresa = 
+                        empresa_usuario dadosEmpresa =
                             negociosEmpresa.ConsultarDadoDaEmpresaPeloCodigoUsuario(listaConversasApuradasNoChat[a].ID_CODIGO_USUARIO_EMPRESA_COTANTE);
 
                         string[] nomeEmpresa = dadosEmpresa.NOME_FANTASIA_EMPRESA.Split(' ');

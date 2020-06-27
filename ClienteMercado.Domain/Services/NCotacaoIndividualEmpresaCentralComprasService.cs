@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
+using System;
+using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
 {
@@ -101,7 +101,7 @@ namespace ClienteMercado.Domain.Services
 
             for (int i = 0; i < listaEmpresasDaCotacao.Count; i++)
             {
-                listaEmpresasDaCotacao[i].enderecoCompletoDaEmpresaCotante = 
+                listaEmpresasDaCotacao[i].enderecoCompletoDaEmpresaCotante =
                     listaEmpresasDaCotacao[i].tipoLogradouro.Trim() + " " + listaEmpresasDaCotacao[i].logradouro.Trim() + " - " + listaEmpresasDaCotacao[i].bairro;
 
                 if ((listaEmpresasDaCotacao[i].apelidoUsuario == "") && (listaEmpresasDaCotacao[i].apelidoUsuario == null))

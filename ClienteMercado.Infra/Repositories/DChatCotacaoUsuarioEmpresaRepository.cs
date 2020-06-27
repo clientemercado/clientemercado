@@ -10,7 +10,7 @@ namespace ClienteMercado.Infra.Repositories
         //Consulta o NÚMERO da ORDEM do texto da conversa no CHAT
         public int ConsultarNumeroDeOrdemDeExibicaoNoChat(int idCotacaoFilha)
         {
-            List<chat_cotacao_usuario_empresa> quantidadeDeConversasNoChat = 
+            List<chat_cotacao_usuario_empresa> quantidadeDeConversasNoChat =
                 _contexto.chat_cotacao_usuario_empresa.Where(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_EMPRESA.Equals(idCotacaoFilha))).ToList();
 
             return quantidadeDeConversasNoChat.Count;
@@ -21,15 +21,15 @@ namespace ClienteMercado.Infra.Repositories
         {
             chat_cotacao_usuario_empresa gravarPerguntaOuRespostaNoChat =
                 _contexto.chat_cotacao_usuario_empresa.Add(obj);
-                _contexto.SaveChanges();
+            _contexto.SaveChanges();
 
-           return gravarPerguntaOuRespostaNoChat;
+            return gravarPerguntaOuRespostaNoChat;
         }
 
         //Buscar conversa do CHAT entre COTANTE e FORNECEDOR
         public List<chat_cotacao_usuario_empresa> BuscarChatEntreUsuarioEmpresaEFornecedor(int idCotacaoFilha)
         {
-            List<chat_cotacao_usuario_empresa> buscarChatUsuarioEmpresaEFornecedor = 
+            List<chat_cotacao_usuario_empresa> buscarChatUsuarioEmpresaEFornecedor =
                 _contexto.chat_cotacao_usuario_empresa.Where(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_EMPRESA.Equals(idCotacaoFilha))).ToList();
 
             return buscarChatUsuarioEmpresaEFornecedor;

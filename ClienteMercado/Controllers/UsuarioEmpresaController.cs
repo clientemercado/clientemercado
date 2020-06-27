@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Domain.Services;
 using ClienteMercado.Models;
-using ClienteMercado.Data.Entities;
-using System.Web;
-using System.IO;
-using System.Web.Services;
+using ClienteMercado.Utils.Mail;
+using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.Sms;
+using ClienteMercado.Utils.Utilitarios;
+using ClienteMercado.Utils.ViewModel;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
-using System.Collections;
-using ClienteMercado.Utils.ViewModel;
-using ClienteMercado.Utils.Net;
-using ClienteMercado.Utils.Utilitarios;
-using ClienteMercado.Utils.Mail;
-using ClienteMercado.Utils.Sms;
-using ClienteMercado.Domain.Services;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Services;
 
 namespace ClienteMercado.Controllers
 {
@@ -84,7 +84,7 @@ namespace ClienteMercado.Controllers
         }
 
         //Acionada quando o Usuário Cotante deseja ver as ocorrências (Ações) relacionadas à COTAÇÃO selecionada no Grid
-        public ActionResult AcompanharCotacoesEnviadasUsuarioEmpresa(string nmU, string nmE, string cloG, string cbaiR, string cciD, string cesT, 
+        public ActionResult AcompanharCotacoesEnviadasUsuarioEmpresa(string nmU, string nmE, string cloG, string cbaiR, string cciD, string cesT,
             string ccouT, string ccM)
         {
             if (Session["IdUsuarioLogado"] != null)
@@ -190,7 +190,7 @@ namespace ClienteMercado.Controllers
         }
 
         //Acionada quando o Usuário Cotante deseja ver as ocorrências (Ações) relacionadas à COTAÇÃO selecionada no Grid
-        public ActionResult AcompanharCotacoesDirecionadasRecebidasUsuarioEmpresa(string nmU, string nmE, string cloG, string cbaiR, string cciD, 
+        public ActionResult AcompanharCotacoesDirecionadasRecebidasUsuarioEmpresa(string nmU, string nmE, string cloG, string cbaiR, string cciD,
             string cesT, string ccouT, string tC, string ccF, string ccM)
         {
             try
@@ -218,7 +218,7 @@ namespace ClienteMercado.Controllers
                     grupo_atividades_empresa dadosDaConsultaDoGrupoDeAtividades = new grupo_atividades_empresa();
                     NTiposDeCotacaoService negociosTiposCotacao = new NTiposDeCotacaoService();
                     tipos_cotacao dadosDaConsultaDoTipoDeCotacao = new tipos_cotacao();
-                    
+
                     ResponderCotacaoRecebida dadosASeremExibidosNaView = new ResponderCotacaoRecebida();
 
                     if (tipoCotacao == "uc")
@@ -309,7 +309,7 @@ namespace ClienteMercado.Controllers
                             {
                                 dadosASeremExibidosNaView.CONDICAO_PAGAMENTO_COTACAO_USUARIO_COTANTE = "À Vista";
                             }
-                            
+
                             dadosASeremExibidosNaView.ID_TIPO_DE_FRETE = cotacaoASerRespondida.ID_TIPO_FRETE;
                             dadosASeremExibidosNaView.VALOR_TOTAL_DO_LOTE_DE_MERCADORIAS_SOMAR_SEM_DESCONTO = cotacaoASerRespondida.PRECO_LOTE_ITENS_COTACAO_USUARIO_COTANTE;
 
@@ -321,7 +321,7 @@ namespace ClienteMercado.Controllers
                             else
                             {
                                 dadosASeremExibidosNaView.PERCENTUAL_DESCONTO_ASER_APLICADO = "";
-                            }                            
+                            }
 
                             //Verifica se existe PERCENTUAL de DESCONTO declarado
                             if (cotacaoASerRespondida.PERCENTUAL_DESCONTO > 0)
@@ -548,7 +548,7 @@ namespace ClienteMercado.Controllers
                         /*
                         CONTINUAR DAQUI... 
                         */
-                }
+                    }
 
                     //Montar ViewBag´s
                     ViewBag.idEmpresa = Sessao.IdEmpresaUsuario;
@@ -585,7 +585,7 @@ namespace ClienteMercado.Controllers
         }
 
         //Acionada quando o Usuário Cotante deseja ver as ocorrências (Ações) relacionadas à COTAÇÃO selecionada no Grid
-        public ActionResult AcompanharCotacoesAvulsasRecebidasUsuarioEmpresa(string nmU, string nmE, string cloG, string cbaiR, string cciD, 
+        public ActionResult AcompanharCotacoesAvulsasRecebidasUsuarioEmpresa(string nmU, string nmE, string cloG, string cbaiR, string cciD,
             string cesT, string ccouT, string tC, string ccF, string ccM)
         {
             try
@@ -664,7 +664,7 @@ namespace ClienteMercado.Controllers
                                 if (dadosItensDaCotacaoDoUsuarioCotante.Count > 0)
                                 {
                                     NProdutosServicosEmpresaProfissionalService negociosProdutos = new NProdutosServicosEmpresaProfissionalService();
-                                    NItensCotacaoFilhaNegociacaoUsuarioCotanteService negociosItensCotacaoFilhaNegociacaoUsuarioCotante = 
+                                    NItensCotacaoFilhaNegociacaoUsuarioCotanteService negociosItensCotacaoFilhaNegociacaoUsuarioCotante =
                                         new NItensCotacaoFilhaNegociacaoUsuarioCotanteService();
                                     itens_cotacao_filha_negociacao_usuario_cotante dadosItensCotacaoFilhaUsuarioCotante = new itens_cotacao_filha_negociacao_usuario_cotante();
 
@@ -879,7 +879,7 @@ namespace ClienteMercado.Controllers
                                 if (dadosItensDaCotacaoDoUsuarioEmpresa.Count > 0)
                                 {
                                     NProdutosServicosEmpresaProfissionalService negociosProdutos = new NProdutosServicosEmpresaProfissionalService();
-                                    NItensCotacaoFilhaNegociacaoUsuarioEmpresaService negociosItensCotacaoFilhaNegociacaoUsuarioEmpresa = 
+                                    NItensCotacaoFilhaNegociacaoUsuarioEmpresaService negociosItensCotacaoFilhaNegociacaoUsuarioEmpresa =
                                         new NItensCotacaoFilhaNegociacaoUsuarioEmpresaService();
                                     itens_cotacao_filha_negociacao_usuario_empresa dadosItensCotacaoFilhaUsuarioEmpresa = new itens_cotacao_filha_negociacao_usuario_empresa();
 
@@ -1267,20 +1267,20 @@ namespace ClienteMercado.Controllers
             if (produtosCotacao != "" && servicosCotacao == "")
             {
                 lista = (from t in listaAtividadesEProdutosEmpresa
-                             where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && t.TIPO_PRODUTO_SERVICO == produtosCotacao
-                             select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
+                         where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && t.TIPO_PRODUTO_SERVICO == produtosCotacao
+                         select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
             }
             else if (servicosCotacao != "" && produtosCotacao == "")
             {
                 lista = (from t in listaAtividadesEProdutosEmpresa
-                             where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && t.TIPO_PRODUTO_SERVICO == servicosCotacao
-                             select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
+                         where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && t.TIPO_PRODUTO_SERVICO == servicosCotacao
+                         select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
             }
             else if (produtosCotacao != "" && servicosCotacao != "")
             {
                 lista = (from t in listaAtividadesEProdutosEmpresa
-                             where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && (t.TIPO_PRODUTO_SERVICO == produtosCotacao || t.TIPO_PRODUTO_SERVICO== servicosCotacao)
-                             select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
+                         where t.DESCRICAO_PRODUTO_SERVICO.ToLower().Contains(term.ToLower()) && (t.TIPO_PRODUTO_SERVICO == produtosCotacao || t.TIPO_PRODUTO_SERVICO == servicosCotacao)
+                         select new { t.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS, t.DESCRICAO_PRODUTO_SERVICO }).Distinct().ToList();
             }
 
             return Json(lista, JsonRequestBehavior.AllowGet);
@@ -1448,8 +1448,8 @@ namespace ClienteMercado.Controllers
 
         //Processo para o envio da COTAÇÃO DIRECIONADA
         [WebMethod]
-        public ActionResult EnviarCotacaoDirecionadaUsuarioEmpresa(string nomeDaCotacao, string dataEncerramentoDaCotacaoDirecionada, string idCategoriaDaAtividadeACotar, string tipoCotacaoProdutoDirecionada, 
-            string tipoCotacaoServicoDirecionada, string idsProdutosServicos, string descricaoDosProdutosOuServicosASeremCotados, string idsUnidadesDeMedida, string idsFornecedores, 
+        public ActionResult EnviarCotacaoDirecionadaUsuarioEmpresa(string nomeDaCotacao, string dataEncerramentoDaCotacaoDirecionada, string idCategoriaDaAtividadeACotar, string tipoCotacaoProdutoDirecionada,
+            string tipoCotacaoServicoDirecionada, string idsProdutosServicos, string descricaoDosProdutosOuServicosASeremCotados, string idsUnidadesDeMedida, string idsFornecedores,
             string idsUsuariosVendedores, string quantidadeCadaItem, string idsMarcasFabricantes, string descricaoMarcasFabricantes)
         {
             //Definindo as variáveis pertinentes ao método em questão
@@ -1666,7 +1666,7 @@ namespace ClienteMercado.Controllers
                             if (gerarCotacaoFilha != null)
                             {
                                 //Salvando os itens da COTAÇÃO FILHA (ITENS_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE)
-                                NItensCotacaoFilhaNegociacaoUsuarioEmpresaService negociosItensCotacaoFilhaNegociacaoUsuarioEmpresa = 
+                                NItensCotacaoFilhaNegociacaoUsuarioEmpresaService negociosItensCotacaoFilhaNegociacaoUsuarioEmpresa =
                                     new NItensCotacaoFilhaNegociacaoUsuarioEmpresaService();
                                 itens_cotacao_filha_negociacao_usuario_empresa dadosItensCotacaoFilhaUsuarioEmpresa = new itens_cotacao_filha_negociacao_usuario_empresa();
 
@@ -1779,7 +1779,7 @@ namespace ClienteMercado.Controllers
         [WebMethod]
         public ActionResult EnviarCotacaoAvulsaUsuarioEmpresa(string nomeDaCotacao, string dataEncerramentoDaCotacaoDirecionada, string idCategoriaDaAtividadeACotar, string tipoCotacaoProdutoDirecionada,
             string tipoCotacaoServicoDirecionada, string idsProdutosServicos, string descricaoDosProdutosOuServicosASeremCotados, string idsUnidadesDeMedida, string idsFornecedores,
-            string idsUsuariosVendedores, string quantidadeCadaItem, string idsMarcasFabricantes, string descricaoMarcasFabricantes, string filtroPorCidade, string filtroPorUF, 
+            string idsUsuariosVendedores, string quantidadeCadaItem, string idsMarcasFabricantes, string descricaoMarcasFabricantes, string filtroPorCidade, string filtroPorUF,
             string idDaOutraCidade, string idDeOutroEstado, string idDeOutraCidadeOutroEstado, string idDaCidadeCotante, string idDoEstadoCotante, string idDoPaisCotante)
         {
             //Definindo as variáveis pertinentes ao método em questão
@@ -2236,9 +2236,9 @@ namespace ClienteMercado.Controllers
                             }
 
                             produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioEmpresa[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_EMPRESA, idCotacaoFilha,
-                                dadosConsultadosCotacaoFilhaUsuarioEmpresa.ID_CODIGO_COTACAO_MASTER_USUARIO_EMPRESA, itensDaCotacaoUsuarioEmpresa[i].ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA, 
-                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "",quantidadeItensFormatado, 
-                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "", 
+                                dadosConsultadosCotacaoFilhaUsuarioEmpresa.ID_CODIGO_COTACAO_MASTER_USUARIO_EMPRESA, itensDaCotacaoUsuarioEmpresa[i].ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA,
+                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItensFormatado,
+                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "",
                                 quantidadeFotosAnexadas, listaFotosProdutosAlternativos, "", 0, 0, "", "", "", "", 0));
 
                             quantidadeFotosAnexadas = 0;
@@ -2276,7 +2276,7 @@ namespace ClienteMercado.Controllers
 
                 NCotacaoFilhaUsuarioEmpresaService negociosCotacaoFilhaUsuarioEmpresa = new NCotacaoFilhaUsuarioEmpresaService();
                 cotacao_filha_usuario_empresa dadosCotacaoFilhaUsuarioEmpresa = new cotacao_filha_usuario_empresa();
-                NItensCotacaoFilhaNegociacaoUsuarioEmpresaProdutosAlternativosService negociosFotosProdutosAlternativos = 
+                NItensCotacaoFilhaNegociacaoUsuarioEmpresaProdutosAlternativosService negociosFotosProdutosAlternativos =
                     new NItensCotacaoFilhaNegociacaoUsuarioEmpresaProdutosAlternativosService();
 
                 //BUSCAR dados da COTAÇÃO FILHA
@@ -2959,7 +2959,7 @@ namespace ClienteMercado.Controllers
                 {
                     for (int i = 0; i < listCotacoesAvulsasDoUsuarioCotante.Count; i++)
                     {
-                        atualizarStatusCotacaoUsuarioCotante = 
+                        atualizarStatusCotacaoUsuarioCotante =
                             negociosCotacaoMasterUsuarioCotante.AtualizarStatusDaCotacao(listCotacoesAvulsasDoUsuarioCotante[i].ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, quantidadeCotacoesRespondidas);
 
                         grupoDeAtividades.ID_GRUPO_ATIVIDADES = listCotacoesAvulsasDoUsuarioCotante[i].ID_GRUPO_ATIVIDADES;
@@ -2981,7 +2981,7 @@ namespace ClienteMercado.Controllers
                             fornecedoresCotados = negociosCotacaoFilhaUsuarioCotante.ConsultarQuantidadeDeFornecedoresQueEstaoRespondendoACotacao(listCotacoesAvulsasDoUsuarioCotante[i].ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE);
 
                             //Verifica se a COTAÇÃO FILHA já foi RESPONDIDA ou NÃO
-                            if ((cotacacaoFilhaGeradaPelaOpcaoEmResponderACotacaoAvulsaDoUsuarioCotante.RESPONDIDA_COTACAO_FILHA_USUARIO_COTANTE) 
+                            if ((cotacacaoFilhaGeradaPelaOpcaoEmResponderACotacaoAvulsaDoUsuarioCotante.RESPONDIDA_COTACAO_FILHA_USUARIO_COTANTE)
                                 && (atualizarStatusCotacaoUsuarioCotante.ID_CODIGO_STATUS_COTACAO < 3))
                             {
                                 respondidaNãoRespondida = "respondida";
@@ -3021,7 +3021,7 @@ namespace ClienteMercado.Controllers
 
                         listaDeCotacoesAvulsasParaOGrupoDeAtividadesDoUsuario.Add(new CotacoesRecebidasPeloUsuario("uc", codigoCotacaoFilha, listCotacoesAvulsasDoUsuarioCotante[i].ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE,
                             listCotacoesAvulsasDoUsuarioCotante[i].NOME_COTACAO_USUARIO_COTANTE, respondidaNãoRespondida, listCotacoesAvulsasDoUsuarioCotante[i].DATA_CRIACAO_COTACAO_USUARIO_COTANTE.ToShortDateString(),
-                            listCotacoesAvulsasDoUsuarioCotante[i].DATA_ENCERRAMENTO_COTACAO_USUARIO_COTANTE.ToShortDateString(), buscarGrupoDeAtividades.DESCRICAO_ATIVIDADE, fornecedoresCotados, false, 0, "1900-0-01", 
+                            listCotacoesAvulsasDoUsuarioCotante[i].DATA_ENCERRAMENTO_COTACAO_USUARIO_COTANTE.ToShortDateString(), buscarGrupoDeAtividades.DESCRICAO_ATIVIDADE, fornecedoresCotados, false, 0, "1900-0-01",
                             dadosDoStatusDaCotacao.DESCRICAO_STATUS_COTACAO, false, ""));
                     }
 
@@ -3109,9 +3109,9 @@ namespace ClienteMercado.Controllers
                 //----------------------------------------------------------------------------
                 //Busca as COTAÇÕES AVULSAS enviadas pelo USUARIO_EMPRESA
                 //----------------------------------------------------------------------------
-                    /*
-                    FAZER... 
-                    */
+                /*
+                FAZER... 
+                */
                 //----------------------------------------------------------------------------
 
                 return listaDeCotacoesAvulsasParaOGrupoDeAtividadesDoUsuario;
@@ -3157,11 +3157,11 @@ namespace ClienteMercado.Controllers
                         negociosUnidadeProduto.ConsultarDadosDaUnidadeDoProduto(itensDaCotacaoUsuarioEmpresaCotante[i].ID_CODIGO_UNIDADE_PRODUTO);
 
                     quantidadeItens = string.Format("{0:0,0.00}", itensDaCotacaoUsuarioEmpresaCotante[i].QUANTIDADE_ITENS_COTACAO_USUARIO_EMPRESA); //Formata a quantidade para exibição
-                     
-                    produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioEmpresaCotante[i].ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA, 0, 
-                        itensDaCotacaoUsuarioEmpresaCotante[i].ID_CODIGO_COTACAO_MASTER_USUARIO_EMPRESA, 
-                        itensDaCotacaoUsuarioEmpresaCotante[i].ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA, 
-                        dadosDoProduto.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "",quantidadeItens, "0", 
+
+                    produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioEmpresaCotante[i].ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA, 0,
+                        itensDaCotacaoUsuarioEmpresaCotante[i].ID_CODIGO_COTACAO_MASTER_USUARIO_EMPRESA,
+                        itensDaCotacaoUsuarioEmpresaCotante[i].ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA,
+                        dadosDoProduto.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItens, "0",
                         dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, "", 0, "", 0, "", "", 0, 0, "", "", "", "", 0));
                 }
             }
@@ -3277,10 +3277,10 @@ namespace ClienteMercado.Controllers
                                 produtoCotado = "sim";
                             }
 
-                            produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioCotante[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE, 0, 
-                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE, 
-                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItensFormatado, 
-                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "", 
+                            produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioCotante[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE, 0,
+                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_COTANTE, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE,
+                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItensFormatado,
+                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "",
                                 quantidadeFotosAnexadas, listaFotosProdutosAlternativos, "", 0, 0, "", "", "", "", 0));
 
                             quantidadeFotosAnexadas = 0;
@@ -3379,10 +3379,10 @@ namespace ClienteMercado.Controllers
                                 produtoCotado = "sim";
                             }
 
-                            produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioEmpresa[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_EMPRESA, 0, 
-                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_EMPRESA, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA, 
-                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "",quantidadeItensFormatado, 
-                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "", 
+                            produtosDaCotacao.Add(new ProdutosDaCotacao(itensDaCotacaoUsuarioEmpresa[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_EMPRESA, 0,
+                                dadosDoProdutoDaCotacaoMaster.ID_CODIGO_COTACAO_MASTER_USUARIO_EMPRESA, dadosDoProdutoDaCotacaoMaster.ID_CODIGO_ITENS_COTACAO_USUARIO_EMPRESA,
+                                dadosDoProdutoEmSi.DESCRICAO_PRODUTO_SERVICO, dadosFabrincanteOuMarca.DESCRICAO_EMPRESA_FABRICANTE_MARCAS, "", quantidadeItensFormatado,
+                                quantidadeItensReal.ToString(), dadosDaUnidadeProduto.DESCRICAO_UNIDADE_PRODUTO, valorDoProduto, produtoCotado, valorTotalDoProduto, 0, "",
                                 quantidadeFotosAnexadas, listaFotosProdutosAlternativos, "", 0, 0, "", "", "", "", 0));
 
                             quantidadeFotosAnexadas = 0;
@@ -3645,10 +3645,10 @@ namespace ClienteMercado.Controllers
                 //e em seguida a confirmação do cadastro
                 if (empresaUsuarioLogins.usuario_empresa.CADASTRO_CONFIRMADO == false && empresaUsuarioLogins.usuario_empresa.USUARIO_MASTER)
                 {
-                        Sessao.IdUsuarioLogado = empresaUsuarioLogins.ID_CODIGO_USUARIO;
-                        Sessao.IdEmpresaUsuario = empresaUsuarioLogins.usuario_empresa.empresa_usuario.ID_CODIGO_EMPRESA;
+                    Sessao.IdUsuarioLogado = empresaUsuarioLogins.ID_CODIGO_USUARIO;
+                    Sessao.IdEmpresaUsuario = empresaUsuarioLogins.usuario_empresa.empresa_usuario.ID_CODIGO_EMPRESA;
 
-                        primeiroAcesso = true;
+                    primeiroAcesso = true;
                 }
 
                 //Esse redirecionamento ocorrerá de qualquer forma. Se o cadastro e existência do usuário forem confirmados no
@@ -3659,9 +3659,9 @@ namespace ClienteMercado.Controllers
                     return RedirectToAction("Configuracoes", "UsuarioEmpresa",
                              new
                              {
-                                tpL = 1,
-                                nmU = MD5Crypt.Criptografar(empresaUsuarioLogins.usuario_empresa.NICK_NAME_USUARIO),
-                                nmE = MD5Crypt.Criptografar(empresaUsuarioLogins.usuario_empresa.empresa_usuario.NOME_FANTASIA_EMPRESA)
+                                 tpL = 1,
+                                 nmU = MD5Crypt.Criptografar(empresaUsuarioLogins.usuario_empresa.NICK_NAME_USUARIO),
+                                 nmE = MD5Crypt.Criptografar(empresaUsuarioLogins.usuario_empresa.empresa_usuario.NOME_FANTASIA_EMPRESA)
                              });
                 }
 
@@ -3700,7 +3700,7 @@ namespace ClienteMercado.Controllers
         {
             int responsavelCobranca = 0;
             int idRegistroFinanceiro = 0;
-            string[] listaIDsProdutosServicos,listaDescricaoProdutosServicos;
+            string[] listaIDsProdutosServicos, listaDescricaoProdutosServicos;
 
             listaIDsProdutosServicos = configurarPerfil.RAMOS_ATIVIDADES_SELECIONADOS.Split(",".ToCharArray(),
                 StringSplitOptions.RemoveEmptyEntries);
@@ -3799,7 +3799,7 @@ namespace ClienteMercado.Controllers
                     atualizaTipoDeContrato.ID_GRUPO_ATIVIDADES = configurarPerfil.ID_GRUPO_ATIVIDADES;
                     atualizaTipoDeContrato.ID_CODIGO_EMPRESA = Convert.ToInt32(Session["IdEmpresaUsuario"]);
 
-                    empresa_usuario atualizandoTipoDeContratoNaEmpresa = 
+                    empresa_usuario atualizandoTipoDeContratoNaEmpresa =
                         negocioEmpresaUsuario.AtualizarTipoDeContratoNaEmpresa(atualizaTipoDeContrato);
 
                     //Confirma o cadastro do Usuário após especificados os dados de configurações de Atividades / Assinatura
@@ -3842,8 +3842,8 @@ namespace ClienteMercado.Controllers
                         return RedirectToAction("PerfilUsuarioEmpresa", "UsuarioEmpresa",
                              new
                              {
-                                nmU = MD5Crypt.Criptografar(configurarPerfil.NOME_USUARIO_MASTER),
-                                nmE = MD5Crypt.Criptografar(configurarPerfil.NOME_FANTASIA_EMPRESA)
+                                 nmU = MD5Crypt.Criptografar(configurarPerfil.NOME_USUARIO_MASTER),
+                                 nmE = MD5Crypt.Criptografar(configurarPerfil.NOME_FANTASIA_EMPRESA)
                              });
                     }
                 }
@@ -3905,7 +3905,7 @@ namespace ClienteMercado.Controllers
 
                     // VALIDAR a extensão da imagem do upload
                     string extensao = Path.GetExtension(hpf.FileName);
-                    string[] extensoesValidas = new string[] { ".jpg", ".jpeg", ".png", ".JPG", ".JPEG",".PNG" };
+                    string[] extensoesValidas = new string[] { ".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG" };
 
                     if (!extensoesValidas.Contains(extensao))
                     {
@@ -4411,7 +4411,7 @@ namespace ClienteMercado.Controllers
                             return Json(resultado, "text/x-json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
                         }
                     }
-            }
+                }
 
             }
             catch (Exception erro)
@@ -4593,7 +4593,7 @@ namespace ClienteMercado.Controllers
                             //Buscar dados do USUÁRIO EMPRESA para avisar sobre percentual de respostas
                             dadosUsuarioEmpresaCotante.ID_CODIGO_USUARIO = dadosCotacaoMaster.ID_CODIGO_USUARIO;
 
-                            usuario_empresa dadosParaComunicacaoAoUsuarioEmpresa = 
+                            usuario_empresa dadosParaComunicacaoAoUsuarioEmpresa =
                                 negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(dadosUsuarioEmpresaCotante.ID_CODIGO_USUARIO);
 
                             //1 - Enviar SMS
@@ -4715,7 +4715,7 @@ namespace ClienteMercado.Controllers
                             itemRespondido = itemRespondido
                         };
 
-                        return Json(resultado, "text/x-json", System.Text.Encoding.UTF8, 
+                        return Json(resultado, "text/x-json", System.Text.Encoding.UTF8,
                             JsonRequestBehavior.AllowGet);
                     }
                 }
@@ -4893,7 +4893,7 @@ namespace ClienteMercado.Controllers
 
         //Armazena na tabela CHAT_COTACAO_USUARIO_COTANTE a conversa entre o COTANTE e o FORNECEDOR
         [WebMethod]
-        public ActionResult EnviarRespostaParaAPerguntaDoCompradorNaCotacao(int idCotacaoFilha, int idEmpresaCotada, int idUsuarioCotante, string textoPerguntaOuResposta, 
+        public ActionResult EnviarRespostaParaAPerguntaDoCompradorNaCotacao(int idCotacaoFilha, int idEmpresaCotada, int idUsuarioCotante, string textoPerguntaOuResposta,
             string tipoCotacao)
         {
             string retornoGravacao = "nok";
@@ -4961,7 +4961,7 @@ namespace ClienteMercado.Controllers
                     {
                         gravacaoChat = retornoGravacao
                     };
-                } 
+                }
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
             }

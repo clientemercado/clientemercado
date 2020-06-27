@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -15,7 +14,7 @@ namespace ClienteMercado.Infra.Repositories
             {
                 itens_cotacao_usuario_cotante gravarItensCotacaoUsuarioCotante =
                     _contexto.itens_cotacao_usuario_cotante.Add(obj);
-                    _contexto.SaveChanges();
+                _contexto.SaveChanges();
 
                 return gravarItensCotacaoUsuarioCotante;
             }

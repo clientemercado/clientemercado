@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -11,7 +11,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                tipos_cotacao consultarDados = 
+                tipos_cotacao consultarDados =
                     _contexto.tipos_cotacao.FirstOrDefault(m => (m.ID_CODIGO_TIPO_COTACAO.Equals(obj.ID_CODIGO_TIPO_COTACAO)));
 
                 return consultarDados;

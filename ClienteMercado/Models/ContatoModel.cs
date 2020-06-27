@@ -23,7 +23,7 @@ namespace ClienteMercado.Models
         [Required(ErrorMessage = "* Informe o Assunto que deseja tratar conosco")]
         [DisplayName("Assunto: ")]
         public int AssuntoPContato { get; set; }
-        public List<SelectListItem> ListagemAssuntos {get; set; }
+        public List<SelectListItem> ListagemAssuntos { get; set; }
 
         [Required(ErrorMessage = "* Digite sua Mensagem")]
         [StringLength(5000)]

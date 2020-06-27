@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
-using System.Collections.Generic;
-using ClienteMercado.Utils.ViewModel;
 using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -15,11 +15,11 @@ namespace ClienteMercado.Infra.Repositories
         //Consulta os dados da COTAÇÃO FILHA enviada pela CENTRAL de COMPRAS, a ser respondida pelo FORNECEDOR
         public cotacao_filha_central_compras ConsultarDadosDaCotacaoFilhaCentralDeComprasASerRespondida(cotacao_filha_central_compras obj)
         {
-            cotacao_filha_central_compras buscarDadosDaCotacao = 
-                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS.Equals(obj.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS)) 
+            cotacao_filha_central_compras buscarDadosDaCotacao =
+                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS.Equals(obj.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS))
                 && (m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA)) && (m.ID_CODIGO_USUARIO.Equals(obj.ID_CODIGO_USUARIO)));
 
-                return buscarDadosDaCotacao;
+            return buscarDadosDaCotacao;
         }
 
         //QUANTIDADE de EMPRESAS respondendo a COTAÇÃO
@@ -38,7 +38,7 @@ namespace ClienteMercado.Infra.Repositories
                         " FROM cotacao_filha_central_compras " +
                         " WHERE ID_COTACAO_MASTER_CENTRAL_COMPRAS = " + iD_COTACAO_MASTER_CENTRAL_COMPRAS;
 
-            List<cotacao_filha_central_compras> cotacoesFilhasEnviadas = 
+            List<cotacao_filha_central_compras> cotacoesFilhasEnviadas =
                 _contexto.Database.SqlQuery<cotacao_filha_central_compras>(query).ToList();
 
             return cotacoesFilhasEnviadas.Count;
@@ -48,7 +48,7 @@ namespace ClienteMercado.Infra.Repositories
         public int BuscarQuantidadeDeEmpresasJahResponderamACotacao(int iD_COTACAO_MASTER_CENTRAL_COMPRAS)
         {
             List<cotacao_filha_central_compras> cotacoesFilhaRespondidas =
-                _contexto.cotacao_filha_central_compras.Where(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iD_COTACAO_MASTER_CENTRAL_COMPRAS) 
+                _contexto.cotacao_filha_central_compras.Where(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iD_COTACAO_MASTER_CENTRAL_COMPRAS)
                 && (m.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS == true))).ToList();
 
             return cotacoesFilhaRespondidas.Count;
@@ -57,7 +57,7 @@ namespace ClienteMercado.Infra.Repositories
         //Gerar a COTAÇÃO FILHA (cópia da Cotação MASTER) para o FORNECEDOR que recebeu a COTAÇÃO
         public cotacao_filha_central_compras GerarCotacaoFilhaDaCC(cotacao_filha_central_compras obj)
         {
-            cotacao_filha_central_compras cotacaoFilhaCentralCompras = 
+            cotacao_filha_central_compras cotacaoFilhaCentralCompras =
                 _contexto.cotacao_filha_central_compras.Add(obj);
             _contexto.SaveChanges();
 
@@ -67,7 +67,7 @@ namespace ClienteMercado.Infra.Repositories
         //CONSULTAR DADOS da COTAÇÃO FILHA
         public cotacao_filha_central_compras ConsultarDadosDaCotacaoFilhaCC(int iCM, int iCCF)
         {
-            cotacao_filha_central_compras dadosDaCotacaoFilha = 
+            cotacao_filha_central_compras dadosDaCotacaoFilha =
                 _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
 
             return dadosDaCotacaoFilha;
@@ -76,7 +76,7 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR como 'true' o CAMPO RECEBEU_CONTRA_PROPOSTA da COTAÇÃO FILHA
         public void SetarCampoDeEnvioDeContraPropostaComoEnviada(int idCotacaoFilha)
         {
-            cotacao_filha_central_compras dadosDaCotacaoFilha = 
+            cotacao_filha_central_compras dadosDaCotacaoFilha =
                 _contexto.cotacao_filha_central_compras.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == idCotacaoFilha));
 
             if (dadosDaCotacaoFilha != null)
@@ -89,14 +89,14 @@ namespace ClienteMercado.Infra.Repositories
         //VERIFICAR SE JÁ FOI ENVIADO CONTRA-PROPOSTA A ALGUM OUTRO FORNECEDOR
         public List<cotacao_filha_central_compras> BuscarListaDeCotacoesFilhaQueReceberamContraProposta(int iCM)
         {
-            List<cotacao_filha_central_compras> cotacoesFilhaComContraProposta = 
+            List<cotacao_filha_central_compras> cotacoesFilhaComContraProposta =
                 _contexto.cotacao_filha_central_compras.Where(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.RECEBEU_CONTRA_PROPOSTA == true))).ToList();
 
             return cotacoesFilhaComContraProposta;
         }
 
         //BUSCAR LISTA de COTAÇÕES RECEBIDAS FILTRADAS
-        public List<ListaDeCotacoesRecebidasPeloFornecedorViewModel> BuscarListaDeCotacoesRecebidasPeloFornecedorConformeFiltro(int tipoFiltragem, int codPesquisar, 
+        public List<ListaDeCotacoesRecebidasPeloFornecedorViewModel> BuscarListaDeCotacoesRecebidasPeloFornecedorConformeFiltro(int tipoFiltragem, int codPesquisar,
             int idGrupoAtividadesFiltro)
         {
             var query = "";
@@ -130,7 +130,7 @@ namespace ClienteMercado.Infra.Repositories
 
             query = "SELECT CF.*, CM.NOME_COTACAO_CENTRAL_COMPRAS as nomeDaCotacao, CC.NOME_CENTRAL_COMPRAS as nomeDaCentralCompras, TC.DESCRICAO_TIPO_COTACAO as tipoCotacao, " +
                     "CONVERT(VARCHAR(10), CM.DATA_ENCERRAMENTO_COTACAO_CENTRAL_COMPRAS, 103) as dataEncerramentoCotacao, GA.DESCRICAO_ATIVIDADE as descricaoRamoAtividade, " +
-                    "CM.ID_CENTRAL_COMPRAS as cCC " + 
+                    "CM.ID_CENTRAL_COMPRAS as cCC " +
                     "FROM cotacao_filha_central_compras CF " +
                     "INNER JOIN cotacao_master_central_compras CM ON (CM.ID_COTACAO_MASTER_CENTRAL_COMPRAS = CF.ID_COTACAO_MASTER_CENTRAL_COMPRAS) " +
                     "INNER JOIN central_de_compras CC ON (CC.ID_CENTRAL_COMPRAS = CM.ID_CENTRAL_COMPRAS) " +
@@ -138,7 +138,7 @@ namespace ClienteMercado.Infra.Repositories
                     "INNER JOIN grupo_atividades_empresa GA ON(GA.ID_GRUPO_ATIVIDADES = CM.ID_GRUPO_ATIVIDADES) " +
                     "WHERE ID_CODIGO_EMPRESA = " + idEmpresa + complemento;
 
-            List<ListaDeCotacoesRecebidasPeloFornecedorViewModel> listaDeCotacaoesRecebidas = 
+            List<ListaDeCotacoesRecebidasPeloFornecedorViewModel> listaDeCotacaoesRecebidas =
                 _contexto.Database.SqlQuery<ListaDeCotacoesRecebidasPeloFornecedorViewModel>(query).ToList();
 
             return listaDeCotacaoesRecebidas;
@@ -147,7 +147,7 @@ namespace ClienteMercado.Infra.Repositories
         //CONSULTAR DADOS da COTAÇÃO FILHA pelo ID da COTAÇÃO
         public cotacao_filha_central_compras ConsultarDadosDaCotacaoFilhaCCPeloIdCotacao(int idCotacaoFilha)
         {
-            cotacao_filha_central_compras dadosDaCotacaoFilha = 
+            cotacao_filha_central_compras dadosDaCotacaoFilha =
                 _contexto.cotacao_filha_central_compras.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == idCotacaoFilha));
 
             return dadosDaCotacaoFilha;
@@ -171,7 +171,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             var query = "SELECT ID_CODIGO_EMPRESA FROM cotacao_filha_central_compras WHERE ID_COTACAO_MASTER_CENTRAL_COMPRAS = " + iCM;
 
-            List<ListaIdsDeEmpresasFornecedorasCotadas> listaDeIdsDasEmpresasCotadas = 
+            List<ListaIdsDeEmpresasFornecedorasCotadas> listaDeIdsDasEmpresasCotadas =
                 _contexto.Database.SqlQuery<ListaIdsDeEmpresasFornecedorasCotadas>(query).ToList();
 
             return listaDeIdsDasEmpresasCotadas;
@@ -180,7 +180,7 @@ namespace ClienteMercado.Infra.Repositories
         //DADOS da COTAÇÃO FILHA RECEBIDA pela EMPRESA em questão
         public cotacao_filha_central_compras ConsultarDadosDaCotacaoFilhaCCPeloCodigoDaEmpresaFornecedora(int iCM, int idEmpresaCotada)
         {
-            var query = "SELECT * FROM cotacao_filha_central_compras WHERE ID_COTACAO_MASTER_CENTRAL_COMPRAS = " + iCM + " AND ID_CODIGO_EMPRESA = " + idEmpresaCotada;            
+            var query = "SELECT * FROM cotacao_filha_central_compras WHERE ID_COTACAO_MASTER_CENTRAL_COMPRAS = " + iCM + " AND ID_CODIGO_EMPRESA = " + idEmpresaCotada;
             var dadosCotacaoFilha = _contexto.Database.SqlQuery<cotacao_filha_central_compras>(query).FirstOrDefault();
 
             return dadosCotacaoFilha;
@@ -189,12 +189,25 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR CONTRA-PROPOSTA COMO ACEITA para a COTAÇÃO
         public void SetarContraPropostaComoAceitaPeloFornecedor(int iCM, int iCCF)
         {
-            cotacao_filha_central_compras dadosDaCotacaoFilha = 
+            cotacao_filha_central_compras dadosDaCotacaoFilha =
                 _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
 
             if (dadosDaCotacaoFilha != null)
             {
                 dadosDaCotacaoFilha.ACEITOU_CONTRA_PROPOSTA = true;
+                _contexto.SaveChanges();
+            }
+        }
+
+        //SETAR ESTA COTAÇÃO como RESPONDIDA por este FORNECEDOR
+        public void SetarComoRespondidaEstaCotacaoPorEsteFornecedor(int iCM, int iCCF)
+        {
+            cotacao_filha_central_compras dadosDaCotacaoFilha =
+                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
+
+            if (dadosDaCotacaoFilha != null)
+            {
+                dadosDaCotacaoFilha.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS = true;
                 _contexto.SaveChanges();
             }
         }
@@ -218,7 +231,7 @@ namespace ClienteMercado.Infra.Repositories
         //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras
         public void SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM, int iCCF, int idFor)
         {
-            cotacao_filha_central_compras dadosCotacaoFilhaCC = 
+            cotacao_filha_central_compras dadosCotacaoFilhaCC =
                 _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_CODIGO_EMPRESA == idFor)));
 
             if (dadosCotacaoFilhaCC != null)

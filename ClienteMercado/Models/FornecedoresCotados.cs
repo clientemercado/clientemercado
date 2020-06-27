@@ -2,7 +2,7 @@
 {
     public class FornecedoresCotados
     {
-        public FornecedoresCotados(int _id_Empresa, string _nome_empresa_fornecedor, string _cidade_empresa_fornecedor, string _estado_empresa_fornecedor, 
+        public FornecedoresCotados(int _id_Empresa, string _nome_empresa_fornecedor, string _cidade_empresa_fornecedor, string _estado_empresa_fornecedor,
             string _usuario_respondendo_empresa_fornecedor, int _id_Cotacao_Filha, string _tem_nao_tem_notificacao, string _respondido_empresa_fornecedor)
         {
             id_Empresa = _id_Empresa;

@@ -147,7 +147,10 @@
                                                 }
                                                 else
                                                 {
-                                                    <a href="#" id="inSolicitarConfirmacao" class="btn  blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                                    if (Model.cotacaoRespondida == "sim")
+                                                    {
+                                                        <a href="#" id="inSolicitarConfirmacao" class="btn  blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                                    }
                                                 }
                                             }
                                             else
@@ -170,14 +173,24 @@
                                             }
                                             else
                                             {
-                                                <a href="#" id="inEnviarContraProposta" class="btn blue button-submit"><i class="far fa-edit"></i> Contra-Proposta</a>
+                                                @*<a href="#" id="inEnviarContraProposta" class="btn blue button-submit"><i class="far fa-edit"></i> Contra-Proposta</a>*@
+
+                                                if (Model.cotacaoRespondida == "sim")
+                                                {
+                                                    <a href="#" id="inEnviarContraProposta" class="btn blue button-submit"><i class="far fa-edit"></i> Contra-Proposta</a>
+                                                }
                                             }
 
                                             if (Model.existemCotacoesQueReceberamContraProposta == "sim")
                                             {
                                                 if (Model.possuiContraProposta == "sim")
                                                 {
-                                                    <a href="#" id="inSolicitarConfirmacao" class="btn blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                                    @*<a href="#" id="inSolicitarConfirmacao" class="btn blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>*@
+
+                                                    if (Model.cotacaoRespondida == "sim")
+                                                    {
+                                                        <a href="#" id="inSolicitarConfirmacao" class="btn  blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -186,7 +199,12 @@
                                             }
                                             else
                                             {
-                                                <a href="#" id="inSolicitarConfirmacao" class="btn blue button-submit"> <i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                                @*<a href="#" id="inSolicitarConfirmacao" class="btn blue button-submit"> <i class="fas fa-stamp"></i> Confirmar Associados</a>*@
+
+                                                if (Model.cotacaoRespondida == "sim")
+                                                {
+                                                    <a href="#" id="inSolicitarConfirmacao" class="btn  blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                                }
                                             }
                                         }
                                     }

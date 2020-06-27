@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -38,8 +38,8 @@ namespace ClienteMercado.Infra.Repositories
             {
                 usuario_profissional confirmaCadastroUsuarioProfissional =
                             _contexto.usuario_profissional.Find(obj.ID_CODIGO_PROFISSIONAL_USUARIO);
-                            confirmaCadastroUsuarioProfissional.CADASTRO_CONFIRMADO = true;
-                            _contexto.SaveChanges();
+                confirmaCadastroUsuarioProfissional.CADASTRO_CONFIRMADO = true;
+                _contexto.SaveChanges();
 
                 return confirmaCadastroUsuarioProfissional;
             }

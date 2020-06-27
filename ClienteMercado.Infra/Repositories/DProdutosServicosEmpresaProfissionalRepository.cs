@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Base;
 using System.Collections.Generic;
 using System.Linq;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Infra.Base;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -19,14 +18,14 @@ namespace ClienteMercado.Infra.Repositories
         {
             produtos_servicos_empresa_profissional produtosServicosEmpresaProfissional = new produtos_servicos_empresa_profissional();
 
-            produtos_servicos_empresa_profissional jaExisteProduto = 
+            produtos_servicos_empresa_profissional jaExisteProduto =
                 _contexto.produtos_servicos_empresa_profissional.FirstOrDefault(m => ((m.ID_GRUPO_ATIVIDADES == obj.ID_GRUPO_ATIVIDADES) && (m.DESCRICAO_PRODUTO_SERVICO == obj.DESCRICAO_PRODUTO_SERVICO)));
 
             if (jaExisteProduto == null)
             {
-                produtosServicosEmpresaProfissional = 
+                produtosServicosEmpresaProfissional =
                     _contexto.produtos_servicos_empresa_profissional.Add(obj);
-                    _contexto.SaveChanges();
+                _contexto.SaveChanges();
             }
 
             return produtosServicosEmpresaProfissional;
@@ -44,7 +43,7 @@ namespace ClienteMercado.Infra.Repositories
         //BUSCAR NOME do PRODUTO
         public string ConsultarDescricaoDoProduto(int idProduto)
         {
-            produtos_servicos_empresa_profissional dadosDoProduto = 
+            produtos_servicos_empresa_profissional dadosDoProduto =
                 _contexto.produtos_servicos_empresa_profissional.FirstOrDefault(m => (m.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS == idProduto));
 
             return dadosDoProduto.DESCRICAO_PRODUTO_SERVICO;
@@ -62,10 +61,10 @@ namespace ClienteMercado.Infra.Repositories
         //CARREGA a LISTA de PRODUTOS de TESTE
         public List<produtos_servicos_empresa_profissional> ListaDeProdutosParaTeste()
         {
-                List<produtos_servicos_empresa_profissional> listaDeProdutosDaCotacaoTeste = 
-                    _contexto.produtos_servicos_empresa_profissional.Where(m => (m.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS > 0)).Take(5).ToList();
+            List<produtos_servicos_empresa_profissional> listaDeProdutosDaCotacaoTeste =
+                _contexto.produtos_servicos_empresa_profissional.Where(m => (m.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS > 0)).Take(5).ToList();
 
-                return listaDeProdutosDaCotacaoTeste;
+            return listaDeProdutosDaCotacaoTeste;
         }
     }
 }

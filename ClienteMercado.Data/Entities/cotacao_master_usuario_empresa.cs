@@ -59,7 +59,7 @@ namespace ClienteMercado.Data.Entities
         public virtual empresa_usuario empresa_usuario { get; set; }
 
         [ForeignKey("ID_CODIGO_USUARIO")]
-        public virtual usuario_empresa usuario_empresa  { get; set; }
+        public virtual usuario_empresa usuario_empresa { get; set; }
 
         [ForeignKey("ID_CODIGO_TIPO_COTACAO")]
         public virtual tipos_cotacao tipos_cotacao { get; set; }

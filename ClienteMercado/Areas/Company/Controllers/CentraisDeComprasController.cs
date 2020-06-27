@@ -245,7 +245,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 NEmpresasParticipantesCentralDeComprasService negociosEmpresasParticipantesCC = new NEmpresasParticipantesCentralDeComprasService();
                 NCentralDeComprasService negociosCentraisDeCompras = new NCentralDeComprasService();
-                NEmpresasSolicitacaoParticipacaoCentralDeComprasService negociosSolicitacaoParticipacaoCC = 
+                NEmpresasSolicitacaoParticipacaoCentralDeComprasService negociosSolicitacaoParticipacaoCC =
                     new NEmpresasSolicitacaoParticipacaoCentralDeComprasService();
 
                 List<ListaCentraisComprasViewModel> listaCentraisDeComprasDoSistema = negociosCentraisDeCompras.BuscarListaDeCentraisDeComprasDoSistema();
@@ -275,7 +275,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     empresas_solicitacao_participacao_central_de_compras dadosSolicitacaoParticipacaoCC =
                         negociosSolicitacaoParticipacaoCC.BuscaSolicitacaoDeParticipacaoNaCCDaEmpresaLogada(listaCentraisDeComprasDoSistema[i].ID_CENTRAL_COMPRAS);
 
-                    if (dadosSolicitacaoParticipacaoCC != null) {
+                    if (dadosSolicitacaoParticipacaoCC != null)
+                    {
                         if ((dadosSolicitacaoParticipacaoCC.SOLICITACAO_PARTICIPACAO_ACEITO == false) && (dadosSolicitacaoParticipacaoCC.ID_CODIGO_USUARIO_ACEITOU_SOLICITACAO == null))
                         {
                             textoStatusConvite = "AGUARD. LIB.";
@@ -283,7 +284,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     }
 
                     //VERIFICAR SE A EMPRESA LOGADA JÁ É PARTICIPANTE DA CENTRAL COMPRAS em QUESTÃO
-                    empresas_participantes_central_de_compras participoDestaCC = 
+                    empresas_participantes_central_de_compras participoDestaCC =
                         negociosEmpresasParticipantesCC.ConsultarSeEmpresaParticipaDaCentralDeCompras(listaCentraisDeComprasDoSistema[i].ID_CENTRAL_COMPRAS);
 
                     if (participoDestaCC != null)
@@ -311,7 +312,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 List<ListaCentraisComprasViewModel> listaCentraisDeComprasEmQueParticipoRetorno =
                     new List<ListaCentraisComprasViewModel>();
 
-                if ((String.IsNullOrEmpty(descricaoFiltro) == false) || (idGrupoAtividadesFiltro > 0) || (String.IsNullOrEmpty(cidadeDaCC) == false) 
+                if ((String.IsNullOrEmpty(descricaoFiltro) == false) || (idGrupoAtividadesFiltro > 0) || (String.IsNullOrEmpty(cidadeDaCC) == false)
                     || (String.IsNullOrEmpty(estadoCC) == false))
                 {
                     if (String.IsNullOrEmpty(descricaoFiltro) == false)
@@ -438,7 +439,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     NEmpresaUsuarioLoginsService negociosEmpresaUsuarioLogins = new NEmpresaUsuarioLoginsService();
 
                     //DADOS EMPRESA/USUARIO ADM da CC
-                    empresa_usuario dadosEmpresaADMCC = 
+                    empresa_usuario dadosEmpresaADMCC =
                         negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = dadosCC.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS });
                     usuario_empresa dadosUsuarioADMCC = negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(dadosCC.ID_CODIGO_USUARIO_ADM_CENTRAL_COMPRAS);
                     empresa_usuario_logins dadosContatoUsuarioADMCC = negociosEmpresaUsuarioLogins.ConsultarDadosDeContatoDoUsuario(dadosCC.ID_CODIGO_USUARIO_ADM_CENTRAL_COMPRAS);
@@ -467,9 +468,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                                  " <BOTÃO> link PARA PÁGINA EXPLICATIVA " +
                                  "<br><br><br>Atenciosamente,<br></td></tr><tr><td><br>&nbsp;&nbsp;Equipe ClienteMercado<br>";
 
-                        bool emailSolicitacaoDeParticapacao =
-                            enviarEmailsSolicitacao.EnviandoEmailSolicitandoParticipacaoNaCC(dadosEmpresaADMCC.EMAIL1_EMPRESA, dadosEmpresaADMCC.EMAIL2_EMPRESA,
-                                dadosContatoUsuarioADMCC.EMAIL1_USUARIO, dadosContatoUsuarioADMCC.EMAIL2_USUARIO, assuntoEmail, corpoEmail);
+                    bool emailSolicitacaoDeParticapacao =
+                        enviarEmailsSolicitacao.EnviandoEmailSolicitandoParticipacaoNaCC(dadosEmpresaADMCC.EMAIL1_EMPRESA, dadosEmpresaADMCC.EMAIL2_EMPRESA,
+                            dadosContatoUsuarioADMCC.EMAIL1_USUARIO, dadosContatoUsuarioADMCC.EMAIL2_USUARIO, assuntoEmail, corpoEmail);
 
 
                     //---------------------------------------------------------------------------------------------

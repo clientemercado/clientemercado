@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ClienteMercado.Data.Contexto;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using ClienteMercado.Data.Contexto;
 
 namespace ClienteMercado.Infra.Base
 {
@@ -26,7 +26,7 @@ namespace ClienteMercado.Infra.Base
             this._contexto.Set<TEntity>().Remove(entity);
             this._contexto.SaveChanges();
         }
-        
+
 
         public TEntity ObterPeloId(int id)
         {

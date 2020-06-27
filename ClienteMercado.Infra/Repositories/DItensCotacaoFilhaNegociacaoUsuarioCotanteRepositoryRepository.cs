@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
 using ClienteMercado.Utils.ViewModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -16,7 +15,7 @@ namespace ClienteMercado.Infra.Repositories
             {
                 itens_cotacao_filha_negociacao_usuario_cotante gravarItensCotacaoUsuarioCotante =
                     _contexto.itens_cotacao_filha_negociacao_usuario_cotante.Add(obj);
-                    _contexto.SaveChanges();
+                _contexto.SaveChanges();
 
                 return gravarItensCotacaoUsuarioCotante;
             }
@@ -35,7 +34,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //Responder a COTAÇÃO FILHA, enviada pelo USUÁRIO COTANTE
-        public itens_cotacao_filha_negociacao_usuario_cotante GravarValorDosProdutosCotadosEmRespostaACotacaoDoUsuarioCotante(itens_cotacao_filha_negociacao_usuario_cotante obj, 
+        public itens_cotacao_filha_negociacao_usuario_cotante GravarValorDosProdutosCotadosEmRespostaACotacaoDoUsuarioCotante(itens_cotacao_filha_negociacao_usuario_cotante obj,
             int idCotacaoFilha, int tipoGravacao)
         {
             // tipoGravacao: 0 - RESPONDENDO A COTAÇÃO
@@ -43,8 +42,8 @@ namespace ClienteMercado.Infra.Repositories
 
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                itens_cotacao_filha_negociacao_usuario_cotante respostaDeValorAoProdutoCotado = 
-                    _contexto.itens_cotacao_filha_negociacao_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE == idCotacaoFilha) 
+                itens_cotacao_filha_negociacao_usuario_cotante respostaDeValorAoProdutoCotado =
+                    _contexto.itens_cotacao_filha_negociacao_usuario_cotante.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE == idCotacaoFilha)
                     && (m.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE == obj.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE));
 
                 if (respostaDeValorAoProdutoCotado != null)
@@ -105,7 +104,7 @@ namespace ClienteMercado.Infra.Repositories
                             " GROUP BY ICM.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_USUARIO_COTANTE, ICM.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE, ICM.QUANTIDADE_ITENS_COTACAO_USUARIO_COTANTE, " +
                             " ICM.PRECO_ITENS_COTACAO_USUARIO_COTANTE, " +
                             " ICM.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE, ICM.QUANTIDADE_ITENS_COTACAO_USUARIO_COTANTE, ICM.PRECO_ITENS_COTACAO_USUARIO_COTANTE, E.ID_CODIGO_EMPRESA, " +
-                            " UE.ID_CODIGO_USUARIO, CF.ID_TIPO_FRETE, CF.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE, CF.DATA_RESPOSTA_COTACAO_FILHA_USUARIO_COTANTE, " + 
+                            " UE.ID_CODIGO_USUARIO, CF.ID_TIPO_FRETE, CF.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE, CF.DATA_RESPOSTA_COTACAO_FILHA_USUARIO_COTANTE, " +
                             " CF.FORMA_PAGAMENTO_COTACAO_FILHA_USUARIO_COTANTE, CF.OBSERVACAO_COTACAO_USUARIO_COTANTE " +
                             " ORDER BY PRECO_FINAL_CALCULADO_DO_PRODUTO ASC";
 
@@ -120,7 +119,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                itens_cotacao_filha_negociacao_usuario_cotante itemDaCotacaoParaAnalise = 
+                itens_cotacao_filha_negociacao_usuario_cotante itemDaCotacaoParaAnalise =
                     _contexto.itens_cotacao_filha_negociacao_usuario_cotante
                     .FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE == idCotacaoFilha) && (m.ID_CODIGO_ITENS_COTACAO_USUARIO_COTANTE == idProduto));
 

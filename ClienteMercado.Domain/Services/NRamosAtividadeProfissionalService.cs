@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using ClienteMercado.Data.Entities;
-
-namespace ClienteMercado.Domain.Services
+﻿namespace ClienteMercado.Domain.Services
 {
     public class NRamosAtividadesProfissionalService
     {

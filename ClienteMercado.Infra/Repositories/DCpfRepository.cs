@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using ClienteMercado.Data.Contexto;
+﻿using ClienteMercado.Data.Contexto;
 using ClienteMercado.Data.Entities;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -23,7 +23,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             using (cliente_mercadoContext _contexto = new cliente_mercadoContext())
             {
-                usuario_empresa cpf = 
+                usuario_empresa cpf =
                     _contexto.usuario_empresa.FirstOrDefault(m => m.CPF_USUARIO_EMPRESA.Equals(obj.CPF_USUARIO_EMPRESA) && m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA));
 
                 return cpf;

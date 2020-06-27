@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClienteMercado.Utils.ViewModel
+﻿namespace ClienteMercado.Utils.ViewModel
 {
     public class ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel
     {
-        public ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel(int _id_cotacao_filha, string _empresa_que_respondeu, string _data_resposta, string _cotou_total_parcial, 
-            decimal _valor_total_cotacao_sem_desconto, decimal _percentual_desconto, string _tipo_desconto, decimal _valor_desconto, decimal _valor_total_cotacao_com_desconto, 
+        public ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel(int _id_cotacao_filha, string _empresa_que_respondeu, string _data_resposta, string _cotou_total_parcial,
+            decimal _valor_total_cotacao_sem_desconto, decimal _percentual_desconto, string _tipo_desconto, decimal _valor_desconto, decimal _valor_total_cotacao_com_desconto,
             string _virou_pedido, string _menor_valor)
         {
             ID_CODIGO_COTACAO_FILHA_USUARIO_COTANTE = _id_cotacao_filha;

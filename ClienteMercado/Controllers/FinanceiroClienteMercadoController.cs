@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Domain.Services;
+using ClienteMercado.Models;
+using ClienteMercado.Utils.Utilitarios;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using ClienteMercado.Models;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Utils.Utilitarios;
-using ClienteMercado.Domain.Services;
 
 namespace ClienteMercado.Controllers
 {
@@ -57,8 +57,8 @@ namespace ClienteMercado.Controllers
                             dadosEmpresaUsuario.usuario_empresa.empresa_usuario.enderecos_empresa_usuario
                                 .cidades_empresa_usuario.CIDADE_EMPRESA_USUARIO;
                         gerarFinanceiro.ESTADO_EMPRESA_PAGADOR =
-                            //dadosEmpresaUsuario.usuario_empresa.empresa_usuario.enderecos_empresa_usuario
-                            //    .cidades_empresa_usuario.UF_CIDADE_EMPRESA_USUARIO;
+                        //dadosEmpresaUsuario.usuario_empresa.empresa_usuario.enderecos_empresa_usuario
+                        //    .cidades_empresa_usuario.UF_CIDADE_EMPRESA_USUARIO;
 
                         //Atribuir dados do Usuário Master e de localização, às variáveis do modelo da View
                         gerarFinanceiro.NOME_USUARIO_PAGADOR = dadosEmpresaUsuario.usuario_empresa.NOME_USUARIO;
@@ -244,7 +244,7 @@ namespace ClienteMercado.Controllers
                         //        .UF_CIDADE_EMPRESA_USUARIO;
 
                         //Parâmetro que será usado para definir o conteúdo da tela de cobrança conforme o tipo de usuário logado
-                        if ((dadosEmpresaUsuario.usuario_empresa.USUARIO_MASTER) && (dadosEmpresaUsuario.usuario_empresa.empresa_usuario.ID_CODIGO_TIPO_CONTRATO_COTADA == 3 
+                        if ((dadosEmpresaUsuario.usuario_empresa.USUARIO_MASTER) && (dadosEmpresaUsuario.usuario_empresa.empresa_usuario.ID_CODIGO_TIPO_CONTRATO_COTADA == 3
                             || dadosEmpresaUsuario.usuario_empresa.empresa_usuario.ID_CODIGO_TIPO_CONTRATO_COTADA == 4))
                         {
                             ViewBag.ehMaster = true;

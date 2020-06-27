@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using System;
-using ClienteMercado.Data.Contexto;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -12,30 +11,30 @@ namespace ClienteMercado.Infra.Repositories
         //Consultar Usuários ligados à Empresa
         public List<usuario_empresa> ConsultarUsuariosLigadosAEmpresa(usuario_empresa obj)
         {
-                List<usuario_empresa> listaUsuariosFornecedores = _contexto.usuario_empresa.Where(m => (m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA))).ToList();
+            List<usuario_empresa> listaUsuariosFornecedores = _contexto.usuario_empresa.Where(m => (m.ID_CODIGO_EMPRESA.Equals(obj.ID_CODIGO_EMPRESA))).ToList();
 
-                return listaUsuariosFornecedores;
+            return listaUsuariosFornecedores;
         }
 
         //Consultar dados dos Vendedores que receberão aviso de cotação
         public List<usuario_empresa> ConsultarDadosDosUsuariosVendedoresQueReceberaoAvisoDeCotacao(string[] listaIDsFornecedores)
         {
-                List<usuario_empresa> dadosUsuariosVendedores = new List<usuario_empresa>();
+            List<usuario_empresa> dadosUsuariosVendedores = new List<usuario_empresa>();
 
-                //Consulta o e-mail de cada ID da lista
-                for (int i = 0; i < listaIDsFornecedores.Length; i++)
+            //Consulta o e-mail de cada ID da lista
+            for (int i = 0; i < listaIDsFornecedores.Length; i++)
+            {
+                int idFornecedor = Convert.ToInt32(listaIDsFornecedores[i]);
+
+                usuario_empresa buscaDadosDoUsuarioVendedor = _contexto.usuario_empresa.FirstOrDefault(m => m.ID_CODIGO_USUARIO.Equals(idFornecedor));
+
+                if (buscaDadosDoUsuarioVendedor != null)
                 {
-                    int idFornecedor = Convert.ToInt32(listaIDsFornecedores[i]);
-
-                    usuario_empresa buscaDadosDoUsuarioVendedor = _contexto.usuario_empresa.FirstOrDefault(m => m.ID_CODIGO_USUARIO.Equals(idFornecedor));
-
-                    if (buscaDadosDoUsuarioVendedor != null)
-                    {
-                        dadosUsuariosVendedores.Add(buscaDadosDoUsuarioVendedor);
-                    }
+                    dadosUsuariosVendedores.Add(buscaDadosDoUsuarioVendedor);
                 }
+            }
 
-                return dadosUsuariosVendedores;
+            return dadosUsuariosVendedores;
         }
 
         //CONSULTAR DADOS do USUÁRIO da EMPRESA FORNECEDORA pelo ID da EMPRESA
@@ -49,7 +48,7 @@ namespace ClienteMercado.Infra.Repositories
         //GRAVAR DADOS ATUALIZADOS do USUÁRIO
         public usuario_empresa AtualizarDadosCadastrais(usuario_empresa obj)
         {
-            usuario_empresa dadosDoUsuarioASerAtualizado = 
+            usuario_empresa dadosDoUsuarioASerAtualizado =
                 _contexto.usuario_empresa.FirstOrDefault(m => (m.ID_CODIGO_USUARIO == obj.ID_CODIGO_USUARIO));
 
             if (dadosDoUsuarioASerAtualizado != null)

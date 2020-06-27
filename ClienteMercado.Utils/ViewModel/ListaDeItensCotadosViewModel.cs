@@ -9,7 +9,7 @@ namespace ClienteMercado.Utils.ViewModel
         public int idProdutoCotado { get; set; }
 
         public string produtoCotado { get; set; }
-        
+
         public string marcaProdutoCotado { get; set; }
 
         public string produtoEmbalagem { get; set; }

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Domain.Services;
+using ClienteMercado.Models;
+using ClienteMercado.Utils.Utilitarios;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using ClienteMercado.Models;
-using ClienteMercado.Data.Entities;
-using ClienteMercado.Utils.Utilitarios;
-using ClienteMercado.Domain.Services;
 
 namespace ClienteMercado.Controllers
 {
@@ -52,11 +52,11 @@ namespace ClienteMercado.Controllers
                 novoContato.EMAIL_CONTATO_CLIENTE_MERCADO = contatoCliente.EmailPContato;
                 novoContato.MENSAGEM_CONTATO_CLIENTE_MERCADO = contatoCliente.MensagemPContato;
                 novoContato.NOME_CONTATO_CLIENTE_MERCADO = contatoCliente.NomePContato;
-                
+
                 contato_cliente_mercado contatoClienteMercado = negocio.GravarContato(novoContato);
 
                 //Redireciona para a action abaixo passando por parametro o número do protocolo de registro no banco de dados.
-                return RedirectToAction(String.Format("Confirmacao/" + contatoClienteMercado.ID_CONTATO_CLIENTE_MERCADO)); 
+                return RedirectToAction(String.Format("Confirmacao/" + contatoClienteMercado.ID_CONTATO_CLIENTE_MERCADO));
             }
             catch (Exception erro)
             {
@@ -70,7 +70,7 @@ namespace ClienteMercado.Controllers
         // GET: /Contato/Confirmacao
         public ActionResult Confirmacao(int id)
         {
-            Models.Contato c = new Contato() {Protocolo = id};
+            Models.Contato c = new Contato() { Protocolo = id };
             return View(c);
         }
 

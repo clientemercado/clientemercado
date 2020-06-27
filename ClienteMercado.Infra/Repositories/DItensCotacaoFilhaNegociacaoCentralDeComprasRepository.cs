@@ -1,9 +1,9 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using ClienteMercado.Utils.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using ClienteMercado.Utils.ViewModel;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -12,7 +12,7 @@ namespace ClienteMercado.Infra.Repositories
         //CARREGAR ITENS da COTAÇÃO ENVIADA
         public List<itens_cotacao_filha_negociacao_central_compras> CarregarOsItensDeUmaCotacaoEnviada(int idCotacaoFilha)
         {
-            List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacao = 
+            List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacao =
                 _contexto.itens_cotacao_filha_negociacao_central_compras.Where(m => (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == idCotacaoFilha)).OrderBy(m => m.DESCRICAO_PRODUTO_EDITADO_COTADA_CENTRAL_COMPRAS).ToList();
 
             return listaDeItensDaCotacao;
@@ -59,7 +59,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //CARREGAR DADOS DE APENAS 1 PRODUTO COTADO PARA TODAS AS EMPRESAS NESSA COTAÇÃO
-        public List<ListaProdutoUnicoCotadoPorEmpresaViewModel> CarregarDadosDeUmProdutoCotadoEmTodasAsEmpresasFornecedoras(int[] listaIdsCotacaoFilhas, 
+        public List<ListaProdutoUnicoCotadoPorEmpresaViewModel> CarregarDadosDeUmProdutoCotadoEmTodasAsEmpresasFornecedoras(int[] listaIdsCotacaoFilhas,
             int idItemDaCotacaoIndividual)
         {
             var listaIdsCF = String.Join(", ", listaIdsCotacaoFilhas);
@@ -76,8 +76,8 @@ namespace ClienteMercado.Infra.Repositories
         //GRAVAR o MENOR VALOR APURADO na consulta como VALOR de CONTRA-PROPOSTA
         public void GravarValorDaContraProposta(int idCotacaoFilha, int idItemDaCotacaoIndividual, decimal menorPreco)
         {
-            itens_cotacao_filha_negociacao_central_compras itemQueTeraOValorDeContraPropostaAtualizado = 
-                _contexto.itens_cotacao_filha_negociacao_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == idCotacaoFilha) 
+            itens_cotacao_filha_negociacao_central_compras itemQueTeraOValorDeContraPropostaAtualizado =
+                _contexto.itens_cotacao_filha_negociacao_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == idCotacaoFilha)
                 && (m.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == idItemDaCotacaoIndividual)));
 
             if (itemQueTeraOValorDeContraPropostaAtualizado != null)
@@ -108,8 +108,8 @@ namespace ClienteMercado.Infra.Repositories
         //SALVAR os VALORES RESPONDIDOS pelo FORNECEDOR
         public bool GravarValoresRespondidosParaACotacao(int idCotacaoFilha, int idItemNegociado, decimal valorTabelaItemNegociado, decimal valorDiferenciadoRespondido)
         {
-            itens_cotacao_filha_negociacao_central_compras dadosDoItemRespondido = 
-                _contexto.itens_cotacao_filha_negociacao_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS == idItemNegociado) 
+            itens_cotacao_filha_negociacao_central_compras dadosDoItemRespondido =
+                _contexto.itens_cotacao_filha_negociacao_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS == idItemNegociado)
                 && (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == idCotacaoFilha)));
 
             if (dadosDoItemRespondido != null)
@@ -137,7 +137,7 @@ namespace ClienteMercado.Infra.Repositories
         //CONSULTAR LISTA de ITENS da COTACAO FILHA
         public List<itens_cotacao_filha_negociacao_central_compras> ConsultarItensDaCotacaoDaCC(int iCCF)
         {
-            List<itens_cotacao_filha_negociacao_central_compras> listaDeitensDaCotacao = 
+            List<itens_cotacao_filha_negociacao_central_compras> listaDeitensDaCotacao =
                 _contexto.itens_cotacao_filha_negociacao_central_compras.Where(m => (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF)).ToList();
 
             return listaDeitensDaCotacao;

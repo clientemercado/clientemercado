@@ -1,13 +1,13 @@
 ﻿using ClienteMercado.Data.Entities;
-using System.Collections.Generic;
-using ClienteMercado.Utils.ViewModel;
 using ClienteMercado.Infra.Repositories;
+using ClienteMercado.Utils.ViewModel;
+using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
 {
     public class NItensCotacaoFilhaNegociacaoUsuarioEmpresaService
     {
-        DItensCotacaoFilhaNegociacaoUsuarioEmpresaRepository ditenscotacaofilhanegociacaousuarioempresa = 
+        DItensCotacaoFilhaNegociacaoUsuarioEmpresaRepository ditenscotacaofilhanegociacaousuarioempresa =
             new DItensCotacaoFilhaNegociacaoUsuarioEmpresaRepository();
 
         //Gravar os Itens que fazem parte da COTAÇÃO FILHA, gerada pelo USUÁRIO EMPRESA para o FORNECEDOR

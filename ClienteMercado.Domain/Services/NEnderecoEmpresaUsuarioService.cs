@@ -1,8 +1,7 @@
-﻿using ClienteMercado.Infra.Repositories;
-using ClienteMercado.Data.Entities;
-using System.Collections.Generic;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
-using System;
+using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
 {

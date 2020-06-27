@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ClienteMercado.Data.Entities;
+﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
 using ClienteMercado.Utils.ViewModel;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
 {
@@ -24,29 +24,29 @@ namespace ClienteMercado.Infra.Repositories
             empresas_fabricantes_marcas gravarNovaEmpresaFabricanteOuMarcas = new empresas_fabricantes_marcas();
 
             //Verifica se a NOVA EMPRESA FABRICANTE ou MARCA já existe
-            empresas_fabricantes_marcas dadosEmpresaOuMarca = 
+            empresas_fabricantes_marcas dadosEmpresaOuMarca =
                 _contexto.empresas_fabricantes_marcas.FirstOrDefault(m => (m.DESCRICAO_EMPRESA_FABRICANTE_MARCAS == obj.DESCRICAO_EMPRESA_FABRICANTE_MARCAS));
 
-                if (dadosEmpresaOuMarca == null)
-                {
-                    //Grava SE NÃO EXISTIR
-                    gravarNovaEmpresaFabricanteOuMarcas =
-                        _contexto.empresas_fabricantes_marcas.Add(obj);
-                    _contexto.SaveChanges();
-                }
-                else
-                {
-                    //Retorna os dados SE EXISTIR
-                    gravarNovaEmpresaFabricanteOuMarcas = dadosEmpresaOuMarca;
-                }
+            if (dadosEmpresaOuMarca == null)
+            {
+                //Grava SE NÃO EXISTIR
+                gravarNovaEmpresaFabricanteOuMarcas =
+                    _contexto.empresas_fabricantes_marcas.Add(obj);
+                _contexto.SaveChanges();
+            }
+            else
+            {
+                //Retorna os dados SE EXISTIR
+                gravarNovaEmpresaFabricanteOuMarcas = dadosEmpresaOuMarca;
+            }
 
-                return gravarNovaEmpresaFabricanteOuMarcas;
+            return gravarNovaEmpresaFabricanteOuMarcas;
         }
 
         //BUSCAR MARCA do PRODUTO
         public string ConsultarDescricaoDaEmpresaFabricanteOuMarca(int idFabricanteMarca)
         {
-            empresas_fabricantes_marcas dadosDaEmpresaFabricante = 
+            empresas_fabricantes_marcas dadosDaEmpresaFabricante =
                 _contexto.empresas_fabricantes_marcas.FirstOrDefault(m => (m.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS == idFabricanteMarca));
 
             return dadosDaEmpresaFabricante.DESCRICAO_EMPRESA_FABRICANTE_MARCAS;
@@ -57,7 +57,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             List<ListaDeEmpresasFabricantesEMarcasViewModel> marcasEncontradas = new List<ListaDeEmpresasFabricantesEMarcasViewModel>();
 
-            List<empresas_produtos_marcas> listaDeMarcasVinculadasAoProduto = 
+            List<empresas_produtos_marcas> listaDeMarcasVinculadasAoProduto =
                 _contexto.empresas_produtos_marcas.Where(m => (m.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS == codProduto)).ToList();
 
             if (listaDeMarcasVinculadasAoProduto.Count > 0)
@@ -71,7 +71,7 @@ namespace ClienteMercado.Infra.Repositories
 
                 string codigosMarcas = String.Join(", ", codMarcas);
 
-                var query = "SELECT * FROM empresas_fabricantes_marcas WHERE ID_CODIGO_EMPRESA_FABRICANTE_MARCAS IN (" + codigosMarcas + ") AND DESCRICAO_EMPRESA_FABRICANTE_MARCAS LIKE '%" + term + "%'" ;
+                var query = "SELECT * FROM empresas_fabricantes_marcas WHERE ID_CODIGO_EMPRESA_FABRICANTE_MARCAS IN (" + codigosMarcas + ") AND DESCRICAO_EMPRESA_FABRICANTE_MARCAS LIKE '%" + term + "%'";
                 marcasEncontradas = _contexto.Database.SqlQuery<ListaDeEmpresasFabricantesEMarcasViewModel>(query).ToList();
             }
 
@@ -81,10 +81,10 @@ namespace ClienteMercado.Infra.Repositories
         //Consultar Empresas Fabricantes ou Marcas
         public empresas_fabricantes_marcas ConsultarEmpresaFabricanteOuMarca(int idFabricanteOuMarca)
         {
-                empresas_fabricantes_marcas dadosEmpresaOuMarca =
-                    _contexto.empresas_fabricantes_marcas.FirstOrDefault(m => (m.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS.Equals(idFabricanteOuMarca)));
+            empresas_fabricantes_marcas dadosEmpresaOuMarca =
+                _contexto.empresas_fabricantes_marcas.FirstOrDefault(m => (m.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS.Equals(idFabricanteOuMarca)));
 
-                return dadosEmpresaOuMarca;
+            return dadosEmpresaOuMarca;
         }
     }
 }

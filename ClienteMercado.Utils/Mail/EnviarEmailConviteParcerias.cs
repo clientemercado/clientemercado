@@ -15,7 +15,7 @@ namespace ClienteMercado.Utils.Mail
             4 - GERAR HTML PARA ESTE E-MAIL.
         */
 
-        public bool EnviandoEmailConviteParcerias(string email1_EmpresaParceira, string email2_EmpresaParceira, string email1_UsuarioContato, string email2_UsuarioContato, 
+        public bool EnviandoEmailConviteParcerias(string email1_EmpresaParceira, string email2_EmpresaParceira, string email1_UsuarioContato, string email2_UsuarioContato,
             string assuntoEmail, string corpoEmail)
         {
             //MONTA o CORPO do E-MAIL
