@@ -169,7 +169,7 @@
                                         <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link6">R$ Vlr Tabela</th>
                                         <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link7">R$ Vlr Diferenciado</th>
                                         <th data-column-id="" data-width="10%" data-header-align="center" data-align="right" data-formatter="link8">COTAR / NC</th>
-                                        <th data-column-id="" data-width="5%"  data-header-align="center" data-align="center" data-formatter="link9">Ped.</th>
+                                        <th data-column-id="" data-width="5%" data-header-align="center" data-align="center" data-formatter="link9">Ped.</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -231,6 +231,7 @@
             <input type="hidden" id="inCCF" value="@Model.iCCF" />
             <input type="hidden" id="idEmpresaCotada" value="@Model.inIdEmpresaCotada" />
             <input type="hidden" id="inNomeUsuarioFornRespondendo" value="@Model.inNomeUsuarioLogado" />
+            <input type="hidden" id="inCotacaoRespondida" value="@Model.cotacaoRespondida" />
             <input type="hidden" id="inNCTodos" value="0" />
             <input type="hidden" id="inContraProposta" value="@Model.inRecebeuContraProposta" />
             <input type="hidden" id="inRespostaCP" value="@Model.inRespondeuContraProposta" />
@@ -419,6 +420,7 @@
             var idsItensCotados = new Array();
             var valoresTabelaItensCotados = new Array();
             var valoresDiferenciadosItensCotados = new Array();
+            var somaValoresCotados = 0;
 
             $(".flagnaocotar").each(function () {
                 idsItensCotados.push($(this).attr('indexlinha'));
@@ -430,7 +432,10 @@
 
             $(".valordiferenciado").each(function () {
                 valoresDiferenciadosItensCotados.push($(this).val().replace('.', '').replace(',', '.'));
+                somaValoresCotados = (somaValoresCotados + parseFloat($(this).val().replace('.', '').replace(',', '.')));
             });
+
+            //CONTINUAR AQUI... OBS: SE (somaValoresCotados == 00), INFORME QUE NENHUM VALOR FOI RESPONDIDO E SE O OPERADOR DESEJA CONFIRMAR ESSA RESPOSTA.
 
             $.ajax({
                 type: "POST",
@@ -771,7 +776,7 @@
                 total += parseFloat(items[i]);
             }
 
-            if (parseFloat(total) == 0) {
+            if ((parseFloat(total) == 0) && ($('#inCotacaoRespondida').val() == "sim")) {
                 $('#inNaoCotarTodos').hide();
                 $('#inDesfazerNaoCotarTodos').show();
             }

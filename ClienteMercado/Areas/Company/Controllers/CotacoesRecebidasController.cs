@@ -200,14 +200,14 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //respondeuContraProposta = listaDeItensDaCotacaoFilha.Where(m => (m.PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS > 0)).ToList().Count() > 0 ? "sim" : "nao";
                     //viewModelEnviarResposta.inRespondeuContraProposta = respondeuContraProposta;
 
-                    //if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == true)
-                    //{
-                    //    viewModelEnviarResposta.inRecebeuContraProposta = "sim";
-                    //}
-                    //else
-                    //{
-                    //    viewModelEnviarResposta.inRecebeuContraProposta = "nao";
-                    //}
+                    if (dadosCotacaoFilha.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS)
+                    {
+                        viewModelEnviarResposta.cotacaoRespondida = "sim";
+                    }
+                    else
+                    {
+                        viewModelEnviarResposta.cotacaoRespondida = "nao";
+                    }
 
                     if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == true)
                     {

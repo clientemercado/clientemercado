@@ -144,13 +144,26 @@ namespace ClienteMercado.Domain.Services
                         listaDeItensDaCotacao[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
                     listaDeItensDaCotacao[i].unidadeProdutoCotado = listaDeItensDaCotacao[i].unidadeProdutoCotado;
 
-                    if (listaDeItensDaCotacao[i].PRODUTO_COTADO_CENTRAL_COMPRAS)
+                    //if (listaDeItensDaCotacao[i].PRODUTO_COTADO_CENTRAL_COMPRAS)
+                    //{
+                    //    listaDeItensDaCotacao[i].produtoCotadoNaoCotado = "sim";
+                    //}
+                    //else
+                    //{
+                    //    listaDeItensDaCotacao[i].produtoCotadoNaoCotado = "nao";
+                    //}
+
+                    if ((listaDeItensDaCotacao[i].PRODUTO_COTADO_CENTRAL_COMPRAS) && (dadosDaCotacaoFilha.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS))
                     {
                         listaDeItensDaCotacao[i].produtoCotadoNaoCotado = "sim";
                     }
-                    else
+                    else if ((listaDeItensDaCotacao[i].PRODUTO_COTADO_CENTRAL_COMPRAS == false) && (dadosDaCotacaoFilha.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS))
                     {
                         listaDeItensDaCotacao[i].produtoCotadoNaoCotado = "nao";
+                    }
+                    else
+                    {
+                        listaDeItensDaCotacao[i].produtoCotadoNaoCotado = "sim";
                     }
 
                     if (dadosDaCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
