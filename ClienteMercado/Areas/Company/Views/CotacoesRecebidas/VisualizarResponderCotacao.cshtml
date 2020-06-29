@@ -123,6 +123,14 @@
                                         <a href="javascript:;" id="inDesfazerNaoCotarTodos" class="btn btn-warning" style="display:none;">
                                             <i class='fas fa-undo-alt'></i> desfazer NC todos itens
                                         </a>
+                                        /*
+                                         ($('#inCotacaoRespondida').val() == 'sim') && (parseInt($('#inNCTodos').val()) == 1)
+
+                                            OBS: EM CASO DE OPÇÃO DE 'NÃO COTAR', DESABILITAR O BOTÃO ABAIXO... SÓ HABILITAR SE FOR DESFEITO O 'NÃO COTAR'
+
+                                            CONTINUAR AQUI...
+                                         */
+
                                         <a href="javascript:;" id="inResponderACotacao" class="btn btn-warning" style="">
                                             <i class="fa fa-sign-out"></i> Enviar Resposta da Cotação
                                         </a>
@@ -435,8 +443,6 @@
                 somaValoresCotados = (somaValoresCotados + parseFloat($(this).val().replace('.', '').replace(',', '.')));
             });
 
-            //CONTINUAR AQUI... OBS: SE (somaValoresCotados == 00), INFORME QUE NENHUM VALOR FOI RESPONDIDO E SE O OPERADOR DESEJA CONFIRMAR ESSA RESPOSTA.
-
             //==========================================================================
             if (parseFloat(somaValoresCotados) == 0) {
                 //SE NÃO INSERIU NENHUM VALOR EM RESPOSTA AOS PRODUTOS DA COTAÇÃO
@@ -472,6 +478,8 @@
                                     debugger;
 
                                     if (data.cotacaoRespondida == "sim") {
+                                        $('#inCotacaoRespondida').val('sim');
+
                                         if (parseInt($('#inNCTodos').val()) == 0) {
                                             //RESPONDEU COTAÇÃO
                                             swal({
@@ -479,7 +487,6 @@
                                             },
                                                 function () {
                                                     debugger;
-
                                                     carregarGrid()
                                                 });
                                         }
@@ -497,12 +504,10 @@
                                 }
                             });
                         }
-                        else {
+                        //else {
 
-                            /*
-                             CONTINUAR AQUI... MUDAR BOTÕES 'NÃO COTAR' PARA 'DESFAZER NÃO COTAR' - TESTAR GERAL...
-                             */
-                        }
+
+                        //}
 
                     });
             }
@@ -736,6 +741,15 @@
     function carregarGrid() {
         //-------------------------------------------------------------------------------
         debugger;
+
+        if (($('#inCotacaoRespondida').val() == 'sim') && (parseInt($('#inNCTodos').val()) == 1)) {
+            $('#inNaoCotarTodos').hide();
+            $('#inDesfazerNaoCotarTodos').show();
+            $('.valortabela').attr("disabled", true);
+            $('.valordiferenciado').attr("disabled", true);
+            $('.naocotar').hide();
+            $('.desfazernc').show();
+        }
 
         //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
         var grid = $('#gridItensCotadosCC').bootgrid({
