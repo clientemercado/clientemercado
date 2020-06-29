@@ -437,46 +437,122 @@
 
             //CONTINUAR AQUI... OBS: SE (somaValoresCotados == 00), INFORME QUE NENHUM VALOR FOI RESPONDIDO E SE O OPERADOR DESEJA CONFIRMAR ESSA RESPOSTA.
 
-            $.ajax({
-                type: "POST",
-                url: "/CotacoesRecebidas/ResponderACotacaoAosFornecedores",
-                dataType: 'json',
-                data: {
-                    'iCM': $('#inICM').val(),
-                    'idEmpresaCotada': $('#idEmpresaCotada').val(),
-                    'codCotacao': codCotacaoSendoRespondida,
-                    'idsItensCotados': JSON.stringify(idsItensCotados),
-                    'valoresTabelaItensCotados': JSON.stringify(valoresTabelaItensCotados),
-                    'valoresDiferenciadosItensCotados': JSON.stringify(valoresDiferenciadosItensCotados)
-                },
-                success: function (data) {
-                    debugger;
+            //==========================================================================
+            if (parseFloat(somaValoresCotados) == 0) {
+                //SE NÃO INSERIU NENHUM VALOR EM RESPOSTA AOS PRODUTOS DA COTAÇÃO
 
-                    if (data.cotacaoRespondida == "sim") {
-                        if (parseInt($('#inNCTodos').val()) == 0) {
-                            //RESPONDEU COTAÇÃO
-                            swal({
-                                title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA COTAÇÃO foi respondida com SUCESSO.\nAguarde a ANÁLISE e RESPOSTA da Central de Compras.\n\nLhe desejamos sucesso e bons negócios em suas negociações de venda.\n\nEquipe\nCliente & Mercado.", type: "warning"
-                            },
-                                function () {
+                swal({
+                    title: "ATENÇÃO!!!\n\nVocê não preencheu NENHUM VALOR em resposta para os PRODUTOS COTADOS!\n\nConfirma sua RESPOSTA para a COTAÇãO",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Sim",
+                    confirmButtonColor: "#337ab7",
+                    cancelButtonText: 'Cancelar',
+                    closeOnConfirm: true,
+                    closeOnCancel: true,
+                    showConfirmButton: true
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $('#inNCTodos').val(1);
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/CotacoesRecebidas/ResponderACotacaoAosFornecedores",
+                                dataType: 'json',
+                                data: {
+                                    'iCM': $('#inICM').val(),
+                                    'idEmpresaCotada': $('#idEmpresaCotada').val(),
+                                    'codCotacao': codCotacaoSendoRespondida,
+                                    'idsItensCotados': JSON.stringify(idsItensCotados),
+                                    'valoresTabelaItensCotados': JSON.stringify(valoresTabelaItensCotados),
+                                    'valoresDiferenciadosItensCotados': JSON.stringify(valoresDiferenciadosItensCotados)
+                                },
+                                success: function (data) {
                                     debugger;
 
-                                    carregarGrid()
-                                });
+                                    if (data.cotacaoRespondida == "sim") {
+                                        if (parseInt($('#inNCTodos').val()) == 0) {
+                                            //RESPONDEU COTAÇÃO
+                                            swal({
+                                                title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA COTAÇÃO foi respondida com SUCESSO.\nAguarde a ANÁLISE e RESPOSTA da Central de Compras.\n\nLhe desejamos sucesso e bons negócios em suas negociações de venda.\n\nEquipe\nCliente & Mercado.", type: "warning"
+                                            },
+                                                function () {
+                                                    debugger;
+
+                                                    carregarGrid()
+                                                });
+                                        }
+                                        else {
+                                            //RESPONDEU NÃO COTAÇÃO
+                                            swal({
+                                                title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA Central de Compras foi informada de sua resposta da COTAÇÃO.\n\nLhe desejamos sucesso em suas próximas negociações.\n\nEquipe\nCliente & Mercado.", type: "warning"
+                                            },
+                                                function () {
+                                                    debugger;
+                                                    carregarGrid()
+                                                });
+                                        }
+                                    }
+                                }
+                            });
                         }
                         else {
-                            //RESPONDEU NÃO COTAÇÃO
-                            swal({
-                                title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA Central de Compras foi informada de sua resposta da COTAÇÃO.\n\nLhe desejamos sucesso em suas próximas negociações.\n\nEquipe\nCliente & Mercado.", type: "warning"
-                            },
-                                function () {
-                                    debugger;
-                                    carregarGrid()
-                                });
+
+                            /*
+                             CONTINUAR AQUI... MUDAR BOTÕES 'NÃO COTAR' PARA 'DESFAZER NÃO COTAR' - TESTAR GERAL...
+                             */
+                        }
+
+                    });
+            }
+            else {
+                //SE INSERIU ALGUM VALOR EM RESPOSTA AOS PRODUTOS DA COTAÇÃO
+
+                $.ajax({
+                    type: "POST",
+                    url: "/CotacoesRecebidas/ResponderACotacaoAosFornecedores",
+                    dataType: 'json',
+                    data: {
+                        'iCM': $('#inICM').val(),
+                        'idEmpresaCotada': $('#idEmpresaCotada').val(),
+                        'codCotacao': codCotacaoSendoRespondida,
+                        'idsItensCotados': JSON.stringify(idsItensCotados),
+                        'valoresTabelaItensCotados': JSON.stringify(valoresTabelaItensCotados),
+                        'valoresDiferenciadosItensCotados': JSON.stringify(valoresDiferenciadosItensCotados)
+                    },
+                    success: function (data) {
+                        debugger;
+
+                        if (data.cotacaoRespondida == "sim") {
+                            if (parseInt($('#inNCTodos').val()) == 0) {
+                                //RESPONDEU COTAÇÃO
+                                swal({
+                                    title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA COTAÇÃO foi respondida com SUCESSO.\nAguarde a ANÁLISE e RESPOSTA da Central de Compras.\n\nLhe desejamos sucesso e bons negócios em suas negociações de venda.\n\nEquipe\nCliente & Mercado.", type: "warning"
+                                },
+                                    function () {
+                                        debugger;
+
+                                        carregarGrid()
+                                    });
+                            }
+                            else {
+                                //RESPONDEU NÃO COTAÇÃO
+                                swal({
+                                    title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA Central de Compras foi informada de sua resposta da COTAÇÃO.\n\nLhe desejamos sucesso em suas próximas negociações.\n\nEquipe\nCliente & Mercado.", type: "warning"
+                                },
+                                    function () {
+                                        debugger;
+                                        carregarGrid()
+                                    });
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
+
+
+            //==========================================================================
         });
 
         //ACEITAR CONTRA-PROPOSTA

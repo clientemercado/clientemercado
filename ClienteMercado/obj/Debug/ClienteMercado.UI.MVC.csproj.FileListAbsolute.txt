@@ -104,6 +104,7 @@ C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.UI.MVC.csproj.CopyComplete
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.dll
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.pdb
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Infra.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\Content\imagensProdutosAlternativos\teste.txt
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.dll
@@ -150,7 +151,6 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.Http
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.WebPages.xml
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.WebPages.Razor.xml
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Infra.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Infra.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.UI.MVC.csprojAssemblyReference.cache
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.UI.MVC.csproj.CoreCompileInputs.cache
