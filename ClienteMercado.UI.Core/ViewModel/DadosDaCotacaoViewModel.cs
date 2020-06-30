@@ -61,6 +61,8 @@ namespace ClienteMercado.UI.Core.ViewModel
 
         public string cotacaoRespondida { get; set; }
 
+        public string naoCotouTodosOsItens { get; set; }
+
         public string cotacaoNegociacaoAceita { get; set; }
 
         public string existemCotacoesQueReceberamContraProposta { get; set; }

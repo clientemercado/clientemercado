@@ -88,6 +88,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 if ((Sessao.IdEmpresaUsuario > 0) && (cCC > 0) && (iCM > 0) && (iCCF > 0))
                 {
                     int valor = 0;
+                    decimal somaValoresCotados = 0;
                     //decimal percentualIdealConfirmado = 0;
                     string mensagem = "";
                     string respondeuContraProposta = "";
@@ -144,7 +145,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //CONSULTAR LISTA de ITENS da COTACAO FILHA
                     List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacaoFilha = negociosItensCotacaoFilhaCentralCompras.ConsultarItensDaCotacaoDaCC(iCCF);
 
-                    //---------------------------------------------------------------------------------------------
                     //Busca os dados do CHAT entre a EMPRESA COTANTE e a EMPRESA FORNECEDORA
                     List<chat_cotacao_central_compras> listaConversasApuradasNoChat =
                         negociosChatCotacaoCentralCompras.BuscarChatEntreEmpresaCotanteEFornecedor(dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS);
@@ -168,7 +168,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         mensagem = "naoTem";
                     }
-                    //---------------------------------------------------------------------------------------------
 
                     DadosDaCotacaoViewModel viewModelEnviarResposta = new DadosDaCotacaoViewModel();
 
@@ -199,6 +198,16 @@ namespace ClienteMercado.Areas.Company.Controllers
                     viewModelEnviarResposta.idUsuarioEmpresaFornecedoraCotada = dadosUsuarioEmpresaLogada.ID_CODIGO_USUARIO;
                     //respondeuContraProposta = listaDeItensDaCotacaoFilha.Where(m => (m.PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS > 0)).ToList().Count() > 0 ? "sim" : "nao";
                     //viewModelEnviarResposta.inRespondeuContraProposta = respondeuContraProposta;
+
+                    //----------------------------------------------------------------------
+                    //VERIFICA SE TODOS OS ITENS FORAM OU NÃO RESPONDIDOS 
+                    for (int v = 0; v < listaDeItensDaCotacaoFilha.Count; v++)
+                    {
+                        somaValoresCotados = (somaValoresCotados + listaDeItensDaCotacaoFilha[v].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS);
+                    }
+
+                    viewModelEnviarResposta.naoCotouTodosOsItens = somaValoresCotados == 0 ? "sim" : "nao";
+                    //----------------------------------------------------------------------
 
                     if (dadosCotacaoFilha.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS)
                     {
