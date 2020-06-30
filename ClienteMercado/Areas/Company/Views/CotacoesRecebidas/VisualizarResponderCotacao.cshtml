@@ -240,6 +240,7 @@
             <input type="hidden" id="idEmpresaCotada" value="@Model.inIdEmpresaCotada" />
             <input type="hidden" id="inNomeUsuarioFornRespondendo" value="@Model.inNomeUsuarioLogado" />
             <input type="hidden" id="inCotacaoRespondida" value="@Model.cotacaoRespondida" />
+            <input type="hidden" id="inNaoCotouTodosOsItens" value="@Model.naoCotouTodosOsItens" />
             <input type="hidden" id="inNCTodos" value="0" />
             <input type="hidden" id="inContraProposta" value="@Model.inRecebeuContraProposta" />
             <input type="hidden" id="inRespostaCP" value="@Model.inRespondeuContraProposta" />
@@ -262,12 +263,14 @@
 
          OBS: GERAR NOVA COTAÇÃO. TODAS AS ANTERIORES FORAM EXCLUÍDAS; <=== FAZER ISSO PRIMEIRO...
 
-
          0) SE RECEBER CONTRA-PROPOSTA, DESABILITAR OS BOTÕES "NÃO COTAR TODOS OS ITENS" e "ENVIAR RESPOSTA COTAÇÃO";
          1) EM CASOS SEM CONTRA PROPOSTA, NO GRID ESPECIFICO PRA ISSO - TICAR ITENS PEDIDOS COM V VERDE - RISCAR ITEM NÃO PEDIDO, em caso de PEDIDO PARCIAL;
          3) CONFIRMADO O PEDIDO, EXIBIR BOTÃO RECUSAR PEDIDO;
-
          */
+
+        if (($('#inNaoCotouTodosOsItens').val() == "sim") && ($('#inCotacaoRespondida').val() == "sim")) {
+            $('#inResponderACotacao').hide();
+        }
 
         $('.monetario').mask('000.000.000.000.000,00', { reverse: true });
 
@@ -408,16 +411,66 @@
             $('.exibenaocotar').show();
             $('#inNaoCotarTodos').hide();
             $('#inDesfazerNaoCotarTodos').show();
+            $('#inResponderACotacao').hide();
         });
 
         //BOTÃO 'DESFAZER NÃO COTAR TODOS'
         $(document).on("click", "#inDesfazerNaoCotarTodos", function () {
+            //-------------------------------------------------------------------
+            //DESFAZER RESPOSTA da COTAÇÃO
+            var codCotacaoSendoRespondida = $('#inCCF').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/CotacoesRecebidas/CancelarRespostaEnviadaACotacao",
+                dataType: 'json',
+                data: {
+                    'iCM': $('#inICM').val(),
+                    'idEmpresaCotada': $('#idEmpresaCotada').val(),
+                    'codCotacao': codCotacaoSendoRespondida
+                },
+                success: function (data) {
+                    debugger;
+
+                    /*
+                     OBS: INFORMAR ATRAVÉS DE UMA MENSAGEM O CANCELAMENTO DA COTAÇÃO... CONTINUAR AQUI TBBM E NO CONTROLLER...
+                     */
+
+                    //if (data.cotacaoRespondida == "sim") {
+                    //    $('#inCotacaoRespondida').val('sim');
+
+                    //    if (parseInt($('#inNCTodos').val()) == 0) {
+                    //        //RESPONDEU COTAÇÃO
+                    //        swal({
+                    //            title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA COTAÇÃO foi respondida com SUCESSO.\nAguarde a ANÁLISE e RESPOSTA da Central de Compras.\n\nLhe desejamos sucesso e bons negócios em suas negociações de venda.\n\nEquipe\nCliente & Mercado.", type: "warning"
+                    //        },
+                    //            function () {
+                    //                debugger;
+                    //                carregarGrid()
+                    //            });
+                    //    }
+                    //    else {
+                    //        //RESPONDEU NÃO COTAÇÃO
+                    //        swal({
+                    //            title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA Central de Compras foi informada de sua resposta da COTAÇÃO.\n\nLhe desejamos sucesso em suas próximas negociações.\n\nEquipe\nCliente & Mercado.", type: "warning"
+                    //        },
+                    //            function () {
+                    //                debugger;
+                    //                carregarGrid()
+                    //            });
+                    //    }
+                    //}
+                }
+            });
+            //-------------------------------------------------------------------
+
             $('#inNCTodos').val(0);
             $('.exibenaocotar').hide();
             $('.naocotar').show();
             $('.monetario').removeAttr('disabled');
             $('#inDesfazerNaoCotarTodos').hide();
             $('#inNaoCotarTodos').show();
+            $('#inResponderACotacao').show();
         });
 
         //BOTÃO 'ENVIAR RESPOSTA da COTAÇÃO'
