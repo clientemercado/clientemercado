@@ -123,14 +123,6 @@
                                         <a href="javascript:;" id="inDesfazerNaoCotarTodos" class="btn btn-warning" style="display:none;">
                                             <i class='fas fa-undo-alt'></i> desfazer NC todos itens
                                         </a>
-                                        /*
-                                         ($('#inCotacaoRespondida').val() == 'sim') && (parseInt($('#inNCTodos').val()) == 1)
-
-                                            OBS: EM CASO DE OPÇÃO DE 'NÃO COTAR', DESABILITAR O BOTÃO ABAIXO... SÓ HABILITAR SE FOR DESFEITO O 'NÃO COTAR'
-
-                                            CONTINUAR AQUI...
-                                         */
-
                                         <a href="javascript:;" id="inResponderACotacao" class="btn btn-warning" style="">
                                             <i class="fa fa-sign-out"></i> Enviar Resposta da Cotação
                                         </a>
@@ -411,23 +403,21 @@
             $('.exibenaocotar').show();
             $('#inNaoCotarTodos').hide();
             $('#inDesfazerNaoCotarTodos').show();
-            $('#inResponderACotacao').hide();
+            //$('#inResponderACotacao').hide();
         });
 
         //BOTÃO 'DESFAZER NÃO COTAR TODOS'
         $(document).on("click", "#inDesfazerNaoCotarTodos", function () {
             //-------------------------------------------------------------------
             //DESFAZER RESPOSTA da COTAÇÃO
-            var codCotacaoSendoRespondida = $('#inCCF').val();
-
             $.ajax({
                 type: "POST",
-                url: "/CotacoesRecebidas/CancelarRespostaEnviadaACotacao",
+                url: "/CotacoesRecebidas/CancelarRespostaEnviadaParaACotacaoZerada",
                 dataType: 'json',
                 data: {
                     'iCM': $('#inICM').val(),
                     'idEmpresaCotada': $('#idEmpresaCotada').val(),
-                    'codCotacao': codCotacaoSendoRespondida
+                    'iCCF': $('#inCCF').val()
                 },
                 success: function (data) {
                     debugger;
@@ -436,7 +426,7 @@
                      OBS: INFORMAR ATRAVÉS DE UMA MENSAGEM O CANCELAMENTO DA COTAÇÃO... CONTINUAR AQUI TBBM E NO CONTROLLER...
                      */
 
-                    //if (data.cotacaoRespondida == "sim") {
+                    if (data.canceladaResposta == "sim") {
                     //    $('#inCotacaoRespondida').val('sim');
 
                     //    if (parseInt($('#inNCTodos').val()) == 0) {
@@ -459,7 +449,7 @@
                     //                carregarGrid()
                     //            });
                     //    }
-                    //}
+                    }
                 }
             });
             //-------------------------------------------------------------------

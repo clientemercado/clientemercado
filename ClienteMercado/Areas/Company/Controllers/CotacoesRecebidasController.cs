@@ -675,42 +675,26 @@ namespace ClienteMercado.Areas.Company.Controllers
         //---------------------------------------------------------------------------
         //RESPONDER a COTAÇÃO pela PRIMEIRA VEZ
         [WebMethod]
-        public ActionResult CancelarRespostaEnviadaACotacao(int iCM, int idEmpresaCotada, string codCotacao)
+        public ActionResult CancelarRespostaEnviadaParaACotacaoZerada(int iCM, int idEmpresaCotada, int iCCF)
         {
             try
             {
-                var resultado = new { cotacaoRespondida = "" };
+                var resultado = new { canceladaResposta = "" };
 
                 /*
-                 SETAR O CANCELAMENTO DA COTAÇÃO... CONTINUAR AQUI.
+                 CONFERIR O CANCELAMENTO DA RESPOSTA DA COTAÇÃO... CONTINUAR AQUI...
                  */
 
-                ////RECEBENDO os ARRAYS
-                //string[] idsItensCotados2, valoresTabelaItensCotados2, valoresDiferenciadosItensCotados2;
+                NCotacaoFilhaCentralDeComprasService negociosCotacaoFilha = new NCotacaoFilhaCentralDeComprasService();
+                NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoFilha = new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
 
-                //idsItensCotados2 = idsItensCotados.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                //valoresTabelaItensCotados2 = valoresTabelaItensCotados.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                //valoresDiferenciadosItensCotados2 = valoresDiferenciadosItensCotados.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                //DESFAZER MARCAÇÃO de COTAÇÃO RESPONDIDA
+                negociosCotacaoFilha.DesfazerMarcacaoDeCotacaoRespondida(iCM, idEmpresaCotada, iCCF);
 
-                //NCotacaoFilhaCentralDeComprasService negociosCotacaoFilha = new NCotacaoFilhaCentralDeComprasService();
-                //NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoFilha = new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
+                //DESFAZER MARCAÇÃO de ITEM de COTAÇÃO RESPONDIDO
+                negociosItensCotacaoFilha.DesfazerMarcacaoDeItemDeCotacaoRespondido(iCCF);
 
-                ////DADOS da COTAÇÃO FILHA RECEBIDA pela EMPRESA em questão
-                //cotacao_filha_central_compras dadosCotacaoFilha =
-                //    negociosCotacaoFilha.ConsultarDadosDaCotacaoFilhaCCPeloCodigoDaEmpresaFornecedora(iCM, idEmpresaCotada);
-
-                ////SALVAR PREÇOS RESPONDIDOS para a COTAÇÃO RECEBIDA
-                //bool cotacaoRespondida =
-                //    negociosItensCotacaoFilha.ResponderACotacaoPelaPrimeiraVez(dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS, idsItensCotados2,
-                //    valoresTabelaItensCotados2, valoresDiferenciadosItensCotados2);
-
-                //if (cotacaoRespondida)
-                //{
-                //    //SETAR ESTA COTAÇÃO como RESPONDIDA por este FORNECEDOR
-                //    negociosCotacaoFilha.SetarComoRespondidaEstaCotacaoPorEsteFornecedor(iCM, dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS);
-
-                //    resultado = new { cotacaoRespondida = "sim" };
-                //}
+                resultado = new { canceladaResposta = "sim" };
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
             }

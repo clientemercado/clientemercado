@@ -116,15 +116,16 @@ namespace ClienteMercado.Infra.Repositories
             {
                 dadosDoItemRespondido.PRECO_UNITARIO_ITENS_TABELA_COTACAO_CENTRAL_COMPRAS = valorTabelaItemNegociado;
                 dadosDoItemRespondido.PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS = valorDiferenciadoRespondido;
+                dadosDoItemRespondido.PRODUTO_COTADO_CENTRAL_COMPRAS = true;
 
-                if (valorDiferenciadoRespondido > 0)
-                {
-                    dadosDoItemRespondido.PRODUTO_COTADO_CENTRAL_COMPRAS = true;
-                }
-                else
-                {
-                    dadosDoItemRespondido.PRODUTO_COTADO_CENTRAL_COMPRAS = false;
-                }
+                //if (valorDiferenciadoRespondido > 0)
+                //{
+                //    dadosDoItemRespondido.PRODUTO_COTADO_CENTRAL_COMPRAS = true;
+                //}
+                //else
+                //{
+                //    dadosDoItemRespondido.PRODUTO_COTADO_CENTRAL_COMPRAS = false;
+                //}
 
                 _contexto.SaveChanges();
 
@@ -141,6 +142,19 @@ namespace ClienteMercado.Infra.Repositories
                 _contexto.itens_cotacao_filha_negociacao_central_compras.Where(m => (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF)).ToList();
 
             return listaDeitensDaCotacao;
+        }
+
+        //DESFAZER MARCAÇÃO de ITEM de COTAÇÃO RESPONDIDO
+        public void DesfazerMarcacaoDeItemDeCotacaoRespondido(int iCCF)
+        {
+            List<itens_cotacao_filha_negociacao_central_compras> listaDeitensDaCotacao =
+                _contexto.itens_cotacao_filha_negociacao_central_compras.Where(m => (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF)).ToList();
+
+            for (int i = 0; i < listaDeitensDaCotacao.Count; i++)
+            {
+                listaDeitensDaCotacao[i].PRODUTO_COTADO_CENTRAL_COMPRAS = false;
+                _contexto.SaveChanges();
+            }
         }
     }
 }

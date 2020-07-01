@@ -199,6 +199,21 @@ namespace ClienteMercado.Infra.Repositories
             }
         }
 
+        //DESFAZER MARCAÇÃO de COTAÇÃO ENVIADA
+        public void DesfazerMarcacaoDeCotacaoRespondida(int iCM, int idEmpresaCotada, int iCCF)
+        {
+            cotacao_filha_central_compras dadosDaCotacaoFilha = 
+                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) 
+                && (m.ID_CODIGO_EMPRESA == idEmpresaCotada) 
+                && (m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF));
+
+            if (dadosDaCotacaoFilha != null)
+            {
+                dadosDaCotacaoFilha.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS = false;
+                _contexto.SaveChanges();
+            }
+        }
+
         //SETAR ESTA COTAÇÃO como RESPONDIDA por este FORNECEDOR
         public void SetarComoRespondidaEstaCotacaoPorEsteFornecedor(int iCM, int iCCF)
         {

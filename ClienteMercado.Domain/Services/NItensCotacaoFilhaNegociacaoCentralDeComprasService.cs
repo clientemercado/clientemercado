@@ -238,5 +238,11 @@ namespace ClienteMercado.Domain.Services
         {
             return dRepository.ConsultarItensDaCotacaoDaCC(iCCF);
         }
+
+        //DESFAZER MARCAÇÃO de ITEM de COTAÇÃO RESPONDIDO
+        public void DesfazerMarcacaoDeItemDeCotacaoRespondido(int iCCF)
+        {
+            dRepository.DesfazerMarcacaoDeItemDeCotacaoRespondido(iCCF);
+        }
     }
 }

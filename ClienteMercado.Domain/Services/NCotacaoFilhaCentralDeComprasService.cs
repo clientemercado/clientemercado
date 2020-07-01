@@ -192,6 +192,12 @@ namespace ClienteMercado.Domain.Services
             dcotacaofilhacentraldecompras.SetarComoRespondidaEstaCotacaoPorEsteFornecedor(iCM, iCCF);
         }
 
+        //DESFAZER MARCAÇÃO de COTAÇÃO ENVIADA
+        public void DesfazerMarcacaoDeCotacaoRespondida(int iCM, int idEmpresaCotada, int iCCF)
+        {
+            dcotacaofilhacentraldecompras.DesfazerMarcacaoDeCotacaoRespondida(iCM, idEmpresaCotada, iCCF);
+        }
+
         ////BUSCAR APENAS 1 COTAÇÃO na LISTA de COTAÇÕES ENVIADAS
         //public List<ListaDeCotacoesEnviadasParaEmpresasCotadasViewModel> BuscarUmaCotacaoEnviadasConformeCotacaoMaster(int iCM)
         //{
