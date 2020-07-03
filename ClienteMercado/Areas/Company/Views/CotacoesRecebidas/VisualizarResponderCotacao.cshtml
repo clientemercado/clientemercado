@@ -394,13 +394,19 @@
 
         //BOTÃO 'NÃO COTAR TODOS'
         $(document).on("click", "#inNaoCotarTodos", function () {
+            debugger;
+
+            /*
+             OBS: ESTUDAR A POSSIBILIDADE AO SE CLICAR NESSA OPÇÃO, JÁ ATIVAR O BOTÃO 'ENVIAR RESPOSTA DA COTAÇÃO' - CONTINUAR AQUI...
+             */
+
             $('#inNCTodos').val(1);
             $('.monetario').val('0,00').attr('disabled', 'disabled');
             $('.flagnaocotar').val(0);
             $('.naocotar').hide();
-            $('.desfazernc').hide();
-            $('.exibenaocotar').attr('disabled', 'disabled');
-            $('.exibenaocotar').show();
+            $('.desfazernc').show();
+            //$('.exibenaocotar').attr('disabled', 'disabled');
+            //$('.exibenaocotar').show();
             $('#inNaoCotarTodos').hide();
             $('#inDesfazerNaoCotarTodos').show();
             //$('#inResponderACotacao').hide();
@@ -422,33 +428,21 @@
                 success: function (data) {
                     debugger;
 
-                    /*
-                     OBS: INFORMAR ATRAVÉS DE UMA MENSAGEM O CANCELAMENTO DA COTAÇÃO... CONTINUAR AQUI TBBM E NO CONTROLLER...
-                     */
-
                     if (data.canceladaResposta == "sim") {
-                    //    $('#inCotacaoRespondida').val('sim');
-
-                    //    if (parseInt($('#inNCTodos').val()) == 0) {
-                    //        //RESPONDEU COTAÇÃO
-                    //        swal({
-                    //            title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA COTAÇÃO foi respondida com SUCESSO.\nAguarde a ANÁLISE e RESPOSTA da Central de Compras.\n\nLhe desejamos sucesso e bons negócios em suas negociações de venda.\n\nEquipe\nCliente & Mercado.", type: "warning"
-                    //        },
-                    //            function () {
-                    //                debugger;
-                    //                carregarGrid()
-                    //            });
-                    //    }
-                    //    else {
-                    //        //RESPONDEU NÃO COTAÇÃO
-                    //        swal({
-                    //            title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nA Central de Compras foi informada de sua resposta da COTAÇÃO.\n\nLhe desejamos sucesso em suas próximas negociações.\n\nEquipe\nCliente & Mercado.", type: "warning"
-                    //        },
-                    //            function () {
-                    //                debugger;
-                    //                carregarGrid()
-                    //            });
-                    //    }
+                        //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                        new PNotify({
+                            title: 'SUCESSO!',
+                            text: "Sua RESPOSTA para esta COTAÇÂO, foi ANULADA com SUCESSO!",
+                            type: 'success',
+                            styling: 'bootstrap3',
+                            icons: 'bootstrap3',
+                            addclass: 'customsuccess',
+                            animateSpeed: 'fast',
+                            mouseReset: true,
+                            Buttons: {
+                                closer: true
+                            }
+                        });
                     }
                 }
             });
@@ -456,9 +450,12 @@
 
             $('#inNCTodos').val(0);
             $('.exibenaocotar').hide();
+            $('.desfazernc').hide();
             $('.naocotar').show();
             $('.monetario').removeAttr('disabled');
             $('#inDesfazerNaoCotarTodos').hide();
+            $('.valortabela').attr("disabled", false);
+            $('.valordiferenciado').attr("disabled", false);
             $('#inNaoCotarTodos').show();
             $('#inResponderACotacao').show();
         });
@@ -785,14 +782,14 @@
         //-------------------------------------------------------------------------------
         debugger;
 
-        if (($('#inCotacaoRespondida').val() == 'sim') && (parseInt($('#inNCTodos').val()) == 1)) {
-            $('#inNaoCotarTodos').hide();
-            $('#inDesfazerNaoCotarTodos').show();
-            $('.valortabela').attr("disabled", true);
-            $('.valordiferenciado').attr("disabled", true);
-            $('.naocotar').hide();
-            $('.desfazernc').show();
-        }
+        //if (($('#inCotacaoRespondida').val() == 'sim') && (parseInt($('#inNCTodos').val()) == 1)) {
+        //    $('#inNaoCotarTodos').hide();
+        //    $('#inDesfazerNaoCotarTodos').show();
+        //    $('.valortabela').attr("disabled", true);
+        //    $('.valordiferenciado').attr("disabled", true);
+        //    $('.naocotar').hide();
+        //    $('.desfazernc').show();
+        //}
 
         //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
         var grid = $('#gridItensCotadosCC').bootgrid({
@@ -912,6 +909,10 @@
             if ((parseFloat(total) == 0) && ($('#inCotacaoRespondida').val() == "sim")) {
                 $('#inNaoCotarTodos').hide();
                 $('#inDesfazerNaoCotarTodos').show();
+                $('.naocotar').hide();
+                $('.desfazernc').show();
+                $('.valortabela').attr("disabled", true);
+                $('.valordiferenciado').attr("disabled", true);
             }
         });
         //-------------------------------------------------------------------------------

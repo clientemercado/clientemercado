@@ -681,10 +681,6 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 var resultado = new { canceladaResposta = "" };
 
-                /*
-                 CONFERIR O CANCELAMENTO DA RESPOSTA DA COTAÇÃO... CONTINUAR AQUI...
-                 */
-
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilha = new NCotacaoFilhaCentralDeComprasService();
                 NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoFilha = new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
 
