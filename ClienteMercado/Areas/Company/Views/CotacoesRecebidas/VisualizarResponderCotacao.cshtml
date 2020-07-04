@@ -396,11 +396,11 @@
         $(document).on("click", "#inNaoCotarTodos", function () {
             debugger;
 
-            /*
-             OBS: ESTUDAR A POSSIBILIDADE AO SE CLICAR NESSA OPÇÃO, JÁ ATIVAR O BOTÃO 'ENVIAR RESPOSTA DA COTAÇÃO' - CONTINUAR AQUI...
-             */
-
             $('#inNCTodos').val(1);
+
+            //CLICAR em RESPONDER COTAÇÃO
+            $("#inResponderACotacao").trigger('click');
+
             $('.monetario').val('0,00').attr('disabled', 'disabled');
             $('.flagnaocotar').val(0);
             $('.naocotar').hide();
@@ -544,11 +544,19 @@
                                 }
                             });
                         }
-                        //else {
-
-
-                        //}
-
+                        else {
+                            //DESFAZER NÃO EXIBIÇÕES de BOTÕES e DESLIGAMENTO de CAMPOS
+                            $('#inNCTodos').val(0);
+                            $('.exibenaocotar').hide();
+                            $('.desfazernc').hide();
+                            $('.naocotar').show();
+                            $('.monetario').removeAttr('disabled');
+                            $('#inDesfazerNaoCotarTodos').hide();
+                            $('.valortabela').attr("disabled", false);
+                            $('.valordiferenciado').attr("disabled", false);
+                            $('#inNaoCotarTodos').show();
+                            $('#inResponderACotacao').show();
+                        }
                     });
             }
             else {
@@ -1074,6 +1082,7 @@
             $('#inValorRespostaItemPedido_' + indexe).val('0,00');
             $('#inValorTabelaItemPedido_' + indexe).removeAttr('disabled');
             $('#inValorRespostaItemPedido_' + indexe).removeAttr('disabled');
+            $('#inResponderACotacao').show();
         }
     }
 
