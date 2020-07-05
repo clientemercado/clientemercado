@@ -144,6 +144,12 @@ namespace ClienteMercado.Domain.Services
                         listaDeItensDaCotacao[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
                     listaDeItensDaCotacao[i].unidadeProdutoCotado = listaDeItensDaCotacao[i].unidadeProdutoCotado;
 
+                    if (dadosDaCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == true)
+                    {
+                        listaDeItensDaCotacao[i].valorContraPropostaProdutoCotado = 
+                            listaDeItensDaCotacao[i].PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
+                    }
+
                     //if (listaDeItensDaCotacao[i].PRODUTO_COTADO_CENTRAL_COMPRAS)
                     //{
                     //    listaDeItensDaCotacao[i].produtoCotadoNaoCotado = "sim";

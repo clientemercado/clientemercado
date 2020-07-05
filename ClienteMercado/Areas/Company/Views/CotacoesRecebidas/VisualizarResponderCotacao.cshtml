@@ -161,15 +161,15 @@
                                 <thead class="flip-content">
                                     <tr>
                                         @*<th data-column-id="idItemCotado" data-type="numeric" data-identifier="true" data-visible="false" data-width="4%">&nbsp;</th>*@
-                                        <th data-column-id="produtoCotado" data-width="25%" data-align="left" data-formatter="link1">Produto</th>
+                                        <th data-column-id="produtoCotado" data-width="20%" data-align="left" data-formatter="link1">Produto</th>
                                         <th data-column-id="marcaProdutoCotado" data-width="10%" data-header-align="center" data-align="left" data-formatter="link2">Marca</th>
                                         <th data-column-id="quantidadeProdutoCotado" data-width="10%" data-header-align="center" data-align="right" data-formatter="link3">Quant.</th>
-                                        <th data-column-id="unidadeProdutoCotado" data-width="6%" data-header-align="center" data-align="right" data-formatter="link4">Unid.</th>
+                                        <th data-column-id="unidadeProdutoCotado" data-width="8%" data-header-align="center" data-align="right" data-formatter="link4">Unid.</th>
                                         <th data-column-id="" data-width="10%" data-header-align="center" data-align="right" data-formatter="link5">Embalagem</th>
-                                        <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link6">R$ Vlr Tabela</th>
-                                        <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link7">R$ Vlr Diferenciado</th>
+                                        <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link6">R$ Tabela</th>
+                                        <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link7">R$ Difer.</th>
                                         <th data-column-id="" data-width="10%" data-header-align="center" data-align="right" data-formatter="link8">COTAR / NC</th>
-                                        <th data-column-id="" data-width="5%" data-header-align="center" data-align="center" data-formatter="link9">Ped.</th>
+                                        <th data-column-id="" data-width="8%" data-header-align="center" data-align="center" data-formatter="link9">Ped.</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -179,15 +179,15 @@
                                 <thead class="flip-content">
                                     <tr>
                                         @*<th data-column-id="idItemCotado" data-type="numeric" data-identifier="true" data-visible="false" data-width="4%">&nbsp;</th>*@
-                                        <th data-column-id="produtoCotado" data-width="25%" data-align="left" data-formatter="link1">Produto</th>
+                                        <th data-column-id="produtoCotado" data-width="20%" data-align="left" data-formatter="link1">Produto</th>
                                         <th data-column-id="marcaProdutoCotado" data-width="10%" data-header-align="center" data-align="left" data-formatter="link2">Marca</th>
                                         <th data-column-id="quantidadeProdutoCotado" data-width="10%" data-header-align="center" data-align="right" data-formatter="link3">Quant.</th>
-                                        <th data-column-id="unidadeProdutoCotado" data-width="6%" data-header-align="center" data-align="right" data-formatter="link4">Unid.</th>
+                                        <th data-column-id="unidadeProdutoCotado" data-width="8%" data-header-align="center" data-align="right" data-formatter="link4">Unid.</th>
                                         <th data-column-id="" data-width="10%" data-header-align="center" data-align="right" data-formatter="link5">Embalagem</th>
-                                        <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link6">R$ Vlr Tabela</th>
-                                        <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link7">R$ Vlr Diferenciado</th>
+                                        <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link6">R$ Tabela</th>
+                                        <th data-column-id="" data-width="12%" data-header-align="center" data-align="right" data-formatter="link7">R$ Difer.</th>
                                         <th data-column-id="" data-width="10%" data-header-align="center" data-align="right" data-formatter="link8">R$ Vlr CP</th>
-                                        <th data-column-id="" data-width="5%" data-header-align="center" data-align="center" data-formatter="link9">Ped.</th>
+                                        <th data-column-id="" data-width="8%" data-header-align="center" data-align="center" data-formatter="link9">Ped.</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -227,6 +227,7 @@
             </form>
             <!-- END FORM-->
 
+            <input type="hidden" id="inCCC" value="@Model.cCC" />
             <input type="hidden" id="inICM" value="@Model.iCM" />
             <input type="hidden" id="inCCF" value="@Model.iCCF" />
             <input type="hidden" id="idEmpresaCotada" value="@Model.inIdEmpresaCotada" />
@@ -356,7 +357,7 @@
                 $('#inMensagemStatus').html('');
 
                 swal({
-                    title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nSeu cliente lhe encaminhou uma Contra-Proposta para os valores respondidos por você na Cotação.\nAnalise com atenção e clique em ACEITAR CP ou NÃO ACEITAR CP.\n\nAtenciosamente,\nEquipe\nCliente & Mercado.", type: "warning"
+                    title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nSeu cliente lhe encaminhou uma Contra-Proposta para os valores respondidos por você na Cotação.\nAvalie com atenção e clique em ACEITAR CP ou NÃO ACEITAR CP.\n\nAtenciosamente,\nEquipe\nCliente & Mercado.", type: "warning"
                 },
                     function () {
                         debugger;
@@ -612,6 +613,10 @@
         $(document).on("click", "#inAceitarCP", function () {
             debugger;
 
+            /*
+             OBS: PRÓXIMO TESTE SERÁ 'ACEITAR CONTRA-PROPOSTA' - CONTINUAR AQUI...
+             */
+
             $.ajax({
                 type: "POST",
                 url: "/CotacoesRecebidas/AceitarContraProposta",
@@ -667,10 +672,8 @@
                                 function () {
                                     debugger;
 
-                                    $(".aceitecp").hide();
-                                    $('#inAceitouCP').hide();
-                                    $('#inNaoAceitouCP').show();
-                                    $('#gridItensCotadosCC_CP').bootgrid('reload');
+                                    //RECARREGAR a PÁGINA
+                                    window.location.href = "@Url.Action("VisualizarResponderCotacao", "CotacoesRecebidas", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#inCCF').val();
                                 });
                         }
                     }
@@ -1007,7 +1010,8 @@
                         //return "<input type='text' id='inValorContraProposta_" + row.idItemCotado + "' size='10' value=" + row.valorRespondidoProdutoCotado + " class='form-control monetario valorcp' valorResposta='" + row.valorRespondidoProdutoCotado + "' style='text-align:right;border: 1px solid #006400; font-weight:bold;' onclick='' disabled />";
                     }
                     else {
-                        return "<input type='text' id='inValorContraProposta_" + row.idItemCotado + "' size='10' value=" + row.valorRespondidoProdutoCotado + " class='form-control monetario valorcp' valorResposta='" + row.valorRespondidoProdutoCotado + "' style='text-align:right;border: 1px solid #f00; font-weight:bold;' onclick='' disabled />";
+                        //return "<input type='text' id='inValorContraProposta_" + row.idItemCotado + "' size='10' value=" + row.valorRespondidoProdutoCotado + " class='form-control monetario valorcp' valorResposta='" + row.valorRespondidoProdutoCotado + "' style='text-align:right;border: 1px solid #f00; font-weight:bold;' onclick='' disabled />";
+                        return "<input type='text' id='inValorContraProposta_" + row.idItemCotado + "' size='10' value=" + row.valorContraPropostaProdutoCotado + " class='form-control monetario valorcp' valorResposta='" + row.valorContraPropostaProdutoCotado + "' style='text-align:right;border: 1px solid #f00; font-weight:bold;' onclick='' disabled />";
                     }
                 },
                 "link9": function (column, row) {

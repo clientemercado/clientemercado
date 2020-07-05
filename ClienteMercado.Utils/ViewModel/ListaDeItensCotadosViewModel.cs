@@ -22,6 +22,8 @@ namespace ClienteMercado.Utils.ViewModel
 
         public string valorRespondidoProdutoCotado { get; set; }
 
+        public string valorContraPropostaProdutoCotado { get; set; }
+
         public int codigoProduto { get; set; }
 
         public string produtoCotadoNaoCotado { get; set; }
