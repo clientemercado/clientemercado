@@ -252,7 +252,7 @@
         debugger;
 
         /*
-         TAREFAS:  <== CONTINUAR AQUI...... <=== AQUI MESMO NESSE LOCAL 
+         TAREFAS:  <== CONTINUAR AQUI...... <=== AQUI MESMO NESSE LOCAL
 
          OBS: GERAR NOVA COTAÇÃO. TODAS AS ANTERIORES FORAM EXCLUÍDAS; <=== FAZER ISSO PRIMEIRO...
 
@@ -632,15 +632,13 @@
                         if (parseInt($('#inNCTodos').val()) == 0) {
                             //CONFIRMAÇÃO do ACEITE da CONTRA-PROPOSTA
                             swal({
-                                title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nSua ACEITAÇÃO para a CONTRA-PROPOSTA apresentada para esta COTAÇÃO foi registrada com SUCESSO.\nAguarde a ANÁLISE e RESPOSTA da Central de Compras.\n\nLhe desejamos sucesso e bons negócios em suas negociações de venda.\n\nEquipe\nCliente & Mercado.", type: "warning"
+                                title: "Caro(a) " + $('#inNomeUsuarioFornRespondendo').val() + ",\n\nSua ACEITAÇÃO para a CONTRA-PROPOSTA apresentada para esta COTAÇÃO foi registrada com SUCESSO.\nAguarde a ANÁLISE e RESPOSTA da Central de Compras.\n\nLhe desejamos sucesso e bons negócios em suas vendas.\n\nEquipe\nCliente & Mercado.", type: "warning"
                             },
                                 function () {
                                     debugger;
 
-                                    $(".aceitecp").hide();
-                                    $('#inNaoAceitouCP').hide();
-                                    $('#inAceitouCP').show();
-                                    $('#gridItensCotadosCC_CP').bootgrid('reload');
+                                    //RECARREGAR a PÁGINA
+                                    window.location.href = "@Url.Action("VisualizarResponderCotacao", "CotacoesRecebidas", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#inCCF').val();
                                 });
                         }
                     }
@@ -876,7 +874,7 @@
                         if ((row.itemFoiPedido == "nao") && (row.habilitar == "disabled")) {
                             return "<a href=\"#\" title='Produto PEDIDO a OUTRO Fornecedor'><font color='#FF0000'><i class='fas fa-check'></i></font><a>";
                         }
-                        else { 
+                        else {
                             return "<div id='inTicado_" + row.idItemCotacao + "' style='display:none;'><font color='#32CD32'><i class='fas fa-check'></i></font></div>";
                         }
                     }
