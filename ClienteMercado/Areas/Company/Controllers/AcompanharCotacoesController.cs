@@ -553,12 +553,25 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //VERIFICAR SE JÁ FOI ENVIADO CONTRA-PROPOSTA A ALGUM OUTRO FORNECEDOR
                     if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == false)
                     {
+                        //SE NÃO RECEBEU CONTRA-PROPOSTA
                         List<cotacao_filha_central_compras> listaDeCotacoesComContraProposta =
                             negociosCotacaoFilhaCC.BuscarListaDeCotacoesFilhaQueReceberamContraProposta(iCM);
 
                         if (listaDeCotacoesComContraProposta.Count > 0)
                         {
                             viewModelAnalisarResposta.existemCotacoesQueReceberamContraProposta = "sim";
+                        }
+                    }
+                    else
+                    {
+                        //SE RECEBEU CONTRA-PROPOSTA
+                        if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
+                        {
+                            viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - FOI ACEITA PELO FORNECEDOR";
+                        }
+                        else
+                        {
+                            viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
                         }
                     }
 

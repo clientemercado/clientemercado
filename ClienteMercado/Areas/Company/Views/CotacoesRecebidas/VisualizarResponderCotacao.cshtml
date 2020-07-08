@@ -613,10 +613,6 @@
         $(document).on("click", "#inAceitarCP", function () {
             debugger;
 
-            /*
-             OBS: PRÓXIMO TESTE SERÁ 'ACEITAR CONTRA-PROPOSTA' - CONTINUAR AQUI...
-             */
-
             $.ajax({
                 type: "POST",
                 url: "/CotacoesRecebidas/AceitarContraProposta",
@@ -649,6 +645,10 @@
         //NÃO ACEITAR CONTRA-PROPOSTA
         $(document).on("click", "#inNaoAceitarCP", function () {
             debugger;
+
+            /*
+            OBS: PRÓXIMO TESTE SERÁ 'NÃO ACEITAR CONTRA-PROPOSTA' - CONTINUAR AQUI...
+            */
 
             $.ajax({
                 type: "POST",

@@ -161,6 +161,7 @@ namespace ClienteMercado.Infra.Repositories
 
             if (dadosDaCotacaoFilha != null)
             {
+                dadosDaCotacaoFilha.ACEITOU_CONTRA_PROPOSTA = false;
                 dadosDaCotacaoFilha.RECEBEU_CONTRA_PROPOSTA = false;
                 _contexto.SaveChanges();
             }

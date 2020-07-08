@@ -177,7 +177,7 @@
 
                                                 if (Model.cotacaoRespondida == "sim")
                                                 {
-                                                    <a href="#" id="inEnviarContraProposta" class="btn blue button-submit"><i class="far fa-edit"></i> Contra-Proposta</a>
+                                                    <a href="#" id="inEnviarContraProposta" class="btn blue button-submit"><i class="far fa-edit"></i> Enviar Contra-Proposta</a>
                                                 }
                                             }
 
@@ -898,11 +898,16 @@
                     }
                 },
                 "valorcp": function (column, row) {
+                    debugger;
+
                     if (row.temContraProposta) {
-                        if (parseFloat(row.valorUnitarioContraProposta) == parseFloat(row.valorUnitarioDiferenciado)) {
+                        var unitarioCP = row.valorUnitarioContraProposta.replace(".", "").replace(",", ".");
+                        var unitarioDiferenciado = row.valorUnitarioDiferenciado.replace(".", "").replace(",", ".");
+
+                        if (parseFloat(unitarioCP) == parseFloat(unitarioDiferenciado)) {
                             return "<font color=\"#3297E0\" title=\"Menor preço respondido por este Fornecedor\"><span><b>" + row.valorUnitarioContraProposta + "</b></span></font>";
                         }
-                        else if (parseFloat(row.valorUnitarioContraProposta) < parseFloat(row.valorUnitarioDiferenciado)) {
+                        else if (parseFloat(unitarioCP) < parseFloat(unitarioDiferenciado)) {
                             return "<font color=\"#008000\" title=\"Valor da Contra-Proposta\"><span><b>" + row.valorUnitarioContraProposta + "</b></span></font>";
                         }
                     }
@@ -912,10 +917,13 @@
                 },
                 "valorTotal": function (column, row) {
                     if (row.temContraProposta) {
-                        if (parseFloat(row.valorUnitarioContraProposta) == parseFloat(row.valorUnitarioDiferenciado)) {
+                        var unitarioCP = row.valorUnitarioContraProposta.replace(".", "").replace(",", ".");
+                        var unitarioDiferenciado = row.valorUnitarioDiferenciado.replace(".", "").replace(",", ".");
+
+                        if (parseFloat(unitarioCP) == parseFloat(unitarioDiferenciado)) {
                             return "<font color=\"#3297E0\" title=\"Total respondido pelo Fornecedor\"><span><b>" + row.valorTotalUnitarioVsQuantidade + "</b></span></font>";
                         }
-                        else if (parseFloat(row.valorUnitarioContraProposta) < parseFloat(row.valorUnitarioDiferenciado)) {
+                        else if (parseFloat(unitarioCP) < parseFloat(unitarioDiferenciado)) {
                             return "<font color=\"#008000\" title=\"Total Contra-Proposta\"><span><b>" + row.valorTotalUnitarioVsQuantidade + "</b></span></font>";
                         }
                     }
