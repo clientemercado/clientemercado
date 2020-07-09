@@ -571,7 +571,14 @@ namespace ClienteMercado.Areas.Company.Controllers
                         }
                         else
                         {
-                            viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                            if (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA)
+                            {
+                                viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - NÃO FOI ACEITA PELO FORNECEDOR";
+                            }
+                            else
+                            {
+                                viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                            }
                         }
                     }
 

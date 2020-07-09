@@ -60,6 +60,8 @@ namespace ClienteMercado.Data.Entities
 
         public bool? ACEITOU_CONTRA_PROPOSTA { get; set; }
 
+        public bool REJEITOU_CONTRA_PROPOSTA { get; set; }
+
         public int? ID_CODIGO_PEDIDO_CENTRAL_COMPRAS { get; set; }
 
         public bool RECEBEU_PEDIDO { get; set; }

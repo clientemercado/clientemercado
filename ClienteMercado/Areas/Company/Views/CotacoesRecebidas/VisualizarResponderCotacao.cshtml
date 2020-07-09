@@ -252,6 +252,10 @@
         debugger;
 
         /*
+         EM CASO DE 'NÃO ACEITE DA COPNTRA-PROPOSTA', DEVE SER MOSTRADO UMA MENSAGEM NO STATUS AO USUÁRIO. VER DEMAIS COMPORTAMENTOS... <--- CONTINUAR AQUI...
+         */
+
+        /*
          TAREFAS:  <== CONTINUAR AQUI...... <=== AQUI MESMO NESSE LOCAL
 
          OBS: GERAR NOVA COTAÇÃO. TODAS AS ANTERIORES FORAM EXCLUÍDAS; <=== FAZER ISSO PRIMEIRO...
@@ -604,8 +608,6 @@
                     }
                 });
             }
-
-
             //==========================================================================
         });
 
@@ -645,10 +647,6 @@
         //NÃO ACEITAR CONTRA-PROPOSTA
         $(document).on("click", "#inNaoAceitarCP", function () {
             debugger;
-
-            /*
-            OBS: PRÓXIMO TESTE SERÁ 'NÃO ACEITAR CONTRA-PROPOSTA' - CONTINUAR AQUI...
-            */
 
             $.ajax({
                 type: "POST",

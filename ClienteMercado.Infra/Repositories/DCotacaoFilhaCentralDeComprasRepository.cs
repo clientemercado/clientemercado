@@ -34,7 +34,7 @@ namespace ClienteMercado.Infra.Repositories
                         " ID_TIPO_FRETE, RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS, DATA_RESPOSTA_COTACAO_FILHA_CENTRAL_COMPRAS, FORMA_PAGAMENTO_COTACAO_FILHA_CENTRAL_COMPRAS, " +
                         " TIPO_DESCONTO, PERCENTUAL_DESCONTO, PRECO_LOTE_ITENS_COTACAO_CENTRAL_COMPRAS, OBSERVACAO_COTACAO_CENTRAL_COMPRAS, RECEBEU_CONTRA_PROPOSTA, " +
                         " ACEITOU_CONTRA_PROPOSTA, DATA_RECEBEU_COTACAO_CENTRAL_COMPRAS, ID_CODIGO_PEDIDO_CENTRAL_COMPRAS, RECEBEU_PEDIDO, DATA_RECEBEU_PEDIDO, " +
-                        " CONFIRMOU_PEDIDO, DATA_CONFIRMOU_PEDIDO, SOLICITAR_CONFIRMACAO_ACEITE_COTACAO " +
+                        " CONFIRMOU_PEDIDO, DATA_CONFIRMOU_PEDIDO, SOLICITAR_CONFIRMACAO_ACEITE_COTACAO, REJEITOU_CONTRA_PROPOSTA " +
                         " FROM cotacao_filha_central_compras " +
                         " WHERE ID_COTACAO_MASTER_CENTRAL_COMPRAS = " + iD_COTACAO_MASTER_CENTRAL_COMPRAS;
 
@@ -162,6 +162,7 @@ namespace ClienteMercado.Infra.Repositories
             if (dadosDaCotacaoFilha != null)
             {
                 dadosDaCotacaoFilha.ACEITOU_CONTRA_PROPOSTA = false;
+                dadosDaCotacaoFilha.REJEITOU_CONTRA_PROPOSTA = false;
                 dadosDaCotacaoFilha.RECEBEU_CONTRA_PROPOSTA = false;
                 _contexto.SaveChanges();
             }
@@ -289,7 +290,7 @@ namespace ClienteMercado.Infra.Repositories
             }
         }
 
-        //SETAR CONTRA-PROPOSTA COMO NÃO ACEITA para a COTAÇÃO / DESMARCANDO RECEBIMENTO de CONTRA-PROPOSTA
+        //SETAR CONTRA-PROPOSTA COMO NÃO ACEITA pelo FORNECEDOR para a COTAÇÃO / DESMARCANDO RECEBIMENTO de CONTRA-PROPOSTA
         public void SetarContraPropostaComoNaoAceitaPeloFornecedor(int iCM, int iCCF)
         {
             cotacao_filha_central_compras dadosDaCotacaoFilha =
@@ -298,7 +299,7 @@ namespace ClienteMercado.Infra.Repositories
             if (dadosDaCotacaoFilha != null)
             {
                 dadosDaCotacaoFilha.ACEITOU_CONTRA_PROPOSTA = false;
-                dadosDaCotacaoFilha.RECEBEU_CONTRA_PROPOSTA = false;
+                dadosDaCotacaoFilha.REJEITOU_CONTRA_PROPOSTA = true;
                 _contexto.SaveChanges();
             }
         }
