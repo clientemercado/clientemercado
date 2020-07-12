@@ -77,6 +77,8 @@ namespace ClienteMercado.UI.Core.ViewModel
 
         public string inAceitouContraProposta { get; set; }
 
+        public string inRejeitouContraProposta { get; set; }
+
         public string todosCotantesAceitaramNegociacao { get; set; }
 
         public string mensagemStatus { get; set; }

@@ -222,19 +222,26 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         viewModelEnviarResposta.inRecebeuContraProposta = "sim";
 
-                        if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
+                        if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA == false))
                         {
                             viewModelEnviarResposta.inAceitouContraProposta = "sim";
                             viewModelEnviarResposta.mensagemStatus = "VOCÊ ACEITOU A CONTRA-PROPOSTA PARA ESTA COTAÇÃO";
 
                             viewModelEnviarResposta.inRespondeuContraProposta = "sim";
+                            viewModelEnviarResposta.inRejeitouContraProposta = "nao";
                         }
-                        else if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false)
+                        else if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA == true))
                         {
                             viewModelEnviarResposta.inAceitouContraProposta = "nao";
                             viewModelEnviarResposta.mensagemStatus = "VOCÊ NÃO ACEITOU A CONTRA-PROPOSTA PARA ESTA COTAÇÃO";
 
                             viewModelEnviarResposta.inRespondeuContraProposta = "nao";
+                            viewModelEnviarResposta.inRejeitouContraProposta = "sim";
+                        }
+                        else
+                        {
+                            viewModelEnviarResposta.inRespondeuContraProposta = "nao";
+                            viewModelEnviarResposta.inRejeitouContraProposta = "nao";
                         }
                     }
                     else

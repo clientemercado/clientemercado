@@ -340,6 +340,7 @@
             <input type="hidden" id="inVerParticipantes" value="" />
             <input type="hidden" id="inExistemOutrosFornecedoresComContraProposta" value="@Model.existemCotacoesQueReceberamContraProposta" />
             <input type="hidden" id="inPossuiContraPropostaEnviada" value="@Model.possuiContraProposta" />
+            <input type="hidden" id="inRejeitouCP" value="@Model.inRejeitouContraProposta" />
             <input type="hidden" id="inAceiteCP" value="@Model.inAceitouContraProposta" />
             <input type="hidden" id="ID_FORNECEDOR_COTACAO_ANALISADA" value="0" />
             <input type="hidden" id="inValorTotal" value="" />
@@ -358,8 +359,15 @@
         carregarChat();
 
         /*
-         OBS: PRIMEIRA PARTE DA MENSAGEM ANTES DO '-' DEVE SER EM AZUL. DEPOIS DO '-' DEVE SER EM VERMELHO; CONTINUAR AQUI...
+         OBS: PRIMEIRA PARTE DA MENSAGEM ANTES DO '-' DEVE SER EM AZUL. DEPOIS DO '-' DEVE SER EM VERMELHO; 
+         APLICAR EM TODOS OS LUGARES ONDE VISUALIZA E RESPONDE A COTAÇÃO
+
+         CONTINUAR AQUI... 
          */
+
+        if ($('#inRejeitouCP').val() == "sim") {
+            $('#inSolicitarConfirmacao').hide();
+        }
 
         if ($('#mensagemStatus').val() != "") {
             $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + $('#mensagemStatus').val());

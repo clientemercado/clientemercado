@@ -571,13 +571,15 @@ namespace ClienteMercado.Areas.Company.Controllers
                         }
                         else
                         {
-                            if (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA)
+                            if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA))
                             {
                                 viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - NÃO FOI ACEITA PELO FORNECEDOR";
+                                viewModelAnalisarResposta.inRejeitouContraProposta = "sim";
                             }
-                            else
+                            else if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA == false))
                             {
                                 viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                                viewModelAnalisarResposta.inRejeitouContraProposta = "nao";
                             }
                         }
                     }

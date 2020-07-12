@@ -111,7 +111,7 @@
                                 <a href="@Url.Action("Index", "CotacoesRecebidas", new { Area = "Company" })" class="btn default button-previous">
                                     <i class="fas fa-arrow-left"></i> Voltar
                                 </a>
-                                <a href="@Url.Action("EmpresasParticipantesDaCotacaoCentralCompras", "CotacoesRecebidas", new { Area = "Company", cCC = @Model.cCC, iCM = Model.iCM, iCCF = Model.iCCF })" class="btn  blue button-submit">
+                                <a href="@Url.Action("EmpresasParticipantesDaCotacaoCentralCompras", "CotacoesRecebidas", new { Area = "Company", cCC = @Model.cCC, iCM = Model.iCM, iCCF = Model.iCCF })" id="inVercotantes" class="btn blue button-submit aceitecp">
                                     <i class="fas fa-clipboard-list"></i> Empresas Cotantes
                                 </a>
                                 @{
@@ -237,6 +237,7 @@
             <input type="hidden" id="inNCTodos" value="0" />
             <input type="hidden" id="inContraProposta" value="@Model.inRecebeuContraProposta" />
             <input type="hidden" id="inRespostaCP" value="@Model.inRespondeuContraProposta" />
+            <input type="hidden" id="inRejeitouCP" value="@Model.inRejeitouContraProposta" />
             <input type="hidden" id="inAceiteCP" value="@Model.inAceitouContraProposta" />
             <input type="hidden" id="inCodigoUsuarioAdmCC" value="@Model.inCodUsuariomEmpresaADM" />
             <input type="hidden" id="idUsuarioEmpresaFornecedoraCotada" value="@Model.idUsuarioEmpresaFornecedoraCotada" />
@@ -250,10 +251,6 @@
 <script>
     jQuery(document).ready(function () {
         debugger;
-
-        /*
-         EM CASO DE 'NÃO ACEITE DA COPNTRA-PROPOSTA', DEVE SER MOSTRADO UMA MENSAGEM NO STATUS AO USUÁRIO. VER DEMAIS COMPORTAMENTOS... <--- CONTINUAR AQUI...
-         */
 
         /*
          TAREFAS:  <== CONTINUAR AQUI...... <=== AQUI MESMO NESSE LOCAL
@@ -346,7 +343,11 @@
             $('#TEXTO_CHAT_COTACAO_USUARIO_COTANTE_ALTERNATIVO').show();
         }
 
+        debugger;
+
         if ($('#inContraProposta').val() == "nao") {
+            debugger;
+
             $('#gridItensCotadosCC_CP').hide();
             $('#gridItensCotadosCC').show();
 
@@ -354,10 +355,12 @@
             carregarChat();
         }
         else if ($('#inContraProposta').val() == "sim") {
+            debugger;
+
             $('#gridItensCotadosCC').hide();
             $('#gridItensCotadosCC_CP').show();
 
-            if (($('#inContraProposta').val() == "sim") && ($('#inRespostaCP').val() == "nao")) {
+            if (($('#inContraProposta').val() == "sim") && ($('#inRespostaCP').val() == "nao") && ($('#inRejeitouCP').val() == "nao")) {
                 $('#inMensagemStatus').html('');
 
                 swal({
@@ -373,8 +376,16 @@
                         carregarChat();
                     });
             }
-            else if (($('#inContraProposta').val() == "sim") && ($('#inRespostaCP').val() == "sim")) {
+            else if (($('#inContraProposta').val() == "sim") && ($('#inRespostaCP').val() == "sim") && ($('#inRejeitouCP').val() == "nao")) {
                 debugger;
+
+                carregarGridContraProposta();
+                carregarChat();
+            }
+            else if (($('#inContraProposta').val() == "sim") && ($('#inRespostaCP').val() == "nao") && ($('#inRejeitouCP').val() == "sim")) {
+                debugger;
+
+                $('.aceitecp').hide();
 
                 carregarGridContraProposta();
                 carregarChat();

@@ -104,6 +104,7 @@ C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.UI.MVC.csproj.CopyComplete
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.dll
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.pdb
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Utils.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\Content\imagensProdutosAlternativos\teste.txt
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.dll
@@ -137,7 +138,6 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Domain.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.UI.Core.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.UI.Core.dll.config
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Utils.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Utils.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\EntityFramework.xml
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\EntityFramework.SqlServer.xml
