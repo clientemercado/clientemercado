@@ -567,18 +567,18 @@ namespace ClienteMercado.Areas.Company.Controllers
                         //SE RECEBEU CONTRA-PROPOSTA
                         if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                         {
-                            viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - FOI ACEITA PELO FORNECEDOR";
+                            viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
                         }
                         else
                         {
                             if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA))
                             {
-                                viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - NÃO FOI ACEITA PELO FORNECEDOR";
+                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - NÃO FOI ACEITA PELO FORNECEDOR";
                                 viewModelAnalisarResposta.inRejeitouContraProposta = "sim";
                             }
                             else if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA == false))
                             {
-                                viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
                                 viewModelAnalisarResposta.inRejeitouContraProposta = "nao";
                             }
                         }
@@ -662,21 +662,21 @@ namespace ClienteMercado.Areas.Company.Controllers
                             {
                                 if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                                 {
-                                    viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - FOI ACEITA PELO FORNECEDOR";
+                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
                                 }
                                 else
                                 {
-                                    viewModelAnalisarResposta.mensagemStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
                                 }
                             }
 
                             if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == false))
                             {
-                                viewModelAnalisarResposta.mensagemStatus = textoMsgStatus + " - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
+                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
                             }
                             else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
                             {
-                                viewModelAnalisarResposta.mensagemStatus = textoMsgStatus + " - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
                             }
                         }
                     }
@@ -1966,21 +1966,21 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                         {
-                            mensagemDoStatus = "CONTRA PROPOSTA ENVIADA - FOI ACEITA PELO FORNECEDOR";
+                            mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
                         }
                         else
                         {
-                            mensagemDoStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                            mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
                         }
                     }
 
                     if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == false))
                     {
-                        mensagemDoStatus = textoMsgStatus + " - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
+                        mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
                     }
                     else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
                     {
-                        mensagemDoStatus = textoMsgStatus + " - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                        mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
                     }
                     //-------------------------------------------------------------------------
 
@@ -2202,21 +2202,21 @@ namespace ClienteMercado.Areas.Company.Controllers
                 {
                     if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                     {
-                        mensagemDoStatus = "CONTRA PROPOSTA ENVIADA - FOI ACEITA PELO FORNECEDOR";
+                        mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
                     }
                     else
                     {
-                        mensagemDoStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                        mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
                     }
                 }
 
                 if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == false))
                 {
-                    mensagemDoStatus = textoMsgStatus + " - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
+                    mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
                 }
                 else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
                 {
-                    mensagemDoStatus = textoMsgStatus + " - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                    mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
                 }
                 //-------------------------------------------------------------------------
 
@@ -2288,21 +2288,21 @@ namespace ClienteMercado.Areas.Company.Controllers
                             {
                                 if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                                 {
-                                    mensagemDoStatus = "CONTRA PROPOSTA ENVIADA - FOI ACEITA PELO FORNECEDOR";
+                                    mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
                                 }
                                 else
                                 {
-                                    mensagemDoStatus = "CONTRA PROPOSTA ENVIADA - AGUARDANDO RESPOSTA FORNECEDOR";
+                                    mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
                                 }
                             }
 
                             if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == false))
                             {
-                                mensagemDoStatus = textoMsgStatus + " - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
+                                mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - AGUARDANDO CONFIRMAÇÃO FORNECEDOR";
                             }
                             else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
                             {
-                                mensagemDoStatus = textoMsgStatus + " - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                                mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
                             }
                             //-------------------------------------------------------------------------
 
@@ -2315,7 +2315,6 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
             catch (Exception erro)
             {
-
                 throw erro;
             }
         }
