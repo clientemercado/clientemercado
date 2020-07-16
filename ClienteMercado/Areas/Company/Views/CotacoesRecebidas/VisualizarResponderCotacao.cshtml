@@ -253,15 +253,8 @@
         debugger;
 
         /*
-         CONTINUAR AQUI... OBS: VER OS CASOS DE FORNECEDORES QUE NÃO RECEBERAM CONTRA-PROPOSTA. OS BOTÕES TREPARAM UM SOBRE O OUTRO. TESTAR ISSO E CORRIGIR...
-         */
-
-        /*
          TAREFAS:  <== CONTINUAR AQUI...... <=== AQUI MESMO NESSE LOCAL
 
-         OBS: GERAR NOVA COTAÇÃO. TODAS AS ANTERIORES FORAM EXCLUÍDAS; <=== FAZER ISSO PRIMEIRO...
-
-         0) SE RECEBER CONTRA-PROPOSTA, DESABILITAR OS BOTÕES "NÃO COTAR TODOS OS ITENS" e "ENVIAR RESPOSTA COTAÇÃO";
          1) EM CASOS SEM CONTRA PROPOSTA, NO GRID ESPECIFICO PRA ISSO - TICAR ITENS PEDIDOS COM V VERDE - RISCAR ITEM NÃO PEDIDO, em caso de PEDIDO PARCIAL;
          3) CONFIRMADO O PEDIDO, EXIBIR BOTÃO RECUSAR PEDIDO;
          */
@@ -373,7 +366,7 @@
                     function () {
                         debugger;
 
-                        $('#mensagemStatus').val('ATENÇÃO - INFORME SE "ACEITA" ou "NÃO ACEITA" a CONTRA-PROPOSTA ENVIADA PELA CENTRAL de COMPRAS')
+                        $('#mensagemStatus').val('<font color="#3297E0">ATENÇÃO</font>&nbsp;' + '- INFORME SE "ACEITA" ou "NÃO ACEITA" a CONTRA-PROPOSTA ENVIADA PELA CENTRAL de COMPRAS')
                         $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + $('#mensagemStatus').val());
 
                         carregarGridContraProposta();
