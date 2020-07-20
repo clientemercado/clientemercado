@@ -82,5 +82,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string todosCotantesAceitaramNegociacao { get; set; }
 
         public string mensagemStatus { get; set; }
+
+        public string rejeitouSolicitacaoAprovandoValoresCotacao { get; set; }
     }
 }

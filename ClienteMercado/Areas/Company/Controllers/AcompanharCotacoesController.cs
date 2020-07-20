@@ -636,7 +636,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     percentualIdealConfirmado = ((cotacoesIndividuaisDasEmpresasDaCC.Count * 100) / 100);
 
-                    if (dadosCotacaoFilha.SOLICITAR_CONFIRMACAO_ACEITE_COTACAO)
+                    if (dadosCotacaoFilha.SOLICITAR_CONFIRMACAO_ACEITE_COTACAO) //--> AQUI...
                     {
                         if (cotacoesIndividuaisQueRegistraramAceiteDaRespostaDoFornecedor.Count < percentualIdealConfirmado)
                         {
@@ -644,7 +644,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                             viewModelAnalisarResposta.todosCotantesAceitaramNegociacao = "nao";
 
                             //ATUALIZAR STATUS
-                            viewModelAnalisarResposta.mensagemStatus = "AGUARDANDO - RESPOSTA COTANTES";
+                            viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>AGUARDANDO</font>&nbsp;- RESPOSTA COTANTES";
                         }
                         else
                         {
@@ -1477,11 +1477,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                 //(OBs: REGISTRA TBM o FORNECEDOR q está tendo sua RESPOSTA de COTAÇÃO AVALIADA)
                 negociosCotacaoMaster.SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(iCM, idFor);
 
-                //===========================================================================================================================
-                //TESTAR ISSO <-- CONTINUAR AQUI...
                 //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras
                 negociosCotacaoFilha.SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(iCM, iCCF, idFor);
-                //===========================================================================================================================
 
                 //SETAR FLAG SOLICITAR_CONFIRMACAO_COTACAO como TRUE na tabela cotacao_individual_empresa_central_compras
                 List<cotacao_individual_empresa_central_compras> listaDeCotacoesIndividuais =
@@ -1640,6 +1637,40 @@ namespace ClienteMercado.Areas.Company.Controllers
                 throw erro;
             }
         }
+
+        //=============================================================================
+        public JsonResult RegistrarNaoAceitacaoDaNegociacaoDoAdmDaCCComOFornecedor(int cCC, int iCM, int idEmpresaLogada)
+        {
+            try
+            {
+                var resultado = new { confirmacaoNegociacao = "" };
+
+                /*
+                 CONTINUAR AQUI... --> NA TABELA 'cotacao_individual_empresa_central_compras', SETAR O CAMPO NEGOCIACAO_COTACAO_REJEITADA como true
+                                       E CONTINUAR NO AJA QUE CHAMA ESTA FUNÇÃO, DESLIGANDO BOTÕES E ATUALIZANDO A VIEW;
+                 */
+
+                //NEmpresasParticipantesCentralDeComprasService negociosEmpresasParticipantesCC = new NEmpresasParticipantesCentralDeComprasService();
+                //NCotacaoIndividualEmpresaCentralComprasService negociosCotacaoIndividual = new NCotacaoIndividualEmpresaCentralComprasService();
+
+                ////PEGAR ID da EMPRESA LOGADA na CENTRAL de COMPRAS
+                //empresas_participantes_central_de_compras dadosEmpresaParticipante =
+                //    negociosEmpresasParticipantesCC.BuscarDadosDaEmpresaParticipanteDaCCPorIDdaEmpresa(cCC, idEmpresaLogada);
+
+                ////SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
+                //cotacao_individual_empresa_central_compras cotacaoIndividualConfirmada =
+                //    negociosCotacaoIndividual.SetarFlagConfirmandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(iCM, dadosEmpresaParticipante.ID_EMPRESA_CENTRAL_COMPRAS);
+
+                //resultado = new { confirmacaoNegociacao = "Ok" };
+
+                return Json(resultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+        //=============================================================================
 
         //GERAR CONTRA-PROPOSTA para a EMPRESA FORNECEDORA
         public JsonResult GerarContraPropostaAoFornecedorEmQuestao(int idCotacaoFilha, int idFornecedor, int cCC, int codEmpresaAdm)

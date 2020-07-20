@@ -147,17 +147,20 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
-        public cotacao_individual_empresa_central_compras SetarFlagDeAceitacaoDaNegociacaoDaCotacaoRespondidaPelosFornecedores(int codCentralCompras, int iCM, int idEmpresa)
+        public cotacao_individual_empresa_central_compras SetarFlagDeAceitacaoDaNegociacaoDaCotacaoRespondidaPelosFornecedores(int codCentralCompras, int iCM, 
+            int idEmpresaAdm)
         {
             cotacao_individual_empresa_central_compras dadosDaCotacaoIndividual = new cotacao_individual_empresa_central_compras();
 
             empresas_participantes_central_de_compras dadosEmpresasParticipantes =
-                _contexto.empresas_participantes_central_de_compras.FirstOrDefault(m => ((m.ID_CENTRAL_COMPRAS == codCentralCompras) && (m.ID_CODIGO_EMPRESA == idEmpresa)));
+                _contexto.empresas_participantes_central_de_compras.FirstOrDefault(m => ((m.ID_CENTRAL_COMPRAS == codCentralCompras) 
+                && (m.ID_CODIGO_EMPRESA == idEmpresaAdm)));
 
             if (dadosEmpresasParticipantes != null)
             {
                 dadosDaCotacaoIndividual =
-                    _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_EMPRESA_CENTRAL_COMPRAS == dadosEmpresasParticipantes.ID_EMPRESA_CENTRAL_COMPRAS)));
+                    _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) 
+                    && (m.ID_EMPRESA_CENTRAL_COMPRAS == dadosEmpresasParticipantes.ID_EMPRESA_CENTRAL_COMPRAS)));
 
                 if (dadosDaCotacaoIndividual != null)
                 {

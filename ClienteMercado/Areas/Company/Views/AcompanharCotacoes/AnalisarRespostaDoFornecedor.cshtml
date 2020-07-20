@@ -149,7 +149,7 @@
                                                 {
                                                     if (Model.cotacaoRespondida == "sim")
                                                     {
-                                                        <a href="#" id="inSolicitarConfirmacao" class="btn  blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
+                                                        <a href="#" id="inSolicitarConfirmacao" class="btn blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
                                                     }
                                                 }
                                             }
@@ -161,7 +161,8 @@
                                                 }
                                                 else
                                                 {
-                                                    <a href="#" id="inConfirmarAceiteDaNegociacao" class="btn btn-warning"><i class="fas fa-search"></i> Cotação em Análise</a>
+                                                    @*<a href="#" id="inConfirmarAceiteDaNegociacao" class="btn btn-warning"><i class="fas fa-search"></i> Cotação em Análise</a>*@
+                                                    <a href="#" id="" class="btn btn-warning"><i class="fas fa-search"></i> Cotação em Análise</a>
                                                 }
                                             }
                                         }
@@ -173,8 +174,6 @@
                                             }
                                             else
                                             {
-                                                @*<a href="#" id="inEnviarContraProposta" class="btn blue button-submit"><i class="far fa-edit"></i> Contra-Proposta</a>*@
-
                                                 if (Model.cotacaoRespondida == "sim")
                                                 {
                                                     <a href="#" id="inEnviarContraProposta" class="btn blue button-submit"><i class="far fa-edit"></i> Enviar Contra-Proposta</a>
@@ -185,8 +184,6 @@
                                             {
                                                 if (Model.possuiContraProposta == "sim")
                                                 {
-                                                    @*<a href="#" id="inSolicitarConfirmacao" class="btn blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>*@
-
                                                     if (Model.cotacaoRespondida == "sim")
                                                     {
                                                         <a href="#" id="inSolicitarConfirmacao" class="btn  blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
@@ -199,8 +196,6 @@
                                             }
                                             else
                                             {
-                                                @*<a href="#" id="inSolicitarConfirmacao" class="btn blue button-submit"> <i class="fas fa-stamp"></i> Confirmar Associados</a>*@
-
                                                 if (Model.cotacaoRespondida == "sim")
                                                 {
                                                     <a href="#" id="inSolicitarConfirmacao" class="btn  blue button-submit"><i class="fas fa-stamp"></i> Confirmar Associados</a>
@@ -215,12 +210,15 @@
                                         {
                                             if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
                                             {
-                                                <a href="#" id="inConfirmarAceiteDaNegociacao" class="btn btn-warning"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
+                                                <a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
+                                                <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style="">
+                                                    <i class="far fa-thumbs-down"></i> Não Aceitar Negociação
+                                                </a>
                                                 <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>
                                             }
                                             else
                                             {
-                                                <a href="#" id="inConfirmarAceiteDaNegociacao" class="btn btn-warning"><i class="fas fa-search"></i> Cotação em Análise</a>
+                                                <a href="#" id="" class="btn btn-warning"><i class="fas fa-search"></i> Cotação em Análise</a>
                                             }
                                         }
                                         else
@@ -251,13 +249,13 @@
                             @{
                                 if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
                                 {
-                                    <div class="col-md-2">
-                                        <font color="#3297E0" size="3"><b>Participantes:</b></font>&nbsp;&nbsp;<font size="3"><b>@Model.quantidadeEmpresasParticipantesDestaCotacao</b></font>
+                                    <div class="col-md-1">
+                                        <font color="#3297E0" size="2"><b>Participantes:</b></font>&nbsp;<font size="3"><b>@Model.quantidadeEmpresasParticipantesDestaCotacao</b></font>
                                     </div>
-                                    <div class="col-md-2">
-                                        <font color="#3297E0" size="3"><b>Confirmados:</b></font>&nbsp;&nbsp;<font size="3" color="@Model.corQuantidadeConfirmada"><b>@Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados</b></font>
+                                    <div class="col-md-1">
+                                        <font color="#3297E0" size="2"><b>Confirmados:</b></font>&nbsp;&nbsp;<font size="3" color="@Model.corQuantidadeConfirmada"><b>@Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados</b></font>
                                     </div>
-                                    <div class="col-md-2">&nbsp;</div>
+                                    @*<div class="col-md-4">&nbsp;</div>*@
                                 }
                                 else
                                 {
@@ -346,6 +344,8 @@
             <input type="hidden" id="inValorTotal" value="" />
             <input type="hidden" id="inIdPedidoRecebido" value="@ViewBag.idPedido" />
             <input type="hidden" id="inTodosCotantesAceitaramNegociacao" value="@Model.todosCotantesAceitaramNegociacao" />
+            <input type="hidden" id="inSolicitaconfirmacao" value="Model.existeSolicitacaoDeConfirmacaoAprovandoRespostaDosFornecedores" />
+            <input type="hidden" id="inRejeitouNegpociacao" value="@Model.rejeitouSolicitacaoAprovandoValoresCotacao" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
         </div>
     </div>
@@ -355,6 +355,10 @@
 
 <script>
     jQuery(document).ready(function () {
+        /*
+         ATENÇÃO: SE LOGAR NAS DEMAIS EMPRESAS PARTICIPANTES E RESPONDER O ACEITE DA COTAÇÃO... <--- CONTINUAR AQUI.
+         */
+
         carregarGrid();
         carregarChat();
 
@@ -395,7 +399,7 @@
             debugger;
 
             if (($('#inPossuiContraPropostaEnviada').val() == 'sim') && ($('#inAceiteCP').val() == "nao")) {
-                swal({ title: "ATENÇÃO:\n\nVocê enviou uma <b>CONTRA-PROPOSTA</b> a esse fornecedor.<br><br>Favor aguardar a resposta do fornecedor ou clique em <b>CANCELAR CONTRA-PROPOSTA</b> e o botão de <b>SOLICITAR CONFIRMAÇÃO</b> será liberado.", type: "warning", confirmButtonColor: "#337ab7", html: true });
+                swal({ title: "ATENÇÃO:<br><br>Você enviou uma <b>CONTRA-PROPOSTA</b> a esse fornecedor.<br><br>Favor aguardar a resposta do fornecedor, <b>ACEITANDO</b> ou <b>NÃO ACEITANDO</b> a mesma.", type: "warning", confirmButtonColor: "#337ab7", html: true });
             }
             else {
                 $.ajax({
@@ -407,7 +411,7 @@
                         'cCC': $('#inCCC').val(),
                         'eA': $('#ineA').val(),
                         'iCM': $("#inICM").val(),
-                        'iCCF': $("#iniCCF").val(), 
+                        'iCCF': $("#iniCCF").val(),
                         'idFor': $('#inIdEmpresaFornecedora').val()
                     },
                     success: function (data) {
@@ -584,7 +588,6 @@
 
         //BOTÃO de CONFIRMAÇÃO de ACEITE da NEGOCIAÇÃO
         $("#inConfirmarAceiteDaNegociacao").click(function () {
-            //-------------------------------------------------------------
             $.ajax({
                 url: "/AcompanharCotacoes/RegistrarAceiteDaNegociacaoDoAdmDaCCComOFornecedor",
                 dataType: 'json',
@@ -619,8 +622,49 @@
                     }
                 }
             });
-            //-------------------------------------------------------------
         });
+
+        //============================================================================
+        //BOTÃO de CONFIRMAÇÃO de ACEITE da NEGOCIAÇÃO
+        $("#inNaoAceitarNegociacao").click(function () {
+            $.ajax({
+                url: "/AcompanharCotacoes/RegistrarNaoAceitacaoDaNegociacaoDoAdmDaCCComOFornecedor",
+                dataType: 'json',
+                cache: false,
+                async: true,
+                data: {
+                    'cCC': $('#inCCC').val(),
+                    'iCM': $("#inICM").val(),
+                    'idEmpresaLogada': $('#inCodigoEmpresaLogada').val()
+                },
+                success: function (data) {
+                    debugger;
+
+                    swal({ title: "ATENÇÃO:<br><br>Este é um TESTE!.", type: "warning", confirmButtonColor: "#337ab7", html: true });
+
+                    @*if (data.confirmacaoNegociacao == "Ok") {
+                        //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                        new PNotify({
+                            title: 'SUCESSO!',
+                            text: 'Registramos o seu ACEITE para a negociação da COTAÇÃO em questão!',
+                            type: 'success',
+                            styling: 'bootstrap3',
+                            icons: 'bootstrap3',
+                            addclass: 'customsuccess',
+                            animateSpeed: 'fast',
+                            mouseReset: true,
+                            Buttons: {
+                                closer: true
+                            }
+                        });
+
+                        //RECARREGAR a PÁGINA
+                        window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
+                    }*@
+                }
+            });
+        });
+        //============================================================================
 
         //Contador REGRESSIVO de caracteres do campo TEXTAREA
         $(document).on("input", "#TEXTO_CHAT_COTACAO_USUARIO_COTANTE", function () {

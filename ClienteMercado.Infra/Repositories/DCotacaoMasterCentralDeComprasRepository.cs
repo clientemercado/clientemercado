@@ -142,7 +142,7 @@ namespace ClienteMercado.Infra.Repositories
             if (dadosDaCotacaoMaster != null)
             {
                 dadosDaCotacaoMaster.SOLICITAR_CONFIRMACAO_COTACAO = true;
-                dadosDaCotacaoMaster.ID_EMPRESA_FORNECEDORA_APROVADA = Sessao.IdUsuarioLogado;
+                dadosDaCotacaoMaster.ID_EMPRESA_FORNECEDORA_APROVACAO = idFor;
 
                 _contexto.SaveChanges();
             }

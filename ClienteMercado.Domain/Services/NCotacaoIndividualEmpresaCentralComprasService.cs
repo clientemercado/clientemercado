@@ -77,9 +77,10 @@ namespace ClienteMercado.Domain.Services
         }
 
         //SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
-        public cotacao_individual_empresa_central_compras SetarFlagDeAceitacaoDaNegociacaoDaCotacaoRespondidaPelosFornecedores(int codCentralCompras, int iCM, int idEmpresa)
+        public cotacao_individual_empresa_central_compras SetarFlagDeAceitacaoDaNegociacaoDaCotacaoRespondidaPelosFornecedores(int codCentralCompras, int iCM, 
+            int idEmpresaAdm)
         {
-            return dRepository.SetarFlagDeAceitacaoDaNegociacaoDaCotacaoRespondidaPelosFornecedores(codCentralCompras, iCM, idEmpresa);
+            return dRepository.SetarFlagDeAceitacaoDaNegociacaoDaCotacaoRespondidaPelosFornecedores(codCentralCompras, iCM, idEmpresaAdm);
         }
 
         //SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
