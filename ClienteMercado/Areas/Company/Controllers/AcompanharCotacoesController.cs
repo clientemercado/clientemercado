@@ -573,7 +573,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                         {
                             if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA))
                             {
-                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - NÃO FOI ACEITA PELO FORNECEDOR";
+                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- NÃO FOI ACEITA POR ESTE FORNECEDOR";
                                 viewModelAnalisarResposta.inRejeitouContraProposta = "sim";
                             }
                             else if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA == false))
@@ -698,6 +698,15 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //else
                     //{
                     //    viewModelAnalisarResposta.negociacaoDoAdmComFornecedoresAceita = "nao";
+                    //}
+
+                    //if (dadosDaCotacaoIndividualEmpresaLogada.NEGOCIACAO_COTACAO_REJEITADA)
+                    //{
+                    //    viewModelAnalisarResposta.inRejeitouContraProposta = "sim";
+                    //}
+                    //else
+                    //{
+                    //    viewModelAnalisarResposta.inRejeitouContraProposta = "nao";
                     //}
 
                     //VIEWBAGS
@@ -1620,7 +1629,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NEmpresasParticipantesCentralDeComprasService negociosEmpresasParticipantesCC = new NEmpresasParticipantesCentralDeComprasService();
                 NCotacaoIndividualEmpresaCentralComprasService negociosCotacaoIndividual = new NCotacaoIndividualEmpresaCentralComprasService();
 
-                //PEGAR ID da EMPRESA LOGADA na CENTRAL de COMPRAS
+                //PEGAR ID da EMPRESA LOGADA na CENTRAL de COMPRAS (ID da Empresa na CENTRAL de COMPRAS)
                 empresas_participantes_central_de_compras dadosEmpresaParticipante =
                     negociosEmpresasParticipantesCC.BuscarDadosDaEmpresaParticipanteDaCCPorIDdaEmpresa(cCC, idEmpresaLogada);
 
@@ -1638,30 +1647,25 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        //=============================================================================
         public JsonResult RegistrarNaoAceitacaoDaNegociacaoDoAdmDaCCComOFornecedor(int cCC, int iCM, int idEmpresaLogada)
         {
             try
             {
-                var resultado = new { confirmacaoNegociacao = "" };
+                var resultado = new { rejeicaoNegociacao = "" };
 
-                /*
-                 CONTINUAR AQUI... --> NA TABELA 'cotacao_individual_empresa_central_compras', SETAR O CAMPO NEGOCIACAO_COTACAO_REJEITADA como true
-                                       E CONTINUAR NO AJA QUE CHAMA ESTA FUNÇÃO, DESLIGANDO BOTÕES E ATUALIZANDO A VIEW;
-                 */
+                NEmpresasParticipantesCentralDeComprasService negociosEmpresasParticipantesCC = new NEmpresasParticipantesCentralDeComprasService();
+                NCotacaoIndividualEmpresaCentralComprasService negociosCotacaoIndividual = new NCotacaoIndividualEmpresaCentralComprasService();
 
-                //NEmpresasParticipantesCentralDeComprasService negociosEmpresasParticipantesCC = new NEmpresasParticipantesCentralDeComprasService();
-                //NCotacaoIndividualEmpresaCentralComprasService negociosCotacaoIndividual = new NCotacaoIndividualEmpresaCentralComprasService();
+                //PEGAR ID da EMPRESA LOGADA na CENTRAL de COMPRAS
+                empresas_participantes_central_de_compras dadosEmpresaParticipante =
+                    negociosEmpresasParticipantesCC.BuscarDadosDaEmpresaParticipanteDaCCPorIDdaEmpresa(cCC, idEmpresaLogada);
 
-                ////PEGAR ID da EMPRESA LOGADA na CENTRAL de COMPRAS
-                //empresas_participantes_central_de_compras dadosEmpresaParticipante =
-                //    negociosEmpresasParticipantesCC.BuscarDadosDaEmpresaParticipanteDaCCPorIDdaEmpresa(cCC, idEmpresaLogada);
+                //SETAR FLAG NEGOCIACAO_COTACAO_REJEITADA como TRUE na tabela cotacao_individual_empresa_central_compras
+                cotacao_individual_empresa_central_compras cotacaoIndividualConfirmada =
+                    negociosCotacaoIndividual.SetarFlagRejeitandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(iCM, 
+                    dadosEmpresaParticipante.ID_EMPRESA_CENTRAL_COMPRAS);
 
-                ////SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
-                //cotacao_individual_empresa_central_compras cotacaoIndividualConfirmada =
-                //    negociosCotacaoIndividual.SetarFlagConfirmandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(iCM, dadosEmpresaParticipante.ID_EMPRESA_CENTRAL_COMPRAS);
-
-                //resultado = new { confirmacaoNegociacao = "Ok" };
+                resultado = new { rejeicaoNegociacao = "Ok" };
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
             }
@@ -1670,7 +1674,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 throw erro;
             }
         }
-        //=============================================================================
 
         //GERAR CONTRA-PROPOSTA para a EMPRESA FORNECEDORA
         public JsonResult GerarContraPropostaAoFornecedorEmQuestao(int idCotacaoFilha, int idFornecedor, int cCC, int codEmpresaAdm)

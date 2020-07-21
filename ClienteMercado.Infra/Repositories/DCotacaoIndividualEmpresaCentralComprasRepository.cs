@@ -96,15 +96,33 @@ namespace ClienteMercado.Infra.Repositories
             return listaCotacoesIndividuaisDaCotacaoMaster;
         }
 
-        //SETAR FLAG NEGOCIACAO_COTACAO_ACEITA como TRUE na tabela cotacao_individual_empresa_central_compras
+        //SETAR FLAG NEGOCIACAO_COTACAO_REJEITADA como TRUE na tabela cotacao_individual_empresa_central_compras
         public cotacao_individual_empresa_central_compras SetarFlagConfirmandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(int iCM, int idEmpresaCC)
         {
             cotacao_individual_empresa_central_compras dadosDaCotacaoIndividual =
-                _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_EMPRESA_CENTRAL_COMPRAS == idEmpresaCC)));
+                _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) 
+                && (m.ID_EMPRESA_CENTRAL_COMPRAS == idEmpresaCC)));
 
             if (dadosDaCotacaoIndividual != null)
             {
                 dadosDaCotacaoIndividual.NEGOCIACAO_COTACAO_ACEITA = true;
+
+                _contexto.SaveChanges();
+            }
+
+            return dadosDaCotacaoIndividual;
+        }
+
+        //SETAR FLAG NEGOCIACAO_COTACAO_REJEITADA como TRUE na tabela cotacao_individual_empresa_central_compras
+        public cotacao_individual_empresa_central_compras SetarFlagRejeitandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(int iCM, int idEmpresaCC)
+        {
+            cotacao_individual_empresa_central_compras dadosDaCotacaoIndividual =
+                _contexto.cotacao_individual_empresa_central_compras.FirstOrDefault(m => ((m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)
+                && (m.ID_EMPRESA_CENTRAL_COMPRAS == idEmpresaCC)));
+
+            if (dadosDaCotacaoIndividual != null)
+            {
+                dadosDaCotacaoIndividual.NEGOCIACAO_COTACAO_REJEITADA = true;
 
                 _contexto.SaveChanges();
             }

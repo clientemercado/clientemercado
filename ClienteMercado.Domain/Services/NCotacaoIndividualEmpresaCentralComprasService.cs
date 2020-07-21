@@ -118,5 +118,12 @@ namespace ClienteMercado.Domain.Services
 
             return listaEmpresasDaCotacao;
         }
+
+        //SETAR FLAG NEGOCIACAO_COTACAO_REJEITADA como TRUE na tabela cotacao_individual_empresa_central_compras
+        public cotacao_individual_empresa_central_compras SetarFlagRejeitandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(int iCM, 
+            int iD_EMPRESA_CENTRAL_COMPRAS)
+        {
+            return dRepository.SetarFlagRejeitandoAceitacaoDosValoresNegociadosPorEmpresaAdmComOFornecedor(iCM, iD_EMPRESA_CENTRAL_COMPRAS);
+        }
     }
 }

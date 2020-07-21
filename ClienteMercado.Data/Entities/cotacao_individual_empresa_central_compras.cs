@@ -33,6 +33,8 @@ namespace ClienteMercado.Data.Entities
 
         public bool NEGOCIACAO_COTACAO_ACEITA { get; set; }
 
+        public bool NEGOCIACAO_COTACAO_REJEITADA { get; set; }
+
         [ForeignKey("ID_COTACAO_MASTER_CENTRAL_COMPRAS")]
         public virtual cotacao_master_central_compras cotacao_master_central_de_compras { get; set; }
 

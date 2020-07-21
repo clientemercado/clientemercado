@@ -210,10 +210,18 @@
                                         {
                                             if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
                                             {
+                                                //if (Model.inRejeitouContraProposta == "nao")
+                                                //{
+                                                    @*<a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
+                                                    <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style=""><i class="far fa-thumbs-down"></i> Não Aceitar Negociação</a>
+                                                    <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>*@
+                                                //}
+
+                                                /*
+                                                 CONTINUAR AQUI... OBS: AO CONFIRMAR ACEITANDO A NEGOCIAÇÃO, NÃO EXIBIR MAIS O BOTÃO 'Aceitar Negociação'. EXIBIR NESSE CASO, UMA MENSAGEM 'NEGOCIAÇÃO DA COTAÇÃO ACEITA'
+                                                */
+
                                                 <a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
-                                                <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style="">
-                                                    <i class="far fa-thumbs-down"></i> Não Aceitar Negociação
-                                                </a>
                                                 <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>
                                             }
                                             else
@@ -640,13 +648,11 @@
                 success: function (data) {
                     debugger;
 
-                    swal({ title: "ATENÇÃO:<br><br>Este é um TESTE!.", type: "warning", confirmButtonColor: "#337ab7", html: true });
-
-                    @*if (data.confirmacaoNegociacao == "Ok") {
+                    if (data.rejeicaoNegociacao == "Ok") {
                         //EXIBE MSG LATERAL À DIREITA SUPERIOR
                         new PNotify({
                             title: 'SUCESSO!',
-                            text: 'Registramos o seu ACEITE para a negociação da COTAÇÃO em questão!',
+                            text: 'Registramos que você NÃO ACEITOU a negociação da COTAÇÃO em questão!',
                             type: 'success',
                             styling: 'bootstrap3',
                             icons: 'bootstrap3',
@@ -660,7 +666,7 @@
 
                         //RECARREGAR a PÁGINA
                         window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
-                    }*@
+                    }
                 }
             });
         });
