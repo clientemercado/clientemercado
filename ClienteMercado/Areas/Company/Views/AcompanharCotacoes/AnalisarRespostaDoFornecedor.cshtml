@@ -212,9 +212,9 @@
                                             {
                                                 //if (Model.inRejeitouContraProposta == "nao")
                                                 //{
-                                                    @*<a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
-                                                    <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style=""><i class="far fa-thumbs-down"></i> Não Aceitar Negociação</a>
-                                                    <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>*@
+                                                @*<a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
+                                            <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style=""><i class="far fa-thumbs-down"></i> Não Aceitar Negociação</a>
+                                            <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>*@
                                                 //}
 
                                                 /*
@@ -353,7 +353,8 @@
             <input type="hidden" id="inIdPedidoRecebido" value="@ViewBag.idPedido" />
             <input type="hidden" id="inTodosCotantesAceitaramNegociacao" value="@Model.todosCotantesAceitaramNegociacao" />
             <input type="hidden" id="inSolicitaconfirmacao" value="Model.existeSolicitacaoDeConfirmacaoAprovandoRespostaDosFornecedores" />
-            <input type="hidden" id="inRejeitouNegpociacao" value="@Model.rejeitouSolicitacaoAprovandoValoresCotacao" />
+            <input type="hidden" id="inAceitouNegociacao" value="@Model.negociacaoDoAdmComFornecedoresAceita" />
+            <input type="hidden" id="inRejeitouNegociacao" value="@Model.rejeitouSolicitacaoAprovandoValoresCotacao" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
         </div>
     </div>
@@ -363,12 +364,13 @@
 
 <script>
     jQuery(document).ready(function () {
-        /*
-         ATENÇÃO: SE LOGAR NAS DEMAIS EMPRESAS PARTICIPANTES E RESPONDER O ACEITE DA COTAÇÃO... <--- CONTINUAR AQUI.
-         */
-
         carregarGrid();
         carregarChat();
+
+        if ($('#inAceitouNegociacao').val() == "sim") {
+            $('#inConfirmarAceiteDaNegociacao').hide();
+            $('#inNegociacaoAceita').show();            
+        }
 
         if ($('#inRejeitouCP').val() == "sim") {
             $('#inSolicitarConfirmacao').hide();

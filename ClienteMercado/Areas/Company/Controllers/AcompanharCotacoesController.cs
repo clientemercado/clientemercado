@@ -691,10 +691,10 @@ namespace ClienteMercado.Areas.Company.Controllers
                         viewModelAnalisarResposta.existeSolicitacaoDeConfirmacaoAprovandoRespostaDosFornecedores = "nao";
                     }
 
-                    //if (dadosDaCotacaoIndividualEmpresaLogada.NEGOCIACAO_COTACAO_ACEITA)
-                    //{
-                    //    viewModelAnalisarResposta.negociacaoDoAdmComFornecedoresAceita = "sim";
-                    //}
+                    if (dadosDaCotacaoIndividualEmpresaLogada.NEGOCIACAO_COTACAO_ACEITA)
+                    {
+                        viewModelAnalisarResposta.negociacaoDoAdmComFornecedoresAceita = "sim";
+                    }
                     //else
                     //{
                     //    viewModelAnalisarResposta.negociacaoDoAdmComFornecedoresAceita = "nao";
