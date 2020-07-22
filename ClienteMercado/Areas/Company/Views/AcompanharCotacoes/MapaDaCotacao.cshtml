@@ -86,6 +86,11 @@
                                                     if (nomeEmpresa.recebeuContraProposta == "sim")
                                                     {
                                                         <!-- Cotações com CONTRA PROPOSTA - AZUL -->
+
+                                                        <!--
+                                                            CONTINUAR AQUI...
+                                                            OBS: SE A COTAÇÃO TEVE A CONTRA-PROPOSTA REJEITADA, ALTERAR O TITLE = "ENVIADA CONTRA-PROPOSTA - NÃO FOI ACEITA pelo FORNECEDOR";
+                                                        -->
                                                         <td align="center" bgcolor="#87CEEB" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="ENVIAMOS CONTRA-PROPOSTA - Em Análise">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
                                                     }
                                                     else
@@ -93,6 +98,11 @@
                                                         if (Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados == Model.quantidadeEmpresasParticipantesDestaCotacao)
                                                         {
                                                             <!-- Cotações não aceitas - CINZA -->
+
+                                                            <!--
+                                                                CONTINUAR AQUI...
+                                                                OBS: SE A COTAÇÃO NÃO TIVER SIDO RESPONDIDA, MANTER A COR AMARELA E TITLE = "Não Respondida";
+                                                            -->
                                                             <td align="center" bgcolor="#DCDCDC" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="COTAÇÃO NÃO ACEITA">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
                                                         }
                                                         else
@@ -129,12 +139,6 @@
 
                                             @for (int i = 0; i < Model.listaDeEmpresasCotadas.Count; i++)
                                             {
-                                                /*
-                                                CONTINUAR AQUI...
-
-                                                OBS: COMPLETAR OS DADOS NO GRID DE FORNECEDORES... VER A POSSIBILIDADE SE UTILIZAR O MODELO DA VERATTO SUGERIDO AO BETO
-                                                */
-
                                                 if (@produtosCotados.listaUmProdutoCotadoPorEmpresa[i].menorPreco == "sim")
                                                 {
                                                     if (@produtosCotados.listaUmProdutoCotadoPorEmpresa[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS > 0)

@@ -348,7 +348,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //POPULAR VIEW MODEL
                     viewModelMapaCotacao.cCC = cCC;
                     viewModelMapaCotacao.iCM = iCM;
-
                     viewModelMapaCotacao.inNomeCentralCompras = dadosDaCentralDeCompras.NOME_CENTRAL_COMPRAS;
                     viewModelMapaCotacao.inCodEmpresaADM = dadosDaCentralDeCompras.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS;
                     viewModelMapaCotacao.inEmpresaLogadaAdmCC = dadosEmpresaADM.NOME_FANTASIA_EMPRESA.ToUpper();
@@ -361,7 +360,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     viewModelMapaCotacao.inCidadeEmpresaAdmCC = dadosLocalizacaoEmpresaADM[0].CIDADE_EMPRESA_USUARIO + "-" + dadosLocalizacaoEmpresaADM[0].UF_EMPRESA_USUARIO;
                     viewModelMapaCotacao.quantidadeEmpresasParticipantesDestaCotacao = cotacoesIndividuaisDasEmpresasDaCC.Count;
                     viewModelMapaCotacao.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados = cotacoesIndividuaisQueRegistraramAceiteDaRespostaDoFornecedor.Count;
-
                     viewModelMapaCotacao.listaDeEmpresasCotadas = ListaDeEmpresasCotadasParaFornecimento(iCM);
                     viewModelMapaCotacao.listaDeProdutosCotados = ListaDeProdutosDaCotacao(iCM);
 
