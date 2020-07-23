@@ -79,6 +79,17 @@
                                                     foreach (var itensCotadosPelaEmpresaAnexou in Model.listaDeEmpresasQueAnexaramCotacaoESeusItensCotados[contador].listaDeItensCotadosPorEmpresa)
                                                     {
                                                 <tr>
+                                                    <!--
+                                                    OBS: 
+                                                        1) SÓ EXIBIR OS VALORES E O TICADO, EM CASO DE TER ACEITADO A NEGOCIAÇÃO DOS VALORES COTADOS, CASO CONTRÁRIO, 
+                                                           EXIBIR SÓ OS PRODUTOS;
+                                                        2) SO EXIBIR TICADO NOS ITENS CUJO VALOR NEGOCIADO JÁ FOI ACEITO;
+                                                        3) EXIBIR UMA COLUNA PEDIDO FEITO;
+                                                        4) EXIBIR A EMPRESA FORNECEDORA DE QUEM O PRODUTO ESTÁ SENDO PEDIDO;
+                                                        5) ESTUDAR A POSSIBILIDADE DE ARMAZENAR O ID DA COTAÇÃO CUJOS VALORES NEGOCIADOS FORAM RESPONDIDOS, PARA FACILITAR A BUSCA E 
+                                                           PREENCHIMENTO DO GRID EM QUESTÃO;
+                                                        6) EM cotacao_individual_empresa_central_compras, ARMAZENAR O ID DO PEDIDO APÓS SER FEITO O PEDIDO;                                                        
+                                                    -->
                                                     <td>@itensCotadosPelaEmpresaAnexou.descricaoProdutoCotado</td>
                                                     <td>@itensCotadosPelaEmpresaAnexou.marcaProdutoCotado</td>
                                                     <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.quantidadeProdutoCotado&nbsp;</td>
