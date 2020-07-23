@@ -377,7 +377,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     ViewBag.dataHoje = diaDaSemana + ", " + diaDoMes + " de " + mesAtual + " de " + anoAtual;
                     ViewBag.ondeEstouAgora = "Acompanhar Cotações > Cotações da Central > Mapa da Cotação";
 
-                    return View(viewModelMapaCotacao);
+                    return View(viewModelMapaCotacao); 
                 }
                 else
                 {
@@ -898,6 +898,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     listaDeCotacoesEnviadasParaEmpresas[a].telefone1DaEmpresaCotada = dadosDaEmpresaCotada.TELEFONE1_EMPRESA_USUARIO;
                     listaDeCotacoesEnviadasParaEmpresas[a].email1DaEmpresaCotada = dadosDaEmpresaCotada.EMAIL1_EMPRESA;
 
+                    if (listaDeCotacoesEnviadasParaEmpresas[a].RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS)
+                    {
+                        listaDeCotacoesEnviadasParaEmpresas[a].cotacaoFoiRespondida = "sim";
+                    }
+
                     if (listaDeCotacoesEnviadasParaEmpresas[a].RECEBEU_CONTRA_PROPOSTA == true)
                     {
                         listaDeCotacoesEnviadasParaEmpresas[a].recebeuContraProposta = "sim";
@@ -906,6 +911,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (listaDeCotacoesEnviadasParaEmpresas[a].ACEITOU_CONTRA_PROPOSTA == true)
                     {
                         listaDeCotacoesEnviadasParaEmpresas[a].aceitouContraProposta = "sim";
+                    }
+
+                    if (listaDeCotacoesEnviadasParaEmpresas[a].REJEITOU_CONTRA_PROPOSTA == true)
+                    {
+                        listaDeCotacoesEnviadasParaEmpresas[a].rejeitouContraProposta = "sim";
                     }
                 }
 
@@ -945,8 +955,10 @@ namespace ClienteMercado.Areas.Company.Controllers
                         nomeFantasiaEmpresaCotada = nomeComposto,
                         telefoneEmpresaCotada = listaDeCotacoesEnviadasParaEmpresas[i].telefone1DaEmpresaCotada,
                         emailEmpresaCotada = listaDeCotacoesEnviadasParaEmpresas[i].email1DaEmpresaCotada,
+                        cotacaoFoiRespondida = listaDeCotacoesEnviadasParaEmpresas[i].cotacaoFoiRespondida,
                         recebeuContraProposta = listaDeCotacoesEnviadasParaEmpresas[i].recebeuContraProposta,
-                        aceitouContraProposta = listaDeCotacoesEnviadasParaEmpresas[i].aceitouContraProposta
+                        aceitouContraProposta = listaDeCotacoesEnviadasParaEmpresas[i].aceitouContraProposta,
+                        rejeitouContraProposta = listaDeCotacoesEnviadasParaEmpresas[i].rejeitouContraProposta
                     });
                 }
 

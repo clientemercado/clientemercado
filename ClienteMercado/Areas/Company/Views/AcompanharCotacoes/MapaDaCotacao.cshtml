@@ -86,24 +86,32 @@
                                                     if (nomeEmpresa.recebeuContraProposta == "sim")
                                                     {
                                                         <!-- Cotações com CONTRA PROPOSTA - AZUL -->
+                                                        if ((nomeEmpresa.aceitouContraProposta == null) && (nomeEmpresa.rejeitouContraProposta == "sim"))
+                                                        {
+                                                            <td align="center" bgcolor="#87CEEB" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="ENVIADA CONTRA-PROPOSTA - NÃO FOI ACEITA pelo FORNECEDOR"><strike>@nomeEmpresa.nomeFantasiaEmpresaCotada</strike></font></a></b></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td align="center" bgcolor="#87CEEB" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="ENVIAMOS CONTRA-PROPOSTA - Em Análise">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
+                                                        }
 
-                                                        <!--
-                                                            CONTINUAR AQUI...
-                                                            OBS: SE A COTAÇÃO TEVE A CONTRA-PROPOSTA REJEITADA, ALTERAR O TITLE = "ENVIADA CONTRA-PROPOSTA - NÃO FOI ACEITA pelo FORNECEDOR";
-                                                        -->
-                                                        <td align="center" bgcolor="#87CEEB" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="ENVIAMOS CONTRA-PROPOSTA - Em Análise">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
+                                                        @*<td align="center" bgcolor="#87CEEB" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="ENVIAMOS CONTRA-PROPOSTA - Em Análise">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>*@
                                                     }
                                                     else
                                                     {
                                                         if (Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados == Model.quantidadeEmpresasParticipantesDestaCotacao)
                                                         {
-                                                            <!-- Cotações não aceitas - CINZA -->
+                                                            <!-- Cotações NÃO ACEITAS / NÃO RESPONDIDAS - CINZA -->
+                                                            if (nomeEmpresa.cotacaoFoiRespondida == "sim")
+                                                            {
+                                                                <td align="center" bgcolor="#DCDCDC" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="COTAÇÃO NÃO ACEITA">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td align="center" bgcolor="#DCDCDC" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="COTAÇÃO NÃO RESPONDIDA"><strike>@nomeEmpresa.nomeFantasiaEmpresaCotada</strike></font></a></b></td>
+                                                            }
 
-                                                            <!--
-                                                                CONTINUAR AQUI...
-                                                                OBS: SE A COTAÇÃO NÃO TIVER SIDO RESPONDIDA, MANTER A COR AMARELA E TITLE = "Não Respondida";
-                                                            -->
-                                                            <td align="center" bgcolor="#DCDCDC" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="COTAÇÃO NÃO ACEITA">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>
+                                                            @*<td align="center" bgcolor="#DCDCDC" nowrap><b><a href="@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company", cCC = @Model.cCC, iCM = @Model.iCM, iCCF = @nomeEmpresa.idCodCotacaoFilhaEnviadaAoFornecedor })"><font color="black" title="COTAÇÃO NÃO ACEITA">@nomeEmpresa.nomeFantasiaEmpresaCotada</font></a></b></td>*@
                                                         }
                                                         else
                                                         {
