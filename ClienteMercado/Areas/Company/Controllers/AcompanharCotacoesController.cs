@@ -1225,7 +1225,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                 }
 
                 NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
-                NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoIndividual = new NItensCotacaoIndividualEmpresaCentralComprasService();
+                NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoIndividual = 
+                    new NItensCotacaoIndividualEmpresaCentralComprasService();
 
                 //CARREGAR os DADOS das EMPRESAS que ANEXARAM COTAÇÃO
                 List<ListaEstilizadaDeEmpresasViewModel> dadosDaEmpresasQueAnexaramCotacao =
@@ -1289,11 +1290,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     unidadeProduto = negociosUnidadesProdutos.ConsultarDescricaoDaUnidadeDoProduto(itemDaCotacaoIndividual.ID_CODIGO_UNIDADE_PRODUTO);
                     marcaDoProdutoCotado = negociosEmpresasfabricantesMarcas.ConsultarDescricaoDaEmpresaFabricanteOuMarca(itemDaCotacaoIndividual.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS);
 
-                    //CONSULTAR SE o PRODUTO JÁ FOI PEDIDO A ALGUM FORNECEDOR
+                    //CONSULTAR SE o PRODUTO JÁ FOI PEDIDO A ALGUM FORNECEDOR <-- ANALISAR ISSO -- ACHO Q ESTÁ ERRADO
                     itens_pedido_central_compras itemJahPedido =
                         negociosItensPedidoCC.ConsultarSeOProdutoJahFoiPedido(itensDaCotacao[i].ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS);
 
-                    //CONSULTAR SE o PRODUTO FOI PEDIDO ao FORNECEDOR cuja RESPOSTA está sendo ANALISADA
+                    //CONSULTAR SE o PRODUTO FOI PEDIDO ao FORNECEDOR cuja RESPOSTA está sendo ANALISADA <-- ANALISAR ISSO -- ACHO Q ESTÁ ERRADO
                     itemPedidoCC =
                         negociosItensPedidoCC.ConsultarSeOFornecedorRecebeuPedidoParaEsteProduto(itensDaCotacao[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS);
 

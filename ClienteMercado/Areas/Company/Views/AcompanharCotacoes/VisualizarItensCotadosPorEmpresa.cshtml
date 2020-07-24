@@ -62,51 +62,53 @@
                                             <thead class="flip-content">
                                                 <tr bgcolor="#DCDCDC">
                                                     <td colspan="3"><label class=""><font color="#3297E0"><b>Empresa:</b></font>&nbsp;<b>@dadosEmpresaCotanteAnexou.nomeEmpresa / @dadosEmpresaCotanteAnexou.cidadeEmpresa-@dadosEmpresaCotanteAnexou.ufEmpresa</b></label></td>
-                                                    <td colspan="4"><label class=""><font color="#3297E0"><b>Contato:</b></font>&nbsp;<b>@dadosEmpresaCotanteAnexou.usuarioContatoEmpresa</b></label></td>
+                                                    <td colspan="5"><label class=""><font color="#3297E0"><b>Contato:</b></font>&nbsp;<b>@dadosEmpresaCotanteAnexou.usuarioContatoEmpresa</b></label></td>
                                                 </tr>
                                                 <tr>
                                                     <td align="center" bgcolor="#0672a7" style="color:White;" width="25%" nowrap><b>Produto</b></td>
                                                     <td align="center" bgcolor="#0672a7" style="color:White;" width="20%" nowrap><b>Marca</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>Quant.</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>Unid.</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="15%" class="numeric" nowrap><b>R$ Unit.</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="15%" class="numeric" nowrap><b>R$ Total</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Confirmado</b></td>
+                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Quant.</b></td>
+                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Unid.</b></td>
+                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>R$ Unit.</b></td>
+                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>R$ Total</b></td>
+                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Pedido</b></td>
+                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="20%" nowrap><b>Fornecedor</b></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @{
                                                     foreach (var itensCotadosPelaEmpresaAnexou in Model.listaDeEmpresasQueAnexaramCotacaoESeusItensCotados[contador].listaDeItensCotadosPorEmpresa)
                                                     {
-                                                <tr>
-                                                    <!--
-                                                    OBS: 
-                                                        1) SÓ EXIBIR OS VALORES E O TICADO, EM CASO DE TER ACEITADO A NEGOCIAÇÃO DOS VALORES COTADOS, CASO CONTRÁRIO, 
-                                                           EXIBIR SÓ OS PRODUTOS;
-                                                        2) SO EXIBIR TICADO NOS ITENS CUJO VALOR NEGOCIADO JÁ FOI ACEITO;
-                                                        3) EXIBIR UMA COLUNA PEDIDO FEITO;
-                                                        4) EXIBIR A EMPRESA FORNECEDORA DE QUEM O PRODUTO ESTÁ SENDO PEDIDO;
-                                                        5) ESTUDAR A POSSIBILIDADE DE ARMAZENAR O ID DA COTAÇÃO CUJOS VALORES NEGOCIADOS FORAM RESPONDIDOS, PARA FACILITAR A BUSCA E 
-                                                           PREENCHIMENTO DO GRID EM QUESTÃO;
-                                                        6) EM cotacao_individual_empresa_central_compras, ARMAZENAR O ID DO PEDIDO APÓS SER FEITO O PEDIDO;                                                        
-                                                    -->
-                                                    <td>@itensCotadosPelaEmpresaAnexou.descricaoProdutoCotado</td>
-                                                    <td>@itensCotadosPelaEmpresaAnexou.marcaProdutoCotado</td>
-                                                    <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.quantidadeProdutoCotado&nbsp;</td>
-                                                    <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.unidadeProdutoCotado&nbsp;</td>
-                                                    <td class="numeric" align="right">0,00&nbsp;</td>
-                                                    <td class="numeric" align="right">0,00&nbsp;</td>
-                                                    @{
-                                                        if (itensCotadosPelaEmpresaAnexou.cotacaoNegociacaoAceita == "sim")
-                                                        {
-                                                            <td class="numeric" align="center"><font color='#008000' title="COTAÇÃO - NEGOCIAÇÃO ACEITA"><i class="fas fa-check"></i></font></td>
-                                                        }
-                                                        else
-                                                        {
+                                                        <tr>
+                                                            <!--
+                                                            OBS: 
+                                                                1) SÓ EXIBIR OS VALORES E O TICADO, EM CASO DE TER ACEITADO A NEGOCIAÇÃO DOS VALORES COTADOS, CASO CONTRÁRIO, 
+                                                                   EXIBIR SÓ OS PRODUTOS;
+                                                                2) SO EXIBIR TICADO NOS ITENS PEDIDO;
+                                                                3) SE TIVER PEDIDO PRO PRODUTO, TICAR COLUNA PEDIDO FEITO;
+                                                                4) EXIBIR A EMPRESA FORNECEDORA DE QUEM O PRODUTO ESTÁ SENDO PEDIDO;
+                                                                5) ESTUDAR A POSSIBILIDADE DE ARMAZENAR O ID DA COTAÇÃO CUJOS VALORES NEGOCIADOS FORAM RESPONDIDOS, PARA FACILITAR A 
+                                                                   BUSCA E PREENCHIMENTO DO GRID EM QUESTÃO;
+                                                                6) EM cotacao_individual_empresa_central_compras, ARMAZENAR O ID DO PEDIDO APÓS SER FEITO O PEDIDO;                                                        
+                                                            -->
+                                                            <td>@itensCotadosPelaEmpresaAnexou.descricaoProdutoCotado</td>
+                                                            <td>@itensCotadosPelaEmpresaAnexou.marcaProdutoCotado</td>
+                                                            <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.quantidadeProdutoCotado&nbsp;</td>
+                                                            <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.unidadeProdutoCotado&nbsp;</td>
+                                                            <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.valorDoProdutoCotado&nbsp;</td>
+                                                            <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.totalDoProdutoCotado&nbsp;</td>
+                                                            @{
+                                                                @*if (itensCotadosPelaEmpresaAnexou.cotacaoNegociacaoAceita == "sim")
+                                                                {
+                                                                    <td class="numeric" align="center"><font color='#008000' title="COTAÇÃO - NEGOCIAÇÃO ACEITA"><i class="fas fa-check"></i></font></td>
+                                                                }
+                                                                else
+                                                                {*@
+                                                                    <td class="numeric" align="center">&nbsp;</td>
+                                                                //}
+                                                            }
                                                             <td class="numeric" align="center">&nbsp;</td>
-                                                        }
-                                                    }
-                                                </tr>
+                                                        </tr>
                                                     }
                                                 }
                                             </tbody>

@@ -22,7 +22,7 @@ namespace ClienteMercado.Infra.Repositories
         {
             bool produtoPedido = false;
 
-            itens_pedido_central_compras produtoPedidoAoFornecedor =
+            itens_pedido_central_compras produtoPedidoAoFornecedor = 
                 _contexto.itens_pedido_central_compras.FirstOrDefault(m => (m.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS == idItemCotadoAoFornecedor));
 
             if (produtoPedidoAoFornecedor != null)

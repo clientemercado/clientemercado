@@ -28,6 +28,8 @@ namespace ClienteMercado.Utils.ViewModel
 
         public string valorDoProdutoCotado { get; set; }
 
+        public string totalDoProdutoCotado { get; set; }
+
         public int ID_COTACAO_MASTER_CENTRAL_COMPRAS { get; set; }
 
         public string msgCotacaoEnviada { get; set; }
