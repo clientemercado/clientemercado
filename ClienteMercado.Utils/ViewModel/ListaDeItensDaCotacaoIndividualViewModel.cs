@@ -37,5 +37,9 @@ namespace ClienteMercado.Utils.ViewModel
         public List<SelectListItem> listagemDeUnidadesProdutosACotar { get; set; }
 
         public string cotacaoNegociacaoAceita { get; set; }
+
+        public string itemFoiPedido { get; set; }
+
+        public string fornecedorItemPedido { get; set; }
     }
 }

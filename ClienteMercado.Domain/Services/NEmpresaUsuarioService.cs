@@ -209,6 +209,8 @@ namespace ClienteMercado.Domain.Services
         //CARREGAR os DADOS das EMPRESAS que ANEXARAM COTAÇÃO
         public List<ListaEstilizadaDeEmpresasViewModel> CarregarDadosDasEmpresasQueAnexaramCotacao(int[] idsEmpresas, int[] idsCotacoesIndividuais)
         {
+            NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
+
             List<ListaEstilizadaDeEmpresasViewModel> dadosDasEmpresasQueAnexaramCotacao =
                 dempresausuario.CarregarDadosDasEmpresasQueAnexaramCotacao(idsEmpresas, idsCotacoesIndividuais);
 
@@ -219,6 +221,21 @@ namespace ClienteMercado.Domain.Services
                 {
                     dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].quantidadeProdutoCotado =
                         dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS.ToString();
+
+                    if (dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS > 0)
+                    {
+                        dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].itemFoiPedido = "sim";
+
+                        //BUSCAR DADOS da EMPRESA FORNECEDORA
+                        empresa_usuario dadosEmpresaFornecedora = 
+                            negociosEmpresaUsuario.BuscarDadosEmpresaCotada((int)dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].ID_EMPRESA_FORNECEDORA_PEDIDO);
+
+                        if (dadosEmpresaFornecedora != null)
+                        {
+                            dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].fornecedorItemPedido = 
+                                dadosEmpresaFornecedora.NOME_FANTASIA_EMPRESA;
+                        }
+                    }
                 }
             }
 

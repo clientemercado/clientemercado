@@ -98,16 +98,17 @@
                                                             <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.valorDoProdutoCotado&nbsp;</td>
                                                             <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.totalDoProdutoCotado&nbsp;</td>
                                                             @{
-                                                                @*if (itensCotadosPelaEmpresaAnexou.cotacaoNegociacaoAceita == "sim")
+                                                                if (itensCotadosPelaEmpresaAnexou.itemFoiPedido == "sim")
                                                                 {
-                                                                    <td class="numeric" align="center"><font color='#008000' title="COTAÇÃO - NEGOCIAÇÃO ACEITA"><i class="fas fa-check"></i></font></td>
+                                                                    <td class="numeric" align="center"><font color='#008000' title="ITEM PEDIDO"><i class="fas fa-check"></i></font></td>
+                                                                    <td class="numeric" align="center">&nbsp;@itensCotadosPelaEmpresaAnexou.fornecedorItemPedido</td>
                                                                 }
                                                                 else
-                                                                {*@
+                                                                {
                                                                     <td class="numeric" align="center">&nbsp;</td>
-                                                                //}
-                                                            }
-                                                            <td class="numeric" align="center">&nbsp;</td>
+                                                                    <td class="numeric" align="center">&nbsp;</td>
+                                                                }
+                                                             }
                                                         </tr>
                                                     }
                                                 }

@@ -27,6 +27,10 @@ namespace ClienteMercado.Data.Entities
         [Required]
         public decimal QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS { get; set; }
 
+        //public bool PEDIDO_ITENS_COTACAO_CENTRAL_COMPRAS { get; set; }
+
+        public int? ID_EMPRESA_FORNECEDORA_PEDIDO { get; set; }
+
         [Required]
         public int ID_EMPRESAS_PRODUTOS_EMBALAGENS { get; set; }
 

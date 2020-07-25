@@ -1885,6 +1885,14 @@ namespace ClienteMercado.Areas.Company.Controllers
             try
             {
                 //================================================================================
+
+                /*
+                 CONTINUAR AQUI... 
+
+                 OBS: 
+                 AO EFETUAR O PEDIDO, INSERIR VALORES NOS CAMPOS 'ID_EMPRESA_FORNECEDORA_PEDIDO', na tabela 'itens_cotacao_individual_empresa_central_compras'
+                 */
+
                 var resultado = new { pedidoFeito = "nao", idPedido = 0, todosItensPedidos = "", mensagemStatus = "" };
                 var idItemPedido = 0;
                 var nomeUsuario = "";
