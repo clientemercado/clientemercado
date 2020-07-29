@@ -175,9 +175,15 @@ namespace ClienteMercado.Domain.Services
         }
 
         //SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO e quem é o FORNECEDOR
-        public void SetarItemComoPedido(int idItemPedido, int idFornecedor)
+        public void SetarItemComoPedido(int idItemPedido, int idFornecedor, int idPedidoGeradoCC)
         {
-            dRepository.SetarItemComoPedido(idItemPedido, idFornecedor);
+            dRepository.SetarItemComoPedido(idItemPedido, idFornecedor, idPedidoGeradoCC);
+        }
+
+        //DESFAZER SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO
+        public void DesfazimentoDeItemComoPedido(int idItemPedido, int idPedido)
+        {
+            dRepository.DesfazimentoDeItemComoPedido(idItemPedido, idPedido);
         }
     }
 }

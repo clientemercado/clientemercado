@@ -721,7 +721,7 @@
             if (parseFloat(somaItensPedido) > 0) {
                 swal({
                     title: "ATENÇÃO!!\n\n",
-                    text: "Deseja ENVIAR um PEDIDO com os Itens selecionados para o fornecedor <b>" + $('#inNomeFornecedor').val() + "</b>?",
+                    text: "Confirma o ENVIO de um PEDIDO com os Itens selecionados para o fornecedor <b>" + $('#inNomeFornecedor').val() + "</b>?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#337ab7",
@@ -1045,6 +1045,10 @@
 
     function verificaSeOItemFoiPedido(valor) {
         debugger;
+
+        /*
+            TESTAR ESSA OPÇÃO... CLICAR NO ITEM SELECIONADO COMO PEDIDO <--- CONTINUAR AQUI...
+        */
 
         if ($('#' + valor).attr('itempedido') == "sim") {
             var somaItensPedido = 0;

@@ -38,8 +38,12 @@ namespace ClienteMercado.Infra.Repositories
         {
             bool itemPedidoExcluido = false;
 
-            itens_pedido_central_compras itemPedidoASerExcluido =
-                _contexto.itens_pedido_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS == idItemASerExcluido)
+            //itens_pedido_central_compras itemPedidoASerExcluido =
+            //    _contexto.itens_pedido_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS == idItemASerExcluido)
+            //    && (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedido)));
+
+            itens_pedido_central_compras itemPedidoASerExcluido = 
+                _contexto.itens_pedido_central_compras.FirstOrDefault(m => ((m.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == idItemASerExcluido) 
                 && (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedido)));
 
             if (itemPedidoASerExcluido != null)

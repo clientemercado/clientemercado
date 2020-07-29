@@ -1885,14 +1885,6 @@ namespace ClienteMercado.Areas.Company.Controllers
             try
             {
                 //================================================================================
-
-                /*
-                 CONTINUAR AQUI... 
-
-                 OBS: 
-                 AO EFETUAR O PEDIDO, INSERIR VALORES NOS CAMPOS 'ID_EMPRESA_FORNECEDORA_PEDIDO', na tabela 'itens_cotacao_individual_empresa_central_compras'
-                 */
-
                 var resultado = new { pedidoFeito = "nao", idPedido = 0, todosItensPedidos = "", mensagemStatus = "" };
                 var idItemPedido = 0;
                 var nomeUsuario = "";
@@ -1964,7 +1956,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                         idItemPedido = negociosItensPedidoCC.GravarItemDoPedido(dadosItensPedidoCC);
 
                         //SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO e quem é o FORNECEDOR
-                        negociosItensCotacaoindividualEmpresaCC.SetarItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), idFornecedor);
+                        negociosItensCotacaoindividualEmpresaCC.SetarItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), idFornecedor, 
+                            idPedidoGeradoCC);
                     }
                 }
 
@@ -2171,13 +2164,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                  AO CANCELAR O PEDIDO, RETIRAR VALORES NOS CAMPOS 'ID_EMPRESA_FORNECEDORA_PEDIDO, ID_EMPRESA_FORNECEDORA_PEDIDO', 
                  na tabela 'itens_cotacao_individual_empresa_central_compras' -- CÓDIGO INICIAL ABAIXO <---
 
-                NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC = 
-                    new NItensCotacaoIndividualEmpresaCentralComprasService();
-
-
-                        //SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO e quem é o FORNECEDOR
-                        negociosItensCotacaoindividualEmpresaCC.SetarItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), idFornecedor);
-
              */
 
             try
@@ -2194,6 +2180,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                 somaItensDoPedido = somaItensDoPedido.Replace('.', ',');
 
                 NPedidoCentralComprasService negociosPedidosCC = new NPedidoCentralComprasService();
+                NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC = 
+                    new NItensCotacaoIndividualEmpresaCentralComprasService();
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
                 NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoFilhaCentralCompras = new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
@@ -2216,6 +2204,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                         negociosPedidosCC.AtualizarValorDoPedido(dadosPedidoCC);
 
                         resultado = new { itemExcluido = "sim", todosItensPedidos = "", mensagemStatus = "" };
+
+                        //DESFAZER SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO
+                        negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeItemComoPedido(Convert.ToInt32(listaIDsItensPedidosAExcluir[i]), idPedido);
                     }
                 }
 

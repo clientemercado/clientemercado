@@ -103,7 +103,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO e quem é o FORNECEDOR
-        public void SetarItemComoPedido(int idItemPedido, int idFornecedor)
+        public void SetarItemComoPedido(int idItemPedido, int idFornecedor, int idPedidoGeradoCC)
         {
             itens_cotacao_individual_empresa_central_compras itemASerEditado = 
                 _contexto.itens_cotacao_individual_empresa_central_compras
@@ -111,8 +111,25 @@ namespace ClienteMercado.Infra.Repositories
 
             if (itemASerEditado != null)
             {
-                itemASerEditado.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = idItemPedido;
+                itemASerEditado.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = idPedidoGeradoCC;
                 itemASerEditado.ID_EMPRESA_FORNECEDORA_PEDIDO = idFornecedor;
+
+                _contexto.SaveChanges();
+            }
+        }
+
+        //DESFAZER SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO
+        public void DesfazimentoDeItemComoPedido(int idItemPedido, int idPedido)
+        {
+            itens_cotacao_individual_empresa_central_compras itemASerEditado = 
+                _contexto.itens_cotacao_individual_empresa_central_compras
+                .FirstOrDefault(m => ((m.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == idItemPedido) 
+                && (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedido)));
+
+            if (itemASerEditado != null)
+            {
+                itemASerEditado.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = 0;
+                itemASerEditado.ID_EMPRESA_FORNECEDORA_PEDIDO = null;
 
                 _contexto.SaveChanges();
             }
