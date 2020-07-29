@@ -173,5 +173,11 @@ namespace ClienteMercado.Domain.Services
 
             return listaDeItensAgrupadosDasCotacoesIndividuais;
         }
+
+        //SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO e quem é o FORNECEDOR
+        public void SetarItemComoPedido(int idItemPedido, int idFornecedor)
+        {
+            dRepository.SetarItemComoPedido(idItemPedido, idFornecedor);
+        }
     }
 }

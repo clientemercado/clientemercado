@@ -1879,8 +1879,8 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //ENVIAR PEDIDO ao FORNECEDOR
-        public JsonResult EnviarOPedidoAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutos, string codsItensIndividuais, string somaItensDoPedido, int idPedido,
-            int idFornecedor, string nomeCentralCompras, string aceitouCP)
+        public JsonResult EnviarOPedidoAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutos, string codsItensIndividuais, string somaItensDoPedido, 
+            int idPedido, int idFornecedor, string nomeCentralCompras, string aceitouCP)
         {
             try
             {
@@ -1912,10 +1912,13 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 somaItensDoPedido = somaItensDoPedido.Replace('.', ',');
 
+                NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC = 
+                    new NItensCotacaoIndividualEmpresaCentralComprasService();
                 NPedidoCentralComprasService negociosPedidosCC = new NPedidoCentralComprasService();
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
-                NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoFilhaCentralCompras = new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
+                NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoFilhaCentralCompras = 
+                    new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
                 NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMaster = new NCotacaoMasterCentralDeComprasService();
                 pedido_central_compras dadosPedidoCC = new pedido_central_compras();
@@ -1959,6 +1962,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                         dadosItensPedidoCC.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS = Convert.ToInt32(listaItensIndividuaisCotacao[i]);
 
                         idItemPedido = negociosItensPedidoCC.GravarItemDoPedido(dadosItensPedidoCC);
+
+                        //SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO e quem é o FORNECEDOR
+                        negociosItensCotacaoindividualEmpresaCC.SetarItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), idFornecedor);
                     }
                 }
 
@@ -2047,10 +2053,8 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //===========================================================================
                     /*
-                     CONTINUAR AQUI... DEIXAR ISSO PRO FINAL...  É AGORA... CONTINUAR AQUI...  AQUI... AQUI... 
-                     
                      DISPARAR AQUI PARA O VENDEDOR:                        
-                        - E-MAILS, SMS, INFORMAÇÕES no SISTEMA sobre O PEDIDO
+                        - E-MAILS, SMS, NOTIFICAÇÕES VIA CELULAR --> INFORMAÇÕES no SISTEMA sobre O PEDIDO
                     */
 
                     //DISPARAR AO FORNECEDOR, AVISO PARA CONFERÊNCIA E ACEITE DO PEDIDO
@@ -2160,6 +2164,22 @@ namespace ClienteMercado.Areas.Company.Controllers
         //CANCELAR PEDIDO do ITEM ao FORNECEDOR
         public JsonResult CancelarOPedidoDoItemAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutos, string somaItensDoPedido, int idPedido)
         {
+            /*
+             CONTINUAR AQUI... 
+
+             OBS: 
+                 AO CANCELAR O PEDIDO, RETIRAR VALORES NOS CAMPOS 'ID_EMPRESA_FORNECEDORA_PEDIDO, ID_EMPRESA_FORNECEDORA_PEDIDO', 
+                 na tabela 'itens_cotacao_individual_empresa_central_compras' -- CÓDIGO INICIAL ABAIXO <---
+
+                NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC = 
+                    new NItensCotacaoIndividualEmpresaCentralComprasService();
+
+
+                        //SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO e quem é o FORNECEDOR
+                        negociosItensCotacaoindividualEmpresaCC.SetarItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), idFornecedor);
+
+             */
+
             try
             {
                 bool itemPedidoExcluido = false;

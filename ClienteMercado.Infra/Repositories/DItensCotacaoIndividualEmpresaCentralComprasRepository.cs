@@ -1,6 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
 using ClienteMercado.Utils.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -99,6 +100,22 @@ namespace ClienteMercado.Infra.Repositories
 
             var result = _contexto.Database.SqlQuery<ListaDeDadosAgrupadosDasCotacoesIndividuaisDaCCViewModel>(query).ToList();
             return result;
+        }
+
+        //SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO e quem é o FORNECEDOR
+        public void SetarItemComoPedido(int idItemPedido, int idFornecedor)
+        {
+            itens_cotacao_individual_empresa_central_compras itemASerEditado = 
+                _contexto.itens_cotacao_individual_empresa_central_compras
+                .FirstOrDefault(m => ((m.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS == idItemPedido)));
+
+            if (itemASerEditado != null)
+            {
+                itemASerEditado.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = idItemPedido;
+                itemASerEditado.ID_EMPRESA_FORNECEDORA_PEDIDO = idFornecedor;
+
+                _contexto.SaveChanges();
+            }
         }
     }
 }
