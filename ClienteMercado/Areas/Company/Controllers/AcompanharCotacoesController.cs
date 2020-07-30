@@ -628,7 +628,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         ViewBag.TodosItensPedidos = "nao";
 
-                        textoMsgStatus = "PEDIDO PARCIAL FEITO";
+                        textoMsgStatus = "PEDIDO PARCIAL FEITO&nbsp;";
                     }
                     //---------------------------------------------------------------------------------------------------------------------------
 
@@ -1879,8 +1879,8 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //ENVIAR PEDIDO ao FORNECEDOR
-        public JsonResult EnviarOPedidoAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutos, string codsItensIndividuais, string somaItensDoPedido, 
-            int idPedido, int idFornecedor, string nomeCentralCompras, string aceitouCP)
+        public JsonResult EnviarOPedidoAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutosNegociacao, string codsItensIndividuais, 
+            string somaItensDoPedido, int idPedido, int idFornecedor, string nomeCentralCompras, string aceitouCP)
         {
             try
             {
@@ -1897,9 +1897,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string urlParceiroEnvioSms = "";
                 string textoMsgStatus = "PEDIDO FEITO";
 
-                string[] listaIDsItensPedidos;
+                string[] listaIDsItensPedidosNegociacao;
                 string[] listaItensIndividuaisCotacao;
-                listaIDsItensPedidos = codsProdutos.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                listaIDsItensPedidosNegociacao = codsProdutosNegociacao.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 listaItensIndividuaisCotacao = codsItensIndividuais.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
                 somaItensDoPedido = somaItensDoPedido.Replace('.', ',');
@@ -1947,10 +1947,10 @@ namespace ClienteMercado.Areas.Company.Controllers
                 //GRAVAR os ITENS do PEDIDO
                 if (idPedidoGeradoCC > 0)
                 {
-                    for (int i = 0; i < listaIDsItensPedidos.Length; i++)
+                    for (int i = 0; i < listaIDsItensPedidosNegociacao.Length; i++)
                     {
                         dadosItensPedidoCC.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = idPedidoGeradoCC;
-                        dadosItensPedidoCC.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS = Convert.ToInt32(listaIDsItensPedidos[i]);
+                        dadosItensPedidoCC.ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS = Convert.ToInt32(listaIDsItensPedidosNegociacao[i]);
                         dadosItensPedidoCC.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS = Convert.ToInt32(listaItensIndividuaisCotacao[i]);
 
                         idItemPedido = negociosItensPedidoCC.GravarItemDoPedido(dadosItensPedidoCC);
@@ -1995,7 +1995,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 }
                 else
                 {
-                    textoMsgStatus = "PEDIDO PARCIAL FEITO";
+                    textoMsgStatus = "PEDIDO PARCIAL FEITO&nbsp;";
                 }
 
                 //SE FOI CONTRA-PROPOSTA ACEITA, MARCAR NA COTAÇÃO MASTER
@@ -2155,7 +2155,8 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //CANCELAR PEDIDO do ITEM ao FORNECEDOR
-        public JsonResult CancelarOPedidoDoItemAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutos, string somaItensDoPedido, int idPedido)
+        public JsonResult CancelarOPedidoDoItemAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutosNegociacao, string codsItensIndividuais, 
+            string somaItensDoPedido, int idPedido)
         {
             /*
              CONTINUAR AQUI... 
@@ -2174,8 +2175,10 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string textoMsgStatus = "PEDIDO FEITO";
                 var resultado = new { itemExcluido = "nao", todosItensPedidos = "", mensagemStatus = "" };
 
-                string[] listaIDsItensPedidosAExcluir;
-                listaIDsItensPedidosAExcluir = codsProdutos.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                string[] listaIDsItensNegociacaoPedidosAExcluir;
+                string[] listaItensIndividuaisCotacao;
+                listaIDsItensNegociacaoPedidosAExcluir = codsProdutosNegociacao.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                listaItensIndividuaisCotacao = codsItensIndividuais.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
                 somaItensDoPedido = somaItensDoPedido.Replace('.', ',');
 
@@ -2188,11 +2191,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                 pedido_central_compras dadosPedidoCC = new pedido_central_compras();
 
                 //EXCLUIR o ITEM do PEDIDO / ATUALIZAR VALOR do PEDIDO
-                for (int i = 0; i < listaIDsItensPedidosAExcluir.Length; i++)
+                for (int i = 0; i < listaIDsItensNegociacaoPedidosAExcluir.Length; i++)
                 {
                     //EXCLUIR o ITEM do PEDIDO
                     itemPedidoExcluido =
-                        negociosItensPedidoCC.ExcluirItemDoPedido(Convert.ToInt32(listaIDsItensPedidosAExcluir[i]), idPedido);
+                        negociosItensPedidoCC.ExcluirItemDoPedido(Convert.ToInt32(listaIDsItensNegociacaoPedidosAExcluir[i]), idPedido);
 
                     if (itemPedidoExcluido)
                     {
@@ -2206,7 +2209,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                         resultado = new { itemExcluido = "sim", todosItensPedidos = "", mensagemStatus = "" };
 
                         //DESFAZER SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO
-                        negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeItemComoPedido(Convert.ToInt32(listaIDsItensPedidosAExcluir[i]), idPedido);
+                        negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), 
+                            idPedido);
                     }
                 }
 
@@ -2252,7 +2256,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 }
                 else
                 {
-                    textoMsgStatus = "PEDIDO PARCIAL FEITO";
+                    textoMsgStatus = "PEDIDO PARCIAL FEITO&nbsp;";
                 }
 
                 //-------------------------------------------------------------------------

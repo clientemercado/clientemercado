@@ -743,7 +743,7 @@
                                     'cCC': $('#inCCC').val(),
                                     'iCM': $("#inICM").val(),
                                     'iCCF': $('#iniCCF').val(),
-                                    'codsProdutos': codsProdsPedidos,
+                                    'codsProdutosNegociacao': codsProdsPedidos,
                                     'codsItensIndividuais': codsIndividuais,
                                     'somaItensDoPedido': somaItensPedido,
                                     'idPedido': $('#inIdPedidoRecebido').val(),
@@ -1054,12 +1054,26 @@
             var somaItensPedido = 0;
             var codsProdsPedidos = "";
 
+            //$(".itemcotado:checked").each(function () {
+            //    if (codsProdsPedidos == "") {
+            //        codsProdsPedidos = $(this).val();
+            //    }
+            //    else {
+            //        codsProdsPedidos = (codsProdsPedidos + ',' + $(this).val());
+            //    }
+
+            //    var totalItemPedido = $(this).closest("tr").find("td").eq(8).text().replace(".", "").replace(",", ".");
+            //    somaItensPedido += parseFloat(totalItemPedido);
+            //});
+
             $(".itemcotado:checked").each(function () {
                 if (codsProdsPedidos == "") {
                     codsProdsPedidos = $(this).val();
+                    codsIndividuais = $(this).attr('idcotacaoinvidual');
                 }
                 else {
                     codsProdsPedidos = (codsProdsPedidos + ',' + $(this).val());
+                    codsIndividuais = (codsIndividuais + ',' + $(this).attr('idcotacaoinvidual'));
                 }
 
                 var totalItemPedido = $(this).closest("tr").find("td").eq(8).text().replace(".", "").replace(",", ".");
@@ -1090,7 +1104,8 @@
                                 'cCC': $('#inCCC').val(),
                                 'iCM': $("#inICM").val(),
                                 'iCCF': $('#iniCCF').val(),
-                                'codsProdutos': codsProdsPedidos,
+                                'codsProdutosNegociacao': codsProdsPedidos,
+                                'codsItensIndividuais': codsIndividuais,
                                 'somaItensDoPedido': somaItensPedido,
                                 'idPedido': $('#inIdPedidoRecebido').val()
                             },
