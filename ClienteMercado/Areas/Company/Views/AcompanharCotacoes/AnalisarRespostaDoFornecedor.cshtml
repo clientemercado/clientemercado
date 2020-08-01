@@ -137,7 +137,12 @@
                                                     if (ViewBag.TodosItensPedidos != "sim")
                                                     {
                                                         <a href="#" id="inEfetuarPedido" class="btn blue button-submit"><i class="fas fa-file-signature"></i> Fazer Pedido</a>
-                                                        <a href="#" id="inCancelarPedido" class="btn btn-danger" style="display: none;"><i class="far fa-window-close"></i> Cancelar Pedido</a>
+                                                        @*<a href="#" id="inCancelarPedido" class="btn btn-danger" style="display: none;"><i class="far fa-window-close"></i> Cancelar Pedido</a>*@
+
+                                                        if (ViewBag.idPedido > 0)
+                                                        {
+                                                            <a href="#" id="inCancelarPedido" class="btn btn-danger" style=""><i class="far fa-window-close"></i> Cancelar Pedido</a>
+                                                        }
                                                     }
                                                     else
                                                     {
@@ -213,8 +218,8 @@
                                                 //if (Model.inRejeitouContraProposta == "nao")
                                                 //{
                                                 @*<a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
-                                                  <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style=""><i class="far fa-thumbs-down"></i> Não Aceitar Negociação</a>
-                                                  <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>*@
+                        <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style=""><i class="far fa-thumbs-down"></i> Não Aceitar Negociação</a>
+                        <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>*@
                                                 //}
 
                                                 <a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
@@ -374,7 +379,7 @@
 
         if ($('#inAceitouNegociacao').val() == "sim") {
             $('#inConfirmarAceiteDaNegociacao').hide();
-            $('#inNegociacaoAceita').show();            
+            $('#inNegociacaoAceita').show();
         }
 
         if ($('#inRejeitouCP').val() == "sim") {
@@ -780,7 +785,10 @@
                                             }
                                         });
 
-                                        $('#gridItensCotadosRespondidos').bootgrid('reload');
+                                        //$('#gridItensCotadosRespondidos').bootgrid('reload');
+
+                                        //RECARREGAR a PÁGINA
+                                        window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
 
                                         if (data.todosItensPedidos == "sim") {
                                             $('#inEfetuarPedido').hide();
@@ -1046,10 +1054,6 @@
     function verificaSeOItemFoiPedido(valor) {
         debugger;
 
-        /*
-            TESTAR ESSA OPÇÃO... CLICAR NO ITEM SELECIONADO COMO PEDIDO <--- CONTINUAR AQUI...
-        */
-
         if ($('#' + valor).attr('itempedido') == "sim") {
             var somaItensPedido = 0;
             var codsProdsPedidos = "";
@@ -1142,7 +1146,9 @@
                                         $('#inCancelarPedido').show();
                                     }
 
-                                    $('#gridItensCotadosRespondidos').bootgrid('reload');
+                                    //$('#gridItensCotadosRespondidos').bootgrid('reload');
+                                    //RECARREGAR a PÁGINA
+                                    window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
                                 }
                             }
                         });

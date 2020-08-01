@@ -185,5 +185,11 @@ namespace ClienteMercado.Domain.Services
         {
             dRepository.DesfazimentoDeItemComoPedido(idItemPedido, idPedido);
         }
+
+        //DESFAZER SETAR TODOS os PRODUTOS da COTAÇÃO INDIVIDUAL como PEDIDO
+        public void DesfazimentoDeTodosOsItensComoPedido(int idPedido)
+        {
+            dRepository.DesfazimentoDeTodosOsItensComoPedido(idPedido);
+        }
     }
 }

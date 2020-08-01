@@ -134,5 +134,20 @@ namespace ClienteMercado.Infra.Repositories
                 _contexto.SaveChanges();
             }
         }
+
+        //DESFAZER SETAR TODOS os PRODUTOS da COTAÇÃO INDIVIDUAL como PEDIDO
+        public void DesfazimentoDeTodosOsItensComoPedido(int idPedido)
+        {
+            List<itens_cotacao_individual_empresa_central_compras> listaItensASeremEditados = 
+                _contexto.itens_cotacao_individual_empresa_central_compras.Where(m => (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedido)).ToList();
+
+            for (int i = 0; i < listaItensASeremEditados.Count; i++)
+            {
+                listaItensASeremEditados[i].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = 0;
+                listaItensASeremEditados[i].ID_EMPRESA_FORNECEDORA_PEDIDO = null;
+
+                _contexto.SaveChanges();
+            }
+        }
     }
 }

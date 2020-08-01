@@ -412,7 +412,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     mesAtual = char.ToUpper(mesAtual[0]) + mesAtual.Substring(1);
                     int anoAtual = dataHoje.Year;
                     string usuarioFornecedor = "";
-                    string textoMsgStatus = "PEDIDO FEITO";
+                    string textoMsgStatus = "PEDIDO FEITO&nbsp;";
 
                     NCentralDeComprasService negociosCentralDeCompras = new NCentralDeComprasService();
                     NEmpresasParticipantesCentralDeComprasService negociosEmpresasParticipantesCC = new NEmpresasParticipantesCentralDeComprasService();
@@ -565,7 +565,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                         //SE RECEBEU CONTRA-PROPOSTA
                         if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                         {
-                            viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
+                            viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- FOI ACEITA PELO FORNECEDOR";
                         }
                         else
                         {
@@ -576,7 +576,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                             }
                             else if ((dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == false) && (dadosCotacaoFilha.REJEITOU_CONTRA_PROPOSTA == false))
                             {
-                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
+                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- AGUARDANDO RESPOSTA FORNECEDOR";
                                 viewModelAnalisarResposta.inRejeitouContraProposta = "nao";
                             }
                         }
@@ -660,11 +660,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                             {
                                 if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                                 {
-                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
+                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- FOI ACEITA PELO FORNECEDOR";
                                 }
                                 else
                                 {
-                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
+                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- AGUARDANDO RESPOSTA FORNECEDOR";
                                 }
                             }
 
@@ -1895,7 +1895,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string smsMensagem = "";
                 string telefoneUsuarioADM = "";
                 string urlParceiroEnvioSms = "";
-                string textoMsgStatus = "PEDIDO FEITO";
+                string textoMsgStatus = "PEDIDO FEITO&nbsp;";
 
                 string[] listaIDsItensPedidosNegociacao;
                 string[] listaItensIndividuaisCotacao;
@@ -2018,11 +2018,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                         {
-                            mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
+                            mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- FOI ACEITA PELO FORNECEDOR";
                         }
                         else
                         {
-                            mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
+                            mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- AGUARDANDO RESPOSTA FORNECEDOR";
                         }
                     }
 
@@ -2093,7 +2093,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                             urlParceiroEnvioSms =
                                 "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
 
-                            bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+                            //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+
+                            bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 2096 ACIMA...
 
                             if (smsUsuarioVendedor)
                             {
@@ -2117,7 +2119,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                             urlParceiroEnvioSms =
                                 "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
 
-                            bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+                            //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+
+                            bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 2120 ACIMA...
 
                             if (smsUsuarioVendedor)
                             {
@@ -2158,21 +2162,12 @@ namespace ClienteMercado.Areas.Company.Controllers
         public JsonResult CancelarOPedidoDoItemAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutosNegociacao, string codsItensIndividuais, 
             string somaItensDoPedido, int idPedido)
         {
-            /*
-             CONTINUAR AQUI... 
-
-             OBS: 
-                 AO CANCELAR O PEDIDO, RETIRAR VALORES NOS CAMPOS 'ID_EMPRESA_FORNECEDORA_PEDIDO, ID_EMPRESA_FORNECEDORA_PEDIDO', 
-                 na tabela 'itens_cotacao_individual_empresa_central_compras' -- CÓDIGO INICIAL ABAIXO <---
-
-             */
-
             try
             {
                 bool itemPedidoExcluido = false;
                 string idsPedidos = "";
                 string todosItensPedidos = "nao";
-                string textoMsgStatus = "PEDIDO FEITO";
+                string textoMsgStatus = "PEDIDO FEITO&nbsp;";
                 var resultado = new { itemExcluido = "nao", todosItensPedidos = "", mensagemStatus = "" };
 
                 string[] listaIDsItensNegociacaoPedidosAExcluir;
@@ -2270,11 +2265,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                 {
                     if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                     {
-                        mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
+                        mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- FOI ACEITA PELO FORNECEDOR";
                     }
                     else
                     {
-                        mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
+                        mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- AGUARDANDO RESPOSTA FORNECEDOR";
                     }
                 }
 
@@ -2310,9 +2305,11 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 bool pedidoExcluido = false;
                 bool itensPedidoExcluidos = false;
-                string textoMsgStatus = "PEDIDO FEITO";
+                string textoMsgStatus = "PEDIDO FEITO&nbsp;";
                 var resultado = new { pedidoExcluido = "nao", mensagemStatus = "" };
 
+                NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC = 
+                    new NItensCotacaoIndividualEmpresaCentralComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
                 NPedidoCentralComprasService negociosPedidosCC = new NPedidoCentralComprasService();
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
@@ -2345,6 +2342,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                             //SETAR NULL no CAMPO relacionado ao ID do PEDIDO
                             negociosCotacaoMasterCC.SetarNullNoIdDoPedidoNaCotacaoMaster(iCM);
 
+                            //DESFAZER SETAR TODOS os PRODUTOS da COTAÇÃO INDIVIDUAL como PEDIDO
+                            negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeTodosOsItensComoPedido(idPedido);
+
                             //-------------------------------------------------------------------------
                             var mensagemDoStatus = "";
 
@@ -2356,11 +2356,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                             {
                                 if (dadosCotacaoFilha.ACEITOU_CONTRA_PROPOSTA == true)
                                 {
-                                    mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - FOI ACEITA PELO FORNECEDOR";
+                                    mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- FOI ACEITA PELO FORNECEDOR";
                                 }
                                 else
                                 {
-                                    mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font> - AGUARDANDO RESPOSTA FORNECEDOR";
+                                    mensagemDoStatus = "<font color='#3297E0'>CONTRA PROPOSTA ENVIADA</font>&nbsp;- AGUARDANDO RESPOSTA FORNECEDOR";
                                 }
                             }
 
