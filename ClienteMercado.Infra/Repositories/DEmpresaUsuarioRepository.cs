@@ -227,7 +227,7 @@ namespace ClienteMercado.Infra.Repositories
             {
                 query = "SELECT PS.DESCRICAO_PRODUTO_SERVICO AS descricaoProdutoCotado, EF.DESCRICAO_EMPRESA_FABRICANTE_MARCAS AS marcaProdutoCotado, " +
                         "ICI.QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS, UP.DESCRICAO_UNIDADE_PRODUTO AS unidadeProdutoCotado, " +
-                        "EP.DESCRICAO_PRODUTO_EMBALAGEM AS embalagemProduto, ICI.ID_EMPRESA_FORNECEDORA_PEDIDO " +
+                        "EP.DESCRICAO_PRODUTO_EMBALAGEM AS embalagemProduto, ICI.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS, ICI.ID_EMPRESA_FORNECEDORA_PEDIDO " +
                         "FROM itens_cotacao_individual_empresa_central_compras ICI " +
                         "INNER JOIN produtos_servicos_empresa_profissional PS ON(PS.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS = ICI.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS) " +
                         "INNER JOIN empresas_fabricantes_marcas EF ON(EF.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS = ICI.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS) " +

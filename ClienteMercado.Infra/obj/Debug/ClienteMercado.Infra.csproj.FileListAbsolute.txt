@@ -62,7 +62,6 @@ C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Infra\obj\Debug\ClienteMe
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Infra\obj\Debug\ClienteMercado.Infra.csproj.CopyComplete
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Infra\obj\Debug\ClienteMercado.Infra.dll
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Infra\obj\Debug\ClienteMercado.Infra.pdb
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.Utils.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.Infra.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.Infra.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.Infra.pdb
@@ -81,6 +80,7 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\Cli
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.Data.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.UI.Core.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.UI.Core.dll.config
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.Utils.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\ClienteMercado.Utils.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\EntityFramework.xml
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Infra\bin\Debug\EntityFramework.SqlServer.xml

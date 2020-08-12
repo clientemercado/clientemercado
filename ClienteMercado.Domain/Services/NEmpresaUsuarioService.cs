@@ -228,7 +228,8 @@ namespace ClienteMercado.Domain.Services
 
                         //BUSCAR DADOS da EMPRESA FORNECEDORA
                         empresa_usuario dadosEmpresaFornecedora = 
-                            negociosEmpresaUsuario.BuscarDadosEmpresaCotada((int)dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].ID_EMPRESA_FORNECEDORA_PEDIDO);
+                            negociosEmpresaUsuario.BuscarDadosEmpresaCotada((int)dadosDasEmpresasQueAnexaramCotacao[i]
+                            .listaDeItensCotadosPorEmpresa[j].ID_EMPRESA_FORNECEDORA_PEDIDO);
 
                         if (dadosEmpresaFornecedora != null)
                         {
