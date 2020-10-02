@@ -222,7 +222,8 @@ namespace ClienteMercado.Domain.Services
                     dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].quantidadeProdutoCotado =
                         dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS.ToString();
 
-                    if (dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS > 0)
+                    if ((dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS > 0) 
+                        && (dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].pedidoConfirmado))
                     {
                         dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].itemFoiPedido = "sim";
 

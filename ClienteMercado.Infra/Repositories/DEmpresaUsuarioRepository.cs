@@ -208,7 +208,7 @@ namespace ClienteMercado.Infra.Repositories
                         "INNER JOIN enderecos_empresa_usuario EE ON(EE.ID_CODIGO_ENDERECO_EMPRESA_USUARIO = EU.ID_CODIGO_ENDERECO_EMPRESA_USUARIO) " +
                         "INNER JOIN cidades_empresa_usuario CE ON(CE.ID_CIDADE_EMPRESA_USUARIO = EE.ID_CIDADE_EMPRESA_USUARIO) " +
                         "INNER JOIN bairros_empresa_usuario BE ON(BE.ID_BAIRRO_EMPRESA_USUARIO = EE.ID_BAIRRO_EMPRESA_USUARIO) " +
-                        "INNER JOIN estados_empresa_usuario EEU ON(EEU.ID_ESTADOS_EMPRESA_USUARIO = CE.ID_ESTADOS_EMPRESA_USUARIO)" +
+                        "INNER JOIN estados_empresa_usuario EEU ON(EEU.ID_ESTADOS_EMPRESA_USUARIO = CE.ID_ESTADOS_EMPRESA_USUARIO) " +
                         "WHERE EU.ID_CODIGO_EMPRESA = " + idsEmpresas[i];
                 var resultado = _contexto.Database.SqlQuery<ListaEstilizadaDeEmpresasViewModel>(query).ToList();
 
@@ -227,12 +227,14 @@ namespace ClienteMercado.Infra.Repositories
             {
                 query = "SELECT PS.DESCRICAO_PRODUTO_SERVICO AS descricaoProdutoCotado, EF.DESCRICAO_EMPRESA_FABRICANTE_MARCAS AS marcaProdutoCotado, " +
                         "ICI.QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS, UP.DESCRICAO_UNIDADE_PRODUTO AS unidadeProdutoCotado, " +
-                        "EP.DESCRICAO_PRODUTO_EMBALAGEM AS embalagemProduto, ICI.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS, ICI.ID_EMPRESA_FORNECEDORA_PEDIDO " +
+                        "EP.DESCRICAO_PRODUTO_EMBALAGEM AS embalagemProduto, ICI.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS, ICI.ID_EMPRESA_FORNECEDORA_PEDIDO, " +
+                        "PCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS AS pedidoConfirmado " +
                         "FROM itens_cotacao_individual_empresa_central_compras ICI " +
                         "INNER JOIN produtos_servicos_empresa_profissional PS ON(PS.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS = ICI.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS) " +
                         "INNER JOIN empresas_fabricantes_marcas EF ON(EF.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS = ICI.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS) " +
                         "INNER JOIN unidades_produtos UP ON(UP.ID_CODIGO_UNIDADE_PRODUTO = ICI.ID_CODIGO_UNIDADE_PRODUTO) " +
                         "INNER JOIN empresas_produtos_embalagens EP ON(EP.ID_EMPRESAS_PRODUTOS_EMBALAGENS = ICI.ID_EMPRESAS_PRODUTOS_EMBALAGENS) " +
+                        "INNER JOIN pedido_central_compras PCC ON(PCC.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = ICI.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS) " +
                         "WHERE ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS IN(" + idsCotacoesIndividuais[i] + ")";
                 var resultItens = _contexto.Database.SqlQuery<ListaDeItensDaCotacaoIndividualViewModel>(query).ToList();
 

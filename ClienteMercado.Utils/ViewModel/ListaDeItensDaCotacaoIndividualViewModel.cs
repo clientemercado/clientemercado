@@ -41,5 +41,7 @@ namespace ClienteMercado.Utils.ViewModel
         public string itemFoiPedido { get; set; }
 
         public string fornecedorItemPedido { get; set; }
+
+        public bool pedidoConfirmado { get; set; }
     }
 }
