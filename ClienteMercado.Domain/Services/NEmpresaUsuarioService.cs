@@ -5,6 +5,7 @@ using ClienteMercado.Utils.Sms;
 using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -209,6 +210,7 @@ namespace ClienteMercado.Domain.Services
         //CARREGAR os DADOS das EMPRESAS que ANEXARAM COTAÇÃO
         public List<ListaEstilizadaDeEmpresasViewModel> CarregarDadosDasEmpresasQueAnexaramCotacao(int[] idsEmpresas, int[] idsCotacoesIndividuais)
         {
+            decimal totalProduto = 0;
             NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
 
             List<ListaEstilizadaDeEmpresasViewModel> dadosDasEmpresasQueAnexaramCotacao =
@@ -237,6 +239,30 @@ namespace ClienteMercado.Domain.Services
                             dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].fornecedorItemPedido = 
                                 dadosEmpresaFornecedora.NOME_FANTASIA_EMPRESA;
                         }
+
+                        //DEFINIR VALOR UNITÁRIO A SER EXIBIDO
+                        if ((dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].recebeu_cp) 
+                            && (dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].aceitou_cp))
+                        {
+                            dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].valorDoProdutoCotado = 
+                                dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].preco_unitario_contra_proposta.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
+
+                            totalProduto = 
+                                (Convert.ToDecimal(dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].quantidadeProdutoCotado) 
+                                * dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].preco_unitario_contra_proposta);
+                        }
+                        else
+                        {
+                            dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].valorDoProdutoCotado = 
+                                dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].preco_unitario_resposta.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
+
+                            totalProduto =
+                                (Convert.ToDecimal(dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].quantidadeProdutoCotado) 
+                                * dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].preco_unitario_resposta);
+                        }
+
+                        dadosDasEmpresasQueAnexaramCotacao[i].listaDeItensCotadosPorEmpresa[j].totalDoProdutoCotado = 
+                            totalProduto.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", "");
                     }
                 }
             }

@@ -228,13 +228,17 @@ namespace ClienteMercado.Infra.Repositories
                 query = "SELECT PS.DESCRICAO_PRODUTO_SERVICO AS descricaoProdutoCotado, EF.DESCRICAO_EMPRESA_FABRICANTE_MARCAS AS marcaProdutoCotado, " +
                         "ICI.QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS, UP.DESCRICAO_UNIDADE_PRODUTO AS unidadeProdutoCotado, " +
                         "EP.DESCRICAO_PRODUTO_EMBALAGEM AS embalagemProduto, ICI.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS, ICI.ID_EMPRESA_FORNECEDORA_PEDIDO, " +
-                        "PCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS AS pedidoConfirmado " +
+                        "PCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS AS pedidoConfirmado, CFC.RECEBEU_CONTRA_PROPOSTA AS recebeu_cp, CFC.ACEITOU_CONTRA_PROPOSTA AS aceitou_cp, " +
+                        "ICF.PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS AS preco_unitario_resposta, ICF.PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS AS preco_unitario_contra_proposta " +
                         "FROM itens_cotacao_individual_empresa_central_compras ICI " +
                         "INNER JOIN produtos_servicos_empresa_profissional PS ON(PS.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS = ICI.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS) " +
                         "INNER JOIN empresas_fabricantes_marcas EF ON(EF.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS = ICI.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS) " +
                         "INNER JOIN unidades_produtos UP ON(UP.ID_CODIGO_UNIDADE_PRODUTO = ICI.ID_CODIGO_UNIDADE_PRODUTO) " +
                         "INNER JOIN empresas_produtos_embalagens EP ON(EP.ID_EMPRESAS_PRODUTOS_EMBALAGENS = ICI.ID_EMPRESAS_PRODUTOS_EMBALAGENS) " +
                         "INNER JOIN pedido_central_compras PCC ON(PCC.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = ICI.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS) " +
+                        "INNER JOIN cotacao_filha_central_compras CFC ON(CFC.ID_CODIGO_EMPRESA = ICI.ID_EMPRESA_FORNECEDORA_PEDIDO) " +
+                        "LEFT JOIN itens_cotacao_filha_negociacao_central_compras ICF ON((ICF.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS = ICI.ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS) " + 
+                        "AND (ICF.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS = CFC.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS)) " +
                         "WHERE ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS IN(" + idsCotacoesIndividuais[i] + ")";
                 var resultItens = _contexto.Database.SqlQuery<ListaDeItensDaCotacaoIndividualViewModel>(query).ToList();
 

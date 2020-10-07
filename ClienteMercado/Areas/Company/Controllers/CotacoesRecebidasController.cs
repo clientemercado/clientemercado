@@ -288,6 +288,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //VIEWBAGS
                     ViewBag.idPedido = 0;
+                    ViewBag.pedidoConfirmado = "nao";
                     ViewBag.dataHoje = diaDaSemana + ", " + diaDoMes + " de " + mesAtual + " de " + anoAtual;
                     ViewBag.ondeEstouAgora = "Cotações Recebidas > Visualizar / Responder Cotação";
 
@@ -306,6 +307,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     else if ((dadosCotacaoFilha.RECEBEU_PEDIDO) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO))
                     {
                         viewModelEnviarResposta.mensagemStatus = textoMsgStatus + " RECEBIDO e CONFIRMADO - AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA";
+                        ViewBag.pedidoConfirmado = "sim";
                     }
 
                     return View(viewModelEnviarResposta);
@@ -763,9 +765,11 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMasterCC = new NCotacaoMasterCentralDeComprasService();
+                NPedidoCentralComprasService negociosPedidoCC = new NPedidoCentralComprasService();
 
                 //CONFIRMAR o ACEITE do PEDIDO
                 negociosCotacaoFilhaCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
+                negociosPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
 
                 //IDENTIFICAR na COTAÇÃO MASTER o FORNECEDOR q RECEBEU PEDIDO
                 negociosCotacaoMasterCC.SetarIdFornecedorNaCotacaoMaster(iCM);

@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
@@ -48,6 +49,12 @@ namespace ClienteMercado.Domain.Services
         public bool ExcluirOPedido(int idPedido)
         {
             return dPedidoCC.ExcluirOPedido(idPedido);
+        }
+
+        //CONFIRMAR o ACEITE do PEDIDO
+        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido)
+        {
+            dPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
         }
     }
 }

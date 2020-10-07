@@ -26,6 +26,14 @@ namespace ClienteMercado.Utils.ViewModel
 
         public int codEmbalagemProduto { get; set; }
 
+        public bool recebeu_cp { get; set; }
+
+        public bool aceitou_cp { get; set; }
+
+        public decimal preco_unitario_resposta { get; set; }
+
+        public decimal preco_unitario_contra_proposta { get; set; }
+
         public string valorDoProdutoCotado { get; set; }
 
         public string totalDoProdutoCotado { get; set; }

@@ -139,7 +139,10 @@
 
                                     if (@ViewBag.idPedido > 0)
                                     {
-                                        <a href="#" id="inConfirmarPedido" class="btn blue button-submit"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
+                                        if (@ViewBag.pedidoConfirmado == "nao")
+                                        {
+                                            <a href="#" id="inConfirmarPedido" class="btn blue button-submit"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
+                                        }
                                     }
                                 }
                             </div>

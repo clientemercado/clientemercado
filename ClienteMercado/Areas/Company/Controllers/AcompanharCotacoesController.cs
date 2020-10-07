@@ -2320,6 +2320,15 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 if (dadosDoPedido != null)
                 {
+                    //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
+                    negociosCotacaoFilhaCC.SetarComoNaoReceBimentoDePedidoParaACotacao(iCM, iCCF);
+
+                    //SETAR NULL no CAMPO relacionado ao ID do PEDIDO
+                    negociosCotacaoMasterCC.SetarNullNoIdDoPedidoNaCotacaoMaster(iCM);
+
+                    //DESFAZER SETAR TODOS os PRODUTOS da COTAÇÃO INDIVIDUAL como PEDIDO
+                    negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeTodosOsItensComoPedido(idPedido);
+
                     //EXCLUIR TODOS os ITENS do PEDIDO
                     itensPedidoExcluidos = negociosItensPedidoCC.ExcluirTodosOsItensDoPedido(idPedido);
 
@@ -2330,22 +2339,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                         if (pedidoExcluido)
                         {
-                            //if (aceitouCP == "sim")
-                            //{
-                            //    //CANCELAR MARCAÇÃO de CONTRA-PROPOSTA
-                            //    negociosCotacaoMaster.CancelarMarcacaoDeContraProposta(iCM);
-                            //}
-
-                            //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
-                            negociosCotacaoFilhaCC.SetarComoNaoReceBimentoDePedidoParaACotacao(iCM, iCCF);
-
-                            //SETAR NULL no CAMPO relacionado ao ID do PEDIDO
-                            negociosCotacaoMasterCC.SetarNullNoIdDoPedidoNaCotacaoMaster(iCM);
-
-                            //DESFAZER SETAR TODOS os PRODUTOS da COTAÇÃO INDIVIDUAL como PEDIDO
-                            negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeTodosOsItensComoPedido(idPedido);
-
-                            //-------------------------------------------------------------------------
                             var mensagemDoStatus = "";
 
                             //CONSULTAR DADOS da COTAÇÃO FILHA
@@ -2372,7 +2365,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                             {
                                 mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
                             }
-                            //-------------------------------------------------------------------------
 
                             resultado = new { pedidoExcluido = "sim", mensagemStatus = mensagemDoStatus };
                         }
