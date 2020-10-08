@@ -245,6 +245,23 @@ namespace ClienteMercado.Infra.Repositories
             }
         }
 
+        //SETAR CONFIRMANDO o PEDIDO como REJEITADO
+        public void SetarConfirmandoRejeicaoAoPedido(int iCM, int iCCF, int idPedido)
+        {
+            cotacao_filha_central_compras dadosDaCotacaoFilha =
+                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
+
+            if (dadosDaCotacaoFilha != null)
+            {
+                dadosDaCotacaoFilha.CONFIRMOU_PEDIDO = false;
+                dadosDaCotacaoFilha.REJEITOU_PEDIDO = true;
+                dadosDaCotacaoFilha.DATA_REJEITOU_PEDIDO = DateTime.Now;
+                dadosDaCotacaoFilha.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = null;
+
+                _contexto.SaveChanges();
+            }
+        }
+
         //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras
         public void SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM, int iCCF, int idFor)
         {

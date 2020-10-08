@@ -754,7 +754,6 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        //---------------------------------------------------------------------------
         //SETAR CONFIRMANDO o PEDIDO como ACEITO
         [WebMethod]
         public ActionResult ConfirmarRecebimentoEAcatamentoDoPedido(int iCM, int iCCF, int idPedido)
@@ -777,6 +776,83 @@ namespace ClienteMercado.Areas.Company.Controllers
                 resultado = new { pedidoConfirmado = "sim" };
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        //---------------------------------------------------------------------------
+        //SETAR CONFIRMANDO o PEDIDO como REJEITADO - AÇÃO PÓS ACEITE
+        [WebMethod]
+        public ActionResult CancelarAceiteDoPedido(int iCM, int iCCF, int idPedido)
+        {
+            try
+            {
+                var resultado = new { pedidoRejeitado = "" };
+
+                NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
+                NCotacaoMasterCentralDeComprasService negociosCotacaoMasterCC = new NCotacaoMasterCentralDeComprasService();
+                NPedidoCentralComprasService negociosPedidoCC = new NPedidoCentralComprasService();
+
+                //CONFIRMAR a REJEIÇÃO ao PEDIDO
+                negociosCotacaoFilhaCC.SetarConfirmandoRejeicaoAoPedido(iCM, iCCF, idPedido); //RETIRAR ACEITE DO PEDIDO. SETAR REJEIÇÃO DO PEDIDO COMO TRUE
+
+                //EXCLUIR PEDIDO REJEITADO PELO FORNECEDOR
+                CancelarExcluirOPedidoRejeitadoPeloFornecedor(iCM, iCCF, idPedido);
+
+                //SETAR NULL NA IDENTIFICAÇÃO DO PEDIDO, na COTAÇÃO MASTER
+                negociosCotacaoMasterCC.SetarNullNoIdDoPedidoNaCotacaoMaster(iCM);
+
+                resultado = new { pedidoRejeitado = "sim" };
+
+                return Json(resultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        //EXCLUIR PEDIDO REJEITADO PELO FORNECEDOR
+        public void CancelarExcluirOPedidoRejeitadoPeloFornecedor(int iCM, int iCCF, int idPedido)
+        {
+            try
+            {
+                bool pedidoExcluido = false;
+                bool itensPedidoExcluidos = false;
+
+                NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC =
+                    new NItensCotacaoIndividualEmpresaCentralComprasService();
+                NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
+                NPedidoCentralComprasService negociosPedidosCC = new NPedidoCentralComprasService();
+                NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
+                NCotacaoMasterCentralDeComprasService negociosCotacaoMasterCC = new NCotacaoMasterCentralDeComprasService();
+
+                //CARREGAR DADOS do PEDIDO
+                pedido_central_compras dadosDoPedido = negociosPedidosCC.ConsultarDadosDoPedidoPeloCodigo(idPedido);
+
+                if (dadosDoPedido != null)
+                {
+                    //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
+                    negociosCotacaoFilhaCC.SetarComoNaoReceBimentoDePedidoParaACotacao(iCM, iCCF);
+
+                    //SETAR NULL no CAMPO relacionado ao ID do PEDIDO
+                    negociosCotacaoMasterCC.SetarNullNoIdDoPedidoNaCotacaoMaster(iCM);
+
+                    //DESFAZER SETAR TODOS os PRODUTOS da COTAÇÃO INDIVIDUAL como PEDIDO
+                    negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeTodosOsItensComoPedido(idPedido);
+
+                    //EXCLUIR TODOS os ITENS do PEDIDO
+                    itensPedidoExcluidos = negociosItensPedidoCC.ExcluirTodosOsItensDoPedido(idPedido);
+
+                    if (itensPedidoExcluidos)
+                    {
+                        //EXCLUIR o PEDIDO
+                        pedidoExcluido = negociosPedidosCC.ExcluirOPedido(idPedido);
+                    }
+                }
             }
             catch (Exception erro)
             {

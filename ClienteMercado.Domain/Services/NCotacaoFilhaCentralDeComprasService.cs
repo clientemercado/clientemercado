@@ -180,6 +180,12 @@ namespace ClienteMercado.Domain.Services
             dcotacaofilhacentraldecompras.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
         }
 
+        //SETAR CONFIRMANDO o PEDIDO como REJEITADO
+        public void SetarConfirmandoRejeicaoAoPedido(int iCM, int iCCF, int idPedido)
+        {
+            dcotacaofilhacentraldecompras.SetarConfirmandoRejeicaoAoPedido(iCM, iCCF, idPedido);
+        }
+
         //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras
         public void SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM, int iCCF, int idFor)
         {
