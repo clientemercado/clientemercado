@@ -139,14 +139,8 @@
 
                                     if (@ViewBag.idPedido > 0)
                                     {
-                                        if (@ViewBag.pedidoConfirmado == "nao")
-                                        {
-                                            <a href="#" id="inConfirmarPedido" class="btn blue button-submit"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
-                                        }
-                                        else if (@ViewBag.pedidoConfirmado == "sim")
-                                        {
-                                            <a href="#" id="inRejeitarPedido" class="btn blue button-submit"><i class="far fa-thumbs-up"></i> Rejeitar Pedido</a>
-                                        }
+                                        <a href="#" id="inConfirmarPedido" class="btn blue button-submit" style="display:none;"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
+                                        <a href="#" id="inRejeitarPedido" class="btn btn-danger button-submit" style="display:none;"><i class="far fa-thumbs-up"></i> Rejeitar Pedido</a>
                                     }
                                 }
                             </div>
@@ -250,6 +244,7 @@
             <input type="hidden" id="idUsuarioEmpresaFornecedoraCotada" value="@Model.idUsuarioEmpresaFornecedoraCotada" />
             <input type="hidden" id="inIdPedidoRecebido" value="@ViewBag.idPedido" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
+            <input type="hidden" id="inPedidoConfirmado" value="@ViewBag.pedidoConfirmado" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->
@@ -262,9 +257,19 @@
         /*
          TAREFAS:  <== CONTINUAR AQUI.
 
+         0) TESTAR 'REJEITAR PEDIDO'; <===
          1) EM CASOS SEM CONTRA PROPOSTA, NO GRID ESPECIFICO PRA ISSO - TICAR ITENS PEDIDOS COM V VERDE - RISCAR ITEM NÃO PEDIDO, em caso de PEDIDO PARCIAL;
          3) CONFIRMADO O PEDIDO, EXIBIR BOTÃO RECUSAR PEDIDO;
          */
+
+        if ((parseFloat($('#inIdPedidoRecebido').val()) > 0) && ($('#inPedidoConfirmado').val() == "nao")) {
+            $('#inConfirmarPedido').show();
+            $('#inRejeitarPedido').hide();
+        }
+        else {
+            $('#inConfirmarPedido').hide();
+            $('#inRejeitarPedido').show();
+        }
 
         if (($('#inNaoCotouTodosOsItens').val() == "sim") && ($('#inCotacaoRespondida').val() == "sim")) {
             $('#inResponderACotacao').hide();
@@ -766,6 +771,10 @@
                 },
                 success: function (data) {
                     debugger;
+
+                    //ALTERA EXIBIÇÃO DOS BOTÕES
+                    $('#inConfirmarPedido').hide();
+                    $('#inRejeitarPedido').show();
 
                     if (data.pedidoConfirmado == "sim") {
                         //EXIBE MSG LATERAL À DIREITA SUPERIOR

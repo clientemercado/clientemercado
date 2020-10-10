@@ -25,16 +25,12 @@ namespace ClienteMercado.Infra.Repositories
         //QUANTIDADE de EMPRESAS respondendo a COTAÇÃO
         public int BuscarQuantidadeDeEmpresasRespondendoACotacaoDaCC(int iD_COTACAO_MASTER_CENTRAL_COMPRAS)
         {
-            //List<cotacao_filha_central_compras> cotacoesFilhasEnviadas = 
+            //List<cotacao_filha_central_compras> cotacoesFilhasEnviadas =
             //    _contexto.cotacao_filha_central_compras.Where(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iD_COTACAO_MASTER_CENTRAL_COMPRAS)).ToList();
 
             //return cotacoesFilhasEnviadas.Count;
 
-            var query = " SELECT ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS, ID_COTACAO_MASTER_CENTRAL_COMPRAS, ID_CODIGO_EMPRESA, ID_CODIGO_USUARIO, " +
-                        " ID_TIPO_FRETE, RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS, DATA_RESPOSTA_COTACAO_FILHA_CENTRAL_COMPRAS, FORMA_PAGAMENTO_COTACAO_FILHA_CENTRAL_COMPRAS, " +
-                        " TIPO_DESCONTO, PERCENTUAL_DESCONTO, PRECO_LOTE_ITENS_COTACAO_CENTRAL_COMPRAS, OBSERVACAO_COTACAO_CENTRAL_COMPRAS, RECEBEU_CONTRA_PROPOSTA, " +
-                        " ACEITOU_CONTRA_PROPOSTA, DATA_RECEBEU_COTACAO_CENTRAL_COMPRAS, ID_CODIGO_PEDIDO_CENTRAL_COMPRAS, RECEBEU_PEDIDO, DATA_RECEBEU_PEDIDO, " +
-                        " CONFIRMOU_PEDIDO, DATA_CONFIRMOU_PEDIDO, SOLICITAR_CONFIRMACAO_ACEITE_COTACAO, REJEITOU_CONTRA_PROPOSTA " +
+            var query = " SELECT * " +
                         " FROM cotacao_filha_central_compras " +
                         " WHERE ID_COTACAO_MASTER_CENTRAL_COMPRAS = " + iD_COTACAO_MASTER_CENTRAL_COMPRAS;
 
@@ -288,6 +284,8 @@ namespace ClienteMercado.Infra.Repositories
                 dadosDaCotacaoFilha.CONFIRMOU_PEDIDO = false;
                 dadosDaCotacaoFilha.DATA_CONFIRMOU_PEDIDO = Convert.ToDateTime("1900-01-01");
                 dadosDaCotacaoFilha.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = null;
+                dadosDaCotacaoFilha.REJEITOU_PEDIDO = true;
+                dadosDaCotacaoFilha.DATA_REJEITOU_PEDIDO = DateTime.Now;
 
                 _contexto.SaveChanges();
             }

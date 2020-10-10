@@ -145,7 +145,6 @@ namespace ClienteMercado.Infra.Repositories
             {
                 listaItensASeremEditados[i].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = 0;
                 listaItensASeremEditados[i].ID_EMPRESA_FORNECEDORA_PEDIDO = null;
-
                 _contexto.SaveChanges();
             }
         }

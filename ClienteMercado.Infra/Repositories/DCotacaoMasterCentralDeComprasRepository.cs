@@ -102,7 +102,6 @@ namespace ClienteMercado.Infra.Repositories
             if (dadosCotacaoMaster != null)
             {
                 dadosCotacaoMaster.ID_EMPRESA_FORNECEDORA_APROVADA = null;
-
                 _contexto.SaveChanges();
             }
         }
