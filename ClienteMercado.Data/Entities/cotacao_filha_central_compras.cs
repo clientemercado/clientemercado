@@ -39,6 +39,8 @@ namespace ClienteMercado.Data.Entities
 
         public bool SOLICITAR_CONFIRMACAO_ACEITE_COTACAO { get; set; }
 
+        public string DESCRICAO_MOTIVO_REJEITOU_PEDIDO { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string FORMA_PAGAMENTO_COTACAO_FILHA_CENTRAL_COMPRAS { get; set; }

@@ -241,18 +241,45 @@ namespace ClienteMercado.Infra.Repositories
             }
         }
 
-        //SETAR CONFIRMANDO o PEDIDO como REJEITADO
-        public void SetarConfirmandoRejeicaoAoPedido(int iCM, int iCCF, int idPedido)
+        //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
+        public void SetarComoNaoReceBimentoDePedidoParaACotacao(int iCM, int iCCF)
         {
             cotacao_filha_central_compras dadosDaCotacaoFilha =
-                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
+                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) 
+                && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
 
             if (dadosDaCotacaoFilha != null)
             {
+                dadosDaCotacaoFilha.RECEBEU_PEDIDO = false;
+                dadosDaCotacaoFilha.DATA_RECEBEU_PEDIDO = Convert.ToDateTime("1900-01-01");
                 dadosDaCotacaoFilha.CONFIRMOU_PEDIDO = false;
+                dadosDaCotacaoFilha.DATA_CONFIRMOU_PEDIDO = Convert.ToDateTime("1900-01-01");
+                dadosDaCotacaoFilha.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = null;
+                //dadosDaCotacaoFilha.REJEITOU_PEDIDO = true;
+                //dadosDaCotacaoFilha.DATA_REJEITOU_PEDIDO = DateTime.Now;
+                //dadosDaCotacaoFilha.DESCRICAO_MOTIVO_REJEITOU_PEDIDO = descMotivo;
+
+                _contexto.SaveChanges();
+            }
+        }
+
+        //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
+        public void SetarDesistenciaDoFornecedorDePedidoParaACotacao(int iCM, int iCCF, string descMotivo)
+        {
+            cotacao_filha_central_compras dadosDaCotacaoFilha =
+                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) 
+                && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
+
+            if (dadosDaCotacaoFilha != null)
+            {
+                dadosDaCotacaoFilha.RECEBEU_PEDIDO = false;
+                dadosDaCotacaoFilha.DATA_RECEBEU_PEDIDO = Convert.ToDateTime("1900-01-01");
+                dadosDaCotacaoFilha.CONFIRMOU_PEDIDO = false;
+                dadosDaCotacaoFilha.DATA_CONFIRMOU_PEDIDO = Convert.ToDateTime("1900-01-01");
+                dadosDaCotacaoFilha.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = null;
                 dadosDaCotacaoFilha.REJEITOU_PEDIDO = true;
                 dadosDaCotacaoFilha.DATA_REJEITOU_PEDIDO = DateTime.Now;
-                dadosDaCotacaoFilha.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = null;
+                dadosDaCotacaoFilha.DESCRICAO_MOTIVO_REJEITOU_PEDIDO = descMotivo;
 
                 _contexto.SaveChanges();
             }
@@ -267,26 +294,6 @@ namespace ClienteMercado.Infra.Repositories
             if (dadosCotacaoFilhaCC != null)
             {
                 dadosCotacaoFilhaCC.SOLICITAR_CONFIRMACAO_ACEITE_COTACAO = true;
-                _contexto.SaveChanges();
-            }
-        }
-
-        //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
-        public void SetarComoNaoReceBimentoDePedidoParaACotacao(int iCM, int iCCF)
-        {
-            cotacao_filha_central_compras dadosDaCotacaoFilha =
-                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
-
-            if (dadosDaCotacaoFilha != null)
-            {
-                dadosDaCotacaoFilha.RECEBEU_PEDIDO = false;
-                dadosDaCotacaoFilha.DATA_RECEBEU_PEDIDO = Convert.ToDateTime("1900-01-01");
-                dadosDaCotacaoFilha.CONFIRMOU_PEDIDO = false;
-                dadosDaCotacaoFilha.DATA_CONFIRMOU_PEDIDO = Convert.ToDateTime("1900-01-01");
-                dadosDaCotacaoFilha.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = null;
-                dadosDaCotacaoFilha.REJEITOU_PEDIDO = true;
-                dadosDaCotacaoFilha.DATA_REJEITOU_PEDIDO = DateTime.Now;
-
                 _contexto.SaveChanges();
             }
         }

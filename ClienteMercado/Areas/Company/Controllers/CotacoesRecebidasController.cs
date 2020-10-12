@@ -784,28 +784,23 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //---------------------------------------------------------------------------
-        //SETAR CONFIRMANDO o PEDIDO como REJEITADO - AÇÃO PÓS ACEITE
+        //SETAR CONFIRMANDO o PEDIDO como REJEITADO 
+        //<-- CONTINUAR AQUI... EXECUTAR E CONFERIR O FLUXO ABAIXO...
+        // DEPOIS DE DEPURAR ESSE CONTROLLER, VERIFICAR TAREFAS EM VisualizarResponderCotacao.cshtml;
         [WebMethod]
-        public ActionResult CancelarAceiteDoPedido(int iCM, int iCCF, int idPedido)
+        public ActionResult CancelarAceiteDoPedido(int iCM, int iCCF, int idPedido, string descMotivo)
         {
             try
             {
                 var resultado = new { pedidoRejeitado = "" };
 
-                NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
-                NCotacaoMasterCentralDeComprasService negociosCotacaoMasterCC = new NCotacaoMasterCentralDeComprasService();
-                NPedidoCentralComprasService negociosPedidoCC = new NPedidoCentralComprasService();
-
-                //CONFIRMAR a REJEIÇÃO ao PEDIDO
-                negociosCotacaoFilhaCC.SetarConfirmandoRejeicaoAoPedido(iCM, iCCF, idPedido); //RETIRAR ACEITE DO PEDIDO. SETAR REJEIÇÃO DO PEDIDO COMO TRUE
-
                 //EXCLUIR PEDIDO REJEITADO PELO FORNECEDOR
-                CancelarExcluirOPedidoRejeitadoPeloFornecedor(iCM, iCCF, idPedido);
+                bool confirmadoRejeitamentoDoPedido = CancelarExcluirOPedidoRejeitadoPeloFornecedor(iCM, iCCF, idPedido, descMotivo);
 
-                //SETAR NULL NA IDENTIFICAÇÃO DO PEDIDO, na COTAÇÃO MASTER
-                negociosCotacaoMasterCC.SetarNullNoIdDoPedidoNaCotacaoMaster(iCM);
-
-                resultado = new { pedidoRejeitado = "sim" };
+                if (confirmadoRejeitamentoDoPedido)
+                {
+                    resultado = new { pedidoRejeitado = "sim" };
+                }
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
             }
@@ -816,11 +811,12 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //EXCLUIR PEDIDO REJEITADO PELO FORNECEDOR
-        public void CancelarExcluirOPedidoRejeitadoPeloFornecedor(int iCM, int iCCF, int idPedido)
+        public bool CancelarExcluirOPedidoRejeitadoPeloFornecedor(int iCM, int iCCF, int idPedido, string descMotivo)
         {
+            bool pedidoExcluido = false;
+
             try
             {
-                bool pedidoExcluido = false;
                 bool itensPedidoExcluidos = false;
 
                 NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC =
@@ -836,7 +832,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 if (dadosDoPedido != null)
                 {
                     //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
-                    negociosCotacaoFilhaCC.SetarComoNaoReceBimentoDePedidoParaACotacao(iCM, iCCF);
+                    negociosCotacaoFilhaCC.SetarDesistenciaDoFornecedorDePedidoParaACotacao(iCM, iCCF, descMotivo);
 
                     //SETAR NULL no CAMPO relacionado ao ID do PEDIDO
                     negociosCotacaoMasterCC.SetarNullNoIdDoPedidoNaCotacaoMaster(iCM);
@@ -851,6 +847,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         //EXCLUIR o PEDIDO
                         pedidoExcluido = negociosPedidosCC.ExcluirOPedido(idPedido);
+
+                        pedidoExcluido = true;
                     }
                 }
             }
@@ -858,6 +856,8 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 throw erro;
             }
+
+            return pedidoExcluido;
         }
         //---------------------------------------------------------------------------
 

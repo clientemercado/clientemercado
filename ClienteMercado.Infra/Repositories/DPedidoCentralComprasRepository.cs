@@ -1,6 +1,5 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

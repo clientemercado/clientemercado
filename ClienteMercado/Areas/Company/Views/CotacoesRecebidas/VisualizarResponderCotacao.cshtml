@@ -111,36 +111,36 @@
                                 <a href="@Url.Action("Index", "CotacoesRecebidas", new { Area = "Company" })" class="btn default button-previous">
                                     <i class="fas fa-arrow-left"></i> Voltar
                                 </a>
-                                <a href="@Url.Action("EmpresasParticipantesDaCotacaoCentralCompras", "CotacoesRecebidas", new { Area = "Company", cCC = @Model.cCC, iCM = Model.iCM, iCCF = Model.iCCF })" id="inVercotantes" class="btn blue button-submit aceitecp">
+                                <a href="@Url.Action("EmpresasParticipantesDaCotacaoCentralCompras", "CotacoesRecebidas", new { Area = "Company", cCC = @Model.cCC, iCM = Model.iCM, iCCF = Model.iCCF })" id="inVercotantes" class="btn blue button-submit aceitecp botoes">
                                     <i class="fas fa-clipboard-list"></i> Empresas Cotantes
                                 </a>
                                 @{
                                     if (@Model.inRecebeuContraProposta == "nao")
                                     {
-                                        <a href="javascript:;" id="inNaoCotarTodos" class="btn btn-danger" style="">
+                                        <a href="javascript:;" id="inNaoCotarTodos" class="btn btn-danger botoes" style="">
                                             <i class='fas fa-times'></i> NÃO COTAR todos itens
                                         </a>
-                                        <a href="javascript:;" id="inDesfazerNaoCotarTodos" class="btn btn-warning" style="display:none;">
+                                        <a href="javascript:;" id="inDesfazerNaoCotarTodos" class="btn btn-warning botoes" style="display:none;">
                                             <i class='fas fa-undo-alt'></i> desfazer NC todos itens
                                         </a>
-                                        <a href="javascript:;" id="inResponderACotacao" class="btn btn-warning" style="">
+                                        <a href="javascript:;" id="inResponderACotacao" class="btn btn-warning botoes" style="">
                                             <i class="fa fa-sign-out"></i> Enviar Resposta da Cotação
                                         </a>
                                     }
                                     else if (@Model.inRecebeuContraProposta == "sim")
                                     {
-                                        <a href="javascript:;" id="inAceitarCP" title="Aceitar Contra-Proposta" class="btn btn-success aceitecp" style="">
+                                        <a href="javascript:;" id="inAceitarCP" title="Aceitar Contra-Proposta" class="btn btn-success aceitecp botoes" style="">
                                             <i class="far fa-thumbs-up"></i> Aceitar CP
                                         </a>
-                                        <a href="javascript:;" id="inNaoAceitarCP" title="Não Aceitar Contra-Proposta" class="btn btn-danger aceitecp" style="">
+                                        <a href="javascript:;" id="inNaoAceitarCP" title="Não Aceitar Contra-Proposta" class="btn btn-danger aceitecp botoes" style="">
                                             <i class="far fa-thumbs-down"></i> Não Aceitar CP
                                         </a>
                                     }
 
                                     if (@ViewBag.idPedido > 0)
                                     {
-                                        <a href="#" id="inConfirmarPedido" class="btn blue button-submit" style="display:none;"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
-                                        <a href="#" id="inRejeitarPedido" class="btn btn-danger button-submit" style="display:none;"><i class="far fa-thumbs-up"></i> Rejeitar Pedido</a>
+                                        <a href="#" id="inConfirmarPedido" class="btn blue button-submit botoes" style="display:none;"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
+                                        <a href="#" id="inRejeitarPedido" class="btn btn-danger button-submit botoes" style="display:none;"><i class="far fa-thumbs-down"></i> Desistir do Pedido</a>
                                     }
                                 }
                             </div>
@@ -258,7 +258,8 @@
          TAREFAS:  <== CONTINUAR AQUI.
 
          0) TESTAR 'REJEITAR PEDIDO'; <===
-         1) EM CASOS SEM CONTRA PROPOSTA, NO GRID ESPECIFICO PRA ISSO - TICAR ITENS PEDIDOS COM V VERDE - RISCAR ITEM NÃO PEDIDO, em caso de PEDIDO PARCIAL;
+         1) COLOCAR CAMPOS OU POPUP COM CAMPOS SOLICITANDO TIPO FRETE E DATA DE ENTREGA...
+         2) EM CASOS SEM CONTRA PROPOSTA, NO GRID ESPECIFICO PRA ISSO - TICAR ITENS PEDIDOS COM V VERDE - RISCAR ITEM NÃO PEDIDO, em caso de PEDIDO PARCIAL;
          3) CONFIRMADO O PEDIDO, EXIBIR BOTÃO RECUSAR PEDIDO;
          */
 
@@ -508,7 +509,6 @@
                 somaValoresCotados = (somaValoresCotados + parseFloat($(this).val().replace('.', '').replace(',', '.')));
             });
 
-            //==========================================================================
             if (parseFloat(somaValoresCotados) == 0) {
                 //SE NÃO INSERIU NENHUM VALOR EM RESPOSTA AOS PRODUTOS DA COTAÇÃO
 
@@ -628,7 +628,6 @@
                     }
                 });
             }
-            //==========================================================================
         });
 
         //ACEITAR CONTRA-PROPOSTA
@@ -808,52 +807,88 @@
         //===============================================================================
         //REJEITAR o PEDIDO da CENTRAL de COMPRAS
         $("#inRejeitarPedido").click(function () {
-            swal({ title: 'ATENÇÃO:\n\nEm Construção.', type: "warning", confirmButtonColor: "#337ab7" });
 
-            ////---------------------------------------------------------------------------
-            //$.ajax({
-            //    url: "/CotacoesRecebidas/ConfirmarRecebimentoEAcatamentoDoPedido",
-            //    dataType: 'json',
-            //    cache: false,
-            //    async: true,
-            //    data: {
-            //        'iCM': $('#inICM').val(),
-            //        'iCCF': $('#inCCF').val(),
-            //        'idPedido': $('#inIdPedidoRecebido').val()
-            //    },
-            //    success: function (data) {
-            //        debugger;
+            var motivoRejeicao = "";
 
-            //        if (data.pedidoConfirmado == "sim") {
-            //            //EXIBE MSG LATERAL À DIREITA SUPERIOR
-            //            new PNotify({
-            //                title: 'SUCESSO!',
-            //                text: "O PEDIDO foi CONFIRMADO com Sucesso!",
-            //                type: 'success',
-            //                styling: 'bootstrap3',
-            //                icons: 'bootstrap3',
-            //                addclass: 'customsuccess',
-            //                animateSpeed: 'fast',
-            //                mouseReset: true,
-            //                Buttons: {
-            //                    closer: true
-            //                }
-            //            });
+            swal({
+                title: "<b>DESISTIR DO PEDIDO<b>",
+                text: "Informe o <b>MOTIVO</b> pelo qual você <b>DESISTIU de atender este PEDIDO</b>:",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                html: true,
+                animation: "slide-from-top",
+                inputPlaceholder: "Descreva aqui..."
+            },
+                function (inputValue) {
+                    if (inputValue) {
+                        motivoRejeicao = inputValue;
+                    }
 
-            //            $('#mensagemStatus').val('PEDIDO RECEBIDO e CONFIRMADO - AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA');
+                    swal({
+                        title: "ATENÇÃO!!!\n\nVocê CONFIRMA a DESISTÊNCIA deste PEDIDO?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sim",
+                        confirmButtonColor: "#337ab7",
+                        cancelButtonText: 'Cancelar',
+                        closeOnConfirm: true,
+                        closeOnCancel: true,
+                        showConfirmButton: true
+                    },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                $.ajax({
+                                    url: "/CotacoesRecebidas/CancelarAceiteDoPedido",
+                                    dataType: 'json',
+                                    cache: false,
+                                    async: true,
+                                    data: {
+                                        'iCM': $('#inICM').val(),
+                                        'iCCF': $('#inCCF').val(),
+                                        'idPedido': $('#inIdPedidoRecebido').val(), 
+                                        'descMotivo': motivoRejeicao
+                                    },
+                                    success: function (data) {
+                                        debugger;
 
-            //            if ($('#mensagemStatus').val() != "") {
-            //                $('#inMensagemStatus').html('');
-            //                $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + $('#mensagemStatus').val());
-            //            }
+                                        if (data.pedidoRejeitado == "sim") {
+                                            //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                                            new PNotify({
+                                                title: 'SUCESSO!',
+                                                text: "A DESISTÊNCIA do PEDIDO foi registrada com SUCESSO!",
+                                                type: 'success',
+                                                styling: 'bootstrap3',
+                                                icons: 'bootstrap3',
+                                                addclass: 'customsuccess',
+                                                animateSpeed: 'fast',
+                                                mouseReset: true,
+                                                Buttons: {
+                                                    closer: true
+                                                }
+                                            });
 
-            //            $('#inConfirmarPedido').hide();
-            //        }
-            //    }
-            //});
-            ////---------------------------------------------------------------------------
+                                            //$('#mensagemStatus').val('PEDIDO RECEBIDO e CONFIRMADO - AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA');
+                                            $('#mensagemStatus').val('VOCÊ DESISTIU DO PEDIDO RECEBIDO PARA ESTA COTAÇÃO!');
+
+                                            if ($('#mensagemStatus').val() != "") {
+                                                $('#inMensagemStatus').html('');
+                                                $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + $('#mensagemStatus').val());
+                                            }
+
+                                            $('.botoes').hide();
+                                        }
+                                    }
+                                });
+                            }
+                            //else {
+
+                            //}
+                        });
+
+                });
         });
-        //===============================================================================
+
     });
 
     //POPULAR GRID

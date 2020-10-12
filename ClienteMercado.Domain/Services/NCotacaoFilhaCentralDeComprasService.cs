@@ -180,12 +180,6 @@ namespace ClienteMercado.Domain.Services
             dcotacaofilhacentraldecompras.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
         }
 
-        //SETAR CONFIRMANDO o PEDIDO como REJEITADO
-        public void SetarConfirmandoRejeicaoAoPedido(int iCM, int iCCF, int idPedido)
-        {
-            dcotacaofilhacentraldecompras.SetarConfirmandoRejeicaoAoPedido(iCM, iCCF, idPedido);
-        }
-
         //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras
         public void SetarFlagDeEnvioDeSolicitacaoDeConfirmacaoParaPedidoDosItensCotados(int iCM, int iCCF, int idFor)
         {
@@ -202,6 +196,12 @@ namespace ClienteMercado.Domain.Services
         public void DesfazerMarcacaoDeCotacaoRespondida(int iCM, int idEmpresaCotada, int iCCF)
         {
             dcotacaofilhacentraldecompras.DesfazerMarcacaoDeCotacaoRespondida(iCM, idEmpresaCotada, iCCF);
+        }
+
+        //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
+        public void SetarDesistenciaDoFornecedorDePedidoParaACotacao(int iCM, int iCCF, string descMotivo)
+        {
+            dcotacaofilhacentraldecompras.SetarDesistenciaDoFornecedorDePedidoParaACotacao(iCM, iCCF, descMotivo);
         }
 
         ////BUSCAR APENAS 1 COTAÇÃO na LISTA de COTAÇÕES ENVIADAS
