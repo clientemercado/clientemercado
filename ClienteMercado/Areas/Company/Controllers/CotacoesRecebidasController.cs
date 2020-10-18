@@ -785,8 +785,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //---------------------------------------------------------------------------
         //SETAR CONFIRMANDO o PEDIDO como REJEITADO 
-        //<-- CONTINUAR AQUI... EXECUTAR E CONFERIR O FLUXO ABAIXO...
-        // DEPOIS DE DEPURAR ESSE CONTROLLER, VERIFICAR TAREFAS EM VisualizarResponderCotacao.cshtml;
         [WebMethod]
         public ActionResult CancelarAceiteDoPedido(int iCM, int iCCF, int idPedido, string descMotivo)
         {

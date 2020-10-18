@@ -133,6 +133,8 @@
                                                 if (Model.quantidadeEmpresasQueRegistraramOAceiteDosValoresCotados == Model.quantidadeEmpresasParticipantesDestaCotacao)
                                                 {
                                                     <a href="#" id="" class="btn btn-success"><i class="far fa-check-circle"></i> Negociação Aceita</a>
+                                                    <a href="#" id="checkall" class="btn btn-primary check"><i class="far fa-check-square"></i> Seleciona Todos Itens</a>
+                                                    <a href="#" id="deselectall" class="btn btn-danger check" style="display:none;"><i class="far fa-square"></i> Desmarca Todos Itens</a>
 
                                                     if (ViewBag.TodosItensPedidos != "sim")
                                                     {
@@ -218,12 +220,14 @@
                                                 //if (Model.inRejeitouContraProposta == "nao")
                                                 //{
                                                 @*<a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
-                                                    <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style=""><i class="far fa-thumbs-down"></i> Não Aceitar Negociação</a>
-                                                    <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>*@
+                                            <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style=""><i class="far fa-thumbs-down"></i> Não Aceitar Negociação</a>
+                                            <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>*@
                                                 //}
 
                                                 <a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
                                                 <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>
+                                                <a href="#" id="checkall" class="btn btn-primary check"><i class="far fa-check-square"></i> Seleciona Todos Itens</a>
+                                                <a href="#" id="deselectall" class="btn btn-danger check" style="display:none;"><i class="far fa-square"></i> Desmarca Todos Itens</a>
                                             }
                                             else
                                             {
@@ -235,6 +239,8 @@
                                             if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
                                             {
                                                 <a href="#" id="" class="btn btn-success"><i class="far fa-check-circle"></i> Negociação Aceita</a>
+                                                <a href="#" id="checkall" class="btn btn-primary check"><i class="far fa-check-square"></i> Seleciona Todos Itens</a>
+                                                <a href="#" id="deselectall" class="btn btn-danger check" style="display:none;"><i class="far fa-square"></i> Desmarca Todos Itens</a>
                                             }
                                             else
                                             {
@@ -357,6 +363,7 @@
             <input type="hidden" id="inAceitouNegociacao" value="@Model.negociacaoDoAdmComFornecedoresAceita" />
             <input type="hidden" id="inRejeitouNegociacao" value="@Model.rejeitouSolicitacaoAprovandoValoresCotacao" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
+            <input type="hidden" id="inTodosItensPedidos" value="@ViewBag.TodosItensPedidos" />            
         </div>
     </div>
     <!-- END VALIDATION STATES-->
@@ -367,7 +374,9 @@
     /*
      * A FAZER NESTA PÁGINA:
      * 
-     OBS: COLOCAR UM CHECKBOX OU BOTÃO SELECIONAR TODOS OS ITENS PARA PEDIDO...
+     0) RESOLVER PRIMEIRO A PÁGINA VisualizarResponderCotacao.cshml...
+     1) COLOCAR UM CHECKBOX OU BOTÃO SELECIONAR TODOS OS ITENS PARA PEDIDO...
+     2) COLOCAR ALGO INFORMANDO QUE O FORNECEDOR REJEITOU O PEDIDO DEPOIS DE CONFIRMADO...
      */
 
     jQuery(document).ready(function () {
@@ -381,6 +390,10 @@
 
         if ($('#inRejeitouCP').val() == "sim") {
             $('#inSolicitarConfirmacao').hide();
+        }
+
+        if ($('#inTodosItensPedidos').val() == "sim") {
+            $('.check').hide();
         }
 
         if ($('#mensagemStatus').val() != "") {
@@ -788,6 +801,7 @@
                                         window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
 
                                         if (data.todosItensPedidos == "sim") {
+                                            $('.check').hide();
                                             $('#inEfetuarPedido').hide();
                                             $('#inCancelarPedido').show();
                                         }
@@ -881,6 +895,7 @@
 
                                         if (data.pedidoExcluido == "sim") {
                                             $('#inCancelarPedido').hide();
+                                            $('#checkall').show();
                                             $('#inEfetuarPedido').show();
                                         }
                                     }
@@ -895,6 +910,26 @@
             }
         });
 
+        //SELECIONAR TODOS
+        $(".check").click(function () {
+            debugger;
+
+            $(".itemcotado").each(
+                function () {
+                    if ($(this).prop("checked")) {
+                        $(this).prop("checked", false);
+
+                        $('#deselectall').hide();
+                        $('#checkall').show();
+                    } else {
+                        $(this).prop("checked", true);
+
+                        $('#checkall').hide();
+                        $('#deselectall').show();
+                    }
+                }
+            )
+        });
     });
 
     function carregarGrid() {
@@ -1136,10 +1171,12 @@
 
                                     if (data.todosItensPedidos == "nao") {
                                         $('#inCancelarPedido').hide();
+                                        $('#checkall').show();
                                         $('#inEfetuarPedido').show();
                                     }
                                     else {
-                                        $('#inEfetuarPedido').hide();
+                                        $('.check').hide();
+                                        $('#inEfetuarPedido').hide();                                        
                                         $('#inCancelarPedido').show();
                                     }
 
