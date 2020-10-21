@@ -257,10 +257,8 @@
         /*
          TAREFAS:  <== CONTINUAR AQUI.
 
-         0) BOTÃO SELECIONAR TODOS: --> VER O QUE FAZER PRA NÃO CONSIDERAR OS ITENS JÁ PEDIDOS, EM CASO DE PEDIDO PARCIAL. OBS: AS REGRAS JÁ DEFINIDAS PRA PEDIDO PARCIAL NÃO DEVEM MUDAR.;
-         1) OS ITENS JÁ PEDIDOS DEVE TER UMA COLORAÇÃO DIFERENTE;
-         2) COLOCAR CAMPOS OU POPUP COM CAMPOS SOLICITANDO TIPO FRETE E DATA DE ENTREGA AO CONFIRMAR O PEDIDO...
-         3) SETAR AVALIAÇÃO OU ALGUMA PONTUAÇÃO OU QUALQUER COISA QUE INFORME AO GRUPO COTANTE QUE ESTE FORNECEDOR REJEITOU O PEDIDO...
+         1) COLOCAR CAMPOS OU POPUP COM CAMPOS SOLICITANDO TIPO FRETE E DATA DE ENTREGA AO CONFIRMAR O PEDIDO...
+         2) SETAR AVALIAÇÃO OU ALGUMA PONTUAÇÃO OU QUALQUER COISA QUE INFORME AO GRUPO COTANTE QUE ESTE FORNECEDOR REJEITOU O PEDIDO...
          */
 
         if ((parseFloat($('#inIdPedidoRecebido').val()) > 0) && ($('#inPedidoConfirmado').val() == "nao")) {
@@ -895,15 +893,6 @@
     function carregarGrid() {
         //-------------------------------------------------------------------------------
         debugger;
-
-        //if (($('#inCotacaoRespondida').val() == 'sim') && (parseInt($('#inNCTodos').val()) == 1)) {
-        //    $('#inNaoCotarTodos').hide();
-        //    $('#inDesfazerNaoCotarTodos').show();
-        //    $('.valortabela').attr("disabled", true);
-        //    $('.valordiferenciado').attr("disabled", true);
-        //    $('.naocotar').hide();
-        //    $('.desfazernc').show();
-        //}
 
         //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
         var grid = $('#gridItensCotadosCC').bootgrid({

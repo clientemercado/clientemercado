@@ -367,7 +367,7 @@
      * A FAZER NESTA PÁGINA:
      * 
      0) RESOLVER PRIMEIRO A PÁGINA VisualizarResponderCotacao.cshml...
-     1) COLOCAR UM CHECKBOX OU BOTÃO SELECIONAR TODOS OS ITENS PARA PEDIDO...
+     1) AO CLICAR EM 'SELECIONAR TODOS', CHECAR SOMENTE OS QQUE AINDA NÃO FORAM PEDIDOS...
      2) COLOCAR ALGO INFORMANDO QUE O FORNECEDOR REJEITOU O PEDIDO DEPOIS DE CONFIRMADO...
      */
 
@@ -949,19 +949,44 @@
                     return "<input type='checkbox' name='checkbox' id='" + row.idItemCotacao + "' class='itemcotado' title='" + row.hint + "' value='" + row.idItemCotacao + "' itempedido='" + row.itemFoiPedido + "' idcotacaoinvidual='" + row.idItemCotacaoIndividualEmpresa + "' onclick='verificaSeOItemFoiPedido(" + row.idItemCotacao + ");' " + row.habilitar + ">";
                 },
                 "link1": function (column, row) {
-                    return "<a href=\"#\">" + row.descricaoProdutoCotacao + "</a>";
+                    if (row.itemFoiPedido == "sim") {
+                        return "<b><a href=\"#\" title='Item Pedido'>" + row.descricaoProdutoCotacao + "</a></b>";
+                    }
+                    else {
+                        return "<a href=\"#\">" + row.descricaoProdutoCotacao + "</a>";
+                    }
                 },
                 "link2": function (column, row) {
-                    return "<a href=\"#\">" + row.marcaProduto + "</a>";
+                    if (row.itemFoiPedido == "sim") {
+                        return "<b><a href=\"#\" title='Item Pedido'>" + row.marcaProduto + "</a></b>";
+                    }
+                    else {
+                        return "<a href=\"#\">" + row.marcaProduto + "</a>";
+                    }
                 },
                 "link3": function (column, row) {
-                    return "<a href=\"#\">" + row.quantidadeProdutoCotacao + "</a>";
+                    if (row.itemFoiPedido == "sim") {
+                        return "<b><a href=\"#\" title='Item Pedido'>" + row.quantidadeProdutoCotacao + "</a></b>";
+                    }
+                    else {
+                        return "<a href=\"#\">" + row.quantidadeProdutoCotacao + "</a>";
+                    }
                 },
                 "link4": function (column, row) {
-                    return "<a href=\"#\">" + row.unidadeProdutoCotacao + "</a>";
+                    if (row.itemFoiPedido == "sim") {
+                        return "<b><a href=\"#\" title='Item Pedido'>" + row.unidadeProdutoCotacao + "</a></b>";
+                    }
+                    else {
+                        return "<a href=\"#\">" + row.unidadeProdutoCotacao + "</a>";
+                    }
                 },
                 "link5": function (column, row) {
-                    return "<a href=\"#\">" + row.valorUnitarioTabela + "<a>";
+                    if (row.itemFoiPedido == "sim") {
+                        return "<a href=\"#\" title='Item Pedido'>" + row.valorUnitarioTabela + "<a>";
+                    }
+                    else {
+                        return "<a href=\"#\">" + row.valorUnitarioTabela + "<a>";
+                    }
                 },
                 "link6": function (column, row) {
                     if (row.itemFoiPedido == "sim") {
@@ -1081,18 +1106,6 @@
         if ($('#' + valor).attr('itempedido') == "sim") {
             var somaItensPedido = 0;
             var codsProdsPedidos = "";
-
-            //$(".itemcotado:checked").each(function () {
-            //    if (codsProdsPedidos == "") {
-            //        codsProdsPedidos = $(this).val();
-            //    }
-            //    else {
-            //        codsProdsPedidos = (codsProdsPedidos + ',' + $(this).val());
-            //    }
-
-            //    var totalItemPedido = $(this).closest("tr").find("td").eq(8).text().replace(".", "").replace(",", ".");
-            //    somaItensPedido += parseFloat(totalItemPedido);
-            //});
 
             $(".itemcotado:checked").each(function () {
                 if (codsProdsPedidos == "") {
