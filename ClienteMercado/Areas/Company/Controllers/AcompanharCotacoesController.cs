@@ -472,7 +472,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
 
                     //CONSULTAR LISTA de ITENS da COTACAO FILHA
-                    List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacaoFilha = negociosItensCotacaoFilhaCentralCompras.ConsultarItensDaCotacaoDaCC(iCCF);
+                    List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacaoFilha = 
+                        negociosItensCotacaoFilhaCentralCompras.ConsultarItensDaCotacaoDaCC(iCCF);
 
                     //CONSULTAR DADOS da EMPRESA COTADA
                     empresa_usuario dadosDaEmpresaCotada =
@@ -634,7 +635,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     percentualIdealConfirmado = ((cotacoesIndividuaisDasEmpresasDaCC.Count * 100) / 100);
 
-                    if (dadosCotacaoFilha.SOLICITAR_CONFIRMACAO_ACEITE_COTACAO) //--> AQUI...
+                    if (dadosCotacaoFilha.SOLICITAR_CONFIRMACAO_ACEITE_COTACAO)
                     {
                         if (cotacoesIndividuaisQueRegistraramAceiteDaRespostaDoFornecedor.Count < percentualIdealConfirmado)
                         {
@@ -677,6 +678,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                                 viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
                             }
                         }
+                    }
+
+                    if (dadosCotacaoFilha.REJEITOU_PEDIDO)
+                    {
+                        viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>RECEBEU PEDIDO</font>&nbsp;- REJEITOU ESTE PEDIDO DA CENTRAL DE COMPRAS";
                     }
 
                     if (dadosDaCotacaoMaster.SOLICITAR_CONFIRMACAO_COTACAO)
@@ -1276,8 +1282,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
                 List<ListaDadosProdutoCotacaoViewModel> listaProdutosCotacoes = new List<ListaDadosProdutoCotacaoViewModel>();
 
-                //List<ListaDadosProdutoCotacaoViewModel> listaDeItemsDaCotacao = new List<ListaDadosProdutoCotacaoViewModel>();
-
                 //PEGA OS ITENS DA COTACAO, baseando-se na PRIMEIRA COTAÇÃO
                 List<itens_cotacao_filha_negociacao_central_compras> itensDaCotacao =
                     negociosItensCotacaoCentralDeCompras.CarregarOsItensDeUmaCotacaoEnviada(iCCF);
@@ -1290,11 +1294,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     unidadeProduto = negociosUnidadesProdutos.ConsultarDescricaoDaUnidadeDoProduto(itemDaCotacaoIndividual.ID_CODIGO_UNIDADE_PRODUTO);
                     marcaDoProdutoCotado = negociosEmpresasfabricantesMarcas.ConsultarDescricaoDaEmpresaFabricanteOuMarca(itemDaCotacaoIndividual.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS);
 
-                    //CONSULTAR SE o PRODUTO JÁ FOI PEDIDO A ALGUM FORNECEDOR <-- ANALISAR ISSO -- ACHO Q ESTÁ ERRADO
+                    //CONSULTAR SE o PRODUTO JÁ FOI PEDIDO A ALGUM FORNECEDOR
                     itens_pedido_central_compras itemJahPedido =
                         negociosItensPedidoCC.ConsultarSeOProdutoJahFoiPedido(itensDaCotacao[i].ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS);
 
-                    //CONSULTAR SE o PRODUTO FOI PEDIDO ao FORNECEDOR cuja RESPOSTA está sendo ANALISADA <-- ANALISAR ISSO -- ACHO Q ESTÁ ERRADO
+                    //CONSULTAR SE o PRODUTO FOI PEDIDO ao FORNECEDOR cuja RESPOSTA está sendo ANALISADA
                     itemPedidoCC =
                         negociosItensPedidoCC.ConsultarSeOFornecedorRecebeuPedidoParaEsteProduto(itensDaCotacao[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS);
 
@@ -1884,7 +1888,6 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //================================================================================
                 var resultado = new { pedidoFeito = "nao", idPedido = 0, todosItensPedidos = "", mensagemStatus = "" };
                 var idItemPedido = 0;
                 var nomeUsuario = "";
@@ -1961,7 +1964,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     }
                 }
 
-                //----------------------------------------------------------------------------------------------------------
                 //CONSULTAR LISTA de ITENS da COTACAO FILHA
                 List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacaoFilha =
                     negociosItensCotacaoFilhaCentralCompras.ConsultarItensDaCotacaoDaCC(iCCF);
@@ -2003,11 +2005,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                 {
                     negociosCotacaoMaster.SetarCampoDeContraProposta(iCM);
                 }
-                //----------------------------------------------------------------------------------------------------------
 
                 if (idItemPedido > 0)
                 {
-                    //-------------------------------------------------------------------------
                     var mensagemDoStatus = "";
 
                     //CONSULTAR DADOS da COTAÇÃO FILHA
@@ -2034,7 +2034,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
                     }
-                    //-------------------------------------------------------------------------
 
                     resultado = new
                     {
@@ -2144,13 +2143,10 @@ namespace ClienteMercado.Areas.Company.Controllers
                         /*
                             CODIFICAR...
                         */
-
-                        //===========================================================================
                     }
                 }
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
-                //================================================================================
             }
             catch (Exception erro)
             {

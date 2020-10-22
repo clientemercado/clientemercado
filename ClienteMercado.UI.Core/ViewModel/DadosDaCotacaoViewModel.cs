@@ -84,5 +84,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string mensagemStatus { get; set; }
 
         public string rejeitouSolicitacaoAprovandoValoresCotacao { get; set; }
+
+        public string rejeitouPedido { get; set; }
     }
 }

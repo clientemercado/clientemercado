@@ -211,13 +211,6 @@
                                         {
                                             if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
                                             {
-                                                //if (Model.inRejeitouContraProposta == "nao")
-                                                //{
-                                                @*<a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
-                                                  <a href="javascript:;" id="inNaoAceitarNegociacao" title="Não Aceitar Negociação" class="btn btn-danger aceitenegociacao" style=""><i class="far fa-thumbs-down"></i> Não Aceitar Negociação</a>
-                                                  <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>*@
-                                                //}
-
                                                 <a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
                                                 <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>
                                                 <a href="#" id="checkall" class="btn btn-primary check"><i class="far fa-check-square"></i> Seleciona Todos Itens</a>
@@ -355,7 +348,7 @@
             <input type="hidden" id="inAceitouNegociacao" value="@Model.negociacaoDoAdmComFornecedoresAceita" />
             <input type="hidden" id="inRejeitouNegociacao" value="@Model.rejeitouSolicitacaoAprovandoValoresCotacao" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
-            <input type="hidden" id="inTodosItensPedidos" value="@ViewBag.TodosItensPedidos" />            
+            <input type="hidden" id="inTodosItensPedidos" value="@ViewBag.TodosItensPedidos" />  
         </div>
     </div>
     <!-- END VALIDATION STATES-->

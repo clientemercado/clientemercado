@@ -308,6 +308,9 @@ namespace ClienteMercado.Infra.Repositories
             {
                 dadosDaCotacaoFilha.RECEBEU_PEDIDO = true;
                 dadosDaCotacaoFilha.DATA_RECEBEU_PEDIDO = DateTime.Now;
+                dadosDaCotacaoFilha.REJEITOU_PEDIDO = false;
+                dadosDaCotacaoFilha.DATA_REJEITOU_PEDIDO = Convert.ToDateTime("1900-01-01");
+                dadosDaCotacaoFilha.DESCRICAO_MOTIVO_REJEITOU_PEDIDO = null;
                 _contexto.SaveChanges();
             }
         }
@@ -342,13 +345,6 @@ namespace ClienteMercado.Infra.Repositories
         //BUSCAR LISTA de COTAÇÕES ENVIADAS
         public List<ListaDeCotacoesEnviadasParaEmpresasCotadasViewModel> BuscarListaDeCotacoesEnviadasConformeCotacaoMaster(int iCM)
         {
-            //var query = "SELECT ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS, ID_COTACAO_MASTER_CENTRAL_COMPRAS, ID_CODIGO_EMPRESA, ID_CODIGO_USUARIO, " +
-            //            "ID_TIPO_FRETE, RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS, DATA_RESPOSTA_COTACAO_FILHA_CENTRAL_COMPRAS, FORMA_PAGAMENTO_COTACAO_FILHA_CENTRAL_COMPRAS, " +
-            //            "TIPO_DESCONTO, PERCENTUAL_DESCONTO, PRECO_LOTE_ITENS_COTACAO_CENTRAL_COMPRAS, OBSERVACAO_COTACAO_CENTRAL_COMPRAS, " +
-            //            "COTACAO_FILHA_CENTRAL_COMPRAS_EDITADA " +
-            //            "FROM cotacao_filha_central_compras " +
-            //            "WHERE ID_COTACAO_MASTER_CENTRAL_COMPRAS = " + iCM;
-
             var query = "SELECT ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS, ID_COTACAO_MASTER_CENTRAL_COMPRAS, ID_CODIGO_EMPRESA, ID_CODIGO_USUARIO, " +
                         "ID_TIPO_FRETE, RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS, DATA_RESPOSTA_COTACAO_FILHA_CENTRAL_COMPRAS, " + 
                         "FORMA_PAGAMENTO_COTACAO_FILHA_CENTRAL_COMPRAS, TIPO_DESCONTO, PERCENTUAL_DESCONTO, PRECO_LOTE_ITENS_COTACAO_CENTRAL_COMPRAS, " +
