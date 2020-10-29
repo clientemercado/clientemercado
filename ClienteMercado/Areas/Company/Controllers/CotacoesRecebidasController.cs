@@ -2,6 +2,7 @@
 using ClienteMercado.Domain.Services;
 using ClienteMercado.Models;
 using ClienteMercado.UI.Core.ViewModel;
+using ClienteMercado.Utils.Mail;
 using ClienteMercado.Utils.Net;
 using ClienteMercado.Utils.Utilitarios;
 using ClienteMercado.Utils.ViewModel;
@@ -89,9 +90,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 {
                     int valor = 0;
                     decimal somaValoresCotados = 0;
-                    //decimal percentualIdealConfirmado = 0;
                     string mensagem = "";
-                    string respondeuContraProposta = "";
 
                     DateTime dataHoje = DateTime.Today;
 
@@ -284,6 +283,11 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                         textoMsgStatus = "PEDIDO PARCIAL";
                     }
+
+                    if (dadosCotacaoFilha.REJEITOU_PEDIDO)
+                    {
+                        viewModelEnviarResposta.rejeitouPedido = "sim";
+                    }
                     //---------------------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -302,11 +306,11 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     if ((dadosCotacaoFilha.RECEBEU_PEDIDO) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == false))
                     {
-                        viewModelEnviarResposta.mensagemStatus = textoMsgStatus + " RECEBIDO - CLIQUE em CONFIRMAR PEDIDO, GARANTINDO o RECEBIMENTO e ACEITAÇÃO do PEDIDO";
+                        viewModelEnviarResposta.mensagemStatus = textoMsgStatus + " RECEBIDO</font>&nbsp;- CLIQUE em CONFIRMAR PEDIDO, GARANTINDO o RECEBIMENTO e ACEITAÇÃO do PEDIDO";
                     }
                     else if ((dadosCotacaoFilha.RECEBEU_PEDIDO) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO))
                     {
-                        viewModelEnviarResposta.mensagemStatus = textoMsgStatus + " RECEBIDO e CONFIRMADO - AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA";
+                        viewModelEnviarResposta.mensagemStatus = textoMsgStatus + " RECEBIDO e CONFIRMADO</font>&nbsp;- AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA";
                         ViewBag.pedidoConfirmado = "sim";
                     }
 
@@ -756,15 +760,18 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //SETAR CONFIRMANDO o PEDIDO como ACEITO
         [WebMethod]
-        public ActionResult ConfirmarRecebimentoEAcatamentoDoPedido(int iCM, int iCCF, int idPedido)
+        public ActionResult ConfirmarRecebimentoEAcatamentoDoPedido(int cCC, int iCM, int iCCF, int idPedido)
         {
             try
             {
                 var resultado = new { pedidoConfirmado = "" };
+                var nomeUsuario = "";
 
+                NCentralDeComprasService negociosCC = new NCentralDeComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMasterCC = new NCotacaoMasterCentralDeComprasService();
                 NPedidoCentralComprasService negociosPedidoCC = new NPedidoCentralComprasService();
+                NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
 
                 //CONFIRMAR o ACEITE do PEDIDO
                 negociosCotacaoFilhaCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
@@ -772,6 +779,118 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 //IDENTIFICAR na COTAÇÃO MASTER o FORNECEDOR q RECEBEU PEDIDO
                 negociosCotacaoMasterCC.SetarIdFornecedorNaCotacaoMaster(iCM);
+
+                central_de_compras dadosCC = negociosCC.CarregarDadosDaCentralDeCompras(cCC);
+
+                empresa_usuario dadosEmpresaAdmCC = 
+                    negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = dadosCC.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS });
+
+                /*
+                 * 
+                 ENVIAR E-MAIL, SMS e NOTIFICAÇÃO SOBRE O ACEITE DO PEDIDO
+
+                 */
+
+                //=======================================================================
+                //===========================================================================
+                /*
+                 DISPARAR AQUI PARA O VENDEDOR:                        
+                    - E-MAILS, SMS, NOTIFICAÇÕES VIA CELULAR --> INFORMAÇÕES no SISTEMA sobre O PEDIDO
+                */
+
+                //DISPARAR AO FORNECEDOR, AVISO PARA CONFERÊNCIA E ACEITE DO PEDIDO
+                //---------------------------------------------------------------------------------------------
+                //ENVIANDO E-MAILS
+                //---------------------------------------------------------------------------------------------
+                //CARREGAR DADOS da EMPRESA ADM da CENTRAL COMPRAS
+                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaSelecionada =
+                    negociosEmpresaUsuario.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosEmpresaAdmCC.ID_CODIGO_EMPRESA);
+
+                EnviarEmailSobreDesistenciaDoPedidoPeloFornecedor enviarEmailAvisandoDesistenciaSobreOPedido = 
+                    new EnviarEmailSobreDesistenciaDoPedidoPeloFornecedor();
+
+                //DISPARA E-MAIL´s para todas as EMPRESAS a serem COTADAS
+                if (!string.IsNullOrEmpty(dadosEmpresaSelecionada.nickNameUsuarioContatoEmpresa))
+                {
+                    nomeUsuario = dadosEmpresaSelecionada.nickNameUsuarioContatoEmpresa;
+                }
+                else
+                {
+                    nomeUsuario = dadosEmpresaSelecionada.nomeUsuarioContatoEmpresa;
+                }
+
+                ////ENVIAR E-MAIL   
+                //bool emailAvisoDePedido =
+                //    enviarEmailAvisandoDesistenciaSobreOPedido.EnviarEmail();   //<--------CONTINUAR AQUI - INSERIR OS PARÂMETROS PARA A CLASSE DE ENVIO DE E-MAIL...
+
+                ////---------------------------------------------------------------------------------------------
+                ////ENVIANDO SMS´s
+                ////---------------------------------------------------------------------------------------------
+                //EnviarSms enviarSmsMaster = new EnviarSms();
+
+                //smsMensagem = "ClienteMercado - Temos um PEDIDO pra você. Acesse www.clientemercado.com.br e confirme o ATENDIMENTO";
+
+                //if (emailAvisoDePedido)
+                //{
+                //    if (!string.IsNullOrEmpty(dadosEmpresaSelecionada.celular1_UsuarioContatoEmpresa))
+                //    {
+                //        //TELEFONE 1 do USUÁRIO ADM
+                //        telefoneUsuarioADM = Regex.Replace(dadosEmpresaSelecionada.celular1_UsuarioContatoEmpresa, "[()-]", "");
+                //        urlParceiroEnvioSms =
+                //            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
+
+                //        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+
+                //        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 2096 ACIMA...
+
+                //        if (smsUsuarioVendedor)
+                //        {
+                //            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                //            NControleSMSService negociosSMS = new NControleSMSService();
+                //            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                //            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaSelecionada.celular1_UsuarioContatoEmpresa;
+                //            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaSelecionada.idUsuarioContatoResponsavel;
+                //            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+                //            controleEnvioSms.DATA_ENVIO = DateTime.Now;
+
+                //            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                //        }
+                //    }
+
+                //    if (!string.IsNullOrEmpty(dadosEmpresaSelecionada.celular2_UsuarioContatoEmpresa))
+                //    {
+                //        //TELEFONE 2 do USUÁRIO ADM
+                //        telefoneUsuarioADM = Regex.Replace(dadosEmpresaSelecionada.celular2_UsuarioContatoEmpresa, "[()-]", "");
+                //        urlParceiroEnvioSms =
+                //            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
+
+                //        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+
+                //        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 2120 ACIMA...
+
+                //        if (smsUsuarioVendedor)
+                //        {
+                //            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                //            NControleSMSService negociosSMS = new NControleSMSService();
+                //            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                //            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaSelecionada.celular2_UsuarioContatoEmpresa;
+                //            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaSelecionada.idUsuarioContatoResponsavel;
+                //            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+
+                //            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                //        }
+                //    }
+
+                //    //---------------------------------------------------------------------------------------------
+                //    //ENVIANDO NOTIFICAÇÃO CELULAR
+                //    //---------------------------------------------------------------------------------------------
+                //    //3 - Enviar ALERT ao aplicativo no celular
+                //    /*
+                //        CODIFICAR...
+                //    */
+                //    //=======================================================================
 
                 resultado = new { pedidoConfirmado = "sim" };
 
@@ -783,7 +902,6 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        //---------------------------------------------------------------------------
         //SETAR CONFIRMANDO o PEDIDO como REJEITADO 
         [WebMethod]
         public ActionResult CancelarAceiteDoPedido(int iCM, int iCCF, int idPedido, string descMotivo)
@@ -794,6 +912,12 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 //EXCLUIR PEDIDO REJEITADO PELO FORNECEDOR
                 bool confirmadoRejeitamentoDoPedido = CancelarExcluirOPedidoRejeitadoPeloFornecedor(iCM, iCCF, idPedido, descMotivo);
+
+                /*
+                 * 
+                 ENVIAR E-MAIL, SMS e NOTIFICAÇÃO SOBRE A DESISTÊNCIA DO PEDIDO
+
+                 */
 
                 if (confirmadoRejeitamentoDoPedido)
                 {

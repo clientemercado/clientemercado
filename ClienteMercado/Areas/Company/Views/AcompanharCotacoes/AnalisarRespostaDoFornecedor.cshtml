@@ -348,7 +348,8 @@
             <input type="hidden" id="inAceitouNegociacao" value="@Model.negociacaoDoAdmComFornecedoresAceita" />
             <input type="hidden" id="inRejeitouNegociacao" value="@Model.rejeitouSolicitacaoAprovandoValoresCotacao" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
-            <input type="hidden" id="inTodosItensPedidos" value="@ViewBag.TodosItensPedidos" />  
+            <input type="hidden" id="inTodosItensPedidos" value="@ViewBag.TodosItensPedidos" />
+            <input type="hidden" id="inRejeitouPedido" value="@Model.rejeitouPedido" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->
@@ -356,16 +357,13 @@
 </div>
 
 <script>
-    /*
-     * A FAZER NESTA PÁGINA:
-     * 
-     0) COLOCAR ALERT MOSTRANDO QUE O PEDIDO FOI REJEITADO PELO FORNECEDOR EM QUESTÃO;
-     1) RESOLVER A PÁGINA VisualizarResponderCotacao.cshml...
-     */
-
     jQuery(document).ready(function () {
         carregarGrid();
         carregarChat();
+
+        if ($('#inRejeitouPedido').val() == "sim") {
+            swal({ title: "ATENÇÃO:<br><br>Este fornecedor DESISTIU de atender um PEDIDO para esta COTAÇÃO.", type: "warning", confirmButtonColor: "#337ab7", html: true });
+        }
 
         if ($('#inAceitouNegociacao').val() == "sim") {
             $('#inConfirmarAceiteDaNegociacao').hide();

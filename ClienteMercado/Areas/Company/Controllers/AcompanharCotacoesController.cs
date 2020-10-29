@@ -682,7 +682,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     if (dadosCotacaoFilha.REJEITOU_PEDIDO)
                     {
-                        viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>RECEBEU PEDIDO</font>&nbsp;- REJEITOU ESTE PEDIDO DA CENTRAL DE COMPRAS";
+                        viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>RECEBEU PEDIDO</font>&nbsp;- DESISTIU DE ATENDER A UM PEDIDO DA CENTRAL DE COMPRAS PARA ESTA COTAÇÃO";
                     }
 
                     if (dadosDaCotacaoMaster.SOLICITAR_CONFIRMACAO_COTACAO)
@@ -699,19 +699,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         viewModelAnalisarResposta.negociacaoDoAdmComFornecedoresAceita = "sim";
                     }
-                    //else
-                    //{
-                    //    viewModelAnalisarResposta.negociacaoDoAdmComFornecedoresAceita = "nao";
-                    //}
-
-                    //if (dadosDaCotacaoIndividualEmpresaLogada.NEGOCIACAO_COTACAO_REJEITADA)
-                    //{
-                    //    viewModelAnalisarResposta.inRejeitouContraProposta = "sim";
-                    //}
-                    //else
-                    //{
-                    //    viewModelAnalisarResposta.inRejeitouContraProposta = "nao";
-                    //}
 
                     //VIEWBAGS
                     ViewBag.idPedido = 0;
@@ -724,6 +711,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (estaCotacaoRecebeuPedido != null)
                     {
                         ViewBag.idPedido = estaCotacaoRecebeuPedido.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS;
+                    }
+
+                    if (dadosCotacaoFilha.REJEITOU_PEDIDO)
+                    {
+                        viewModelAnalisarResposta.rejeitouPedido = "sim";
                     }
 
                     return View(viewModelAnalisarResposta);

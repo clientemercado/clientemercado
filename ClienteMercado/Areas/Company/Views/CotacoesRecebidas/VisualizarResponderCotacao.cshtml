@@ -245,6 +245,7 @@
             <input type="hidden" id="inIdPedidoRecebido" value="@ViewBag.idPedido" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
             <input type="hidden" id="inPedidoConfirmado" value="@ViewBag.pedidoConfirmado" />
+            <input type="hidden" id="inRejeitouPedido" value="@Model.rejeitouPedido" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->
@@ -263,6 +264,10 @@
          4) EM CASO DE REJEIÇÃO DO PEDIDO, TODA VEZ QUE O FORNECEDOR ENTRAR, EXIBIR PRA ELE Q ELE REJEITOU O PEDIDO, CASO NÃO TENHA RECEBIDO NOVO PEDIDO DESTA COTAÇÃO;
          */
 
+        if ($('#inRejeitouPedido').val() == "sim") {
+            swal({ title: "ATENÇÃO:<br><br>Você DESISTIU de um PEDIDO para esta COTAÇÃO.", type: "warning", confirmButtonColor: "#337ab7", html: true });
+        }
+
         if ((parseFloat($('#inIdPedidoRecebido').val()) > 0) && ($('#inPedidoConfirmado').val() == "nao")) {
             $('#inConfirmarPedido').show();
             $('#inRejeitarPedido').hide();
@@ -278,8 +283,8 @@
 
         $('.monetario').mask('000.000.000.000.000,00', { reverse: true });
 
-        if ($('#mensagemStatus').val() != "") {
-            $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + $('#mensagemStatus').val());
+        if (($('#mensagemStatus').val() != "") && ($('#inRejeitouPedido').val() == "")) {
+            $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i>&nbsp;" + $('#mensagemStatus').val());
         }
 
         //$(document).on("keydown", ".embalagem", function () {
@@ -764,6 +769,7 @@
                 cache: false,
                 async: true,
                 data: {
+                    'cCC': $('#inCCC').val(),
                     'iCM': $('#inICM').val(),
                     'iCCF': $('#inCCF').val(),
                     'idPedido': $('#inIdPedidoRecebido').val()
@@ -791,11 +797,11 @@
                             }
                         });
 
-                        $('#mensagemStatus').val('PEDIDO RECEBIDO e CONFIRMADO - AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA');
+                        $('#mensagemStatus').val('&nbsp;- AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA');
 
                         if ($('#mensagemStatus').val() != "") {
                             $('#inMensagemStatus').html('');
-                            $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + $('#mensagemStatus').val());
+                            $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i>&nbsp;PEDIDO RECEBIDO e CONFIRMADO</font>" + $('#mensagemStatus').val());
                         }
 
                         $('#inConfirmarPedido').hide();
@@ -839,7 +845,7 @@
                         function (isConfirm) {
                             if (isConfirm) {
                                 $.ajax({
-                                    url: "/CotacoesRecebidas/CancelarAceiteDoPedido",
+                                    url: "/CotacoesRecebidas/CancelarAceiteDoPedido", 
                                     dataType: 'json',
                                     cache: false,
                                     async: true,
@@ -881,9 +887,6 @@
                                     }
                                 });
                             }
-                            //else {
-
-                            //}
                         });
 
                 });

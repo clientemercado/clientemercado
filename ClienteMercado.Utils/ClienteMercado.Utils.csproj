@@ -75,6 +75,8 @@
     <Compile Include="Mail\EnviarEmailConviteParcerias.cs" />
     <Compile Include="Mail\EnviarEmailCotacao.cs" />
     <Compile Include="Mail\EnviarEmailDeContraProposta.cs" />
+    <Compile Include="Mail\EnviarEmailSobreAceitamentoDoPedido.cs" />
+    <Compile Include="Mail\EnviarEmailSobreDesistenciaDoPedidoPeloFornecedor.cs" />
     <Compile Include="Mail\EnviarEmailSolicitacaoDeParticipacaoNaCC.cs" />
     <Compile Include="Mail\EnviarEmailSolicitandoConfirmacaoDaCotacao.cs" />
     <Compile Include="Net\Sessao.cs" />
