@@ -139,7 +139,8 @@
 
                                     if (@ViewBag.idPedido > 0)
                                     {
-                                        <a href="#" id="inConfirmarPedido" class="btn blue button-submit botoes" style="display:none;"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
+                                        @*<a href="#" id="inConfirmarPedido" class="btn blue button-submit botoes" style="display:none;"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>*@
+                                        <a href="#" id="infoComplementar" class="btn blue button-submit botoes" style="display:none;"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
                                         <a href="#" id="inRejeitarPedido" class="btn btn-danger button-submit botoes" style="display:none;"><i class="far fa-thumbs-down"></i> Desistir do Pedido</a>
                                     }
                                 }
@@ -228,6 +229,58 @@
             </form>
             <!-- END FORM-->
 
+            <div id="modalInfoComplementar" class="modal fade" role="dialog">
+                <br /><br /><br />
+                <div class="modal-dialog modal-lg" style="width:70%">
+                    <div class="modal-content">
+
+                        <div class="modal-header" style="background-color: #337ab7">
+                            <a><i type="button" class="glyphicon glyphicon-remove" data-dismiss="modal" style="color:#fff; position: absolute;top:8px;right: 8px;"></i></a>
+                            <h4 class="modal-title" style="text-align:left;"><font color=white><i class="fas fa-edit"></i> Dados Complementares:</font></h4>
+                        </div>
+
+                        <div class="portlet-body form">
+                            <div class="row">
+                                <div class="form-body">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label><b>Dt. Entrega:</b></label>
+                                                <input type='text' id='inDataEntrega' size='10' value="" maxlength="10" class='form-control data info' obrigatorio=1 placeholder="DD/MM/AAAA" style='' onclick='' />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><b>Forma Pagto:</b></label>
+                                                <input type='text' id='inFormaPagamento' size='50' value="" class='form-control info' obrigatorio=1 style='' onclick='' />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label><b>Tipo Frete:</b></label>
+                                                <select id="inTipoFrete" class="form-control obrigatorio">
+                                                    <option value="">Selecione...</option>
+                                                    <option value="1">CIF</option>
+                                                    <option value="2">FOB</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <a href="#" id="inConfirmarPedido" class="btn blue button-submit botoes" style=''><i class="fas fa-sign-out-alt"></i> Continuar</a>
+                                        </div>
+                                        <div class="col-md-8">&nbsp;</div>
+                                    </div>
+                                    <div class="col-md-12">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <input type="hidden" id="inCCC" value="@Model.cCC" />
             <input type="hidden" id="inICM" value="@Model.iCM" />
             <input type="hidden" id="inCCF" value="@Model.iCCF" />
@@ -258,10 +311,9 @@
         /*
          TAREFAS:  <== CONTINUAR AQUI.
 
-         1) COLOCAR CAMPOS OU POPUP COM CAMPOS SOLICITANDO TIPO FRETE E DATA DE ENTREGA AO CONFIRMAR O PEDIDO...
-         2) SETAR AVALIAÇÃO OU ALGUMA PONTUAÇÃO OU QUALQUER COISA QUE INFORME AO GRUPO COTANTE QUE ESTE FORNECEDOR REJEITOU O PEDIDO...
-         3) PRIMEIRA PARTE DA MENSAGEM EM AZUL, DEPOIS DO TRAÇO, MENSAGEM EM VERMELHO;
-         4) EM CASO DE REJEIÇÃO DO PEDIDO, TODA VEZ QUE O FORNECEDOR ENTRAR, EXIBIR PRA ELE Q ELE REJEITOU O PEDIDO, CASO NÃO TENHA RECEBIDO NOVO PEDIDO DESTA COTAÇÃO;
+         1) SETAR AVALIAÇÃO OU ALGUMA PONTUAÇÃO OU QUALQUER COISA QUE INFORME AO GRUPO COTANTE QUE ESTE FORNECEDOR REJEITOU O PEDIDO...
+         2) PRIMEIRA PARTE DA MENSAGEM EM AZUL, DEPOIS DO TRAÇO, MENSAGEM EM VERMELHO;
+         3) EM CASO DE REJEIÇÃO DO PEDIDO, TODA VEZ QUE O FORNECEDOR ENTRAR, EXIBIR PRA ELE Q ELE REJEITOU O PEDIDO, CASO NÃO TENHA RECEBIDO NOVO PEDIDO DESTA COTAÇÃO;
          */
 
         if ($('#inRejeitouPedido').val() == "sim") {
@@ -269,11 +321,11 @@
         }
 
         if ((parseFloat($('#inIdPedidoRecebido').val()) > 0) && ($('#inPedidoConfirmado').val() == "nao")) {
-            $('#inConfirmarPedido').show();
+            $('#infoComplementar').show();
             $('#inRejeitarPedido').hide();
         }
         else {
-            $('#inConfirmarPedido').hide();
+            $('#infoComplementar').hide();
             $('#inRejeitarPedido').show();
         }
 
@@ -281,6 +333,7 @@
             $('#inResponderACotacao').hide();
         }
 
+        $(".data").mask("99/99/9999");
         $('.monetario').mask('000.000.000.000.000,00', { reverse: true });
 
         if (($('#mensagemStatus').val() != "") && ($('#inRejeitouPedido').val() == "")) {
@@ -761,8 +814,29 @@
             }
         });
 
+        //ABRIR MODAL de INFORMAÇÕES COMPLEMENTARES
+        $("#infoComplementar").click(function () {
+            debugger;
+
+            $('.info').val('');
+            $('#inTipoFrete').val(0);
+
+            $("#modalInfoComplementar").modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            })
+        })
+
         //CONFIRMANDO o PEDIDO da CENTRAL de COMPRAS
         $("#inConfirmarPedido").click(function () {
+            debugger;
+
+            /*
+            OBS: VALIDAR OS CAMPOS DOS DADOS COMPLEMENTARES <-- CONTINUAR AQUI...
+            */
+
+
             $.ajax({
                 url: "/CotacoesRecebidas/ConfirmarRecebimentoEAcatamentoDoPedido",
                 dataType: 'json',
@@ -772,13 +846,16 @@
                     'cCC': $('#inCCC').val(),
                     'iCM': $('#inICM').val(),
                     'iCCF': $('#inCCF').val(),
-                    'idPedido': $('#inIdPedidoRecebido').val()
+                    'idPedido': $('#inIdPedidoRecebido').val(),
+                    'dataEntrega': $('#inDataEntrega').val(),
+                    'formaPagto': $('#inFormaPagamento').val(),
+                    'tipoFrete': $('#inTipoFrete').val()
                 },
                 success: function (data) {
                     debugger;
 
                     //ALTERA EXIBIÇÃO DOS BOTÕES
-                    $('#inConfirmarPedido').hide();
+                    $('#infoComplementar').hide();
                     $('#inRejeitarPedido').show();
 
                     if (data.pedidoConfirmado == "sim") {
@@ -804,7 +881,7 @@
                             $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i>&nbsp;PEDIDO RECEBIDO e CONFIRMADO</font>" + $('#mensagemStatus').val());
                         }
 
-                        $('#inConfirmarPedido').hide();
+                        $('#infoComplementar').hide();
                     }
                 }
             });

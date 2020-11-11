@@ -518,6 +518,25 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
+        //POPULAR LISTA de GRUPOS de ATIVIDADES
+        private static List<SelectListItem> ListagemTiposDeFrete()
+        {
+            try
+            {
+                List<SelectListItem> listTiposDeFrete = new List<SelectListItem>();
+
+                listTiposDeFrete.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
+                listTiposDeFrete.Add(new SelectListItem { Text = "CIF", Value = "1" });
+                listTiposDeFrete.Add(new SelectListItem { Text = "FOB", Value = "2" });
+
+                return listTiposDeFrete;
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
         //CONSULTA do AUTOCOMPLETE da LISTA de COTAÇÕES da CENTRAL de COMPRAS
         [WebMethod]
         public JsonResult BuscarListaDeNomesCotacaoesDaCC(string term)
@@ -760,7 +779,8 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //SETAR CONFIRMANDO o PEDIDO como ACEITO
         [WebMethod]
-        public ActionResult ConfirmarRecebimentoEAcatamentoDoPedido(int cCC, int iCM, int iCCF, int idPedido)
+        public ActionResult ConfirmarRecebimentoEAcatamentoDoPedido(int cCC, int iCM, int iCCF, int idPedido, string dataEntrega, string formaPagto, 
+            int tipoFrete)
         {
             try
             {
@@ -774,8 +794,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var email2_UsuarioContatoAdmCC = "";
                 var dataEnvioPedido = "";
                 var numeroPedido = "";
-                var dataEntrega = "";
-                var tipoFrete = "";
                 var empresaFornecedora = "";
                 var usuarioFornConfirmou = "";
                 var foneUsuarioFornConfirmou = "";
