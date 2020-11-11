@@ -765,7 +765,20 @@ namespace ClienteMercado.Areas.Company.Controllers
             try
             {
                 var resultado = new { pedidoConfirmado = "" };
-                var nomeUsuario = "";
+
+                var nomeCC = "";
+                var usuarioAdmCC = "";
+                var email1_EmpresaAdmCC = "";
+                var email2_EmpresaAdmCC = "";
+                var email1_UsuarioContatoAdmCC = "";
+                var email2_UsuarioContatoAdmCC = "";
+                var dataEnvioPedido = "";
+                var numeroPedido = "";
+                var dataEntrega = "";
+                var tipoFrete = "";
+                var empresaFornecedora = "";
+                var usuarioFornConfirmou = "";
+                var foneUsuarioFornConfirmou = "";
 
                 NCentralDeComprasService negociosCC = new NCentralDeComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
@@ -781,9 +794,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 negociosCotacaoMasterCC.SetarIdFornecedorNaCotacaoMaster(iCM);
 
                 central_de_compras dadosCC = negociosCC.CarregarDadosDaCentralDeCompras(cCC);
-
-                empresa_usuario dadosEmpresaAdmCC = 
-                    negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = dadosCC.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS });
+                cotacao_filha_central_compras dadosCF = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
 
                 /*
                  * 
@@ -798,30 +809,45 @@ namespace ClienteMercado.Areas.Company.Controllers
                     - E-MAILS, SMS, NOTIFICAÇÕES VIA CELULAR --> INFORMAÇÕES no SISTEMA sobre O PEDIDO
                 */
 
-                //DISPARAR AO FORNECEDOR, AVISO PARA CONFERÊNCIA E ACEITE DO PEDIDO
+                //DISPARAR AO ADMINISTRADOR da CENTRAL de COMPRAS AVISO SOBRE O ACEITE DO PEDIDO
                 //---------------------------------------------------------------------------------------------
                 //ENVIANDO E-MAILS
                 //---------------------------------------------------------------------------------------------
                 //CARREGAR DADOS da EMPRESA ADM da CENTRAL COMPRAS
-                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaSelecionada =
-                    negociosEmpresaUsuario.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosEmpresaAdmCC.ID_CODIGO_EMPRESA);
+                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaAdmCC =
+                    negociosEmpresaUsuario.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosCC.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS);
 
-                EnviarEmailSobreDesistenciaDoPedidoPeloFornecedor enviarEmailAvisandoDesistenciaSobreOPedido = 
-                    new EnviarEmailSobreDesistenciaDoPedidoPeloFornecedor();
+                //CARREGAR DADOS da EMPRESA FORNECEDORA
+                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaForn = 
+                    negociosEmpresaUsuario.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosCF.ID_CODIGO_EMPRESA);
 
-                //DISPARA E-MAIL´s para todas as EMPRESAS a serem COTADAS
-                if (!string.IsNullOrEmpty(dadosEmpresaSelecionada.nickNameUsuarioContatoEmpresa))
+                EnviarEmailSobreAceitamentoDoPedido enviarEmailSobreAceitamentoDoPedido = new EnviarEmailSobreAceitamentoDoPedido();
+
+                //DISPARA E-MAIL´s para a Empresa ADM da CENTRAL de COMPRAS
+                if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.nickNameUsuarioContatoEmpresa))
                 {
-                    nomeUsuario = dadosEmpresaSelecionada.nickNameUsuarioContatoEmpresa;
+                    usuarioAdmCC = dadosEmpresaAdmCC.nickNameUsuarioContatoEmpresa;
                 }
                 else
                 {
-                    nomeUsuario = dadosEmpresaSelecionada.nomeUsuarioContatoEmpresa;
+                    usuarioAdmCC = dadosEmpresaAdmCC.nomeUsuarioContatoEmpresa;
                 }
 
-                ////ENVIAR E-MAIL   
-                //bool emailAvisoDePedido =
-                //    enviarEmailAvisandoDesistenciaSobreOPedido.EnviarEmail();   //<--------CONTINUAR AQUI - INSERIR OS PARÂMETROS PARA A CLASSE DE ENVIO DE E-MAIL...
+                if (!string.IsNullOrEmpty(dadosEmpresaForn.nickNameUsuarioContatoEmpresa))
+                {
+                    usuarioFornConfirmou = dadosEmpresaForn.nickNameUsuarioContatoEmpresa;
+                }
+                else
+                {
+                    usuarioFornConfirmou = dadosEmpresaForn.nomeUsuarioContatoEmpresa;
+                }
+
+                //OBS: POPULAR OS CAMPOS PARAMETROS ABAIXO <----
+
+                //ENVIAR E-MAIL   
+                bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, empresaFornecedora, email1_EmpresaAdmCC,
+                    email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega, tipoFrete,
+                    usuarioFornConfirmou, foneUsuarioFornConfirmou);
 
                 ////---------------------------------------------------------------------------------------------
                 ////ENVIANDO SMS´s
