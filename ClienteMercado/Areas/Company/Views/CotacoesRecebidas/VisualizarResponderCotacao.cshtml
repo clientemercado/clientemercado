@@ -246,20 +246,20 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label><b>Dt. Entrega:</b></label>
-                                                <input type='text' id='inDataEntrega' size='10' value="" maxlength="10" class='form-control data info' obrigatorio=1 placeholder="DD/MM/AAAA" style='' onclick='' />
+                                                <input type='text' id='inDataEntrega' size='10' value="" maxlength="10" class='form-control data info obrigatorio' placeholder="DD/MM/AAAA" style='' onclick='' />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label><b>Forma Pagto:</b></label>
-                                                <input type='text' id='inFormaPagamento' size='50' value="" class='form-control info' obrigatorio=1 style='' onclick='' />
+                                                <input type='text' id='inFormaPagamento' size='50' value="" class='form-control info obrigatorio' style='' onclick='' />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label><b>Tipo Frete:</b></label>
                                                 <select id="inTipoFrete" class="form-control obrigatorio">
-                                                    <option value="">Selecione...</option>
+                                                    <option value="0">Selecione...</option>
                                                     <option value="1">CIF</option>
                                                     <option value="2">FOB</option>
                                                 </select>
@@ -836,7 +836,24 @@
             OBS: VALIDAR OS CAMPOS DOS DADOS COMPLEMENTARES <-- CONTINUAR AQUI...
             */
 
+            var primeiroCampo = "";
+            var qtdCamposVazios = 0;
+            var $inputsObrigatorios = $('.obrigatorio');
+            $inputsObrigatorios.each(function () {
+                $(this).css({ "border": "1px solid #ccc", "padding": "2px" });
+                if ($(this).hasClass("obrigatorio")) {
+                    if (($(this).val() == "") || (parseFloat($(this).val()) == 0)) {
+                        $(this).css({ "border": "1px solid #F00", "padding": "2px" });
+                        qtdCamposVazios++;
 
+                        if (primeiroCampo == "") {
+                            primeiroCampo = $(this).attr('id');
+                        }
+                    }
+                }
+            });
+
+            if (qtdCamposVazios == 0) {
             $.ajax({
                 url: "/CotacoesRecebidas/ConfirmarRecebimentoEAcatamentoDoPedido",
                 dataType: 'json',
@@ -885,6 +902,14 @@
                     }
                 }
             });
+            }
+            else {
+                swal({ title: "ATENÇÃO!!", text: "Os campos EM VERMELHO devem ser preenchidos!", type: "warning", confirmButtonColor: "#337ab7" },
+                    function () {
+                        $('#' + primeiroCampo).focus();
+                    }
+                );
+            }
         });
 
         //===============================================================================
