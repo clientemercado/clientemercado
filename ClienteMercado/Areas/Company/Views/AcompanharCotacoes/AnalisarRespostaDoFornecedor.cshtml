@@ -213,8 +213,12 @@
                                             {
                                                 <a href="#" id="inConfirmarAceiteDaNegociacao" title="Aceitar Negociação" class="btn btn-warning aceitenegociacao"> <i class="fas fa-thumbs-up"></i> Aceitar negociação</a>
                                                 <a href="#" id="inNegociacaoAceita" class="btn btn-success" style="display: none;"> <i class="far fa-check-circle"></i> Negociação Aceita</a>
-                                                <a href="#" id="checkall" class="btn btn-primary check"><i class="far fa-check-square"></i> Seleciona Todos Itens</a>
-                                                <a href="#" id="deselectall" class="btn btn-danger check" style="display:none;"><i class="far fa-square"></i> Desmarca Todos Itens</a>
+
+                                                if (@Model.inCodEmpresaLogada == @Model.inCodEmpresaADM)
+                                                {
+                                                    <a href="#" id="checkall" class="btn btn-primary check"><i class="far fa-check-square"></i> Seleciona Todos Itens</a>
+                                                    <a href="#" id="deselectall" class="btn btn-danger check" style="display:none;"><i class="far fa-square"></i> Desmarca Todos Itens</a>
+                                                }
                                             }
                                             else
                                             {
@@ -226,8 +230,12 @@
                                             if (Model.idEmpresaFornecedoraCotada == Model.inCodEmpresaFornecedoraComRespostaEmAnalise)
                                             {
                                                 <a href="#" id="" class="btn btn-success"><i class="far fa-check-circle"></i> Negociação Aceita</a>
-                                                <a href="#" id="checkall" class="btn btn-primary check"><i class="far fa-check-square"></i> Seleciona Todos Itens</a>
-                                                <a href="#" id="deselectall" class="btn btn-danger check" style="display:none;"><i class="far fa-square"></i> Desmarca Todos Itens</a>
+
+                                                if (@Model.inCodEmpresaLogada == @Model.inCodEmpresaADM)
+                                                {
+                                                    <a href="#" id="checkall" class="btn btn-primary check"><i class="far fa-check-square"></i> Seleciona Todos Itens</a>
+                                                    <a href="#" id="deselectall" class="btn btn-danger check" style="display:none;"><i class="far fa-square"></i> Desmarca Todos Itens</a>
+                                                }
                                             }
                                             else
                                             {

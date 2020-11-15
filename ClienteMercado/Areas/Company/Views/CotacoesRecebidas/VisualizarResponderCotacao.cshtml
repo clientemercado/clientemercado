@@ -123,7 +123,7 @@
                                         <a href="javascript:;" id="inDesfazerNaoCotarTodos" class="btn btn-warning botoes" style="display:none;">
                                             <i class='fas fa-undo-alt'></i> desfazer NC todos itens
                                         </a>
-                                        <a href="javascript:;" id="inResponderACotacao" class="btn btn-warning botoes" style="">
+                                        <a href="javascript:;" id="inResponderACotacao" class="btn btn-warning botoes complementar" style="" tipo="1">
                                             <i class="fa fa-sign-out"></i> Enviar Resposta da Cotação
                                         </a>
                                     }
@@ -140,7 +140,7 @@
                                     if (@ViewBag.idPedido > 0)
                                     {
                                         @*<a href="#" id="inConfirmarPedido" class="btn blue button-submit botoes" style="display:none;"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>*@
-                                        <a href="#" id="infoComplementar" class="btn blue button-submit botoes" style="display:none;"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
+                                        <a href="#" id="infoComplementar" class="btn blue button-submit botoes complementar" style="display:none;" tipo="2"><i class="far fa-thumbs-up"></i> Confirmar Pedido</a>
                                         <a href="#" id="inRejeitarPedido" class="btn btn-danger button-submit botoes" style="display:none;"><i class="far fa-thumbs-down"></i> Desistir do Pedido</a>
                                     }
                                 }
@@ -815,11 +815,16 @@
         });
 
         //ABRIR MODAL de INFORMAÇÕES COMPLEMENTARES
-        $("#infoComplementar").click(function () {
+        $(".complementar").click(function () {
             debugger;
 
             $('.info').val('');
             $('#inTipoFrete').val(0);
+
+            if (parseInt($(this).attr("tipo")) == 2) { //OBS DEPOIS DE TESTAR O MÉTODO CHAMADO AQUI, DESCOMENTAR AS LINHAS ABAIXO... CONTINUAR AQUI
+                //$('#inFormaPagamento').prop("disabled", true);
+                //$('#inTipoFrete').prop("disabled", true);
+            }
 
             $("#modalInfoComplementar").modal({
                 backdrop: 'static',
