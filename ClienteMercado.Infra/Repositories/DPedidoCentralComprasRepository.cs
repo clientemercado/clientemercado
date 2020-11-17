@@ -49,7 +49,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //CONFIRMAR o ACEITE do PEDIDO
-        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido)
+        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, string dataEntrega, string formaPagto, int tipoFrete)
         {
             pedido_central_compras dadosDoPedidoCC = 
                 _contexto.pedido_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) 

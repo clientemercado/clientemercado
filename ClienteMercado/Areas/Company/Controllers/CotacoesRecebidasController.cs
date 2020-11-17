@@ -806,7 +806,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 //CONFIRMAR o ACEITE do PEDIDO
                 negociosCotacaoFilhaCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
-                negociosPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
+                negociosPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, dataEntrega, formaPagto, tipoFrete);
 
                 //IDENTIFICAR na COTAÇÃO MASTER o FORNECEDOR q RECEBEU PEDIDO
                 negociosCotacaoMasterCC.SetarIdFornecedorNaCotacaoMaster(iCM);

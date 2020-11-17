@@ -52,9 +52,9 @@ namespace ClienteMercado.Domain.Services
         }
 
         //CONFIRMAR o ACEITE do PEDIDO
-        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido)
+        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, string dataEntrega, string formaPagto, int tipoFrete)
         {
-            dPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
+            dPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, dataEntrega, formaPagto, tipoFrete);
         }
     }
 }

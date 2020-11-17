@@ -85,6 +85,7 @@
     <Compile Include="Entities\estados_empresa_usuario.cs" />
     <Compile Include="Entities\financeiro_cobranca_faturamento_usuario_empresa.cs" />
     <Compile Include="Entities\financeiro_cobranca_faturamento_usuario_profissional.cs" />
+    <Compile Include="Entities\forma_pagamento.cs" />
     <Compile Include="Entities\fotos_itens_alternativos_cotacao_filha_negociacao_central_compras.cs" />
     <Compile Include="Entities\fotos_itens_alternativos_cotacao_filha_negociacao_usuario_cotante.cs" />
     <Compile Include="Entities\fotos_itens_alternativos_cotacao_filha_negociacao_usuario_empresa.cs" />
