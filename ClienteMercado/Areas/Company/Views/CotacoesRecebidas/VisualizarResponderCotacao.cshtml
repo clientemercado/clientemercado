@@ -251,7 +251,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label><b>Forma Pagto:</b></label>
+                                                <label><b>Forma Pagto:</b>&nbsp;&nbsp;&nbsp;<a href="#" id="cadastrarFormaPgto">cadastrar</a></label>
                                                 <input type='text' id='inFormaPagamento' size='50' value="" class='form-control info obrigatorio' style='' onclick='' />
                                             </div>
                                         </div>
@@ -269,6 +269,60 @@
                                     <div class="col-md-12">
                                         <div class="col-md-4">
                                             <a href="#" id="inConfirmarPedido" class="btn blue button-submit botoes" style=''><i class="fas fa-sign-out-alt"></i> Continuar</a>
+                                        </div>
+                                        <div class="col-md-8">&nbsp;</div>
+                                    </div>
+                                    <div class="col-md-12">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalFormaPagto" class="modal fade" role="dialog">
+                <br /><br /><br />
+                <div class="modal-dialog modal-lg" style="width:70%">
+                    <div class="modal-content">
+
+                        <div class="modal-header" style="background-color: #337ab7">
+                            <a><i type="button" class="glyphicon glyphicon-remove fecharmodal" data-dismiss="modal" style="color:#fff; position: absolute;top:8px;right: 8px;"></i></a>
+                            <h4 class="modal-title" style="text-align:left;"><font color=white><i class="fas fa-edit"></i> Cadastro Formas Pagamento:</font></h4>
+                        </div>
+
+                        <div class="portlet-body form">
+                            <div class="row">
+                                <div class="form-body">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><b>Descrição:</b></label>
+                                                <input type='text' id='inDescFormaPgto' size='100' value="" maxlength="100" class='form-control obrigatorio2' placeholder="Informe descrição..." style='' onclick='' />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label><b>Qtd Parcelas:</b></label>
+                                                <input type='text' id='inQuantParcelas' size='5' value="" maxlength="3" class='form-control obrigatorio2' style='' onclick='' />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label><b>1º Prazo:</b></label>
+                                                <input type='text' id='inPrimeiroIntervalo' size='5' value="" maxlength="3" class='form-control obrigatorio2' style='' onclick='' />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label><b>Demais Prazos:</b></label>
+                                                <input type='text' id='inDemaisIntervalos' size='5' value="" maxlength="3" class='form-control obrigatorio2' style='' onclick='' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <a href="#" id="inGravarFormaPgto" class="btn blue button-submit botoes" style=''><i class="far fa-save"></i> Gravar</a>
                                         </div>
                                         <div class="col-md-8">&nbsp;</div>
                                     </div>
@@ -833,13 +887,91 @@
             })
         })
 
+        $("#cadastrarFormaPgto").click(function () {
+            $("#modalFormaPagto").modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            });
+        });        
+
+        $("#inGravarFormaPgto").click(function () {
+            /*
+             CONTINUAR AQUI...
+
+             1) VALIDAR CAMPOS ANTES DA GRAVAÇÃO DA FORMA DE PAGAMENTO;
+             2) CRIAR BACKEND PARA GRAVAÇÃO DA FORMA DE PAGAMENTO;
+             3) ATUALIZAR NO MODAL ANTERIOR O A DROPLIST DAS FORMAS DE PAGAMENTO;
+            */
+
+            var primeiroCampo = "";
+            var qtdCamposVazios = 0;
+            var $inputsObrigatorios = $('.obrigatorio2');
+            $inputsObrigatorios.each(function () {
+                $(this).css({ "border": "1px solid #ccc", "padding": "2px" });
+                if ($(this).hasClass("obrigatorio2")) {
+                    if (($(this).val() == "") || (parseFloat($(this).val()) == 0)) {
+                        $(this).css({ "border": "1px solid #F00", "padding": "2px" });
+                        qtdCamposVazios++;
+
+                        if (primeiroCampo == "") {
+                            primeiroCampo = $(this).attr('id');
+                        }
+                    }
+                }
+            });
+
+            if (qtdCamposVazios == 0) {
+                $.ajax({
+                    url: "/CotacoesRecebidas/GravarFormaPagamento",
+                    dataType: 'json',
+                    cache: false,
+                    async: true,
+                    data: {
+                        'descFormaPgto': $('#inDescFormaPgto').val(),
+                        'quantParc': $('#inQuantParcelas').val(),
+                        'primeiroInterv': $('#inPrimeiroIntervalo').val(),
+                        'demaisInterv': $('#inDemaisIntervalos').val()
+                    },
+                    success: function (data) {
+                        debugger;
+
+                        if (data.gravacaoFormPag == "Ok") {
+                            //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                            new PNotify({
+                                title: 'SUCESSO!',
+                                text: "FORMA de PAGAMENTO foi GRAVADA com Sucesso!",
+                                type: 'success',
+                                styling: 'bootstrap3',
+                                icons: 'bootstrap3',
+                                addclass: 'customsuccess',
+                                animateSpeed: 'fast',
+                                mouseReset: true,
+                                Buttons: {
+                                    closer: true
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                swal({ title: "ATENÇÃO!!", text: "Os campos EM VERMELHO devem ser preenchidos!", type: "warning", confirmButtonColor: "#337ab7" },
+                    function () {
+                        $('#' + primeiroCampo).focus();
+                    }
+                );
+            }
+        });
+
+        $(".fecharmodal").click(function () {
+            debugger;
+
+        });
+
         //CONFIRMANDO o PEDIDO da CENTRAL de COMPRAS
         $("#inConfirmarPedido").click(function () {
             debugger;
-
-            /*
-            OBS: VALIDAR OS CAMPOS DOS DADOS COMPLEMENTARES <-- CONTINUAR AQUI...
-            */
 
             var primeiroCampo = "";
             var qtdCamposVazios = 0;
@@ -859,54 +991,54 @@
             });
 
             if (qtdCamposVazios == 0) {
-            $.ajax({
-                url: "/CotacoesRecebidas/ConfirmarRecebimentoEAcatamentoDoPedido",
-                dataType: 'json',
-                cache: false,
-                async: true,
-                data: {
-                    'cCC': $('#inCCC').val(),
-                    'iCM': $('#inICM').val(),
-                    'iCCF': $('#inCCF').val(),
-                    'idPedido': $('#inIdPedidoRecebido').val(),
-                    'dataEntrega': $('#inDataEntrega').val(),
-                    'formaPagto': $('#inFormaPagamento').val(),
-                    'tipoFrete': $('#inTipoFrete').val()
-                },
-                success: function (data) {
-                    debugger;
+                $.ajax({
+                    url: "/CotacoesRecebidas/ConfirmarRecebimentoEAcatamentoDoPedido",
+                    dataType: 'json',
+                    cache: false,
+                    async: true,
+                    data: {
+                        'cCC': $('#inCCC').val(),
+                        'iCM': $('#inICM').val(),
+                        'iCCF': $('#inCCF').val(),
+                        'idPedido': $('#inIdPedidoRecebido').val(),
+                        'dataEntrega': $('#inDataEntrega').val(),
+                        'formaPagto': $('#inFormaPagamento').val(),
+                        'tipoFrete': $('#inTipoFrete').val()
+                    },
+                    success: function (data) {
+                        debugger;
 
-                    //ALTERA EXIBIÇÃO DOS BOTÕES
-                    $('#infoComplementar').hide();
-                    $('#inRejeitarPedido').show();
-
-                    if (data.pedidoConfirmado == "sim") {
-                        //EXIBE MSG LATERAL À DIREITA SUPERIOR
-                        new PNotify({
-                            title: 'SUCESSO!',
-                            text: "O PEDIDO foi CONFIRMADO com Sucesso!",
-                            type: 'success',
-                            styling: 'bootstrap3',
-                            icons: 'bootstrap3',
-                            addclass: 'customsuccess',
-                            animateSpeed: 'fast',
-                            mouseReset: true,
-                            Buttons: {
-                                closer: true
-                            }
-                        });
-
-                        $('#mensagemStatus').val('&nbsp;- AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA');
-
-                        if ($('#mensagemStatus').val() != "") {
-                            $('#inMensagemStatus').html('');
-                            $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i>&nbsp;PEDIDO RECEBIDO e CONFIRMADO</font>" + $('#mensagemStatus').val());
-                        }
-
+                        //ALTERA EXIBIÇÃO DOS BOTÕES
                         $('#infoComplementar').hide();
+                        $('#inRejeitarPedido').show();
+
+                        if (data.pedidoConfirmado == "sim") {
+                            //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                            new PNotify({
+                                title: 'SUCESSO!',
+                                text: "O PEDIDO foi CONFIRMADO com Sucesso!",
+                                type: 'success',
+                                styling: 'bootstrap3',
+                                icons: 'bootstrap3',
+                                addclass: 'customsuccess',
+                                animateSpeed: 'fast',
+                                mouseReset: true,
+                                Buttons: {
+                                    closer: true
+                                }
+                            });
+
+                            $('#mensagemStatus').val('&nbsp;- AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA');
+
+                            if ($('#mensagemStatus').val() != "") {
+                                $('#inMensagemStatus').html('');
+                                $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i>&nbsp;PEDIDO RECEBIDO e CONFIRMADO</font>" + $('#mensagemStatus').val());
+                            }
+
+                            $('#infoComplementar').hide();
+                        }
                     }
-                }
-            });
+                });
             }
             else {
                 swal({ title: "ATENÇÃO!!", text: "Os campos EM VERMELHO devem ser preenchidos!", type: "warning", confirmButtonColor: "#337ab7" },

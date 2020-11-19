@@ -1076,12 +1076,12 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //Carrega DIÁLOGOS entre COTANTE e FORNECEDOR
-        public JsonResult GravarDialogoEntreCotanteDaCCEFornecedor(int idCotacaoFilha, int idUsuarioEmpresaCotante, int idUsuarioEmpresaCotada, string textoPerguntaOuResposta)
+        public JsonResult GravarDialogoEntreCotanteDaCCEFornecedor(int idCotacaoFilha, int idUsuarioEmpresaCotante, int idUsuarioEmpresaCotada, 
+            string textoPerguntaOuResposta)
         {
             try
             {
                 string retornoGravacao = "nok";
-
                 var resultado = new { gravacaoChat = "" };
 
                 //USUÁRIO EMPRESA COTANTE
@@ -1111,6 +1111,29 @@ namespace ClienteMercado.Areas.Company.Controllers
                 resultado = new
                 {
                     gravacaoChat = retornoGravacao
+                };
+
+                return Json(resultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        //GRAVAR FORMA DE PAGAMENTO
+        public JsonResult GravarFormaPagamento(string descFormaPgto, int quantParc, int primeiroInterv, int demaisInterv)
+        {
+            try
+            {
+                string retornoGravacao = "nok";
+                var resultado = new { gravacaoFormPag = "" };
+
+
+                //Resultado a ser retornado
+                resultado = new
+                {
+                    gravacaoFormPag = "Ok"
                 };
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
