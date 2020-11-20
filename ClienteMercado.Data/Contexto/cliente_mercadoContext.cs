@@ -111,6 +111,7 @@ namespace ClienteMercado.Data.Contexto
         public DbSet<fotos_itens_alternativos_cotacao_filha_negociacao_central_compras> fotos_itens_alternativos_cotacao_filha_negociacao_central_compras { get; set; }
         public DbSet<empresas_produtos_marcas> empresas_produtos_marcas { get; set; }
         public DbSet<empresas_produtos_embalagens> empresas_produtos_embalagens { get; set; }
+        public DbSet<forma_pagamento> forma_pagamento { get; set; }
 
         public class cliente_mercadoContextInitializer : DropCreateDatabaseAlways<cliente_mercadoContext> //Sempre dropar e criar o database
         {

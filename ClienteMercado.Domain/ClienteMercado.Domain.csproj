@@ -101,6 +101,7 @@
     <Compile Include="Services\NEstadosService.cs" />
     <Compile Include="Services\NFinanceiroCobrancaFaturamentoUsuarioEmpresaService.cs" />
     <Compile Include="Services\NFinanceiroCobrancaFaturamentoUsuarioProfissionalService.cs" />
+    <Compile Include="Services\NFormaPagamentoService.cs" />
     <Compile Include="Services\NFornecedoresService.cs" />
     <Compile Include="Services\NGruposAtividadesEmpresaProfissionalService.cs" />
     <Compile Include="Services\NItensCotacaoFilhaNegociacaoCentralDeComprasService.cs" />

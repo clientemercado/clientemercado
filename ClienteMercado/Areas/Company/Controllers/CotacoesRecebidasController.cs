@@ -195,10 +195,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     viewModelEnviarResposta.inCidadeEmpresaAdmCC = dadosLocalizacaoEmpresaADM[0].CIDADE_EMPRESA_USUARIO;
                     viewModelEnviarResposta.inIdEmpresaCotada = dadosEmpresaLogada.ID_CODIGO_EMPRESA;
                     viewModelEnviarResposta.idUsuarioEmpresaFornecedoraCotada = dadosUsuarioEmpresaLogada.ID_CODIGO_USUARIO;
+                    viewModelEnviarResposta.inListaDeFormasPagamento = ListagemDeFormasDePagamento();
+
                     //respondeuContraProposta = listaDeItensDaCotacaoFilha.Where(m => (m.PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS > 0)).ToList().Count() > 0 ? "sim" : "nao";
                     //viewModelEnviarResposta.inRespondeuContraProposta = respondeuContraProposta;
 
-                    //----------------------------------------------------------------------
                     //VERIFICA SE TODOS OS ITENS FORAM OU NÃO RESPONDIDOS 
                     for (int v = 0; v < listaDeItensDaCotacaoFilha.Count; v++)
                     {
@@ -206,7 +207,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     }
 
                     viewModelEnviarResposta.naoCotouTodosOsItens = somaValoresCotados == 0 ? "sim" : "nao";
-                    //----------------------------------------------------------------------
 
                     if (dadosCotacaoFilha.RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS)
                     {
@@ -1126,17 +1126,58 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                string retornoGravacao = "nok";
-                var resultado = new { gravacaoFormPag = "" };
+                var resultado = new { gravacaoFormPag = "", idFormaPgto = 0 };
 
+                NFormaPagamentoService serviceFormaPagto = new NFormaPagamentoService();
+                forma_pagamento dadosFormaPgto = new forma_pagamento();
 
-                //Resultado a ser retornado
-                resultado = new
+                dadosFormaPgto.DESCRICAO_FORMA_PAGAMENTO = descFormaPgto;
+                dadosFormaPgto.NUMERO_PARCELAS_FORMA_PAGAMENTO = quantParc;
+                dadosFormaPgto.PRIMEIRO_INTERVALO_FORMA_PAGAMENTO = primeiroInterv;
+                dadosFormaPgto.INTERVALO_DEMAIS_PARCELAS_FORMA_PAGAMENTO = demaisInterv;
+
+                forma_pagamento gravarFormaPagto = serviceFormaPagto.GravarFormaPagto(dadosFormaPgto);
+
+                if (gravarFormaPagto != null)
                 {
-                    gravacaoFormPag = "Ok"
-                };
+                    //Resultado a ser retornado
+                    resultado = new
+                    {
+                        gravacaoFormPag = "Ok",
+                        idFormaPgto = gravarFormaPagto.ID_FORMA_PAGAMENTO
+                    };
+                }
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        //Carrega lista de FORMAS de PAGAMENTO
+        private static List<SelectListItem> ListagemDeFormasDePagamento()
+        {
+            try
+            {
+                NFormaPagamentoService serviceFormasPagamento = new NFormaPagamentoService();
+
+                List<forma_pagamento> listaFormasPagamento = serviceFormasPagamento.CarregarListaDeFormasPagamento();
+                List<SelectListItem> listFormasPgto = new List<SelectListItem>();
+
+                listFormasPgto.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
+
+                foreach (var grupoCategoarias in listaFormasPagamento)
+                {
+                    listFormasPgto.Add(new SelectListItem
+                    {
+                        Text = grupoCategoarias.DESCRICAO_FORMA_PAGAMENTO,
+                        Value = grupoCategoarias.ID_FORMA_PAGAMENTO.ToString()
+                    });
+                }
+
+                return listFormasPgto;
             }
             catch (Exception erro)
             {

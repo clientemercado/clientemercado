@@ -583,7 +583,6 @@ namespace ClienteMercado.Areas.Company.Controllers
         //ATUALIZAR DADOS da EMPRESA e do USUÁRIO
         public ActionResult ComecarGratuidadeNoSistema(string dataFinalGratuidade)
         {
-
             var resultado = new { dataFinalGratuidadeRegistrada = "nOk" };
 
             NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();

@@ -250,7 +250,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group"> <!-- TROCAR PELO LIST DE FORMAS DE PAGAMENTO JÁ DEFINIDO NO MODELO - CONTINUAR AQUI... -->
                                                 <label><b>Forma Pagto:</b>&nbsp;&nbsp;&nbsp;<a href="#" id="cadastrarFormaPgto">cadastrar</a></label>
                                                 <input type='text' id='inFormaPagamento' size='50' value="" class='form-control info obrigatorio' style='' onclick='' />
                                             </div>
@@ -899,9 +899,8 @@
             /*
              CONTINUAR AQUI...
 
-             1) VALIDAR CAMPOS ANTES DA GRAVAÇÃO DA FORMA DE PAGAMENTO;
-             2) CRIAR BACKEND PARA GRAVAÇÃO DA FORMA DE PAGAMENTO;
-             3) ATUALIZAR NO MODAL ANTERIOR O A DROPLIST DAS FORMAS DE PAGAMENTO;
+             1) CRIAR BACKEND PARA GRAVAÇÃO DA FORMA DE PAGAMENTO;  <-- TESTAR
+             2) ATUALIZAR NO MODAL ANTERIOR O A DROPLIST DAS FORMAS DE PAGAMENTO;
             */
 
             var primeiroCampo = "";
@@ -951,6 +950,12 @@
                                     closer: true
                                 }
                             });
+
+                            if (parseFloat(data.idFormaPgto) > 0) {
+                                /*
+                                 AJAX PARA CARREGAR FORMAS PGTO...
+                                 */
+                            }
                         }
                     }
                 });

@@ -1,5 +1,7 @@
-﻿using ClienteMercado.Utils.ViewModel;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Utils.ViewModel;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace ClienteMercado.UI.Core.ViewModel
 {
@@ -86,5 +88,6 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string rejeitouSolicitacaoAprovandoValoresCotacao { get; set; }
 
         public string rejeitouPedido { get; set; }
+        public List<SelectListItem> inListaDeFormasPagamento { get; set; }
     }
 }

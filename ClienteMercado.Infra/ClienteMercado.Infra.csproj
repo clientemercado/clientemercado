@@ -82,6 +82,7 @@
     <Compile Include="Repositories\DEstadosRepository.cs" />
     <Compile Include="Repositories\DFinanceiroCobrancaFaturamentoUsuarioEmpresaRepository.cs" />
     <Compile Include="Repositories\DFinanceiroCobrancaFaturamentoUsuarioProfissionalRepository.cs" />
+    <Compile Include="Repositories\DFormaPagamentoRepository.cs" />
     <Compile Include="Repositories\DFornecedoresRepository.cs" />
     <Compile Include="Repositories\DGruposAtividadesEmpresaProfissionalRepository.cs" />
     <Compile Include="Repositories\DItensCotacaoFilhaNegociacaoUsuarioCotanteProdutosAlternativos.cs" />
