@@ -1,4 +1,6 @@
-﻿@{
+﻿@model  ClienteMercado.UI.Core.ViewModel.DadosDaCotacaoViewModel
+
+@{
     ViewBag.Title = "Responder a Cotacao Recebida";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -250,9 +252,11 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group"> <!-- TROCAR PELO LIST DE FORMAS DE PAGAMENTO JÁ DEFINIDO NO MODELO - CONTINUAR AQUI... -->
+                                            <div class="form-group">
+                                                <!-- TROCAR PELO LIST DE FORMAS DE PAGAMENTO JÁ DEFINIDO NO MODELO - CONTINUAR AQUI... -->
                                                 <label><b>Forma Pagto:</b>&nbsp;&nbsp;&nbsp;<a href="#" id="cadastrarFormaPgto">cadastrar</a></label>
-                                                <input type='text' id='inFormaPagamento' size='50' value="" class='form-control info obrigatorio' style='' onclick='' />
+                                                @*<input type='text' id='inFormaPagamento' size='50' value="" class='form-control info obrigatorio' style='' onclick='' />*@
+                                                @Html.DropDownList("inListaDeFormasPagamento", Model.inListaDeFormasPagamento, new { @class = "form-control", @id = "inListaDeFormasPagamento" })
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -893,7 +897,7 @@
                 keyboard: true,
                 show: true
             });
-        });        
+        });
 
         $("#inGravarFormaPgto").click(function () {
             /*
@@ -1089,14 +1093,14 @@
                         function (isConfirm) {
                             if (isConfirm) {
                                 $.ajax({
-                                    url: "/CotacoesRecebidas/CancelarAceiteDoPedido", 
+                                    url: "/CotacoesRecebidas/CancelarAceiteDoPedido",
                                     dataType: 'json',
                                     cache: false,
                                     async: true,
                                     data: {
                                         'iCM': $('#inICM').val(),
                                         'iCCF': $('#inCCF').val(),
-                                        'idPedido': $('#inIdPedidoRecebido').val(), 
+                                        'idPedido': $('#inIdPedidoRecebido').val(),
                                         'descMotivo': motivoRejeicao
                                     },
                                     success: function (data) {
