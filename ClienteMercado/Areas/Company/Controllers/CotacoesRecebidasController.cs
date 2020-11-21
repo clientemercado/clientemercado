@@ -1156,6 +1156,21 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
+        //CARREGAR LISTA FORMAS PAGAMENTO ATUALIZADA <-- TESTAR ISSO...
+        public JsonResult CarregarListaFormasPgto()
+        {
+            try
+            {
+                List<SelectListItem> listaDeFormasPagamento = ListagemDeFormasDePagamento();
+
+                return Json(listaDeFormasPagamento, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
         //Carrega lista de FORMAS de PAGAMENTO
         private static List<SelectListItem> ListagemDeFormasDePagamento()
         {
