@@ -1131,6 +1131,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NFormaPagamentoService serviceFormaPagto = new NFormaPagamentoService();
                 forma_pagamento dadosFormaPgto = new forma_pagamento();
 
+                dadosFormaPgto.ID_CODIGO_EMPRESA = Convert.ToInt32(Sessao.IdEmpresaUsuario);
                 dadosFormaPgto.DESCRICAO_FORMA_PAGAMENTO = descFormaPgto;
                 dadosFormaPgto.NUMERO_PARCELAS_FORMA_PAGAMENTO = quantParc;
                 dadosFormaPgto.PRIMEIRO_INTERVALO_FORMA_PAGAMENTO = primeiroInterv;
@@ -1156,7 +1157,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        //CARREGAR LISTA FORMAS PAGAMENTO ATUALIZADA <-- TESTAR ISSO...
+        //CARREGAR LISTA FORMAS PAGAMENTO ATUALIZADA
         public JsonResult CarregarListaFormasPgto()
         {
             try

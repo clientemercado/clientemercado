@@ -253,7 +253,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label><b>Forma Pagto:</b>&nbsp;&nbsp;&nbsp;<a href="#" id="cadastrarFormaPgto">cadastrar</a></label>
+                                                <label><b>Forma Pagto:</b>&nbsp;&nbsp;&nbsp;<a href="#" id="cadastrarFormaPgto">cadastrar nova</a></label>
                                                 @Html.DropDownList("inListaDeFormasPagamento", Model.inListaDeFormasPagamento, new { @class = "form-control", @id = "inListaDeFormasPagamento" })
                                             </div>
                                         </div>
@@ -306,19 +306,19 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label><b>Qtd Parcelas:</b></label>
-                                                <input type='text' id='inQuantParcelas' size='5' value="" maxlength="3" class='form-control obrigatorio2' style='' onclick='' />
+                                                <input type='text' id='inQuantParcelas' size='5' value="" maxlength="3" class='form-control obrigatorio2' placeholder="Nº parcelas..." style='' onclick='' />
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label><b>1º Prazo:</b></label>
-                                                <input type='text' id='inPrimeiroIntervalo' size='5' value="" maxlength="3" class='form-control obrigatorio2' style='' onclick='' />
+                                                <input type='text' id='inPrimeiroIntervalo' size='5' value="" maxlength="3" class='form-control obrigatorio2' placeholder="Nº dias..." style='' onclick='' />
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label><b>Demais Prazos:</b></label>
-                                                <input type='text' id='inDemaisIntervalos' size='5' value="" maxlength="3" class='form-control obrigatorio2' style='' onclick='' />
+                                                <input type='text' id='inDemaisIntervalos' size='5' value="" maxlength="3" class='form-control obrigatorio2' style='' placeholder="Nº dias..." onclick='' />
                                             </div>
                                         </div>
                                     </div>
@@ -965,13 +965,31 @@
                                 cache: false,
                                 async: true,
                                 data: { },
-                                success: function (data) {
-                                    debugger;
+                                    success: function (data) {
+                                        debugger;
 
-                                    /*
-                                     * POPULAR CAMPO COM A LISTAGEM OBTIDA...  CONTINUAR AQUI...
-                                     */
+                                        /*
+                                         * POPULAR CAMPO COM A LISTAGEM OBTIDA...  CONTINUAR AQUI... NÃO ESTÁ FUNCIONANDO CORRETAMENTE - DEBUGAR
+                                         */
 
+                                        if (parseInt(data.length) > 0) {
+                                            debugger;
+
+                                            var linhasSelect = "";
+
+                                            for (var i = 0; i < data.length; i++) {
+                                                if (linhasSelect == "") {
+                                                    linhasSelect = "<option value='" + data.Value + "'><column>" + data.Text + "</column></option>";
+                                                }
+                                                else {
+                                                    linhasSelect = (linhasSelect + "<option value='" + data.Value + "'><column>" + data.Text + "</column></option>");
+                                                }
+                                            }
+
+                                            if (linhasSelect != '') {
+                                                $('#inListaDeFormasPagamento').val(linhasSelect);
+                                            }
+                                        }
                                     }
                                 });
                                 //===============================================
