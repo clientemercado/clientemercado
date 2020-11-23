@@ -908,6 +908,7 @@
             var primeiroCampo = "";
             var qtdCamposVazios = 0;
             var $inputsObrigatorios = $('.obrigatorio2');
+            var idNovaForma = 0;
             $inputsObrigatorios.each(function () {
                 $(this).css({ "border": "1px solid #ccc", "padding": "2px" });
                 if ($(this).hasClass("obrigatorio2")) {
@@ -954,11 +955,10 @@
                             });
 
                             if (parseFloat(data.idFormaPgto) > 0) {
-                                /*
-                                 AJAX PARA CARREGAR FORMAS PGTO...
-                                 */
 
-                                //===============================================
+                                //RECARREGAR FORMAS PGTO PÓS GRAVAÇÃO DA NOVA
+                                idNovaForma = data.idFormaPgto;
+
                                 $.ajax({
                                 url: "/CotacoesRecebidas/CarregarListaFormasPgto",
                                 dataType: 'json',
@@ -968,10 +968,6 @@
                                     success: function (data) {
                                         debugger;
 
-                                        /*
-                                         * POPULAR CAMPO COM A LISTAGEM OBTIDA...  CONTINUAR AQUI... NÃO ESTÁ FUNCIONANDO CORRETAMENTE - DEBUGAR
-                                         */
-
                                         if (parseInt(data.length) > 0) {
                                             debugger;
 
@@ -979,20 +975,23 @@
 
                                             for (var i = 0; i < data.length; i++) {
                                                 if (linhasSelect == "") {
-                                                    linhasSelect = "<option value='" + data.Value + "'><column>" + data.Text + "</column></option>";
+                                                    linhasSelect = "<option value='" + data[i].Value + "'><column>" + data[i].Text + "</column></option>";
                                                 }
                                                 else {
-                                                    linhasSelect = (linhasSelect + "<option value='" + data.Value + "'><column>" + data.Text + "</column></option>");
+                                                    linhasSelect = (linhasSelect + "<option value='" + data[i].Value + "'><column>" + data[i].Text + "</column></option>");
                                                 }
                                             }
 
                                             if (linhasSelect != '') {
-                                                $('#inListaDeFormasPagamento').val(linhasSelect);
+                                                $('#inListaDeFormasPagamento').empty();
+                                                $('#inListaDeFormasPagamento').append(linhasSelect);
+                                                $('#inListaDeFormasPagamento').val(idNovaForma);
+
+                                                $(".fecharmodal").trigger('click');
                                             }
                                         }
                                     }
                                 });
-                                //===============================================
                             }
                         }
                     }
@@ -1008,8 +1007,7 @@
         });
 
         $(".fecharmodal").click(function () {
-            debugger;
-
+            $('#modalFormaPagto').modal('toggle');
         });
 
         //CONFIRMANDO o PEDIDO da CENTRAL de COMPRAS
