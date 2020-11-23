@@ -49,7 +49,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //CONFIRMAR o ACEITE do PEDIDO
-        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, string dataEntrega, string formaPagto, int tipoFrete)
+        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, string dataEntrega, int idFormaPagto, int tipoFrete)
         {
             pedido_central_compras dadosDoPedidoCC = 
                 _contexto.pedido_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) 
@@ -58,6 +58,13 @@ namespace ClienteMercado.Infra.Repositories
             if (dadosDoPedidoCC != null)
             {
                 dadosDoPedidoCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS = true;
+
+                /*
+                 GRAVAR:
+                    - DATA PAGAMENTO;
+                    - FORMA PAGAMENTO
+                    - TIPO FRETE;
+                 */
 
                 _contexto.SaveChanges();
             }

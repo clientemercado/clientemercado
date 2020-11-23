@@ -237,6 +237,13 @@ namespace ClienteMercado.Infra.Repositories
                 dadosDaCotacaoFilha.DATA_CONFIRMOU_PEDIDO = DateTime.Now;
                 dadosDaCotacaoFilha.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = idPedido;
 
+                /*
+                 GRAVAR:
+                    - DATA PAGAMENTO;
+                    - FORMA PAGAMENTO
+                    - TIPO FRETE;
+                 */
+
                 _contexto.SaveChanges();
             }
         }

@@ -779,7 +779,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //SETAR CONFIRMANDO o PEDIDO como ACEITO
         [WebMethod]
-        public ActionResult ConfirmarRecebimentoEAcatamentoDoPedido(int cCC, int iCM, int iCCF, int idPedido, string dataEntrega, string formaPagto, 
+        public ActionResult ConfirmarRecebimentoEAcatamentoDoPedido(int cCC, int iCM, int iCCF, int idPedido, string dataEntrega, int idFormaPagto, 
             int tipoFrete)
         {
             try
@@ -804,9 +804,26 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NPedidoCentralComprasService negociosPedidoCC = new NPedidoCentralComprasService();
                 NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
 
+                /*
+                 * CONTINUAR AQUI...
+                 1) NO BANCO DE DADOS:
+                    - CRIAR NAS SEGUINTES TABELAS (cotacao_filha_central_compras / pedido_central_compras) OS SEGUINTES CAMPOS:
+                        - DATA PAGAMENTO;
+                        - FORMA PAGAMENTO
+                        - TIPO FRETE;
+
+                 2) NO MODELO DE DADOS:
+                    - MAPEAR NO MODELO DO BANCO OS MESMOS CAMPOS:
+                        - DATA PAGAMENTO;
+                        - FORMA PAGAMENTO
+                        - TIPO FRETE;
+
+                 3) SETAR VALORES NESTES CAMPOS CONFORME PARÂMETROS RECEBIDOS ACIMA;
+                */
+
                 //CONFIRMAR o ACEITE do PEDIDO
                 negociosCotacaoFilhaCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
-                negociosPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, dataEntrega, formaPagto, tipoFrete);
+                negociosPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, dataEntrega, idFormaPagto, tipoFrete);
 
                 //IDENTIFICAR na COTAÇÃO MASTER o FORNECEDOR q RECEBEU PEDIDO
                 negociosCotacaoMasterCC.SetarIdFornecedorNaCotacaoMaster(iCM);
