@@ -226,8 +226,11 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //SETAR CONFIRMANDO o PEDIDO como ACEITO
-        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido)
+        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, int idTipoFrete, int idFormaPagto, string dataEntrega)
         {
+            var dataFormatada = 
+                Convert.ToDateTime(dataEntrega).Year.ToString() + "-" + Convert.ToDateTime(dataEntrega).Month.ToString() + "-" + Convert.ToDateTime(dataEntrega).Day.ToString();
+
             cotacao_filha_central_compras dadosDaCotacaoFilha =
                 _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
 
@@ -236,13 +239,9 @@ namespace ClienteMercado.Infra.Repositories
                 dadosDaCotacaoFilha.CONFIRMOU_PEDIDO = true;
                 dadosDaCotacaoFilha.DATA_CONFIRMOU_PEDIDO = DateTime.Now;
                 dadosDaCotacaoFilha.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = idPedido;
-
-                /*
-                 GRAVAR:
-                    - DATA PAGAMENTO;
-                    - FORMA PAGAMENTO
-                    - TIPO FRETE;
-                 */
+                dadosDaCotacaoFilha.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS = Convert.ToDateTime(dataFormatada);
+                dadosDaCotacaoFilha.ID_FORMA_PAGAMENTO = idFormaPagto;
+                dadosDaCotacaoFilha.ID_TIPO_FRETE = idTipoFrete;
 
                 _contexto.SaveChanges();
             }

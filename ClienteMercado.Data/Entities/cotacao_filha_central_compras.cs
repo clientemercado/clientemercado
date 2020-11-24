@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -77,6 +78,8 @@ namespace ClienteMercado.Data.Entities
         public bool REJEITOU_PEDIDO { get; set; }
 
         public System.DateTime DATA_REJEITOU_PEDIDO { get; set; }
+        public DateTime DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS { get; set; }
+        public int ID_FORMA_PAGAMENTO { get; set; }
 
         [ForeignKey("ID_COTACAO_MASTER_CENTRAL_COMPRAS")]
         public virtual cotacao_master_central_compras cotacao_master_central_compras { get; set; }
@@ -89,6 +92,9 @@ namespace ClienteMercado.Data.Entities
 
         [ForeignKey("ID_TIPO_FRETE")]
         public virtual tipos_frete tipo_frete { get; set; }
+
+        [ForeignKey("ID_FORMA_PAGAMENTO")]
+        public virtual forma_pagamento forma_pagamento { get; set; }
 
         //[ForeignKey("ID_CODIGO_PEDIDO_CENTRAL_COMPRAS")]
         //public virtual pedido_central_compras pedido_central_compras { get; set; }

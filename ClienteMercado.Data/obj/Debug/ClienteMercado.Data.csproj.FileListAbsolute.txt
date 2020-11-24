@@ -21,8 +21,6 @@ C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMer
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.csproj.CopyComplete
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.dll
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.pdb
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.dll
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Debug\ClienteMercado.Data.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Debug\ClienteMercado.Data.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Debug\ClienteMercado.Data.pdb
@@ -32,3 +30,5 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Debug\Enti
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.csproj.CoreCompileInputs.cache
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.csproj.CopyComplete
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.dll
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Debug\ClienteMercado.Data.pdb

@@ -254,17 +254,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label><b>Forma Pagto:</b>&nbsp;&nbsp;&nbsp;<a href="#" id="cadastrarFormaPgto">cadastrar nova</a></label>
-                                                @Html.DropDownList("inListaDeFormasPagamento", Model.inListaDeFormasPagamento, new { @class = "form-control", @id = "inListaDeFormasPagamento" })
+                                                @Html.DropDownList("inListaDeFormasPagamento", Model.inListaDeFormasPagamento, new { @class = "form-control obrigatorio", @id = "inListaDeFormasPagamento" })
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label><b>Tipo Frete:</b></label>
-                                                <select id="inTipoFrete" class="form-control obrigatorio">
-                                                    <option value="0">Selecione...</option>
-                                                    <option value="1">CIF</option>
-                                                    <option value="2">FOB</option>
-                                                </select>
+                                                @Html.DropDownList("inListaTiposFrete", Model.inListaTiposFrete, new { @class = "form-control obrigatorio", @id = "inListaTiposFrete" })
                                             </div>
                                         </div>
                                     </div>
@@ -1044,7 +1040,7 @@
                         'idPedido': $('#inIdPedidoRecebido').val(),
                         'dataEntrega': $('#inDataEntrega').val(),
                         'idFormaPagto': $('#inListaDeFormasPagamento').val(),
-                        'tipoFrete': $('#inTipoFrete').val()
+                        'idTipoFrete': $('#inListaTiposFrete').val()
                     },
                     success: function (data) {
                         debugger;

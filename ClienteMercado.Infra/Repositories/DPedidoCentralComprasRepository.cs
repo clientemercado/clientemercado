@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -49,8 +50,11 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //CONFIRMAR o ACEITE do PEDIDO
-        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, string dataEntrega, int idFormaPagto, int tipoFrete)
+        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, int idTipoFrete, int idFormaPagto, string dataEntrega)
         {
+            var dataFormatada = 
+                Convert.ToDateTime(dataEntrega).Year.ToString() + "-" + Convert.ToDateTime(dataEntrega).Month.ToString() + "-" + Convert.ToDateTime(dataEntrega).Day.ToString();
+
             pedido_central_compras dadosDoPedidoCC = 
                 _contexto.pedido_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) 
                 && (m.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) && (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedido)));
@@ -58,13 +62,9 @@ namespace ClienteMercado.Infra.Repositories
             if (dadosDoPedidoCC != null)
             {
                 dadosDoPedidoCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS = true;
-
-                /*
-                 GRAVAR:
-                    - DATA PAGAMENTO;
-                    - FORMA PAGAMENTO
-                    - TIPO FRETE;
-                 */
+                dadosDoPedidoCC.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS = Convert.ToDateTime(dataFormatada);
+                dadosDoPedidoCC.ID_FORMA_PAGAMENTO = idFormaPagto;
+                dadosDoPedidoCC.ID_TIPO_FRETE = idTipoFrete;
 
                 _contexto.SaveChanges();
             }

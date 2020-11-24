@@ -196,6 +196,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     viewModelEnviarResposta.inIdEmpresaCotada = dadosEmpresaLogada.ID_CODIGO_EMPRESA;
                     viewModelEnviarResposta.idUsuarioEmpresaFornecedoraCotada = dadosUsuarioEmpresaLogada.ID_CODIGO_USUARIO;
                     viewModelEnviarResposta.inListaDeFormasPagamento = ListagemDeFormasDePagamento();
+                    viewModelEnviarResposta.inListaTiposFrete = ListagemTiposDeFrete();
 
                     //respondeuContraProposta = listaDeItensDaCotacaoFilha.Where(m => (m.PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS > 0)).ToList().Count() > 0 ? "sim" : "nao";
                     //viewModelEnviarResposta.inRespondeuContraProposta = respondeuContraProposta;
@@ -518,24 +519,24 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        //POPULAR LISTA de GRUPOS de ATIVIDADES
-        private static List<SelectListItem> ListagemTiposDeFrete()
-        {
-            try
-            {
-                List<SelectListItem> listTiposDeFrete = new List<SelectListItem>();
+        ////POPULAR LISTA de GRUPOS de ATIVIDADES
+        //private static List<SelectListItem> ListagemTiposDeFrete()
+        //{
+        //    try
+        //    {
+        //        List<SelectListItem> listTiposDeFrete = new List<SelectListItem>();
 
-                listTiposDeFrete.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
-                listTiposDeFrete.Add(new SelectListItem { Text = "CIF", Value = "1" });
-                listTiposDeFrete.Add(new SelectListItem { Text = "FOB", Value = "2" });
+        //        listTiposDeFrete.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
+        //        listTiposDeFrete.Add(new SelectListItem { Text = "CIF", Value = "1" });
+        //        listTiposDeFrete.Add(new SelectListItem { Text = "FOB", Value = "2" });
 
-                return listTiposDeFrete;
-            }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-        }
+        //        return listTiposDeFrete;
+        //    }
+        //    catch (Exception erro)
+        //    {
+        //        throw erro;
+        //    }
+        //}
 
         //CONSULTA do AUTOCOMPLETE da LISTA de COTAÇÕES da CENTRAL de COMPRAS
         [WebMethod]
@@ -780,7 +781,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         //SETAR CONFIRMANDO o PEDIDO como ACEITO
         [WebMethod]
         public ActionResult ConfirmarRecebimentoEAcatamentoDoPedido(int cCC, int iCM, int iCCF, int idPedido, string dataEntrega, int idFormaPagto, 
-            int tipoFrete)
+            int idTipoFrete)
         {
             try
             {
@@ -804,26 +805,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NPedidoCentralComprasService negociosPedidoCC = new NPedidoCentralComprasService();
                 NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
 
-                /*
-                 * CONTINUAR AQUI...
-                 1) NO BANCO DE DADOS:
-                    - CRIAR NAS SEGUINTES TABELAS (cotacao_filha_central_compras / pedido_central_compras) OS SEGUINTES CAMPOS:
-                        - DATA PAGAMENTO;
-                        - FORMA PAGAMENTO
-                        - TIPO FRETE;
-
-                 2) NO MODELO DE DADOS:
-                    - MAPEAR NO MODELO DO BANCO OS MESMOS CAMPOS:
-                        - DATA PAGAMENTO;
-                        - FORMA PAGAMENTO
-                        - TIPO FRETE;
-
-                 3) SETAR VALORES NESTES CAMPOS CONFORME PARÂMETROS RECEBIDOS ACIMA;
-                */
-
-                //CONFIRMAR o ACEITE do PEDIDO
-                negociosCotacaoFilhaCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
-                negociosPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, dataEntrega, idFormaPagto, tipoFrete);
+                //CONFIRMAR o ACEITE do PEDIDO  <-- TESTAR GRAVAÇÃO DOS NOVOS PARÂMETROS... CONTINUAR AQUI... <----
+                negociosCotacaoFilhaCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, idTipoFrete, idFormaPagto, dataEntrega);
+                negociosPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, idTipoFrete, idFormaPagto, dataEntrega);
 
                 //IDENTIFICAR na COTAÇÃO MASTER o FORNECEDOR q RECEBEU PEDIDO
                 negociosCotacaoMasterCC.SetarIdFornecedorNaCotacaoMaster(iCM);
@@ -879,10 +863,10 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 //OBS: POPULAR OS CAMPOS PARAMETROS ABAIXO <----
 
-                //ENVIAR E-MAIL   
-                bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, empresaFornecedora, email1_EmpresaAdmCC,
-                    email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega, tipoFrete,
-                    usuarioFornConfirmou, foneUsuarioFornConfirmou);
+                ////ENVIAR E-MAIL   <--- DESCOMENTAR E ALTERAR PARAMETRO ERRADO RELACIONADO AO FRETE
+                //bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, empresaFornecedora, email1_EmpresaAdmCC,
+                //    email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega, tipoFrete,
+                //    usuarioFornConfirmou, foneUsuarioFornConfirmou);
 
                 ////---------------------------------------------------------------------------------------------
                 ////ENVIANDO SMS´s
@@ -1216,6 +1200,29 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 throw erro;
             }
+        }
+
+        //Carrega os TIPOS de FRETE
+        private static List<SelectListItem> ListagemTiposDeFrete()
+        {
+            //Buscar os TIPOS de FRETE
+            NTiposFreteService negociosTiposDeFrete = new NTiposFreteService();
+            List<tipos_frete> listaDeTiposDeFretes = negociosTiposDeFrete.ListaDeTiposDeFrete();
+
+            List<SelectListItem> listaFretes = new List<SelectListItem>();
+
+            listaFretes.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
+
+            foreach (var tiposDeFretes in listaDeTiposDeFretes)
+            {
+                listaFretes.Add(new SelectListItem
+                {
+                    Text = tiposDeFretes.DESCRICAO_TIPO_FRETE,
+                    Value = tiposDeFretes.ID_TIPO_FRETE.ToString()
+                });
+            }
+
+            return listaFretes;
         }
     }
 }

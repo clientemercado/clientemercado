@@ -175,9 +175,9 @@ namespace ClienteMercado.Domain.Services
         }
 
         //SETAR CONFIRMANDO o PEDIDO como ACEITO
-        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido)
+        public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, int idTipoFrete, int idFormaPagto, string dataEntrega)
         {
-            dcotacaofilhacentraldecompras.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido);
+            dcotacaofilhacentraldecompras.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, idTipoFrete, idFormaPagto, dataEntrega);
         }
 
         //SETAR FLAG SOLICITAR_CONFIRMACAO_ACEITE_COTACAO na tabela cotacao_filha_central_compras

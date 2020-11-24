@@ -49,5 +49,6 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string rejeitouSolicitacaoAprovandoValoresCotacao { get; set; }
         public string rejeitouPedido { get; set; }
         public List<SelectListItem> inListaDeFormasPagamento { get; set; }
+        public List<SelectListItem> inListaTiposFrete { get; set; }
     }
 }

@@ -2417,7 +2417,6 @@ namespace ClienteMercado.Controllers
             return null;
         }
 
-        //===============================================================================================================
         //Carregar RESPOSTAS da COTAÇÃO para o PRODUTO, respondida pelo FORNECEDOR (Obs: Para efeito de ANÁLISE)
         public JsonResult CarregarRespostaDaCotacaoPorProduto(int idCotacaoMaster, int idCodigoProduto, string tipoCotacao)
         {
@@ -2615,10 +2614,7 @@ namespace ClienteMercado.Controllers
             {
                 throw erro;
             }
-
-            return null;
         }
-        //===============================================================================================================
 
         //Carrega os TIPOS de FRETE
         private static List<SelectListItem> ListagemTiposDeFrete()
@@ -2629,7 +2625,7 @@ namespace ClienteMercado.Controllers
 
             List<SelectListItem> listaFretes = new List<SelectListItem>();
 
-            listaFretes.Add(new SelectListItem { Text = "Selecione o Tipo de Frete...", Value = "0" });
+            listaFretes.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
 
             foreach (var tiposDeFretes in listaDeTiposDeFretes)
             {
@@ -2647,7 +2643,6 @@ namespace ClienteMercado.Controllers
         private static List<CotacoesEnviadasPeloUsuario> ListaDeCotacoesDirecionadasEnviadasPeloUsuarioEmpresa()
         {
             int fornecedoresCotados = 0;
-            int quantidadeCotacoesRespondidas = 0;
 
             try
             {
@@ -2698,7 +2693,6 @@ namespace ClienteMercado.Controllers
         private static List<CotacoesEnviadasPeloUsuario> ListaDeCotacoesAvulsasEnviadasPeloUsuarioEmpresa()
         {
             int fornecedoresCotados = 0;
-            int quantidadeCotacoesRespondidas = 0;
 
             try
             {
