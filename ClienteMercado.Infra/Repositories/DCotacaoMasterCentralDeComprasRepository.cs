@@ -94,7 +94,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //SETAR NULL no CAMPO relacionado ao ID do PEDIDO
-        public void SetarNullNoIdDoPedidoNaCotacaoMaster(int iCM) //ESTIVE AQUI 1
+        public void SetarNullNoIdDoPedidoNaCotacaoMaster(int iCM)
         {
             cotacao_master_central_compras dadosCotacaoMaster =
                 _contexto.cotacao_master_central_compras.FirstOrDefault(m => (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM));

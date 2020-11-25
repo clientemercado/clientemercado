@@ -264,6 +264,9 @@ namespace ClienteMercado.Infra.Repositories
                 //dadosDaCotacaoFilha.REJEITOU_PEDIDO = true;
                 //dadosDaCotacaoFilha.DATA_REJEITOU_PEDIDO = DateTime.Now;
                 //dadosDaCotacaoFilha.DESCRICAO_MOTIVO_REJEITOU_PEDIDO = descMotivo;
+                dadosDaCotacaoFilha.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS = null;
+                dadosDaCotacaoFilha.ID_FORMA_PAGAMENTO = null;
+                dadosDaCotacaoFilha.ID_TIPO_FRETE = 2;
 
                 _contexto.SaveChanges();
             }
@@ -286,6 +289,9 @@ namespace ClienteMercado.Infra.Repositories
                 dadosDaCotacaoFilha.REJEITOU_PEDIDO = true;
                 dadosDaCotacaoFilha.DATA_REJEITOU_PEDIDO = DateTime.Now;
                 dadosDaCotacaoFilha.DESCRICAO_MOTIVO_REJEITOU_PEDIDO = descMotivo;
+                dadosDaCotacaoFilha.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS = null;
+                dadosDaCotacaoFilha.ID_FORMA_PAGAMENTO = null;
+                dadosDaCotacaoFilha.ID_TIPO_FRETE = 2;
 
                 _contexto.SaveChanges();
             }

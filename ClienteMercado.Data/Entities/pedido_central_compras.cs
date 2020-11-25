@@ -33,8 +33,8 @@ namespace ClienteMercado.Data.Entities
 
         [Required]
         public bool CONFIRMADO_PEDIDO_CENTRAL_COMPRAS { get; set; }
-        public int ID_FORMA_PAGAMENTO { get; set; }
-        public int ID_TIPO_FRETE { get; set; }
+        public int? ID_FORMA_PAGAMENTO { get; set; }
+        public int? ID_TIPO_FRETE { get; set; }
 
         [ForeignKey("ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS")]
         public virtual cotacao_master_central_compras cotacao_master_central_compras { get; set; }

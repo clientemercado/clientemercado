@@ -285,7 +285,7 @@
                     <div class="modal-content">
 
                         <div class="modal-header" style="background-color: #337ab7">
-                            <a><i type="button" class="glyphicon glyphicon-remove fecharmodal" data-dismiss="modal" style="color:#fff; position: absolute;top:8px;right: 8px;"></i></a>
+                            <a><i type="button" class="glyphicon glyphicon-remove" data-dismiss="modal" style="color:#fff; position: absolute;top:8px;right: 8px;"></i></a>
                             <h4 class="modal-title" style="text-align:left;"><font color=white><i class="fas fa-edit"></i> Cadastro Formas Pagamento:</font></h4>
                         </div>
 
@@ -983,7 +983,7 @@
                                                 $('#inListaDeFormasPagamento').append(linhasSelect);
                                                 $('#inListaDeFormasPagamento').val(idNovaForma);
 
-                                                $(".fecharmodal").trigger('click');
+                                                $('#modalFormaPagto').modal('toggle');
                                             }
                                         }
                                     }
@@ -1002,9 +1002,9 @@
             }
         });
 
-        $(".fecharmodal").click(function () {
-            $('#modalFormaPagto').modal('toggle');
-        });
+        //$(".fecharmodal").click(function () {
+        //    $('#modalFormaPagto').modal('toggle');
+        //});
 
         //CONFIRMANDO o PEDIDO da CENTRAL de COMPRAS
         $("#inConfirmarPedido").click(function () {
@@ -1072,7 +1072,7 @@
                                 $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i>&nbsp;PEDIDO RECEBIDO e CONFIRMADO</font>" + $('#mensagemStatus').val());
                             }
 
-                            $('#infoComplementar').hide();
+                            $('#modalInfoComplementar').modal('toggle');
                         }
                     }
                 });

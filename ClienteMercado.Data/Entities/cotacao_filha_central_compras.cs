@@ -78,8 +78,8 @@ namespace ClienteMercado.Data.Entities
         public bool REJEITOU_PEDIDO { get; set; }
 
         public System.DateTime DATA_REJEITOU_PEDIDO { get; set; }
-        public DateTime DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS { get; set; }
-        public int ID_FORMA_PAGAMENTO { get; set; }
+        public DateTime? DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS { get; set; }
+        public int? ID_FORMA_PAGAMENTO { get; set; }
 
         [ForeignKey("ID_COTACAO_MASTER_CENTRAL_COMPRAS")]
         public virtual cotacao_master_central_compras cotacao_master_central_compras { get; set; }
