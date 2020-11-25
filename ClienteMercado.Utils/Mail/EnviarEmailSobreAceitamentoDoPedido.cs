@@ -10,7 +10,7 @@ namespace ClienteMercado.Utils.Mail
         //===================================================================
         public bool EnviarEmail(string _nomeCC, string _usuarioAdmCC, string _empresaFornecedora, string _email1_EmpresaAdmCC, string _email2_EmpresaAdmCC,
             string _email1_UsuarioContatoAdmCC, string _email2_UsuarioContatoAdmCC, string _dataEnvioPedido, string _numeroPedido, string _dataEntrega, 
-            int _tipoFrete, string _usuarioConfirmou, string _foneUsuarioConfirmou)
+            string _tipoFrete, string _usuarioConfirmou, string _foneUsuarioConfirmou)
         {
             //Montando Link de Acesso ao site
             string comandoHref = "<a href=";

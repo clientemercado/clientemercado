@@ -798,14 +798,16 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var empresaFornecedora = "";
                 var usuarioFornConfirmou = "";
                 var foneUsuarioFornConfirmou = "";
+                var tipoFrete = "";
 
                 NCentralDeComprasService negociosCC = new NCentralDeComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMasterCC = new NCotacaoMasterCentralDeComprasService();
                 NPedidoCentralComprasService negociosPedidoCC = new NPedidoCentralComprasService();
                 NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
+                NTiposFreteService serviceTiposFrete = new NTiposFreteService();
 
-                //CONFIRMAR o ACEITE do PEDIDO  <-- TESTAR GRAVAÇÃO DOS NOVOS PARÂMETROS... CONTINUAR AQUI... <----
+                //CONFIRMAR o ACEITE do PEDIDO
                 negociosCotacaoFilhaCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, idTipoFrete, idFormaPagto, dataEntrega);
                 negociosPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, idTipoFrete, idFormaPagto, dataEntrega);
 
@@ -840,6 +842,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                 ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaForn = 
                     negociosEmpresaUsuario.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosCF.ID_CODIGO_EMPRESA);
 
+                //CARREGAR DESCRIÇÃO do TIPO de FRETE
+                tipoFrete = serviceTiposFrete.ConsultarDescricaoTipoFrete(idTipoFrete);
+
                 EnviarEmailSobreAceitamentoDoPedido enviarEmailSobreAceitamentoDoPedido = new EnviarEmailSobreAceitamentoDoPedido();
 
                 //DISPARA E-MAIL´s para a Empresa ADM da CENTRAL de COMPRAS
@@ -861,12 +866,14 @@ namespace ClienteMercado.Areas.Company.Controllers
                     usuarioFornConfirmou = dadosEmpresaForn.nomeUsuarioContatoEmpresa;
                 }
 
-                //OBS: POPULAR OS CAMPOS PARAMETROS ABAIXO <----
+                /*
+                    --> CONTINUAR AQUI... TESTAR PRA VER COMO CHEGA NA PÁGINA DE DISPARO DO E-MAIL, VER COMO FICA A FORMATAÇÃO...
+                 */
 
-                ////ENVIAR E-MAIL   <--- DESCOMENTAR E ALTERAR PARAMETRO ERRADO RELACIONADO AO FRETE
-                //bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, empresaFornecedora, email1_EmpresaAdmCC,
-                //    email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega, tipoFrete,
-                //    usuarioFornConfirmou, foneUsuarioFornConfirmou);
+                //ENVIAR E-MAIL  
+                bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, empresaFornecedora, email1_EmpresaAdmCC,
+                    email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega, tipoFrete,
+                    usuarioFornConfirmou, foneUsuarioFornConfirmou);
 
                 ////---------------------------------------------------------------------------------------------
                 ////ENVIANDO SMS´s
@@ -1026,7 +1033,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
             return pedidoExcluido;
         }
-        //---------------------------------------------------------------------------
 
         //Carrega DIÁLOGOS entre COTANTE e FORNECEDOR
         [WebMethod]
