@@ -804,7 +804,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string smsMensagem = "";
                 string telefoneUsuarioADM = "";
                 string urlParceiroEnvioSms = "";
-                string textoMsgStatus = "PEDIDO FEITO&nbsp;";
 
                 NCentralDeComprasService negociosCC = new NCentralDeComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
@@ -873,12 +872,13 @@ namespace ClienteMercado.Areas.Company.Controllers
                 }
 
                 //ENVIAR E-MAIL  
-                bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, empresaFornecedora, email1_EmpresaAdmCC,
-                    email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega, tipoFrete,
-                    usuarioFornConfirmou, foneUsuarioFornConfirmou);
+                bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, dadosCF.empresa_usuario.NOME_FANTASIA_EMPRESA, 
+                    email1_EmpresaAdmCC, email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega,
+                    tipoFrete, usuarioFornConfirmou, foneUsuarioFornConfirmou);
 
                 /*
-                    --> CONTINUAR AQUI... TESTAR PRA VER COMO SE COMPORTA A PASSAGEM POR TODA ESSA ÁREA DE CÓDIGO, LINHA A LINHA - CONTINUAR AQUI...
+                    --> CONTINUAR AQUI... CONFERIR A URL DE ENVIO DE MENSAGENS - VERIFICAR SE O CADASTRO AINDA ESTÁ ATIVO, SE O SITE AINDA EXISTE
+                    -   OBS(SE NECESSÁRIO, REALIZAR NOVO CADASTRO PARA TESTES OU VER OUTRO SITE QUE O FAÇA)   --> CONTINUAR AQUI...
                  */
 
                 //---------------------------------------------------------------------------------------------
@@ -893,11 +893,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa))
                     {
                         //TELEFONE 1 do USUÁRIO ADM
-                        telefoneUsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa, "[()-]", "");
+                        telefoneUsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa, "[()-]", "").Replace(" ","");
                         urlParceiroEnvioSms =
                             "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
 
-                        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+                        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, 0);
 
                         bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 900 ACIMA...
 

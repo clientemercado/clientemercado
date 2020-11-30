@@ -64,7 +64,7 @@ namespace ClienteMercado.Infra.Repositories
         public cotacao_filha_central_compras ConsultarDadosDaCotacaoFilhaCC(int iCM, int iCCF)
         {
             cotacao_filha_central_compras dadosDaCotacaoFilha =
-                _contexto.cotacao_filha_central_compras.FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
+                _contexto.cotacao_filha_central_compras.Include("empresa_usuario").FirstOrDefault(m => ((m.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS == iCCF) && (m.ID_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)));
 
             return dadosDaCotacaoFilha;
         }
