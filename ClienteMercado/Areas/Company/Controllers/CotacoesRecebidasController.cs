@@ -199,6 +199,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     viewModelEnviarResposta.idUsuarioEmpresaFornecedoraCotada = dadosUsuarioEmpresaLogada.ID_CODIGO_USUARIO;
                     viewModelEnviarResposta.inListaDeFormasPagamento = ListagemDeFormasDePagamento();
                     viewModelEnviarResposta.inListaTiposFrete = ListagemTiposDeFrete();
+                    viewModelEnviarResposta.inDataEntrega = Convert.ToDateTime(dadosCotacaoFilha.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS).ToString("dd/MM/yyyy");
 
                     //respondeuContraProposta = listaDeItensDaCotacaoFilha.Where(m => (m.PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS > 0)).ToList().Count() > 0 ? "sim" : "nao";
                     //viewModelEnviarResposta.inRespondeuContraProposta = respondeuContraProposta;
@@ -797,7 +798,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var email2_UsuarioContatoAdmCC = "";
                 var dataEnvioPedido = "";
                 var numeroPedido = "";
-                var empresaFornecedora = "";
                 var usuarioFornConfirmou = "";
                 var foneUsuarioFornConfirmou = "";
                 var tipoFrete = "";
@@ -821,19 +821,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 central_de_compras dadosCC = negociosCC.CarregarDadosDaCentralDeCompras(cCC);
                 cotacao_filha_central_compras dadosCF = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
-
-                /*
-                 * 
-                 ENVIAR E-MAIL, SMS e NOTIFICAÇÃO SOBRE O ACEITE DO PEDIDO
-
-                 */
-
-                //=======================================================================
-                //===========================================================================
-                /*
-                 DISPARAR AQUI PARA O VENDEDOR:                        
-                    - E-MAILS, SMS, NOTIFICAÇÕES VIA CELULAR --> INFORMAÇÕES no SISTEMA sobre O PEDIDO
-                */
 
                 //DISPARAR AO ADMINISTRADOR da CENTRAL de COMPRAS AVISO SOBRE O ACEITE DO PEDIDO
                 //---------------------------------------------------------------------------------------------
@@ -875,11 +862,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, dadosCF.empresa_usuario.NOME_FANTASIA_EMPRESA, 
                     email1_EmpresaAdmCC, email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega,
                     tipoFrete, usuarioFornConfirmou, foneUsuarioFornConfirmou);
-
-                /*
-                    --> CONTINUAR AQUI... CONFERIR A URL DE ENVIO DE MENSAGENS - VERIFICAR SE O CADASTRO AINDA ESTÁ ATIVO, SE O SITE AINDA EXISTE
-                    -   OBS(SE NECESSÁRIO, REALIZAR NOVO CADASTRO PARA TESTES OU VER OUTRO SITE QUE O FAÇA)   --> CONTINUAR AQUI...
-                 */
 
                 //---------------------------------------------------------------------------------------------
                 //ENVIANDO SMS´s
@@ -942,16 +924,15 @@ namespace ClienteMercado.Areas.Company.Controllers
                     }
                 }
 
-                    //---------------------------------------------------------------------------------------------
-                    //ENVIANDO NOTIFICAÇÃO CELULAR
-                    //---------------------------------------------------------------------------------------------
-                    //3 - Enviar ALERT ao aplicativo no celular
-                    /*
-                        CODIFICAR...
-                    */
-                    //=======================================================================
+                //---------------------------------------------------------------------------------------------
+                //ENVIANDO NOTIFICAÇÃO CELULAR
+                //---------------------------------------------------------------------------------------------
+                //3 - Enviar ALERT ao aplicativo no celular
+                /*
+                    CODIFICAR...
+                */
 
-                    resultado = new { pedidoConfirmado = "sim" };
+                resultado = new { pedidoConfirmado = "sim" };
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
             }
@@ -963,20 +944,150 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //SETAR CONFIRMANDO o PEDIDO como REJEITADO 
         [WebMethod]
-        public ActionResult CancelarAceiteDoPedido(int iCM, int iCCF, int idPedido, string descMotivo)
+        public ActionResult CancelarAceiteDoPedido(int cCC, int iCM, int iCCF, int idPedido, string dataEntrega, string descMotivo)
         {
             try
             {
                 var resultado = new { pedidoRejeitado = "" };
 
+                var nomeCC = "";
+                var usuarioAdmCC = "";
+                var email1_EmpresaAdmCC = "";
+                var email2_EmpresaAdmCC = "";
+                var email1_UsuarioContatoAdmCC = "";
+                var email2_UsuarioContatoAdmCC = "";
+                var dataEnvioPedido = "";
+                var numeroPedido = "";
+                var usuarioFornConfirmou = "";
+                var foneUsuarioFornConfirmou = "";
+                var tipoFrete = "";
+                string smsMensagem = "";
+                string telefoneUsuarioADM = "";
+                string urlParceiroEnvioSms = "";
+
+                NCentralDeComprasService negociosCC = new NCentralDeComprasService();
+                NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
+                NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
+
                 //EXCLUIR PEDIDO REJEITADO PELO FORNECEDOR
                 bool confirmadoRejeitamentoDoPedido = CancelarExcluirOPedidoRejeitadoPeloFornecedor(iCM, iCCF, idPedido, descMotivo);
 
-                /*
-                 * 
-                 ENVIAR E-MAIL, SMS e NOTIFICAÇÃO SOBRE A DESISTÊNCIA DO PEDIDO
+                central_de_compras dadosCC = negociosCC.CarregarDadosDaCentralDeCompras(cCC);
+                cotacao_filha_central_compras dadosCF = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
 
+                //DISPARAR AO ADMINISTRADOR da CENTRAL de COMPRAS AVISO SOBRE O ACEITE DO PEDIDO
+                //---------------------------------------------------------------------------------------------
+                //ENVIANDO E-MAILS
+                //---------------------------------------------------------------------------------------------
+                //CARREGAR DADOS da EMPRESA ADM da CENTRAL COMPRAS
+                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaAdmCC =
+                    negociosEmpresaUsuario.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosCC.ID_CODIGO_EMPRESA_ADM_CENTRAL_COMPRAS);
+
+                //CARREGAR DADOS da EMPRESA FORNECEDORA
+                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaForn =
+                    negociosEmpresaUsuario.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosCF.ID_CODIGO_EMPRESA);
+
+                ////CARREGAR DESCRIÇÃO do TIPO de FRETE
+                //tipoFrete = serviceTiposFrete.ConsultarDescricaoTipoFrete(idTipoFrete);
+
+                EnviarEmailSobreRejeitamentoDoPedido enviarEmailSobreAceitamentoDoPedido = new EnviarEmailSobreRejeitamentoDoPedido();
+
+                //DISPARA E-MAIL´s para a Empresa ADM da CENTRAL de COMPRAS
+                if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.nickNameUsuarioContatoEmpresa))
+                {
+                    usuarioAdmCC = dadosEmpresaAdmCC.nickNameUsuarioContatoEmpresa;
+                }
+                else
+                {
+                    usuarioAdmCC = dadosEmpresaAdmCC.nomeUsuarioContatoEmpresa;
+                }
+
+                if (!string.IsNullOrEmpty(dadosEmpresaForn.nickNameUsuarioContatoEmpresa))
+                {
+                    usuarioFornConfirmou = dadosEmpresaForn.nickNameUsuarioContatoEmpresa;
+                }
+                else
+                {
+                    usuarioFornConfirmou = dadosEmpresaForn.nomeUsuarioContatoEmpresa;
+                }
+
+                /*
+                 ANALISAR OS PARÂMETROS PASSADOS PARA O ENVIO DE E-MAIL - OLHAR NA CLASSE QUE RECEE TAMBÉM -- CONTINUAR AQUI...
                  */
+
+                //ENVIAR E-MAIL  
+                bool emailAvisoDerejeitamentoDoPedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, dadosCF.empresa_usuario.NOME_FANTASIA_EMPRESA,
+                    email1_EmpresaAdmCC, email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega,
+                    tipoFrete, usuarioFornConfirmou, foneUsuarioFornConfirmou, descMotivo);
+
+                //---------------------------------------------------------------------------------------------
+                //ENVIANDO SMS´s
+                //---------------------------------------------------------------------------------------------
+                EnviarSms enviarSmsMaster = new EnviarSms();
+
+                smsMensagem = "ClienteMercado - O PEDIDO 00010 foi CANCELADO pelo fornecedor. Verifique em www.clientemercado.com.br";
+
+                if (emailAvisoDerejeitamentoDoPedido)
+                {
+                    if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa))
+                    {
+                        //TELEFONE 1 do USUÁRIO ADM
+                        telefoneUsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa, "[()-]", "").Replace(" ", "");
+                        urlParceiroEnvioSms =
+                            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
+
+                        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, 0);
+
+                        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 900 ACIMA...
+
+                        if (smsUsuarioVendedor)
+                        {
+                            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                            NControleSMSService negociosSMS = new NControleSMSService();
+                            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa;
+                            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaAdmCC.idUsuarioContatoResponsavel;
+                            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver qual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+                            controleEnvioSms.DATA_ENVIO = DateTime.Now;
+
+                            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa))
+                    {
+                        //TELEFONE 2 do USUÁRIO ADM
+                        telefoneUsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa, "[()-]", "");
+                        urlParceiroEnvioSms =
+                            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
+
+                        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+
+                        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 926 ACIMA...
+
+                        if (smsUsuarioVendedor)
+                        {
+                            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                            NControleSMSService negociosSMS = new NControleSMSService();
+                            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa;
+                            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaAdmCC.idUsuarioContatoResponsavel;
+                            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver qual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+
+                            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                        }
+                    }
+                }
+
+                //---------------------------------------------------------------------------------------------
+                //ENVIANDO NOTIFICAÇÃO CELULAR
+                //---------------------------------------------------------------------------------------------
+                //3 - Enviar ALERT ao aplicativo no celular
+                /*
+                    CODIFICAR...
+                */
 
                 if (confirmadoRejeitamentoDoPedido)
                 {

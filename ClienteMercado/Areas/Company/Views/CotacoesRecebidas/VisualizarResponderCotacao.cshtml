@@ -351,6 +351,7 @@
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
             <input type="hidden" id="inPedidoConfirmado" value="@ViewBag.pedidoConfirmado" />
             <input type="hidden" id="inRejeitouPedido" value="@Model.rejeitouPedido" />
+            <input type="hidden" id="inDataEntregaPedido" value="@Model.inDataEntrega" />            
         </div>
     </div>
     <!-- END VALIDATION STATES-->
@@ -1089,7 +1090,6 @@
         //===============================================================================
         //REJEITAR o PEDIDO da CENTRAL de COMPRAS
         $("#inRejeitarPedido").click(function () {
-
             var motivoRejeicao = "";
 
             swal({
@@ -1126,9 +1126,11 @@
                                     cache: false,
                                     async: true,
                                     data: {
+                                        'cCC': $('#inCCC').val(),
                                         'iCM': $('#inICM').val(),
                                         'iCCF': $('#inCCF').val(),
                                         'idPedido': $('#inIdPedidoRecebido').val(),
+                                        'dataEntrega': $('#inDataEntregaPedido').val(),
                                         'descMotivo': motivoRejeicao
                                     },
                                     success: function (data) {

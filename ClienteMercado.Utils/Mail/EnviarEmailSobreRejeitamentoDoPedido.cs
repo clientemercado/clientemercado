@@ -5,11 +5,11 @@ using System.Web;
 
 namespace ClienteMercado.Utils.Mail
 {
-    public class EnviarEmailSobreAceitamentoDoPedido
+    public class EnviarEmailSobreRejeitamentoDoPedido
     {
         public bool EnviarEmail(string _nomeCC, string _usuarioAdmCC, string _empresaFornecedora, string _email1_EmpresaAdmCC, string _email2_EmpresaAdmCC,
-            string _email1_UsuarioContatoAdmCC, string _email2_UsuarioContatoAdmCC, string _dataEnvioPedido, string _numeroPedido, string _dataEntrega, 
-            string _tipoFrete, string _usuarioConfirmou, string _foneUsuarioConfirmou)
+            string _email1_UsuarioContatoAdmCC, string _email2_UsuarioContatoAdmCC, string _dataEnvioPedido, string _numeroPedido, string _dataEntrega,
+            string _tipoFrete, string _usuarioConfirmouDesistencia, string _foneUsuarioConfirmouDesistencia, string _motivoDesistenciaDoPedido)
         {
             //Montando Link de Acesso ao site
             string comandoHref = "<a href=";
@@ -21,28 +21,30 @@ namespace ClienteMercado.Utils.Mail
             string assunto = "";
             string mensagem = "";
 
-            assunto = "CONFIRMAÇÃO DO PEDIDO - Fornecedor: " + _empresaFornecedora;
+            assunto = "DESISTÊNCIA DO PEDIDO - Fornecedor: " + _empresaFornecedora;
             mensagem = @"<html>" +
                         "<body>" +
-                        "<tr><td>" + 
-                        "<table width='80%' align='center' bgcolor='#E8E8E8'>" + 
+                        "<tr><td>" +
+                        "<table width='80%' align='center' bgcolor='#E8E8E8'>" +
                         "<tr><td><img src='cid:Imagem1' /></td></tr>" +
                         "<tr>" +
-                        "<td align='center'>" + 
+                        "<td align='center'>" +
                         "<h2><b>!!! ATENÇÃO !!!</b></h2>" +
                         "</td>" +
-                        "</tr>" + 
+                        "</tr>" +
                         "<tr>" +
                         "<td><br>&nbsp;&nbsp;Sr(a) " + _usuarioAdmCC + ", <br><br>" +
-                        "&nbsp;&nbsp;O Fornecedor <b>" + _empresaFornecedora + "</b>, ACEITOU o PEDIDO Nº 00010, efetuado por sua Central de Compras no dia " + _dataEnvioPedido + "." + 
+                        "&nbsp;&nbsp;O Fornecedor <b>" + _empresaFornecedora + "</b>, DESISTIU de atender o PEDIDO nº 00010, efetuado por sua Central de Compras no dia " + _dataEnvioPedido + "." +
                         "</td>" +
-                        "</tr>" + 
+                        "</tr>" +
                         "<br><br>" +
                         "<tr><td colspan='4'><b>CARACTERÍSTICAS DO PEDIDO:</b></td></tr><br>" +
-                        "<tr><td><b>Pedido Nº:</b>&nbsp;</td><td>" + _numeroPedido + "</td><td colspan='2'></td></tr> "+
+                        "<tr><td><b>Pedido Nº:</b>&nbsp;</td><td>" + _numeroPedido + "</td><td colspan='2'></td></tr> " +
                         "<tr><td><b>Data Entrega:</b>&nbsp;</td><td>" + _dataEntrega + "/td><td colspan='2'></td></tr> " +
                         "<tr><td><b>Frete:</b>&nbsp;</td><td>" + _tipoFrete + "</td><td colspan='2'></td></tr> " +
-                        "<tr><td><b>Confirmou o Pedido:</b>&nbsp;</td><td>" + _usuarioConfirmou + "&nbsp;</td><td><b>Contato:&nbsp;</b></td><td>" + _foneUsuarioConfirmou + "</td></tr> " +
+                        "<tr><td><b>Confirmou DESISTÊNCIA do Pedido:</b>&nbsp;</td><td>" + _usuarioConfirmouDesistencia + "&nbsp;</td><td><b>Contato:&nbsp;</b></td><td>" + _foneUsuarioConfirmouDesistencia + "</td></tr> " +
+                        "<tr><td colspan='3'></td></tr>" +
+                        "<tr><td><b>Motivo DESISTÊNCIA:</b>&nbsp;</td><td colspan='2'>" + _motivoDesistenciaDoPedido + "</td></tr>" +
                         "<tr><td align='center'><br>Acesse o site " + linked + " e verifique as novas informações sobre este pedido.<br><br>" +
                         "<tr><td><br><br>&nbsp;&nbsp;Atenciosamente,<br></td></tr><tr><td><br>&nbsp;&nbsp;" +
                         "Equipe Cliente&Mercado<br></td></tr>" +
@@ -117,4 +119,5 @@ namespace ClienteMercado.Utils.Mail
 
         }
     }
+    //==========================================================================
 }

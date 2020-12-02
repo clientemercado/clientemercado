@@ -34,9 +34,9 @@ namespace ClienteMercado.Data.Entities
         public bool RESPONDIDA_COTACAO_FILHA_CENTRAL_COMPRAS { get; set; }
 
         [Required]
-        public System.DateTime DATA_RESPOSTA_COTACAO_FILHA_CENTRAL_COMPRAS { get; set; }
+        public DateTime DATA_RESPOSTA_COTACAO_FILHA_CENTRAL_COMPRAS { get; set; }
 
-        public System.DateTime DATA_RECEBEU_COTACAO_CENTRAL_COMPRAS { get; set; }
+        public DateTime DATA_RECEBEU_COTACAO_CENTRAL_COMPRAS { get; set; }
 
         public bool SOLICITAR_CONFIRMACAO_ACEITE_COTACAO { get; set; }
 
@@ -69,15 +69,15 @@ namespace ClienteMercado.Data.Entities
 
         public bool RECEBEU_PEDIDO { get; set; }
 
-        public System.DateTime DATA_RECEBEU_PEDIDO { get; set; }
+        public DateTime DATA_RECEBEU_PEDIDO { get; set; }
 
         public bool CONFIRMOU_PEDIDO { get; set; }
 
-        public System.DateTime DATA_CONFIRMOU_PEDIDO { get; set; }
+        public DateTime DATA_CONFIRMOU_PEDIDO { get; set; }
 
         public bool REJEITOU_PEDIDO { get; set; }
 
-        public System.DateTime DATA_REJEITOU_PEDIDO { get; set; }
+        public DateTime DATA_REJEITOU_PEDIDO { get; set; }
         public DateTime? DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS { get; set; }
         public int? ID_FORMA_PAGAMENTO { get; set; }
 
