@@ -2197,6 +2197,12 @@ namespace ClienteMercado.Areas.Company.Controllers
                     }
                 }
 
+                /*
+                 * 
+                 ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR... CONTINUAR AQUI...
+
+                 */
+
                 //CONSULTAR LISTA de ITENS da COTACAO FILHA
                 List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacaoFilha =
                     negociosItensCotacaoFilhaCentralCompras.ConsultarItensDaCotacaoDaCC(iCCF);
@@ -2355,6 +2361,12 @@ namespace ClienteMercado.Areas.Company.Controllers
                             }
 
                             resultado = new { pedidoExcluido = "sim", mensagemStatus = mensagemDoStatus };
+
+                            /*
+                             * 
+                             ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR... CONTINUAR AQUI...
+
+                             */
                         }
                     }
                 }
