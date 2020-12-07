@@ -2156,6 +2156,17 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string idsPedidos = "";
                 string todosItensPedidos = "nao";
                 string textoMsgStatus = "PEDIDO FEITO&nbsp;";
+
+                var nomeCC = "";
+                var usuarioAdmCC = "";
+                var email1_EmpresaAdmCC = "";
+                var email2_EmpresaAdmCC = "";
+                var email1_UsuarioContatoAdmCC = "";
+                var email2_UsuarioContatoAdmCC = "";
+                var dataEnvioPedido = "";
+                var numeroPedido = "";
+                var usuarioFornAInformar = "";
+
                 var resultado = new { itemExcluido = "nao", todosItensPedidos = "", mensagemStatus = "" };
 
                 string[] listaIDsItensNegociacaoPedidosAExcluir;
@@ -2171,7 +2182,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
                 NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoFilhaCentralCompras = new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
+                NEmpresaUsuarioService empresaUsuarioService = new NEmpresaUsuarioService();
                 pedido_central_compras dadosPedidoCC = new pedido_central_compras();
+                itens_cotacao_individual_empresa_central_compras itemPedidoDetalhes = new itens_cotacao_individual_empresa_central_compras();
 
                 //EXCLUIR o ITEM do PEDIDO / ATUALIZAR VALOR do PEDIDO
                 for (int i = 0; i < listaIDsItensNegociacaoPedidosAExcluir.Length; i++)
@@ -2192,16 +2205,135 @@ namespace ClienteMercado.Areas.Company.Controllers
                         resultado = new { itemExcluido = "sim", todosItensPedidos = "", mensagemStatus = "" };
 
                         //DESFAZER SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO
-                        negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), 
-                            idPedido);
+                        itemPedidoDetalhes = 
+                            negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), idPedido);
                     }
                 }
+
+                //CONSULTAR DADOS da COTAÇÃO FILHA
+                cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
 
                 /*
                  * 
                  ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR... CONTINUAR AQUI...
 
                  */
+
+                //===========================================================================
+                /*
+                 DISPARAR AQUI PARA O VENDEDOR:                        
+                    - E-MAILS, SMS, NOTIFICAÇÕES VIA CELULAR --> INFORMAÇÕES no SISTEMA sobre O CANCELAMENTO do PEDIDO
+                */
+
+                //DISPARAR AO FORNECEDOR, AVISO PARA CONFERÊNCIA E ACEITE DO PEDIDO
+                //---------------------------------------------------------------------------------------------
+                //ENVIANDO E-MAILS
+                //---------------------------------------------------------------------------------------------
+
+                /*
+                 OBS: TRAZER DADOS DA CENTRAL DE COMPRAS, PARA COMPOSIÇÃO DO E-MAIL DE AVISO DE CANCELAMENTO DO PEDIDO DO ITEM...
+                      CONTINUAR AQUI ANTES DE QUALQUER OUTRO LOCAL NESSA ÁREA...
+                 */
+
+                //CARREGAR DADOS do COMPRADOR
+                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaCompradora =
+                    empresaUsuarioService.BuscarDadosDaEmpresaParaEnvioDeMensagens(Convert.ToInt32(Sessao.IdEmpresaUsuario));
+
+                //CARREGAR DADOS do FORNECEDOR
+                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaFornecedoraSelecionada = 
+                    empresaUsuarioService.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosCotacaoFilha.ID_CODIGO_EMPRESA);
+
+                EnviarEmailSobreCancelamentoDoPedidoAoFornecedor enviarEmailSobreOCancelamentoDoPedido = 
+                    new EnviarEmailSobreCancelamentoDoPedidoAoFornecedor();
+
+                /*
+                 CONTINUAR DAQUI... DESCOMENTAR E AJUSTAR LINHAS ABAIXO PARA ENVIO DA MENSAGEM...
+                 */
+
+                ////DISPARA E-MAIL´s para a Empresa ADM da CENTRAL de COMPRAS
+                if (!string.IsNullOrEmpty(dadosEmpresaFornecedoraSelecionada.nickNameUsuarioContatoEmpresa))
+                {
+                    usuarioFornAInformar = dadosEmpresaFornecedoraSelecionada.nickNameUsuarioContatoEmpresa;
+                }
+                else
+                {
+                    usuarioFornAInformar = dadosEmpresaFornecedoraSelecionada.nomeUsuarioContatoEmpresa;
+                }
+
+                ////ENVIAR E-MAIL  <-- DESCOMENTAR AQUI...
+                //bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, dadosCF.empresa_usuario.NOME_FANTASIA_EMPRESA,
+                //    email1_EmpresaAdmCC, email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega,
+                //    tipoFrete, usuarioFornConfirmou, foneUsuarioFornConfirmou);
+
+                ////---------------------------------------------------------------------------------------------
+                ////ENVIANDO SMS´s
+                ////---------------------------------------------------------------------------------------------
+                //EnviarSms enviarSmsMaster = new EnviarSms();
+
+                //smsMensagem = "ClienteMercado - O PEDIDO 00010 foi confirmado pelo fornecedor. Verifique em www.clientemercado.com.br";
+
+                //if (emailAvisoDeAceitePedido)
+                //{
+                //    if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa))
+                //    {
+                //        //TELEFONE 1 do USUÁRIO ADM
+                //        telefoneUsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa, "[()-]", "").Replace(" ", "");
+                //        urlParceiroEnvioSms =
+                //            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
+
+                //        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, 0);
+
+                //        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 900 ACIMA...
+
+                //        if (smsUsuarioVendedor)
+                //        {
+                //            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                //            NControleSMSService negociosSMS = new NControleSMSService();
+                //            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                //            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa;
+                //            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaAdmCC.idUsuarioContatoResponsavel;
+                //            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+                //            controleEnvioSms.DATA_ENVIO = DateTime.Now;
+
+                //            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                //        }
+                //    }
+
+                //    if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa))
+                //    {
+                //        //TELEFONE 2 do USUÁRIO ADM
+                //        telefoneUsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa, "[()-]", "");
+                //        urlParceiroEnvioSms =
+                //            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
+
+                //        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+
+                //        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 926 ACIMA...
+
+                //        if (smsUsuarioVendedor)
+                //        {
+                //            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                //            NControleSMSService negociosSMS = new NControleSMSService();
+                //            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                //            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa;
+                //            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaAdmCC.idUsuarioContatoResponsavel;
+                //            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+
+                //            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                //        }
+                //    }
+                //}
+
+                ////---------------------------------------------------------------------------------------------
+                ////ENVIANDO NOTIFICAÇÃO CELULAR
+                ////---------------------------------------------------------------------------------------------
+                ////3 - Enviar ALERT ao aplicativo no celular
+                ///*
+                //    CODIFICAR...
+                //*/
+                //    //===========================================================================
 
                 //CONSULTAR LISTA de ITENS da COTACAO FILHA
                 List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacaoFilha =
@@ -2252,7 +2384,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var mensagemDoStatus = "";
 
                 //CONSULTAR DADOS da COTAÇÃO FILHA
-                cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
+                //cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
 
                 //ATUALIZAR STATUS
                 if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == true)

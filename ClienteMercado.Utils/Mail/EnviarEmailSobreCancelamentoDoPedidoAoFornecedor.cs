@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ClienteMercado.Utils.Mail
 {
-    public class EnviarEmailSobreRejeitamentoDoPedido
+    public class EnviarEmailSobreCancelamentoDoPedidoAoFornecedor
     {
-        public bool EnviarEmail(string _nomeCC, string _usuarioAdmCC, string _empresaFornecedora, string _email1_EmpresaAdmCC, string _email2_EmpresaAdmCC,
+        public bool EnviarEmail(string _nomeCC, string _usuarioAdmCC, string _empresaCompradora, string _empresaFornecedora, string _email1_EmpresaAdmCC, string _email2_EmpresaAdmCC,
             string _email1_UsuarioContatoAdmCC, string _email2_UsuarioContatoAdmCC, string _dataEnvioPedido, string _numeroPedido, string _dataEntrega,
             string _tipoFrete, string _usuarioConfirmouDesistencia, string _foneUsuarioConfirmouDesistencia, string _motivoDesistenciaDoPedido)
         {
@@ -21,7 +21,7 @@ namespace ClienteMercado.Utils.Mail
             string assunto = "";
             string mensagem = "";
 
-            assunto = "DESISTÊNCIA DO PEDIDO - Fornecedor: " + _empresaFornecedora;
+            assunto = "CANCELAMENTO DO PEDIDO Nº 00010 - Comprador: " + _empresaFornecedora;
             mensagem = @"<html>" +
                         "<body>" +
                         "<tr><td>" +

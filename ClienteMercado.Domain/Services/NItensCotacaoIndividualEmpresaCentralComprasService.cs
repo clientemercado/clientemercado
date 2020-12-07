@@ -181,9 +181,9 @@ namespace ClienteMercado.Domain.Services
         }
 
         //DESFAZER SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO
-        public void DesfazimentoDeItemComoPedido(int idItemPedido, int idPedido)
+        public itens_cotacao_individual_empresa_central_compras DesfazimentoDeItemComoPedido(int idItemPedido, int idPedido)
         {
-            dRepository.DesfazimentoDeItemComoPedido(idItemPedido, idPedido);
+            return dRepository.DesfazimentoDeItemComoPedido(idItemPedido, idPedido);
         }
 
         //DESFAZER SETAR TODOS os PRODUTOS da COTAÇÃO INDIVIDUAL como PEDIDO

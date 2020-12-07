@@ -119,7 +119,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //DESFAZER SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO
-        public void DesfazimentoDeItemComoPedido(int idItemPedido, int idPedido)
+        public itens_cotacao_individual_empresa_central_compras DesfazimentoDeItemComoPedido(int idItemPedido, int idPedido)
         {
             itens_cotacao_individual_empresa_central_compras itemASerEditado = 
                 _contexto.itens_cotacao_individual_empresa_central_compras
@@ -133,6 +133,8 @@ namespace ClienteMercado.Infra.Repositories
 
                 _contexto.SaveChanges();
             }
+
+            return itemASerEditado;
         }
 
         //DESFAZER SETAR TODOS os PRODUTOS da COTAÇÃO INDIVIDUAL como PEDIDO

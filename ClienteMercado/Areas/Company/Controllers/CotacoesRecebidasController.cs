@@ -708,7 +708,6 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        //---------------------------------------------------------------------------
         //RESPONDER a COTAÇÃO pela PRIMEIRA VEZ
         [WebMethod]
         public ActionResult CancelarRespostaEnviadaParaACotacaoZerada(int iCM, int idEmpresaCotada, int iCCF)
@@ -735,7 +734,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 throw erro;
             }
         }
-        //---------------------------------------------------------------------------
 
         //SETAR CONTRA-PROPOSTA COMO ACEITA para a COTAÇÃO
         [WebMethod]
