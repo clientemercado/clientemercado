@@ -2176,6 +2176,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 somaItensDoPedido = somaItensDoPedido.Replace('.', ',');
 
+                NCentralDeComprasService serviceCentralCompras = new NCentralDeComprasService();
                 NPedidoCentralComprasService negociosPedidosCC = new NPedidoCentralComprasService();
                 NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC = 
                     new NItensCotacaoIndividualEmpresaCentralComprasService();
@@ -2215,7 +2216,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 /*
                  * 
-                 ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR... CONTINUAR AQUI...
+                 ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR...
 
                  */
 
@@ -2230,39 +2231,42 @@ namespace ClienteMercado.Areas.Company.Controllers
                 //ENVIANDO E-MAILS
                 //---------------------------------------------------------------------------------------------
 
-                /*
-                 OBS: TRAZER DADOS DA CENTRAL DE COMPRAS, PARA COMPOSIÇÃO DO E-MAIL DE AVISO DE CANCELAMENTO DO PEDIDO DO ITEM...
-                      CONTINUAR AQUI ANTES DE QUALQUER OUTRO LOCAL NESSA ÁREA...
-                 */
+                //CARREGAR DADOS da CENTRAL de COMPRAS
+                central_de_compras dadosCC = serviceCentralCompras.CarregarDadosDaCentralDeCompras(cCC);
 
                 //CARREGAR DADOS do COMPRADOR
                 ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaCompradora =
                     empresaUsuarioService.BuscarDadosDaEmpresaParaEnvioDeMensagens(Convert.ToInt32(Sessao.IdEmpresaUsuario));
 
                 //CARREGAR DADOS do FORNECEDOR
-                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaFornecedoraSelecionada = 
+                ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaFornecedora = 
                     empresaUsuarioService.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosCotacaoFilha.ID_CODIGO_EMPRESA);
 
                 EnviarEmailSobreCancelamentoDoPedidoAoFornecedor enviarEmailSobreOCancelamentoDoPedido = 
                     new EnviarEmailSobreCancelamentoDoPedidoAoFornecedor();
 
-                /*
-                 CONTINUAR DAQUI... DESCOMENTAR E AJUSTAR LINHAS ABAIXO PARA ENVIO DA MENSAGEM...
-                 */
-
-                ////DISPARA E-MAIL´s para a Empresa ADM da CENTRAL de COMPRAS
-                if (!string.IsNullOrEmpty(dadosEmpresaFornecedoraSelecionada.nickNameUsuarioContatoEmpresa))
+                if (!string.IsNullOrEmpty(dadosEmpresaCompradora.nickNameUsuarioContatoEmpresa))
                 {
-                    usuarioFornAInformar = dadosEmpresaFornecedoraSelecionada.nickNameUsuarioContatoEmpresa;
+                    usuarioAdmCC = dadosEmpresaCompradora.nickNameUsuarioContatoEmpresa;
                 }
                 else
                 {
-                    usuarioFornAInformar = dadosEmpresaFornecedoraSelecionada.nomeUsuarioContatoEmpresa;
+                    usuarioAdmCC = dadosEmpresaCompradora.nomeUsuarioContatoEmpresa;
                 }
 
-                ////ENVIAR E-MAIL  <-- DESCOMENTAR AQUI...
-                //bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, dadosCF.empresa_usuario.NOME_FANTASIA_EMPRESA,
-                //    email1_EmpresaAdmCC, email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega,
+                //DISPARA E-MAIL´s para a Empresa ADM da CENTRAL de COMPRAS
+                if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.nickNameUsuarioContatoEmpresa))
+                {
+                    usuarioFornAInformar = dadosEmpresaFornecedora.nickNameUsuarioContatoEmpresa;
+                }
+                else
+                {
+                    usuarioFornAInformar = dadosEmpresaFornecedora.nomeUsuarioContatoEmpresa;
+                }
+
+                ////ENVIAR E-MAIL  <-- DESCOMENTAR AQUI e VER OS PARÂMETROS REAIS NECESSÁRIOS PARA O ENVIO DESSE E-MAIL... CONTINUAR AQUI...
+                //bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC, 
+                //    dadosEmpresaFornecedora.nomeEmpresa, email1_EmpresaAdmCC, email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega,
                 //    tipoFrete, usuarioFornConfirmou, foneUsuarioFornConfirmou);
 
                 ////---------------------------------------------------------------------------------------------

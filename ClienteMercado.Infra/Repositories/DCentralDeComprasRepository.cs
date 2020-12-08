@@ -111,7 +111,7 @@ namespace ClienteMercado.Infra.Repositories
         //CARREGA DADOS da CENTRAL de COMPRAS
         public central_de_compras CarregarDadosDaCentralDeCompras(int cCC)
         {
-            central_de_compras dadosDaCC = _contexto.central_de_compras.FirstOrDefault(m => (m.ID_CENTRAL_COMPRAS == cCC));
+            central_de_compras dadosDaCC = _contexto.central_de_compras.Include("empresa_usuario").FirstOrDefault(m => (m.ID_CENTRAL_COMPRAS == cCC));
 
             return dadosDaCC;
         }
