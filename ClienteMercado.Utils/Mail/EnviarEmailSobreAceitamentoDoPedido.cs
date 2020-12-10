@@ -9,7 +9,7 @@ namespace ClienteMercado.Utils.Mail
     {
         public bool EnviarEmail(string _nomeCC, string _usuarioAdmCC, string _empresaFornecedora, string _email1_EmpresaAdmCC, string _email2_EmpresaAdmCC,
             string _email1_UsuarioContatoAdmCC, string _email2_UsuarioContatoAdmCC, string _dataEnvioPedido, string _numeroPedido, string _dataEntrega, 
-            string _tipoFrete, string _usuarioConfirmou, string _foneUsuarioConfirmou)
+            string _tipoFrete, string _usuarioConfirmou, string _fone1UsuarioConfirmou, string _fone2UsuarioConfirmou)
         {
             //Montando Link de Acesso ao site
             string comandoHref = "<a href=";
@@ -42,7 +42,7 @@ namespace ClienteMercado.Utils.Mail
                         "<tr><td><b>Pedido Nº:</b>&nbsp;</td><td>" + _numeroPedido + "</td><td colspan='2'></td></tr> "+
                         "<tr><td><b>Data Entrega:</b>&nbsp;</td><td>" + _dataEntrega + "/td><td colspan='2'></td></tr> " +
                         "<tr><td><b>Frete:</b>&nbsp;</td><td>" + _tipoFrete + "</td><td colspan='2'></td></tr> " +
-                        "<tr><td><b>Confirmou o Pedido:</b>&nbsp;</td><td>" + _usuarioConfirmou + "&nbsp;</td><td><b>Contato:&nbsp;</b></td><td>" + _foneUsuarioConfirmou + "</td></tr> " +
+                        "<tr><td><b>Confirmou o Pedido:</b>&nbsp;</td><td>" + _usuarioConfirmou + "&nbsp;</td><td><b>Contato:&nbsp;</b></td><td>" + _fone1UsuarioConfirmou + " / " + _fone2UsuarioConfirmou + "</td></tr> " +
                         "<tr><td align='center'><br>Acesse o site " + linked + " e verifique as novas informações sobre este pedido.<br><br>" +
                         "<tr><td><br><br>&nbsp;&nbsp;Atenciosamente,<br></td></tr><tr><td><br>&nbsp;&nbsp;" +
                         "Equipe Cliente&Mercado<br></td></tr>" +

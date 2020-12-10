@@ -790,6 +790,10 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 var nomeCC = "";
                 var usuarioAdmCC = "";
+                string telefone1EmpresaADM = "";
+                string telefone2EmpresaADM = "";
+                string telefone1UsuarioADM = "";
+                string telefone2UsuarioADM = "";
                 var email1_EmpresaAdmCC = "";
                 var email2_EmpresaAdmCC = "";
                 var email1_UsuarioContatoAdmCC = "";
@@ -797,10 +801,10 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var dataEnvioPedido = "";
                 var numeroPedido = "";
                 var usuarioFornConfirmou = "";
-                var foneUsuarioFornConfirmou = "";
+                var fone1UsuarioFornConfirmou = "";
+                var fone2UsuarioFornConfirmou = "";
                 var tipoFrete = "";
                 string smsMensagem = "";
-                string telefoneUsuarioADM = "";
                 string urlParceiroEnvioSms = "";
 
                 NCentralDeComprasService negociosCC = new NCentralDeComprasService();
@@ -841,25 +845,45 @@ namespace ClienteMercado.Areas.Company.Controllers
                 if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.nickNameUsuarioContatoEmpresa))
                 {
                     usuarioAdmCC = dadosEmpresaAdmCC.nickNameUsuarioContatoEmpresa;
+                    email1_EmpresaAdmCC = dadosEmpresaAdmCC.eMail1_Empresa;
+                    email2_EmpresaAdmCC = dadosEmpresaAdmCC.eMail2_Empresa;
+                    email1_UsuarioContatoAdmCC = dadosEmpresaAdmCC.eMaiL1_UsuarioContatoEmpresa;
+                    email2_UsuarioContatoAdmCC = dadosEmpresaAdmCC.eMaiL2_UsuarioContatoEmpresa;
+                    telefone1EmpresaADM = dadosEmpresaAdmCC.fone1_Empresa;
+                    telefone2EmpresaADM = dadosEmpresaAdmCC.fone2_Empresa;
+                    telefone1UsuarioADM = dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa;
+                    telefone2UsuarioADM = dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa;
                 }
                 else
                 {
                     usuarioAdmCC = dadosEmpresaAdmCC.nomeUsuarioContatoEmpresa;
+                    email1_EmpresaAdmCC = dadosEmpresaAdmCC.eMail1_Empresa;
+                    email2_EmpresaAdmCC = dadosEmpresaAdmCC.eMail2_Empresa;
+                    email1_UsuarioContatoAdmCC = dadosEmpresaAdmCC.eMaiL1_UsuarioContatoEmpresa;
+                    email2_UsuarioContatoAdmCC = dadosEmpresaAdmCC.eMaiL2_UsuarioContatoEmpresa;
+                    telefone1EmpresaADM = dadosEmpresaAdmCC.fone1_Empresa;
+                    telefone2EmpresaADM = dadosEmpresaAdmCC.fone2_Empresa;
+                    telefone1UsuarioADM = dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa;
+                    telefone2UsuarioADM = dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa;
                 }
 
                 if (!string.IsNullOrEmpty(dadosEmpresaForn.nickNameUsuarioContatoEmpresa))
                 {
                     usuarioFornConfirmou = dadosEmpresaForn.nickNameUsuarioContatoEmpresa;
+                    fone1UsuarioFornConfirmou = dadosEmpresaForn.celular1_UsuarioContatoEmpresa;
+                    fone2UsuarioFornConfirmou = dadosEmpresaForn.celular2_UsuarioContatoEmpresa;
                 }
                 else
                 {
                     usuarioFornConfirmou = dadosEmpresaForn.nomeUsuarioContatoEmpresa;
+                    fone1UsuarioFornConfirmou = dadosEmpresaForn.celular1_UsuarioContatoEmpresa;
+                    fone2UsuarioFornConfirmou = dadosEmpresaForn.celular2_UsuarioContatoEmpresa;
                 }
 
                 //ENVIAR E-MAIL  
                 bool emailAvisoDeAceitePedido = enviarEmailSobreAceitamentoDoPedido.EnviarEmail(nomeCC, usuarioAdmCC, dadosCF.empresa_usuario.NOME_FANTASIA_EMPRESA, 
                     email1_EmpresaAdmCC, email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega,
-                    tipoFrete, usuarioFornConfirmou, foneUsuarioFornConfirmou);
+                    tipoFrete, usuarioFornConfirmou, fone1UsuarioFornConfirmou, fone2UsuarioFornConfirmou);
 
                 //---------------------------------------------------------------------------------------------
                 //ENVIANDO SMS´s
@@ -873,9 +897,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa))
                     {
                         //TELEFONE 1 do USUÁRIO ADM
-                        telefoneUsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa, "[()-]", "").Replace(" ","");
+                        telefone1UsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular1_UsuarioContatoEmpresa, "[()-]", "").Replace(" ","");
                         urlParceiroEnvioSms =
-                            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
+                            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefone1UsuarioADM;
 
                         //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, 0);
 
@@ -899,9 +923,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (!string.IsNullOrEmpty(dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa))
                     {
                         //TELEFONE 2 do USUÁRIO ADM
-                        telefoneUsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa, "[()-]", "");
+                        telefone2UsuarioADM = Regex.Replace(dadosEmpresaAdmCC.celular2_UsuarioContatoEmpresa, "[()-]", "");
                         urlParceiroEnvioSms =
-                            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefoneUsuarioADM;
+                            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + telefone2UsuarioADM;
 
                         //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
 

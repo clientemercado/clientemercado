@@ -257,7 +257,7 @@ namespace ClienteMercado.Infra.Repositories
             query = "SELECT EU.ID_CODIGO_EMPRESA AS idEmpresa, EU.NOME_FANTASIA_EMPRESA AS nomeEmpresa, EU.EMAIL1_EMPRESA AS eMail1_Empresa, EU.EMAIL2_EMPRESA AS eMail2_Empresa, " +
                     "UE.ID_CODIGO_USUARIO AS idUsuarioContatoResponsavel, UE.NICK_NAME_USUARIO AS nickNameUsuarioContatoEmpresa, UE.NOME_USUARIO AS nomeUsuarioContatoEmpresa, " +
                     "UL.EMAIL1_USUARIO AS eMaiL1_UsuarioContatoEmpresa, UL.EMAIL2_USUARIO AS eMaiL2_UsuarioContatoEmpresa, UE.TELEFONE1_USUARIO_EMPRESA AS celular1_UsuarioContatoEmpresa, " +
-                    "UE.TELEFONE2_USUARIO_EMPRESA AS celular2_UsuarioContatoEmpresa " +
+                    "UE.TELEFONE2_USUARIO_EMPRESA AS celular2_UsuarioContatoEmpresa, EU.TELEFONE1_EMPRESA_USUARIO AS fone1_Empresa, EU.TELEFONE2_EMPRESA_USUARIO AS fone2_Empresa" +
                     "FROM empresa_usuario EU " +
                     "INNER JOIN usuario_empresa UE ON(UE.ID_CODIGO_EMPRESA = EU.ID_CODIGO_EMPRESA AND UE.USUARIO_MASTER = 1) " + //DESCOMENTAR ISSO DEPOIS
                     "INNER JOIN empresa_usuario_logins UL ON(UL.ID_CODIGO_USUARIO = UE.ID_CODIGO_USUARIO) " +

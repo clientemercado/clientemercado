@@ -2148,7 +2148,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //CANCELAR PEDIDO do ITEM ao FORNECEDOR
         public JsonResult CancelarOPedidoDoItemAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutosNegociacao, string codsItensIndividuais, 
-            string somaItensDoPedido, int idPedido)
+            string somaItensDoPedido, int idPedido, string motivoDesistenciaDoPedido)
         {
             try
             {
@@ -2156,16 +2156,24 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string idsPedidos = "";
                 string todosItensPedidos = "nao";
                 string textoMsgStatus = "PEDIDO FEITO&nbsp;";
-
-                var nomeCC = "";
+                string telefone1EmpresaADM = "";
+                string telefone2EmpresaADM = "";
+                string telefone1UsuarioADM = "";
+                string telefone2UsuarioADM = "";
                 var usuarioAdmCC = "";
                 var email1_EmpresaAdmCC = "";
                 var email2_EmpresaAdmCC = "";
                 var email1_UsuarioContatoAdmCC = "";
                 var email2_UsuarioContatoAdmCC = "";
+                var usuarioFornAInformar = "";
+                var email1_EmpresaForn = "";
+                var email2_EmpresaForn = "";
+                var email1_UsuarioContatoForn = "";
+                var email2_UsuarioContatoForn = "";
+                var fone1UsuarioContatoForn = "";
+                var fone2UsuarioContatoForn = "";
                 var dataEnvioPedido = "";
                 var numeroPedido = "";
-                var usuarioFornAInformar = "";
 
                 var resultado = new { itemExcluido = "nao", todosItensPedidos = "", mensagemStatus = "" };
 
@@ -2248,26 +2256,56 @@ namespace ClienteMercado.Areas.Company.Controllers
                 if (!string.IsNullOrEmpty(dadosEmpresaCompradora.nickNameUsuarioContatoEmpresa))
                 {
                     usuarioAdmCC = dadosEmpresaCompradora.nickNameUsuarioContatoEmpresa;
+                    email1_EmpresaAdmCC = dadosEmpresaCompradora.eMail1_Empresa;
+                    email2_EmpresaAdmCC = dadosEmpresaCompradora.eMail2_Empresa;
+                    email1_UsuarioContatoAdmCC = dadosEmpresaCompradora.eMaiL1_UsuarioContatoEmpresa;
+                    email2_UsuarioContatoAdmCC = dadosEmpresaCompradora.eMaiL2_UsuarioContatoEmpresa;
+                    telefone1EmpresaADM = dadosEmpresaCompradora.fone1_Empresa;
+                    telefone2EmpresaADM = dadosEmpresaCompradora.fone2_Empresa;
+                    telefone1UsuarioADM = dadosEmpresaCompradora.celular1_UsuarioContatoEmpresa;
+                    telefone2UsuarioADM = dadosEmpresaCompradora.celular2_UsuarioContatoEmpresa;
                 }
                 else
                 {
                     usuarioAdmCC = dadosEmpresaCompradora.nomeUsuarioContatoEmpresa;
+                    email1_EmpresaAdmCC = dadosEmpresaCompradora.eMail1_Empresa;
+                    email2_EmpresaAdmCC = dadosEmpresaCompradora.eMail2_Empresa;
+                    email1_UsuarioContatoAdmCC = dadosEmpresaCompradora.eMaiL1_UsuarioContatoEmpresa;
+                    email2_UsuarioContatoAdmCC = dadosEmpresaCompradora.eMaiL2_UsuarioContatoEmpresa;
+                    telefone1EmpresaADM = dadosEmpresaCompradora.fone1_Empresa;
+                    telefone2EmpresaADM = dadosEmpresaCompradora.fone2_Empresa;
+                    telefone1UsuarioADM = dadosEmpresaCompradora.celular1_UsuarioContatoEmpresa;
+                    telefone2UsuarioADM = dadosEmpresaCompradora.celular2_UsuarioContatoEmpresa;
                 }
 
                 //DISPARA E-MAIL´s para a Empresa ADM da CENTRAL de COMPRAS
                 if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.nickNameUsuarioContatoEmpresa))
                 {
                     usuarioFornAInformar = dadosEmpresaFornecedora.nickNameUsuarioContatoEmpresa;
+                    email1_EmpresaForn = dadosEmpresaFornecedora.eMail1_Empresa;
+                    email2_EmpresaForn = dadosEmpresaFornecedora.eMail2_Empresa;
+                    email1_UsuarioContatoForn = dadosEmpresaFornecedora.eMaiL1_UsuarioContatoEmpresa;
+                    email2_UsuarioContatoForn = dadosEmpresaFornecedora.eMaiL2_UsuarioContatoEmpresa;
+                    fone1UsuarioContatoForn = dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa;
+                    fone2UsuarioContatoForn = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
                 }
                 else
                 {
                     usuarioFornAInformar = dadosEmpresaFornecedora.nomeUsuarioContatoEmpresa;
+                    email1_EmpresaForn = dadosEmpresaFornecedora.eMail1_Empresa;
+                    email2_EmpresaForn = dadosEmpresaFornecedora.eMail2_Empresa;
+                    email1_UsuarioContatoForn = dadosEmpresaFornecedora.eMaiL1_UsuarioContatoEmpresa;
+                    email2_UsuarioContatoForn = dadosEmpresaFornecedora.eMaiL2_UsuarioContatoEmpresa;
+                    fone1UsuarioContatoForn = dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa;
+                    fone2UsuarioContatoForn = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
                 }
 
-                ////ENVIAR E-MAIL  <-- DESCOMENTAR AQUI e VER OS PARÂMETROS REAIS NECESSÁRIOS PARA O ENVIO DESSE E-MAIL... CONTINUAR AQUI...
-                //bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC, 
-                //    dadosEmpresaFornecedora.nomeEmpresa, email1_EmpresaAdmCC, email2_EmpresaAdmCC, email1_UsuarioContatoAdmCC, email2_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, dataEntrega,
-                //    tipoFrete, usuarioFornConfirmou, foneUsuarioFornConfirmou);
+                //ENVIAR E-MAIL  <-- DESCOMENTAR AQUI e CONFERIR OS PARÂMETROS PASSADOS NESSE E-MAIL
+                //OBS: TEM ALGUNS PARÂMETROS COMO: (numeroPedido, motivoDesistenciaDoPedido) QQUE DEVEM SER PASSADOS PRA ESTE MÉTODO. CONTINUAR AQUI...
+                bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC,
+                    telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
+                    email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoDesistenciaDoPedido, dadosEmpresaFornecedora.nomeEmpresa,
+                    usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn);
 
                 ////---------------------------------------------------------------------------------------------
                 ////ENVIANDO SMS´s
@@ -2340,7 +2378,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 //    //===========================================================================
 
                 //CONSULTAR LISTA de ITENS da COTACAO FILHA
-                List<itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacaoFilha =
+                List <itens_cotacao_filha_negociacao_central_compras> listaDeItensDaCotacaoFilha =
                     negociosItensCotacaoFilhaCentralCompras.ConsultarItensDaCotacaoDaCC(iCCF);
 
                 //VERIFICAR TODOS os PEDIDOS para ESTA COTAÇÃO
