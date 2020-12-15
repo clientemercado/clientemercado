@@ -2209,6 +2209,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                         //BUSCAR DADOS do PEDIDO
                         dadosPedidoCC = negociosPedidosCC.ConsultarDadosDoPedidoPeloCodigo(idPedido);
 
+                        dataEnvioPedido = dadosPedidoCC.DATA_PEDIDO_CENTRAL_COMPRAS.ToString();
+
                         //ATUALIZAR o VALOR TOTAL REGISTRADO para o PEDIDO
                         dadosPedidoCC.VALOR_PEDIDO_CENTRAL_COMPRAS = (dadosPedidoCC.VALOR_PEDIDO_CENTRAL_COMPRAS - Convert.ToDecimal(somaItensDoPedido));
                         negociosPedidosCC.AtualizarValorDoPedido(dadosPedidoCC);
@@ -2224,18 +2226,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 //CONSULTAR DADOS da COTAÇÃO FILHA
                 cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
 
-                /*
-                 * 
-                 ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR...   RODAR O CÓDIGO E CONFERIR ISSO <---
-
-                 */
-
                 //===========================================================================
-                /*
-                 DISPARAR AQUI PARA O VENDEDOR:                        
-                    - E-MAILS, SMS, NOTIFICAÇÕES VIA CELULAR --> INFORMAÇÕES no SISTEMA sobre O CANCELAMENTO do PEDIDO
-                */
-
                 //DISPARAR AO FORNECEDOR, AVISO SOBRE O CANCELAMENTO DO PEDIDO
                 //---------------------------------------------------------------------------------------------
                 //ENVIANDO E-MAILS
@@ -2539,8 +2530,9 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                             /*
                              * 
-                             ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR... CONTINUAR AQUI...
+                             ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR.
 
+                             CONTINUAR AQUI...
                              */
                         }
                     }

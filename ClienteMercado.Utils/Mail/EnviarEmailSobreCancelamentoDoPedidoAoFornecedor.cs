@@ -41,13 +41,13 @@ namespace ClienteMercado.Utils.Mail
                         "<br><br>" +
                         "<tr><td colspan='4'><b>CARACTERÍSTICAS DO PEDIDO:</b></td></tr><br>" +
                         "<tr><td><b>Pedido Nº:</b>&nbsp;</td><td>" + _numeroPedido + "</td><td colspan='2'></td></tr> " +
-                        "<tr><td><b>Data Pedido:</b>&nbsp;</td><td>" + _dataEnvioPedido + "/td><td colspan='2'></td></tr> " +
+                        "<tr><td><b>Data Pedido:</b>&nbsp;</td><td>" + _dataEnvioPedido + "</td><td colspan='2'></td></tr> " +
                         "<tr><td><b>Confirmou CANCELAMENTO do Pedido:</b>&nbsp;</td><td>" + _usuarioAdmCC + "&nbsp;</td><td colspan='2'></td></tr> " +
                         "<td><b>Fone(s) Contato(s):&nbsp;</b></td><td>" + _fone1UsuarioAdmCC + " / " + _fone2UsuarioAdmCC + "</td><td colspan='2'></td></tr> " +
                         "<td><b>E-mail(s) Contato(s):&nbsp;</b></td><td>" + _email1EmpresaAdmCC + " / " + _emailContatoEmpresaAdmCC + "</td><td colspan='2'></td></tr> " +
                         "<tr><td colspan='3'></td></tr>" +
                         "<tr><td><b>Motivo DESISTÊNCIA:</b>&nbsp;</td><td colspan='2'>" + _motivoDesistenciaDoPedido + "</td></tr>" +
-                        "<tr><td align='center'><br>Para mais detalhes, acesse o site " + linked + " e verifique as novas informações sobre este pedido.<br><br>" +
+                        "<tr><td align='center'><br>Para mais detalhes, acesse o site " + linked + " e verifique as novas informações sobre este pedido.<br><br></td></tr>" +
                         "<tr><td><br><br>&nbsp;&nbsp;Atenciosamente,<br></td></tr><tr><td><br>&nbsp;&nbsp;" +
                         "Equipe Cliente&Mercado<br></td></tr>" +
                         "<tr><td>&nbsp;</td></tr>" +
