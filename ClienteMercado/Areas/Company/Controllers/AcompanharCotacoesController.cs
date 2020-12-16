@@ -2456,7 +2456,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //CANCELAR TODO o PEDIDO ENVIADO ao FORNECEDOR
-        public JsonResult CancelarOPedidoEnviadoAoFornecedor(int cCC, int iCM, int iCCF, int idPedido, string aceitouCP)
+        public JsonResult CancelarOPedidoEnviadoAoFornecedor(int cCC, int iCM, int iCCF, int idPedido, string aceitouCP, string motivoDesistenciaDoPedido)
         {
             try
             {
@@ -2480,6 +2480,10 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var email2_UsuarioContatoForn = "";
                 var fone1UsuarioContatoForn = "";
                 var fone2UsuarioContatoForn = "";
+                var dataEnvioPedido = "";
+                var numeroPedido = "";
+                string smsMensagem = "";
+                string urlParceiroEnvioSms = "";
 
                 var resultado = new { pedidoExcluido = "nao", mensagemStatus = "" };
 
@@ -2520,7 +2524,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                              * 
                              ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR.
 
-                             CONTINUAR AQUI...
+                             OBS: EXECUTAR E TESTAR O CÓDIGO DE ENVIO DE E-MAIL E SMS <-- CONTINUAR AQUI...
                              */
 
                             //================================================================================================================
@@ -2594,87 +2598,80 @@ namespace ClienteMercado.Areas.Company.Controllers
                                 fone2UsuarioContatoForn = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
                             }
 
+                            //ENVIAR E-MAIL
+                            bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC,
+                                telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
+                                email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoDesistenciaDoPedido, dadosEmpresaFornecedora.nomeEmpresa,
+                                usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn);
+
+                            //---------------------------------------------------------------------------------------------
+                            //ENVIANDO SMS´s
+                            //---------------------------------------------------------------------------------------------
+                            EnviarSms enviarSmsMaster = new EnviarSms();
+
+                            smsMensagem = "ClienteMercado - O PEDIDO 00010 foi CANCELADO pela C. Compras. Verifique em www.clientemercado.com.br";
+
+                            if (emailAvisoCancelamentoDePedido)
+                            {
+                                if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa))
+                                {
+                                    //TELEFONE 1 do USUÁRIO FORNECEDOR
+                                    fone1UsuarioContatoForn = Regex.Replace(dadosEmpresaCompradora.celular1_UsuarioContatoEmpresa, "[()-]", "").Replace(" ", "");
+                                    urlParceiroEnvioSms =
+                                        "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + fone1UsuarioContatoForn;
+
+                                    //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, 0);
+
+                                    bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 900 ACIMA...
+
+                                    if (smsUsuarioVendedor)
+                                    {
+                                        //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                                        NControleSMSService negociosSMS = new NControleSMSService();
+                                        controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                                        controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa;
+                                        controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaFornecedora.idUsuarioContatoResponsavel;
+                                        controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+                                        controleEnvioSms.DATA_ENVIO = DateTime.Now;
+
+                                        negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                                    }
+                                }
+
+                                if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa))
+                                {
+                                    //TELEFONE 2 do USUÁRIO FORNECEDOR
+                                    fone2UsuarioContatoForn = Regex.Replace(dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa, "[()-]", "");
+                                    urlParceiroEnvioSms =
+                                        "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + fone2UsuarioContatoForn;
+
+                                    //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+
+                                    bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 926 ACIMA...
+
+                                    if (smsUsuarioVendedor)
+                                    {
+                                        //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                                        NControleSMSService negociosSMS = new NControleSMSService();
+                                        controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                                        controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
+                                        controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaFornecedora.idUsuarioContatoResponsavel;
+                                        controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+
+                                        negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                                    }
+                                }
+                            }
+
+                            //---------------------------------------------------------------------------------------------
+                            //ENVIANDO NOTIFICAÇÃO CELULAR
+                            //---------------------------------------------------------------------------------------------
+                            //3 - Enviar ALERT ao aplicativo no celular
                             /*
-                             * 
-                             OBS: EXECUTAR E TESTAR O CÓDIGO ATÉ AQUI IMPLEMENTADO. DAR CONTINUIDADE AQUI...
-
-                             */
-
-                            ////ENVIAR E-MAIL
-                            //bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC,
-                            //    telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
-                            //    email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoDesistenciaDoPedido, dadosEmpresaFornecedora.nomeEmpresa,
-                            //    usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn);
-
-                            ////---------------------------------------------------------------------------------------------
-                            ////ENVIANDO SMS´s
-                            ////---------------------------------------------------------------------------------------------
-                            //EnviarSms enviarSmsMaster = new EnviarSms();
-
-                            //smsMensagem = "ClienteMercado - O PEDIDO 00010 foi CANCELADO pela C. Compras. Verifique em www.clientemercado.com.br";
-
-                            //if (emailAvisoCancelamentoDePedido)
-                            //{
-                            //    if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa))
-                            //    {
-                            //        //TELEFONE 1 do USUÁRIO FORNECEDOR
-                            //        fone1UsuarioContatoForn = Regex.Replace(dadosEmpresaCompradora.celular1_UsuarioContatoEmpresa, "[()-]", "").Replace(" ", "");
-                            //        urlParceiroEnvioSms =
-                            //            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + fone1UsuarioContatoForn;
-
-                            //        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, 0);
-
-                            //        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 900 ACIMA...
-
-                            //        if (smsUsuarioVendedor)
-                            //        {
-                            //            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
-                            //            NControleSMSService negociosSMS = new NControleSMSService();
-                            //            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
-
-                            //            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa;
-                            //            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaFornecedora.idUsuarioContatoResponsavel;
-                            //            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
-                            //            controleEnvioSms.DATA_ENVIO = DateTime.Now;
-
-                            //            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
-                            //        }
-                            //    }
-
-                            //    if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa))
-                            //    {
-                            //        //TELEFONE 2 do USUÁRIO FORNECEDOR
-                            //        fone2UsuarioContatoForn = Regex.Replace(dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa, "[()-]", "");
-                            //        urlParceiroEnvioSms =
-                            //            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + fone2UsuarioContatoForn;
-
-                            //        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
-
-                            //        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 926 ACIMA...
-
-                            //        if (smsUsuarioVendedor)
-                            //        {
-                            //            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
-                            //            NControleSMSService negociosSMS = new NControleSMSService();
-                            //            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
-
-                            //            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
-                            //            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaFornecedora.idUsuarioContatoResponsavel;
-                            //            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
-
-                            //            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
-                            //        }
-                            //    }
-                            //}
-
-                            //////---------------------------------------------------------------------------------------------
-                            //////ENVIANDO NOTIFICAÇÃO CELULAR
-                            //////---------------------------------------------------------------------------------------------
-                            //////3 - Enviar ALERT ao aplicativo no celular
-                            /////*
-                            ////    CODIFICAR...
-                            ////*/
-                            ////    //===========================================================================
+                                CODIFICAR...
+                            */
                             //================================================================================================================
 
                             var mensagemDoStatus = "";
