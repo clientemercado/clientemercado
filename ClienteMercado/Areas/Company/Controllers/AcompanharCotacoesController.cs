@@ -2417,9 +2417,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 //-------------------------------------------------------------------------
                 var mensagemDoStatus = "";
 
-                //CONSULTAR DADOS da COTAÇÃO FILHA
-                //cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
-
                 //ATUALIZAR STATUS
                 if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == true)
                 {
@@ -2459,21 +2456,41 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //CANCELAR TODO o PEDIDO ENVIADO ao FORNECEDOR
-        public JsonResult CancelarOPedidoEnviadoAoFornecedor(int iCM, int iCCF, int idPedido, string aceitouCP)
+        public JsonResult CancelarOPedidoEnviadoAoFornecedor(int cCC, int iCM, int iCCF, int idPedido, string aceitouCP)
         {
             try
             {
                 bool pedidoExcluido = false;
                 bool itensPedidoExcluidos = false;
                 string textoMsgStatus = "PEDIDO FEITO&nbsp;";
+
+                string telefone1EmpresaADM = "";
+                string telefone2EmpresaADM = "";
+                string telefone1UsuarioADM = "";
+                string telefone2UsuarioADM = "";
+                var usuarioAdmCC = "";
+                var email1_EmpresaAdmCC = "";
+                var email2_EmpresaAdmCC = "";
+                var email1_UsuarioContatoAdmCC = "";
+                var email2_UsuarioContatoAdmCC = "";
+                var usuarioFornAInformar = "";
+                var email1_EmpresaForn = "";
+                var email2_EmpresaForn = "";
+                var email1_UsuarioContatoForn = "";
+                var email2_UsuarioContatoForn = "";
+                var fone1UsuarioContatoForn = "";
+                var fone2UsuarioContatoForn = "";
+
                 var resultado = new { pedidoExcluido = "nao", mensagemStatus = "" };
 
+                NCentralDeComprasService serviceCentralCompras = new NCentralDeComprasService();
                 NItensCotacaoIndividualEmpresaCentralComprasService negociosItensCotacaoindividualEmpresaCC = 
                     new NItensCotacaoIndividualEmpresaCentralComprasService();
                 NCotacaoFilhaCentralDeComprasService negociosCotacaoFilhaCC = new NCotacaoFilhaCentralDeComprasService();
                 NPedidoCentralComprasService negociosPedidosCC = new NPedidoCentralComprasService();
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMasterCC = new NCotacaoMasterCentralDeComprasService();
+                NEmpresaUsuarioService empresaUsuarioService = new NEmpresaUsuarioService();
 
                 //CARREGAR DADOS do PEDIDO
                 pedido_central_compras dadosDoPedido = negociosPedidosCC.ConsultarDadosDoPedidoPeloCodigo(idPedido);
@@ -2499,10 +2516,168 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                         if (pedidoExcluido)
                         {
-                            var mensagemDoStatus = "";
+                            /*
+                             * 
+                             ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR.
 
+                             CONTINUAR AQUI...
+                             */
+
+                            //================================================================================================================
                             //CONSULTAR DADOS da COTAÇÃO FILHA
                             cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
+
+                            //===========================================================================
+                            //DISPARAR AO FORNECEDOR, AVISO SOBRE O CANCELAMENTO DO PEDIDO
+                            //---------------------------------------------------------------------------------------------
+                            //ENVIANDO E-MAILS
+                            //---------------------------------------------------------------------------------------------
+
+                            //CARREGAR DADOS da CENTRAL de COMPRAS
+                            central_de_compras dadosCC = serviceCentralCompras.CarregarDadosDaCentralDeCompras(cCC);
+
+                            //CARREGAR DADOS do COMPRADOR
+                            ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaCompradora =
+                                empresaUsuarioService.BuscarDadosDaEmpresaParaEnvioDeMensagens(Convert.ToInt32(Sessao.IdEmpresaUsuario));
+
+                            //CARREGAR DADOS do FORNECEDOR
+                            ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel dadosEmpresaFornecedora =
+                                empresaUsuarioService.BuscarDadosDaEmpresaParaEnvioDeMensagens(dadosCotacaoFilha.ID_CODIGO_EMPRESA);
+
+                            EnviarEmailSobreCancelamentoDoPedidoAoFornecedor enviarEmailSobreOCancelamentoDoPedido =
+                                new EnviarEmailSobreCancelamentoDoPedidoAoFornecedor();
+
+                            if (!string.IsNullOrEmpty(dadosEmpresaCompradora.nickNameUsuarioContatoEmpresa))
+                            {
+                                usuarioAdmCC = dadosEmpresaCompradora.nickNameUsuarioContatoEmpresa;
+                                email1_EmpresaAdmCC = dadosEmpresaCompradora.eMail1_Empresa;
+                                email2_EmpresaAdmCC = dadosEmpresaCompradora.eMail2_Empresa;
+                                email1_UsuarioContatoAdmCC = dadosEmpresaCompradora.eMaiL1_UsuarioContatoEmpresa;
+                                email2_UsuarioContatoAdmCC = dadosEmpresaCompradora.eMaiL2_UsuarioContatoEmpresa;
+                                telefone1EmpresaADM = dadosEmpresaCompradora.fone1_Empresa;
+                                telefone2EmpresaADM = dadosEmpresaCompradora.fone2_Empresa;
+                                telefone1UsuarioADM = dadosEmpresaCompradora.celular1_UsuarioContatoEmpresa;
+                                telefone2UsuarioADM = dadosEmpresaCompradora.celular2_UsuarioContatoEmpresa;
+                            }
+                            else
+                            {
+                                usuarioAdmCC = dadosEmpresaCompradora.nomeUsuarioContatoEmpresa;
+                                email1_EmpresaAdmCC = dadosEmpresaCompradora.eMail1_Empresa;
+                                email2_EmpresaAdmCC = dadosEmpresaCompradora.eMail2_Empresa;
+                                email1_UsuarioContatoAdmCC = dadosEmpresaCompradora.eMaiL1_UsuarioContatoEmpresa;
+                                email2_UsuarioContatoAdmCC = dadosEmpresaCompradora.eMaiL2_UsuarioContatoEmpresa;
+                                telefone1EmpresaADM = dadosEmpresaCompradora.fone1_Empresa;
+                                telefone2EmpresaADM = dadosEmpresaCompradora.fone2_Empresa;
+                                telefone1UsuarioADM = dadosEmpresaCompradora.celular1_UsuarioContatoEmpresa;
+                                telefone2UsuarioADM = dadosEmpresaCompradora.celular2_UsuarioContatoEmpresa;
+                            }
+
+                            //DISPARA E-MAIL´s para a Empresa ADM da CENTRAL de COMPRAS
+                            if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.nickNameUsuarioContatoEmpresa))
+                            {
+                                usuarioFornAInformar = dadosEmpresaFornecedora.nickNameUsuarioContatoEmpresa;
+                                email1_EmpresaForn = dadosEmpresaFornecedora.eMail1_Empresa;
+                                email2_EmpresaForn = dadosEmpresaFornecedora.eMail2_Empresa;
+                                email1_UsuarioContatoForn = dadosEmpresaFornecedora.eMaiL1_UsuarioContatoEmpresa;
+                                email2_UsuarioContatoForn = dadosEmpresaFornecedora.eMaiL2_UsuarioContatoEmpresa;
+                                fone1UsuarioContatoForn = dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa;
+                                fone2UsuarioContatoForn = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
+                            }
+                            else
+                            {
+                                usuarioFornAInformar = dadosEmpresaFornecedora.nomeUsuarioContatoEmpresa;
+                                email1_EmpresaForn = dadosEmpresaFornecedora.eMail1_Empresa;
+                                email2_EmpresaForn = dadosEmpresaFornecedora.eMail2_Empresa;
+                                email1_UsuarioContatoForn = dadosEmpresaFornecedora.eMaiL1_UsuarioContatoEmpresa;
+                                email2_UsuarioContatoForn = dadosEmpresaFornecedora.eMaiL2_UsuarioContatoEmpresa;
+                                fone1UsuarioContatoForn = dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa;
+                                fone2UsuarioContatoForn = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
+                            }
+
+                            /*
+                             * 
+                             OBS: EXECUTAR E TESTAR O CÓDIGO ATÉ AQUI IMPLEMENTADO. DAR CONTINUIDADE AQUI...
+
+                             */
+
+                            ////ENVIAR E-MAIL
+                            //bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC,
+                            //    telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
+                            //    email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoDesistenciaDoPedido, dadosEmpresaFornecedora.nomeEmpresa,
+                            //    usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn);
+
+                            ////---------------------------------------------------------------------------------------------
+                            ////ENVIANDO SMS´s
+                            ////---------------------------------------------------------------------------------------------
+                            //EnviarSms enviarSmsMaster = new EnviarSms();
+
+                            //smsMensagem = "ClienteMercado - O PEDIDO 00010 foi CANCELADO pela C. Compras. Verifique em www.clientemercado.com.br";
+
+                            //if (emailAvisoCancelamentoDePedido)
+                            //{
+                            //    if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa))
+                            //    {
+                            //        //TELEFONE 1 do USUÁRIO FORNECEDOR
+                            //        fone1UsuarioContatoForn = Regex.Replace(dadosEmpresaCompradora.celular1_UsuarioContatoEmpresa, "[()-]", "").Replace(" ", "");
+                            //        urlParceiroEnvioSms =
+                            //            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + fone1UsuarioContatoForn;
+
+                            //        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, 0);
+
+                            //        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 900 ACIMA...
+
+                            //        if (smsUsuarioVendedor)
+                            //        {
+                            //            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                            //            NControleSMSService negociosSMS = new NControleSMSService();
+                            //            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                            //            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaFornecedora.celular1_UsuarioContatoEmpresa;
+                            //            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaFornecedora.idUsuarioContatoResponsavel;
+                            //            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+                            //            controleEnvioSms.DATA_ENVIO = DateTime.Now;
+
+                            //            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                            //        }
+                            //    }
+
+                            //    if (!string.IsNullOrEmpty(dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa))
+                            //    {
+                            //        //TELEFONE 2 do USUÁRIO FORNECEDOR
+                            //        fone2UsuarioContatoForn = Regex.Replace(dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa, "[()-]", "");
+                            //        urlParceiroEnvioSms =
+                            //            "http://paineldeenvios.com/painel/app/modulo/api/index.php?action=sendsms&lgn=27992691260&pwd=teste&msg=" + smsMensagem + "&numbers=" + fone2UsuarioContatoForn;
+
+                            //        //bool smsUsuarioVendedor = enviarSmsMaster.EnviandoSms(urlParceiroEnvioSms, Convert.ToInt64(telefoneUsuarioADM));
+
+                            //        bool smsUsuarioVendedor = true; //ACESSAR 'http://paineldeenvios.com/', COLOCAR SALDO E DESCOMENTAR LINHA 926 ACIMA...
+
+                            //        if (smsUsuarioVendedor)
+                            //        {
+                            //            //Registrar o envio do SMS, para controle de saldos de sms´s enviados
+                            //            NControleSMSService negociosSMS = new NControleSMSService();
+                            //            controle_sms_usuario_empresa controleEnvioSms = new controle_sms_usuario_empresa();
+
+                            //            controleEnvioSms.TELEFONE_DESTINO = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
+                            //            controleEnvioSms.ID_CODIGO_USUARIO = dadosEmpresaFornecedora.idUsuarioContatoResponsavel;
+                            //            controleEnvioSms.MOTIVO_ENVIO = 4; //Valor default. 4 - Envio de AViso de PEDIDO (ver ual valor vai entrar no lugar do 4) (Criar uma tabela com esses valores para referência/leitura)
+
+                            //            negociosSMS.GravarDadosSmsEnviado(controleEnvioSms);
+                            //        }
+                            //    }
+                            //}
+
+                            //////---------------------------------------------------------------------------------------------
+                            //////ENVIANDO NOTIFICAÇÃO CELULAR
+                            //////---------------------------------------------------------------------------------------------
+                            //////3 - Enviar ALERT ao aplicativo no celular
+                            /////*
+                            ////    CODIFICAR...
+                            ////*/
+                            ////    //===========================================================================
+                            //================================================================================================================
+
+                            var mensagemDoStatus = "";
 
                             //ATUALIZAR STATUS
                             if (dadosCotacaoFilha.RECEBEU_CONTRA_PROPOSTA == true)
@@ -2528,12 +2703,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                             resultado = new { pedidoExcluido = "sim", mensagemStatus = mensagemDoStatus };
 
-                            /*
-                             * 
-                             ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR.
-
-                             CONTINUAR AQUI...
-                             */
                         }
                     }
                 }
