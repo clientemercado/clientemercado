@@ -2498,6 +2498,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 //CARREGAR DADOS do PEDIDO
                 pedido_central_compras dadosDoPedido = negociosPedidosCC.ConsultarDadosDoPedidoPeloCodigo(idPedido);
+                dataEnvioPedido = dadosDoPedido.DATA_PEDIDO_CENTRAL_COMPRAS.ToString();
 
                 if (dadosDoPedido != null)
                 {
@@ -2520,13 +2521,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                         if (pedidoExcluido)
                         {
-                            /*
-                             * 
-                             ENVIAR E-MAIL E OUTROS AVISOS INFORMANDO DO CANCELAMENTO DO PEDIDO AO FORNECEDOR.
-
-                             OBS: EXECUTAR E TESTAR O CÓDIGO DE ENVIO DE E-MAIL E SMS <-- CONTINUAR AQUI...
-                             */
-
                             //================================================================================================================
                             //CONSULTAR DADOS da COTAÇÃO FILHA
                             cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
