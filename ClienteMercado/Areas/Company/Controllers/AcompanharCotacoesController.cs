@@ -702,6 +702,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //VIEWBAGS
                     ViewBag.idPedido = 0;
+                    ViewBag.codControlePedido = "";
                     ViewBag.dataHoje = diaDaSemana + ", " + diaDoMes + " de " + mesAtual + " de " + anoAtual;
                     ViewBag.ondeEstouAgora = "Acompanhar Cotações > Cotações da Central > Mapa da Cotação > Analisar Resposta do Fornecedor";
 
@@ -711,6 +712,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (estaCotacaoRecebeuPedido != null)
                     {
                         ViewBag.idPedido = estaCotacaoRecebeuPedido.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS;
+                        ViewBag.codControlePedido = estaCotacaoRecebeuPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS;
                     }
 
                     if (dadosCotacaoFilha.REJEITOU_PEDIDO)
@@ -1880,7 +1882,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                var resultado = new { pedidoFeito = "nao", idPedido = 0, todosItensPedidos = "", mensagemStatus = "" };
+                var resultado = new { pedidoFeito = "nao", idPedido = 0, codControlePedido = "", todosItensPedidos = "", mensagemStatus = "" };
                 var idItemPedido = 0;
                 var nomeUsuario = "";
                 int idPedidoGeradoCC = idPedido;
@@ -1909,6 +1911,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMaster = new NCotacaoMasterCentralDeComprasService();
                 pedido_central_compras dadosPedidoCC = new pedido_central_compras();
+                pedido_central_compras pedidoGerado = new pedido_central_compras();
                 itens_pedido_central_compras dadosItensPedidoCC = new itens_pedido_central_compras();
 
                 if (idPedidoGeradoCC == 0)
@@ -1920,8 +1923,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     dadosPedidoCC.DATA_PEDIDO_CENTRAL_COMPRAS = DateTime.Now;
                     dadosPedidoCC.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS = Convert.ToDateTime("1900-01-01");
                     dadosPedidoCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS = false;
+                    dadosPedidoCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS = GerarCodigoControleDoPedido(cCC);
 
-                    idPedidoGeradoCC = negociosPedidosCC.GerarPedidoCC(dadosPedidoCC);
+                    pedidoGerado = negociosPedidosCC.GerarPedidoCC(dadosPedidoCC);
+
+                    idPedidoGeradoCC = pedidoGerado.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS;
 
                     //SETAR RECEBIMENTO de PEDIDO pra esta COTACAO
                     negociosCotacaoFilhaCC.SetarReceBimentoDePedidoParaACotacao(iCM, iCCF);
@@ -2031,6 +2037,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         pedidoFeito = "sim",
                         idPedido = idPedidoGeradoCC,
+                        codControlePedido = pedidoGerado.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS,
                         todosItensPedidos = todosItensPedidos,
                         mensagemStatus = mensagemDoStatus
                     };
@@ -2521,7 +2528,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                         if (pedidoExcluido)
                         {
-                            //================================================================================================================
                             //CONSULTAR DADOS da COTAÇÃO FILHA
                             cotacao_filha_central_compras dadosCotacaoFilha = negociosCotacaoFilhaCC.ConsultarDadosDaCotacaoFilhaCC(iCM, iCCF);
 
@@ -2666,7 +2672,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                             /*
                                 CODIFICAR...
                             */
-                            //================================================================================================================
 
                             var mensagemDoStatus = "";
 
@@ -2703,6 +2708,23 @@ namespace ClienteMercado.Areas.Company.Controllers
             catch (Exception erro)
             {
                 throw erro;
+            }
+        }
+
+        //GERAR NOVO CODIGO de CONTROLE do PEDIDO
+        public string GerarCodigoControleDoPedido(int cCC)
+        {
+            try
+            {
+                NPedidoCentralComprasService servicePedidos = new NPedidoCentralComprasService();
+
+                string novoCodControlePedido = servicePedidos.GerarCodigoControleDoPedido(cCC);
+
+                return novoCodControlePedido;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

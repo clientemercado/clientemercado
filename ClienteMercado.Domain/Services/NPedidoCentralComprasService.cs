@@ -16,7 +16,7 @@ namespace ClienteMercado.Domain.Services
         }
 
         //GERAR o PEDIDO feito pelo USUÁRIO ADM da CENTRAL de COMPRAS (Independente do Pedido ser TOTAL ou PARCIAL)
-        public int GerarPedidoCC(pedido_central_compras obj)
+        public pedido_central_compras GerarPedidoCC(pedido_central_compras obj)
         {
             return dPedidoCC.GerarPedidoCC(obj);
         }
@@ -55,6 +55,12 @@ namespace ClienteMercado.Domain.Services
         public void SetarConfirmandoAceiteDoPedido(int iCM, int iCCF, int idPedido, int idTipoFrete, int idFormaPagto, string dataEntrega)
         {
             dPedidoCC.SetarConfirmandoAceiteDoPedido(iCM, iCCF, idPedido, idTipoFrete, idFormaPagto, dataEntrega);
+        }
+
+        //GERAR NOVO CODIGO de CONTROLE do PEDIDO
+        public string GerarCodigoControleDoPedido(int cCC)
+        {
+            return dPedidoCC.GerarCodigoControleDoPedido(cCC);
         }
     }
 }

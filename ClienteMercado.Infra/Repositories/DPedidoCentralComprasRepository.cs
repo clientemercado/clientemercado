@@ -18,13 +18,13 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //GERAR o PEDIDO feito pelo USUÁRIO ADM da CENTRAL de COMPRAS (Independente do Pedido ser TOTAL ou PARCIAL)
-        public int GerarPedidoCC(pedido_central_compras obj)
+        public pedido_central_compras GerarPedidoCC(pedido_central_compras obj)
         {
             pedido_central_compras gravarPedidoCC =
                 _contexto.pedido_central_compras.Add(obj);
             _contexto.SaveChanges();
 
-            return gravarPedidoCC.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS;
+            return gravarPedidoCC;
         }
 
         //VERIFICAR se o FORNECEDOR recebeu PEDIDO para ESTA COTAÇÃO
@@ -68,6 +68,22 @@ namespace ClienteMercado.Infra.Repositories
 
                 _contexto.SaveChanges();
             }
+        }
+
+        //GERAR NOVO CODIGO de CONTROLE do PEDIDO
+        public string GerarCodigoControleDoPedido(int cCC)
+        {
+            var codControle = "";
+
+            var query = "SELECT TOP 1 ID_CODIGO_PEDIDO_CENTRAL_COMPRAS " +
+                        "FROM pedido_central_compras PC " +
+                        "INNER JOIN central_de_compras CC ON(CC.ID_CENTRAL_COMPRAS = " + cCC + ") " +
+                        "ORDER BY ID_CODIGO_PEDIDO_CENTRAL_COMPRAS DESC";
+            var result = _contexto.Database.SqlQuery<pedido_central_compras>(query).ToList();
+
+            codControle = result[0].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS > 0 ? (result[0].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS + 1).ToString() : "000001";
+
+            return codControle;
         }
 
         //EXCLUIR o PEDIDO

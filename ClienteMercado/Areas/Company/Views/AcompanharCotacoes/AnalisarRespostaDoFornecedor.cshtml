@@ -351,6 +351,7 @@
             <input type="hidden" id="ID_FORNECEDOR_COTACAO_ANALISADA" value="0" />
             <input type="hidden" id="inValorTotal" value="" />
             <input type="hidden" id="inIdPedidoRecebido" value="@ViewBag.idPedido" />
+            <input type="hidden" id="inCodControlePedido" value="@ViewBag.codControlePedido" />
             <input type="hidden" id="inTodosCotantesAceitaramNegociacao" value="@Model.todosCotantesAceitaramNegociacao" />
             <input type="hidden" id="inSolicitaconfirmacao" value="Model.existeSolicitacaoDeConfirmacaoAprovandoRespostaDosFornecedores" />
             <input type="hidden" id="inAceitouNegociacao" value="@Model.negociacaoDoAdmComFornecedoresAceita" />
@@ -702,7 +703,6 @@
 
         //EFETUAR PEDIDO ao FORNECEDOR
         $("#inEfetuarPedido").click(function () {
-            //-------------------------------------------------------------
             debugger;
 
             var somaItensPedido = 0;
@@ -740,7 +740,7 @@
                             debugger;
 
                             $.ajax({
-                                url: "/AcompanharCotacoes/EnviarOPedidoAoFornecedor",
+                                url: "/AcompanharCotacoes/EnviarOPedidoAoFornecedor",   //TESTAR GERAÇÃO DO COD. CONTROLE DO PEDIDO <--
                                 dataType: 'json',
                                 cache: false,
                                 async: true,
@@ -769,6 +769,7 @@
 
                                         $(".itemcotado").attr("checked", false);
                                         $('#inIdPedidoRecebido').val(data.idPedido);
+                                        $('#inCodControlePedido').val(data.codControlePedido);
 
                                         //EXIBE MSG LATERAL À DIREITA SUPERIOR
                                         new PNotify({
@@ -784,8 +785,6 @@
                                                 closer: true
                                             }
                                         });
-
-                                        //$('#gridItensCotadosRespondidos').bootgrid('reload');
 
                                         //RECARREGAR a PÁGINA
                                         window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
@@ -823,7 +822,6 @@
             else {
                 swal({ title: 'ATENÇÃO:\n\nSelecione pelo menos 1 ITEM na lista para efetuar o PEDIDO ao FORNECEDOR.', type: "warning", confirmButtonColor: "#337ab7" });
             }
-            //-------------------------------------------------------------
         });
 
         //CANCELAR PEDIDO ao FORNECEDOR
