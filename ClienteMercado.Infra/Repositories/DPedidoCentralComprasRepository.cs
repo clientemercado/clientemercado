@@ -75,13 +75,20 @@ namespace ClienteMercado.Infra.Repositories
         {
             var codControle = "";
 
-            var query = "SELECT TOP 1 ID_CODIGO_PEDIDO_CENTRAL_COMPRAS " +
+            var query = "SELECT TOP 1 * " +
                         "FROM pedido_central_compras PC " +
                         "INNER JOIN central_de_compras CC ON(CC.ID_CENTRAL_COMPRAS = " + cCC + ") " +
                         "ORDER BY ID_CODIGO_PEDIDO_CENTRAL_COMPRAS DESC";
             var result = _contexto.Database.SqlQuery<pedido_central_compras>(query).ToList();
-
-            codControle = result[0].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS > 0 ? (result[0].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS + 1).ToString() : "000001";
+            
+            if (result.Count > 0)
+            {
+                codControle = (result[0].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS + 1).ToString();
+            }
+            else
+            {
+                codControle = "000001";
+            }
 
             return codControle;
         }

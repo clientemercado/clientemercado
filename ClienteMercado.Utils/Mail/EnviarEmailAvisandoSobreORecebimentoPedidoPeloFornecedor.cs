@@ -8,7 +8,7 @@ namespace ClienteMercado.Utils.Mail
     public class EnviarEmailAvisandoSobreORecebimentoPedidoPeloFornecedor
     {
         public bool EnviandoEmail(string _empresa, string _usuario, string _email1_Empresa, string _email2_Empresa, string _email1_UsuarioContato, string _email2_UsuarioContato,
-            string _nomeCentralDeCompras, string dataLimiteAceitarPedido)
+            string _nomeCentralDeCompras, string dataLimiteAceitarPedido, string codigoPedido)
         {
             //Montando Link de Acesso ao site
             string comandoHref = "<a href=";
@@ -24,7 +24,7 @@ namespace ClienteMercado.Utils.Mail
             mensagem = @"<html>" +
                         "<body><tr><td><table width='80%' align='center' bgcolor='#E8E8E8'><tr><td><img src='cid:Imagem1' /></td>" +
                         "<tr><td align='center'><h2><b>!!! ATENÇÃO !!!</b></h2></td></tr><tr><td><br>&nbsp;&nbsp;Sr(a) " + _usuario + ", <br><br>" +
-                        "&nbsp;&nbsp;A Central de Compras <b>" + _nomeCentralDeCompras + "</b> na plataforma ClienteMercado.com, lhe enviou um PEDIDO.</td></tr>" +
+                        "&nbsp;&nbsp;A Central de Compras <b>" + _nomeCentralDeCompras + "</b> na plataforma ClienteMercado.com, lhe enviou um PEDIDO de Nº " + codigoPedido + ".</td></tr>" +
                         "<tr><td align='center'>Sua empresa tem até o dia <b><font color='#FF0000'>" + dataLimiteAceitarPedido + "</font></b> para CONFIRMAR o ATENDIMENTO do mesmo.</td></tr>" +
                         "<tr><td></td></tr>" +
                         "<tr><td align='center'><br>Não perca o prazo!<br><br>" +

@@ -1885,6 +1885,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var resultado = new { pedidoFeito = "nao", idPedido = 0, codControlePedido = "", todosItensPedidos = "", mensagemStatus = "" };
                 var idItemPedido = 0;
                 var nomeUsuario = "";
+                var codControlePedido = GerarCodigoControleDoPedido(cCC);
                 int idPedidoGeradoCC = idPedido;
                 string idsPedidos = "";
                 string todosItensPedidos = "nao";
@@ -1894,8 +1895,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string urlParceiroEnvioSms = "";
                 string textoMsgStatus = "PEDIDO FEITO&nbsp;";
 
-                string[] listaIDsItensPedidosNegociacao;
-                string[] listaItensIndividuaisCotacao;
+                string[] listaIDsItensPedidosNegociacao, listaItensIndividuaisCotacao;
                 listaIDsItensPedidosNegociacao = codsProdutosNegociacao.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 listaItensIndividuaisCotacao = codsItensIndividuais.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
@@ -1923,7 +1923,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     dadosPedidoCC.DATA_PEDIDO_CENTRAL_COMPRAS = DateTime.Now;
                     dadosPedidoCC.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS = Convert.ToDateTime("1900-01-01");
                     dadosPedidoCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS = false;
-                    dadosPedidoCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS = GerarCodigoControleDoPedido(cCC);
+                    dadosPedidoCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS = codControlePedido;
 
                     pedidoGerado = negociosPedidosCC.GerarPedidoCC(dadosPedidoCC);
 
@@ -2073,14 +2073,14 @@ namespace ClienteMercado.Areas.Company.Controllers
                     bool emailAvisoDePedido =
                         enviarEmailAvisandoSobreOPedido.EnviandoEmail(dadosEmpresaSelecionada.nomeEmpresa, dadosEmpresaSelecionada.nomeUsuarioContatoEmpresa,
                         dadosEmpresaSelecionada.eMail1_Empresa, dadosEmpresaSelecionada.eMail2_Empresa, dadosEmpresaSelecionada.eMaiL1_UsuarioContatoEmpresa,
-                        dadosEmpresaSelecionada.eMaiL2_UsuarioContatoEmpresa, nomeCentralCompras, dataLimiteAcatamentoDoPedido);
+                        dadosEmpresaSelecionada.eMaiL2_UsuarioContatoEmpresa, nomeCentralCompras, dataLimiteAcatamentoDoPedido, codControlePedido);
 
                     //---------------------------------------------------------------------------------------------
                     //ENVIANDO SMS´s
                     //---------------------------------------------------------------------------------------------
                     EnviarSms enviarSmsMaster = new EnviarSms();
 
-                    smsMensagem = "ClienteMercado - Temos um PEDIDO pra você. Acesse www.clientemercado.com.br e confirme o ATENDIMENTO";
+                    smsMensagem = "ClienteMercado - Você recebeu um PEDIDO. Acesse www.clientemercado.com.br e confirme o ATENDIMENTO";
 
                     if (emailAvisoDePedido)
                     {
