@@ -1,3 +1,5 @@
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.Providers.dll
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\Content\imagensProdutosAlternativos\teste.txt
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.dll
@@ -17,7 +19,6 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.Http
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.Http.WebHost.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.Mvc.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.Optimization.dll
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.Providers.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.Razor.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.WebPages.Deployment.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.WebPages.dll
@@ -50,4 +51,3 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\obj\Debug\ClienteMe
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.UI.MVC.csproj.CoreCompileInputs.cache
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.UI.MVC.csproj.CopyComplete
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.dll
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\obj\Debug\ClienteMercado.pdb

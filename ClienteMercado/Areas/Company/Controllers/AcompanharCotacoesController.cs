@@ -1273,8 +1273,10 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NItensCotacaoFilhaNegociacaoCentralDeComprasService negociosItensCotacaoCentralDeCompras = new NItensCotacaoFilhaNegociacaoCentralDeComprasService();
                 NEmpresasFabricantesMarcasService negociosEmpresasfabricantesMarcas = new NEmpresasFabricantesMarcasService();
                 NUnidadesProdutosService negociosUnidadesProdutos = new NUnidadesProdutosService();
+                NPedidoCentralComprasService pedidosService = new NPedidoCentralComprasService();
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
                 List<ListaDadosProdutoCotacaoViewModel> listaProdutosCotacoes = new List<ListaDadosProdutoCotacaoViewModel>();
+                pedido_central_compras dadosDoPedido = new pedido_central_compras();
 
                 //PEGA OS ITENS DA COTACAO, baseando-se na PRIMEIRA COTAÇÃO
                 List<itens_cotacao_filha_negociacao_central_compras> itensDaCotacao =
@@ -1305,6 +1307,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (itemPedidoCC)
                     {
                         itemFoiPedido = "sim";
+                        dadosDoPedido = pedidosService.ConsultarDadosDoPedidoPeloCodigo(itemJahPedido.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS);
                     }
 
                     if (itensDaCotacao[i].PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS > 0)
@@ -1345,7 +1348,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                         somaTotalCalculado = somaTotalCalculado.ToString("C2", CultureInfo.CurrentCulture).Replace("R$", ""),
                         temContraProposta = possuiContraProposta,
                         ehOMenorPreco = ehMenorPreco,
-                        itemFoiPedido = itemFoiPedido
+                        itemFoiPedido = itemFoiPedido,
+                        codControlePedido = dadosDoPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS
                     });
 
                     itemFoiPedido = "nao";

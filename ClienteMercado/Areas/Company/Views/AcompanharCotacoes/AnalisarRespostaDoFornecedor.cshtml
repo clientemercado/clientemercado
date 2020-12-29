@@ -989,7 +989,7 @@
                 },
                 "link6": function (column, row) {
                     if (row.itemFoiPedido == "sim") {
-                        return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor'><font color='#32CD32'><i class='fas fa-check'></i></font><a>";
+                        return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor'>" + row.codControlePedido + "<font color='#32CD32'><i class='fas fa-check'></i></font><a>"; 
                     }
                     else {
                         if ((row.itemFoiPedido == "nao") && (row.habilitar == "disabled")) {
