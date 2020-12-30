@@ -291,7 +291,7 @@
                                         <th data-formatter="valorresp" data-width="11%" data-header-align="center" data-align="right">R$ Resp.</th>
                                         <th data-formatter="valorcp" data-width="9%" data-header-align="center" data-align="right">R$ CP</th>
                                         <th data-formatter="valorTotal" data-width="10%" data-header-align="center" data-align="right">R$ Total</th>
-                                        <th data-formatter="link6" data-width="7%" data-header-align="center" data-align="center">Ped.</th>
+                                        <th data-formatter="link6" data-width="7%" data-header-align="center" data-align="center">Ped. Nº</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -989,7 +989,7 @@
                 },
                 "link6": function (column, row) {
                     if (row.itemFoiPedido == "sim") {
-                        return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor'>" + row.codControlePedido + "<font color='#32CD32'><i class='fas fa-check'></i></font><a>"; 
+                        return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor'>" + row.codControlePedido + "&nbsp;<font color='#32CD32'><i class='fas fa-check'></i></font><a>"; 
                     }
                     else {
                         if ((row.itemFoiPedido == "nao") && (row.habilitar == "disabled")) {
