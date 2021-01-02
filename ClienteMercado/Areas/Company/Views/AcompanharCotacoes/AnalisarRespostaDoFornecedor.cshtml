@@ -415,7 +415,7 @@
             $('#inMensagemStatus').append("");
         }
 
-        //SOLICITAR CONFIRMAÇÃO aos demais PARTICIPANTES da COTAÇÃO, PRETENCENTES À CENTRAL COMPRAS <-- TESTAR ISSO
+        //SOLICITAR CONFIRMAÇÃO aos demais PARTICIPANTES da COTAÇÃO, PRETENCENTES À CENTRAL COMPRAS
         $("#inSolicitarConfirmacao").click(function () {
             debugger;
 
@@ -588,7 +588,7 @@
                         $("#texto_chat_principal").hide();
                         $("#texto_chat_alternativo").hide();
                         $("#botao_enviar").hide();
-                        $('#dialogo_entre_cotante_efornecedor td').parent().remove(); //Limpar / Remover linha
+                        $('#dialogo_entre_cotante_efornecedor td').parent().remove();
 
                         carregarChat();
                     }
@@ -740,7 +740,7 @@
                             debugger;
 
                             $.ajax({
-                                url: "/AcompanharCotacoes/EnviarOPedidoAoFornecedor",   //TESTAR GERAÇÃO DO COD. CONTROLE DO PEDIDO <--
+                                url: "/AcompanharCotacoes/EnviarOPedidoAoFornecedor",
                                 dataType: 'json',
                                 cache: false,
                                 async: true,
@@ -829,72 +829,92 @@
             debugger;
 
             if (parseInt($('#inIdPedidoRecebido').val()) > 0) {
-                swal({
-                    title: "ATENÇÃO!!\n\n",
-                    text: "Deseja CANCELAR o PEDIDO enviado ao fornecedor <b>" + $('#inNomeFornecedor').val() + "</b>?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#337ab7",
-                    confirmButtonText: "Sim",
-                    cancelButtonText: "Não",
-                    closeOnConfirm: true,
-                    html: true
-                },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            debugger;
+                var motivoCancelamento = "";
 
-                            $.ajax({
-                                url: "/AcompanharCotacoes/CancelarOPedidoEnviadoAoFornecedor",
-                                dataType: 'json',
-                                cache: false,
-                                async: true,
-                                data: {
-                                    'cCC': $('#inCCC').val(),
-                                    'iCM': $("#inICM").val(),
-                                    'iCCF': $('#iniCCF').val(),
-                                    'idPedido': $('#inIdPedidoRecebido').val(),
-                                    'aceitouCP': $('#inAceiteCP').val()
-                                },
-                                success: function (data) {
+                swal({
+                    title: "<b>DESISTIR DO PEDIDO<b>",
+                    text: "Informe o <b>MOTIVO</b> pelo qual você a <b>CENTRAL de COMPRAS</b> está <b>CANCELANDO este PEDIDO</b>:",
+                    type: "input",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    html: true,
+                    animation: "slide-from-top",
+                    inputPlaceholder: "Descreva aqui..."
+                },
+                    function (inputValue) {
+                        if (inputValue) {
+                            motivoCancelamento = inputValue;
+                        }
+
+                        swal({
+                            title: "ATENÇÃO!!\n\n",
+                            text: "Deseja CANCELAR o PEDIDO enviado ao fornecedor <b>" + $('#inNomeFornecedor').val() + "</b>?",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#337ab7",
+                            confirmButtonText: "Sim",
+                            cancelButtonText: "Não",
+                            closeOnConfirm: true,
+                            html: true
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
                                     debugger;
 
-                                    if (data.pedidoExcluido == "sim") {
-                                        $('#inIdPedidoRecebido').val(0);
+                                    $.ajax({
+                                        url: "/AcompanharCotacoes/CancelarOPedidoEnviadoAoFornecedor",
+                                        dataType: 'json',
+                                        cache: false,
+                                        async: true,
+                                        data: {
+                                            'cCC': $('#inCCC').val(),
+                                            'iCM': $("#inICM").val(),
+                                            'iCCF': $('#iniCCF').val(),
+                                            'idPedido': $('#inIdPedidoRecebido').val(),
+                                            'aceitouCP': $('#inAceiteCP').val(),
+                                            'motivoCancelamento': motivoCancelamento
+                                        },
+                                        success: function (data) {
+                                            debugger;
 
-                                        $('#inMensagemStatus').html("");
-                                        $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + data.mensagemStatus);
+                                            if (data.pedidoExcluido == "sim") {
+                                                $('#inIdPedidoRecebido').val(0);
 
-                                        //EXIBE MSG LATERAL À DIREITA SUPERIOR
-                                        new PNotify({
-                                            title: 'SUCESSO!',
-                                            text: "O PEDIDO enviado ao fornecedor <b>" + $('#inNomeFornecedor').val() + "</b>, foi CANCELADO com SUCESSO!",
-                                            type: 'success',
-                                            styling: 'bootstrap3',
-                                            icons: 'bootstrap3',
-                                            addclass: 'customsuccess',
-                                            animateSpeed: 'fast',
-                                            mouseReset: true,
-                                            Buttons: {
-                                                closer: true
+                                                $('#inMensagemStatus').html("");
+                                                $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + data.mensagemStatus);
+
+                                                //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                                                new PNotify({
+                                                    title: 'SUCESSO!',
+                                                    text: "O PEDIDO enviado ao fornecedor <b>" + $('#inNomeFornecedor').val() + "</b>, foi CANCELADO com SUCESSO!",
+                                                    type: 'success',
+                                                    styling: 'bootstrap3',
+                                                    icons: 'bootstrap3',
+                                                    addclass: 'customsuccess',
+                                                    animateSpeed: 'fast',
+                                                    mouseReset: true,
+                                                    Buttons: {
+                                                        closer: true
+                                                    }
+                                                });
+
+                                                $('#gridItensCotadosRespondidos').bootgrid('reload');
+
+                                                if (data.pedidoExcluido == "sim") {
+                                                    $('#inCancelarPedido').hide();
+                                                    $('#checkall').show();
+                                                    $('#inEfetuarPedido').show();
+                                                }
                                             }
-                                        });
-
-                                        $('#gridItensCotadosRespondidos').bootgrid('reload');
-
-                                        if (data.pedidoExcluido == "sim") {
-                                            $('#inCancelarPedido').hide();
-                                            $('#checkall').show();
-                                            $('#inEfetuarPedido').show();
                                         }
-                                    }
+                                    });
+                                }
+                                else {
+                                    debugger;
+
                                 }
                             });
-                        }
-                        else {
-                            debugger;
 
-                        }
                     });
             }
         });

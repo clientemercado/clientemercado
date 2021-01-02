@@ -37,7 +37,7 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //ATUALIZAR o VALOR TOTAL REGISTRADO para o PEDIDO
-        public void AtualizarValorDoPedido(pedido_central_compras obj)
+        public pedido_central_compras AtualizarValorDoPedido(pedido_central_compras obj)
         {
             pedido_central_compras dadosDoPedidoAAtualizar =
                 _contexto.pedido_central_compras.FirstOrDefault(m => (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == obj.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS));
@@ -47,6 +47,8 @@ namespace ClienteMercado.Infra.Repositories
                 dadosDoPedidoAAtualizar.VALOR_PEDIDO_CENTRAL_COMPRAS = obj.VALOR_PEDIDO_CENTRAL_COMPRAS;
                 _contexto.SaveChanges();
             }
+
+            return dadosDoPedidoAAtualizar;
         }
 
         //CONFIRMAR o ACEITE do PEDIDO
@@ -83,7 +85,15 @@ namespace ClienteMercado.Infra.Repositories
             
             if (result.Count > 0)
             {
-                codControle = (result[0].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS + 1).ToString();
+                codControle = (Convert.ToInt32(result[0].COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS) + 1).ToString();
+
+                var tamanhoCod = codControle.Length;
+                var difTamanho = (6 - tamanhoCod);
+
+                for (int g = 0; g < difTamanho; g++)
+                {
+                    codControle = ("0" + codControle);
+                }
             }
             else
             {
@@ -94,16 +104,18 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //EXCLUIR o PEDIDO
-        public bool ExcluirOPedido(int idPedido)
+        public bool ExcluirOPedido(string idPedido)
         {
             bool pedidoExcluido = false;
 
-            pedido_central_compras pedidoASerExcluido =
-                _contexto.pedido_central_compras.FirstOrDefault(m => (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedido));
+            var query = "SELECT * " +
+                        "FROM pedido_central_compras PC " +
+                        "WHERE PC.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS IN (" + idPedido + ")";
+            var result = _contexto.Database.SqlQuery<pedido_central_compras>(query).ToList();
 
-            if (pedidoASerExcluido != null)
+            if (result.Count > 0)
             {
-                var command0 = "DELETE FROM pedido_central_compras WHERE ID_CODIGO_PEDIDO_CENTRAL_COMPRAS = " + idPedido;
+                var command0 = "DELETE FROM pedido_central_compras WHERE ID_CODIGO_PEDIDO_CENTRAL_COMPRAS IN (" + idPedido + ")";
                 _contexto.Database.ExecuteSqlCommand(command0);
 
                 pedidoExcluido = true;

@@ -1889,9 +1889,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var resultado = new { pedidoFeito = "nao", idPedido = 0, codControlePedido = "", todosItensPedidos = "", mensagemStatus = "" };
                 var idItemPedido = 0;
                 var nomeUsuario = "";
-                var codControlePedido = GerarCodigoControleDoPedido(cCC);
                 int idPedidoGeradoCC = idPedido;
                 string idsPedidos = "";
+                string codControlePedido = "";
                 string todosItensPedidos = "nao";
                 string dataLimiteAcatamentoDoPedido = ((DateTime.Now.AddDays(1)).Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString());
                 string smsMensagem = "";
@@ -1920,6 +1920,8 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 if (idPedidoGeradoCC == 0)
                 {
+                    codControlePedido = GerarCodigoControleDoPedido(cCC);
+
                     //GERAR o PEDIDO feito pelo USUÁRIO ADM da CENTRAL de COMPRAS (Independente do Pedido ser TOTAL ou PARCIAL)
                     dadosPedidoCC.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS = iCM;
                     dadosPedidoCC.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS = iCCF;
@@ -1946,7 +1948,9 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //ATUALIZAR o VALOR TOTAL REGISTRADO para o PEDIDO
                     dadosPedidoCC.VALOR_PEDIDO_CENTRAL_COMPRAS = (dadosPedidoCC.VALOR_PEDIDO_CENTRAL_COMPRAS + Convert.ToDecimal(somaItensDoPedido));
-                    negociosPedidosCC.AtualizarValorDoPedido(dadosPedidoCC);
+                    dadosPedidoCC = negociosPedidosCC.AtualizarValorDoPedido(dadosPedidoCC);
+
+                    codControlePedido = dadosPedidoCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS;
                 }
 
                 //GRAVAR os ITENS do PEDIDO
@@ -2308,7 +2312,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                 bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC,
                     telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
                     email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoDesistenciaDoPedido, dadosEmpresaFornecedora.nomeEmpresa,
-                    usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn);
+                    usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn, 
+                    dadosPedidoCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS);
 
                 //---------------------------------------------------------------------------------------------
                 //ENVIANDO SMS´s
@@ -2409,7 +2414,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (listaDeItensPedidos.Count == 0)
                     {
                         //EXCLUIR o PEDIDO
-                        negociosPedidosCC.ExcluirOPedido(Convert.ToInt32(idsPedidos));
+                        negociosPedidosCC.ExcluirOPedido(idsPedidos);
 
                         //SETAR COMO NÃO RECEBIMENTO de PEDIDO pra esta COTACAO
                         negociosCotacaoFilhaCC.SetarComoNaoReceBimentoDePedidoParaACotacao(iCM, iCCF);
@@ -2467,7 +2472,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //CANCELAR TODO o PEDIDO ENVIADO ao FORNECEDOR
-        public JsonResult CancelarOPedidoEnviadoAoFornecedor(int cCC, int iCM, int iCCF, int idPedido, string aceitouCP, string motivoDesistenciaDoPedido)
+        public JsonResult CancelarOPedidoEnviadoAoFornecedor(int cCC, int iCM, int iCCF, int idPedido, string aceitouCP, string motivoCancelamento)
         {
             try
             {
@@ -2528,7 +2533,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (itensPedidoExcluidos)
                     {
                         //EXCLUIR o PEDIDO
-                        pedidoExcluido = negociosPedidosCC.ExcluirOPedido(idPedido);
+                        pedidoExcluido = negociosPedidosCC.ExcluirOPedido(idPedido.ToString());
 
                         if (pedidoExcluido)
                         {
@@ -2602,11 +2607,15 @@ namespace ClienteMercado.Areas.Company.Controllers
                                 fone2UsuarioContatoForn = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
                             }
 
+                            if (motivoCancelamento == "")
+                                motivoCancelamento = "Não informado";
+
                             //ENVIAR E-MAIL
                             bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC,
                                 telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
-                                email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoDesistenciaDoPedido, dadosEmpresaFornecedora.nomeEmpresa,
-                                usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn);
+                                email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoCancelamento, dadosEmpresaFornecedora.nomeEmpresa,
+                                usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn, 
+                                dadosDoPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS);
 
                             //---------------------------------------------------------------------------------------------
                             //ENVIANDO SMS´s

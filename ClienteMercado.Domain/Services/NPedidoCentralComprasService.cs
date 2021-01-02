@@ -34,9 +34,9 @@ namespace ClienteMercado.Domain.Services
         }
 
         //ATUALIZAR o VALOR TOTAL REGISTRADO para o PEDIDO
-        public void AtualizarValorDoPedido(pedido_central_compras obj)
+        public pedido_central_compras AtualizarValorDoPedido(pedido_central_compras obj)
         {
-            dPedidoCC.AtualizarValorDoPedido(obj);
+            return dPedidoCC.AtualizarValorDoPedido(obj);
         }
 
         //VERIFICAR TODOS os PEDIDOS para ESTA COTAÇÃO
@@ -46,7 +46,7 @@ namespace ClienteMercado.Domain.Services
         }
 
         //EXCLUIR o PEDIDO
-        public bool ExcluirOPedido(int idPedido)
+        public bool ExcluirOPedido(string idPedido)
         {
             return dPedidoCC.ExcluirOPedido(idPedido);
         }

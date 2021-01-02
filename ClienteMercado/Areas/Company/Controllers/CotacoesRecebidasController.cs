@@ -1160,7 +1160,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (itensPedidoExcluidos)
                     {
                         //EXCLUIR o PEDIDO
-                        pedidoExcluido = negociosPedidosCC.ExcluirOPedido(idPedido);
+                        pedidoExcluido = negociosPedidosCC.ExcluirOPedido(idPedido.ToString());
 
                         pedidoExcluido = true;
                     }

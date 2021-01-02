@@ -10,7 +10,8 @@ namespace ClienteMercado.Utils.Mail
         public bool EnviarEmail(string _nomeCC, string _usuarioAdmCC, string _fone1EmpresaAdmCC, string _fone2EmpresaAdmCC, string _fone1UsuarioAdmCC, 
             string _fone2UsuarioAdmCC, string _email1EmpresaAdmCC, string _email2EmpresaAdmCC, string _emailContatoEmpresaAdmCC,  string _dataEnvioPedido, 
             string _numeroPedido, string _motivoDesistenciaDoPedido, string _empresaFornecedora, string _nomeContatoEmpresaFornecedora, 
-            string _email1_EmpresaForn, string _email2_EmpresaForn, string _email1_UsuarioContatoEmpresaForn, string _email2_UsuarioContatoEmpresaForn)
+            string _email1_EmpresaForn, string _email2_EmpresaForn, string _email1_UsuarioContatoEmpresaForn, string _email2_UsuarioContatoEmpresaForn,
+            string numeroPedido)
         {
             //Montando Link de Acesso ao site
             string comandoHref = "<a href=";
@@ -22,7 +23,7 @@ namespace ClienteMercado.Utils.Mail
             string assunto = "";
             string mensagem = "";
 
-            assunto = "CANCELAMENTO DO PEDIDO Nº 00010 - Comprador: " + _nomeCC;
+            assunto = "CANCELAMENTO DO PEDIDO Nº " + numeroPedido + " - Comprador: " + _nomeCC;
             mensagem = @"<html>" +
                         "<body>" +
                         "<tr><td>" +
