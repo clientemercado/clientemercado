@@ -36,12 +36,12 @@ namespace ClienteMercado.Utils.Mail
                         "</tr>" +
                         "<tr>" +
                         "<td><br>&nbsp;&nbsp;Sr(a) " + _nomeContatoEmpresaFornecedora + ", <br><br>" +
-                        "&nbsp;&nbsp;A Central de Compras <b>" + _nomeCC + "</b>, DESISTIU do PEDIDO nº 00010, efetuado no dia " + _dataEnvioPedido + "." +
+                        "&nbsp;&nbsp;A Central de Compras <b>" + _nomeCC + "</b>, DESISTIU do PEDIDO nº " + numeroPedido + ", efetuado no dia " + _dataEnvioPedido + "." +
                         "</td>" +
                         "</tr>" +
                         "<br><br>" +
                         "<tr><td colspan='4'><b>CARACTERÍSTICAS DO PEDIDO:</b></td></tr><br>" +
-                        "<tr><td><b>Pedido Nº:</b>&nbsp;</td><td>" + _numeroPedido + "</td><td colspan='2'></td></tr> " +
+                        "<tr><td><b>Pedido Nº:</b>&nbsp;</td><td>" + numeroPedido + "</td><td colspan='2'></td></tr> " +
                         "<tr><td><b>Data Pedido:</b>&nbsp;</td><td>" + _dataEnvioPedido + "</td><td colspan='2'></td></tr> " +
                         "<tr><td><b>Confirmou CANCELAMENTO do Pedido:</b>&nbsp;</td><td>" + _usuarioAdmCC + "&nbsp;</td><td colspan='2'></td></tr> " +
                         "<td><b>Fone(s) Contato(s):&nbsp;</b></td><td>" + _fone1UsuarioAdmCC + " / " + _fone2UsuarioAdmCC + "</td><td colspan='2'></td></tr> " +

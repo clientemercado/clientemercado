@@ -833,7 +833,7 @@
 
                 swal({
                     title: "<b>DESISTIR DO PEDIDO<b>",
-                    text: "Informe o <b>MOTIVO</b> pelo qual você a <b>CENTRAL de COMPRAS</b> está <b>CANCELANDO este PEDIDO</b>:",
+                    text: "Informe o <b>MOTIVO</b> pelo qual a <b>CENTRAL de COMPRAS</b> está <b>CANCELANDO este PEDIDO</b>:",
                     type: "input",
                     showCancelButton: true,
                     closeOnConfirm: false,
@@ -848,7 +848,7 @@
 
                         swal({
                             title: "ATENÇÃO!!\n\n",
-                            text: "Deseja CANCELAR o PEDIDO enviado ao fornecedor <b>" + $('#inNomeFornecedor').val() + "</b>?",
+                            text: "Confirma o CANCELAMENTO do PEDIDO enviado ao fornecedor <b>" + $('#inNomeFornecedor').val() + "</b>?",
                             type: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#337ab7",
@@ -1009,7 +1009,7 @@
                 },
                 "link6": function (column, row) {
                     if (row.itemFoiPedido == "sim") {
-                        return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor'>" + row.codControlePedido + "&nbsp;<font color='#32CD32'><i class='fas fa-check'></i></font><a>"; 
+                        return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor'>" + row.codControlePedido + "&nbsp;<font color='#32CD32'><i class='fas fa-check'></i></font><a>";
                     }
                     else {
                         if ((row.itemFoiPedido == "nao") && (row.habilitar == "disabled")) {
@@ -1140,82 +1140,103 @@
                 somaItensPedido += parseFloat(totalItemPedido);
             });
 
-            swal({
-                title: "ATENÇÃO!!\n\n",
-                text: "O ITEM selecionado já foi PEDIDO a este fornecedor.<br>Deseja CANCELAR o PEDIDO deste ITEM?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#337ab7",
-                confirmButtonText: "Sim",
-                cancelButtonText: "Não",
-                closeOnConfirm: true,
-                html: true
-            },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        debugger;
+            //=============================================================================
+            var motivoCancelamento = "";
 
-                        $.ajax({
-                            url: "/AcompanharCotacoes/CancelarOPedidoDoItemAoFornecedor",
-                            dataType: 'json',
-                            cache: false,
-                            async: true,
-                            data: {
-                                'cCC': $('#inCCC').val(),
-                                'iCM': $("#inICM").val(),
-                                'iCCF': $('#iniCCF').val(),
-                                'codsProdutosNegociacao': codsProdsPedidos,
-                                'codsItensIndividuais': codsIndividuais,
-                                'somaItensDoPedido': somaItensPedido,
-                                'idPedido': $('#inIdPedidoRecebido').val()
-                            },
-                            success: function (data) {
+            swal({
+                title: "<b>CANCELAR PEDIDO do ITEM<b>",
+                text: "O ITEM selecionado já foi PEDIDO a este fornecedor.<br>Informe o <b>MOTIVO</b> pelo qual a <b>CENTRAL de COMPRAS</b> está <b>CANCELANDO o PEDIDO do ITEM</b>:",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                html: true,
+                animation: "slide-from-top",
+                inputPlaceholder: "Descreva aqui..."
+            },
+                function (inputValue) {
+                    if (inputValue) {
+                        motivoCancelamento = inputValue;
+                    }
+
+                    swal({
+                        title: "ATENÇÃO!!\n\n",
+                        text: "Confirma o CANCELAMENTO do PEDIDO deste ITEM?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#337ab7",
+                        confirmButtonText: "Sim",
+                        cancelButtonText: "Não",
+                        closeOnConfirm: true,
+                        html: true
+                    },
+                        function (isConfirm) {
+                            if (isConfirm) {
                                 debugger;
 
-                                if (data.itemExcluido == "sim") {
-                                    $('#inMensagemStatus').html("");
-                                    $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + data.mensagemStatus);
+                                $.ajax({
+                                    url: "/AcompanharCotacoes/CancelarOPedidoDoItemAoFornecedor",
+                                    dataType: 'json',
+                                    cache: false,
+                                    async: true,
+                                    data: {
+                                        'cCC': $('#inCCC').val(),
+                                        'iCM': $("#inICM").val(),
+                                        'iCCF': $('#iniCCF').val(),
+                                        'codsProdutosNegociacao': codsProdsPedidos,
+                                        'codsItensIndividuais': codsIndividuais,
+                                        'somaItensDoPedido': somaItensPedido,
+                                        'idPedido': $('#inIdPedidoRecebido').val(),
+                                        'motivoCancelamento': motivoCancelamento
+                                    },
+                                    success: function (data) {
+                                        debugger;
 
-                                    $(".itemcotado").attr("checked", false);
+                                        if (data.itemExcluido == "sim") {
+                                            $('#inMensagemStatus').html("");
+                                            $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + data.mensagemStatus);
 
-                                    //EXIBE MSG LATERAL À DIREITA SUPERIOR
-                                    new PNotify({
-                                        title: 'SUCESSO!',
-                                        text: 'O ITEM selecionado foi removido do PEDIDO com sucesso!',
-                                        type: 'success',
-                                        styling: 'bootstrap3',
-                                        icons: 'bootstrap3',
-                                        addclass: 'customsuccess',
-                                        animateSpeed: 'fast',
-                                        mouseReset: true,
-                                        Buttons: {
-                                            closer: true
+                                            $(".itemcotado").attr("checked", false);
+
+                                            //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                                            new PNotify({
+                                                title: 'SUCESSO!',
+                                                text: 'O ITEM selecionado foi removido do PEDIDO com sucesso!',
+                                                type: 'success',
+                                                styling: 'bootstrap3',
+                                                icons: 'bootstrap3',
+                                                addclass: 'customsuccess',
+                                                animateSpeed: 'fast',
+                                                mouseReset: true,
+                                                Buttons: {
+                                                    closer: true
+                                                }
+                                            });
+
+                                            if (data.todosItensPedidos == "nao") {
+                                                $('#inCancelarPedido').hide();
+                                                $('#checkall').show();
+                                                $('#inEfetuarPedido').show();
+                                            }
+                                            else {
+                                                $('.check').hide();
+                                                $('#inEfetuarPedido').hide();
+                                                $('#inCancelarPedido').show();
+                                            }
+
+                                            //$('#gridItensCotadosRespondidos').bootgrid('reload');
+                                            //RECARREGAR a PÁGINA
+                                            window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
                                         }
-                                    });
-
-                                    if (data.todosItensPedidos == "nao") {
-                                        $('#inCancelarPedido').hide();
-                                        $('#checkall').show();
-                                        $('#inEfetuarPedido').show();
                                     }
-                                    else {
-                                        $('.check').hide();
-                                        $('#inEfetuarPedido').hide();                                        
-                                        $('#inCancelarPedido').show();
-                                    }
-
-                                    //$('#gridItensCotadosRespondidos').bootgrid('reload');
-                                    //RECARREGAR a PÁGINA
-                                    window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
-                                }
+                                });
+                            }
+                            else {
+                                debugger;
+                                $(".itemcotado").attr("checked", false);
                             }
                         });
-                    }
-                    else {
-                        debugger;
-                        $(".itemcotado").attr("checked", false);
-                    }
                 });
+            //=============================================================================
         };
     };
 </script>

@@ -2163,8 +2163,15 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //CANCELAR PEDIDO do ITEM ao FORNECEDOR
         public JsonResult CancelarOPedidoDoItemAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutosNegociacao, string codsItensIndividuais, 
-            string somaItensDoPedido, int idPedido, string motivoDesistenciaDoPedido)
+            string somaItensDoPedido, int idPedido, string motivoCancelamento)
         {
+            /*
+             OBS: INFORMAR NO E-MAIL A DESCRIÇÃO DO ITEN QUE ESTÁ TENDO SEU PEDIDO CANCELADO...             
+
+                CONTINUAR AQUI...
+             */
+
+
             try
             {
                 bool itemPedidoExcluido = false;
@@ -2308,10 +2315,13 @@ namespace ClienteMercado.Areas.Company.Controllers
                     fone2UsuarioContatoForn = dadosEmpresaFornecedora.celular2_UsuarioContatoEmpresa;
                 }
 
+                if (motivoCancelamento == "")
+                    motivoCancelamento = "Não informado";
+
                 //ENVIAR E-MAIL
                 bool emailAvisoCancelamentoDePedido = enviarEmailSobreOCancelamentoDoPedido.EnviarEmail(dadosCC.NOME_CENTRAL_COMPRAS, usuarioAdmCC,
                     telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
-                    email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoDesistenciaDoPedido, dadosEmpresaFornecedora.nomeEmpresa,
+                    email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoCancelamento, dadosEmpresaFornecedora.nomeEmpresa,
                     usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn, 
                     dadosPedidoCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS);
 
