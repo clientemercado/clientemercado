@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClienteMercado.Data.Entities;
+using ClienteMercado.Utils.ViewModel;
+using System;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Web;
@@ -11,7 +13,7 @@ namespace ClienteMercado.Utils.Mail
             string _fone2UsuarioAdmCC, string _email1EmpresaAdmCC, string _email2EmpresaAdmCC, string _emailContatoEmpresaAdmCC,  string _dataEnvioPedido, 
             string _numeroPedido, string _motivoDesistenciaDoPedido, string _empresaFornecedora, string _nomeContatoEmpresaFornecedora, 
             string _email1_EmpresaForn, string _email2_EmpresaForn, string _email1_UsuarioContatoEmpresaForn, string _email2_UsuarioContatoEmpresaForn,
-            string numeroPedido)
+            string numeroPedido, ItemASerCanceladoOPedidoDetalhesViewModel itemCanceladoDetalhes)
         {
             //Montando Link de Acesso ao site
             string comandoHref = "<a href=";
@@ -20,10 +22,24 @@ namespace ClienteMercado.Utils.Mail
 
             //Montando o corpo do e-mail
             string linked = (link1 + link2);
+            string textoAssunto = "";
+            string itemCancelado = "";
             string assunto = "";
             string mensagem = "";
 
-            assunto = "CANCELAMENTO DO PEDIDO Nº " + numeroPedido + " - Comprador: " + _nomeCC;
+            if (itemCanceladoDetalhes.descricaoItem != null)
+            {
+                textoAssunto = "CANCELAMENTO DE ITEM DO PEDIDO Nº " + numeroPedido + " - Comprador: " + _nomeCC;
+                itemCancelado = itemCanceladoDetalhes.descricaoItem + " - Quant: " + itemCanceladoDetalhes.quantidadeItem + " " 
+                    + itemCanceladoDetalhes.unidadeItem + " - " + itemCanceladoDetalhes.embalagemItem;
+            }
+            else
+            {
+                textoAssunto = "CANCELAMENTO DO PEDIDO Nº " + numeroPedido + " - Comprador: " + _nomeCC;
+                itemCancelado = "TODOS OS ITENS do PEDIDO";
+            }
+
+            assunto = textoAssunto;
             mensagem = @"<html>" +
                         "<body>" +
                         "<tr><td>" +
@@ -47,6 +63,7 @@ namespace ClienteMercado.Utils.Mail
                         "<td><b>Fone(s) Contato(s):&nbsp;</b></td><td>" + _fone1UsuarioAdmCC + " / " + _fone2UsuarioAdmCC + "</td><td colspan='2'></td></tr> " +
                         "<td><b>E-mail(s) Contato(s):&nbsp;</b></td><td>" + _email1EmpresaAdmCC + " / " + _emailContatoEmpresaAdmCC + "</td><td colspan='2'></td></tr> " +
                         "<tr><td colspan='3'></td></tr>" +
+                        "<tr><td><b>Item CANCELADO:</b>&nbsp;</td><td colspan='2'>" + itemCancelado + "</td></tr>" +
                         "<tr><td><b>Motivo DESISTÊNCIA:</b>&nbsp;</td><td colspan='2'>" + _motivoDesistenciaDoPedido + "</td></tr>" +
                         "<tr><td align='center'><br>Para mais detalhes, acesse o site " + linked + " e verifique as novas informações sobre este pedido.<br><br></td></tr>" +
                         "<tr><td><br><br>&nbsp;&nbsp;Atenciosamente,<br></td></tr><tr><td><br>&nbsp;&nbsp;" +

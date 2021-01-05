@@ -144,6 +144,12 @@
                                                     {
                                                         <a href="#" id="inEfetuarPedido" class="btn blue button-submit" style="display:none;"><i class="fas fa-file-signature"></i> Fazer Pedido</a>
                                                         <a href="#" id="inCancelarPedido" class="btn btn-danger" style=""><i class="far fa-window-close"></i> Cancelar Pedido</a>
+
+                                                        <!--
+                                                        BOTÃO inConfirmarEntregaPedido  ==> SÓ EXIBIR APÓS A CONFIRMAÇÃO DO PEDIDO PELO FORNECEDOR <-- CONTINUAR AQUI...
+                                                        -->
+
+                                                        <a href="#" id="inConfirmarEntregaPedido" class="btn blue" style="" title="Confirmar Itens do Pedido já entregues"><i class="fas fa-box-open"></i></a>
                                                     }
                                                 }
                                                 else
@@ -793,6 +799,7 @@
                                             $('.check').hide();
                                             $('#inEfetuarPedido').hide();
                                             $('#inCancelarPedido').show();
+                                            $('#inConfirmarEntregaPedido').show();
                                         }
                                     }
                                 }
@@ -902,6 +909,7 @@
 
                                                 if (data.pedidoExcluido == "sim") {
                                                     $('#inCancelarPedido').hide();
+                                                    $('#inConfirmarEntregaPedido').hide();
                                                     $('#checkall').show();
                                                     $('#inEfetuarPedido').show();
                                                 }
@@ -917,6 +925,11 @@
 
                     });
             }
+        });
+
+        //CONFIRMAR ENTREGA TOTAL OU PARCIAL DO PEDIDO
+        $("#inConfirmarEntregaPedido").click(function () {
+            swal({ title: 'ATENÇÃO:\n\nEm CONTRUÇÃO.', type: "warning", confirmButtonColor: "#337ab7" });
         });
 
         //SELECIONAR TODOS
@@ -1214,6 +1227,7 @@
 
                                             if (data.todosItensPedidos == "nao") {
                                                 $('#inCancelarPedido').hide();
+                                                $('#inConfirmarEntregaPedido').hide();
                                                 $('#checkall').show();
                                                 $('#inEfetuarPedido').show();
                                             }
@@ -1221,6 +1235,7 @@
                                                 $('.check').hide();
                                                 $('#inEfetuarPedido').hide();
                                                 $('#inCancelarPedido').show();
+                                                $('#inConfirmarEntregaPedido').show();
                                             }
 
                                             //$('#gridItensCotadosRespondidos').bootgrid('reload');

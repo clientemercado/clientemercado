@@ -2165,13 +2165,6 @@ namespace ClienteMercado.Areas.Company.Controllers
         public JsonResult CancelarOPedidoDoItemAoFornecedor(int cCC, int iCM, int iCCF, string codsProdutosNegociacao, string codsItensIndividuais, 
             string somaItensDoPedido, int idPedido, string motivoCancelamento)
         {
-            /*
-             OBS: INFORMAR NO E-MAIL A DESCRIÇÃO DO ITEN QUE ESTÁ TENDO SEU PEDIDO CANCELADO...             
-
-                CONTINUAR AQUI...
-             */
-
-
             try
             {
                 bool itemPedidoExcluido = false;
@@ -2201,8 +2194,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 var resultado = new { itemExcluido = "nao", todosItensPedidos = "", mensagemStatus = "" };
 
-                string[] listaIDsItensNegociacaoPedidosAExcluir;
-                string[] listaItensIndividuaisCotacao;
+                string[] listaIDsItensNegociacaoPedidosAExcluir, listaItensIndividuaisCotacao;
                 listaIDsItensNegociacaoPedidosAExcluir = codsProdutosNegociacao.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 listaItensIndividuaisCotacao = codsItensIndividuais.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
@@ -2218,6 +2210,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NEmpresaUsuarioService empresaUsuarioService = new NEmpresaUsuarioService();
                 pedido_central_compras dadosPedidoCC = new pedido_central_compras();
                 itens_cotacao_individual_empresa_central_compras itemPedidoDetalhes = new itens_cotacao_individual_empresa_central_compras();
+                ItemASerCanceladoOPedidoDetalhesViewModel dadosDoItemCancelado = new ItemASerCanceladoOPedidoDetalhesViewModel();
 
                 //EXCLUIR o ITEM do PEDIDO / ATUALIZAR VALOR do PEDIDO
                 for (int i = 0; i < listaIDsItensNegociacaoPedidosAExcluir.Length; i++)
@@ -2242,6 +2235,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                         //DESFAZER SETAR PRODUTO da COTAÇÃO INDIVIDUAL como PEDIDO
                         itemPedidoDetalhes = 
                             negociosItensCotacaoindividualEmpresaCC.DesfazimentoDeItemComoPedido(Convert.ToInt32(listaItensIndividuaisCotacao[i]), idPedido);
+
+                        dadosDoItemCancelado = CarregarDetalhesDoItem(itemPedidoDetalhes);
                     }
                 }
 
@@ -2323,7 +2318,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
                     email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoCancelamento, dadosEmpresaFornecedora.nomeEmpresa,
                     usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn, 
-                    dadosPedidoCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS);
+                    dadosPedidoCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS, dadosDoItemCancelado);
 
                 //---------------------------------------------------------------------------------------------
                 //ENVIANDO SMS´s
@@ -2481,6 +2476,29 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
+        //CARREGA OS DETALHES DO ITEM DE PEDIDO A SER CANCELADO
+        private ItemASerCanceladoOPedidoDetalhesViewModel CarregarDetalhesDoItem(itens_cotacao_individual_empresa_central_compras itemPedidoDetalhes)
+        {
+            NProdutosServicosEmpresaProfissionalService serviceProdutos = new NProdutosServicosEmpresaProfissionalService();
+            NEmpresasFabricantesMarcasService serviceMarca = new NEmpresasFabricantesMarcasService();
+            NUnidadesProdutosService serviceUnidade = new NUnidadesProdutosService();
+            NEmpresasProdutosEmbalagensService serviceEmbalagem = new NEmpresasProdutosEmbalagensService();
+            ItemASerCanceladoOPedidoDetalhesViewModel dadosDoItem = new ItemASerCanceladoOPedidoDetalhesViewModel();
+
+            produtos_servicos_empresa_profissional dadosProduto = 
+                serviceProdutos.ConsultarDadosDoProdutoDaCotacao(itemPedidoDetalhes.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS);
+            unidades_produtos dadosUnidade = serviceUnidade.ConsultarDadosDaUnidadeDoProduto(itemPedidoDetalhes.ID_CODIGO_UNIDADE_PRODUTO);
+            empresas_produtos_embalagens dadosEmbalagem = serviceEmbalagem.ConsultarDadosDaEmbalagemDoProduto(itemPedidoDetalhes.ID_EMPRESAS_PRODUTOS_EMBALAGENS);
+
+            dadosDoItem.descricaoItem = dadosProduto.DESCRICAO_PRODUTO_SERVICO;
+            dadosDoItem.marca = serviceMarca.ConsultarDescricaoDaEmpresaFabricanteOuMarca(itemPedidoDetalhes.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS);
+            dadosDoItem.quantidadeItem = itemPedidoDetalhes.QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS.ToString();
+            dadosDoItem.unidadeItem = dadosUnidade.DESCRICAO_UNIDADE_PRODUTO;
+            dadosDoItem.embalagemItem = dadosEmbalagem.DESCRICAO_PRODUTO_EMBALAGEM;
+
+            return dadosDoItem;
+        }
+
         //CANCELAR TODO o PEDIDO ENVIADO ao FORNECEDOR
         public JsonResult CancelarOPedidoEnviadoAoFornecedor(int cCC, int iCM, int iCCF, int idPedido, string aceitouCP, string motivoCancelamento)
         {
@@ -2521,6 +2539,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NItensPedidoCentralComprasService negociosItensPedidoCC = new NItensPedidoCentralComprasService();
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMasterCC = new NCotacaoMasterCentralDeComprasService();
                 NEmpresaUsuarioService empresaUsuarioService = new NEmpresaUsuarioService();
+                ItemASerCanceladoOPedidoDetalhesViewModel itemPedidoDetalhes = new ItemASerCanceladoOPedidoDetalhesViewModel();
 
                 //CARREGAR DADOS do PEDIDO
                 pedido_central_compras dadosDoPedido = negociosPedidosCC.ConsultarDadosDoPedidoPeloCodigo(idPedido);
@@ -2625,7 +2644,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                                 telefone1EmpresaADM, telefone2EmpresaADM, telefone1UsuarioADM, telefone2UsuarioADM, email1_EmpresaAdmCC, email2_EmpresaAdmCC,
                                 email1_UsuarioContatoAdmCC, dataEnvioPedido, numeroPedido, motivoCancelamento, dadosEmpresaFornecedora.nomeEmpresa,
                                 usuarioFornAInformar, email1_EmpresaForn, email2_EmpresaForn, email1_UsuarioContatoForn, email2_UsuarioContatoForn, 
-                                dadosDoPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS);
+                                dadosDoPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS, itemPedidoDetalhes);
 
                             //---------------------------------------------------------------------------------------------
                             //ENVIANDO SMS´s

@@ -15,27 +15,22 @@ namespace ClienteMercado.Data.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_CODIGO_PEDIDO_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public int ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public int ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public decimal VALOR_PEDIDO_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public System.DateTime DATA_PEDIDO_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public System.DateTime DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public bool CONFIRMADO_PEDIDO_CENTRAL_COMPRAS { get; set; }
         public int? ID_FORMA_PAGAMENTO { get; set; }
         public int? ID_TIPO_FRETE { get; set; }
         public string COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS { get; set; }
+        public bool PEDIDO_ENTREGUE { get; set; }
 
         [ForeignKey("ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS")]
         public virtual cotacao_master_central_compras cotacao_master_central_compras { get; set; }

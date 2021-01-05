@@ -9,28 +9,19 @@ namespace ClienteMercado.Data.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public int ID_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public int ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS { get; set; }
-
         [Required]
         public int ID_CODIGO_UNIDADE_PRODUTO { get; set; }
-
         public int ID_CODIGO_PEDIDO_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public int ID_CODIGO_EMPRESA_FABRICANTE_MARCAS { get; set; }
-
         [Required]
         public decimal QUANTIDADE_ITENS_COTACAO_CENTRAL_COMPRAS { get; set; }
-
         //public bool PEDIDO_ITENS_COTACAO_CENTRAL_COMPRAS { get; set; }
-
         public int? ID_EMPRESA_FORNECEDORA_PEDIDO { get; set; }
-
         [Required]
         public int ID_EMPRESAS_PRODUTOS_EMBALAGENS { get; set; }
 

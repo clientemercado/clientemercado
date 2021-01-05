@@ -9,15 +9,13 @@ namespace ClienteMercado.Data.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_CODIGO_ITENS_PEDIDO_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public int ID_CODIGO_PEDIDO_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public int ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS { get; set; }
-
         [Required]
         public int ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS { get; set; }
+        public bool ITEM_PEDIDO_ENTREGUE { get; set; }
 
         [ForeignKey("ID_CODIGO_PEDIDO_CENTRAL_COMPRAS")]
         public virtual pedido_central_compras pedido_central_compras { get; set; }

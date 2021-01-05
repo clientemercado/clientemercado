@@ -95,6 +95,7 @@
     <Compile Include="Utilitarios\MensagensTemp.cs" />
     <Compile Include="Validation\Validacoes.cs" />
     <Compile Include="ViewModel\DadosDaCentralComprasViewModel.cs" />
+    <Compile Include="ViewModel\ItemASerCanceladoOPedidoDetalhesViewModel.cs" />
     <Compile Include="ViewModel\ListaCentraisComprasViewModel.cs" />
     <Compile Include="ViewModel\ListaDadosDeLocalizacaoViewModel.cs" />
     <Compile Include="ViewModel\ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel.cs" />
