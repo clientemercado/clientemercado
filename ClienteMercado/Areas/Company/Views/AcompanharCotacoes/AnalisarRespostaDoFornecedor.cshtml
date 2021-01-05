@@ -145,11 +145,10 @@
                                                         <a href="#" id="inEfetuarPedido" class="btn blue button-submit" style="display:none;"><i class="fas fa-file-signature"></i> Fazer Pedido</a>
                                                         <a href="#" id="inCancelarPedido" class="btn btn-danger" style=""><i class="far fa-window-close"></i> Cancelar Pedido</a>
 
-                                                        <!--
-                                                        BOTÃO inConfirmarEntregaPedido  ==> SÓ EXIBIR APÓS A CONFIRMAÇÃO DO PEDIDO PELO FORNECEDOR <-- CONTINUAR AQUI...
-                                                        -->
-
-                                                        <a href="#" id="inConfirmarEntregaPedido" class="btn blue" style="" title="Confirmar Itens do Pedido já entregues"><i class="fas fa-box-open"></i></a>
+                                                        if (ViewBag.fornecedorConfirmouPedido)
+                                                        {
+                                                            <a href="#" id="inConfirmarEntregaPedido" class="btn blue" style="" title="Confirmar Itens do Pedido já entregues"><i class="fas fa-box-open"></i></a>
+                                                        }
                                                     }
                                                 }
                                                 else
@@ -168,7 +167,6 @@
                                                 }
                                                 else
                                                 {
-                                                    @*<a href="#" id="inConfirmarAceiteDaNegociacao" class="btn btn-warning"><i class="fas fa-search"></i> Cotação em Análise</a>*@
                                                     <a href="#" id="" class="btn btn-warning"><i class="fas fa-search"></i> Cotação em Análise</a>
                                                 }
                                             }
@@ -336,6 +334,63 @@
 
                 </div>
             </form>
+
+            <!-- ================================================================================================================ -->
+            <!-- CONTINUAR AQUI... -->
+            <div id="modalBaixaPedido" class="modal fade" role="dialog">
+                <br /><br /><br />
+                <div class="modal-dialog modal-lg" style="width:70%">
+                    <div class="modal-content">
+
+                        <div class="modal-header" style="background-color: #337ab7">
+                            <a><i type="button" class="glyphicon glyphicon-remove" data-dismiss="modal" style="color:#fff; position: absolute;top:8px;right: 8px;"></i></a>
+                            <h4 class="modal-title" style="text-align:left;"><font color=white><i class="fas fa-edit"></i> Baixa(s) do(s) PEDIDO(s):</font></h4>
+                        </div>
+
+                        <div class="portlet-body form">
+                            <div class="row">
+                                <div class="form-body">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><b>Descrição:</b></label>
+                                                <input type='text' id='inDescFormaPgto' size='100' value="" maxlength="100" class='form-control obrigatorio2' placeholder="Informe descrição..." style='' onclick='' />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label><b>Qtd Parcelas:</b></label>
+                                                <input type='text' id='inQuantParcelas' size='5' value="" maxlength="3" class='form-control obrigatorio2' placeholder="Nº parcelas..." style='' onclick='' />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label><b>1º Prazo:</b></label>
+                                                <input type='text' id='inPrimeiroIntervalo' size='5' value="" maxlength="3" class='form-control obrigatorio2' placeholder="Nº dias..." style='' onclick='' />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label><b>Demais Prazos:</b></label>
+                                                <input type='text' id='inDemaisIntervalos' size='5' value="" maxlength="3" class='form-control obrigatorio2' style='' placeholder="Nº dias..." onclick='' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <a href="#" id="inGravarFormaPgto" class="btn blue button-submit botoes" style=''><i class="far fa-save"></i> Gravar</a>
+                                        </div>
+                                        <div class="col-md-8">&nbsp;</div>
+                                    </div>
+                                    <div class="col-md-12">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- ================================================================================================================ -->
 
             <input type="hidden" id="inCCC" value="@Model.cCC" />
             <input type="hidden" id="ineA" value="@Model.ineACriptografado" />
@@ -929,7 +984,11 @@
 
         //CONFIRMAR ENTREGA TOTAL OU PARCIAL DO PEDIDO
         $("#inConfirmarEntregaPedido").click(function () {
-            swal({ title: 'ATENÇÃO:\n\nEm CONTRUÇÃO.', type: "warning", confirmButtonColor: "#337ab7" });
+            $("#modalBaixaPedido").modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            });
         });
 
         //SELECIONAR TODOS

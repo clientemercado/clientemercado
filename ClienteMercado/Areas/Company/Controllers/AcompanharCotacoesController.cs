@@ -715,6 +715,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                         ViewBag.codControlePedido = estaCotacaoRecebeuPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS;
                     }
 
+                    ViewBag.fornecedorConfirmouPedido = dadosCotacaoFilha.CONFIRMOU_PEDIDO;
+
                     if (dadosCotacaoFilha.REJEITOU_PEDIDO)
                     {
                         viewModelAnalisarResposta.rejeitouPedido = "sim";
