@@ -1194,7 +1194,6 @@
                 somaItensPedido += parseFloat(totalItemPedido);
             });
 
-            //=============================================================================
             var motivoCancelamento = "";
 
             swal({
@@ -1292,7 +1291,112 @@
                             }
                         });
                 });
-            //=============================================================================
         };
     };
+
+    $("#inConfirmarBaixa").click(function () {
+        var primeiroCampo = "";
+        var qtdCamposVazios = 0;
+        var $inputsObrigatorios = $('.obrigatorio');
+        $inputsObrigatorios.each(function () {
+            $(this).css({ "border": "1px solid #ccc", "padding": "2px" });
+            if ($(this).hasClass("obrigatorio")) {
+                if (($(this).val() == "") || (parseFloat($(this).val()) == 0)) {
+                    $(this).css({ "border": "1px solid #F00", "padding": "2px" });
+                    qtdCamposVazios++;
+
+                    if (primeiroCampo == "") {
+                        primeiroCampo = $(this).attr('id');
+                    }
+                }
+            }
+        });
+
+        if (qtdCamposVazios == 0) {
+            swal({
+                title: "ATENÇÃO!!\n\n",
+                text: "Confirma a BAIXA do PEDIDO selecionado?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#337ab7",
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
+                closeOnConfirm: true,
+                html: true
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        debugger;
+
+                        alert('EFETUANDO BAIXA!!!');   //CONTINUAR AQUI... CONSTRUIR AJAX DA BAIXA... TESTAR EXECUÇÃO DA FUNCIONALIDADE ATÉ AQUI...
+
+                        @* $.ajax({
+                            url: "/AcompanharCotacoes/CancelarOPedidoDoItemAoFornecedor",
+                            dataType: 'json',
+                            cache: false,
+                            async: true,
+                            data: {
+                                'cCC': $('#inCCC').val(),
+                                'iCM': $("#inICM").val(),
+                                'iCCF': $('#iniCCF').val(),
+                                'codsProdutosNegociacao': codsProdsPedidos,
+                                'codsItensIndividuais': codsIndividuais,
+                                'somaItensDoPedido': somaItensPedido,
+                                'idPedido': $('#inIdPedidoRecebido').val(),
+                                'motivoCancelamento': motivoCancelamento
+                            },
+                            success: function (data) {
+                                debugger;
+
+                                if (data.itemExcluido == "sim") {
+                                    $('#inMensagemStatus').html("");
+                                    $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + data.mensagemStatus);
+
+                                    $(".itemcotado").attr("checked", false);
+
+                                    //EXIBE MSG LATERAL À DIREITA SUPERIOR
+                                    new PNotify({
+                                        title: 'SUCESSO!',
+                                        text: 'O ITEM selecionado foi removido do PEDIDO com sucesso!',
+                                        type: 'success',
+                                        styling: 'bootstrap3',
+                                        icons: 'bootstrap3',
+                                        addclass: 'customsuccess',
+                                        animateSpeed: 'fast',
+                                        mouseReset: true,
+                                        Buttons: {
+                                            closer: true
+                                        }
+                                    });
+
+                                    if (data.todosItensPedidos == "nao") {
+                                        $('#inCancelarPedido').hide();
+                                        $('#inConfirmarEntregaPedido').hide();
+                                        $('#checkall').show();
+                                        $('#inEfetuarPedido').show();
+                                    }
+                                    else {
+                                        $('.check').hide();
+                                        $('#inEfetuarPedido').hide();
+                                        $('#inCancelarPedido').show();
+                                        $('#inConfirmarEntregaPedido').show();
+                                    }
+
+                                    //$('#gridItensCotadosRespondidos').bootgrid('reload');
+                                    //RECARREGAR a PÁGINA
+                                    window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
+                                }
+                            }
+                        });*@
+                    }
+                    else {
+                        debugger;
+                        $('#inListaPedidosBaixa').val(0);
+                    }
+                });
+        }
+        else {
+            swal({ title: 'ATENÇÃO:\n\nSelecione pelo menos o Nº de um PEDIDO para dar BAIXA.', type: "warning", confirmButtonColor: "#337ab7" });
+        }
+    });
 </script>
