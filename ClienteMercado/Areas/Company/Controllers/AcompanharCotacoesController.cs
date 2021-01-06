@@ -599,7 +599,10 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //---------------------------------------------------------------------------------------------------------------------------
                     //VERIFICAR TODOS os PEDIDOS para ESTA COTAÇÃO
+                    List<SelectListItem> listaPedidosBaixa = new List<SelectListItem>();
                     List<pedido_central_compras> listaDePedidosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosParaACotacao(iCM);
+
+                    listaPedidosBaixa.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
 
                     for (int i = 0; i < listaDePedidosParaACotacao.Count; i++)
                     {
@@ -611,7 +614,15 @@ namespace ClienteMercado.Areas.Company.Controllers
                         {
                             idsPedidos = (idsPedidos + "," + listaDePedidosParaACotacao[i].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS.ToString());
                         }
+
+                        listaPedidosBaixa.Add(new SelectListItem
+                        {
+                            Text = listaDePedidosParaACotacao[i].COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS,
+                            Value = listaDePedidosParaACotacao[i].ID_CODIGO_PEDIDO_CENTRAL_COMPRAS.ToString()
+                        });
                     }
+
+                    viewModelAnalisarResposta.inListaPedidosBaixa = (listaPedidosBaixa != null) ? listaPedidosBaixa : null;
 
                     //BUSCAR LISTA de ITENS PEDIDOS
                     List<itens_pedido_central_compras> listaDeItensPedidos = new List<itens_pedido_central_compras>();

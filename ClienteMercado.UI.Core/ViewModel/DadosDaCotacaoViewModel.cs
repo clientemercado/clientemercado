@@ -50,6 +50,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string rejeitouPedido { get; set; }
         public List<SelectListItem> inListaDeFormasPagamento { get; set; }
         public List<SelectListItem> inListaTiposFrete { get; set; }
+        public List<SelectListItem> inListaPedidosBaixa { get; set; }
         public string inDataEntrega { get; set; }
     }
 }
