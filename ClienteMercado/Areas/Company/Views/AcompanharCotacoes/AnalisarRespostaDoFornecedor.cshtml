@@ -338,7 +338,7 @@
             <!-- ================================================================================================================ -->
             <div id="modalBaixaPedido" class="modal fade" role="dialog">
                 <br /><br /><br />
-                <div class="modal-dialog modal-lg" style="width:40%">
+                <div class="modal-dialog modal-lg" style="width:50%">
                     <div class="modal-content">
 
                         <div class="modal-header" style="background-color: #337ab7">
@@ -356,12 +356,17 @@
                                                 @Html.DropDownList("inListaPedidosBaixa", Model.inListaPedidosBaixa, new { @class = "form-control obrigatorio", @id = "inListaPedidosBaixa" })
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label><b>Dt. Entrega:</b></label>
+                                                <input type='text' id='inDataEntrega' size='10' value="" maxlength="10" class='form-control data info obrigatorio' placeholder="DD/MM/AAAA" style='' onclick='' />
+                                            </div>
+                                        </div>
                                         <div class="col-md-2">
                                             <label>&nbsp;</label>
                                             <br />
                                             <a href="#" id="inConfirmarBaixa" class="btn blue button-submit botoes" style=''><i class='fas fa-check'></i> Baixar</a>
                                         </div>
-                                        <div class="col-md-4"></div>
                                     </div>
                                     <div class="col-md-12">&nbsp;</div>
                                 </div>
@@ -411,6 +416,9 @@
     jQuery(document).ready(function () {
         carregarGrid();
         carregarChat();
+
+        $(".data").mask("99/99/9999");
+        $('.monetario').mask('000.000.000.000.000,00', { reverse: true });
 
         if ($('#inRejeitouPedido').val() == "sim") {
             swal({ title: "ATENÇÃO:<br><br>Este fornecedor DESISTIU de atender um PEDIDO para esta COTAÇÃO.", type: "warning", confirmButtonColor: "#337ab7", html: true });
@@ -1340,7 +1348,8 @@
                                 'cCC': $('#inCCC').val(),
                                 'iCM': $("#inICM").val(),
                                 'iCCF': $('#iniCCF').val(),
-                                'idPedidoABaixar': $('#inListaPedidosBaixa').val()
+                                'idPedidoABaixar': $('#inListaPedidosBaixa').val(),
+                                'dataEntrega': $('#inDataEntrega').val()
                             },
                             success: function (data) {
                                 debugger;
@@ -1377,7 +1386,7 @@
                 });
         }
         else {
-            swal({ title: 'ATENÇÃO:\n\nSelecione pelo menos o Nº de um PEDIDO para dar BAIXA.', type: "warning", confirmButtonColor: "#337ab7" });
+            swal({ title: 'ATENÇÃO:\n\nOs campos:\n\n - Nº Pedido a baixar:\n - Dt. Entrega:\n\n devem ser preenchidos.', type: "warning", confirmButtonColor: "#337ab7" });
         }
     });
 </script>

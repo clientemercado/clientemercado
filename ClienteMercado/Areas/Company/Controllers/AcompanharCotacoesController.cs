@@ -2784,7 +2784,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //=================================================================
-        public JsonResult EfetuarBaixaDoPedidoEntregue(int cCC, string eA, int iCM, int iCCF, int idPedidoABaixar)
+        public JsonResult EfetuarBaixaDoPedidoEntregue(int cCC, string eA, int iCM, int iCCF, int idPedidoABaixar, string dataEntrega)
         {
             try
             {
