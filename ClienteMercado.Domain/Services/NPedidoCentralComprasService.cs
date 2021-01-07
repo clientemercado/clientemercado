@@ -62,5 +62,11 @@ namespace ClienteMercado.Domain.Services
         {
             return dPedidoCC.GerarCodigoControleDoPedido(cCC);
         }
+
+        //BAIXAR o PEDIDO
+        public pedido_central_compras DarBaixaNoPedido(int idPedidoABaixar)
+        {
+            return dPedidoCC.DarBaixaNoPedido(idPedidoABaixar);
+        }
     }
 }

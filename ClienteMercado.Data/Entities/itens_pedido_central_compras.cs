@@ -16,6 +16,7 @@ namespace ClienteMercado.Data.Entities
         [Required]
         public int ID_ITENS_COTACAO_INDIVIDUAL_EMPRESA_CENTRAL_COMPRAS { get; set; }
         public bool ITEM_PEDIDO_ENTREGUE { get; set; }
+        public System.DateTime? DATA_ENTREGA_ITEM { get; set; }
 
         [ForeignKey("ID_CODIGO_PEDIDO_CENTRAL_COMPRAS")]
         public virtual pedido_central_compras pedido_central_compras { get; set; }

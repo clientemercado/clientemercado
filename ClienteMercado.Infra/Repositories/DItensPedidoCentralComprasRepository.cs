@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,6 +56,32 @@ namespace ClienteMercado.Infra.Repositories
             }
 
             return itemPedidoExcluido;
+        }
+
+        //BAIXAR ITEM(s) DO PEDIDO
+        public List<itens_pedido_central_compras> InformarRecebimentoDoItemDoPedido(int idPedidoABaixar, string dataEntrega)
+        {
+            try
+            {
+                dataEntrega = 
+                    Convert.ToDateTime(dataEntrega).Year.ToString() + "-" + Convert.ToDateTime(dataEntrega).Month.ToString() + "-" + Convert.ToDateTime(dataEntrega).Day.ToString();
+
+                List<itens_pedido_central_compras> listaDeItensPedido =
+                    _contexto.itens_pedido_central_compras.Where(m => (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedidoABaixar)).ToList();
+
+                for (int i = 0; i < listaDeItensPedido.Count; i++)
+                {
+                    listaDeItensPedido[i].DATA_ENTREGA_ITEM = Convert.ToDateTime(dataEntrega);
+                }
+
+                _contexto.SaveChanges();
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+
+            throw new System.NotImplementedException();
         }
 
         //EXCLUIR TODOS os ITENS do PEDIDO

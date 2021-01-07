@@ -494,7 +494,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     usuarioFornecedor = (usuarioFornecedor + " / " + dadosContatoUsuarioEmpresaFornecedora.EMAIL1_USUARIO);
 
-                    //---------------------------------------------------------------------------------------------
                     //Busca os dados do CHAT entre a EMPRESA COTANTE e a EMPRESA FORNECEDORA
                     List<chat_cotacao_central_compras> listaConversasApuradasNoChat =
                         negociosChatCotacaoCentralCompras.BuscarChatEntreEmpresaCotanteEFornecedor(dadosCotacaoFilha.ID_CODIGO_COTACAO_FILHA_CENTRAL_COMPRAS);
@@ -518,7 +517,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     {
                         mensagem = "naoTem";
                     }
-                    //---------------------------------------------------------------------------------------------
 
                     //POPULAR VIEW MODEL
                     viewModelAnalisarResposta.cCC = cCC;
@@ -597,7 +595,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                         viewModelAnalisarResposta.inAceitouContraProposta = "nao";
                     }
 
-                    //---------------------------------------------------------------------------------------------------------------------------
                     //VERIFICAR TODOS os PEDIDOS para ESTA COTAÇÃO
                     List<SelectListItem> listaPedidosBaixa = new List<SelectListItem>();
                     List<pedido_central_compras> listaDePedidosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosParaACotacao(iCM);
@@ -642,7 +639,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                         textoMsgStatus = "PEDIDO PARCIAL FEITO&nbsp;";
                     }
-                    //---------------------------------------------------------------------------------------------------------------------------
 
                     percentualIdealConfirmado = ((cotacoesIndividuaisDasEmpresasDaCC.Count * 100) / 100);
 
@@ -2784,15 +2780,23 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
 
         //=================================================================
+        /*
+         TESTAR A BAIXA DO PEDIDO... CONTINUAR AQUI...         
+         */
+
+        //EFETUAR A BAIXA DO PEDIDO COMO ENTREGUE
         public JsonResult EfetuarBaixaDoPedidoEntregue(int cCC, string eA, int iCM, int iCCF, int idPedidoABaixar, string dataEntrega)
         {
             try
             {
                 var resultado = new { pedidoBaixado = "nao" };
 
-                /*
-                 AQUI ENTRAM OS DETALHES DA BAIXA DO PEDIDO... CONTINUAR AQUI...
-                 */
+                NPedidoCentralComprasService servicePedido = new NPedidoCentralComprasService();
+                NItensPedidoCentralComprasService serviceItensPedido = new NItensPedidoCentralComprasService();
+
+                //BAIXAR ITEM(s) DO PEDIDO / PEDIDO
+                List<itens_pedido_central_compras> listaItensPedidoBaixados = serviceItensPedido.InformarRecebimentoDoItemDoPedido(idPedidoABaixar, dataEntrega);
+                pedido_central_compras dadosDoPedido = servicePedido.DarBaixaNoPedido(idPedidoABaixar);
 
                 resultado = new { pedidoBaixado = "sim" };
 

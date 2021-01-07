@@ -72,6 +72,28 @@ namespace ClienteMercado.Infra.Repositories
             }
         }
 
+        //BAIXAR o PEDIDO
+        public pedido_central_compras DarBaixaNoPedido(int idPedidoABaixar)
+        {
+            try
+            {
+                pedido_central_compras dadosDoPedido = 
+                    _contexto.pedido_central_compras.FirstOrDefault(m => (m.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS == idPedidoABaixar));
+
+                if (dadosDoPedido != null)
+                {
+                    dadosDoPedido.PEDIDO_ENTREGUE = true;
+                    _contexto.SaveChanges();
+                }
+
+                return dadosDoPedido;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         //GERAR NOVO CODIGO de CONTROLE do PEDIDO
         public string GerarCodigoControleDoPedido(int cCC)
         {

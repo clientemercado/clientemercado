@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
@@ -42,6 +43,12 @@ namespace ClienteMercado.Domain.Services
         public bool ExcluirTodosOsItensDoPedido(int idPedido)
         {
             return repositoryItensPedidoCC.ExcluirTodosOsItensDoPedido(idPedido);
+        }
+
+        //BAIXAR ITEM(s) DO PEDIDO
+        public List<itens_pedido_central_compras> InformarRecebimentoDoItemDoPedido(int idPedidoABaixar, string dataEntrega)
+        {
+            return repositoryItensPedidoCC.InformarRecebimentoDoItemDoPedido(idPedidoABaixar, dataEntrega);
         }
     }
 }
