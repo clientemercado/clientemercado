@@ -336,7 +336,6 @@
             </form>
 
             <!-- ================================================================================================================ -->
-            <!-- OBS: CONSTRUIR COMPORTAMENTOS DO BOTÃO BAIXAR. <=== CONTINUAR AQUI... -->
             <div id="modalBaixaPedido" class="modal fade" role="dialog">
                 <br /><br /><br />
                 <div class="modal-dialog modal-lg" style="width:40%">
@@ -1332,10 +1331,8 @@
                     if (isConfirm) {
                         debugger;
 
-                        alert('EFETUANDO BAIXA!!!');   //CONTINUAR AQUI... CONSTRUIR AJAX DA BAIXA... TESTAR EXECUÇÃO DA FUNCIONALIDADE ATÉ AQUI...
-
-                        @* $.ajax({
-                            url: "/AcompanharCotacoes/CancelarOPedidoDoItemAoFornecedor",
+                         $.ajax({
+                             url: "/AcompanharCotacoes/EfetuarBaixaDoPedidoEntregue",
                             dataType: 'json',
                             cache: false,
                             async: true,
@@ -1343,25 +1340,16 @@
                                 'cCC': $('#inCCC').val(),
                                 'iCM': $("#inICM").val(),
                                 'iCCF': $('#iniCCF').val(),
-                                'codsProdutosNegociacao': codsProdsPedidos,
-                                'codsItensIndividuais': codsIndividuais,
-                                'somaItensDoPedido': somaItensPedido,
-                                'idPedido': $('#inIdPedidoRecebido').val(),
-                                'motivoCancelamento': motivoCancelamento
+                                'idPedidoABaixar': $('#inListaPedidosBaixa').val()
                             },
                             success: function (data) {
                                 debugger;
 
-                                if (data.itemExcluido == "sim") {
-                                    $('#inMensagemStatus').html("");
-                                    $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + data.mensagemStatus);
-
-                                    $(".itemcotado").attr("checked", false);
-
+                                if (data.pedidoBaixado == "sim") {
                                     //EXIBE MSG LATERAL À DIREITA SUPERIOR
                                     new PNotify({
                                         title: 'SUCESSO!',
-                                        text: 'O ITEM selecionado foi removido do PEDIDO com sucesso!',
+                                        text: 'PEDIDO Nº 000001 da BAIXADO com Sucesso!', //<-- OBS: NÚMERO DO PEDIDO DEVE SER DINÂMICO
                                         type: 'success',
                                         styling: 'bootstrap3',
                                         icons: 'bootstrap3',
@@ -1373,25 +1361,14 @@
                                         }
                                     });
 
-                                    if (data.todosItensPedidos == "nao") {
-                                        $('#inCancelarPedido').hide();
-                                        $('#inConfirmarEntregaPedido').hide();
-                                        $('#checkall').show();
-                                        $('#inEfetuarPedido').show();
-                                    }
-                                    else {
-                                        $('.check').hide();
-                                        $('#inEfetuarPedido').hide();
-                                        $('#inCancelarPedido').show();
-                                        $('#inConfirmarEntregaPedido').show();
-                                    }
+                                    $('#modalBaixaPedido').modal('toggle');
 
-                                    //$('#gridItensCotadosRespondidos').bootgrid('reload');
+                                    @*//$('#gridItensCotadosRespondidos').bootgrid('reload');
                                     //RECARREGAR a PÁGINA
-                                    window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
+                                    window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();*@
                                 }
                             }
-                        });*@
+                        });
                     }
                     else {
                         debugger;

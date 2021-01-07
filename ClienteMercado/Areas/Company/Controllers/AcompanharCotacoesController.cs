@@ -2782,5 +2782,27 @@ namespace ClienteMercado.Areas.Company.Controllers
                 throw e;
             }
         }
+
+        //=================================================================
+        public JsonResult EfetuarBaixaDoPedidoEntregue(int cCC, string eA, int iCM, int iCCF, int idPedidoABaixar)
+        {
+            try
+            {
+                var resultado = new { pedidoBaixado = "nao" };
+
+                /*
+                 AQUI ENTRAM OS DETALHES DA BAIXA DO PEDIDO... CONTINUAR AQUI...
+                 */
+
+                resultado = new { pedidoBaixado = "sim" };
+
+                return Json(resultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        //=================================================================
     }
 }
