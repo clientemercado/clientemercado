@@ -344,7 +344,7 @@
 
                         <div class="modal-header" style="background-color: #337ab7">
                             <a><i type="button" class="glyphicon glyphicon-remove" data-dismiss="modal" style="color:#fff; position: absolute;top:8px;right: 8px;"></i></a>
-                            <h4 class="modal-title" style="text-align:left;"><font color=white><i class='fas fa-check'></i> Baixa do(s) PEDIDO(s) Entregue(s):</font></h4>
+                            <h4 class="modal-title" style="text-align:left;"><font color=white><i class="fas fa-list-ol"></i> Baixa do(s) PEDIDO(s) Entregue(s):</font></h4>
                         </div>
 
                         <div class="portlet-body form">
@@ -360,7 +360,7 @@
                                         <div class="col-md-2">
                                             <label>&nbsp;</label>
                                             <br />
-                                            <a href="#" id="inConfirmarBaixa" class="btn blue button-submit botoes" style=''><i class="far fa-save"></i> Baixar</a>
+                                            <a href="#" id="inConfirmarBaixa" class="btn blue button-submit botoes" style=''><i class='fas fa-check'></i> Baixar</a>
                                         </div>
                                         <div class="col-md-4"></div>
                                     </div>
@@ -1293,6 +1293,10 @@
                 });
         };
     };
+
+    $(".glyphicon-remove").click(function () {
+        $('.obrigatorio').css({ "border": "1px solid #ccc", "padding": "2px" });
+    });
 
     $("#inConfirmarBaixa").click(function () {
         var primeiroCampo = "";
