@@ -82,7 +82,7 @@ namespace ClienteMercado.Infra.Repositories
 
                 if (dadosDoPedido != null)
                 {
-                    dadosDoPedido.PEDIDO_ENTREGUE = true;
+                    dadosDoPedido.PEDIDO_ENTREGUE_FINALIZADO = true;
                     _contexto.SaveChanges();
                 }
 
@@ -151,6 +151,16 @@ namespace ClienteMercado.Infra.Repositories
         {
             List<pedido_central_compras> listaDePedidosDaCotacao =
                 _contexto.pedido_central_compras.Where(m => (m.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)).ToList();
+
+            return listaDePedidosDaCotacao;
+        }
+
+        //VERIFICAR TODOS os PEDIDOS para BAIXA NESTA COTAÇÃO
+        public List<pedido_central_compras> BuscarTodosOsPedidosParaBaixaNestaACotacao(int iCM)
+        {
+            List<pedido_central_compras> listaDePedidosDaCotacao =
+                _contexto.pedido_central_compras.Where(m => ((m.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS == iCM) 
+                && (m.PEDIDO_ENTREGUE_FINALIZADO == false))).ToList();
 
             return listaDePedidosDaCotacao;
         }

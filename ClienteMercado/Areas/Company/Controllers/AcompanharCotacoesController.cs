@@ -595,9 +595,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                         viewModelAnalisarResposta.inAceitouContraProposta = "nao";
                     }
 
-                    //VERIFICAR TODOS os PEDIDOS para ESTA COTAÇÃO
+                    //VERIFICAR TODOS os PEDIDOS para BAIAX NESTA COTAÇÃO
                     List<SelectListItem> listaPedidosBaixa = new List<SelectListItem>();
-                    List<pedido_central_compras> listaDePedidosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosParaACotacao(iCM);
+                    List<pedido_central_compras> listaDePedidosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosParaBaixaNestaACotacao(iCM);
 
                     listaPedidosBaixa.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
 
@@ -2779,11 +2779,6 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        //=================================================================
-        /*
-         TESTAR A BAIXA DO PEDIDO... CONTINUAR AQUI...         
-         */
-
         //EFETUAR A BAIXA DO PEDIDO COMO ENTREGUE
         public JsonResult EfetuarBaixaDoPedidoEntregue(int cCC, string eA, int iCM, int iCCF, int idPedidoABaixar, string dataEntrega)
         {
@@ -2807,6 +2802,5 @@ namespace ClienteMercado.Areas.Company.Controllers
                 throw e;
             }
         }
-        //=================================================================
     }
 }

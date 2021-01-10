@@ -68,5 +68,11 @@ namespace ClienteMercado.Domain.Services
         {
             return dPedidoCC.DarBaixaNoPedido(idPedidoABaixar);
         }
+
+        //VERIFICAR TODOS os PEDIDOS para BAIAX NESTA COTAÇÃO
+        public List<pedido_central_compras> BuscarTodosOsPedidosParaBaixaNestaACotacao(int iCM)
+        {
+            return dPedidoCC.BuscarTodosOsPedidosParaBaixaNestaACotacao(iCM);
+        }
     }
 }

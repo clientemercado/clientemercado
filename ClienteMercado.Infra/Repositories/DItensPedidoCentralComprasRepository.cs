@@ -71,17 +71,18 @@ namespace ClienteMercado.Infra.Repositories
 
                 for (int i = 0; i < listaDeItensPedido.Count; i++)
                 {
+                    listaDeItensPedido[i].ITEM_PEDIDO_ENTREGUE = true;
                     listaDeItensPedido[i].DATA_ENTREGA_ITEM = Convert.ToDateTime(dataEntrega);
                 }
 
                 _contexto.SaveChanges();
+
+                return listaDeItensPedido;
             }
             catch (System.Exception e)
             {
                 throw e;
             }
-
-            throw new System.NotImplementedException();
         }
 
         //EXCLUIR TODOS os ITENS do PEDIDO

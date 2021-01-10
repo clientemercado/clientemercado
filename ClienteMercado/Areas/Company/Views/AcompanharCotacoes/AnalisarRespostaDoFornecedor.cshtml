@@ -1371,6 +1371,15 @@
                                     });
 
                                     $('#modalBaixaPedido').modal('toggle');
+                                    $('#inConfirmarEntregaPedido').hide();
+
+                                    /*
+                                     OBS: CONTINUAR AQUI <---
+                                         2º) APÓS FINALIZAR O PEDIDO NO BANCO: 
+                                           - DESLIGAR TODOS OS CHECKBOX;
+                                           - EXIBIR MENSAGEM PEDIDO FINALIZADO EM A 'DATA MAIS RECENTE DA ENTREGA';
+                                           - SE TODOS OS ITENS JÁ TIVEREM SIDO PEDIDOS, MESMO QUE EM FORNECEDORES DIFERENTES, DESABILITAR BOTÃO 'FAZER PEDIDO';
+                                     */
 
                                     @*//$('#gridItensCotadosRespondidos').bootgrid('reload');
                                     //RECARREGAR a PÁGINA
