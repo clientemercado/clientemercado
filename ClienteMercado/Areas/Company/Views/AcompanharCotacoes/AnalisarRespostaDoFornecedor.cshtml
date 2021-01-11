@@ -1358,7 +1358,7 @@
                                     //EXIBE MSG LATERAL À DIREITA SUPERIOR
                                     new PNotify({
                                         title: 'SUCESSO!',
-                                        text: 'PEDIDO Nº 000001 da BAIXADO com Sucesso!', //<-- OBS: NÚMERO DO PEDIDO DEVE SER DINÂMICO
+                                        text: 'PEDIDO Nº ' + data.numeroPedido + ' RECEBIDO e BAIXADO com Sucesso!',
                                         type: 'success',
                                         styling: 'bootstrap3',
                                         icons: 'bootstrap3',
@@ -1375,6 +1375,8 @@
 
                                     /*
                                      OBS: CONTINUAR AQUI <---
+                                         1º) APÓS RECEBER E BAIXAR O PEDIDO:
+                                           - VERIFICAR COMPORTAMENTO DA EXIBIÇÃO DO BOTÃO 'FAZER PEDIDO' QUE NÃO DEVE MAIS SER EXIBIDO. O QUE ESTÁ CAUSANDO ISSO?
                                          2º) APÓS FINALIZAR O PEDIDO NO BANCO: 
                                            - DESLIGAR TODOS OS CHECKBOX;
                                            - EXIBIR MENSAGEM PEDIDO FINALIZADO EM A 'DATA MAIS RECENTE DA ENTREGA';

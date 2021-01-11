@@ -2784,7 +2784,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                var resultado = new { pedidoBaixado = "nao" };
+                var resultado = new { pedidoBaixado = "nao", numeroPedido = "" };
 
                 NPedidoCentralComprasService servicePedido = new NPedidoCentralComprasService();
                 NItensPedidoCentralComprasService serviceItensPedido = new NItensPedidoCentralComprasService();
@@ -2793,7 +2793,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 List<itens_pedido_central_compras> listaItensPedidoBaixados = serviceItensPedido.InformarRecebimentoDoItemDoPedido(idPedidoABaixar, dataEntrega);
                 pedido_central_compras dadosDoPedido = servicePedido.DarBaixaNoPedido(idPedidoABaixar);
 
-                resultado = new { pedidoBaixado = "sim" };
+                resultado = new { pedidoBaixado = "sim", numeroPedido = dadosDoPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS };
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
             }
