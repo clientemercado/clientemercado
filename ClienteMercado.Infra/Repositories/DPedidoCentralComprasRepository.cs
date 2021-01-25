@@ -165,6 +165,16 @@ namespace ClienteMercado.Infra.Repositories
             return listaDePedidosDaCotacao;
         }
 
+        //VERIFICAR TODOS os PEDIDOS BAIXADOS NESTA COTAÇÃO
+        public List<pedido_central_compras> BuscarTodosOsPedidosBaixadosParaEstaCotacao(int iCM)
+        {
+            List<pedido_central_compras> listaDePedidosDaCotacao =
+                _contexto.pedido_central_compras.Where(m => ((m.ID_CODIGO_COTACAO_MASTER_CENTRAL_COMPRAS == iCM)
+                && (m.PEDIDO_ENTREGUE_FINALIZADO == true))).ToList();
+
+            return listaDePedidosDaCotacao;
+        }
+
         //BUSCAR DADOS do PEDIDO - ATUALIZAR o VALOR TOTAL REGISTRADO para o PEDIDO
         public pedido_central_compras ConsultarDadosDoPedidoPeloCodigo(int idPedidoGeradoCC)
         {

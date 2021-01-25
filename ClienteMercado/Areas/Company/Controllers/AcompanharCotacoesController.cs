@@ -598,6 +598,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //VERIFICAR TODOS os PEDIDOS para BAIXA NESTA COTAÇÃO
                     List<SelectListItem> listaPedidosBaixa = new List<SelectListItem>();
                     List<pedido_central_compras> listaDePedidosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosParaBaixaNestaACotacao(iCM);
+                    List<pedido_central_compras> listaPedidosBaixadosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosBaixadosParaEstaCotacao(iCM);
 
                     listaPedidosBaixa.Add(new SelectListItem { Text = "Selecione...", Value = "0" });
 
@@ -682,7 +683,24 @@ namespace ClienteMercado.Areas.Company.Controllers
                             }
                             else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
                             {
-                                viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                                bool todosOsPedidosRecebidos = true;
+
+                                for (int i = 0; i < listaDePedidosParaACotacao.Count; i++)
+                                {
+                                    if (listaDePedidosParaACotacao[i].PEDIDO_ENTREGUE_FINALIZADO == false)
+                                    {
+                                        todosOsPedidosRecebidos = false;
+                                    }
+                                }
+
+                                if (todosOsPedidosRecebidos == true)
+                                {
+                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO";
+                                }
+                                else
+                                {
+                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                                }
                             }
                         }
                     }
@@ -707,7 +725,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                         viewModelAnalisarResposta.negociacaoDoAdmComFornecedoresAceita = "sim";
                     }
 
-                    if (listaDePedidosParaACotacao.Count == (listaDePedidosParaACotacao.Where(m => (m.PEDIDO_ENTREGUE_FINALIZADO == true)).Count()))
+                    if ((listaPedidosBaixadosParaACotacao.Count > 0) && ((listaPedidosBaixadosParaACotacao.Count) == (listaPedidosBaixadosParaACotacao.Where(m => (m.PEDIDO_ENTREGUE_FINALIZADO == true)).Count())))
                     {
                         viewModelAnalisarResposta.pedidoEntregueIntegralmente = "sim";
                     }
@@ -2052,7 +2070,26 @@ namespace ClienteMercado.Areas.Company.Controllers
                     }
                     else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
                     {
-                        mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                        List<pedido_central_compras> listaDePedidosParaACotacaoCC = negociosPedidosCC.BuscarTodosOsPedidosParaBaixaNestaACotacao(iCM);
+
+                        bool todosOsPedidosRecebidos = true;
+
+                        for (int i = 0; i < listaDePedidosParaACotacao.Count; i++)
+                        {
+                            if (listaDePedidosParaACotacao[i].PEDIDO_ENTREGUE_FINALIZADO == false)
+                            {
+                                todosOsPedidosRecebidos = false;
+                            }
+                        }
+
+                        if (todosOsPedidosRecebidos == true)
+                        {
+                            mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO";
+                        }
+                        else
+                        {
+                            mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                        }   
                     }
 
                     resultado = new
@@ -2471,7 +2508,26 @@ namespace ClienteMercado.Areas.Company.Controllers
                 }
                 else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
                 {
-                    mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                    List<pedido_central_compras> listaDePedidosParaACotacaoCC = negociosPedidosCC.BuscarTodosOsPedidosParaBaixaNestaACotacao(iCM);
+
+                    bool todosOsPedidosRecebidos = true;
+
+                    for (int i = 0; i < listaDePedidosParaACotacao.Count; i++)
+                    {
+                        if (listaDePedidosParaACotacao[i].PEDIDO_ENTREGUE_FINALIZADO == false)
+                        {
+                            todosOsPedidosRecebidos = false;
+                        }
+                    }
+
+                    if (todosOsPedidosRecebidos == true)
+                    {
+                        mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO";
+                    }
+                    else
+                    {
+                        mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                    }
                 }
                 //-------------------------------------------------------------------------
 
@@ -2750,7 +2806,14 @@ namespace ClienteMercado.Areas.Company.Controllers
                             }
                             else if ((dadosCotacaoFilha.RECEBEU_PEDIDO == true) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO == true))
                             {
-                                mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                                if (dadosDoPedido.PEDIDO_ENTREGUE_FINALIZADO == true)
+                                {
+                                    mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO";
+                                }
+                                else
+                                {
+                                    mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                                }
                             }
 
                             resultado = new { pedidoExcluido = "sim", mensagemStatus = mensagemDoStatus };
