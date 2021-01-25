@@ -595,7 +595,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                         viewModelAnalisarResposta.inAceitouContraProposta = "nao";
                     }
 
-                    //VERIFICAR TODOS os PEDIDOS para BAIAX NESTA COTAÇÃO
+                    //VERIFICAR TODOS os PEDIDOS para BAIXA NESTA COTAÇÃO
                     List<SelectListItem> listaPedidosBaixa = new List<SelectListItem>();
                     List<pedido_central_compras> listaDePedidosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosParaBaixaNestaACotacao(iCM);
 
@@ -705,6 +705,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                     if (dadosDaCotacaoIndividualEmpresaLogada.NEGOCIACAO_COTACAO_ACEITA)
                     {
                         viewModelAnalisarResposta.negociacaoDoAdmComFornecedoresAceita = "sim";
+                    }
+
+                    if (listaDePedidosParaACotacao.Count == (listaDePedidosParaACotacao.Where(m => (m.PEDIDO_ENTREGUE_FINALIZADO == true)).Count()))
+                    {
+                        viewModelAnalisarResposta.pedidoEntregueIntegralmente = "sim";
                     }
 
                     //VIEWBAGS

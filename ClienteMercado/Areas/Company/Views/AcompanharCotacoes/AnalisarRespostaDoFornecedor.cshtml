@@ -405,6 +405,7 @@
             <input type="hidden" id="inRejeitouNegociacao" value="@Model.rejeitouSolicitacaoAprovandoValoresCotacao" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
             <input type="hidden" id="inTodosItensPedidos" value="@ViewBag.TodosItensPedidos" />
+            <input type="hidden" id="inTodosOsPedidosEntregues" value="@Model.pedidoEntregueIntegralmente" />
             <input type="hidden" id="inRejeitouPedido" value="@Model.rejeitouPedido" />
         </div>
     </div>
@@ -435,6 +436,12 @@
 
         if ($('#inTodosItensPedidos').val() == "sim") {
             $('.check').hide();
+        }
+
+        if ($('#inTodosOsPedidosEntregues').val() == "sim") {
+            $('#inEfetuarPedido').hide();
+            $('#inCancelarPedido').hide();
+            $('#checkall').hide();
         }
 
         if ($('#mensagemStatus').val() != "") {
@@ -1371,16 +1378,15 @@
                                     });
 
                                     $('#modalBaixaPedido').modal('toggle');
+                                    $('#inCancelarPedido').hide();
+                                    $('#checkall').hide();
                                     $('#inConfirmarEntregaPedido').hide();
 
                                     /*
                                      OBS: CONTINUAR AQUI <---
-                                         1º) APÓS RECEBER E BAIXAR O PEDIDO:
-                                           - VERIFICAR COMPORTAMENTO DA EXIBIÇÃO DO BOTÃO 'FAZER PEDIDO' QUE NÃO DEVE MAIS SER EXIBIDO. O QUE ESTÁ CAUSANDO ISSO?
-                                         2º) APÓS FINALIZAR O PEDIDO NO BANCO: 
+                                         1º) APÓS FINALIZAR O PEDIDO NO BANCO: 
                                            - DESLIGAR TODOS OS CHECKBOX;
-                                           - EXIBIR MENSAGEM PEDIDO FINALIZADO EM A 'DATA MAIS RECENTE DA ENTREGA';
-                                           - SE TODOS OS ITENS JÁ TIVEREM SIDO PEDIDOS, MESMO QUE EM FORNECEDORES DIFERENTES, DESABILITAR BOTÃO 'FAZER PEDIDO';
+                                           - EXIBIR MENSAGEM PEDIDO FINALIZADO EM A 'MOSTRAR A DATA MAIS RECENTE DA ENTREGA';
                                      */
 
                                     @*//$('#gridItensCotadosRespondidos').bootgrid('reload');
