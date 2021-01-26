@@ -350,8 +350,9 @@
             <input type="hidden" id="inIdPedidoRecebido" value="@ViewBag.idPedido" />
             <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
             <input type="hidden" id="inPedidoConfirmado" value="@ViewBag.pedidoConfirmado" />
+            <input type="hidden" id="inPedidoEntregueAoCliente" value="@Model.pedidoEntregueIntegralmente" />
             <input type="hidden" id="inRejeitouPedido" value="@Model.rejeitouPedido" />
-            <input type="hidden" id="inDataEntregaPedido" value="@Model.inDataEntrega" />            
+            <input type="hidden" id="inDataEntregaPedido" value="@Model.inDataEntrega" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->
@@ -384,6 +385,10 @@
 
         if (($('#inNaoCotouTodosOsItens').val() == "sim") && ($('#inCotacaoRespondida').val() == "sim")) {
             $('#inResponderACotacao').hide();
+        }
+
+        if ($('#inPedidoEntregueAoCliente').val() == "sim") {
+            $('#inRejeitarPedido').hide();
         }
 
         $(".data").mask("99/99/9999");

@@ -314,7 +314,16 @@ namespace ClienteMercado.Areas.Company.Controllers
                     }
                     else if ((dadosCotacaoFilha.RECEBEU_PEDIDO) && (dadosCotacaoFilha.CONFIRMOU_PEDIDO))
                     {
-                        viewModelEnviarResposta.mensagemStatus = textoMsgStatus + " RECEBIDO e CONFIRMADO</font>&nbsp;- AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA";
+                        if (estaCotacaoRecebeuPedido.PEDIDO_ENTREGUE_FINALIZADO)
+                        {
+                            viewModelEnviarResposta.mensagemStatus = textoMsgStatus + " RECEBIDO e CONFIRMADO</font>&nbsp;- PRODUTOS ENTREGUES ao CLIENTE";
+                            viewModelEnviarResposta.pedidoEntregueIntegralmente = "sim";
+                        }
+                        else
+                        {
+                            viewModelEnviarResposta.mensagemStatus = textoMsgStatus + " RECEBIDO e CONFIRMADO</font>&nbsp;- AGILIZE a ENTREGA. VOCÊ SERÁ AVALIADO POR ISSO NO SISTEMA";
+                        }
+
                         ViewBag.pedidoConfirmado = "sim";
                     }
 
