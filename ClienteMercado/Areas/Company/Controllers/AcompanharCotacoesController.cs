@@ -1363,6 +1363,9 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     ehMenorPreco = itensDaCotacao[i].PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS == menorPreco ? "sim" : "nao";
 
+                    //SE TODOS OS PEDIDOS DO PRODUTO JÁ FORAM ENTREGUES, DESABILTA CHECKBOX DOS PRODUTOS DO PEDIDO
+                    habilitarSimOuNao = (dadosDoPedido.PEDIDO_ENTREGUE_FINALIZADO == true) ? "disabled" : "";
+
                     listaProdutosCotacoes.Add(new ListaDadosProdutoCotacaoViewModel
                     {
                         idItemCotacao = itensDaCotacao[i].ID_CODIGO_COTACAO_FILHA_NEGOCIACAO_CENTRAL_COMPRAS,

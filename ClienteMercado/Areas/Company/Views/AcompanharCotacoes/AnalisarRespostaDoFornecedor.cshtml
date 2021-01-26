@@ -335,7 +335,6 @@
                 </div>
             </form>
 
-            <!-- ================================================================================================================ -->
             <div id="modalBaixaPedido" class="modal fade" role="dialog">
                 <br /><br /><br />
                 <div class="modal-dialog modal-lg" style="width:50%">
@@ -376,7 +375,6 @@
                     </div>
                 </div>
             </div>
-            <!-- ================================================================================================================ -->
 
             <input type="hidden" id="inCCC" value="@Model.cCC" />
             <input type="hidden" id="ineA" value="@Model.ineACriptografado" />
@@ -442,10 +440,6 @@
             $('#inEfetuarPedido').hide();
             $('#inCancelarPedido').hide();
             $('#checkall').hide();
-
-            /*
-             AQUI --> DESLIGAR TODOS OS CHECKBOX...
-             */
         }
 
         if ($('#mensagemStatus').val() != "") {
@@ -1387,9 +1381,8 @@
                                     $('#inConfirmarEntregaPedido').hide();
 
                                     /*
-                                     OBS: CONTINUAR AQUI <--------
+                                     OBS: CONTINUAR AQUI <---------------====
                                          1º) APÓS FINALIZAR O PEDIDO NO BANCO: 
-                                           - DESLIGAR TODOS OS CHECKBOX;
                                            - EXIBIR MENSAGEM PEDIDO FINALIZADO EM A 'MOSTRAR A DATA MAIS RECENTE DA ENTREGA';
                                      */
 
