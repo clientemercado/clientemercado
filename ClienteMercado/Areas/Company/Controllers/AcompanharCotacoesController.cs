@@ -232,7 +232,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     listaCentraisDeComprasEmQueParticipo[i].statusCentralCompras = textoStatus;
                 }
 
-                //------------------------------------------------------------------
                 //APLICAR FILTRO
                 List<ListaDeParticipacoesDaEmpresaEmCentraisDeComprasViewModel> listaCentraisDeComprasEmQueParticipoRetorno =
                     new List<ListaDeParticipacoesDaEmpresaEmCentraisDeComprasViewModel>();
@@ -253,7 +252,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 {
                     listaCentraisDeComprasEmQueParticipoRetorno = listaCentraisDeComprasEmQueParticipo;
                 }
-                //------------------------------------------------------------------
 
                 return Json(
                     new
@@ -413,6 +411,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     int anoAtual = dataHoje.Year;
                     string usuarioFornecedor = "";
                     string textoMsgStatus = "PEDIDO FEITO&nbsp;";
+                    var dataEntregaPedido = "";
 
                     NCentralDeComprasService negociosCentralDeCompras = new NCentralDeComprasService();
                     NEmpresasParticipantesCentralDeComprasService negociosEmpresasParticipantesCC = new NEmpresasParticipantesCentralDeComprasService();
@@ -620,6 +619,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                         });
                     }
 
+                    for (int a = 0; a < listaPedidosBaixadosParaACotacao.Count; a++)
+                    {
+                        dataEntregaPedido = (listaPedidosBaixadosParaACotacao[a].PEDIDO_ENTREGUE_FINALIZADO == true) ? listaPedidosBaixadosParaACotacao[a].DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS.ToShortDateString() : "";
+                    }
+
                     viewModelAnalisarResposta.inListaPedidosBaixa = (listaPedidosBaixa != null) ? listaPedidosBaixa : null;
 
                     //BUSCAR LISTA de ITENS PEDIDOS
@@ -695,7 +699,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                                 if (todosOsPedidosRecebidos == true)
                                 {
-                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO";
+                                    viewModelAnalisarResposta.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO em " + dataEntregaPedido;
                                 }
                                 else
                                 {
@@ -1209,7 +1213,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     listaCotacaoesDaCentralCompras[i].statusCotacao = textoStatus;
                 }
 
-                //------------------------------------------------------------------
                 //APLICAR FILTRO
                 List<ListaDeCotacaoesDaCentralDeComprasViewModel> listaDeCotacoesDaCentralDeComprasFiltro = new List<ListaDeCotacaoesDaCentralDeComprasViewModel>();
 
@@ -1222,7 +1225,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //listaDeCotacoesDaCentralDeComprasFiltro = listaCotacaoesDaCentralCompras.Where(m => (m.temCotacaoAnexada == "sim")).ToList();
                     listaDeCotacoesDaCentralDeComprasFiltro = listaCotacaoesDaCentralCompras.ToList();
                 }
-                //------------------------------------------------------------------
 
                 return Json(
                     new
@@ -1933,6 +1935,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 string telefoneUsuarioADM = "";
                 string urlParceiroEnvioSms = "";
                 string textoMsgStatus = "PEDIDO FEITO&nbsp;";
+                var dataEntregaPedido = "";
 
                 string[] listaIDsItensPedidosNegociacao, listaItensIndividuaisCotacao;
                 listaIDsItensPedidosNegociacao = codsProdutosNegociacao.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -2083,11 +2086,13 @@ namespace ClienteMercado.Areas.Company.Controllers
                             {
                                 todosOsPedidosRecebidos = false;
                             }
+
+                            dataEntregaPedido = (listaDePedidosParaACotacao[i].PEDIDO_ENTREGUE_FINALIZADO == true) ? listaDePedidosParaACotacao[i].DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS.ToShortDateString() : "";
                         }
 
                         if (todosOsPedidosRecebidos == true)
                         {
-                            mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO";
+                            mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO em " + dataEntregaPedido;
                         }
                         else
                         {
@@ -2245,6 +2250,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var numeroPedido = "";
                 string smsMensagem = "";
                 string urlParceiroEnvioSms = "";
+                var dataEntregaPedido = "";
 
                 var resultado = new { itemExcluido = "nao", todosItensPedidos = "", mensagemStatus = "" };
 
@@ -2521,11 +2527,13 @@ namespace ClienteMercado.Areas.Company.Controllers
                         {
                             todosOsPedidosRecebidos = false;
                         }
+
+                        dataEntregaPedido = (listaDePedidosParaACotacao[i].PEDIDO_ENTREGUE_FINALIZADO == true) ? listaDePedidosParaACotacao[i].DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS.ToShortDateString() : "";
                     }
 
                     if (todosOsPedidosRecebidos == true)
                     {
-                        mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO";
+                        mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO em " + dataEntregaPedido;
                     }
                     else
                     {
@@ -2601,6 +2609,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 var numeroPedido = "";
                 string smsMensagem = "";
                 string urlParceiroEnvioSms = "";
+                var dataEntregaPedido = "";
 
                 var resultado = new { pedidoExcluido = "nao", mensagemStatus = "" };
 
@@ -2811,7 +2820,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                             {
                                 if (dadosDoPedido.PEDIDO_ENTREGUE_FINALIZADO == true)
                                 {
-                                    mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO";
+                                    dataEntregaPedido = (dadosDoPedido.PEDIDO_ENTREGUE_FINALIZADO == true) ? dadosDoPedido.DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS.ToShortDateString() : "";
+                                    mensagemDoStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO em " + dataEntregaPedido;
                                 }
                                 else
                                 {

@@ -1382,11 +1382,10 @@
 
                                     /*
                                      OBS: CONTINUAR AQUI <---------------====
-                                         1º) APÓS FINALIZAR O PEDIDO NO BANCO: 
-                                           - EXIBIR MENSAGEM PEDIDO FINALIZADO EM A 'MOSTRAR A DATA MAIS RECENTE DA ENTREGA';
+                                          1) FAZER MAIS UM TESTE DE FINALIZAÇÃO DO PEDIDO;
+                                          2) vER A PRÓIMA TAREFA - VER NA FOLHA ONDE ESCREVI ALGO QUE DEVERIA FAZER;
                                      */
 
-                                    //$('#gridItensCotadosRespondidos').bootgrid('reload');
                                     //RECARREGAR a PÁGINA
                                     window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
                                 }
