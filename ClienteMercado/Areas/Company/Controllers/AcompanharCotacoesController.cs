@@ -1367,6 +1367,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //SE TODOS OS PEDIDOS DO PRODUTO JÁ FORAM ENTREGUES, DESABILTA CHECKBOX DOS PRODUTOS DO PEDIDO
                     habilitarSimOuNao = (dadosDoPedido.PEDIDO_ENTREGUE_FINALIZADO == true) ? "disabled" : "";
+                    var pedidoEntregue = (habilitarSimOuNao == "disabled") ? "sim" : "nao";
 
                     listaProdutosCotacoes.Add(new ListaDadosProdutoCotacaoViewModel
                     {
@@ -1386,7 +1387,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                         temContraProposta = possuiContraProposta,
                         ehOMenorPreco = ehMenorPreco,
                         itemFoiPedido = itemFoiPedido,
-                        codControlePedido = dadosDoPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS
+                        codControlePedido = dadosDoPedido.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS,
+                        pedidoEntregue = pedidoEntregue
                     });
 
                     itemFoiPedido = "nao";

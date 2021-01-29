@@ -24,5 +24,6 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string somaSubTotais { get; set; }
         public string itemFoiPedido { get; set; }
         public string codControlePedido { get; set; }
+        public string pedidoEntregue { get; set; }
     }
 }

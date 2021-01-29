@@ -3,6 +3,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .alinhacentro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        font-family: Verdana;
+        color: #FF0000;
+        font-weight: bold;
+    }
+</style>
+
 <div class="row">
     @*<div class="col-md-12">*@
     <!-- BEGIN VALIDATION STATES-->
@@ -40,6 +52,8 @@
                     </div>
                     <hr />
 
+                    <div id="inMensagemStatus" class="col-md-12 alinhacentro" style=''></div>
+
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-12">
@@ -54,58 +68,58 @@
                         <!-- OBS: AQUI VAI ENTRAR A LISTA DE EMPRESAS E ITENS COTADOS POR CADA EMPRESA -->
                         <div class="portlet-body flip-scroll col-md-12">
                             @{
-                                    var contador = 0;
+                                var contador = 0;
 
-                                    foreach (var dadosEmpresaCotanteAnexou in Model.listaDeEmpresasQueAnexaramCotacaoESeusItensCotados)
-                                    {
-                                        <table class="table table-bordered table-striped table-condensed flip-content">
-                                            <thead class="flip-content">
-                                                <tr bgcolor="#DCDCDC">
-                                                    <td colspan="3"><label class=""><font color="#3297E0"><b>Empresa:</b></font>&nbsp;<b>@dadosEmpresaCotanteAnexou.nomeEmpresa / @dadosEmpresaCotanteAnexou.cidadeEmpresa-@dadosEmpresaCotanteAnexou.ufEmpresa</b></label></td>
-                                                    <td colspan="5"><label class=""><font color="#3297E0"><b>Contato:</b></font>&nbsp;<b>@dadosEmpresaCotanteAnexou.usuarioContatoEmpresa</b></label></td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="25%" nowrap><b>Produto</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="20%" nowrap><b>Marca</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Quant.</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Unid.</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>R$ Unit.</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>R$ Total</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Pedido</b></td>
-                                                    <td align="center" bgcolor="#0672a7" style="color:White;" width="20%" nowrap><b>Fornecedor</b></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @{
-                                                    foreach (var itensCotadosPelaEmpresaAnexou in Model.listaDeEmpresasQueAnexaramCotacaoESeusItensCotados[contador].listaDeItensCotadosPorEmpresa)
-                                                    {
-                                                        <tr>
-                                                            <td>@itensCotadosPelaEmpresaAnexou.descricaoProdutoCotado</td>
-                                                            <td>@itensCotadosPelaEmpresaAnexou.marcaProdutoCotado</td>
-                                                            <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.quantidadeProdutoCotado&nbsp;</td>
-                                                            <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.unidadeProdutoCotado&nbsp;</td>
-                                                            <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.valorDoProdutoCotado&nbsp;</td>
-                                                            <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.totalDoProdutoCotado&nbsp;</td>
-                                                            @{
-                                                                if (itensCotadosPelaEmpresaAnexou.itemFoiPedido == "sim")
-                                                                {
-                                                                    <td class="numeric" align="center"><font color='#008000' title="ITEM PEDIDO"><i class="fas fa-check"></i></font></td>
-                                                                    <td class="numeric" align="center">&nbsp;@itensCotadosPelaEmpresaAnexou.fornecedorItemPedido</td>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <td class="numeric" align="center">&nbsp;</td>
-                                                                    <td class="numeric" align="center">&nbsp;</td>
-                                                                }
-                                                             }
-                                                        </tr>
-                                                    }
+                                foreach (var dadosEmpresaCotanteAnexou in Model.listaDeEmpresasQueAnexaramCotacaoESeusItensCotados)
+                                {
+                                    <table class="table table-bordered table-striped table-condensed flip-content">
+                                        <thead class="flip-content">
+                                            <tr bgcolor="#DCDCDC">
+                                                <td colspan="3"><label class=""><font color="#3297E0"><b>Empresa:</b></font>&nbsp;<b>@dadosEmpresaCotanteAnexou.nomeEmpresa / @dadosEmpresaCotanteAnexou.cidadeEmpresa-@dadosEmpresaCotanteAnexou.ufEmpresa</b></label></td>
+                                                <td colspan="5"><label class=""><font color="#3297E0"><b>Contato:</b></font>&nbsp;<b>@dadosEmpresaCotanteAnexou.usuarioContatoEmpresa</b></label></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="25%" nowrap><b>Produto</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="20%" nowrap><b>Marca</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Quant.</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Unid.</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>R$ Unit.</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>R$ Total</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Pedido</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="20%" nowrap><b>Fornecedor</b></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (var itensCotadosPelaEmpresaAnexou in Model.listaDeEmpresasQueAnexaramCotacaoESeusItensCotados[contador].listaDeItensCotadosPorEmpresa)
+                                                {
+                                                    <tr>
+                                                        <td>@itensCotadosPelaEmpresaAnexou.descricaoProdutoCotado</td>
+                                                        <td>@itensCotadosPelaEmpresaAnexou.marcaProdutoCotado</td>
+                                                        <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.quantidadeProdutoCotado&nbsp;</td>
+                                                        <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.unidadeProdutoCotado&nbsp;</td>
+                                                        <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.valorDoProdutoCotado&nbsp;</td>
+                                                        <td class="numeric" align="right">@itensCotadosPelaEmpresaAnexou.totalDoProdutoCotado&nbsp;</td>
+                                                        @{
+                                                            if (itensCotadosPelaEmpresaAnexou.itemFoiPedido == "sim")
+                                                            {
+                                                                <td class="numeric" align="center"><font color='#008000' title="ITEM PEDIDO"><i class="fas fa-check"></i></font></td>
+                                                                <td class="numeric" align="center">&nbsp;@itensCotadosPelaEmpresaAnexou.fornecedorItemPedido</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td class="numeric" align="center">&nbsp;</td>
+                                                                <td class="numeric" align="center">&nbsp;</td>
+                                                            }
+                                                        }
+                                                    </tr>
                                                 }
-                                            </tbody>
-                                        </table>
+                                            }
+                                        </tbody>
+                                    </table>
 
-                                       contador = (contador + 1);
-                                    }
+                                    contador = (contador + 1);
+                                }
                             }
                         </div>
                     </div>
@@ -115,8 +129,20 @@
 
             <input type="hidden" id="inCCC" value="@Model.cCC" />
             <input type="hidden" id="inICM" value="@Model.iCM" />
+            <input type="hidden" id="mensagemStatus" value="@Model.mensagemStatus" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->
     @*</div>*@
 </div>
+<script>
+    jQuery(document).ready(function () {
+        /*
+         OBS: 
+         - APLICAR EXIBIÇÃO DO NÚMERO DO PEDIDO E TICADO SIMPLES / DUPLO E INFORMAÇÃO NO HINT SE O PEDIDO JÁ FOI ENTREGUE OU NÃO;
+         - EXIBIR MENSAGEM DO STATUS EM CASO DE PEDIDO FINALIZADO;
+
+              CONTINUAR AQUI...
+         */
+    });
+</script>

@@ -1075,7 +1075,12 @@
                 },
                 "link6": function (column, row) {
                     if (row.itemFoiPedido == "sim") {
-                        return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor'>" + row.codControlePedido + "&nbsp;<font color='#32CD32'><i class='fas fa-check'></i></font><a>";
+                        if (row.pedidoEntregue == "sim") {
+                            return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor / Status: PEDIDO ENTREGUE'>" + row.codControlePedido + "&nbsp;<font color='#32CD32'><i class='fas fa-check-double'></i></font><a>";
+                        }
+                        else {
+                            return "<a href=\"#\" title='Produto PEDIDO a este Fornecedor / Status: AGUARDANDO ENTREGA'>" + row.codControlePedido + "&nbsp;<font color='#32CD32'><i class='fas fa-check'></i></font><a>";
+                        }
                     }
                     else {
                         if ((row.itemFoiPedido == "nao") && (row.habilitar == "disabled")) {
@@ -1379,12 +1384,6 @@
                                     $('#inCancelarPedido').hide();
                                     $('#checkall').hide();
                                     $('#inConfirmarEntregaPedido').hide();
-
-                                    /*
-                                     OBS: CONTINUAR AQUI <---------------====
-                                          1) FAZER MAIS UM TESTE DE FINALIZAÇÃO DO PEDIDO;
-                                          2) vER A PRÓIMA TAREFA - VER NA FOLHA ONDE ESCREVI ALGO QUE DEVERIA FAZER;
-                                     */
 
                                     //RECARREGAR a PÁGINA
                                     window.location.href = "@Url.Action("AnalisarRespostaDoFornecedor", "AcompanharCotacoes", new { Area = "Company" })" + "?cCC=" + $('#inCCC').val() + "&iCM=" + $('#inICM').val() + "&iCCF=" + $('#iniCCF').val();
