@@ -1,4 +1,4 @@
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Data.pdb
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Utils.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\Content\imagensProdutosAlternativos\teste.txt
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.dll
@@ -26,12 +26,12 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\System.Web.WebP
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\WebActivatorEx.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\WebGrease.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Infra.dll
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Data.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Data.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Domain.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Domain.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.UI.Core.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.UI.Core.dll.config
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Utils.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\ClienteMercado.Utils.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\EntityFramework.xml
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado\bin\EntityFramework.SqlServer.xml
