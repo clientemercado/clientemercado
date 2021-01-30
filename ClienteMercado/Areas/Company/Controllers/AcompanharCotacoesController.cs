@@ -792,6 +792,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     NGruposAtividadesEmpresaProfissionalService negociosGrupoAtividadesEmpresa = new NGruposAtividadesEmpresaProfissionalService();
                     NEnderecoEmpresaUsuarioService negociosLocalizacao = new NEnderecoEmpresaUsuarioService();
                     NCotacaoIndividualEmpresaCentralComprasService negociosCotacaoIndividualDasEmpresasParticipantesDaCC = new NCotacaoIndividualEmpresaCentralComprasService();
+                    NPedidoCentralComprasService negociosPedidosCentralCompras = new NPedidoCentralComprasService();
 
                     DadosDaCotacaoViewModel viewModelItensCotados = new DadosDaCotacaoViewModel();
 
@@ -831,6 +832,35 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     //viewModelItensCotados.listaDeEmpresasCotadas = ListaDeEmpresasCotadasParaFornecimento(iCM);
                     //viewModelItensCotados.listaDeProdutosCotados = ListaDeProdutosDaCotacao(iCM);
+
+                    List<pedido_central_compras> listaDePedidosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosParaBaixaNestaACotacao(iCM);
+                    List<pedido_central_compras> listaPedidosBaixadosParaACotacao = negociosPedidosCentralCompras.BuscarTodosOsPedidosBaixadosParaEstaCotacao(iCM);
+
+                    bool todosOsPedidosRecebidos = true;
+                    string textoMsgStatus = "PEDIDO FEITO&nbsp;";
+                    var dataEntregaPedido = "";
+
+                    for (int i = 0; i < listaDePedidosParaACotacao.Count; i++)
+                    {
+                        if (listaDePedidosParaACotacao[i].PEDIDO_ENTREGUE_FINALIZADO == false)
+                        {
+                            todosOsPedidosRecebidos = false;
+                        }
+                    }
+
+                    if (todosOsPedidosRecebidos == true)
+                    {
+                        for (int a = 0; a < listaPedidosBaixadosParaACotacao.Count; a++)
+                        {
+                            dataEntregaPedido = (listaPedidosBaixadosParaACotacao[a].PEDIDO_ENTREGUE_FINALIZADO == true) ? listaPedidosBaixadosParaACotacao[a].DATA_ENTREGA_PEDIDO_CENTRAL_COMPRAS.ToShortDateString() : "";
+                        }
+
+                        viewModelItensCotados.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - PEDIDO RECEBIDO em " + dataEntregaPedido;
+                    }
+                    else
+                    {
+                        viewModelItensCotados.mensagemStatus = "<font color='#3297E0'>" + textoMsgStatus + "</font> - CONFIRMADO PELO FORNECEDOR / AGUARDANDO ENTREGA";
+                    }
 
                     //VIEWBAGS
                     ViewBag.dataHoje = diaDaSemana + ", " + diaDoMes + " de " + mesAtual + " de " + anoAtual;

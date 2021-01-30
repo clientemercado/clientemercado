@@ -3,6 +3,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.css" />
+
 <style>
     .alinhacentro {
         display: flex;
@@ -83,9 +92,9 @@
                                                 <td align="center" bgcolor="#0672a7" style="color:White;" width="20%" nowrap><b>Marca</b></td>
                                                 <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Quant.</b></td>
                                                 <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Unid.</b></td>
-                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>R$ Unit.</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>R$ Unit.</b></td>
                                                 <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>R$ Total</b></td>
-                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="5%" class="numeric" nowrap><b>Pedido</b></td>
+                                                <td align="center" bgcolor="#0672a7" style="color:White;" width="10%" class="numeric" nowrap><b>Pedido</b></td>
                                                 <td align="center" bgcolor="#0672a7" style="color:White;" width="20%" nowrap><b>Fornecedor</b></td>
                                             </tr>
                                         </thead>
@@ -103,7 +112,15 @@
                                                         @{
                                                             if (itensCotadosPelaEmpresaAnexou.itemFoiPedido == "sim")
                                                             {
-                                                                <td class="numeric" align="center"><font color='#008000' title="ITEM PEDIDO"><i class="fas fa-check"></i></font></td>
+                                                                if (itensCotadosPelaEmpresaAnexou.pedidoEntregue)
+                                                                {
+                                                                    <td class="numeric" align="center"><a href="#">@itensCotadosPelaEmpresaAnexou.codControlePedido&nbsp;</a><font color='#32CD32' title="ITEM PEDIDO"><i class="fas fa-check-double" title="Status: PEDIDO ENTREGUE"></i></font></td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="numeric" align="center"><font color='#32CD32' title="ITEM PEDIDO"><i class="fas fa-check" title="Status: AGUARDANDO ENTREGA"></i></font></td>
+                                                                }
+
                                                                 <td class="numeric" align="center">&nbsp;@itensCotadosPelaEmpresaAnexou.fornecedorItemPedido</td>
                                                             }
                                                             else
@@ -135,14 +152,11 @@
     <!-- END VALIDATION STATES-->
     @*</div>*@
 </div>
+
 <script>
     jQuery(document).ready(function () {
-        /*
-         OBS: 
-         - APLICAR EXIBIÇÃO DO NÚMERO DO PEDIDO E TICADO SIMPLES / DUPLO E INFORMAÇÃO NO HINT SE O PEDIDO JÁ FOI ENTREGUE OU NÃO;
-         - EXIBIR MENSAGEM DO STATUS EM CASO DE PEDIDO FINALIZADO;
-
-              CONTINUAR AQUI...
-         */
+        if ($('#mensagemStatus').val() != "") {
+            $('#inMensagemStatus').append("<font color='#3297E0'><i class='far fa-check-circle'></i></font>&nbsp;" + $('#mensagemStatus').val());
+        }
     });
 </script>

@@ -230,7 +230,9 @@ namespace ClienteMercado.Infra.Repositories
                         "EP.DESCRICAO_PRODUTO_EMBALAGEM AS embalagemProduto, ICI.ID_CODIGO_PEDIDO_CENTRAL_COMPRAS, ICI.ID_EMPRESA_FORNECEDORA_PEDIDO, " +
                         "CAST(COALESCE(PCC.CONFIRMADO_PEDIDO_CENTRAL_COMPRAS,0) AS BIT) AS pedidoConfirmado, " + 
                         "CAST(COALESCE(CFC.RECEBEU_CONTRA_PROPOSTA,0) AS BIT) AS recebeu_cp, CAST(COALESCE(CFC.ACEITOU_CONTRA_PROPOSTA,0) AS BIT) AS aceitou_cp, " +
-                        "COALESCE(ICF.PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS,0) AS preco_unitario_resposta, COALESCE(ICF.PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS,0) AS preco_unitario_contra_proposta " +
+                        "COALESCE(ICF.PRECO_UNITARIO_ITENS_COTACAO_CENTRAL_COMPRAS,0) AS preco_unitario_resposta, " + 
+                        "COALESCE(ICF.PRECO_UNITARIO_ITENS_CONTRA_PROPOSTA_CENTRAL_COMPRAS,0) AS preco_unitario_contra_proposta, " +
+                        "PCC.COD_CONTROLE_PEDIDO_CENTRAL_COMPRAS AS codControlePedido, PCC.PEDIDO_ENTREGUE_FINALIZADO AS pedidoEntregue " +
                         "FROM itens_cotacao_individual_empresa_central_compras ICI " +
                         "INNER JOIN produtos_servicos_empresa_profissional PS ON(PS.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS = ICI.ID_CODIGO_PRODUTOS_SERVICOS_EMPRESAS_PROFISSIONAIS) " +
                         "INNER JOIN empresas_fabricantes_marcas EF ON(EF.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS = ICI.ID_CODIGO_EMPRESA_FABRICANTE_MARCAS) " +
