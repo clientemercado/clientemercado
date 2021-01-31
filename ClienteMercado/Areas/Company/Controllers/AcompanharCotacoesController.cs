@@ -1134,7 +1134,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         //CONSULTA do AUTOCOMPLETE da LISTA de COTAÇÕES da CENTRAL de COMPRAS
         [WebMethod]
-        public JsonResult BuscarListaDeNomesCotacaoesDaCC(string term)
+        public JsonResult BuscarListaDeNomesCotacaoesDaCC(string term, int cCC, int tipoPesq)
         {
             try
             {
@@ -1142,7 +1142,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NCotacaoMasterCentralDeComprasService negociosCotacaoMaster = new NCotacaoMasterCentralDeComprasService();
 
                 //CARREGA LISTA de COTAÇÕES da CENTRAL de COMPRAS
-                List<cotacao_master_central_compras> listaCotacaoMasterCC = negociosCotacaoMaster.CarregarListaAutoCompleteDasCotacoesDaCC(term);
+                List<cotacao_master_central_compras> listaCotacaoMasterCC = negociosCotacaoMaster.CarregarListaAutoCompleteDasCotacoesDaCC(term, cCC, tipoPesq);
 
                 return Json(listaCotacaoMasterCC, JsonRequestBehavior.AllowGet);
             }
@@ -1180,6 +1180,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     grupo_atividades_empresa dadosGA =
                         negociosGruposAtividades.ConsultarDadosGeraisSobreOGrupoDeAtividades(dadosCC.ID_GRUPO_ATIVIDADES);
 
+                    listaCotacaoesDaCentralCompras[i].idCotacaoAExibir = listaCotacaoesDaCentralCompras[i].ID_COTACAO_MASTER_CENTRAL_COMPRAS.ToString();
                     listaCotacaoesDaCentralCompras[i].nomeDaCotacao = listaCotacaoesDaCentralCompras[i].NOME_COTACAO_CENTRAL_COMPRAS;
                     listaCotacaoesDaCentralCompras[i].dataCriacaoDaCotacao = listaCotacaoesDaCentralCompras[i].DATA_CRIACAO_COTACAO_CENTRAL_COMPRAS.ToShortDateString();
                     listaCotacaoesDaCentralCompras[i].dataEncerramentoCotacao = listaCotacaoesDaCentralCompras[i].DATA_ENCERRAMENTO_COTACAO_CENTRAL_COMPRAS.ToShortDateString();

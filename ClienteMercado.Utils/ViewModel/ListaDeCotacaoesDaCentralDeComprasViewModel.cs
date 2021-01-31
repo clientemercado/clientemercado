@@ -4,6 +4,7 @@ namespace ClienteMercado.Utils.ViewModel
 {
     public class ListaDeCotacaoesDaCentralDeComprasViewModel : cotacao_master_central_compras
     {
+        public string idCotacaoAExibir { get; set; }
         public string nomeDaCotacao { get; set; }
 
         public string dataCriacaoDaCotacao { get; set; }

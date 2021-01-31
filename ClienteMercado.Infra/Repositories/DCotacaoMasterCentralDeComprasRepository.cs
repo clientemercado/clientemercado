@@ -177,7 +177,18 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         //CARREGA LISTA AUTOCOMPLETE de COTAÇÕES da CENTRAL de COMPRAS
-        public List<cotacao_master_central_compras> CarregarListaAutoCompleteDasCotacoesDaCC(string term)
+        public List<cotacao_master_central_compras> CarregarListaAutoCompleteDasCotacoesDaCC(string term, int cCC, int tipoPesq)
+        {
+            var complemento = (tipoPesq == 1) ? "CM.ID_COTACAO_MASTER_CENTRAL_COMPRAS LIKE '%" + term + "%'": "CM.NOME_COTACAO_CENTRAL_COMPRAS LIKE '%" + term + "%'";
+
+            var query = "SELECT CM.* FROM cotacao_master_central_compras CM WHERE " + complemento + " AND CM.ID_CENTRAL_COMPRAS = " + cCC;
+
+            var result = _contexto.Database.SqlQuery<cotacao_master_central_compras>(query).ToList();
+            return result;
+        }
+
+        //CARREGA LISTA AUTOCOMPLETE de COTAÇÕES RECEBIDAS
+        public List<cotacao_master_central_compras> CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(string term)
         {
             var query = "SELECT CM.* FROM cotacao_master_central_compras CM WHERE CM.NOME_COTACAO_CENTRAL_COMPRAS LIKE '%" + term + "%'";
 

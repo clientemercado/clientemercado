@@ -1,6 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
+using System;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
@@ -22,9 +23,9 @@ namespace ClienteMercado.Domain.Services
         }
 
         //CARREGA LISTA AUTOCOMPLETE de COTAÇÕES da CENTRAL de COMPRAS
-        public List<cotacao_master_central_compras> CarregarListaAutoCompleteDasCotacoesDaCC(string term)
+        public List<cotacao_master_central_compras> CarregarListaAutoCompleteDasCotacoesDaCC(string term, int cCC, int tipoPesq)
         {
-            return dRepository.CarregarListaAutoCompleteDasCotacoesDaCC(term);
+            return dRepository.CarregarListaAutoCompleteDasCotacoesDaCC(term, cCC, tipoPesq);
         }
 
         //CARREGAR DADOS da COTAÇÃO MASTER
@@ -85,6 +86,12 @@ namespace ClienteMercado.Domain.Services
         public void SetarNullNoIdDoPedidoNaCotacaoMaster(int iCM)
         {
             dRepository.SetarNullNoIdDoPedidoNaCotacaoMaster(iCM);
+        }
+
+        //CARREGA LISTA AUTOCOMPLETE de COTAÇÕES RECEBIDAS
+        public List<cotacao_master_central_compras> CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(string term)
+        {
+            return dRepository.CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(term);
         }
     }
 }

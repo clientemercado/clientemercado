@@ -1,4 +1,3 @@
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\ClienteMercado.Data.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\ClienteMercado.UI.Core.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\ClienteMercado.UI.Core.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\ClienteMercado.UI.Core.pdb
@@ -13,6 +12,7 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\S
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\System.Web.WebPages.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\EntityFramework.dll
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\ClienteMercado.Data.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\ClienteMercado.Data.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\ClienteMercado.Utils.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.UI.Core\bin\Debug\ClienteMercado.Utils.dll.config
