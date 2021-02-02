@@ -198,6 +198,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     grupo_atividades_empresa dadosGA =
                          negociosGruposAtividades.ConsultarDadosGeraisSobreOGrupoDeAtividades(dadosCC.ID_GRUPO_ATIVIDADES);
 
+                    listaCentraisDeComprasEmQueParticipo[i].idCC = dadosCC.ID_CENTRAL_COMPRAS.ToString();
                     listaCentraisDeComprasEmQueParticipo[i].nomeCentralCompras = dadosCC.NOME_CENTRAL_COMPRAS;
                     listaCentraisDeComprasEmQueParticipo[i].idGrupoAtividades = dadosCC.ID_GRUPO_ATIVIDADES;
                     listaCentraisDeComprasEmQueParticipo[i].ramoAtividadeCentralCompras = dadosGA.DESCRICAO_ATIVIDADE;
