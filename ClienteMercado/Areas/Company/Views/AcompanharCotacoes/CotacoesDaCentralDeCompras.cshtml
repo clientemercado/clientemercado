@@ -161,42 +161,6 @@
             swal({ title: "Caro " + $('#inUsuarioLogado').val() + ",\nVocê e outra(s) " + $('#inQuantidadeEmpresasDaCC').val() + " empresa(s), foram convidados a participar da Central de Compras em grupo:\n\n" + $('#inNomeCC').val().toUpperCase() + ".\n\nParticipar, lhe permitirá ter acesso a novos FORNECEDORES e conseguir MELHORES PREÇOS nas compras em grupo, tornando sua empresa mais competitiva em seu segmento de mercado na sua região.\n\nEquipe Cliente & Mercado.", type: "warning", confirmButtonColor: "#337ab7" });
         }
 
-        //=====================================================================
-        $("#inNumeroCotacao").autocomplete({
-            source: function (request, response) {
-                debugger;
-                var termo = $("#inNumeroCotacao").val();
-
-                $.ajax({
-                    type: "POST",
-                    url: "/AcompanharCotacoes/BuscarListaDeNomesCotacaoesDaCC",
-                    dataType: "json",
-                    data: { 'term': termo, 'cCC': $('#inCCC').val(), 'tipoPesq': 1 },
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.ID_COTACAO_MASTER_CENTRAL_COMPRAS + "-" + item.NOME_COTACAO_CENTRAL_COMPRAS,
-                                value: item.ID_COTACAO_MASTER_CENTRAL_COMPRAS,
-                                descricao: item.NOME_COTACAO_CENTRAL_COMPRAS
-                            };
-                        }));
-                    }
-                });
-            },
-            select: function (event, ui) {
-                debugger;
-
-                $('#inNumeroCotacao').val(ui.item.value);
-                $("#inNomeCotacao").val(ui.item.descricao);
-                $("#inNomeCotacao2").hide();
-                $("#inNomeCotacao").show();
-                //$("#inListaDeRamosDeAtividade").val(0);
-                $('#gridCotacoesDaCentralCompras').bootgrid('reload');
-
-            }, minLength: 2,
-        });
-        //====================================================================
-
         $("#inNomeCotacao").autocomplete({
             source: function (request, response) {
                 debugger;
@@ -229,6 +193,40 @@
                 $('#gridCotacoesDaCentralCompras').bootgrid('reload');
 
             }, minLength: 4,
+        });
+
+        $("#inNumeroCotacao").autocomplete({
+            source: function (request, response) {
+                debugger;
+                var termo = $("#inNumeroCotacao").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/AcompanharCotacoes/BuscarListaDeNomesCotacaoesDaCC",
+                    dataType: "json",
+                    data: { 'term': termo, 'cCC': $('#inCCC').val(), 'tipoPesq': 1 },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.ID_COTACAO_MASTER_CENTRAL_COMPRAS + "-" + item.NOME_COTACAO_CENTRAL_COMPRAS,
+                                value: item.ID_COTACAO_MASTER_CENTRAL_COMPRAS,
+                                descricao: item.NOME_COTACAO_CENTRAL_COMPRAS
+                            };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                debugger;
+
+                $('#inNumeroCotacao').val(ui.item.value);
+                $("#inNomeCotacao").val(ui.item.descricao);
+                $("#inNomeCotacao2").hide();
+                $("#inNomeCotacao").show();
+                //$("#inListaDeRamosDeAtividade").val(0);
+                $('#gridCotacoesDaCentralCompras').bootgrid('reload');
+
+            }, minLength: 2,
         });
 
         //BOTÃO PESQUISAR

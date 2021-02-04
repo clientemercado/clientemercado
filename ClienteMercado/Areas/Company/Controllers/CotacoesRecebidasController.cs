@@ -558,7 +558,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             NCotacaoMasterCentralDeComprasService negociosCotacaoMaster = new NCotacaoMasterCentralDeComprasService();
 
             //CARREGA LISTA de COTAÇÕES da CENTRAL de COMPRAS
-            List<cotacao_master_central_compras> listaCotacaoMasterCC = negociosCotacaoMaster.CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(term);
+            List<cotacao_master_central_compras> listaCotacaoMasterCC = negociosCotacaoMaster.CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(term, 0, 3);
 
             return Json(listaCotacaoMasterCC, JsonRequestBehavior.AllowGet);
         }

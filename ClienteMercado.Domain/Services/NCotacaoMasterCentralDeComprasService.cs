@@ -89,9 +89,9 @@ namespace ClienteMercado.Domain.Services
         }
 
         //CARREGA LISTA AUTOCOMPLETE de COTAÇÕES RECEBIDAS
-        public List<cotacao_master_central_compras> CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(string term)
+        public List<cotacao_master_central_compras> CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(string term, int cCC, int tipoPesq)
         {
-            return dRepository.CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(term);
+            return dRepository.CarregarListaAutoCompleteDasCotacoesRecebidasDaCC(term, cCC, tipoPesq);
         }
     }
 }
