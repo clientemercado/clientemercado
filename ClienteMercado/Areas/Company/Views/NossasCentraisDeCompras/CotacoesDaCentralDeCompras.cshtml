@@ -135,7 +135,13 @@
     jQuery(document).ready(function () {
         debugger;
 
-        //-----------------------------------------------------------------------
+        /*
+            CONTINUAR AQUI...
+
+            1) COLOCAR COLUNA EXIBINDO O NÚMERO DA COTAÇÃO, A EXEMPLO DO QUE FOI IMPLEMENTADA EM OUTROS LOCAIS DO SISTEMA;
+            2) IMPLEMENTAR NO FILTRO O CAMPO DE PESQUISA DO NÚMERO DA COTAÇÃO;
+         */
+
         if ($("#inAceitouConvite").val() == "sim") {
             debugger;
 
@@ -162,7 +168,6 @@
 
             swal({ title: "Caro " + $('#inUsuarioLogado').val() + ",\nVocê e outra(s) " + $('#inQuantidadeEmpresasDaCC').val() + " empresa(s), foram convidados a participar da Central de Compras em grupo:\n\n" + $('#inNomeCC').val().toUpperCase() + ".\n\nParticipar, lhe permitirá ter acesso a novos FORNECEDORES e conseguir MELHORES PREÇOS nas compras em grupo, tornando sua empresa mais competitiva em seu segmento de mercado na sua região.\n\nEquipe Cliente & Mercado.", type: "warning", confirmButtonColor: "#337ab7" });
         }
-        //-----------------------------------------------------------------------
 
         $("#inNomeCotacao").autocomplete({
             source: function (request, response) {

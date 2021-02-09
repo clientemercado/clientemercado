@@ -754,8 +754,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     listaCotacaoesDaCentralCompras[i].temCotacaoAnexada =
                         negociosCotacaoIndividualEmpresaCC.VerificarSeEmpresaPossuiCotacaoIndividualAnexada(listaCotacaoesDaCentralCompras[i].ID_COTACAO_MASTER_CENTRAL_COMPRAS, dadosEmpresaPartcipanteCC.ID_EMPRESA_CENTRAL_COMPRAS);
 
-                    var teste = "";
-
                     //VERIFICAR STATUS da CENTRAL de COMPRAS
                     if ((quantidadeDeEmpresasRespondendoACotacao == 0) && (DateTime.Now.Date <= listaCotacaoesDaCentralCompras[i].DATA_ENCERRAMENTO_COTACAO_CENTRAL_COMPRAS.Date))
                     {
@@ -822,7 +820,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                     listaCotacaoesDaCentralCompras[i].cotacaoJahEnviadaAosFornecedores = listaCotacaoesDaCentralCompras[i].COTACAO_ENVIADA_FORNECEDORES;
                 }
 
-                //------------------------------------------------------------------
                 //APLICAR FILTRO
                 List<ListaDeCotacaoesDaCentralDeComprasViewModel> listaDeCotacoesDaCentralDeComprasFiltro = new List<ListaDeCotacaoesDaCentralDeComprasViewModel>();
 
@@ -835,7 +832,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                 {
                     listaDeCotacoesDaCentralDeComprasFiltro = listaCotacaoesDaCentralCompras;
                 }
-                //------------------------------------------------------------------
 
                 return Json(
                     new
