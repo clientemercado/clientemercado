@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using System;
 using System.Collections;
 
 namespace ClienteMercado.Domain.Services
@@ -30,6 +31,15 @@ namespace ClienteMercado.Domain.Services
         public empresa_usuario_logins GravarNovaSenhaUsuarioEmpresa(empresa_usuario_logins obj)
         {
             return dlogin.GravarNovaSenhaUsuarioEmpresa(obj);
+        }
+
+        /// <summary>
+        /// Consulta o LOGIN do Usuário da Empresa Cliente
+        /// </summary>
+        /// <returns></returns>
+        public DadosLogin_UsuarioEmpresaCliente ConsultarLoginUsuarioEmpresaCliente(DadosLogin_UsuarioEmpresaCliente obj)
+        {
+            return dlogin.ConsultarLoginUsuarioEmpresaCliente(obj);
         }
 
         //Consultar e-mail dos Vendedores que receberão aviso de cotação

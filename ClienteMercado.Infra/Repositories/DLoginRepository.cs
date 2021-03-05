@@ -34,6 +34,22 @@ namespace ClienteMercado.Infra.Repositories
             return loginUsuarioEmpresa;
         }
 
+        /// <summary>
+        /// Consulta o LOGIN do Usuário da Empresa Cliente
+        /// </summary>
+        /// <returns></returns>
+        public DadosLogin_UsuarioEmpresaCliente ConsultarLoginUsuarioEmpresaCliente(DadosLogin_UsuarioEmpresaCliente obj)
+        {
+            DadosLogin_UsuarioEmpresaCliente loginUserEmpresaCliente = 
+                _contexto.dadosLoginUsuario_empresaCliente.Include("Usuario_EmpresaCliente")
+                .FirstOrDefault(m => (((m.Lg_DadosLoginUsuarioEmpresaCliente == obj.Lg_DadosLoginUsuarioEmpresaCliente) ||
+                (m.eMail1_DadosLoginUsuarioEmpresaCliente == obj.Lg_DadosLoginUsuarioEmpresaCliente) || 
+                (m.eMail2_DadosLoginUsuarioEmpresaCliente == obj.Lg_DadosLoginUsuarioEmpresaCliente)) && 
+                (m.Pw_DadosLoginUsuarioEmpresaCliente == obj.Pw_DadosLoginUsuarioEmpresaCliente)));
+
+            return loginUserEmpresaCliente;
+        }
+
         //Consultar o Login e trazer os dados da Empresa e Usuário Master, para o faturamento
         public empresa_usuario_logins BuscarDadosUsuarioEEmpresaParaFaturamento(empresa_usuario_logins obj)
         {

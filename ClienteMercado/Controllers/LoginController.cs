@@ -18,7 +18,8 @@ namespace ClienteMercado.Controllers
             return View();
         }
 
-        //LOGIN
+        //==============================================================================================================
+        //CONFIRMAR LOGIN - SUPERMARKET_ON
         public ActionResult ConfirmarLogin(string login, string passw)
         {
             try
@@ -26,20 +27,20 @@ namespace ClienteMercado.Controllers
                 var resultado = new { logado = "", mensagemLogin = "" };
 
                 //Login para Usuário de Empresa
-                NLoginService negocioLoginEmpresa = new NLoginService();
-                empresa_usuario_logins loginDoUsuario = new empresa_usuario_logins();
+                NLoginService serviceLoginEmpresaCliente = new NLoginService();
+                DadosLogin_UsuarioEmpresaCliente loginDoUsuario = new DadosLogin_UsuarioEmpresaCliente();
 
                 Login viewModelLogin = new Login();
 
-                loginDoUsuario.LOGIN_EMPRESA_USUARIO_LOGINS = login;
-                loginDoUsuario.SENHA_EMPRESA_USUARIO_LOGINS = Hash.GerarHashMd5(passw);
+                loginDoUsuario.Lg_DadosLoginUsuarioEmpresaCliente = login;
+                loginDoUsuario.Pw_DadosLoginUsuarioEmpresaCliente = passw;
 
-                empresa_usuario_logins empresaUsuarioLogins = negocioLoginEmpresa.ConsultarLoginUsuarioEmpresa(loginDoUsuario);
+                DadosLogin_UsuarioEmpresaCliente empresaUsuarioLogins = serviceLoginEmpresaCliente.ConsultarLoginUsuarioEmpresaCliente(loginDoUsuario);
 
                 if (empresaUsuarioLogins != null)
                 {
-                    Sessao.IdUsuarioLogado = empresaUsuarioLogins.ID_CODIGO_USUARIO;
-                    Sessao.IdEmpresaUsuario = empresaUsuarioLogins.usuario_empresa.empresa_usuario.ID_CODIGO_EMPRESA;
+                    Sessao.IdUsuarioLogado = empresaUsuarioLogins.id_UsuarioEmpresaCliente;
+                    Sessao.IdEmpresaUsuario = empresaUsuarioLogins.usuario_empresaCliente.id_EmpresaCliente;
 
                     resultado = new { logado = "sim", mensagemLogin = "" };
                 }
@@ -55,6 +56,7 @@ namespace ClienteMercado.Controllers
                 throw erro;
             }
         }
+        //==============================================================================================================
 
         // Checa Login (Login ou E-mail) e Senha
         [AllowAnonymous]

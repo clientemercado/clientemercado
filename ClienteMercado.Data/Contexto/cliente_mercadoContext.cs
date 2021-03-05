@@ -40,6 +40,26 @@ namespace ClienteMercado.Data.Contexto
             }
         }
 
+        //========================================================================================================
+        //MAPEAMENTO DAS TABELAS - SUPERMARKET_ON
+        public DbSet<EmpresaCliente> empresa_cliente { get; set; }
+        public DbSet<Usuario_EmpresaCliente> usuario_empresaCliente { get; set; }
+        public DbSet<Cliente_EmpresaCliente> cliente_empresaCliente { get; set; }
+        public DbSet<DadosLogin_UsuarioEmpresaCliente> dadosLoginUsuario_empresaCliente { get; set; }
+        public DbSet<DadosLogin_ClienteEmpresaCliente> dadosLoginCliente_empresaCliente { get; set; }
+        public DbSet<Cidade_EmpresaCliente> cidade_empresaCliente { get; set; }
+        public DbSet<CupomDesconto_EmpresaCliente> cuponDesconto_empresaCliente { get; set; }
+        public DbSet<Departamento_EmpresaCliente> departamenento_empresaCliente { get; set; }
+        public DbSet<SubDepartamento_EmpresaCliente> subDepartamento_empresaCliente { get; set; }
+        public DbSet<Empresa_FabricantesMarcas> empresa_fabricanteMarcas { get; set; }
+        public DbSet<MeiosPagamento_EmpresaCliente> meiosPagamento_empresaCliente { get; set; }
+        public DbSet<PedidoCliente_EmpresaCliente> pedidoCliente_empresaCliente { get; set; }
+        public DbSet<Produto_EmpresaCliente> produto_empresaCliente { get; set; }
+        public DbSet<ProdutosPedidoCliente_EmpresaCliente> produtosPedidoCliente_empresaCliente { get; set; }
+        public DbSet<Localidade_CidadeEmpresaCliente> localidadeCidade_empresaCliente { get; set; }
+        public DbSet<PromocaoVenda_EmpresaCliente> promocaoVenda_empresaCliente { get; set; }
+        //========================================================================================================
+
         public DbSet<empresa_usuario> empresa_usuario { get; set; }
         public DbSet<usuario_empresa> usuario_empresa { get; set; }
         public DbSet<empresa_usuario_logins> empresa_usuario_logins { get; set; }

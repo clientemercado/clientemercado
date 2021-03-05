@@ -151,6 +151,7 @@
     <Compile Include="Areas\Company\Controllers\AcompanharCotacoesController.cs" />
     <Compile Include="Areas\Company\Controllers\CentraisDeComprasController.cs" />
     <Compile Include="Areas\Company\Controllers\Configuration_registryController.cs" />
+    <Compile Include="Areas\Company\Controllers\EmpresaClienteController.cs" />
     <Compile Include="Areas\Company\Controllers\NossasCentraisDeComprasController.cs" />
     <Compile Include="Areas\Company\Controllers\ConfiguracoesController.cs" />
     <Compile Include="Areas\Company\Controllers\CotacaoAvulsaController.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Controllers\FinanceiroClienteMercadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LoginController_CM.cs" />
     <Compile Include="Controllers\UsuarioCotanteController.cs" />
     <Compile Include="Controllers\UsuarioEmpresaController.cs" />
     <Compile Include="Controllers\UsuarioProfissionalController.cs" />
@@ -4728,6 +4730,7 @@
     <Content Include="Areas\Company\Views\Configuration_registry\Termos.cshtml" />
     <Content Include="Areas\Company\Views\Configuration_registry\DataLocation.cshtml" />
     <Content Include="Areas\Company\Views\Configuration_registry\PaymentData.cshtml" />
+    <Content Include="Areas\Company\Views\EmpresaCliente\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Deploy Cliente Mercado.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -4829,7 +4832,7 @@
     <Content Include="Views\Shared\_Layout-Others-Home.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\Shared\_Layout.cshtml">
+    <Content Include="Views\Shared\_Layout_CM.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Web.config">
@@ -4894,6 +4897,7 @@
     <Content Include="Views\UsuarioEmpresa\GridItensEnviadosParaCotacao.cshtml" />
     <Content Include="Scripts\PgwSlider-master.zip" />
     <Content Include="Views\Shared\_Layout_configuration.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
