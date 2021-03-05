@@ -21,6 +21,10 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 if (Sessao.IdEmpresaUsuario > 0)
                 {
+                    /*
+                     ALTERAR ESTES DADOS AQUI CONSIDERANDO AS TABELAS DO SUPERMARKET_ON..
+                     */
+
                     NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService negociosUsuarioEmpresa = new NUsuarioEmpresaService();
 

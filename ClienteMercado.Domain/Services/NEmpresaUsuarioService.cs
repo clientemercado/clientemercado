@@ -49,6 +49,15 @@ namespace ClienteMercado.Domain.Services
             return dempresausuario.ConsultarEmailEmpresa(obj);
         }
 
+        /// <summary>
+        /// Consultar dados da Empresa Cliente - SUPERMARKET_ON
+        /// </summary>
+        /// <returns></returns>
+        public EmpresaCliente ConsultarDadosDaEmpresaCliente(EmpresaCliente obj)
+        {
+            return dempresausuario.ConsultarDadosDaEmpresaCliente(obj);
+        }
+
         //Consultar e-mail para o Cadastro do Usuário da Empresa
         public empresa_usuario_logins ConsultarEmailUsuarioEmpresa(empresa_usuario_logins obj)
         {

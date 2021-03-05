@@ -69,6 +69,7 @@
     <Compile Include="ViewModel\AcompanharCotacaoesViewModel.cs" />
     <Compile Include="ViewModel\CadastroEmpresaViewModel.cs" />
     <Compile Include="ViewModel\DadosDaCotacaoViewModel.cs" />
+    <Compile Include="ViewModel\DadosEmpresaClienteViewModel.cs" />
     <Compile Include="ViewModel\DadosEmpresaEUsuarioViewModel.cs" />
     <Compile Include="ViewModel\DadosEmpresasCotadasViewModel.cs" />
     <Compile Include="ViewModel\ListaDadosProdutoCotacaoViewModel.cs" />

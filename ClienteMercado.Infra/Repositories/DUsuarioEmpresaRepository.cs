@@ -45,6 +45,18 @@ namespace ClienteMercado.Infra.Repositories
             return dadosDoUsuario;
         }
 
+        /// <summary>
+        /// Consultar dados do Usuário Funcionário da Empresa Cliente - SUPERMARKET_ON
+        /// </summary>
+        /// <returns></returns>
+        public Usuario_EmpresaCliente ConsultarDadosUsuarioEmpresaCliente(Usuario_EmpresaCliente obj)
+        {
+            Usuario_EmpresaCliente dadosUsuEmpresaCliente = 
+                _contexto.usuario_empresaCliente.FirstOrDefault(m => (m.id_UsuarioEmpresaCliente == obj.id_UsuarioEmpresaCliente));
+
+            return dadosUsuEmpresaCliente;
+        }
+
         //GRAVAR DADOS ATUALIZADOS do USUÁRIO
         public usuario_empresa AtualizarDadosCadastrais(usuario_empresa obj)
         {

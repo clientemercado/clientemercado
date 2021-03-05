@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
@@ -36,6 +37,15 @@ namespace ClienteMercado.Domain.Services
         public usuario_empresa ConsultarDadosDoUsuarioDaEmpresaFornecedoraPeloIdDaEmpresa(int idEmpresa)
         {
             return dusuarioempresa.ConsultarDadosDoUsuarioDaEmpresaFornecedoraPeloIdDaEmpresa(idEmpresa);
+        }
+
+        /// <summary>
+        /// Consultar dados do Usuário Funcionário da Empresa Cliente - SUPERMARKET_ON
+        /// </summary>
+        /// <returns></returns>
+        public Usuario_EmpresaCliente ConsultarDadosUsuarioEmpresaCliente(Usuario_EmpresaCliente obj)
+        {
+            return dusuarioempresa.ConsultarDadosUsuarioEmpresaCliente(obj);
         }
     }
 }

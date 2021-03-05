@@ -70,6 +70,17 @@ namespace ClienteMercado.Infra.Repositories
             return atualizarCadastroEmpresa;
         }
 
+        /// <summary>
+        /// Consultar dados da Empresa Cliente - SUPERMARKET_ON
+        /// </summary>
+        /// <returns></returns>
+        public EmpresaCliente ConsultarDadosDaEmpresaCliente(EmpresaCliente obj)
+        {
+            EmpresaCliente dadosEmpresaCliente = _contexto.empresa_cliente.FirstOrDefault(m => (m.id_EmpresaCliente == obj.id_EmpresaCliente));
+
+            return dadosEmpresaCliente;
+        }
+
         //Confirmar o Cadastro da Empresa e do Usuário Master
         public usuario_empresa ConfirmarCadastroUsuarioEmpresa(usuario_empresa obj)
         {

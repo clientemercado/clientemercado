@@ -29,22 +29,24 @@ namespace ClienteMercado.Areas.Company.Controllers
                     mesAtual = char.ToUpper(mesAtual[0]) + mesAtual.Substring(1);
                     int anoAtual = dataHoje.Year;
 
-                    NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
-                    NUsuarioEmpresaService negociosUsuarioEmpresa = new NUsuarioEmpresaService();
-                    DadosEmpresaEUsuarioViewModel dadosDaEmpresa = new DadosEmpresaEUsuarioViewModel();
+                    NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
+                    NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
-                    empresa_usuario dadosEmpresa = negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
-                    usuario_empresa dadosUsuarioEmpresa = negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(Convert.ToInt32(Session["IdUsuarioLogado"]));
+                    EmpresaCliente dadosEmpresaCliente = 
+                        serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
+                    Usuario_EmpresaCliente dadosUsuEmpresaCliente = 
+                        serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
 
                     //POPULAR VIEW MODEL
-                    dadosDaEmpresa.NOME_FANTASIA_EMPRESA = dadosEmpresa.NOME_FANTASIA_EMPRESA.ToUpper();
-                    dadosDaEmpresa.NOME_USUARIO = dadosUsuarioEmpresa.NOME_USUARIO;
+                    dadosDaEmpresaClienteEUsuario.nomeFantasia_EmpresaCliente = dadosEmpresaCliente.nomeFantasia_EmpresaCliente.ToUpper();
+                    dadosDaEmpresaClienteEUsuario.nome_UsuarioEmpresaCliente = dadosUsuEmpresaCliente.nome_UsuarioEmpresaCliente;
 
                     //VIEWBAGS
                     ViewBag.dataHoje = diaDaSemana + ", " + diaDoMes + " de " + mesAtual + " de " + anoAtual;
                     ViewBag.ondeEstouAgora = "";
 
-                    return View(dadosDaEmpresa);
+                    return View(dadosDaEmpresaClienteEUsuario);
                 }
                 else
                 {
