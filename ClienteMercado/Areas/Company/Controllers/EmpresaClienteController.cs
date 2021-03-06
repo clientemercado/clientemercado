@@ -21,19 +21,23 @@ namespace ClienteMercado.Areas.Company.Controllers
             {
                 if (Sessao.IdEmpresaUsuario > 0)
                 {
-                    /*
-                     ALTERAR ESTES DADOS AQUI CONSIDERANDO AS TABELAS DO SUPERMARKET_ON..
-                     */
+                    //----------------------------------------------------------------------------------------------------------------
+                    //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
+                    NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
+                    NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
-                    NEmpresaUsuarioService negociosEmpresaUsuario = new NEmpresaUsuarioService();
-                    NUsuarioEmpresaService negociosUsuarioEmpresa = new NUsuarioEmpresaService();
+                    EmpresaCliente dadosEmpresaCliente =
+                        serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
+                    Usuario_EmpresaCliente dadosUsuEmpresaCliente =
+                        serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
 
-                    NossasCentraisDeComprasViewModel viewModelCC = new NossasCentraisDeComprasViewModel();
+                    //POPULAR VIEW MODEL
+                    dadosDaEmpresaClienteEUsuario.nomeFantasia_EmpresaCliente = dadosEmpresaCliente.nomeFantasia_EmpresaCliente.ToUpper();
+                    dadosDaEmpresaClienteEUsuario.nome_UsuarioEmpresaCliente = dadosUsuEmpresaCliente.nome_UsuarioEmpresaCliente;
+                    //----------------------------------------------------------------------------------------------------------------
 
-                    empresa_usuario dadosEmpresa = negociosEmpresaUsuario.ConsultarDadosDaEmpresa(new empresa_usuario { ID_CODIGO_EMPRESA = Convert.ToInt32(Sessao.IdEmpresaUsuario) });
-                    usuario_empresa dadosUsuarioEmpresa = negociosUsuarioEmpresa.ConsultarDadosDoUsuarioDaEmpresa(Convert.ToInt32(Sessao.IdEmpresaUsuario));
-
-                    return View(viewModelCC);
+                    return View(dadosDaEmpresaClienteEUsuario);
                 }
             }
             catch (Exception e)

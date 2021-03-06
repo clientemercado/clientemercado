@@ -29,6 +29,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     mesAtual = char.ToUpper(mesAtual[0]) + mesAtual.Substring(1);
                     int anoAtual = dataHoje.Year;
 
+                    //----------------------------------------------------------------------------------------------------------------
+                    //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
@@ -41,6 +43,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeFantasia_EmpresaCliente = dadosEmpresaCliente.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nome_UsuarioEmpresaCliente = dadosUsuEmpresaCliente.nome_UsuarioEmpresaCliente;
+                    //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
                     ViewBag.dataHoje = diaDaSemana + ", " + diaDoMes + " de " + mesAtual + " de " + anoAtual;
