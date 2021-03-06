@@ -1,0 +1,54 @@
+﻿.HideColHead {
+    display: none
+}
+
+.HideCol {
+    display: none
+}
+
+th {
+    background-color: #CDC9C9;
+    color: white;
+}
+
+.status {
+    font-size: 9pt;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.sweet-alert button.cancel {
+    background-color: #337ab7;
+    color: white;
+}
+
+    .sweet-alert button.cancel:hover {
+        background-color: #337ab7;
+        color: white;
+    }
+
+.ui-pnotify {
+    top: 100px; /*Replace the 25px with the top that you need*/
+    right: 25px;
+    position: absolute;
+    height: auto;
+    z-index: 9999
+}
+
+    .ui-pnotify.customsuccess .ui-pnotify-container {
+        background-color: #337ab7 !important;
+    }
+
+    .ui-pnotify.customsuccess .ui-pnotify-text {
+        font-size: 11px
+    }
+
+    .ui-pnotify.customsuccess .ui-pnotify-title,
+    .ui-pnotify.customsuccess .ui-pnotify-text,
+    .ui-pnotify.customsuccess .ui-pnotify-icon,
+    .ui-pnotify.customsuccess .ui-pnotify-sticker,
+    .ui-pnotify.customsuccess .ui-pnotify-closer {
+        color: #FFF !important;
+    }
