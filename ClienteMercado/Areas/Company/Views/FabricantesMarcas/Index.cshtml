@@ -15,22 +15,24 @@
 <link href="~/Areas/Company/Content/css/index.css" rel="stylesheet" />
 <script src="~/Areas/Company/Content/js/FabricantesMarcas.js"></script>
 
-<h2>Cadastro e Manutenção de Dados - Fabricantes e Marcas Empresa Cliente</h2>
-
 <div class="row">
     <!-- BEGIN VALIDATION STATES-->
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fas fa-user-friends"></i> Centrais de Compras do Sistema
+                Cadastro e Manutenção de Dados - Fabricantes e Marcas Empresa Cliente
             </div>
         </div>
         <div class="portlet-body form">
             <div class="form-actions">
                 <div class="row">
-                    <div class="col-md-12">
-                        <button id="btn-pesquisar" class="btn blue" title="Pesquisar conforme dados selecionados"><i class="fas fa-search"></i> Pesquisar</button>
+                    <div class="col-md-1">
+                        <button id="btn-cadastrar" class="btn btn-primary" title="Cadastrar"><i class="far fa-file"></i> Cadastrar</button>
                     </div>
+                    <div class="col-md-1">
+                        <button id="btn-excluir" class="btn btn-danger" title="Excluir"><i class="far fa-trash-alt"></i> Excluir</button>
+                    </div>
+                    <div class="col-md-10">&nbsp;</div>
                 </div>
             </div>
             <!-- BEGIN FORM-->
@@ -38,31 +40,16 @@
                 <div class="form-body">
                     <div class="form-group">
                         <div class="col-md-12">
-                            @*<div class="col-md-8"><font color="#3297E0"><b>Central Compras:</b></font></div>
-                                <div class="col-md-4"><font color="#3297E0"><b>Ramo Atividade:</b></font></div>*@
+                            <div class="col-md-8"><font color="#3297E0"><b>Empresa:</b></font></div>
+                            <div class="col-md-4">&nbsp;</div>
                         </div>
                         <div class="col-md-12">
-                            @*<div class="col-md-8">
-                                    <input type="text" name="name" id="inNomeCentralCompras" data-required="1" size="10" class="form-control" placeholder="Descrição..." />
-                                </div>
-                                <div class="col-md-4">
-                                    @Html.DropDownList("inListaDeRamosDeAtividade", Model.inListaDeRamosDeAtividade, new { @class = "form-control", @id = "inListaDeRamosDeAtividade" })
-                                </div>*@
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            @*<div class="col-md-8"><font color="#3297E0"><b>Cidade:</b></font></div>
-                                <div class="col-md-4"><font color="#3297E0"><b>UF:</b></font></div>*@
-                        </div>
-                        <div class="col-md-12">
-                            @*<div class="col-md-8">
-                                    <input type="text" name="name" id="inCidade" data-required="1" size="8" class="form-control" placeholder="Cidade" />
-                                </div>
-                                <div class="col-md-2">
-                                    @Html.DropDownList("inListaDeUFs", Model.inListaDeUFs, new { @class = "form-control", @id = "inListaDeUFs" })
-                                </div>
-                                <div class="col-md-2">&nbsp;</div>*@
+                            <div class="col-md-8">
+                                <input type="text" name="name" id="inPesquisar" data-required="1" size="10" class="form-control" placeholder="Descrição..." />
+                            </div>
+                            <div class="col-md-4">
+                                <button id="btn-pesquisar" class="btn blue" title="Pesquisar conforme dados selecionados"><i class="fas fa-search"></i> Pesquisar</button>
+                            </div>
                         </div>
                     </div>
                     <hr />
@@ -70,22 +57,22 @@
                     <!--<div class="form-group">-->
                     <!-- BEGIN SAMPLE TABLE PORTLET-->
                     <!--<div class="portlet-body flip-scroll col-md-12">
-                            <table id="gridCentraisDeComprasDoSistema" class="table table-bordered table-striped table-condensed flip-content">
-                                <thead class="flip-content">
-                                    <tr>
-                                        <th data-column-id="nomeCentralCompras" data-width="30%" data-formatter="link1">Central Compras</th>
-                                        <th data-column-id="ramoAtividadeCentralCompras" data-width="18%" data-formatter="link2">Ramo Atividade</th>
-                                        <th data-column-id="quantasEmpresas" data-width="9%" data-align="right" data-formatter="link3">Empresas</th>
-                                        <th data-column-id="cidadeDaCentralCompras" data-width="16%" data-formatter="link4">Cidade</th>
-                                        <th data-column-id="ufDaCentralCompras" data-width="5%" data-align="center" data-formatter="link5">UF</th>
-                                        <th data-column-id="statusCentralCompras" data-width="10%" data-align="center" data-formatter="status1">Status</th>
-                                        <th data-formatter="commands" data-align="center" data-width="12%">Participar</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>-->
+                    <table id="gridCentraisDeComprasDoSistema" class="table table-bordered table-striped table-condensed flip-content">
+                        <thead class="flip-content">
+                            <tr>
+                                <th data-column-id="nomeCentralCompras" data-width="30%" data-formatter="link1">Central Compras</th>
+                                <th data-column-id="ramoAtividadeCentralCompras" data-width="18%" data-formatter="link2">Ramo Atividade</th>
+                                <th data-column-id="quantasEmpresas" data-width="9%" data-align="right" data-formatter="link3">Empresas</th>
+                                <th data-column-id="cidadeDaCentralCompras" data-width="16%" data-formatter="link4">Cidade</th>
+                                <th data-column-id="ufDaCentralCompras" data-width="5%" data-align="center" data-formatter="link5">UF</th>
+                                <th data-column-id="statusCentralCompras" data-width="10%" data-align="center" data-formatter="status1">Status</th>
+                                <th data-formatter="commands" data-align="center" data-width="12%">Participar</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>-->
                 </div>
             </form>
             <!-- END FORM-->
