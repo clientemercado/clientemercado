@@ -57,22 +57,22 @@
                     <!--<div class="form-group">-->
                     <!-- BEGIN SAMPLE TABLE PORTLET-->
                     <!--<div class="portlet-body flip-scroll col-md-12">
-                    <table id="gridCentraisDeComprasDoSistema" class="table table-bordered table-striped table-condensed flip-content">
-                        <thead class="flip-content">
-                            <tr>
-                                <th data-column-id="nomeCentralCompras" data-width="30%" data-formatter="link1">Central Compras</th>
-                                <th data-column-id="ramoAtividadeCentralCompras" data-width="18%" data-formatter="link2">Ramo Atividade</th>
-                                <th data-column-id="quantasEmpresas" data-width="9%" data-align="right" data-formatter="link3">Empresas</th>
-                                <th data-column-id="cidadeDaCentralCompras" data-width="16%" data-formatter="link4">Cidade</th>
-                                <th data-column-id="ufDaCentralCompras" data-width="5%" data-align="center" data-formatter="link5">UF</th>
-                                <th data-column-id="statusCentralCompras" data-width="10%" data-align="center" data-formatter="status1">Status</th>
-                                <th data-formatter="commands" data-align="center" data-width="12%">Participar</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>-->
+                            <table id="gridCentraisDeComprasDoSistema" class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th data-column-id="nomeCentralCompras" data-width="30%" data-formatter="link1">Central Compras</th>
+                                        <th data-column-id="ramoAtividadeCentralCompras" data-width="18%" data-formatter="link2">Ramo Atividade</th>
+                                        <th data-column-id="quantasEmpresas" data-width="9%" data-align="right" data-formatter="link3">Empresas</th>
+                                        <th data-column-id="cidadeDaCentralCompras" data-width="16%" data-formatter="link4">Cidade</th>
+                                        <th data-column-id="ufDaCentralCompras" data-width="5%" data-align="center" data-formatter="link5">UF</th>
+                                        <th data-column-id="statusCentralCompras" data-width="10%" data-align="center" data-formatter="status1">Status</th>
+                                        <th data-formatter="commands" data-align="center" data-width="12%">Participar</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>-->
                 </div>
             </form>
             <!-- END FORM-->
@@ -82,3 +82,5 @@
     </div>
     <!-- END VALIDATION STATES-->
 </div>
+
+@Html.Hidden("Url1", @Url.Action("Cadastro", "MeiosPagamentoEmpresa", new { area = "Company" }));

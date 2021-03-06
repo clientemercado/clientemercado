@@ -72,7 +72,7 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="@Url.Action("Index", "NossasCentraisDeCompras")" class="btn default button-previous"><i class="fas fa-arrow-left"></i> Voltar</a>
+                                <a href="@Url.Action("Index", "NossasCentraisDeCompras")" class="btn default button-previous"><i class="fas fa-arrow-left"></i></i> Voltar</a>
                                 <a href="#" id="inNovaCotacaoCC" class="btn blue button-submit" style="display:none;"><i class="far fa-file"></i> Criar Nova Cotação</a>
                                 <a href="#" id="inAceitarConvite" class="btn btn-warning" style="display:none;"><i class="far fa-thumbs-up"></i> ACEITO PARTICIPAR</a>
                                 &nbsp;&nbsp;&nbsp;
@@ -288,7 +288,7 @@
             debugger;
 
             //REDIRECIONA para NOVA COTAÇÃO
-            window.location.href = "@Url.Action("NovaCotacao", "NossasCentraisDeCompras", new { Area = "Company" })" + "?cCC=" + $("#inCCC").val() + "&tP=nw" + "&iCM=0" ;
+            window.location.href = "@Url.Action("NovaCotacao", "NossasCentraisDeCompras", new { Area = "Company" })" + "?cCC=" + $("#inCCC").val() + "&tP=nw" + "&iCM=0";
         });
 
         //BOTÃO ACEITAR CONVITE
