@@ -64,6 +64,7 @@
     <!-- END VALIDATION STATES-->
 </div>
 
-@Html.Hidden("Url2", @Url.Action("Index", "DepartamentosEmpresa", new { area = "Company" }));
+@Html.Hidden("Url2", @Url.Action("Index", "DepartamentosEmpresa", new { area = "Company" }))
+@Html.Hidden("Url3", @Url.Action("AlterarDados", "DepartamentosEmpresa", new { area = "Company" }))
 
 
