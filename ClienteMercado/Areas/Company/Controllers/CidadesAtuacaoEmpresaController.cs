@@ -115,6 +115,60 @@ namespace ClienteMercado.Areas.Company.Controllers
                 throw erro;
             }
         }
+
+        //----------------------------------------------------------------------------------
+        //GRAVAR REGISTRO
+        public JsonResult GravarRegistro(DadosEmpresaClienteViewModel obj)
+        {
+            try
+            {
+                //string saldoAtualizado = "";
+
+                //AtividadeService serviceAtividade = new AtividadeService();
+                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+
+                ////POPULAR MODELO P/ GRAVAÇÃO
+                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+
+                //if (obj.AtiCodigoPai > 0)
+                //{
+                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
+                //}
+
+                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
+                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
+                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
+                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
+                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
+                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
+                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
+                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
+                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
+                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
+                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
+                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
+                //novaAtividade.EmpCodigo = idEmpresa;
+
+                ////GRAVAR NOVA AVIVIDADE 
+                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
+
+                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
+                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
+
+                //if (ultimaAtividadeFilhaRegs != null)
+                //{
+                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
+                //}
+
+                return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+
+        //----------------------------------------------------------------------------------
         public ActionResult AlterarDados()
         {
             try
@@ -164,6 +218,58 @@ namespace ClienteMercado.Areas.Company.Controllers
                 throw erro;
             }
         }
+        //----------------------------------------------------------------------------------
+        //ATUALIZAR REGISTRO
+        public JsonResult AtualizarRegistro(DadosEmpresaClienteViewModel obj)
+        {
+            try
+            {
+                //string saldoAtualizado = "";
+
+                //AtividadeService serviceAtividade = new AtividadeService();
+                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+
+                ////POPULAR MODELO P/ GRAVAÇÃO
+                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+
+                //if (obj.AtiCodigoPai > 0)
+                //{
+                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
+                //}
+
+                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
+                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
+                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
+                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
+                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
+                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
+                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
+                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
+                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
+                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
+                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
+                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
+                //novaAtividade.EmpCodigo = idEmpresa;
+
+                ////GRAVAR NOVA AVIVIDADE 
+                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
+
+                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
+                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
+
+                //if (ultimaAtividadeFilhaRegs != null)
+                //{
+                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
+                //}
+
+                return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+        }
+        //----------------------------------------------------------------------------------
 
     }
 }
