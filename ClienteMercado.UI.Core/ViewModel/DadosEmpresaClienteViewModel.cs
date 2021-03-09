@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using ClienteMercado.Data.Entities;
 
 namespace ClienteMercado.UI.Core.ViewModel
 {
     public class DadosEmpresaClienteViewModel : Usuario_EmpresaCliente
     {
+        public string nomeEmpresaLogada { get; set; }
+        public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }
         public string razaoSocial_EmpresaCliente { get; set; }
         public string nomeFantasia_EmpresaCliente { get; set; }
@@ -13,6 +17,8 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string bairro_EmpresaCliente { get; set; }
         public string complementoEndereco_EmpresaCliente { get; set; }
         public float cepEndereco_EmpresaCliente { get; set; }
+        public string cidade_EmpresaCliente { get; set; }
+        public string uf_EmpresaCliente { get; set; }
         public string pais_EmpresaCliente { get; set; }
         public string telefone1_EmpresaCliente { get; set; }
         public string telefone2_EmpresaCliente { get; set; }
@@ -25,5 +31,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public DateTime? dataInativou_EmpresaCliente { get; set; }
         public int idUsuarioInativou_EmpresaCliente { get; set; }
         public float? latitude_logitude_cep_EmpresaCliente { get; set; }
+        public List<SelectListItem> ListagemPaises { get; set; }
+        public List<SelectListItem> ListagemEstados { get; set; }
     }
 }

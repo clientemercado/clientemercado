@@ -62,6 +62,8 @@ namespace ClienteMercado.Data.Entities
         public DateTime? dataInativou_EmpresaCliente { get; set; }
         public int? idUsuarioInativou_EmpresaCliente { get; set; }
         public float? latitude_logitude_cep_EmpresaCliente { get; set; }
+        public string cidade_EmpresaCliente { get; set; }
+        public string uf_EmpresaCliente { get; set; }
 
         public virtual ICollection<Usuario_EmpresaCliente> usuario_empresaCliente { get; set; }
         public virtual ICollection<Cliente_EmpresaCliente> cliente_empresaCliente { get; set; }

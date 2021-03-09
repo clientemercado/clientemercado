@@ -149,6 +149,12 @@ namespace ClienteMercado.Domain.Services
             return gravou;
         }
 
+        //GRAVAR NOVA EMPRESA CLIENTE
+        public EmpresaCliente GravarNovaEmpresaCliente(EmpresaCliente obj)
+        {
+            return dempresausuario.GravarNovaEmpresaCliente(obj);
+        }
+
         //Consultar dados da EMPRESA
         public empresa_usuario ConsultarDadosDaEmpresa(empresa_usuario obj)
         {

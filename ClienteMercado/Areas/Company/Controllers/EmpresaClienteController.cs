@@ -4,6 +4,7 @@ using ClienteMercado.UI.Core.ViewModel;
 using ClienteMercado.Utils.Net;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -72,14 +73,16 @@ namespace ClienteMercado.Areas.Company.Controllers
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
-                    EmpresaCliente dadosEmpresaCliente =
+                    EmpresaCliente dadosEmpresaLogada =
                         serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
-                    Usuario_EmpresaCliente dadosUsuEmpresaCliente =
+                    Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
 
                     //POPULAR VIEW MODEL
-                    dadosDaEmpresaClienteEUsuario.nomeFantasia_EmpresaCliente = dadosEmpresaCliente.nomeFantasia_EmpresaCliente.ToUpper();
-                    dadosDaEmpresaClienteEUsuario.nome_UsuarioEmpresaCliente = dadosUsuEmpresaCliente.nome_UsuarioEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.ListagemPaises = ListagemPaises();
+                    dadosDaEmpresaClienteEUsuario.ListagemEstados = ListagemEstados();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -105,45 +108,26 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
+                EmpresaCliente dadosNewEmpresaCliente = new EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosNewEmpresaCliente.cnpj_EmpresaCliente = obj.cnpj_EmpresaCliente.Replace(".", "").Replace("/","").Replace("-","");
+                dadosNewEmpresaCliente.razaoSocial_EmpresaCliente = obj.razaoSocial_EmpresaCliente;
+                dadosNewEmpresaCliente.nomeFantasia_EmpresaCliente = obj.nomeFantasia_EmpresaCliente;
+                dadosNewEmpresaCliente.email1_EmpresaCliente = obj.email1_EmpresaCliente;
+                dadosNewEmpresaCliente.telefone1_EmpresaCliente = obj.telefone1_EmpresaCliente;
+                dadosNewEmpresaCliente.pais_EmpresaCliente = obj.pais_EmpresaCliente;
+                dadosNewEmpresaCliente.cepEndereco_EmpresaCliente = Convert.ToInt64(obj.cepEndereco_EmpresaCliente.ToString().Replace(".","").Replace("-",""));
+                dadosNewEmpresaCliente.endereco_EmpresaCliente = obj.endereco_EmpresaCliente;
+                dadosNewEmpresaCliente.complementoEndereco_EmpresaCliente = obj.complementoEndereco_EmpresaCliente;
+                dadosNewEmpresaCliente.bairro_EmpresaCliente = obj.bairro_EmpresaCliente;
+                dadosNewEmpresaCliente.cidade_EmpresaCliente = obj.cidade_EmpresaCliente;
+                dadosNewEmpresaCliente.uf_EmpresaCliente = obj.uf_EmpresaCliente;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+                //GRAVAR NOVA EMPRESA CLIENTE
+                dadosNewEmpresaCliente = serviceEmpresaCliente.GravarNovaEmpresaCliente(dadosNewEmpresaCliente);
 
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
-
-                return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "ok", idRegistroGerado = dadosNewEmpresaCliente.id_EmpresaCliente }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception erro)
             {
@@ -152,7 +136,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult AlterarDados()
+        public ActionResult AlterarDados(int id)
         {
             try
             {
@@ -175,14 +159,36 @@ namespace ClienteMercado.Areas.Company.Controllers
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
-                    EmpresaCliente dadosEmpresaCliente =
+                    EmpresaCliente dadosEmpresaLogada =
                         serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
-                    Usuario_EmpresaCliente dadosUsuEmpresaCliente =
+                    Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
+                    EmpresaCliente dadosEmpresaCliente = 
+                        serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(id) });
 
                     //POPULAR VIEW MODEL
+                    dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
                     dadosDaEmpresaClienteEUsuario.nomeFantasia_EmpresaCliente = dadosEmpresaCliente.nomeFantasia_EmpresaCliente.ToUpper();
-                    dadosDaEmpresaClienteEUsuario.nome_UsuarioEmpresaCliente = dadosUsuEmpresaCliente.nome_UsuarioEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.cnpj_EmpresaCliente = dadosEmpresaCliente.cnpj_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.razaoSocial_EmpresaCliente = dadosEmpresaCliente.razaoSocial_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.logomarca_EmpresaCliente = dadosEmpresaCliente.logomarca_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.endereco_EmpresaCliente = dadosEmpresaCliente.endereco_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.bairro_EmpresaCliente = dadosEmpresaCliente.bairro_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.complementoEndereco_EmpresaCliente = dadosEmpresaCliente.complementoEndereco_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.cepEndereco_EmpresaCliente = dadosEmpresaCliente.cepEndereco_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.pais_EmpresaCliente = dadosEmpresaCliente.pais_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.telefone1_EmpresaCliente = dadosEmpresaCliente.telefone1_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.telefone2_EmpresaCliente = dadosEmpresaCliente.telefone2_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.email1_EmpresaCliente = dadosEmpresaCliente.email1_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.email2_EmpresaCliente = dadosEmpresaCliente.email2_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.receberEmails_EmpresaCliente = dadosEmpresaCliente.receberEmails_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.aceitacaoTermosPolitica_EmpresaCliente = dadosEmpresaCliente.aceitacaoTermosPolitica_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.dataCadastro_EmpresaCliente = dadosEmpresaCliente.dataCadastro_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.ativaInativa_EmpresaCliente = dadosEmpresaCliente.ativaInativa_EmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.ListagemPaises = ListagemPaises();
+                    dadosDaEmpresaClienteEUsuario.ListagemEstados = ListagemEstados();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -254,6 +260,86 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
         //----------------------------------------------------------------------------------
+
+        //Carrega lista de Países atendidos pelo ClienteMercado
+        private static List<SelectListItem> ListagemPaises()
+        {
+            //Buscar lista de Países
+            NPaisesService negocioPaises = new NPaisesService();
+
+            List<paises_empresa_usuario> listaPaises = negocioPaises.ListaPaises();
+
+            List<SelectListItem> listPaises = new List<SelectListItem>();
+
+            listPaises.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var grupoPaises in listaPaises)
+            {
+                listPaises.Add(new SelectListItem
+                {
+                    Text = grupoPaises.PAIS_EMPRESA_USUARIO,
+                    Value = grupoPaises.ID_PAISES_EMPRESA_USUARIO.ToString()
+                });
+            }
+
+            return listPaises;
+        }
+
+        //Carrega a lista de Estados (Obs: No momento carregrá todos os estados brasileiros. Depois vejo como ficará)
+        private List<SelectListItem> ListagemEstados()
+        {
+            //Buscar lista de Estados brasileiros
+            NEstadosService negocioEstados = new NEstadosService();
+
+            List<estados_empresa_usuario> listaEstados = negocioEstados.ListaEstados();
+
+            List<SelectListItem> listEstados = new List<SelectListItem>();
+
+            listEstados.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var grupoEstados in listaEstados)
+            {
+                listEstados.Add(new SelectListItem
+                {
+                    Text = grupoEstados.UF_EMPRESA_USUARIO,
+                    Value = grupoEstados.ID_ESTADOS_EMPRESA_USUARIO.ToString()
+                });
+            }
+
+            return listEstados;
+        }
+
+        //FORMATAR CPF/CNPJ
+        public static string FormatarCpfCnpj(string strCpfCnpj)
+        {
+            if (strCpfCnpj.Length <= 11)
+            {
+                MaskedTextProvider mtpCpf = new MaskedTextProvider(@"000\.000\.000-00");
+                mtpCpf.Set(ZerosEsquerda(strCpfCnpj, 11));
+
+                return mtpCpf.ToString();
+            }
+            else
+            {
+                MaskedTextProvider mtpCnpj = new MaskedTextProvider(@"00\.000\.000/0000-00");
+                mtpCnpj.Set(ZerosEsquerda(strCpfCnpj, 11));
+
+                return mtpCnpj.ToString();
+            }
+        }
+
+        //ACRESCENTA ZEROS À ESQUERDA
+        public static string ZerosEsquerda(string strString, int intTamanho)
+        {
+            string strResult = "";
+
+            for (int intCont = 1; intCont <= (intTamanho - strString.Length); intCont++)
+            {
+                strResult += "0";
+            }
+
+            return strResult + strString;
+        }
 
     }
 }

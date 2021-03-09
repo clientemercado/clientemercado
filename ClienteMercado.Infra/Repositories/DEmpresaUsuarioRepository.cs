@@ -184,6 +184,18 @@ namespace ClienteMercado.Infra.Repositories
             return result;
         }
 
+        /// <summary>
+        /// GRAVA OS DADOS DA NOVA EMPRESA CLIENTE
+        /// </summary>
+        public EmpresaCliente GravarNovaEmpresaCliente(EmpresaCliente obj)
+        {
+            EmpresaCliente empresaCliente =
+                _contexto.empresa_cliente.Add(obj);
+            _contexto.SaveChanges();
+
+            return empresaCliente;
+        }
+
         //CARREGAR DADOS das EMPRESAS SELECIONADAS para RECEBER A COTAÇÃO
         public List<ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel> BuscarListaDeEmpresasSelecionadasParaRecerACotacaoDaCentralDeCompras(int[] empresasSelecionadas)
         {
