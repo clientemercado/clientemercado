@@ -5,8 +5,9 @@ using ClienteMercado.Data.Entities;
 
 namespace ClienteMercado.UI.Core.ViewModel
 {
-    public class DadosEmpresaClienteViewModel : Usuario_EmpresaCliente
+    public class DadosEmpresaClienteViewModel
     {
+        public int iEC { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }
@@ -16,7 +17,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string endereco_EmpresaCliente { get; set; }
         public string bairro_EmpresaCliente { get; set; }
         public string complementoEndereco_EmpresaCliente { get; set; }
-        public float cepEndereco_EmpresaCliente { get; set; }
+        public string cepEndereco_EmpresaCliente { get; set; }
         public string cidade_EmpresaCliente { get; set; }
         public string uf_EmpresaCliente { get; set; }
         public string pais_EmpresaCliente { get; set; }

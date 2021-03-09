@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ClienteMercado.UI.Core.ViewModel.DadosEmpresaClienteViewModel
+
+@{
     ViewBag.Title = "SuperMarket_On";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -49,13 +51,13 @@
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-3">
-                                <input type="text" id="inCNPJEmpresa" data-required="1" size="10" class="form-control cadastro" placeholder="Informe CNPJ..." value="@Model.cnpj_EmpresaCliente" readonly />
+                                <input type="text" id="inCNPJEmpresa" data-required="1" size="10" class="form-control obg" placeholder="Informe CNPJ..." value="@Model.cnpj_EmpresaCliente" readonly />
                             </div>
                             <div class="col-md-5">
-                                <input type="text" id="inRazaoSocialEmpresa" data-required="1" size="10" class="form-control cadastro" placeholder="Informe Razão Social..." value="@Model.razaoSocial_EmpresaCliente" />
+                                <input type="text" id="inRazaoSocialEmpresa" data-required="1" size="10" class="form-control obg" placeholder="Informe Razão Social..." value="@Model.razaoSocial_EmpresaCliente" />
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="inNomeFantasiaEmpresa" data-required="1" size="10" class="form-control cadastro" placeholder="Informe Nome Fantasia..." value="@Model.nomeFantasia_EmpresaCliente" />
+                                <input type="text" id="inNomeFantasiaEmpresa" data-required="1" size="10" class="form-control obg" placeholder="Informe Nome Fantasia..." value="@Model.nomeFantasia_EmpresaCliente" />
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -66,16 +68,16 @@
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-4">
-                                <input type="text" id="inEmail1Empresa" data-required="1" size="10" class="form-control cadastro" placeholder="Informe E-mail..." value="@Model.email1_EmpresaCliente" />
+                                <input type="text" id="inEmail1Empresa" data-required="1" size="10" class="form-control obg" placeholder="Informe E-mail..." value="@Model.email1_EmpresaCliente" />
                             </div>
                             <div class="col-md-2">
-                                <input type="tel" id="inTelefone1Empresa" data-required="1" size="10" class="form-control cadastro telefone" placeholder="Informe Telefone..." pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" value="@Model.telefone1_EmpresaCliente" />
+                                <input type="tel" id="inTelefone1Empresa" data-required="1" size="10" class="form-control obg telefone" placeholder="Informe Telefone..." pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" value="@Model.telefone1_EmpresaCliente" />
                             </div>
                             <div class="col-md-3">
-                                @*@Html.DropDownList("inListaDePaises", Model.ListagemPaises, new { @class = "form-control cadastro", @id = "inListaDePaises", style = "", @tabindex = "" })*@
+                                @Html.DropDownList("inListaDePaises", Model.ListagemPaises, new { @class = "form-control obg", @id = "inListaDePaises", style = "", @tabindex = "" })
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="inCepEmpresa" data-required="1" size="10" maxlength="9" class="form-control cadastro" placeholder="Informe CEP..." value="@Model.cepEndereco_EmpresaCliente" onClick="limparCampoCEP();" onkeypress="return MM_formtCep(event,this,'#####-###');" />
+                                <input type="text" id="inCepEmpresa" data-required="1" size="10" maxlength="9" class="form-control obg" placeholder="Informe CEP..." value="@Model.cepEndereco_EmpresaCliente" onClick="limparCampoCEP();" onkeypress="return MM_formtCep(event,this,'#####-###');" />
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -85,13 +87,13 @@
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-5">
-                                <input type="text" id="inEnderecoEmpresa" data-required="1" size="10" class="form-control cadastro" placeholder="Informe Endereço..." value="@Model.endereco_EmpresaCliente" />
+                                <input type="text" id="inEnderecoEmpresa" data-required="1" size="10" class="form-control obg" placeholder="Informe Endereço..." value="@Model.endereco_EmpresaCliente" />
                             </div>
                             <div class="col-md-4">
                                 <input type="text" id="inComplementoEndEmpresa" data-required="1" size="10" class="form-control" placeholder="Complemento..." value="@Model.complementoEndereco_EmpresaCliente" />
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="inBairroEmpresa" data-required="1" size="10" class="form-control cadastro" placeholder="Informe Bairro..." value="@Model.bairro_EmpresaCliente" />
+                                <input type="text" id="inBairroEmpresa" data-required="1" size="10" class="form-control obg" placeholder="Informe Bairro..." value="@Model.bairro_EmpresaCliente" />
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -101,69 +103,22 @@
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-5">
-                                <input type="text" id="inCidadeEmpresa" data-required="1" size="10" class="form-control cadastro" placeholder="Informe Cidade..." value="" />
+                                <input type="text" id="inCidadeEmpresa" data-required="1" size="10" class="form-control obg" placeholder="Informe Cidade..." value="@Model.cidade_EmpresaCliente" />
                             </div>
                             <div class="col-md-2">
-                                @*@Html.DropDownList("inListaDeEstados", Model.ListagemEstados, new { @class = "form-control cadastro", @id = "inListaDeEstados", style = "", @tabindex = "" })*@
+                                @Html.DropDownList("inListaDeEstados", Model.ListagemEstados, new { @class = "form-control obg", @id = "inListaDeEstados", style = "", @tabindex = "" })
                             </div>
                             <div class="col-md-5">&nbsp;</div>
                         </div>
                     </div>
-                    <!--<h4><b><font color="#3297E0">Dados Usuário:</font></b></h4><div id="msg-erro-cpf-1" class="alert alert-danger" role="alert" style="text-align:center;display:none;"><h4><font color="red">CNPJ Inválido</font></h4></div>
-                    <hr />
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <div class="col-md-2"><font color="#3297E0">CPF:</font></div>
-                            <div class="col-md-4"><font color="#3297E0">Nome:</font></div>
-                            <div class="col-md-2"><font color="#3297E0">Me chamem por:</font></div>
-                            <div class="col-md-4"><font color="#3297E0">E-mail:</font></div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <input type="text" id="inCPFUsuario" data-required="1" size="10" maxlength="14" class="form-control cadastro" placeholder="Informe CPF..." value="@Model.CPF_USUARIO" onKeyDown="FormataCPF(this, event);" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="inNomeUsuario" data-required="1" size="10" class="form-control cadastro" placeholder="Informe Nome Usuário..." value="@Model.NOME_USUARIO" />
-                            </div>
-                            <div class="col-md-2">
-                                <input type="text" id="inApelidoUsuario" data-required="1" size="10" class="form-control cadastro" placeholder="Informe Nome..." value="@Model.APELIDO_USUARIO" />
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="inEmai1lUsuario" data-required="1" size="10" class="form-control cadastro" placeholder="Informe E-mail..." value="@Model.EMAIL1_USUARIO" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="col-md-2"><font color="#3297E0">Telefone 1:</font></div>
-                            <div class="col-md-2"><font color="#3297E0">Telefone 2:</font></div>
-                            <div class="col-md-2">&nbsp;</div>
-                            <div class="col-md-6">&nbsp;</div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <input type="text" id="inTelefone1Usuario" data-required="1" size="10" class="form-control cadastro telefone" placeholder="Informe Telefone 1..." value="@Model.TELEFONE1_USUARIO_EMPRESA" />
-                            </div>
-                            <div class="col-md-2">
-                                <input type="text" id="inTelefone2Usuario" data-required="1" size="10" class="form-control telefone" placeholder="Informe Telefone 2..." value="@Model.TELEFONE2_USUARIO_EMPRESA" />
-                            </div>
-                            <div class="col-md-4">
-                                <input type="checkbox" id="inReceberEmailsEmpresa" checked> Aceito receber E-mails da ClienteMercado
-                                <br />
-                                &nbsp;&nbsp;
-                                <span class="texto_normal">Leia os</span>&nbsp;@Html.ActionLink("Termos de Uso", "Termos", "Configuration_registry", new { @class = "linkdois" })&nbsp;<span class="texto_normal">e</span>&nbsp;@Html.ActionLink("Política de Privacidade", "Politica", "CadastroEmpresaUsuario", new { @class = "linkdois" })
-                            </div>
-                            <div class="col-md-4" style="text-align:right;">-->
-                                <!-- CONTINUAR AQUI: CONFERIR CARREGAMENTO AUTOMÁTICO do CEP (VER CARREGGAMENTO A PARTIR DOS CORREIOS - VER CÓDIGO ADALINE NO SOX) -->
-                                <!--<button type="button" id="btn-continuar" class="btn btn-primary btn-padrao" title="" style="">Continue <i class="fas fa-arrow-right"></i></button>
-                            </div>
-                        </div>
-                    </div>-->
                     <!-- ================================================================================= -->
                 </div>
             </form>
             <!-- END FORM-->
 
-            <input type="hidden" id="inRecarregaGrid" value="0" />
+            <input type="hidden" id="inUF" value="@Model.uf_EmpresaCliente" />
+            <input type="hidden" id="inPais" value="@Model.pais_EmpresaCliente" />
+            <input type="hidden" id="inIEC" value="@Model.iEC" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->

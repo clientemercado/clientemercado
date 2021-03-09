@@ -296,5 +296,11 @@ namespace ClienteMercado.Domain.Services
         {
             return dempresausuario.BuscarDadosDaEmpresaParaEnvioDeMensagens(idFornecedor);
         }
+
+        //ALTERAR DADOS EMPRESA CLIENTE
+        public void AlterarDadosEmpresaCliente(EmpresaCliente obj)
+        {
+            dempresausuario.AlterarDadosEmpresaCliente(obj);
+        }
     }
 }

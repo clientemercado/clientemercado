@@ -39,7 +39,8 @@ namespace ClienteMercado.Data.Entities
         [MaxLength(100)]
         public string complementoEndereco_EmpresaCliente { get; set; }
 
-        public Int64 cepEndereco_EmpresaCliente { get; set; }
+        [MaxLength(10)]
+        public string cepEndereco_EmpresaCliente { get; set; }
 
         [MaxLength(15)]
         public string pais_EmpresaCliente { get; set; }

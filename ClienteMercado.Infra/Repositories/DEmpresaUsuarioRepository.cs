@@ -4,6 +4,7 @@ using ClienteMercado.Utils.Net;
 using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace ClienteMercado.Infra.Repositories
@@ -272,6 +273,38 @@ namespace ClienteMercado.Infra.Repositories
             }
 
             return resultEmpresas;
+        }
+
+        /// <summary>
+        /// ALTERAÇÃO DE DADOS DA EMPRESA CLIENTE
+        /// </summary>
+        public void AlterarDadosEmpresaCliente(EmpresaCliente obj)
+        {
+            try
+            {
+                EmpresaCliente dadosEmpresaClienteAlterar = _contexto.empresa_cliente.FirstOrDefault(m => (m.id_EmpresaCliente == obj.id_EmpresaCliente));
+
+                if (dadosEmpresaClienteAlterar != null)
+                {
+                    dadosEmpresaClienteAlterar.razaoSocial_EmpresaCliente = obj.razaoSocial_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.nomeFantasia_EmpresaCliente = obj.nomeFantasia_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.email1_EmpresaCliente = obj.email1_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.telefone1_EmpresaCliente = obj.telefone1_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.pais_EmpresaCliente = obj.pais_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.cepEndereco_EmpresaCliente = obj.cepEndereco_EmpresaCliente.Replace(".", "").Replace("-", "");
+                    dadosEmpresaClienteAlterar.endereco_EmpresaCliente = obj.endereco_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.complementoEndereco_EmpresaCliente = obj.complementoEndereco_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.bairro_EmpresaCliente = obj.bairro_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.cidade_EmpresaCliente = obj.cidade_EmpresaCliente;
+                    dadosEmpresaClienteAlterar.uf_EmpresaCliente = obj.uf_EmpresaCliente;
+
+                    _contexto.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         //CARREGAR DADOS do FORNECEDOR para ENVIO de MENSAGENS

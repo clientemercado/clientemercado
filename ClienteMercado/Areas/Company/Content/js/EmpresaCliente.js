@@ -2,6 +2,12 @@
     var url1 = $('#Url1').val();
     var url2 = $('#Url2').val();
 
+    if ($('#inUF').val() != "")
+        $('#inListaDeEstados').val($('#inUF').val());
+
+    if ($('#inPais').val() != "")
+        $('#inListaDePaises').val($('#inPais').val());
+
     //MÁSCARA CNPJ
     $(".cnpj").keydown(function () {
         $(".cnpj").mask("99.999.999/9999-99");
@@ -117,10 +123,10 @@
 
         //Validando o formulário
         var qtdCamposVazios = 0;
-        var $inputsObrigatorios = $('.obrigatorio');
+        var $inputsObrigatorios = $('.obg');
         $inputsObrigatorios.each(function () {
             $(this).css({ "border": "1px solid #ccc", "padding": "2px" });
-            if ($(this).hasClass("obrigatorio")) {
+            if ($(this).hasClass("obg")) {
                 if ($(this).val() == "" || parseFloat($(this).val().replace(".", "").replace(".", "").replace(".", "").replace(",", ".")) == 0) {
                     $(this).css({ "border": "1px solid #F00", "padding": "2px" });
                     qtdCamposVazios++;
@@ -133,22 +139,20 @@
             var msg = "";
             var obj = {};
 
-            ////Obtendo o valores
-            //obj['cenCusCodigo'] = $("#CenCusCodigo").val();
-            //obj['frenteServIndiceFilho'] = $("#FreSerIndice").val();
-            //obj['frenteServFilho'] = $("#freSerCodigo").val();
-            //obj['orcCodItemContrato'] = $("#orcCodigo").val();
-            //obj['indiceItemContrato'] = $("#OrcSerIndice").val();
-            //obj['codServItemContrato'] = $("#orcSerCodigo").val();
-            //obj['iteConEmpCodigoItemContrato'] = $("#iteConEmpCodigo").val();
-            //obj['saldoApurado'] = $("#qtdaUm").val();
-            //obj['quantidadeNew'] = $("#qtdaDois").val();
-            //obj['descAtivPrincPai'] = $("#descAtividadePrincipal").val();
-            //obj['unidAtivPrinc'] = $("#unidDois").val();
-            //obj['fatorXPrinc'] = $("#fatorX").val();
-            //obj['previstoAtivPrinc'] = $("#hHPrevDois").val().replace(".", ",");
-            //obj['ConEmpCodigo'] = $("#conEmpCodigo").val();
-            //obj['AtiCodigoPai'] = $("#freSerCodigoPai").val();
+            //Obtendo o valores
+            obj['iEC'] = $('#inIEC').val();
+            obj['cnpj_EmpresaCliente'] = $("#inCNPJEmpresa").val();
+            obj['razaoSocial_EmpresaCliente'] = $("#inRazaoSocialEmpresa").val();
+            obj['nomeFantasia_EmpresaCliente'] = $("#inNomeFantasiaEmpresa").val();
+            obj['email1_EmpresaCliente'] = $("#inEmail1Empresa").val();
+            obj['telefone1_EmpresaCliente'] = $("#inTelefone1Empresa").val();
+            obj['pais_EmpresaCliente'] = $("#inListaDePaises").val();
+            obj['cepEndereco_EmpresaCliente'] = $("#inCepEmpresa").val();
+            obj['endereco_EmpresaCliente'] = $("#inEnderecoEmpresa").val();
+            obj['complementoEndereco_EmpresaCliente'] = $("#inComplementoEndEmpresa").val();
+            obj['bairro_EmpresaCliente'] = $("#inBairroEmpresa").val();
+            obj['cidade_EmpresaCliente'] = $("#inCidadeEmpresa").val();
+            obj['uf_EmpresaCliente'] = $("#inListaDeEstados").val();
 
             $.ajax({
                 type: "POST",
