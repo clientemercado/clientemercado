@@ -5,9 +5,10 @@ using ClienteMercado.Data.Entities;
 
 namespace ClienteMercado.UI.Core.ViewModel
 {
-    public class DadosEmpresaClienteViewModel
+    public class DadosEmpresaClienteViewModel : Usuario_EmpresaCliente
     {
         public int iEC { get; set; }
+        public int iUEC { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }

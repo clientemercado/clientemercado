@@ -57,6 +57,74 @@ namespace ClienteMercado.Infra.Repositories
             return dadosUsuEmpresaCliente;
         }
 
+        /// <summary>
+        /// ALTERAR DADOS DO USUÁRIO da EMPRESA CLIENTE - SUPERMARKET_ON
+        /// </summary>
+        /// <returns></returns>
+        public void AlterarDadosUsuarioEmpresaCliente(Usuario_EmpresaCliente obj)
+        {
+            Usuario_EmpresaCliente dadosUsuarioEmpClienteAlterar =
+                _contexto.usuario_empresaCliente.FirstOrDefault(m => ((m.id_UsuarioEmpresaCliente == obj.id_UsuarioEmpresaCliente)
+                && (m.id_EmpresaCliente == obj.id_EmpresaCliente)));
+
+            if (dadosUsuarioEmpClienteAlterar != null)
+            {
+                dadosUsuarioEmpClienteAlterar.nome_UsuarioEmpresaCliente = obj.nome_UsuarioEmpresaCliente;
+                dadosUsuarioEmpClienteAlterar.eMail1_UsuarioEmpresaCliente = obj.eMail1_UsuarioEmpresaCliente;
+                dadosUsuarioEmpClienteAlterar.telefone1_UsuarioEmpresaCliente = obj.telefone1_UsuarioEmpresaCliente;
+                dadosUsuarioEmpClienteAlterar.pais_UsuarioEmpresaCliente = obj.pais_UsuarioEmpresaCliente;
+                dadosUsuarioEmpClienteAlterar.cepEndereco_UsuarioEmpresaCliente = obj.cepEndereco_UsuarioEmpresaCliente.Replace(".", "").Replace("-", "");
+                dadosUsuarioEmpClienteAlterar.endereco_UsuarioEmpresaCliente = obj.endereco_UsuarioEmpresaCliente;
+                dadosUsuarioEmpClienteAlterar.complementoEndereco_UsuarioEmpresaCliente = obj.complementoEndereco_UsuarioEmpresaCliente;
+                dadosUsuarioEmpClienteAlterar.bairro_UsuarioEmpresaCliente = obj.bairro_UsuarioEmpresaCliente;
+                dadosUsuarioEmpClienteAlterar.cidade_UsuarioEmpresaCliente = obj.cidade_UsuarioEmpresaCliente;
+                dadosUsuarioEmpClienteAlterar.uf_UsuarioEmpresaCliente = obj.uf_UsuarioEmpresaCliente;
+                //dadosAlteracaoUsuarioEmpCliente.receberEmails_UsuarioEmpresaCliente = true;
+                //dadosAlteracaoUsuarioEmpCliente.dataCadastro_UsuarioEmpresaCliente = DateTime.Now;
+                //dadosAlteracaoUsuarioEmpCliente.ativoInativo_UsuarioEmpresaCliente = true;
+
+                _contexto.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// GERAR DADOS DE LOGON PARA O USUÁRIO
+        /// </summary>
+        /// <returns></returns>
+        public void GerarDadosLogonUsuarioEmpCliente(DadosLogin_UsuarioEmpresaCliente obj)
+        {
+            try
+            {
+                DadosLogin_UsuarioEmpresaCliente logonUsuarioEmpresaCliente =  
+                    _contexto.dadosLoginUsuario_empresaCliente.Add(obj);
+                _contexto.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Gravar registro do Usuário Funcionário da Empresa Cliente - SUPERMARKET_ON
+        /// </summary>
+        /// <returns></returns>
+        public Usuario_EmpresaCliente GravarNovoUsuarioEmpresaCliente(Usuario_EmpresaCliente obj)
+        {
+            try
+            {
+                Usuario_EmpresaCliente usuarioEmpresaCliente = 
+                    _contexto.usuario_empresaCliente.Add(obj);
+                _contexto.SaveChanges();
+
+                return usuarioEmpresaCliente;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         //GRAVAR DADOS ATUALIZADOS do USUÁRIO
         public usuario_empresa AtualizarDadosCadastrais(usuario_empresa obj)
         {
