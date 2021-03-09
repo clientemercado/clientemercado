@@ -88,6 +88,83 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         /// <summary>
+        /// ALTERAR DADOS DO USUÁRIO CIENTE da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public void AlterarDadosUsuarioClienteEmpresa(Cliente_EmpresaCliente obj)
+        {
+            Cliente_EmpresaCliente dadosUsuarioClienteEmpresaAlterar =
+                _contexto.cliente_empresaCliente.FirstOrDefault(m => ((m.id_ClienteEmpresaCliente == obj.id_ClienteEmpresaCliente)
+                && (m.id_EmpresaCliente == obj.id_EmpresaCliente)));
+
+            if (dadosUsuarioClienteEmpresaAlterar != null)
+            {
+                dadosUsuarioClienteEmpresaAlterar.nome_ClienteEmpresaCliente = obj.nome_ClienteEmpresaCliente;
+                dadosUsuarioClienteEmpresaAlterar.eMail1_ClienteEmpresaCliente = obj.eMail1_ClienteEmpresaCliente;
+                dadosUsuarioClienteEmpresaAlterar.telefone1_ClienteEmpresaCliente= obj.telefone1_ClienteEmpresaCliente;
+                dadosUsuarioClienteEmpresaAlterar.pais_ClienteEmpresaCliente = obj.pais_ClienteEmpresaCliente;
+                dadosUsuarioClienteEmpresaAlterar.cepEndereco_ClienteEmpresaCliente = obj.cepEndereco_ClienteEmpresaCliente.Replace(".", "").Replace("-", "");
+                dadosUsuarioClienteEmpresaAlterar.endereco_ClienteEmpresaCliente = obj.endereco_ClienteEmpresaCliente;
+                dadosUsuarioClienteEmpresaAlterar.complementoEndereco_ClienteEmpresaCliente = obj.complementoEndereco_ClienteEmpresaCliente;
+                dadosUsuarioClienteEmpresaAlterar.bairro_ClienteEmpresaCliente = obj.bairro_ClienteEmpresaCliente;
+                dadosUsuarioClienteEmpresaAlterar.cidade_ClienteEmpresaCliente = obj.cidade_ClienteEmpresaCliente;
+                dadosUsuarioClienteEmpresaAlterar.uf_ClienteEmpresaCliente = obj.uf_ClienteEmpresaCliente;
+                //dadosAlteracaoUsuarioEmpCliente.receberEmails_UsuarioEmpresaCliente = true;
+                //dadosAlteracaoUsuarioEmpCliente.dataCadastro_UsuarioEmpresaCliente = DateTime.Now;
+                //dadosAlteracaoUsuarioEmpCliente.ativoInativo_UsuarioEmpresaCliente = true;
+
+                _contexto.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// BUSCAR DADOS DO CLIENTE DA EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public Cliente_EmpresaCliente ConsultarDadosClienteEmpresa(Cliente_EmpresaCliente obj)
+        {
+            Cliente_EmpresaCliente dadosClienteEmpresa = 
+                _contexto.cliente_empresaCliente.FirstOrDefault(m => (m.id_ClienteEmpresaCliente == obj.id_ClienteEmpresaCliente));
+
+            return dadosClienteEmpresa;
+        }
+
+        /// <summary>
+        /// GERAR DADOS DE LOGON PARA O USUÁRIO CLIENTE
+        /// </summary>
+        /// <returns></returns>
+        public void GerarDadosLogonUsuarioClienteEmpresa(DadosLogin_ClienteEmpresaCliente obj)
+        {
+            try
+            {
+                DadosLogin_ClienteEmpresaCliente logonUsuarioClienteEmpresa = _contexto.dadosLoginCliente_empresaCliente.Add(obj);
+                _contexto.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// //GRAVAR NOVA USUÁRIO CLIENTE da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public Cliente_EmpresaCliente GravarNovoUsuarioClienteEmpresa(Cliente_EmpresaCliente obj)
+        {
+            try
+            {
+                Cliente_EmpresaCliente dadosUsuClienteEmpresa = _contexto.cliente_empresaCliente.Add(obj);
+
+                return dadosUsuClienteEmpresa;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// GERAR DADOS DE LOGON PARA O USUÁRIO
         /// </summary>
         /// <returns></returns>

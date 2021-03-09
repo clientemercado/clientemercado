@@ -4,6 +4,7 @@ using ClienteMercado.UI.Core.ViewModel;
 using ClienteMercado.Utils.Net;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -97,6 +98,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.ListagemPaises = ListagemPaises();
+                    dadosDaEmpresaClienteEUsuario.ListagemEstados = ListagemEstados();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -122,45 +125,42 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NUsuarioEmpresaService serviceUsuarioEmpCliente = new NUsuarioEmpresaService();
+                Cliente_EmpresaCliente dadosNewUsuarioCliente = new Cliente_EmpresaCliente();
+                DadosLogin_ClienteEmpresaCliente dadosLogonUsuarioCliente = new DadosLogin_ClienteEmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosNewUsuarioCliente.id_EmpresaCliente = Convert.ToInt32(Sessao.IdEmpresaUsuario);
+                dadosNewUsuarioCliente.cpf_ClienteEmpresaCliente = obj.cpf_UsuarioEmpresaCliente.Replace(".", "").Replace("/", "").Replace("-", "");
+                dadosNewUsuarioCliente.nome_ClienteEmpresaCliente = obj.nome_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.eMail1_ClienteEmpresaCliente= obj.eMail1_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.telefone1_ClienteEmpresaCliente = obj.telefone1_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.pais_ClienteEmpresaCliente = obj.pais_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.cepEndereco_ClienteEmpresaCliente= obj.cepEndereco_UsuarioEmpresaCliente.Replace(".", "").Replace("-", "");
+                dadosNewUsuarioCliente.endereco_ClienteEmpresaCliente = obj.endereco_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.complementoEndereco_ClienteEmpresaCliente = obj.complementoEndereco_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.bairro_ClienteEmpresaCliente = obj.bairro_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.cidade_ClienteEmpresaCliente= obj.cidade_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.uf_ClienteEmpresaCliente= obj.uf_UsuarioEmpresaCliente;
+                dadosNewUsuarioCliente.receberEmails_ClienteEmpresaCliente = true;
+                dadosNewUsuarioCliente.dataCadastro_ClienteEmpresaCliente = DateTime.Now;
+                dadosNewUsuarioCliente.ativoInativo_ClienteEmpresaCliente = true;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+                //GRAVAR NOVO USUÁRIO CLIENTE da EMPRESA
+                dadosNewUsuarioCliente = serviceUsuarioEmpCliente.GravarNovoUsuarioClienteEmpresa(dadosNewUsuarioCliente);
 
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
+                dadosLogonUsuarioCliente.id_ClienteEmpresaCliente = dadosNewUsuarioCliente.id_ClienteEmpresaCliente;
+                dadosLogonUsuarioCliente.Lg_DadosLoginClienteEmpresaCliente = "spmkt" + dadosNewUsuarioCliente.id_ClienteEmpresaCliente;
+                dadosLogonUsuarioCliente.Pw_DadosLoginClienteEmpresaCliente = "spmkt" + dadosNewUsuarioCliente.id_ClienteEmpresaCliente;
+                dadosLogonUsuarioCliente.eMail1_DadosLoginClienteEmpresaCliente = obj.eMail1_UsuarioEmpresaCliente;
 
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
+                //GERAR DADOS DE LOGON PARA O USUÁRIO CLIENTE
+                serviceUsuarioEmpCliente.GerarDadosLogonUsuarioClienteEmpresa(dadosLogonUsuarioCliente);
 
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
+                /*
+                 OBS: DISPARAR E-MAIL PARA O USUÁRIO INFORMANDO O LOGIN E SENHA...
+                 */
 
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
-
-                return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "ok", idRegistroGerado = dadosNewUsuarioCliente.id_ClienteEmpresaCliente }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception erro)
             {
@@ -169,7 +169,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult AlterarDados()
+        public ActionResult AlterarDados(int id)
         {
             try
             {
@@ -200,6 +200,25 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+                    Cliente_EmpresaCliente dadosUsuarioClienteEmpresa = 
+                        serviceUsuEmpresaCliente.ConsultarDadosClienteEmpresa(new Cliente_EmpresaCliente { id_ClienteEmpresaCliente = Convert.ToInt32(id) });
+
+                    dadosDaEmpresaClienteEUsuario.iUCE = dadosUsuarioClienteEmpresa.id_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.cpf_UsuarioEmpresaCliente = FormatarCpfCnpj(dadosUsuarioClienteEmpresa.cpf_ClienteEmpresaCliente);
+                    dadosDaEmpresaClienteEUsuario.nome_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.nome_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.eMail1_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.eMail1_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.telefone1_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.telefone1_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.cepEndereco_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.cepEndereco_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.endereco_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.endereco_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.complementoEndereco_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.complementoEndereco_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.bairro_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.bairro_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.cidade_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.cidade_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.cpf_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.cpf_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.uf_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.uf_ClienteEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.pais_UsuarioEmpresaCliente = dadosUsuarioClienteEmpresa.pais_ClienteEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.ListagemPaises = ListagemPaises();
+                    dadosDaEmpresaClienteEUsuario.ListagemEstados = ListagemEstados();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -225,43 +244,28 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NUsuarioEmpresaService serviceUsuarioEmpCliente = new NUsuarioEmpresaService();
+                Cliente_EmpresaCliente dadosAlteracaoUsuarioClienteEmpresa = new Cliente_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosAlteracaoUsuarioClienteEmpresa.id_EmpresaCliente = Convert.ToInt32(Sessao.IdEmpresaUsuario);
+                dadosAlteracaoUsuarioClienteEmpresa.id_ClienteEmpresaCliente = obj.id_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.cpf_ClienteEmpresaCliente = obj.cpf_UsuarioEmpresaCliente.Replace(".", "").Replace("/", "").Replace("-", "");
+                dadosAlteracaoUsuarioClienteEmpresa.nome_ClienteEmpresaCliente = obj.nome_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.eMail1_ClienteEmpresaCliente = obj.eMail1_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.telefone1_ClienteEmpresaCliente = obj.telefone1_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.pais_ClienteEmpresaCliente = obj.pais_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.cepEndereco_ClienteEmpresaCliente = obj.cepEndereco_UsuarioEmpresaCliente.Replace(".", "").Replace("-", "");
+                dadosAlteracaoUsuarioClienteEmpresa.endereco_ClienteEmpresaCliente = obj.endereco_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.complementoEndereco_ClienteEmpresaCliente = obj.complementoEndereco_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.bairro_ClienteEmpresaCliente = obj.bairro_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.cidade_ClienteEmpresaCliente = obj.cidade_UsuarioEmpresaCliente;
+                dadosAlteracaoUsuarioClienteEmpresa.uf_ClienteEmpresaCliente = obj.uf_UsuarioEmpresaCliente;
+                //dadosAlteracaoUsuarioClienteEmpresa.receberEmails_UsuarioEmpresaCliente = true;
+                //dadosAlteracaoUsuarioClienteEmpresa.dataCadastro_UsuarioEmpresaCliente = DateTime.Now;
+                //dadosAlteracaoUsuarioClienteEmpresa.ativoInativo_UsuarioEmpresaCliente = true;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
-
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
+                //ALTERAR DADOS DO USUÁRIO CIENTE da EMPRESA
+                serviceUsuarioEmpCliente.AlterarDadosUsuarioClienteEmpresa(dadosAlteracaoUsuarioClienteEmpresa);
 
                 return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
             }
@@ -272,5 +276,84 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
+        //Carrega lista de Países atendidos pelo ClienteMercado
+        private static List<SelectListItem> ListagemPaises()
+        {
+            //Buscar lista de Países
+            NPaisesService negocioPaises = new NPaisesService();
+
+            List<paises_empresa_usuario> listaPaises = negocioPaises.ListaPaises();
+
+            List<SelectListItem> listPaises = new List<SelectListItem>();
+
+            listPaises.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var grupoPaises in listaPaises)
+            {
+                listPaises.Add(new SelectListItem
+                {
+                    Text = grupoPaises.PAIS_EMPRESA_USUARIO,
+                    Value = grupoPaises.PAIS_EMPRESA_USUARIO
+                });
+            }
+
+            return listPaises;
+        }
+
+        //Carrega a lista de Estados (Obs: No momento carregrá todos os estados brasileiros. Depois vejo como ficará)
+        private List<SelectListItem> ListagemEstados()
+        {
+            //Buscar lista de Estados brasileiros
+            NEstadosService negocioEstados = new NEstadosService();
+
+            List<estados_empresa_usuario> listaEstados = negocioEstados.ListaEstados();
+
+            List<SelectListItem> listEstados = new List<SelectListItem>();
+
+            listEstados.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var grupoEstados in listaEstados)
+            {
+                listEstados.Add(new SelectListItem
+                {
+                    Text = grupoEstados.UF_EMPRESA_USUARIO,
+                    Value = grupoEstados.UF_EMPRESA_USUARIO
+                });
+            }
+
+            return listEstados;
+        }
+
+        //FORMATAR CPF/CNPJ
+        public static string FormatarCpfCnpj(string strCpfCnpj)
+        {
+            if (strCpfCnpj.Length <= 11)
+            {
+                MaskedTextProvider mtpCpf = new MaskedTextProvider(@"000\.000\.000-00");
+                mtpCpf.Set(ZerosEsquerda(strCpfCnpj, 11));
+
+                return mtpCpf.ToString();
+            }
+            else
+            {
+                MaskedTextProvider mtpCnpj = new MaskedTextProvider(@"00\.000\.000/0000-00");
+                mtpCnpj.Set(ZerosEsquerda(strCpfCnpj, 11));
+
+                return mtpCnpj.ToString();
+            }
+        }
+
+        //ACRESCENTA ZEROS À ESQUERDA
+        public static string ZerosEsquerda(string strString, int intTamanho)
+        {
+            string strResult = "";
+
+            for (int intCont = 1; intCont <= (intTamanho - strString.Length); intCont++)
+            {
+                strResult += "0";
+            }
+
+            return strResult + strString;
+        }
     }
 }

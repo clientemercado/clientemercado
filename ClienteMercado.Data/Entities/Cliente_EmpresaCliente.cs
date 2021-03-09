@@ -28,7 +28,7 @@ namespace ClienteMercado.Data.Entities
         [MaxLength(100)]
         public string complementoEndereco_ClienteEmpresaCliente { get; set; }
 
-        public Int64 cepEndereco_ClienteEmpresaCliente { get; set; }
+        public string cepEndereco_ClienteEmpresaCliente { get; set; }
 
         [MaxLength(15)]
         public string pais_ClienteEmpresaCliente { get; set; }
@@ -44,13 +44,14 @@ namespace ClienteMercado.Data.Entities
 
         [MaxLength(50)]
         public string eMail2_ClienteEmpresaCliente { get; set; }
-        public bool receberEmails_UsuarioEmpresaCliente { get; set; }
+        public bool receberEmails_ClienteEmpresaCliente { get; set; }
         public DateTime? dataCadastro_ClienteEmpresaCliente { get; set; }
         public bool ativoInativo_ClienteEmpresaCliente { get; set; }
         public DateTime? dataInativou_ClienteEmpresaCliente { get; set; }
         public int? idUsuarioInativou_ClienteEmpresaCliente { get; set; }
-        public bool receberEmails_ClienteEmpresaCliente { get; set; }
         public float? latitude_logitude_cep_UsuarioEmpresaCliente { get; set; }
+        public string cidade_ClienteEmpresaCliente { get; set; }
+        public string uf_ClienteEmpresaCliente { get; set; }
 
 
         [ForeignKey("id_EmpresaCliente")]

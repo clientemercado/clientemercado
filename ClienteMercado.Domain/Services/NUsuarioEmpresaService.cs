@@ -71,5 +71,41 @@ namespace ClienteMercado.Domain.Services
         {
             dusuarioempresa.GerarDadosLogonUsuarioEmpCliente(obj);
         }
+
+        /// <summary>
+        /// GRAVAR NOVA USUÁRIO CLIENTE da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public Cliente_EmpresaCliente GravarNovoUsuarioClienteEmpresa(Cliente_EmpresaCliente obj)
+        {
+            return dusuarioempresa.GravarNovoUsuarioClienteEmpresa(obj);
+        }
+
+        /// <summary>
+        /// GERAR DADOS DE LOGON PARA O USUÁRIO CLIENTE
+        /// </summary>
+        /// <returns></returns>
+        public void GerarDadosLogonUsuarioClienteEmpresa(DadosLogin_ClienteEmpresaCliente obj)
+        {
+            dusuarioempresa.GerarDadosLogonUsuarioClienteEmpresa(obj);
+        }
+
+        /// <summary>
+        /// BUSCAR DADOS DO CLIENTE DA EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public Cliente_EmpresaCliente ConsultarDadosClienteEmpresa(Cliente_EmpresaCliente obj)
+        {
+            return dusuarioempresa.ConsultarDadosClienteEmpresa(obj);
+        }
+
+        /// <summary>
+        /// ALTERAR DADOS DO USUÁRIO CIENTE da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public void AlterarDadosUsuarioClienteEmpresa(Cliente_EmpresaCliente obj)
+        {
+            dusuarioempresa.AlterarDadosUsuarioClienteEmpresa(obj);
+        }
     }
 }

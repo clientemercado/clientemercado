@@ -9,6 +9,7 @@ namespace ClienteMercado.UI.Core.ViewModel
     {
         public int iEC { get; set; }
         public int iUEC { get; set; }
+        public int iUCE { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }
