@@ -3,6 +3,12 @@
     var url2 = $('#Url2').val();
     var url3 = $('#Url3').val();
 
+    if ($('#inUF').val() != "")
+        $('#inListaDeEstados').val($('#inUF').val());
+
+    if ($('#inPais').val() != "")
+        $('#inListaDePaises').val($('#inPais').val());
+
     //BOTÃO NOVO CADASTRO
     $(document).on("click", "#btn-cadastrar", function () {
         debugger;
@@ -24,10 +30,10 @@
 
         //Validando o formulário
         var qtdCamposVazios = 0;
-        var $inputsObrigatorios = $('.obrigatorio');
+        var $inputsObrigatorios = $('.obg');
         $inputsObrigatorios.each(function () {
             $(this).css({ "border": "1px solid #ccc", "padding": "2px" });
-            if ($(this).hasClass("obrigatorio")) {
+            if ($(this).hasClass("obg")) {
                 if ($(this).val() == "" || parseFloat($(this).val().replace(".", "").replace(".", "").replace(".", "").replace(",", ".")) == 0) {
                     $(this).css({ "border": "1px solid #F00", "padding": "2px" });
                     qtdCamposVazios++;
@@ -40,22 +46,10 @@
             var msg = "";
             var obj = {};
 
-            ////Obtendo o valores
-            //obj['cenCusCodigo'] = $("#CenCusCodigo").val();
-            //obj['frenteServIndiceFilho'] = $("#FreSerIndice").val();
-            //obj['frenteServFilho'] = $("#freSerCodigo").val();
-            //obj['orcCodItemContrato'] = $("#orcCodigo").val();
-            //obj['indiceItemContrato'] = $("#OrcSerIndice").val();
-            //obj['codServItemContrato'] = $("#orcSerCodigo").val();
-            //obj['iteConEmpCodigoItemContrato'] = $("#iteConEmpCodigo").val();
-            //obj['saldoApurado'] = $("#qtdaUm").val();
-            //obj['quantidadeNew'] = $("#qtdaDois").val();
-            //obj['descAtivPrincPai'] = $("#descAtividadePrincipal").val();
-            //obj['unidAtivPrinc'] = $("#unidDois").val();
-            //obj['fatorXPrinc'] = $("#fatorX").val();
-            //obj['previstoAtivPrinc'] = $("#hHPrevDois").val().replace(".", ",");
-            //obj['ConEmpCodigo'] = $("#conEmpCodigo").val();
-            //obj['AtiCodigoPai'] = $("#freSerCodigoPai").val();
+            //Obtendo o valores
+            obj['cidade_UsuarioEmpresaCliente'] = $("#inCidadeUsu").val();
+            obj['uf_UsuarioEmpresaCliente'] = $("#inListaDeEstados").val();
+            obj['pais_UsuarioEmpresaCliente'] = $("#inListaDePaises").val();
 
             $.ajax({
                 type: "POST",
@@ -86,7 +80,7 @@
                         var idRegistroGerado = data.idRegistroGerado;
 
                         //REDIRECIONAR PARA TELA DE EDIÇÃO
-                        window.location.href = url3;
+                        window.location.href = "/Company/CidadesAtuacaoEmpresa/AlterarDados?id=" + idRegistroGerado;
                     }
                     else {
                         swal({ title: "Ocorreu algum erro na gravação!\nTente novamente.", type: "error", confirmButtonColor: "#337ab7" });
@@ -125,22 +119,11 @@
             var msg = "";
             var obj = {};
 
-            ////Obtendo o valores
-            //obj['cenCusCodigo'] = $("#CenCusCodigo").val();
-            //obj['frenteServIndiceFilho'] = $("#FreSerIndice").val();
-            //obj['frenteServFilho'] = $("#freSerCodigo").val();
-            //obj['orcCodItemContrato'] = $("#orcCodigo").val();
-            //obj['indiceItemContrato'] = $("#OrcSerIndice").val();
-            //obj['codServItemContrato'] = $("#orcSerCodigo").val();
-            //obj['iteConEmpCodigoItemContrato'] = $("#iteConEmpCodigo").val();
-            //obj['saldoApurado'] = $("#qtdaUm").val();
-            //obj['quantidadeNew'] = $("#qtdaDois").val();
-            //obj['descAtivPrincPai'] = $("#descAtividadePrincipal").val();
-            //obj['unidAtivPrinc'] = $("#unidDois").val();
-            //obj['fatorXPrinc'] = $("#fatorX").val();
-            //obj['previstoAtivPrinc'] = $("#hHPrevDois").val().replace(".", ",");
-            //obj['ConEmpCodigo'] = $("#conEmpCodigo").val();
-            //obj['AtiCodigoPai'] = $("#freSerCodigoPai").val();
+            //Obtendo o valores
+            obj['id_UsuarioEmpresaCliente'] = $("#inIEC").val();
+            obj['cidade_UsuarioEmpresaCliente'] = $("#inCidadeUsu").val();
+            obj['uf_UsuarioEmpresaCliente'] = $("#inListaDeEstados").val();
+            obj['pais_UsuarioEmpresaCliente'] = $("#inListaDePaises").val();
 
             $.ajax({
                 type: "POST",

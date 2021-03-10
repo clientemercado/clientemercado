@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ClienteMercado.UI.Core.ViewModel.DadosEmpresaClienteViewModel
+
+@{
     ViewBag.Title = "SuperMarket_On";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -40,15 +42,19 @@
                 <div class="form-body">
                     <div class="form-group">
                         <div class="col-md-12">
-                            @*<div class="col-md-8"><font color="#3297E0"><b>Empresa:</b></font></div>
-                                <div class="col-md-4">&nbsp;</div>*@
+                            <div class="col-md-5"><font color="#3297E0">Cidade:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">UF:</font></div>
+                            <div class="col-md-5">País:</div>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-8">
-                                @*<input type="text" name="name" id="inPesquisar" data-required="1" size="10" class="form-control" placeholder="Descrição..." />*@
+                            <div class="col-md-5">
+                                <input type="text" id="inCidadeUsu" data-required="1" size="" maxlength="50" class="form-control obg" placeholder="Informe Cidade..." value="@Model.cidade_UsuarioEmpresaCliente" />
                             </div>
-                            <div class="col-md-4">
-                                @*<button id="btn-pesquisar" class="btn blue" title="Pesquisar conforme dados selecionados"><i class="fas fa-search"></i> Pesquisar</button>*@
+                            <div class="col-md-2">
+                                @Html.DropDownList("inListaDeEstados", Model.ListagemEstados, new { @class = "form-control obg", @id = "inListaDeEstados", style = "", @tabindex = "" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DropDownList("inListaDePaises", Model.ListagemPaises, new { @class = "form-control obg", @id = "inListaDePaises", style = "", @tabindex = "" })
                             </div>
                         </div>
                     </div>
@@ -58,7 +64,9 @@
             </form>
             <!-- END FORM-->
 
-            <input type="hidden" id="inRecarregaGrid" value="0" />
+            <input type="hidden" id="inUF" value="@Model.uf_UsuarioEmpresaCliente" />
+            <input type="hidden" id="inPais" value="@Model.pais_UsuarioEmpresaCliente" />
+            <input type="hidden" id="inIEC" value="@Model.iCEC" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->

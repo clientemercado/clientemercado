@@ -1,6 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
+using System;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
@@ -19,6 +20,28 @@ namespace ClienteMercado.Domain.Services
         public List<ListaDeCidadesViewModel> CarregarListadeCidades(string term)
         {
             return dRepository.CarregarListadeCidades(term);
+        }
+
+        //CONSULTAR DADOS DA CIDADE ONDE A EMPRESA ATUA
+        public Cidade_EmpresaCliente ConsultarDadosCidadeEmpresaCliente(Cidade_EmpresaCliente obj)
+        {
+            return dRepository.ConsultarDadosCidadeEmpresaCliente(obj);
+        }
+
+        /// <summary>
+        /// GRAVAR NOVA CIDADE de ATUAÇÃO da EMPRESA CLIENTE
+        /// </summary>
+        public Cidade_EmpresaCliente GravarNovaCidadeAtuacaoEmpresa(Cidade_EmpresaCliente obj)
+        {
+            return dRepository.GravarNovaCidadeAtuacaoEmpresa(obj);
+        }
+
+        /// <summary>
+        /// ALTERAR DADOS da CIDADE de ATUAÇÂO da EMPRESA CLIENTE
+        /// </summary>
+        public void AlterarDadosCidadeEmpresaCliente(Cidade_EmpresaCliente obj)
+        {
+            dRepository.AlterarDadosCidadeEmpresaCliente(obj);
         }
     }
 }

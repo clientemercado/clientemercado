@@ -15,10 +15,18 @@ namespace ClienteMercado.Data.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_CidadeEmpresaCliente { get; set; }
+        public int id_EmpresaCliente { get; set; }
 
         [MaxLength(100)]
         public string cidade_CidadeEmpresaCliente { get; set; }
+        [MaxLength(2)]
+        public string uf_CidadeEmpresaCliente { get; set; }
+        [MaxLength(15)]
+        public string pais_CidadeEmpresaCliente { get; set; }
 
+
+        [ForeignKey("id_EmpresaCliente")]
+        public virtual EmpresaCliente empresa_cliente { get; set; }
 
         public virtual ICollection<Localidade_CidadeEmpresaCliente> localidadeCidade_empresaCliente { get; set; }
     }
