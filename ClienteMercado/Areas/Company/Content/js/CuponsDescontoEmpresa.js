@@ -24,10 +24,10 @@
 
         //Validando o formulário
         var qtdCamposVazios = 0;
-        var $inputsObrigatorios = $('.obrigatorio');
+        var $inputsObrigatorios = $('.obg');
         $inputsObrigatorios.each(function () {
             $(this).css({ "border": "1px solid #ccc", "padding": "2px" });
-            if ($(this).hasClass("obrigatorio")) {
+            if ($(this).hasClass("obg")) {
                 if ($(this).val() == "" || parseFloat($(this).val().replace(".", "").replace(".", "").replace(".", "").replace(",", ".")) == 0) {
                     $(this).css({ "border": "1px solid #F00", "padding": "2px" });
                     qtdCamposVazios++;
@@ -40,22 +40,10 @@
             var msg = "";
             var obj = {};
 
-            ////Obtendo o valores
-            //obj['cenCusCodigo'] = $("#CenCusCodigo").val();
-            //obj['frenteServIndiceFilho'] = $("#FreSerIndice").val();
-            //obj['frenteServFilho'] = $("#freSerCodigo").val();
-            //obj['orcCodItemContrato'] = $("#orcCodigo").val();
-            //obj['indiceItemContrato'] = $("#OrcSerIndice").val();
-            //obj['codServItemContrato'] = $("#orcSerCodigo").val();
-            //obj['iteConEmpCodigoItemContrato'] = $("#iteConEmpCodigo").val();
-            //obj['saldoApurado'] = $("#qtdaUm").val();
-            //obj['quantidadeNew'] = $("#qtdaDois").val();
-            //obj['descAtivPrincPai'] = $("#descAtividadePrincipal").val();
-            //obj['unidAtivPrinc'] = $("#unidDois").val();
-            //obj['fatorXPrinc'] = $("#fatorX").val();
-            //obj['previstoAtivPrinc'] = $("#hHPrevDois").val().replace(".", ",");
-            //obj['ConEmpCodigo'] = $("#conEmpCodigo").val();
-            //obj['AtiCodigoPai'] = $("#freSerCodigoPai").val();
+            //Obtendo o valores
+            obj['nomeCupom_CupomDescontoEmpresaCliente'] = $("#inNomeCupom").val();
+            obj['dataValidade_CupomDescontoEmpresaCliente'] = $("#inValidade").val();
+            obj['percentualDesconto_CupomDescontoEmpresaCliente'] = $("#inPercentual").val();
 
             $.ajax({
                 type: "POST",

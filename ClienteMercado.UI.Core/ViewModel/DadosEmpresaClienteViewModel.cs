@@ -37,5 +37,9 @@ namespace ClienteMercado.UI.Core.ViewModel
         public float? latitude_logitude_cep_EmpresaCliente { get; set; }
         public List<SelectListItem> ListagemPaises { get; set; }
         public List<SelectListItem> ListagemEstados { get; set; }
+
+        public string nomeCupom_CupomDescontoEmpresaCliente { get; set; }
+        public string dataValidade_CupomDescontoEmpresaCliente { get; set; }
+        public int? percentualDesconto_CupomDescontoEmpresaCliente { get; set; }
     }
 }

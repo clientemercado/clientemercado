@@ -90,6 +90,7 @@
     <Compile Include="Services\NCotacaoMasterUsuarioEmpresaService.cs" />
     <Compile Include="Services\NCpfServiceService.cs" />
     <Compile Include="Services\NCpfProfissional.cs" />
+    <Compile Include="Services\NCupomDescontoEmpresaService.cs" />
     <Compile Include="Services\NEmpresasProdutosEmbalagensService.cs" />
     <Compile Include="Services\NEmpresasFabricantesMarcasService.cs" />
     <Compile Include="Services\NEmpresasParticipantesCentralDeComprasService.cs" />

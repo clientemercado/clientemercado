@@ -18,7 +18,7 @@ namespace ClienteMercado.Data.Entities
         public string nomeCupom_CupomDescontoEmpresaCliente { get; set; }
         public DateTime dataValidade_CupomDescontoEmpresaCliente { get; set; }
         public decimal? percentualDesconto_CupomDescontoEmpresaCliente { get; set; }
-        public bool ativoInativo_SubDepartamentoEmpresaCliente { get; set; }
+        public bool ativoInativo_CupomDescontoEmpresaCliente { get; set; }
         public int? idUsuarioAtivou_CupomDescontoEmpresaCliente { get; set; }
         public DateTime? dataInativou_SubDepartamentoEmpresaCliente { get; set; }
         public int idUsuarioInativou_SubDepartamentoEmpresaCliente { get; set; }
