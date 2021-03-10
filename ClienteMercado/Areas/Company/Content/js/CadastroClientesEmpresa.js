@@ -60,7 +60,6 @@
             var obj = {};
 
             //Obtendo o valores
-            obj['id_UsuarioEmpresaCliente'] = $("#inIEC").val();
             obj['cpf_UsuarioEmpresaCliente'] = $("#inCpfUsu").val();
             obj['nome_UsuarioEmpresaCliente'] = $("#inNomeUsu").val();
             obj['eMail1_UsuarioEmpresaCliente'] = $("#inEmail1Usu").val();
@@ -142,6 +141,7 @@
             var obj = {};
 
             //Obtendo o valores
+            obj['id_UsuarioEmpresaCliente'] = $("#inIEC").val();
             obj['cpf_UsuarioEmpresaCliente'] = $("#inCpfUsu").val();
             obj['nome_UsuarioEmpresaCliente'] = $("#inNomeUsu").val();
             obj['eMail1_UsuarioEmpresaCliente'] = $("#inEmail1Usu").val();

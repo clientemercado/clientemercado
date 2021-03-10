@@ -155,6 +155,7 @@ namespace ClienteMercado.Infra.Repositories
             try
             {
                 Cliente_EmpresaCliente dadosUsuClienteEmpresa = _contexto.cliente_empresaCliente.Add(obj);
+                _contexto.SaveChanges();
 
                 return dadosUsuClienteEmpresa;
             }

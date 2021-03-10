@@ -149,8 +149,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                 dadosNewUsuarioCliente = serviceUsuarioEmpCliente.GravarNovoUsuarioClienteEmpresa(dadosNewUsuarioCliente);
 
                 dadosLogonUsuarioCliente.id_ClienteEmpresaCliente = dadosNewUsuarioCliente.id_ClienteEmpresaCliente;
-                dadosLogonUsuarioCliente.Lg_DadosLoginClienteEmpresaCliente = "spmkt" + dadosNewUsuarioCliente.id_ClienteEmpresaCliente;
-                dadosLogonUsuarioCliente.Pw_DadosLoginClienteEmpresaCliente = "spmkt" + dadosNewUsuarioCliente.id_ClienteEmpresaCliente;
+                dadosLogonUsuarioCliente.Lg_DadosLoginClienteEmpresaCliente = "spmkt0" + dadosNewUsuarioCliente.id_ClienteEmpresaCliente;
+                dadosLogonUsuarioCliente.Pw_DadosLoginClienteEmpresaCliente = "spmkt0" + dadosNewUsuarioCliente.id_ClienteEmpresaCliente;
                 dadosLogonUsuarioCliente.eMail1_DadosLoginClienteEmpresaCliente = obj.eMail1_UsuarioEmpresaCliente;
 
                 //GERAR DADOS DE LOGON PARA O USUÁRIO CLIENTE
