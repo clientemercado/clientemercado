@@ -97,6 +97,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.ListagemDepartamentos = ListagemDepartamentos();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -122,43 +124,15 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NSubDepartamentoEmpresaService serviceSubDepartamentoEmpresa = new NSubDepartamentoEmpresaService();
+                SubDepartamento_EmpresaCliente dadosNewSubDeptoEmpresa = new SubDepartamento_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosNewSubDeptoEmpresa.id_DepartamentoEmpresaCliente= obj.id_DepartamentoEmpresaCliente;
+                dadosNewSubDeptoEmpresa.descricao_SubDepartamentoEmpresaCliente= obj.descricao_SubDepartamentoEmpresaCliente;
+                dadosNewSubDeptoEmpresa.ativoInativo_SubDepartamentoEmpresaCliente= true;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
-
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
+                //GRAVAR NOVO SUB-DEPTO da EMPRESA CLIENTE
+                dadosNewSubDeptoEmpresa = serviceSubDepartamentoEmpresa.GravarNovoSubDeptoEmpresa(dadosNewSubDeptoEmpresa);
 
                 return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
             }
@@ -189,16 +163,27 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    NSubDepartamentoEmpresaService serviceSubDepartamentoEmpresa = new NSubDepartamentoEmpresaService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
                     EmpresaCliente dadosEmpresaLogada =
                         serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
                     Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
+                    SubDepartamento_EmpresaCliente dadosSubDeptoEmpresa = 
+                        serviceSubDepartamentoEmpresa.ConsultarDadosSubDeptoEmpresa(new SubDepartamento_EmpresaCliente { id_SubDepartamentoEmpresaCliente = Convert.ToInt32(id) });
 
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.iSDEC = dadosSubDeptoEmpresa.id_SubDepartamentoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.id_DepartamentoEmpresaCliente = dadosSubDeptoEmpresa.id_DepartamentoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.descricao_DepartamentoEmpresaCliente = dadosSubDeptoEmpresa.descricao_SubDepartamentoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.ativoInativo_DepartamentoEmpresaCliente = 
+                        dadosSubDeptoEmpresa.ativoInativo_SubDepartamentoEmpresaCliente.ToString();
+
+                    dadosDaEmpresaClienteEUsuario.ListagemDepartamentos = ListagemDepartamentos();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -270,6 +255,30 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
         //----------------------------------------------------------------------------------
+
+        //Carrega a lista de Estados (Obs: No momento carregrá todos os estados brasileiros. Depois vejo como ficará)
+        private List<SelectListItem> ListagemDepartamentos()
+        {
+            //Buscar lista de Departamentos da Empresa
+            NSubDepartamentoEmpresaService serviceSubDeptoEmpresa = new NSubDepartamentoEmpresaService();
+
+            List<Departamento_EmpresaCliente> listaDepartamentos = serviceSubDeptoEmpresa.ListaDepartamentosEmpresa();
+
+            List<SelectListItem> listDeptos = new List<SelectListItem>();
+
+            listDeptos.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var grupoDeptos in listaDepartamentos)
+            {
+                listDeptos.Add(new SelectListItem
+                {
+                    Text = grupoDeptos.descricao_DepartamentoEmpresaCliente,
+                    Value = grupoDeptos.id_DepartamentoEmpresaCliente.ToString()
+                });
+            }
+
+            return listDeptos;
+        }
 
     }
 }

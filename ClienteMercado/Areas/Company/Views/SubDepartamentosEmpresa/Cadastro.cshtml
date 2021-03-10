@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ClienteMercado.UI.Core.ViewModel.DadosEmpresaClienteViewModel
+
+@{
     ViewBag.Title = "SuperMarket_On";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -38,74 +40,27 @@
             <!-- BEGIN FORM-->
             <form action="#" class="form-horizontal">
                 <div class="form-body">
-                    <h4><b><font color="#3297E0">Dados Tipo:</font></b></h4>
+                    <h4><b><font color="#3297E0">Dados Sub-Departamento Empresa:</font></b></h4>
                     <hr />
                     <div class="form-group">
                         <div class="col-md-12">
-                            <div class="col-md-3"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-5"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-4"><font color="#3297E0">label campo:</font></div>
+                            <div class="col-md-5"><font color="#3297E0">Nome Sub-Departamento:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Departamento Pai:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">Ativar:</font></div>
+                            <div class="col-md-2">&nbsp;</div>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-3">
-                                <input type="text" id="inCampo" data-required="1" size="10" class="form-control cadastro cnpj" placeholder="" value="" />
-                            </div>
                             <div class="col-md-5">
-                                <input type="text" id="inCampo" data-required="1" size="10" class="form-control cadastro" placeholder="" value="" />
+                                <input type="text" id="inNomeSubDepto" data-required="1" size="" class="form-control obg" placeholder="" value="" />
                             </div>
-                            <div class="col-md-4">
-                                <input type="text" id="inCampo" data-required="1" size="10" class="form-control cadastro" placeholder="" value="" />
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-4"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-2"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-3"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-3"><font color="#3297E0">label campo:</font></div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-4">
-                                <input type="text" id="inCampo" data-required="1" size="10" class="form-control cadastro" placeholder="" value="" />
+                            <div class="col-md-3">
+                                @Html.DropDownList("inListaDepartamentos", Model.ListagemDepartamentos, new { @class = "form-control obg", @id = "inListaDepartamentos", style = "", @tabindex = "" })
                             </div>
                             <div class="col-md-2">
-                                <input type="tel" id="inCampo" data-required="1" size="10" class="form-control cadastro telefone" placeholder="" value="" />
+                                <!-- OBS: ACERTAR: IMPLEMENTAR CHECK BOX PARA ATIVAR/DESATIVAR DEPTO -->
+                                @*<input type="text" id="inAtivarDesativar" data-required="1" size="" class="form-control obg data" placeholder="" value="" />*@
                             </div>
-                            <div class="col-md-3">
-                                @*@Html.DropDownList("inListaDePaises", Model.ListagemPaises, new { @class = "form-control cadastro", @id = "inListaDePaises", style = "", @tabindex = "" })*@
-                            </div>
-                            <div class="col-md-3">
-                                <input type="text" id="inCampo" data-required="1" size="10" maxlength="9" class="form-control cadastro" placeholder="" value="" onClick="limparCampoCEP();" onkeypress="return MM_formtCep(event,this,'#####-###');" />
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-5"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-4"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-3"><font color="#3297E0">label campo:</font></div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-5">
-                                <input type="text" id="inCampo" data-required="1" size="10" class="form-control cadastro" placeholder="" value="" />
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="inCampo" data-required="1" size="10" class="form-control" placeholder="" value="" />
-                            </div>
-                            <div class="col-md-3">
-                                <input type="text" id="inCampo" data-required="1" size="10" class="form-control cadastro" placeholder="" value="" />
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-5"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-2"><font color="#3297E0">label campo:</font></div>
-                            <div class="col-md-5">&nbsp;</div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-5">
-                                <input type="text" id="inCampo" data-required="1" size="10" class="form-control cadastro" placeholder="" value="" />
-                            </div>
-                            <div class="col-md-2">
-                                @*@Html.DropDownList("inListaDeEstados", Model.ListagemEstados, new { @class = "form-control cadastro", @id = "inListaDeEstados", style = "", @tabindex = "" })*@
-                            </div>
-                            <div class="col-md-5">&nbsp;</div>
+                            <div class="col-md-2">&nbsp;</div>
                         </div>
                     </div>
                     <!-- ================================================================================= -->
@@ -113,7 +68,7 @@
             </form>
             <!-- END FORM-->
 
-            <input type="hidden" id="inRecarregaGrid" value="0" />
+            @*<input type="hidden" id="inRecarregaGrid" value="0" />*@
         </div>
     </div>
     <!-- END VALIDATION STATES-->

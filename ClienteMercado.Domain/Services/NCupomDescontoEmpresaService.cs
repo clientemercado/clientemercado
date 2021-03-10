@@ -10,7 +10,7 @@ namespace ClienteMercado.Domain.Services
 {
     public class NCupomDescontoEmpresaService
     {
-        NCupomDescontoEmpresaRepository drepository = new NCupomDescontoEmpresaRepository();
+        DCupomDescontoEmpresaRepository drepository = new DCupomDescontoEmpresaRepository();
 
         /// <summary>
         /// GRAVAR NOVA CUPOM da EMPRESA CLIENTE

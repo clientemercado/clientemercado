@@ -10,7 +10,7 @@ namespace ClienteMercado.Domain.Services
 {
     public class NDepartamentoEmpresaClienteService
     {
-        NDepartamentoEmpresaClienteRepository drepository = new NDepartamentoEmpresaClienteRepository();
+        DDepartamentoEmpresaClienteRepository drepository = new DDepartamentoEmpresaClienteRepository();
 
         /// <summary>
         /// GRAVAR NOVO DEPTO da EMPRESA CLIENTE

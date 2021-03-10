@@ -129,7 +129,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                 dadosNewDeptoEmpresa.descricao_DepartamentoEmpresaCliente = obj.descricao_DepartamentoEmpresaCliente;
                 dadosNewDeptoEmpresa.ativoInativo_DepartamentoEmpresaCliente = true;
 
-                //GRAVAR NOVA CUPOM da EMPRESA CLIENTE
+                //GRAVAR NOVO DEPTO da EMPRESA CLIENTE
                 dadosNewDeptoEmpresa = serviceDepartamentoEmpresa.GravarNovoDeptoEmpresa(dadosNewDeptoEmpresa);
 
                 return Json(new { status = "ok", idRegistroGerado = dadosNewDeptoEmpresa.id_DepartamentoEmpresaCliente }, JsonRequestBehavior.AllowGet);
@@ -169,7 +169,6 @@ namespace ClienteMercado.Areas.Company.Controllers
                         serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
                     Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
-
                     Departamento_EmpresaCliente dadosDeptoEmpresa = 
                         serviceDepartamentoEmpresa.ConsultarDadosDeptoEmpresa(new Departamento_EmpresaCliente { id_DepartamentoEmpresaCliente = Convert.ToInt32(id) });
 

@@ -13,6 +13,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public int iCEC { get; set; }
         public int iCDEC { get; set; }
         public int iDEC { get; set; }
+        public int iSDEC { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }
@@ -47,5 +48,9 @@ namespace ClienteMercado.UI.Core.ViewModel
 
         public string descricao_DepartamentoEmpresaCliente { get; set; }
         public string ativoInativo_DepartamentoEmpresaCliente { get; set; }
+
+        public string descricao_SubDepartamentoEmpresaCliente { get; set; }
+        public int id_DepartamentoEmpresaCliente { get; set; }
+        public List<SelectListItem> ListagemDepartamentos { get; set; }
     }
 }

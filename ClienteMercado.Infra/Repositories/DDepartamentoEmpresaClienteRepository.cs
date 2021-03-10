@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClienteMercado.Infra.Repositories
 {
-    public class NDepartamentoEmpresaClienteRepository : RepositoryBase<Departamento_EmpresaCliente>
+    public class DDepartamentoEmpresaClienteRepository : RepositoryBase<Departamento_EmpresaCliente>
     {
         /// <summary>
         /// GRAVAR NOVO DEPTO da EMPRESA CLIENTE

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClienteMercado.Infra.Repositories
 {
-    public class NCupomDescontoEmpresaRepository : RepositoryBase<CupomDesconto_EmpresaCliente>
+    public class DCupomDescontoEmpresaRepository : RepositoryBase<CupomDesconto_EmpresaCliente>
     {
         /// <summary>
         /// GRAVAR NOVA CUPOM da EMPRESA CLIENTE
