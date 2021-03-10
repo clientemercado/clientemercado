@@ -3,6 +3,9 @@
     var url2 = $('#Url2').val();
     var url3 = $('#Url3').val();
 
+    $(".data").mask("99/99/9999");
+    $('.monetario').mask('000.000.000.000.000,00', { reverse: true });
+
     //BOTÃO NOVO CADASTRO
     $(document).on("click", "#btn-cadastrar", function () {
         debugger;
@@ -74,7 +77,7 @@
                         var idRegistroGerado = data.idRegistroGerado;
 
                         //REDIRECIONAR PARA TELA DE EDIÇÃO
-                        window.location.href = url3;
+                        window.location.href = "/Company/CuponsDescontoEmpresa/AlterarDados?id=" + idRegistroGerado;
                     }
                     else {
                         swal({ title: "Ocorreu algum erro na gravação!\nTente novamente.", type: "error", confirmButtonColor: "#337ab7" });
@@ -113,22 +116,11 @@
             var msg = "";
             var obj = {};
 
-            ////Obtendo o valores
-            //obj['cenCusCodigo'] = $("#CenCusCodigo").val();
-            //obj['frenteServIndiceFilho'] = $("#FreSerIndice").val();
-            //obj['frenteServFilho'] = $("#freSerCodigo").val();
-            //obj['orcCodItemContrato'] = $("#orcCodigo").val();
-            //obj['indiceItemContrato'] = $("#OrcSerIndice").val();
-            //obj['codServItemContrato'] = $("#orcSerCodigo").val();
-            //obj['iteConEmpCodigoItemContrato'] = $("#iteConEmpCodigo").val();
-            //obj['saldoApurado'] = $("#qtdaUm").val();
-            //obj['quantidadeNew'] = $("#qtdaDois").val();
-            //obj['descAtivPrincPai'] = $("#descAtividadePrincipal").val();
-            //obj['unidAtivPrinc'] = $("#unidDois").val();
-            //obj['fatorXPrinc'] = $("#fatorX").val();
-            //obj['previstoAtivPrinc'] = $("#hHPrevDois").val().replace(".", ",");
-            //obj['ConEmpCodigo'] = $("#conEmpCodigo").val();
-            //obj['AtiCodigoPai'] = $("#freSerCodigoPai").val();
+            //Obtendo o valores
+            obj['iCDEC'] = $("#inIEC").val();
+            obj['nomeCupom_CupomDescontoEmpresaCliente'] = $("#inNomeCupom").val();
+            obj['dataValidade_CupomDescontoEmpresaCliente'] = $("#inValidade").val();
+            obj['percentualDesconto_CupomDescontoEmpresaCliente'] = $("#inPercentual").val();
 
             $.ajax({
                 type: "POST",

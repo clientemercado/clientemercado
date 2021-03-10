@@ -17,7 +17,23 @@ namespace ClienteMercado.Domain.Services
         /// </summary>
         public CupomDesconto_EmpresaCliente GravarNovaCuponDescontoEmpresa(CupomDesconto_EmpresaCliente obj)
         {
-            return drepository.GravarNovaCuponDescontoEmpresa(obj)
+            return drepository.GravarNovaCuponDescontoEmpresa(obj);
+        }
+
+        /// <summary>
+        /// CONSULTAR DADOS do CUPOM DESCONTOS da EMPRESA CLIENTE
+        /// </summary>
+        public CupomDesconto_EmpresaCliente ConsultarDadosCupomDescontoEmpresa(CupomDesconto_EmpresaCliente obj)
+        {
+            return drepository.ConsultarDadosCupomDescontoEmpresa(obj);
+        }
+
+        /// <summary>
+        /// ALTERAR DADOS da CUPOM DESCONTOS da EMPRESA CLIENTE
+        /// </summary>
+        public void AlterarDadosCupomDescontosEmpresa(CupomDesconto_EmpresaCliente obj)
+        {
+            drepository.AlterarDadosCupomDescontosEmpresa(obj);
         }
     }
 }
