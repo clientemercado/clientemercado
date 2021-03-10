@@ -122,45 +122,17 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NDepartamentoEmpresaClienteService serviceDepartamentoEmpresa = new NDepartamentoEmpresaClienteService();
+                Departamento_EmpresaCliente dadosNewDeptoEmpresa = new Departamento_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosNewDeptoEmpresa.id_EmpresaCliente = Convert.ToInt32(Sessao.IdEmpresaUsuario);
+                dadosNewDeptoEmpresa.descricao_DepartamentoEmpresaCliente = obj.descricao_DepartamentoEmpresaCliente;
+                dadosNewDeptoEmpresa.ativoInativo_DepartamentoEmpresaCliente = true;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+                //GRAVAR NOVA CUPOM da EMPRESA CLIENTE
+                dadosNewDeptoEmpresa = serviceDepartamentoEmpresa.GravarNovoDeptoEmpresa(dadosNewDeptoEmpresa);
 
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
-
-                return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "ok", idRegistroGerado = dadosNewDeptoEmpresa.id_DepartamentoEmpresaCliente }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception erro)
             {
@@ -169,7 +141,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult AlterarDados()
+        public ActionResult AlterarDados(int id)
         {
             try
             {
@@ -190,6 +162,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    NDepartamentoEmpresaClienteService serviceDepartamentoEmpresa = new NDepartamentoEmpresaClienteService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
                     EmpresaCliente dadosEmpresaLogada =
@@ -197,9 +170,16 @@ namespace ClienteMercado.Areas.Company.Controllers
                     Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
 
+                    Departamento_EmpresaCliente dadosDeptoEmpresa = 
+                        serviceDepartamentoEmpresa.ConsultarDadosDeptoEmpresa(new Departamento_EmpresaCliente { id_DepartamentoEmpresaCliente = Convert.ToInt32(id) });
+
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.iDEC = dadosDeptoEmpresa.id_DepartamentoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.descricao_DepartamentoEmpresaCliente = dadosDeptoEmpresa.descricao_DepartamentoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.ativoInativo_DepartamentoEmpresaCliente = dadosDeptoEmpresa.ativoInativo_DepartamentoEmpresaCliente.ToString();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -225,43 +205,16 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NDepartamentoEmpresaClienteService serviceDepartamentoEmpresa = new NDepartamentoEmpresaClienteService();
+                Departamento_EmpresaCliente dadosDeptoEmpresaAlterar = new Departamento_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosDeptoEmpresaAlterar.id_EmpresaCliente = Convert.ToInt32(Sessao.IdEmpresaUsuario);
+                dadosDeptoEmpresaAlterar.id_DepartamentoEmpresaCliente = obj.iDEC;
+                dadosDeptoEmpresaAlterar.descricao_DepartamentoEmpresaCliente = obj.descricao_DepartamentoEmpresaCliente;
+                //dadosDeptoEmpresaAlterar.ativoInativo_DepartamentoEmpresaCliente = true;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
-
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
+                //ALTERAR DADOS do DEPTO da EMPRESA
+                serviceDepartamentoEmpresa.AlterarDadosDeptoEmpresa(dadosDeptoEmpresaAlterar);
 
                 return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
             }

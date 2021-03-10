@@ -12,6 +12,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public int iUCE { get; set; }
         public int iCEC { get; set; }
         public int iCDEC { get; set; }
+        public int iDEC { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }
@@ -42,5 +43,9 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string nomeCupom_CupomDescontoEmpresaCliente { get; set; }
         public string dataValidade_CupomDescontoEmpresaCliente { get; set; }
         public string percentualDesconto_CupomDescontoEmpresaCliente { get; set; }
+        public string ativoInativo_CupomDescontoEmpresaCliente { get; set; }
+
+        public string descricao_DepartamentoEmpresaCliente { get; set; }
+        public string ativoInativo_DepartamentoEmpresaCliente { get; set; }
     }
 }

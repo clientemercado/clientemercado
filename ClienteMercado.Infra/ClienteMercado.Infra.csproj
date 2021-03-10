@@ -114,6 +114,7 @@
     <Compile Include="Repositories\DEmpresaUsuarioLoginsRepository.cs" />
     <Compile Include="Repositories\DItensCotacaoFilhaNegociacaoCentralDeComprasRepository.cs" />
     <Compile Include="Repositories\NCupomDescontoEmpresaRepository.cs" />
+    <Compile Include="Repositories\NDepartamentoEmpresaClienteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClienteMercado.Data\ClienteMercado.Data.csproj">

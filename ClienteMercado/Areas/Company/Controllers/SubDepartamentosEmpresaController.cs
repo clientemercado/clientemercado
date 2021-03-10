@@ -168,7 +168,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
         //----------------------------------------------------------------------------------
-        public ActionResult AlterarDados()
+        public ActionResult AlterarDados(int id)
         {
             try
             {
