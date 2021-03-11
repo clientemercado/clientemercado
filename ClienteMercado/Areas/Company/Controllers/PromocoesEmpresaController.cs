@@ -122,45 +122,22 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NPromocoesEmpresaService servicePromocoesEmpresa = new NPromocoesEmpresaService();
+                PromocaoVenda_EmpresaCliente dadosNewPromocaoEmpresa = new PromocaoVenda_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosNewPromocaoEmpresa.id_EmpresaCliente = Convert.ToInt32(Sessao.IdEmpresaUsuario);
+                dadosNewPromocaoEmpresa.dataCadastroOferta_PromocaoVendaEmpresaCliente = DateTime.Now;
+                dadosNewPromocaoEmpresa.idUsuarioCadastrouOferta_PromocaoVendaEmpresaCliente = Sessao.IdUsuarioLogado;
+                dadosNewPromocaoEmpresa.nomeOferta_PromocaoVendaEmpresaCliente = obj.nomeOferta_PromocaoVendaEmpresaCliente;
+                dadosNewPromocaoEmpresa.dataValidade_PromocaoVendaEmpresaCliente = Convert.ToDateTime(obj.dataValidade_PromocaoVendaEmpresaCliente);
+                dadosNewPromocaoEmpresa.percentualOffOferta_PromocaoVendaEmpresaCliente = Convert.ToDecimal(obj.percentualOffOferta_PromocaoVendaEmpresaCliente);
+                dadosNewPromocaoEmpresa.bannerOferta_PromocaoVendaEmpresaCliente = obj.bannerOferta_PromocaoVendaEmpresaCliente;
+                dadosNewPromocaoEmpresa.ativoInativo_PromocaoVendaEmpresaCliente = true;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+                //GRAVAR NOVA PROMOCAO da EMPRESA CLIENTE
+                dadosNewPromocaoEmpresa = servicePromocoesEmpresa.GravarNovaPromocaoEmpresa(dadosNewPromocaoEmpresa);
 
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
-
-                return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "ok", idRegistroGerado = dadosNewPromocaoEmpresa.id_PromocaoVendaEmpresaCliente }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception erro)
             {
@@ -190,6 +167,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    NPromocoesEmpresaService servicePromocoesEmpresa = new NPromocoesEmpresaService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
                     EmpresaCliente dadosEmpresaLogada =
@@ -197,9 +175,20 @@ namespace ClienteMercado.Areas.Company.Controllers
                     Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
 
+                    PromocaoVenda_EmpresaCliente dadosPromocaoVendaEmpresa =
+                        servicePromocoesEmpresa.ConsultarDadosPromocaoEmpresa(new PromocaoVenda_EmpresaCliente { id_PromocaoVendaEmpresaCliente = Convert.ToInt32(id) });
+
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.iPVDEC = dadosPromocaoVendaEmpresa.id_PromocaoVendaEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.nomeOferta_PromocaoVendaEmpresaCliente = dadosPromocaoVendaEmpresa.nomeOferta_PromocaoVendaEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.dataValidade_PromocaoVendaEmpresaCliente =
+                        Convert.ToDateTime(dadosPromocaoVendaEmpresa.dataValidade_PromocaoVendaEmpresaCliente).ToString("dd/MM/yyyy");
+                    dadosDaEmpresaClienteEUsuario.percentualOffOferta_PromocaoVendaEmpresaCliente =
+                        dadosPromocaoVendaEmpresa.percentualOffOferta_PromocaoVendaEmpresaCliente.ToString().Replace(".", "");
+                    dadosDaEmpresaClienteEUsuario.bannerOferta_PromocaoVendaEmpresaCliente = dadosPromocaoVendaEmpresa.bannerOferta_PromocaoVendaEmpresaCliente;
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -225,43 +214,18 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NPromocoesEmpresaService servicePromocoesEmpresa = new NPromocoesEmpresaService();
+                PromocaoVenda_EmpresaCliente dadosPromocaoEmpresaAlterar = new PromocaoVenda_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosPromocaoEmpresaAlterar.id_PromocaoVendaEmpresaCliente = obj.iPVDEC;
+                dadosPromocaoEmpresaAlterar.nomeOferta_PromocaoVendaEmpresaCliente = obj.nomeOferta_PromocaoVendaEmpresaCliente;
+                dadosPromocaoEmpresaAlterar.dataValidade_PromocaoVendaEmpresaCliente = Convert.ToDateTime(obj.dataValidade_PromocaoVendaEmpresaCliente);
+                dadosPromocaoEmpresaAlterar.percentualOffOferta_PromocaoVendaEmpresaCliente = Convert.ToDecimal(obj.percentualOffOferta_PromocaoVendaEmpresaCliente);
+                dadosPromocaoEmpresaAlterar.bannerOferta_PromocaoVendaEmpresaCliente = obj.bannerOferta_PromocaoVendaEmpresaCliente;
+                //dadosPromocaoEmpresaAlterar.ativoInativo_PromocaoVendaEmpresaCliente = true;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
-
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
+                //ALTERAR DADOS da PROMOCAO da EMPRESA CLIENTE
+                servicePromocoesEmpresa.AlterarDadosPromocaoEmpresa(dadosPromocaoEmpresaAlterar);
 
                 return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
             }

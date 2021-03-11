@@ -14,6 +14,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public int iCDEC { get; set; }
         public int iDEC { get; set; }
         public int iSDEC { get; set; }
+        public int iPVDEC { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }
@@ -52,5 +53,11 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string descricao_SubDepartamentoEmpresaCliente { get; set; }
         public int id_DepartamentoEmpresaCliente { get; set; }
         public List<SelectListItem> ListagemDepartamentos { get; set; }
+
+        public string nomeOferta_PromocaoVendaEmpresaCliente { get; set; }
+        public string dataValidade_PromocaoVendaEmpresaCliente { get; set; }
+        public string percentualOffOferta_PromocaoVendaEmpresaCliente { get; set; }
+        public string ativoInativo_PromocaoVendaEmpresaCliente { get; set; }        
+        public string bannerOferta_PromocaoVendaEmpresaCliente { get; set; }
     }
 }

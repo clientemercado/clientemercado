@@ -92,6 +92,7 @@
     <Compile Include="Services\NCpfProfissional.cs" />
     <Compile Include="Services\NCupomDescontoEmpresaService.cs" />
     <Compile Include="Services\NDepartamentoEmpresaClienteService.cs" />
+    <Compile Include="Services\NPromocoesEmpresaService.cs" />
     <Compile Include="Services\NSubDepartamentoEmpresaService.cs" />
     <Compile Include="Services\NEmpresasProdutosEmbalagensService.cs" />
     <Compile Include="Services\NEmpresasFabricantesMarcasService.cs" />

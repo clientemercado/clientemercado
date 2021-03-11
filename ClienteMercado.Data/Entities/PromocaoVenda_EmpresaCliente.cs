@@ -25,7 +25,7 @@ namespace ClienteMercado.Data.Entities
         public DateTime? dataValidade_PromocaoVendaEmpresaCliente { get; set; }
         public int? idUsuarioCadastrouOferta_PromocaoVendaEmpresaCliente { get; set; }
         public bool ativoInativo_PromocaoVendaEmpresaCliente { get; set; }
-        public DateTime dataInativou_PromocaoVendaEmpresaCliente { get; set; }
+        public DateTime? dataInativou_PromocaoVendaEmpresaCliente { get; set; }
         public int? idUsuarioInativou_PromocaoVendaEmpresaCliente { get; set; }
 
 
