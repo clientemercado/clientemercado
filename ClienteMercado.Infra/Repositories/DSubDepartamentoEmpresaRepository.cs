@@ -51,6 +51,30 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         /// <summary>
+        /// ATUALIZAR DADOS do SUB-DEPTO da EMPRESA CLIENTE
+        /// </summary>
+        public void AlterarDadosSubDeptoEmpresa(SubDepartamento_EmpresaCliente obj)
+        {
+            try
+            {
+                SubDepartamento_EmpresaCliente dadosSubDeptoEmpresa =
+                    _contexto.subDepartamento_empresaCliente.FirstOrDefault(m => ((m.id_SubDepartamentoEmpresaCliente == obj.id_SubDepartamentoEmpresaCliente)));
+
+                if (dadosSubDeptoEmpresa != null)
+                {
+                    dadosSubDeptoEmpresa.id_DepartamentoEmpresaCliente = obj.id_DepartamentoEmpresaCliente;
+                    dadosSubDeptoEmpresa.descricao_SubDepartamentoEmpresaCliente = obj.descricao_SubDepartamentoEmpresaCliente;
+
+                    _contexto.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// CONSULTAR DADOS SUB-DEPTO da EMPRESA CLIENTE
         /// </summary>
         public SubDepartamento_EmpresaCliente ConsultarDadosSubDeptoEmpresa(SubDepartamento_EmpresaCliente obj)

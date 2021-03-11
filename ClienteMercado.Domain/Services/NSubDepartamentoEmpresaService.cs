@@ -35,5 +35,13 @@ namespace ClienteMercado.Domain.Services
         {
             return drepository.ConsultarDadosSubDeptoEmpresa(obj);
         }
+
+        /// <summary>
+        /// ATUALIZAR DADOS do SUB-DEPTO da EMPRESA CLIENTE
+        /// </summary>
+        public void AlterarDadosSubDeptoEmpresa(SubDepartamento_EmpresaCliente obj)
+        {
+            drepository.AlterarDadosSubDeptoEmpresa(obj);
+        }
     }
 }
