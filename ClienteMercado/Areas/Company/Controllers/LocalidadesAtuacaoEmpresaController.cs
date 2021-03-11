@@ -97,6 +97,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.ListagemCidades = ListagemCidades();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -122,45 +124,18 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NLocalidadesAtendidasEmpresaService serviceLocalidadesEmpresa = new NLocalidadesAtendidasEmpresaService();
+                Localidade_CidadeEmpresaCliente dadosNewLocalidadesEmpresa = new Localidade_CidadeEmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosNewLocalidadesEmpresa.id_CidadeEmpresaCliente = obj.id_CidadeEmpresaCliente;
+                dadosNewLocalidadesEmpresa.nomeLocalidade_LocalidadeCidadeEmpresaCliente= obj.nomeLocalidade_LocalidadeCidadeEmpresaCliente;
+                dadosNewLocalidadesEmpresa.cepLocalidade_LocalidadeCidadeEmpresaCliente = obj.cepLocalidade_LocalidadeCidadeEmpresaCliente;
+                //dadosNewLocalidadesEmpresa.latitude_logitude_cep_UsuarioEmpresaCliente = obj.uf_UsuarioEmpresaCliente;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+                //GRAVAR NOVA LOCALIDADE de ATUAÇÃO da EMPRESA CLIENTE
+                dadosNewLocalidadesEmpresa = serviceLocalidadesEmpresa.GravarNovaLocalidadeAtuacaoEmpresa(dadosNewLocalidadesEmpresa);
 
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
-
-                return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "ok", idRegistroGerado = dadosNewLocalidadesEmpresa.id_LocalidadeCidadeEmpresaCliente }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception erro)
             {
@@ -190,6 +165,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    NLocalidadesAtendidasEmpresaService serviceLocalidadesEmpresa = new NLocalidadesAtendidasEmpresaService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
                     EmpresaCliente dadosEmpresaLogada =
@@ -197,9 +173,18 @@ namespace ClienteMercado.Areas.Company.Controllers
                     Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
 
+                    Localidade_CidadeEmpresaCliente dadosLocalidadeEmpresa = 
+                        serviceLocalidadesEmpresa.ConsultarDadosLocalidadeEmpresa(new Localidade_CidadeEmpresaCliente { id_LocalidadeCidadeEmpresaCliente = id });
+
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.iLEC = dadosLocalidadeEmpresa.id_LocalidadeCidadeEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.nomeLocalidade_LocalidadeCidadeEmpresaCliente = dadosLocalidadeEmpresa.nomeLocalidade_LocalidadeCidadeEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.cepLocalidade_LocalidadeCidadeEmpresaCliente = dadosLocalidadeEmpresa.cepLocalidade_LocalidadeCidadeEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.id_CidadeEmpresaCliente = dadosLocalidadeEmpresa.id_CidadeEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.ListagemCidades = ListagemCidades();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -225,43 +210,17 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NLocalidadesAtendidasEmpresaService serviceLocalidadesEmpresa = new NLocalidadesAtendidasEmpresaService();
+                Localidade_CidadeEmpresaCliente dadosLocalidadesEmpresaAlterar = new Localidade_CidadeEmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosLocalidadesEmpresaAlterar.id_LocalidadeCidadeEmpresaCliente = obj.iLEC;
+                dadosLocalidadesEmpresaAlterar.id_CidadeEmpresaCliente = obj.id_CidadeEmpresaCliente;
+                dadosLocalidadesEmpresaAlterar.nomeLocalidade_LocalidadeCidadeEmpresaCliente = obj.nomeLocalidade_LocalidadeCidadeEmpresaCliente;
+                dadosLocalidadesEmpresaAlterar.cepLocalidade_LocalidadeCidadeEmpresaCliente = obj.cepLocalidade_LocalidadeCidadeEmpresaCliente;
+                //dadosNewLocalidadesEmpresa.latitude_logitude_cep_UsuarioEmpresaCliente = obj.uf_UsuarioEmpresaCliente;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
-
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
+                //SLTERAR DADOS LOCALIDADE de ATUAÇÃO da EMPRESA CLIENTE
+                serviceLocalidadesEmpresa.AlterarDadosLocalidadeAtuacaoEmpresa(dadosLocalidadesEmpresaAlterar);
 
                 return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
             }
@@ -272,5 +231,28 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
+        //Carrega a lista de Estados (Obs: No momento carregrá todos os estados brasileiros. Depois vejo como ficará)
+        private List<SelectListItem> ListagemCidades()
+        {
+            //Buscar lista de Cidades da Empresa
+            NCidadesService serviceCidades = new NCidadesService();
+
+            List<Cidade_EmpresaCliente> listaCidades = serviceCidades.BuscarListaCidadesEmpresa();
+
+            List<SelectListItem> listCitys = new List<SelectListItem>();
+
+            listCitys.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (var cidades in listaCidades)
+            {
+                listCitys.Add(new SelectListItem
+                {
+                    Text = cidades.cidade_CidadeEmpresaCliente,
+                    Value = cidades.id_CidadeEmpresaCliente.ToString()
+                });
+            }
+
+            return listCitys;
+        }
     }
 }

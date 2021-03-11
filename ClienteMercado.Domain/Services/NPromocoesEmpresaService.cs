@@ -10,7 +10,7 @@ namespace ClienteMercado.Domain.Services
 {
     public class NPromocoesEmpresaService
     {
-        NPromocoesEmpresaRepository drepository = new NPromocoesEmpresaRepository();
+        DPromocoesEmpresaRepository drepository = new DPromocoesEmpresaRepository();
 
         /// <summary>
         /// GRAVAR NOVA PROMOCAO da EMPRESA CLIENTE

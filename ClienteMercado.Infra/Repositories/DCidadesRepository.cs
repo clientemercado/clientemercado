@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using ClienteMercado.Utils.Net;
 using ClienteMercado.Utils.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace ClienteMercado.Infra.Repositories
 {
     public class DCidadesRepository : RepositoryBase<cidades_empresa_usuario>
     {
+        int? idEmpresa = Sessao.IdEmpresaUsuario;
+
         //Consultar dados da CIDADE
         public cidades_empresa_usuario ConsultarDadosDaCidade(int idCidade)
         {
@@ -66,6 +69,25 @@ namespace ClienteMercado.Infra.Repositories
             catch (System.Exception e)
             {
                 throw e;
+            }
+        }
+
+        /// <summary>
+        /// BUSCAR LISTA de CIDADES de ATUAÇÂO da EMPRESA CLIENTE
+        /// </summary>
+        public List<Cidade_EmpresaCliente> BuscarListaCidadesEmpresa()
+        {
+            try
+            {
+                List<Cidade_EmpresaCliente> listaCidadesAtendidas = 
+                    _contexto.cidade_empresaCliente.Where(m => (m.id_EmpresaCliente == idEmpresa)).ToList();
+
+                return listaCidadesAtendidas;
+            }
+            catch (System.Exception)
+            {
+
+                throw;
             }
         }
 

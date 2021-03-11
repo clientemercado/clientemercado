@@ -15,7 +15,7 @@ namespace ClienteMercado.Data.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_CidadeEmpresaCliente { get; set; }
-        public int id_EmpresaCliente { get; set; }
+        public int? id_EmpresaCliente { get; set; }
 
         [MaxLength(100)]
         public string cidade_CidadeEmpresaCliente { get; set; }

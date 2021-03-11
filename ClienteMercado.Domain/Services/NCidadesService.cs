@@ -43,5 +43,13 @@ namespace ClienteMercado.Domain.Services
         {
             dRepository.AlterarDadosCidadeEmpresaCliente(obj);
         }
+
+        /// <summary>
+        /// BUSCAR LISTA de CIDADES de ATUAÇÂO da EMPRESA CLIENTE
+        /// </summary>
+        public List<Cidade_EmpresaCliente> BuscarListaCidadesEmpresa()
+        {
+            return dRepository.BuscarListaCidadesEmpresa();
+        }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ClienteMercado.Infra.Repositories
 {
-    public class NPromocoesEmpresaRepository : RepositoryBase<PromocaoVenda_EmpresaCliente>
+    public class DPromocoesEmpresaRepository : RepositoryBase<PromocaoVenda_EmpresaCliente>
     {
         int? idEmpresa = Sessao.IdEmpresaUsuario;
 
