@@ -96,6 +96,7 @@
     <Compile Include="Repositories\DItensPedidoUsuarioCotanteRepository.cs" />
     <Compile Include="Repositories\DLembreteRepository.cs" />
     <Compile Include="Repositories\DLoginRepository.cs" />
+    <Compile Include="Repositories\DMeiosPagamentoAEmpresaClienteRepository.cs" />
     <Compile Include="Repositories\DMeiosPagamentoFaturaServicosRepository.cs" />
     <Compile Include="Repositories\DPaisesRepository.cs" />
     <Compile Include="Repositories\DPedidoCentralComprasRepository.cs" />

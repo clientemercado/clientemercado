@@ -17,6 +17,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public int iPVDEC { get; set; }
         public int iEFM { get; set; }
         public int iLEC { get; set; }
+        public int iMPEC { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }
@@ -68,5 +69,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string nomeLocalidade_LocalidadeCidadeEmpresaCliente { get; set; }
         public string cepLocalidade_LocalidadeCidadeEmpresaCliente { get; set; }
         public List<SelectListItem> ListagemCidades { get; set; }
+
+        public string descricao_MeiosPagamentoEmpresaCliente { get; set; }
     }
 }

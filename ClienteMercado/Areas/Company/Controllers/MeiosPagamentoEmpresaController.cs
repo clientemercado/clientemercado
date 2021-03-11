@@ -122,45 +122,15 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NMeiosPagamentoAEmpresaClienteService serviceDepartamentoEmpresa = new NMeiosPagamentoAEmpresaClienteService();
+                MeiosPagamento_EmpresaCliente dadosNewMeioPagamentoEmpresa = new MeiosPagamento_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosNewMeioPagamentoEmpresa.descricao_MeiosPagamentoEmpresaCliente = obj.descricao_MeiosPagamentoEmpresaCliente;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+                //GRAVAR NOVO MEIO PGTO da EMPRESA CLIENTE
+                dadosNewMeioPagamentoEmpresa = serviceDepartamentoEmpresa.GravarNovoMeioPgtoEmpresa(dadosNewMeioPagamentoEmpresa);
 
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
-
-                return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "ok", idRegistroGerado = dadosNewMeioPagamentoEmpresa.id_MeiosPagamentoEmpresaCliente }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception erro)
             {
@@ -190,16 +160,22 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    NMeiosPagamentoAEmpresaClienteService serviceMeioPgtoEmpresa = new NMeiosPagamentoAEmpresaClienteService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
                     EmpresaCliente dadosEmpresaLogada =
                         serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
                     Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
+                    MeiosPagamento_EmpresaCliente dadosMeioPagamentoEmpresa = 
+                        serviceMeioPgtoEmpresa.ConsultarDadosMeioPagamento(new MeiosPagamento_EmpresaCliente { id_MeiosPagamentoEmpresaCliente = id });
 
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.iMPEC = dadosMeioPagamentoEmpresa.id_MeiosPagamentoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.descricao_MeiosPagamentoEmpresaCliente = dadosMeioPagamentoEmpresa.descricao_MeiosPagamentoEmpresaCliente;
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -225,43 +201,14 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NMeiosPagamentoAEmpresaClienteService serviceDepartamentoEmpresa = new NMeiosPagamentoAEmpresaClienteService();
+                MeiosPagamento_EmpresaCliente dadosAlterarMeioPagamentoEmpresa = new MeiosPagamento_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosAlterarMeioPagamentoEmpresa.id_MeiosPagamentoEmpresaCliente = obj.iMPEC;
+                dadosAlterarMeioPagamentoEmpresa.descricao_MeiosPagamentoEmpresaCliente = obj.descricao_MeiosPagamentoEmpresaCliente;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
-
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
+                //ALTERAR DADOS MEIO PGTO da EMPRESA CLIENTE
+                serviceDepartamentoEmpresa.AlterarDadosMeioPgtoEmpresa(dadosAlterarMeioPagamentoEmpresa);
 
                 return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
             }
