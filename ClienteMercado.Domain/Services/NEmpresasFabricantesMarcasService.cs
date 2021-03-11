@@ -1,6 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
 using ClienteMercado.Utils.ViewModel;
+using System;
 using System.Collections.Generic;
 
 namespace ClienteMercado.Domain.Services
@@ -37,6 +38,33 @@ namespace ClienteMercado.Domain.Services
         public string ConsultarDescricaoDaEmpresaFabricanteOuMarca(int idFabricanteMarca)
         {
             return dRepository.ConsultarDescricaoDaEmpresaFabricanteOuMarca(idFabricanteMarca);
+        }
+
+        /// <summary>
+        /// GRAVAR FABRICANTE MARCA
+        /// </summary>
+        /// <returns></returns>
+        public Empresa_FabricantesMarcas GravarNovEmpresaFabricanteMarca(Empresa_FabricantesMarcas obj)
+        {
+            return dRepository.GravarNovEmpresaFabricanteMarca(obj);
+        }
+
+        /// <summary>
+        /// CONSULTAR DADOS EMPRESA FABRICANTE ou MARCA
+        /// </summary>
+        /// <returns></returns>
+        public Empresa_FabricantesMarcas ConsultarDadosDaEmpresaFabricante(Empresa_FabricantesMarcas obj)
+        {
+            return dRepository.ConsultarDadosDaEmpresaFabricante(obj);
+        }
+
+        /// <summary>
+        /// ALTERAR DADOS FABRICANTE MARCA
+        /// </summary>
+        /// <returns></returns>
+        public void AlterarDadosEmpresaFabricanteMarca(Empresa_FabricantesMarcas obj)
+        {
+            dRepository.AlterarDadosEmpresaFabricanteMarca(obj);
         }
     }
 }

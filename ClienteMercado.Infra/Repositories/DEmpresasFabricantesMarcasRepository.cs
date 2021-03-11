@@ -52,6 +52,70 @@ namespace ClienteMercado.Infra.Repositories
             return dadosDaEmpresaFabricante.DESCRICAO_EMPRESA_FABRICANTE_MARCAS;
         }
 
+        /// <summary>
+        /// CONSULTAR DADOS EMPRESA FABRICANTE ou MARCA
+        /// </summary>
+        /// <returns></returns>
+        public Empresa_FabricantesMarcas ConsultarDadosDaEmpresaFabricante(Empresa_FabricantesMarcas obj)
+        {
+            try
+            {
+                Empresa_FabricantesMarcas dadosEmpresaFabricante = 
+                    _contexto.empresa_fabricanteMarcas.FirstOrDefault(m => (m.id_EmpresaFabricantesMarcas == obj.id_EmpresaFabricantesMarcas));
+
+                return dadosEmpresaFabricante;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// ALTERAR DADOS FABRICANTE MARCA
+        /// </summary>
+        /// <returns></returns>
+        public void AlterarDadosEmpresaFabricanteMarca(Empresa_FabricantesMarcas obj)
+        {
+            try
+            {
+                Empresa_FabricantesMarcas dadosEmpresaFabricante =
+                    _contexto.empresa_fabricanteMarcas.FirstOrDefault(m => (m.id_EmpresaFabricantesMarcas == obj.id_EmpresaFabricantesMarcas));
+
+                if (dadosEmpresaFabricante != null)
+                {
+                    dadosEmpresaFabricante.descricao_EmpresaFabricantesMarcas = obj.descricao_EmpresaFabricantesMarcas;
+
+                    _contexto.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// GRAVAR FABRICANTE MARCA
+        /// </summary>
+        /// <returns></returns>
+        public Empresa_FabricantesMarcas GravarNovEmpresaFabricanteMarca(Empresa_FabricantesMarcas obj)
+        {
+            try
+            {
+                Empresa_FabricantesMarcas dadosNovEmpresaFabricanteMarca = _contexto.empresa_fabricanteMarcas.Add(obj);
+                _contexto.SaveChanges();
+
+                return dadosNovEmpresaFabricanteMarca;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            throw new NotImplementedException();
+        }
+
         //TRAZ MARCAS/FABRICANTES VINCULADAS AO PRODUTO
         public List<ListaDeEmpresasFabricantesEMarcasViewModel> ListaDeFabricantesEMarcasVinculadasAoProduto(string term, int codProduto)
         {

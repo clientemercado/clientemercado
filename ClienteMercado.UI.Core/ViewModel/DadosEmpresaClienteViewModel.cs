@@ -15,6 +15,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public int iDEC { get; set; }
         public int iSDEC { get; set; }
         public int iPVDEC { get; set; }
+        public int iEFM { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }
@@ -59,5 +60,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string percentualOffOferta_PromocaoVendaEmpresaCliente { get; set; }
         public string ativoInativo_PromocaoVendaEmpresaCliente { get; set; }        
         public string bannerOferta_PromocaoVendaEmpresaCliente { get; set; }
+
+        public string descricao_EmpresaFabricantesMarcas { get; set; }
     }
 }

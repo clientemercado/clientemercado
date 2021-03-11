@@ -122,45 +122,15 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NEmpresasFabricantesMarcasService serviceEmpresaFabricanteMarca = new NEmpresasFabricantesMarcasService();
+                Empresa_FabricantesMarcas dadosNewEmpresaFabricanteMarca = new Empresa_FabricantesMarcas();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosNewEmpresaFabricanteMarca.descricao_EmpresaFabricantesMarcas = obj.descricao_EmpresaFabricantesMarcas;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+                //GRAVAR FABRICANTE MARCA
+                dadosNewEmpresaFabricanteMarca = serviceEmpresaFabricanteMarca.GravarNovEmpresaFabricanteMarca(dadosNewEmpresaFabricanteMarca);
 
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
-
-                return Json(new { status = "ok", idRegistroGerado = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "ok", idRegistroGerado = dadosNewEmpresaFabricanteMarca.id_EmpresaFabricantesMarcas }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception erro)
             {
@@ -190,16 +160,22 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    NEmpresasFabricantesMarcasService serviceEmpresaFabricanteMarca = new NEmpresasFabricantesMarcasService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
                     EmpresaCliente dadosEmpresaLogada =
                         serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
                     Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
+                    Empresa_FabricantesMarcas dadosEmpresaFabricante = 
+                        serviceEmpresaFabricanteMarca.ConsultarDadosDaEmpresaFabricante(new Empresa_FabricantesMarcas { id_EmpresaFabricantesMarcas = Convert.ToInt32(id) });
 
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
+
+                    dadosDaEmpresaClienteEUsuario.iEFM = dadosEmpresaFabricante.id_EmpresaFabricantesMarcas;
+                    dadosDaEmpresaClienteEUsuario.descricao_EmpresaFabricantesMarcas = dadosEmpresaFabricante.descricao_EmpresaFabricantesMarcas;
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -225,43 +201,14 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NEmpresasFabricantesMarcasService serviceEmpresaFabricanteMarca = new NEmpresasFabricantesMarcasService();
+                Empresa_FabricantesMarcas dadosEmpresaFabricanteMarcaAlterar = new Empresa_FabricantesMarcas();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosEmpresaFabricanteMarcaAlterar.id_EmpresaFabricantesMarcas = obj.iEFM;
+                dadosEmpresaFabricanteMarcaAlterar.descricao_EmpresaFabricantesMarcas = obj.descricao_EmpresaFabricantesMarcas;
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
-
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
-
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
+                //ALTERAR DADOS FABRICANTE MARCA
+                serviceEmpresaFabricanteMarca.AlterarDadosEmpresaFabricanteMarca(dadosEmpresaFabricanteMarcaAlterar);
 
                 return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
             }
