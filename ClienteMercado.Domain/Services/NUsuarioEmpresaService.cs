@@ -107,5 +107,14 @@ namespace ClienteMercado.Domain.Services
         {
             dusuarioempresa.AlterarDadosUsuarioClienteEmpresa(obj);
         }
+
+        /// <summary>
+        /// CARREGA LISTA de USUÁRIOS FUNCIONÁRIOS
+        /// </summary>
+        /// <returns></returns>
+        public List<Usuario_EmpresaCliente> CarregarListaDeUsuariosFuncionariosEmpresaCliente(string term)
+        {
+            return dusuarioempresa.CarregarListaDeUsuariosFuncionariosEmpresaCliente(term);
+        }
     }
 }

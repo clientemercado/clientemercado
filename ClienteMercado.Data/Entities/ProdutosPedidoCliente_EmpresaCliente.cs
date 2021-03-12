@@ -18,7 +18,7 @@ namespace ClienteMercado.Data.Entities
         public string motivoItemPedidoNaoEntregue_ProdutosPedidoCliente { get; set; }
         public DateTime? dataEntregaItemPedido_ProdutosPedidoCliente { get; set; }
         public int quantidade_ProdutosPedidoCliente { get; set; }
-        public decimal valorPago_ProdutosPedidoCliente { get; set; }
+        public decimal valorUnitario_ProdutosPedidoCliente { get; set; }
 
 
         [ForeignKey("id_PedidoClienteEmpresaCliente")]

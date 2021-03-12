@@ -117,6 +117,7 @@
     <Compile Include="ViewModel\ListaEstilizadaDeEmpresasViewModel.cs" />
     <Compile Include="ViewModel\ListaIdsDeEmpresasFornecedorasCotadas.cs" />
     <Compile Include="ViewModel\ListaItensCotadosRespondidosPeloFornecedorViewModel.cs" />
+    <Compile Include="ViewModel\ListaItensDoPedidoViewModel.cs" />
     <Compile Include="ViewModel\ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel.cs" />
     <Compile Include="ViewModel\ListaPorItemCotadoJaCalculadoUsuarioCotanteViewModel.cs" />
     <Compile Include="ViewModel\ListaPorItemCotadoJaCalculadoUsuarioEmpresaCotanteViewModel.cs" />

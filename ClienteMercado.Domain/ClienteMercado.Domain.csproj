@@ -94,6 +94,7 @@
     <Compile Include="Services\NDepartamentoEmpresaClienteService.cs" />
     <Compile Include="Services\NLocalidadesAtendidasEmpresaService.cs" />
     <Compile Include="Services\NMeiosPagamentoAEmpresaClienteService.cs" />
+    <Compile Include="Services\NPedidoClienteEmpresaService.cs" />
     <Compile Include="Services\NPromocoesEmpresaService.cs" />
     <Compile Include="Services\NSubDepartamentoEmpresaService.cs" />
     <Compile Include="Services\NEmpresasProdutosEmbalagensService.cs" />

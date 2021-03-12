@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using ClienteMercado.Utils.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace ClienteMercado.Infra.Repositories
 {
     public class DUsuarioEmpresaRepository : RepositoryBase<usuario_empresa>
     {
+        int? idEmpresa = Sessao.IdEmpresaUsuario;
+
         //Consultar Usuários ligados à Empresa
         public List<usuario_empresa> ConsultarUsuariosLigadosAEmpresa(usuario_empresa obj)
         {
@@ -84,6 +87,26 @@ namespace ClienteMercado.Infra.Repositories
                 //dadosAlteracaoUsuarioEmpCliente.ativoInativo_UsuarioEmpresaCliente = true;
 
                 _contexto.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// CARREGA LISTA de USUÁRIOS FUNCIONÁRIOS
+        /// </summary>
+        /// <returns></returns>
+        public List<Usuario_EmpresaCliente> CarregarListaDeUsuariosFuncionariosEmpresaCliente(string term)
+        {
+            try
+            {
+                List<Usuario_EmpresaCliente> listaUsuariosFunc = 
+                    _contexto.usuario_empresaCliente.Where(m => ((m.nome_UsuarioEmpresaCliente.Contains(term))) 
+                    && (m.id_EmpresaCliente == idEmpresa)).ToList();
+
+                return listaUsuariosFunc;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 

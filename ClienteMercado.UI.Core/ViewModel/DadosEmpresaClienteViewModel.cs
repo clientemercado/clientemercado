@@ -71,5 +71,20 @@ namespace ClienteMercado.UI.Core.ViewModel
         public List<SelectListItem> ListagemCidades { get; set; }
 
         public string descricao_MeiosPagamentoEmpresaCliente { get; set; }
+
+        public int? idPedidoCliente { get; set; }
+        public string inCodControlePedidoClienteEntrega { get; set; }
+        public string nomeClienteEntrega { get; set; }
+        public string cidadeClienteEntrega { get; set; }
+        public string ufClienteEntrega { get; set; }
+        public string localidadeClienteEntrega { get; set; }
+        public string modoPagamentoClienteEntrega { get; set; }
+        public string cuponDescontoClienteEntrega { get; set; }
+        public string valorPedido_PedidoClienteEmpresaCliente { get; set; }
+        public string pedidoEntregue_PedidoClienteEmpresaCliente { get; set; }
+        public int? idUsuarioEmpresaEntregou_ClienteEmpresaCliente { get; set; }
+        public string nomeUsuarioFuncionarioEntrega { get; set; }
+        public string dataEntregaPedido_ClienteEmpresaCliente { get; set; }
+        public List<SelectListItem> ListagemOpcoesSimNao { get; set; }
     }
 }

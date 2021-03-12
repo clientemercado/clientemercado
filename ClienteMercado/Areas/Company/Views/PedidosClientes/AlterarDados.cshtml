@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ClienteMercado.UI.Core.ViewModel.DadosEmpresaClienteViewModel
+
+@{
     ViewBag.Title = "SuperMarket_On";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -38,27 +40,105 @@
             <!-- BEGIN FORM-->
             <form action="#" class="form-horizontal">
                 <div class="form-body">
+                    <h4><b><font color="#3297E0">Dados Pedido Cliente:</font></b></h4>
+                    <hr />
                     <div class="form-group">
                         <div class="col-md-12">
-                            @*<div class="col-md-8"><font color="#3297E0"><b>Empresa:</b></font></div>
-                                <div class="col-md-4">&nbsp;</div>*@
+                            <div class="col-md-2"><font color="#3297E0">Nº Pedido:</font></div>
+                            <div class="col-md-10">&nbsp;</div>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-8">
-                                @*<input type="text" name="name" id="inPesquisar" data-required="1" size="10" class="form-control" placeholder="Descrição..." />*@
+                            <div class="col-md-2">
+                                <input type="text" id="inNumPedControle" data-required="1" size="10" class="form-control" placeholder="" value="@Model.inCodControlePedidoClienteEntrega" readonly />
                             </div>
-                            <div class="col-md-4">
-                                @*<button id="btn-pesquisar" class="btn blue" title="Pesquisar conforme dados selecionados"><i class="fas fa-search"></i> Pesquisar</button>*@
+                            <div class="col-md-10">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5"><font color="#3297E0">Cliente:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Cidade:</font></div>
+                            <div class="col-md-1"><font color="#3297E0">UF:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Localidade:</font></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <input type="text" id="inNomeCliente" data-required="1" size="10" class="form-control" placeholder="" value="@Model.nomeClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="inCidade" data-required="1" size="10" class="form-control" placeholder="" value="@Model.cidadeClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-1">
+                                <input type="text" id="inUF" data-required="1" size="10" class="form-control" placeholder="" value="@Model.ufClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="inlocalidade" data-required="1" size="10" class="form-control" placeholder="" value="@Model.localidadeClienteEntrega" readonly />
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5"><font color="#3297E0">Modo Pagamento:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Cupom Desc. aplicado:</font></div>
+                            <div class="col-md-1">&nbsp;</div>
+                            <div class="col-md-3">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <input type="text" id="inModoPag" data-required="1" size="10" class="form-control" placeholder="" value="@Model.modoPagamentoClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="tel" id="inCupom" data-required="1" size="10" class="form-control telefone" placeholder="" value="@Model.cuponDescontoClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-3">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2"><font color="#3297E0">Vlr Pedido:</font></div>
+                            <div class="col-md-1"><font color="#3297E0">Entregue:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">Data entrega:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Quem entregou:</font></div>
+                            <div class="col-md-4">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <input type="text" id="inVlrPedido" data-required="1" size="" class="form-control monetario" placeholder="" value="@Model.valorPedido_PedidoClienteEmpresaCliente" />
+                            </div>
+                            <div class="col-md-1">
+                                @Html.DropDownList("inListaOpcoes", Model.ListagemOpcoesSimNao, new { @class = "form-control obg", @id = "inListaOpcoes", style = "", @tabindex = "" })
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="inPedDataEntrega" data-required="1" size="" class="form-control data" placeholder="" value="@Model.dataEntregaPedido_ClienteEmpresaCliente" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="inUsuEntrega" data-required="1" size="" class="form-control" placeholder="" value="@Model.nomeUsuarioFuncionarioEntrega" onclick="verificaCampo();" />
+                                <input type="text" id="inUsuEntrega_" data-required="1" style="display:none;" class="form-control" placeholder="" value="" onclick="verificaCampo();" />
+                                <input type="hidden" id="inIdUsuEntrega" value="@Model.idUsuarioEmpresaEntregou_ClienteEmpresaCliente" />
+                            </div>
+                            <div class="col-md-4">&nbsp;</div>
+                        </div>
                     </div>
-                    <hr />
 
+                    <div class="form-group">
+                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table id="gridItensPedido" class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th data-column-id="itemPedidoEntregue_ProdutosPedidoCliente" data-width="20%" data-formatter="link1">Central Compras</th>
+                                        <th data-column-id="quantidade_ProdutosPedidoCliente" data-width="10%" data-formatter="link2">Ramo Atividade</th>
+                                        <th data-column-id="valorPago_ProdutosPedidoCliente" data-width="10%" data-align="right" data-formatter="link3">Empresas</th>
+                                        <th data-column-id="dataEntregaItemPedido_ProdutosPedidoCliente" data-width="10%" data-formatter="link4">Cidade</th>
+                                        <th data-column-id="motivoItemPedidoNaoEntregue_ProdutosPedidoCliente" data-width="50%" data-formatter="link4">Cidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- ================================================================================= -->
                 </div>
             </form>
             <!-- END FORM-->
 
-            <input type="hidden" id="inRecarregaGrid" value="0" />
+            <input type="hidden" id="inIdPed" value="@Model.idPedidoCliente" />
+            <input type="hidden" id="inEntr" value="@Model.pedidoEntregue_PedidoClienteEmpresaCliente" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->
