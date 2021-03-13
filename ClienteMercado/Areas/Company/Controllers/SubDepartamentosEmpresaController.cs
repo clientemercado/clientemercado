@@ -229,13 +229,13 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        //Carrega a lista de Estados (Obs: No momento carregrá todos os estados brasileiros. Depois vejo como ficará)
+        //Carrega a lista de DEPARTAMENTOS da EMPRESA
         private List<SelectListItem> ListagemDepartamentos()
         {
             //Buscar lista de Departamentos da Empresa
-            NSubDepartamentoEmpresaService serviceSubDeptoEmpresa = new NSubDepartamentoEmpresaService();
+            NDepartamentoEmpresaClienteService servicebDeptoEmpresa = new NDepartamentoEmpresaClienteService();
 
-            List<Departamento_EmpresaCliente> listaDepartamentos = serviceSubDeptoEmpresa.ListaDepartamentosEmpresa();
+            List<Departamento_EmpresaCliente> listaDepartamentos = servicebDeptoEmpresa.ListaDepartamentosEmpresa();
 
             List<SelectListItem> listDeptos = new List<SelectListItem>();
 

@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using ClienteMercado.Utils.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace ClienteMercado.Infra.Repositories
 {
     public class DDepartamentoEmpresaClienteRepository : RepositoryBase<Departamento_EmpresaCliente>
     {
+        int? idEmpresa = Sessao.IdEmpresaUsuario;
+
         /// <summary>
         /// GRAVAR NOVO DEPTO da EMPRESA CLIENTE
         /// </summary>
@@ -39,6 +42,24 @@ namespace ClienteMercado.Infra.Repositories
                     _contexto.departamenento_empresaCliente.FirstOrDefault(m => (m.id_DepartamentoEmpresaCliente == obj.id_DepartamentoEmpresaCliente));
 
                 return dadosDeptoEmpresa;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// CARREGAR LISTA DE DEPARTAMENTOS DA EMPRESA
+        /// </summary>
+        public List<Departamento_EmpresaCliente> ListaDepartamentosEmpresa()
+        {
+            try
+            {
+                List<Departamento_EmpresaCliente> listaDeptoEmpresa =
+                    _contexto.departamenento_empresaCliente.Where(m => (m.id_EmpresaCliente == idEmpresa)).ToList();
+
+                return listaDeptoEmpresa;
             }
             catch (Exception e)
             {

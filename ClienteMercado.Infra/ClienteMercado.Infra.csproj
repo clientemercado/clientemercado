@@ -101,6 +101,7 @@
     <Compile Include="Repositories\DPaisesRepository.cs" />
     <Compile Include="Repositories\DPedidoCentralComprasRepository.cs" />
     <Compile Include="Repositories\DPedidoUsuarioCotanteRepository.cs" />
+    <Compile Include="Repositories\DProdutoEmpresaRepository.cs" />
     <Compile Include="Repositories\DProdutosServicosEmpresaProfissionalRepository.cs" />
     <Compile Include="Repositories\DProfissionalUsuarioRepository.cs" />
     <Compile Include="Repositories\DRamosAtividadesProfissionalRepository.cs" />

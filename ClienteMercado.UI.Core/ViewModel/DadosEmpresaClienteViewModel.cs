@@ -86,5 +86,19 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string nomeUsuarioFuncionarioEntrega { get; set; }
         public string dataEntregaPedido_ClienteEmpresaCliente { get; set; }
         public List<SelectListItem> ListagemOpcoesSimNao { get; set; }
+
+
+        public string descricao_ProdutoEmpresaCliente { get; set; }
+        public string tipoEmbalagem_ProdutoEmpresaCliente { get; set; }
+        public string pesoEmbalagem_ProdutoEmpresaCliente { get; set; }
+        public string unidadePesoEmbalagem_ProdutoEmpresaCliente { get; set; }
+        public string valorVenda_ProdutoEmpresaCliente { get; set; }
+        public int? id_SubDepartamentoEmpresaCliente { get; set; }
+        public int? id_EmpresaFabricantesMarcas { get; set; }
+        public int? id_PromocaoVendaEmpresaCliente { get; set; }
+        public string ativoInativo_ProdutoEmpresaCliente { get; set; }
+        public List<SelectListItem> ListagemSubDepartamentos { get; set; }
+        public List<SelectListItem> ListagemFabricantesMarcas { get; set; }
+        public List<SelectListItem> ListagemPromocoesAtivas { get; set; }
     }
 }

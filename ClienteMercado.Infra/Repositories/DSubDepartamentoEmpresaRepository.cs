@@ -14,24 +14,6 @@ namespace ClienteMercado.Infra.Repositories
         int? idEmpresa = Sessao.IdEmpresaUsuario;
 
         /// <summary>
-        /// CARREGAR LISTA DE DEPARTAMENTOS DA EMPRESA
-        /// </summary>
-        public List<Departamento_EmpresaCliente> ListaDepartamentosEmpresa()
-        {
-            try
-            {
-                List<Departamento_EmpresaCliente> listaDeptoEmpresa = 
-                    _contexto.departamenento_empresaCliente.Where(m => (m.id_EmpresaCliente == idEmpresa)).ToList();
-
-                return listaDeptoEmpresa;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        /// <summary>
         /// GRAVAR NOVO SUB-DEPTO da EMPRESA CLIENTE
         /// </summary>
         public SubDepartamento_EmpresaCliente GravarNovoSubDeptoEmpresa(SubDepartamento_EmpresaCliente obj)
@@ -67,6 +49,24 @@ namespace ClienteMercado.Infra.Repositories
 
                     _contexto.SaveChanges();
                 }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// CARREGAR LISTA de SUB-DEPTO da EMPRESA CLIENTE
+        /// </summary>
+        public List<SubDepartamento_EmpresaCliente> ListaSubDepartamentosEmpresa()
+        {
+            try
+            {
+                List<SubDepartamento_EmpresaCliente> listaSubDeptos = 
+                    _contexto.subDepartamento_empresaCliente.Where(m => (m.id_SubDepartamentoEmpresaCliente > 0)).ToList();
+
+                return listaSubDeptos;
             }
             catch (Exception e)
             {

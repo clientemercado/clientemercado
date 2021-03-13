@@ -54,6 +54,25 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         /// <summary>
+        /// CARREGA LISTA de PROMOCOES ATIVAS PRATICADAS pela EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public List<PromocaoVenda_EmpresaCliente> ListaPromocoesDaEmpresa()
+        {
+            try
+            {
+                List<PromocaoVenda_EmpresaCliente> listaPromocoes = 
+                    _contexto.promocaoVenda_empresaCliente.Where(m => (m.id_EmpresaCliente == idEmpresa)).ToList();
+
+                return listaPromocoes;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// ALTERAR DADOS da PROMOCAO da EMPRESA CLIENTE
         /// </summary>
         /// <returns></returns>

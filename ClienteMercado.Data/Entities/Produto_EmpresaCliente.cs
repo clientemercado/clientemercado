@@ -29,9 +29,9 @@ namespace ClienteMercado.Data.Entities
         public string idImportacao_ProdutoEmpresaCliente { get; set; }
         public decimal? valorVenda_ProdutoEmpresaCliente { get; set; }
         public decimal? valorVendaAnterior_ProdutoEmpresaCliente { get; set; }
-        public bool ativoInativo_SubDepartamentoEmpresaCliente { get; set; }
-        public DateTime? dataInativou_SubDepartamentoEmpresaCliente { get; set; }
-        public int? idUsuarioInativou_SubDepartamentoEmpresaCliente { get; set; }
+        public bool ativoInativo_ProdutoEmpresaCliente { get; set; }
+        public DateTime? dataInativou_ProdutoEmpresaCliente { get; set; }
+        public int? idUsuarioInativou_ProdutoEmpresaCliente { get; set; }
 
 
         [ForeignKey("id_SubDepartamentoEmpresaCliente")]

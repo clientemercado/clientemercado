@@ -35,5 +35,13 @@ namespace ClienteMercado.Domain.Services
         {
             drepository.AlterarDadosDeptoEmpresa(obj);
         }
+
+        /// <summary>
+        /// CARREGAR LISTA DE DEPARTAMENTOS DA EMPRESA
+        /// </summary>
+        public List<Departamento_EmpresaCliente> ListaDepartamentosEmpresa()
+        {
+            return drepository.ListaDepartamentosEmpresa();
+        }
     }
 }

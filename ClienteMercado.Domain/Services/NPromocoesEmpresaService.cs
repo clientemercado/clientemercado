@@ -38,5 +38,14 @@ namespace ClienteMercado.Domain.Services
         {
             drepository.AlterarDadosPromocaoEmpresa(obj);
         }
+
+        /// <summary>
+        /// CARREGA LISTA de PROMOCOES ATIVAS PRATICADAS pela EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public List<PromocaoVenda_EmpresaCliente> ListaPromocoesDaEmpresa()
+        {
+            return drepository.ListaPromocoesDaEmpresa();
+        }
     }
 }

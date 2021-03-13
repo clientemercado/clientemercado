@@ -72,6 +72,25 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         /// <summary>
+        /// CARREGAR LISTA de EMPRESAS FABRICANTES e MARCAS
+        /// </summary>
+        /// <returns></returns>
+        public List<Empresa_FabricantesMarcas> ListaGeralFabricantesEMarcas()
+        {
+            try
+            {
+                List<Empresa_FabricantesMarcas> listaFabricantesMarcas = 
+                    _contexto.empresa_fabricanteMarcas.Where(m => (m.id_EmpresaFabricantesMarcas > 0)).ToList();
+
+                return listaFabricantesMarcas;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// ALTERAR DADOS FABRICANTE MARCA
         /// </summary>
         /// <returns></returns>

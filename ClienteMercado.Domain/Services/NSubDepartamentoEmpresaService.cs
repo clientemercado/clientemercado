@@ -13,14 +13,6 @@ namespace ClienteMercado.Domain.Services
         DSubDepartamentoEmpresaRepository drepository = new DSubDepartamentoEmpresaRepository();
 
         /// <summary>
-        /// CARREGAR LISTA DE DEPARTAMENTOS DA EMPRESA
-        /// </summary>
-        public List<Departamento_EmpresaCliente> ListaDepartamentosEmpresa()
-        {
-            return drepository.ListaDepartamentosEmpresa();
-        }
-
-        /// <summary>
         /// GRAVAR NOVO SUB-DEPTO da EMPRESA CLIENTE
         /// </summary>
         public SubDepartamento_EmpresaCliente GravarNovoSubDeptoEmpresa(SubDepartamento_EmpresaCliente obj)
@@ -42,6 +34,14 @@ namespace ClienteMercado.Domain.Services
         public void AlterarDadosSubDeptoEmpresa(SubDepartamento_EmpresaCliente obj)
         {
             drepository.AlterarDadosSubDeptoEmpresa(obj);
+        }
+
+        /// <summary>
+        /// CARREGAR LISTA de SUB-DEPTO da EMPRESA CLIENTE
+        /// </summary>
+        public List<SubDepartamento_EmpresaCliente> ListaSubDepartamentosEmpresa()
+        {
+            return drepository.ListaSubDepartamentosEmpresa();
         }
     }
 }

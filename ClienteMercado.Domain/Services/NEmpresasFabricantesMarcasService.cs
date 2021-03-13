@@ -66,5 +66,15 @@ namespace ClienteMercado.Domain.Services
         {
             dRepository.AlterarDadosEmpresaFabricanteMarca(obj);
         }
+
+        /// <summary>
+        /// CARREGAR LISTA de EMPRESAS FABRICANTES e MARCAS
+        /// </summary>
+        /// <returns></returns>
+
+        public List<Empresa_FabricantesMarcas> ListaGeralFabricantesEMarcas()
+        {
+            return dRepository.ListaGeralFabricantesEMarcas();
+        }
     }
 }
