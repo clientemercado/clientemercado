@@ -328,7 +328,17 @@ namespace ClienteMercado.Areas.Company.Controllers
                     listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
                 }
 
-                return Json(listaProdutosPedido, JsonRequestBehavior.AllowGet); //POPULAR LISTA NA WIEW...
+                //return Json(listaProdutosPedido, JsonRequestBehavior.AllowGet);
+                return Json(
+                    new
+                    {
+                        rows = listaProdutosPedido,
+                        current = 1,
+                        rowCount = listaProdutosPedido.Count,
+                        total = listaProdutosPedido.Count,
+                        dadosCarregados = "Ok"
+                    },
+                    JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

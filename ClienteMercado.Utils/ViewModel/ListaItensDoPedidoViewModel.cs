@@ -9,6 +9,7 @@ namespace ClienteMercado.Utils.ViewModel
 {
     public class ListaItensDoPedidoViewModel : ProdutosPedidoCliente_EmpresaCliente
     {
+        public int idPedido { get; set; }
         public string itemPedido { get; set; }
         public string quantidadeItemPedido { get; set; }
         public string valorUnitarioItemPedido { get; set; }

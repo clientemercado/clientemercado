@@ -9,7 +9,110 @@
     if ($('#inEntr').val() != "")
         $('#inListaOpcoes').val($('#inEntr').val());
 
-    carregarItensDoPedido();
+    //carregarItensDoPedido();
+
+    //---------------------------------------------------------------------------
+    //===================================================================================
+    //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
+    var grid = $('#gridItensPedido').bootgrid({
+        ajax: true,
+        navigation: 0, //CABEÇALHO: 2 - Exibe só RODAPÉ
+        columnSelection: false, //SELETOR de COLUNA: True - Habilita / False - Desabilita
+        url: "/PedidosClientes/BuscarListaDeProdutosDoPedido",
+        post: function () {
+        /* PARÂMETROS a serem enviados na REQUISIÇÃO AJAX */
+            debugger;
+
+            return {
+                'idPedido': $('#inIdPed').val()
+            };
+        },
+        selection: true,
+        multiSelect: true,
+        rowSelect: true,
+        keepSelection: true,
+        formatters: {
+            "link1": function (column, row) {
+                return "<font color=\"#3297E0\"><b>" + row.itemPedido + "</b></font>";
+            },
+            "link2": function (column, row) {
+                return "<font color=\"#3297E0\"><b>" + row.quantidadeItemPedido + "</b></font>";
+            },
+            "link3": function (column, row) {
+                return "<font color=\"#3297E0\"><b>" + row.valorUnitarioItemPedido + "</b></font>";
+            },
+            "link4": function (column, row) {
+                return "<font color=\"#3297E0\"><b>" + row.dataEntregaItemPedido + "</b></font>";
+            },
+            "link5": function (column, row) {
+                return "<font color=\"#3297E0\"><b>" + row.motivoNaoEntregaDotemPedido + "</b></font>";
+            }
+        }
+    }).on("loaded.rs.jquery.bootgrid", function () {
+        ///* Executa depois que os dados são carregados e renderizados */
+
+        ////PARTICIPAR da CENTRAL de COMPRAS
+        //grid.find(".command-participar").on("click", function (e) {
+
+        //    var codCC = $(this).attr("data-row-id");
+
+        //    swal({
+        //        title: "ATENÇÃO!!\n\n",
+        //        text: "Deseja participar desta Central de Compras?",
+        //        type: "warning",
+        //        showCancelButton: true,
+        //        confirmButtonColor: "#337ab7",
+        //        confirmButtonText: "Sim",
+        //        cancelButtonText: "Não",
+        //        closeOnConfirm: true,
+        //    },
+        //        function (isConfirm) {
+        //            if (isConfirm) {
+        //                debugger;
+
+        //                $.ajax({
+        //                    type: "POST",
+        //                    url: "/CentraisDeCompras/SolicitarParticipacaoNaCC",
+        //                    dataType: 'json',
+        //                    data: {
+        //                        'cCC': codCC
+        //                    },
+        //                    success: function (data) {
+        //                        debugger;
+
+        //                        if (data.participacaoSolicitada == "Ok") {
+        //                            debugger;
+
+        //                            swal.close(); //FECHA SWAL MSG
+
+        //                            //EXIBE MSG LATERAL À DIREITA SUPERIOR
+        //                            new PNotify({
+        //                                title: 'Sucesso!',
+        //                                text: 'SOLICITAÇÃO de PARTICIPAÇÃO ENVIADA!\n\nAguarde a LIBERAÇÃO.',
+        //                                type: 'success',
+        //                                styling: 'bootstrap3',
+        //                                icons: 'bootstrap3',
+        //                                addclass: 'customsuccess',
+        //                                animateSpeed: 'fast',
+        //                                mouseReset: true,
+        //                                Buttons: {
+        //                                    closer: true
+        //                                }
+        //                            });
+
+        //                            $('#gridCentraisDeComprasDoSistema').bootgrid('reload');
+        //                        }
+        //                    }
+        //                });
+        //            }
+        //            else {
+        //                $('#gridCentraisDeComprasDoSistema').bootgrid('reload');
+        //            }
+        //        });
+
+        //});
+    });
+    //---------------------------------------------------------------------------
 
     //BOTÃO NOVO CADASTRO
     $(document).on("click", "#btn-cadastrar", function () {
@@ -216,125 +319,4 @@ function verificaCampo() {
     $('#inUsuEntrega_').hide();
     $('#inUsuEntrega').show();
     $('#inUsuEntrega').focus();
-}
-
-function carregarItensDoPedido() {
-    debugger;
-
-    //===================================================================================
-    //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
-    var grid = $('#gridItensPedido').bootgrid({
-        ajax: true,
-        navigation: 0, //CABEÇALHO: 2 - Exibe só RODAPÉ
-        columnSelection: false, //SELETOR de COLUNA: True - Habilita / False - Desabilita
-        url: "/PedidosClientes/BuscarListaDeProdutosDoPedido",
-        post: function () {
-            /* PARÂMETROS a serem enviados na REQUISIÇÃO AJAX */
-            return {
-                'idPedido': $('#inIdPed').val()
-            };
-        },
-        selection: true,
-        multiSelect: true,
-        rowSelect: true,
-        keepSelection: true,
-        formatters: {
-            "status1": function (column, row) {
-                /* Dynamically detect if it is UP or Down. */
-                var value = row.statusCentralCompras,
-                    label = (value === "ATIVA") ? "success" : "danger";
-                return "<span class='label label-" + label + "'><b>" + value + "</b></span>";
-            },
-            "commands": function (column, row) {
-                var hintConvite = "Eu quero participar desta CENTRAL de COMPRAS";
-
-                if (row.statusConviteCentralCompras == "") {
-                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-participar\" data-row-id=\"" + row.ID_CENTRAL_COMPRAS + "\" title=\"" + hintConvite + "\"><font color='red'><span class=\"fas fa-user-plus\"></span></font></button>";
-                }
-                else {
-                    var value = row.statusConviteCentralCompras,
-                        label = (value === "FAÇO PARTE") ? "success" : "danger";
-                    return "<span class='label label-" + label + "'><b>" + value + "</b></span>";
-                }
-            },
-            "link1": function (column, row) {
-                return "<a href=\"@Url.Action("CotacoesDaCentralDeComprasSistema", "CentraisDeCompras")?cCC=" + row.ID_CENTRAL_COMPRAS + "\">" + row.nomeCentralCompras + "</a>";
-            },
-            "link2": function (column, row) {
-                return "<a href=\"@Url.Action("CotacoesDaCentralDeComprasSistema", "CentraisDeCompras")?cCC=" + row.ID_CENTRAL_COMPRAS + "\">" + row.ramoAtividadeCentralCompras + "</a>";
-            },
-            "link3": function (column, row) {
-                return "<a href=\"@Url.Action("CotacoesDaCentralDeComprasSistema", "CentraisDeCompras")?cCC=" + row.ID_CENTRAL_COMPRAS + "\">" + row.quantasEmpresas + "</a>";
-            },
-            "link4": function (column, row) {
-                return "<a href=\"@Url.Action("CotacoesDaCentralDeComprasSistema", "CentraisDeCompras")?cCC=" + row.ID_CENTRAL_COMPRAS + "\">" + row.cidadeDaCentralCompras + "</a>";
-            },
-            "link5": function (column, row) {
-                return "<a href=\"@Url.Action("CotacoesDaCentralDeComprasSistema", "CentraisDeCompras")?cCC=" + row.ID_CENTRAL_COMPRAS + "\">" + row.ufDaCentralCompras + "</a>";
-            }
-        }
-    }).on("loaded.rs.jquery.bootgrid", function () {
-        /* Executa depois que os dados são carregados e renderizados */
-
-        //PARTICIPAR da CENTRAL de COMPRAS
-        grid.find(".command-participar").on("click", function (e) {
-
-            var codCC = $(this).attr("data-row-id");
-
-            swal({
-                title: "ATENÇÃO!!\n\n",
-                text: "Deseja participar desta Central de Compras?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#337ab7",
-                confirmButtonText: "Sim",
-                cancelButtonText: "Não",
-                closeOnConfirm: true,
-            },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        debugger;
-
-                        $.ajax({
-                            type: "POST",
-                            url: "/CentraisDeCompras/SolicitarParticipacaoNaCC",
-                            dataType: 'json',
-                            data: {
-                                'cCC': codCC
-                            },
-                            success: function (data) {
-                                debugger;
-
-                                if (data.participacaoSolicitada == "Ok") {
-                                    debugger;
-
-                                    swal.close(); //FECHA SWAL MSG
-
-                                    //EXIBE MSG LATERAL À DIREITA SUPERIOR
-                                    new PNotify({
-                                        title: 'Sucesso!',
-                                        text: 'SOLICITAÇÃO de PARTICIPAÇÃO ENVIADA!\n\nAguarde a LIBERAÇÃO.',
-                                        type: 'success',
-                                        styling: 'bootstrap3',
-                                        icons: 'bootstrap3',
-                                        addclass: 'customsuccess',
-                                        animateSpeed: 'fast',
-                                        mouseReset: true,
-                                        Buttons: {
-                                            closer: true
-                                        }
-                                    });
-
-                                    $('#gridCentraisDeComprasDoSistema').bootgrid('reload');
-                                }
-                            }
-                        });
-                    }
-                    else {
-                        $('#gridCentraisDeComprasDoSistema').bootgrid('reload');
-                    }
-                });
-
-        });
-    });
 }
