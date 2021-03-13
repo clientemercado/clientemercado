@@ -326,6 +326,8 @@ namespace ClienteMercado.Areas.Company.Controllers
                     listaProdutosPedido[i].dataEntregaItemPedido = 
                         Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
                     listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaProdutosPedido[i].totalProdutoComprado = 
+                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
                 }
 
                 //return Json(listaProdutosPedido, JsonRequestBehavior.AllowGet);

@@ -40,8 +40,8 @@
             <!-- BEGIN FORM-->
             <form action="#" class="form-horizontal">
                 <div class="form-body">
-                    <h4><b><font color="#3297E0">Dados Pedido Cliente:</font></b></h4>
-                    <hr />
+                    @*<h4><b><font color="#3297E0">Dados Pedido Cliente:</font></b></h4>
+                    <hr />*@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="col-md-2"><font color="#3297E0">Nº Pedido:</font></div>
@@ -121,11 +121,13 @@
                             <table id="gridItensPedido" class="table table-bordered table-striped table-condensed flip-content">
                                 <thead class="flip-content">
                                     <tr>
-                                        <th data-column-id="itemPedido" data-width="20%" data-formatter="link1">Central Compras</th>
-                                        <th data-column-id="quantidadeItemPedido" data-width="10%" data-formatter="link2">Ramo Atividade</th>
-                                        <th data-column-id="valorUnitarioItemPedido" data-width="10%" data-align="right" data-formatter="link3">Empresas</th>
-                                        <th data-column-id="dataEntregaItemPedido" data-width="10%" data-formatter="link4">Cidade</th>
-                                        <th data-column-id="motivoNaoEntregaDotemPedido" data-width="50%" data-formatter="link5">Observações</th>
+                                        <th data-formatter="link0" data-width="4%" data-header-align="center" data-align="center">&nbsp;</th>
+                                        <th data-column-id="itemPedido" data-width="20%" data-formatter="link1" data-header-align="center">Produto</th>
+                                        <th data-column-id="quantidadeItemPedido" data-width="10%" data-align="right" data-formatter="link2" data-header-align="center">Quant.</th>
+                                        <th data-column-id="valorUnitarioItemPedido" data-width="10%" data-align="right" data-formatter="link3" data-header-align="center">R$ Unit.</th>
+                                        <th data-column-id="totalProdutoComprado" data-width="10%" data-align="right" data-formatter="link4" data-header-align="center">R$ Total</th>
+                                        <th data-column-id="dataEntregaItemPedido" data-width="10%" data-align="right" data-formatter="link5" data-header-align="center">Data Entrega</th>
+                                        <th data-column-id="motivoNaoEntregaDotemPedido" data-width="46%" data-formatter="link6" data-header-align="center">Observações</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

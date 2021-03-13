@@ -46,9 +46,9 @@ namespace ClienteMercado.Infra.Repositories
         {
             try
             {
-                var query = "SELECT P.descricao_ProdutoEmpresaCliente AS itemPedido, PP.id_PedidoClienteEmpresaCliente as idPedido, " + 
-                            "PP.quantidade_ProdutosPedidoCliente, PP.valorUnitario_ProdutosPedidoCliente, PP.dataEntregaItemPedido_ProdutosPedidoCliente, " + 
-                            "PP.motivoItemPedidoNaoEntregue_ProdutosPedidoCliente AS motivoNaoEntregaDotemPedido " +
+                var query = "SELECT PP.id_ProdutosPedidoCliente AS idProdutoPedido, P.descricao_ProdutoEmpresaCliente AS itemPedido, " + 
+                            "PP.id_PedidoClienteEmpresaCliente as idPedido, PP.quantidade_ProdutosPedidoCliente, PP.valorUnitario_ProdutosPedidoCliente, " + 
+                            "PP.dataEntregaItemPedido_ProdutosPedidoCliente, PP.motivoItemPedidoNaoEntregue_ProdutosPedidoCliente AS motivoNaoEntregaDotemPedido " +
                             "FROM ProdutosPedidoCliente_EmpresaCliente PP " +
                             "INNER JOIN Produto_EmpresaCliente P ON(P.id_ProdutoEmpresaCliente = PP.id_ProdutoEmpresaCliente) " +
                             "WHERE PP.id_PedidoClienteEmpresaCliente = " + idPedido;

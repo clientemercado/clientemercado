@@ -32,20 +32,26 @@
         rowSelect: true,
         keepSelection: true,
         formatters: {
+            "link0": function (column, row) {
+                return "<input type='checkbox' name='checkbox' id='" + row.idProdutoPedido + "' class='itemcotado' title='' value='" + row.idProdutoPedido + "'>";
+            },
             "link1": function (column, row) {
-                return "<font color=\"#3297E0\"><b>" + row.itemPedido + "</b></font>";
+                return row.itemPedido;
             },
             "link2": function (column, row) {
-                return "<font color=\"#3297E0\"><b>" + row.quantidadeItemPedido + "</b></font>";
+                return row.quantidadeItemPedido;
             },
             "link3": function (column, row) {
-                return "<font color=\"#3297E0\"><b>" + row.valorUnitarioItemPedido + "</b></font>";
+                return row.valorUnitarioItemPedido;
             },
             "link4": function (column, row) {
-                return "<font color=\"#3297E0\"><b>" + row.dataEntregaItemPedido + "</b></font>";
+                return row.totalProdutoComprado;
             },
             "link5": function (column, row) {
-                return "<font color=\"#3297E0\"><b>" + row.motivoNaoEntregaDotemPedido + "</b></font>";
+                return row.dataEntregaItemPedido;
+            },
+            "link6": function (column, row) {
+                return row.motivoNaoEntregaDotemPedido;
             }
         }
     }).on("loaded.rs.jquery.bootgrid", function () {
