@@ -29,5 +29,26 @@ namespace ClienteMercado.Infra.Repositories
                 throw e;
             }
         }
+
+        /// <summary>
+        /// CONSULTAR DADOS do PRODUTO da EMPRESA CLIENTE
+        /// </summary>
+        /// <returns></returns>
+        public Produto_EmpresaCliente ConsultarDadosDoProduto(Produto_EmpresaCliente obj)
+        {
+            try
+            {
+                Produto_EmpresaCliente dadosDoProduto = 
+                    _contexto.produto_empresaCliente.Include("SubDepartamento_EmpresaCliente")
+                    .Include("Empresa_FabricantesMarcas").Include("PromocaoVenda_EmpresaCliente")
+                    .FirstOrDefault(m => (m.id_ProdutoEmpresaCliente == obj.id_ProdutoEmpresaCliente));
+
+                return dadosDoProduto;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

@@ -20,5 +20,15 @@ namespace ClienteMercado.Domain.Services
         {
             return drepository.GravarNovoProdutoEmpresaCliente(obj);
         }
+
+        /// <summary>
+        /// CONSULTAR DADOS do PRODUTO da EMPRESA CLIENTE
+        /// </summary>
+        /// <returns></returns>
+
+        public Produto_EmpresaCliente ConsultarDadosDoProduto(Produto_EmpresaCliente obj)
+        {
+            return drepository.ConsultarDadosDoProduto(obj);
+        }
     }
 }
