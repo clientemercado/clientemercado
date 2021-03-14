@@ -3,6 +3,54 @@
     var url2 = $('#Url2').val();
     var url3 = $('#Url3').val();
 
+    //=================================================================
+    //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
+    var grid = $('#gridFabricantesEmpresa').bootgrid({
+        ajax: true,
+        navigation: 0, //CABEÇALHO: 2 - Exibe só RODAPÉ
+        columnSelection: false, //SELETOR de COLUNA: True - Habilita / False - Desabilita
+        url: "/PedidosClientes/BuscarListaFabricantesMarcas",
+        post: function () {
+            /* PARÂMETROS a serem enviados na REQUISIÇÃO AJAX */
+            debugger;
+
+            return {
+                'idPedido': $('#inIdPed').val()
+            };
+        },
+        selection: true,
+        multiSelect: true,
+        rowSelect: true,
+        keepSelection: true,
+        formatters: {
+            "link0": function (column, row) {
+                return "<input type='checkbox' name='checkbox' id='" + row.idProdutoPedido + "' class='itemcotado' title='' value='" + row.idProdutoPedido + "'>";
+            },
+            "link1": function (column, row) {
+                return row.itemPedido;
+            },
+            "link2": function (column, row) {
+                return row.quantidadeItemPedido;
+            },
+            "link3": function (column, row) {
+                return row.valorUnitarioItemPedido;
+            },
+            "link4": function (column, row) {
+                return row.totalProdutoComprado;
+            },
+            "link5": function (column, row) {
+                return row.dataEntregaItemPedido;
+            },
+            "link6": function (column, row) {
+                return row.motivoNaoEntregaDotemPedido;
+            }
+        }
+    }).on("loaded.rs.jquery.bootgrid", function () {
+        /* Executa depois que os dados são carregados e renderizados */
+
+    });
+    //=================================================================
+
     //BOTÃO NOVO CADASTRO
     $(document).on("click", "#btn-cadastrar", function () {
         debugger;

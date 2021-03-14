@@ -9,8 +9,6 @@
     if ($('#inEntr').val() != "")
         $('#inListaOpcoes').val($('#inEntr').val());
 
-    //---------------------------------------------------------------------------
-    //===================================================================================
     //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
     var grid = $('#gridItensPedido').bootgrid({
         ajax: true,
@@ -53,70 +51,9 @@
             }
         }
     }).on("loaded.rs.jquery.bootgrid", function () {
-        ///* Executa depois que os dados são carregados e renderizados */
+        /* Executa depois que os dados são carregados e renderizados */
 
-        ////PARTICIPAR da CENTRAL de COMPRAS
-        //grid.find(".command-participar").on("click", function (e) {
-
-        //    var codCC = $(this).attr("data-row-id");
-
-        //    swal({
-        //        title: "ATENÇÃO!!\n\n",
-        //        text: "Deseja participar desta Central de Compras?",
-        //        type: "warning",
-        //        showCancelButton: true,
-        //        confirmButtonColor: "#337ab7",
-        //        confirmButtonText: "Sim",
-        //        cancelButtonText: "Não",
-        //        closeOnConfirm: true,
-        //    },
-        //        function (isConfirm) {
-        //            if (isConfirm) {
-        //                debugger;
-
-        //                $.ajax({
-        //                    type: "POST",
-        //                    url: "/CentraisDeCompras/SolicitarParticipacaoNaCC",
-        //                    dataType: 'json',
-        //                    data: {
-        //                        'cCC': codCC
-        //                    },
-        //                    success: function (data) {
-        //                        debugger;
-
-        //                        if (data.participacaoSolicitada == "Ok") {
-        //                            debugger;
-
-        //                            swal.close(); //FECHA SWAL MSG
-
-        //                            //EXIBE MSG LATERAL À DIREITA SUPERIOR
-        //                            new PNotify({
-        //                                title: 'Sucesso!',
-        //                                text: 'SOLICITAÇÃO de PARTICIPAÇÃO ENVIADA!\n\nAguarde a LIBERAÇÃO.',
-        //                                type: 'success',
-        //                                styling: 'bootstrap3',
-        //                                icons: 'bootstrap3',
-        //                                addclass: 'customsuccess',
-        //                                animateSpeed: 'fast',
-        //                                mouseReset: true,
-        //                                Buttons: {
-        //                                    closer: true
-        //                                }
-        //                            });
-
-        //                            $('#gridCentraisDeComprasDoSistema').bootgrid('reload');
-        //                        }
-        //                    }
-        //                });
-        //            }
-        //            else {
-        //                $('#gridCentraisDeComprasDoSistema').bootgrid('reload');
-        //            }
-        //        });
-
-        //});
     });
-    //---------------------------------------------------------------------------
 
     //BOTÃO NOVO CADASTRO
     $(document).on("click", "#btn-cadastrar", function () {

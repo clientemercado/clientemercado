@@ -2,6 +2,7 @@
 using ClienteMercado.Domain.Services;
 using ClienteMercado.UI.Core.ViewModel;
 using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -251,6 +252,45 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
 
             return listDeptos;
+        }
+
+        public ActionResult BuscarListaClientesEmpresa(int idPedido)
+        {
+            /*
+            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
+             */
+
+            try
+            {
+                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+
+                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+
+                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                {
+                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaProdutosPedido[i].dataEntregaItemPedido =
+                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
+                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaProdutosPedido[i].totalProdutoComprado =
+                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                }
+
+                return Json(
+                    new
+                    {
+                        rows = listaProdutosPedido,
+                        current = 1,
+                        rowCount = listaProdutosPedido.Count,
+                        total = listaProdutosPedido.Count,
+                        dadosCarregados = "Ok"
+                    },
+                    JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
     }
