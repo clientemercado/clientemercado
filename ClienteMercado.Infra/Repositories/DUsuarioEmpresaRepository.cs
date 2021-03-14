@@ -1,6 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
 using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,6 +104,30 @@ namespace ClienteMercado.Infra.Repositories
                     && (m.id_EmpresaCliente == idEmpresa)).ToList();
 
                 return listaUsuariosFunc;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// CARREGA LISTA de CLIENTES da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaClientesEmpresaViewModel> BuscarListaDeUsuariosClientesEmpresa()
+        {
+            try
+            {
+                var query = "SELECT CE.id_ClienteEmpresaCliente, CE.nome_ClienteEmpresaCliente AS nomeClienteEmpresa, " + 
+                            "CE.endereco_ClienteEmpresaCliente AS enderecoClienteEmpresa, " +
+                            "(CE.cidade_ClienteEmpresaCliente + '-' + CE.uf_ClienteEmpresaCliente) AS cidadeClienteEmpresa, " +
+                            "CE.dataCadastro_ClienteEmpresaCliente, '0' AS quantidadePedidosApp, '0.00' AS totalvalorPedidoApp " +
+                            "FROM Cliente_EmpresaCliente CE " +
+                            "WHERE id_EmpresaCliente = " + idEmpresa;
+                var listaClientesEmpresa = _contexto.Database.SqlQuery<ListaClientesEmpresaViewModel>(query).ToList();
+
+                return listaClientesEmpresa;
             }
             catch (Exception e)
             {

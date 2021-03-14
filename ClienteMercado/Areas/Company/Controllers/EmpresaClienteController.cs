@@ -335,7 +335,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             return strResult + strString;
         }
 
-        public ActionResult BuscarListaClientesEmpresa(int idPedido)
+        public ActionResult BuscarListaEmpresasCliente(int idPedido)
         {
             /*
             MODIFICAR CÓDIGO DE BUSCA ABAIXO... 

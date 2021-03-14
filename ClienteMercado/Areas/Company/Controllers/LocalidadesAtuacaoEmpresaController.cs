@@ -256,7 +256,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listCitys;
         }
 
-        public ActionResult BuscarListaClientesEmpresa(int idPedido)
+        public ActionResult BuscarListaLocalidadesAtuacaoEmpresa(int idPedido)
         {
             /*
             MODIFICAR CÓDIGO DE BUSCA ABAIXO... 

@@ -62,13 +62,12 @@
                                 <thead class="flip-content">
                                     <tr>
                                         <th data-formatter="link0" data-width="4%" data-header-align="center" data-align="center">&nbsp;</th>
-                                        <th data-column-id="nome_ClienteEmpresaCliente" data-width="26%" data-formatter="link1" data-header-align="center">Cliente</th>
-                                        <th data-column-id="endereco_ClienteEmpresaCliente" data-width="15%" data-align="right" data-formatter="link2" data-header-align="center">Endereço</th>
-                                        <th data-column-id="cidade_ClienteEmpresaCliente" data-width="10%" data-align="right" data-formatter="link3" data-header-align="center">Cidade</th>
-                                        <th data-column-id="dataCadastro_ClienteEmpresaCliente" data-width="10%" data-align="right" data-formatter="link4" data-header-align="center">Desde</th>
-                                        <th data-column-id="" data-width="10%" data-align="right" data-formatter="link5" data-header-align="center">Pedidos app</th>
-                                        <th data-column-id="" data-width="10%" data-formatter="link6" data-header-align="center">R$ Total</th>
-                                        <th data-column-id="" data-width="15%" data-formatter="link6" data-header-align="center">&nbsp;</th>
+                                        <th data-column-id="nomeClienteEmpresa" data-width="31%" data-formatter="link1" data-header-align="left">&nbsp;Cliente</th>
+                                        <th data-column-id="enderecoClienteEmpresa" data-width="15%" data-align="left" data-formatter="link2" data-header-align="left">&nbsp;Endereço</th>
+                                        <th data-column-id="cidadeClienteEmpresa" data-width="20%" data-align="left" data-formatter="link3" data-header-align="left">Cidade</th>
+                                        <th data-column-id="dataCadastroClienteEmpresa" data-width="10%" data-align="right" data-formatter="link4" data-header-align="center">Desde</th>
+                                        <th data-column-id="quantidadePedidosApp" data-width="10%" data-align="right" data-formatter="link5" data-header-align="center">Pedidos app</th>
+                                        <th data-column-id="totalvalorPedidoApp" data-width="10%" data-formatter="link6" data-align="right" data-header-align="center">R$ Total</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -87,3 +86,56 @@
 </div>
 
 @Html.Hidden("Url1", @Url.Action("Cadastro", "CadastroClientesEmpresa", new { area = "Company" }))
+@Html.Hidden("UrlX", @Url.Action("AlterarDados", "CadastroClientesEmpresa", new { area = "Company" }))
+
+<script>
+    $(document).ready(function () {
+        //=================================================================
+        //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
+        var grid = $('#gridClientesEmpresa').bootgrid({
+            ajax: true,
+            navigation: 0, //CABEÇALHO: 2 - Exibe só RODAPÉ
+            columnSelection: false, //SELETOR de COLUNA: True - Habilita / False - Desabilita
+            url: "/CadastroClientesEmpresa/BuscarListaClientesEmpresa",
+            post: function () {
+                /* PARÂMETROS a serem enviados na REQUISIÇÃO AJAX */
+                debugger;
+
+                //return {
+                //    'idPedido': $('#inIdPed').val()
+                //};
+            },
+            selection: true,
+            multiSelect: true,
+            rowSelect: true,
+            keepSelection: true,
+            formatters: {
+                "link0": function (column, row) {
+                    return "<input type='checkbox' name='checkbox' id='" + row.id_ClienteEmpresaCliente + "' class='itemcotado' title='' value='" + row.id_ClienteEmpresaCliente + "'>";
+                },
+                "link1": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.nomeClienteEmpresa + "</a>";
+                },
+                "link2": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.enderecoClienteEmpresa + "</a>";
+                },
+                "link3": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.cidadeClienteEmpresa + "</a>";
+                },
+                "link4": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.dataCadastroClienteEmpresa + "</a>";
+                },
+                "link5": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.quantidadePedidosApp + "</a>";
+                },
+                "link6": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.totalvalorPedidoApp + "</a>";
+                }
+            }
+        }).on("loaded.rs.jquery.bootgrid", function () {
+            /* Executa depois que os dados são carregados e renderizados */
+
+        });
+        //=================================================================
+    });
+</script>

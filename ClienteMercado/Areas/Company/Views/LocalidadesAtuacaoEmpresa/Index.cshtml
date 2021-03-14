@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <!-- BEGIN SAMPLE TABLE PORTLET-->
                         <div class="portlet-body flip-scroll col-md-12">
-                            <table id="gridItensPedido" class="table table-bordered table-striped table-condensed flip-content">
+                            <table id="gridLocalidades" class="table table-bordered table-striped table-condensed flip-content">
                                 <thead class="flip-content">
                                     <tr>
                                         <th data-formatter="link0" data-width="4%" data-header-align="center" data-align="center">&nbsp;</th>
@@ -86,3 +86,55 @@
 </div>
 
 @Html.Hidden("Url1", @Url.Action("Cadastro", "LocalidadesAtuacaoEmpresa", new { area = "Company" }))
+
+<script>
+    $(document).ready(function () {
+        //=================================================================
+        //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
+        var grid = $('#gridLocalidades').bootgrid({
+            ajax: true,
+            navigation: 0, //CABEÇALHO: 2 - Exibe só RODAPÉ
+            columnSelection: false, //SELETOR de COLUNA: True - Habilita / False - Desabilita
+            url: "/LocalidadesAtuacaoEmpresa/BuscarListaLocalidadesAtuacaoEmpresa",
+            post: function () {
+                /* PARÂMETROS a serem enviados na REQUISIÇÃO AJAX */
+                debugger;
+
+                //return {
+                //    'idPedido': $('#inIdPed').val()
+                //};
+            },
+            selection: true,
+            multiSelect: true,
+            rowSelect: true,
+            keepSelection: true,
+            formatters: {
+                "link0": function (column, row) {
+                    return "<input type='checkbox' name='checkbox' id='" + row.id_ClienteEmpresaCliente + "' class='itemcotado' title='' value='" + row.id_ClienteEmpresaCliente + "'>";
+                },
+                "link1": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.nomeClienteEmpresa + "</a>";
+                },
+                "link2": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.enderecoClienteEmpresa + "</a>";
+                },
+                "link3": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.cidadeClienteEmpresa + "</a>";
+                },
+                "link4": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.dataCadastroClienteEmpresa + "</a>";
+                },
+                "link5": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.quantidadePedidosApp + "</a>";
+                },
+                "link6": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.totalvalorPedidoApp + "</a>";
+                }
+            }
+        }).on("loaded.rs.jquery.bootgrid", function () {
+            /* Executa depois que os dados são carregados e renderizados */
+
+        });
+        //=================================================================
+    });
+</script>

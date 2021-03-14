@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 
@@ -115,6 +116,15 @@ namespace ClienteMercado.Domain.Services
         public List<Usuario_EmpresaCliente> CarregarListaDeUsuariosFuncionariosEmpresaCliente(string term)
         {
             return dusuarioempresa.CarregarListaDeUsuariosFuncionariosEmpresaCliente(term);
+        }
+
+        /// <summary>
+        /// CARREGA LISTA de CLIENTES da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaClientesEmpresaViewModel> BuscarListaDeUsuariosClientesEmpresa()
+        {
+            return dusuarioempresa.BuscarListaDeUsuariosClientesEmpresa();
         }
     }
 }

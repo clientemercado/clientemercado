@@ -254,7 +254,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listDeptos;
         }
 
-        public ActionResult BuscarListaClientesEmpresa(int idPedido)
+        public ActionResult BuscarListaSubDeptosEmpresa(int idPedido)
         {
             /*
             MODIFICAR CÓDIGO DE BUSCA ABAIXO... 

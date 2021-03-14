@@ -220,7 +220,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaClientesEmpresa(int idPedido)
+        public ActionResult BuscarListameiosPagamentoEmpresa(int idPedido)
         {
             /*
             MODIFICAR CÓDIGO DE BUSCA ABAIXO... 

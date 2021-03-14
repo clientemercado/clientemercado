@@ -280,7 +280,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listEstados;
         }
 
-        public ActionResult BuscarListaClientesEmpresa(int idPedido)
+        public ActionResult BuscarListaCidadesAtuacaoEmpresa(int idPedido)
         {
             /*
             MODIFICAR CÓDIGO DE BUSCA ABAIXO... 

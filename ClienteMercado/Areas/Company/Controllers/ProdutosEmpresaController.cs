@@ -350,7 +350,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listOpcoes;
         }
 
-        public ActionResult BuscarListaClientesEmpresa(int idPedido)
+        public ActionResult BuscarListaProdutosEmpresa(int idPedido)
         {
             /*
             MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
