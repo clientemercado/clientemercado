@@ -30,5 +30,14 @@ namespace ClienteMercado.Domain.Services
         {
             return drepository.ConsultarDadosDoProduto(obj);
         }
+
+        /// <summary>
+        /// ALTERAR DADOS do PEDIDO do CLIENTE da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public void AlterarDadosProdutoEmpresa(Produto_EmpresaCliente obj)
+        {
+            drepository.AlterarDadosProdutoEmpresa(obj);
+        }
     }
 }

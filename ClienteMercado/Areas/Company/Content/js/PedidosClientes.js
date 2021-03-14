@@ -9,8 +9,6 @@
     if ($('#inEntr').val() != "")
         $('#inListaOpcoes').val($('#inEntr').val());
 
-    //carregarItensDoPedido();
-
     //---------------------------------------------------------------------------
     //===================================================================================
     //CONSULTA os DADOS e CARREGA o GRID ao entrar na página

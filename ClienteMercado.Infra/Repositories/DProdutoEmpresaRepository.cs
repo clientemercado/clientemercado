@@ -50,5 +50,44 @@ namespace ClienteMercado.Infra.Repositories
                 throw e;
             }
         }
+
+        /// <summary>
+        /// ALTERAR DADOS do PEDIDO do CLIENTE da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public void AlterarDadosProdutoEmpresa(Produto_EmpresaCliente obj)
+        {
+            try
+            {
+                Produto_EmpresaCliente dadosProdutoEmpresa =
+                    _contexto.produto_empresaCliente.FirstOrDefault(m => ((m.id_ProdutoEmpresaCliente == obj.id_ProdutoEmpresaCliente)
+                    && (m.id_EmpresaCliente == obj.id_EmpresaCliente)));
+
+                if (dadosProdutoEmpresa != null)
+                {
+                    dadosProdutoEmpresa.id_SubDepartamentoEmpresaCliente = Convert.ToInt32(obj.id_SubDepartamentoEmpresaCliente);
+                    dadosProdutoEmpresa.id_EmpresaFabricantesMarcas = Convert.ToInt32(obj.id_EmpresaFabricantesMarcas);
+
+                    if (obj.id_PromocaoVendaEmpresaCliente > 0)
+                        dadosProdutoEmpresa.id_PromocaoVendaEmpresaCliente = Convert.ToInt32(obj.id_PromocaoVendaEmpresaCliente);
+
+                    dadosProdutoEmpresa.descricao_ProdutoEmpresaCliente = obj.descricao_ProdutoEmpresaCliente;
+                    dadosProdutoEmpresa.tipoEmbalagem_ProdutoEmpresaCliente = obj.tipoEmbalagem_ProdutoEmpresaCliente;
+                    dadosProdutoEmpresa.pesoEmbalagem_ProdutoEmpresaCliente = obj.pesoEmbalagem_ProdutoEmpresaCliente;
+                    dadosProdutoEmpresa.unidadePesoEmbalagem_ProdutoEmpresaCliente = obj.unidadePesoEmbalagem_ProdutoEmpresaCliente;
+                    dadosProdutoEmpresa.valorVenda_ProdutoEmpresaCliente = obj.valorVenda_ProdutoEmpresaCliente;
+                    dadosProdutoEmpresa.id_SubDepartamentoEmpresaCliente = obj.id_SubDepartamentoEmpresaCliente;
+                    dadosProdutoEmpresa.id_EmpresaFabricantesMarcas = obj.id_EmpresaFabricantesMarcas;
+                    dadosProdutoEmpresa.id_PromocaoVendaEmpresaCliente = obj.id_PromocaoVendaEmpresaCliente;
+                    dadosProdutoEmpresa.ativoInativo_ProdutoEmpresaCliente = obj.ativoInativo_ProdutoEmpresaCliente;
+
+                    _contexto.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

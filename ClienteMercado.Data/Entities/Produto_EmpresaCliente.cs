@@ -20,14 +20,14 @@ namespace ClienteMercado.Data.Entities
 
         [MaxLength(10)]
         public string tipoEmbalagem_ProdutoEmpresaCliente { get; set; }
-        public int? pesoEmbalagem_ProdutoEmpresaCliente { get; set; }
+        public decimal pesoEmbalagem_ProdutoEmpresaCliente { get; set; }
 
         [MaxLength(10)]
         public string unidadePesoEmbalagem_ProdutoEmpresaCliente { get; set; }
 
         [MaxLength(20)]
         public string idImportacao_ProdutoEmpresaCliente { get; set; }
-        public decimal? valorVenda_ProdutoEmpresaCliente { get; set; }
+        public decimal valorVenda_ProdutoEmpresaCliente { get; set; }
         public decimal? valorVendaAnterior_ProdutoEmpresaCliente { get; set; }
         public bool ativoInativo_ProdutoEmpresaCliente { get; set; }
         public DateTime? dataInativou_ProdutoEmpresaCliente { get; set; }

@@ -56,7 +56,7 @@
                                 <input type="text" id="inEmbalagem" data-required="1" size="10" class="form-control obg" placeholder="" value="" />
                             </div>
                             <div class="col-md-2">
-                                <input type="text" id="inPeso" data-required="1" size="10" class="form-control obg" placeholder="" value="" />
+                                <input type="text" id="inPeso" data-required="1" size="10" class="form-control obg monetario" placeholder="" value="" />
                             </div>
                             <div class="col-md-2">
                                 <input type="text" id="inUnidade" data-required="1" size="10" class="form-control obg" placeholder="" value="" />
@@ -89,7 +89,7 @@
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <!-- OBS: ACERTAR: IMPLEMENTAR VALIDAÇÃO DO CPF -->
-                                <input type="text" id="inVlrVenda" data-required="1" size="10" class="form-control obg" placeholder="" value="" />
+                                <input type="text" id="inVlrVenda" data-required="1" size="10" class="form-control obg monetario" placeholder="" value="" />
                             </div>
                             <div class="col-md-1">
                                 @Html.DropDownList("inListaOpcoes", Model.ListagemOpcoesSimNao, new { @class = "form-control obg", @id = "inListaOpcoes", style = "", @tabindex = "" })

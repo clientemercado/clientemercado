@@ -18,6 +18,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public int iEFM { get; set; }
         public int iLEC { get; set; }
         public int iMPEC { get; set; }
+        public int iPEC { get; set; }
         public string nomeEmpresaLogada { get; set; }
         public string nomeUsuarioEmpresaLogada { get; set; }
         public string cnpj_EmpresaCliente { get; set; }

@@ -139,7 +139,7 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 dadosNewProdutoEmpresa.descricao_ProdutoEmpresaCliente = obj.descricao_ProdutoEmpresaCliente;
                 dadosNewProdutoEmpresa.tipoEmbalagem_ProdutoEmpresaCliente = obj.tipoEmbalagem_ProdutoEmpresaCliente;
-                dadosNewProdutoEmpresa.pesoEmbalagem_ProdutoEmpresaCliente= Convert.ToInt32(obj.pesoEmbalagem_ProdutoEmpresaCliente);
+                dadosNewProdutoEmpresa.pesoEmbalagem_ProdutoEmpresaCliente= Convert.ToDecimal(obj.pesoEmbalagem_ProdutoEmpresaCliente.Replace(".", ","));
                 dadosNewProdutoEmpresa.unidadePesoEmbalagem_ProdutoEmpresaCliente= obj.unidadePesoEmbalagem_ProdutoEmpresaCliente;
                 dadosNewProdutoEmpresa.valorVenda_ProdutoEmpresaCliente = Convert.ToDecimal(obj.valorVenda_ProdutoEmpresaCliente.Replace(".", ","));
                 dadosNewProdutoEmpresa.id_SubDepartamentoEmpresaCliente = Convert.ToInt32(obj.id_SubDepartamentoEmpresaCliente);
@@ -187,16 +187,28 @@ namespace ClienteMercado.Areas.Company.Controllers
                         serviceEmpresaCliente.ConsultarDadosDaEmpresaCliente(new EmpresaCliente { id_EmpresaCliente = Convert.ToInt32(Session["IdEmpresaUsuario"]) });
                     Usuario_EmpresaCliente dadosUsuEmpresaLogada =
                         serviceUsuEmpresaCliente.ConsultarDadosUsuarioEmpresaCliente(new Usuario_EmpresaCliente { id_UsuarioEmpresaCliente = Convert.ToInt32(Session["IdUsuarioLogado"]) });
-                    Produto_EmpresaCliente dadosNewProdutoEmpresa =
+                    Produto_EmpresaCliente dadosProdutoEmpresa =
                         serviceProdutoEmpresa.ConsultarDadosDoProduto(new Produto_EmpresaCliente { id_ProdutoEmpresaCliente = id });
 
                     //POPULAR VIEW MODEL
                     dadosDaEmpresaClienteEUsuario.nomeEmpresaLogada = dadosEmpresaLogada.nomeFantasia_EmpresaCliente.ToUpper();
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
 
-                    /*
-                     CARREGAR OS CAPOS DA VIEW... 
-                     */
+                    dadosDaEmpresaClienteEUsuario.iPEC = dadosProdutoEmpresa.id_ProdutoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.id_SubDepartamentoEmpresaCliente = dadosProdutoEmpresa.id_SubDepartamentoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.id_EmpresaFabricantesMarcas = dadosProdutoEmpresa.id_EmpresaFabricantesMarcas;
+                    dadosDaEmpresaClienteEUsuario.id_PromocaoVendaEmpresaCliente = dadosProdutoEmpresa.id_PromocaoVendaEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.descricao_ProdutoEmpresaCliente = dadosProdutoEmpresa.descricao_ProdutoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.tipoEmbalagem_ProdutoEmpresaCliente = dadosProdutoEmpresa.tipoEmbalagem_ProdutoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.pesoEmbalagem_ProdutoEmpresaCliente = dadosProdutoEmpresa.pesoEmbalagem_ProdutoEmpresaCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    dadosDaEmpresaClienteEUsuario.unidadePesoEmbalagem_ProdutoEmpresaCliente = dadosProdutoEmpresa.unidadePesoEmbalagem_ProdutoEmpresaCliente;
+                    dadosDaEmpresaClienteEUsuario.valorVenda_ProdutoEmpresaCliente = dadosProdutoEmpresa.valorVenda_ProdutoEmpresaCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    dadosDaEmpresaClienteEUsuario.ativoInativo_ProdutoEmpresaCliente = dadosProdutoEmpresa.ativoInativo_ProdutoEmpresaCliente ? "Sim" : "Não";
+
+                    dadosDaEmpresaClienteEUsuario.ListagemSubDepartamentos = ListagemSubDepartamentos();
+                    dadosDaEmpresaClienteEUsuario.ListagemFabricantesMarcas = ListagemFabricantesMarcas();
+                    dadosDaEmpresaClienteEUsuario.ListagemPromocoesAtivas = ListagemPromocoesEmpresa();
+                    dadosDaEmpresaClienteEUsuario.ListagemOpcoesSimNao = ListagemOpcoes();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -222,43 +234,29 @@ namespace ClienteMercado.Areas.Company.Controllers
         {
             try
             {
-                //string saldoAtualizado = "";
+                NProdutoEmpresaService serviceProdutoEmpresa = new NProdutoEmpresaService();
+                Produto_EmpresaCliente dadosAlteracaoProdutoEmpresa = new Produto_EmpresaCliente();
 
-                //AtividadeService serviceAtividade = new AtividadeService();
-                //Data.Entities.Atividade novaAtividade = new Data.Entities.Atividade();
+                dadosAlteracaoProdutoEmpresa.id_EmpresaCliente = Convert.ToInt32(Sessao.IdEmpresaUsuario);
+                dadosAlteracaoProdutoEmpresa.id_ProdutoEmpresaCliente = Convert.ToInt32(obj.iPEC);
+                dadosAlteracaoProdutoEmpresa.id_SubDepartamentoEmpresaCliente = Convert.ToInt32(obj.id_SubDepartamentoEmpresaCliente);
+                dadosAlteracaoProdutoEmpresa.id_EmpresaFabricantesMarcas = Convert.ToInt32(obj.id_EmpresaFabricantesMarcas);
 
-                ////POPULAR MODELO P/ GRAVAÇÃO
-                //novaAtividade.AtiIndice = novoIndiceAtividades(0, 1, obj.orcCodItemContrato, obj.frenteServFilho);
+                if (obj.id_PromocaoVendaEmpresaCliente > 0)
+                    dadosAlteracaoProdutoEmpresa.id_PromocaoVendaEmpresaCliente = Convert.ToInt32(obj.id_PromocaoVendaEmpresaCliente);
 
-                //if (obj.AtiCodigoPai > 0)
-                //{
-                //    novaAtividade.AtiCodigoPai = obj.AtiCodigoPai;
-                //}
+                dadosAlteracaoProdutoEmpresa.descricao_ProdutoEmpresaCliente = obj.descricao_ProdutoEmpresaCliente;
+                dadosAlteracaoProdutoEmpresa.tipoEmbalagem_ProdutoEmpresaCliente = obj.tipoEmbalagem_ProdutoEmpresaCliente;
+                dadosAlteracaoProdutoEmpresa.pesoEmbalagem_ProdutoEmpresaCliente = Convert.ToDecimal(obj.pesoEmbalagem_ProdutoEmpresaCliente.Replace(".", ","));
+                dadosAlteracaoProdutoEmpresa.unidadePesoEmbalagem_ProdutoEmpresaCliente = obj.unidadePesoEmbalagem_ProdutoEmpresaCliente;
+                dadosAlteracaoProdutoEmpresa.valorVenda_ProdutoEmpresaCliente = Convert.ToDecimal(obj.valorVenda_ProdutoEmpresaCliente.Replace(".", ","));
+                dadosAlteracaoProdutoEmpresa.id_SubDepartamentoEmpresaCliente = Convert.ToInt32(obj.id_SubDepartamentoEmpresaCliente);
+                dadosAlteracaoProdutoEmpresa.id_EmpresaFabricantesMarcas = Convert.ToInt32(obj.id_EmpresaFabricantesMarcas);
+                dadosAlteracaoProdutoEmpresa.id_PromocaoVendaEmpresaCliente = Convert.ToInt32(obj.id_PromocaoVendaEmpresaCliente);
+                dadosAlteracaoProdutoEmpresa.ativoInativo_ProdutoEmpresaCliente = obj.ativoInativo_ProdutoEmpresaCliente == "Sim" ? true : false;
 
-                //novaAtividade.AtiDescricao = obj.descAtivPrincPai;
-                //novaAtividade.AtiQtda = Convert.ToDouble(obj.quantidadeNew);
-                //novaAtividade.AtiUnidade = obj.unidAtivPrinc;
-                //novaAtividade.ATISALDO = Convert.ToDecimal(obj.saldoApurado);
-                //novaAtividade.ATIPREV = Convert.ToDecimal(obj.previstoAtivPrinc);
-                //novaAtividade.ATIFATOR = Convert.ToDecimal(obj.fatorXPrinc);
-                //novaAtividade.FreSerCodigo = obj.frenteServFilho;
-                //novaAtividade.CenCusCodigo = obj.CenCusCodigo;
-                //novaAtividade.OrcCodigo = obj.orcCodItemContrato;
-                //novaAtividade.ConEmpCodigo = obj.ConEmpCodigo;
-                //novaAtividade.OrcSerIndice = obj.indiceItemContrato;
-                //novaAtividade.ORCSERCODIGO = Convert.ToInt32(obj.codServItemContrato);
-                //novaAtividade.EmpCodigo = idEmpresa;
-
-                ////GRAVAR NOVA AVIVIDADE 
-                //novaAtividade = serviceAtividade.GravarNovaAtividade(novaAtividade);
-
-                ////CARREGAR ULTIMA ATIVIDADE FILHA REGISTRADA - PEGAR SALDO
-                //ListaDeAtividadesViewModel ultimaAtividadeFilhaRegs = serviceAtividade.BuscarUltimaAtividadeFilhaRegistrada(novaAtividade.AtiCodigo);
-
-                //if (ultimaAtividadeFilhaRegs != null)
-                //{
-                //    saldoAtualizado = ultimaAtividadeFilhaRegs.ATISALDO.ToString();
-                //}
+                //ALTERAR DADOS do PEDIDO do CLIENTE da EMPRESA
+                serviceProdutoEmpresa.AlterarDadosProdutoEmpresa(dadosAlteracaoProdutoEmpresa);
 
                 return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
             }

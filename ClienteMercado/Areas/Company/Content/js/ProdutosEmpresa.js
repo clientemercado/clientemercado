@@ -3,6 +3,18 @@
     var url2 = $('#Url2').val();
     var url3 = $('#Url3').val();
 
+    $(".data").mask("99/99/9999");
+    $('.monetario').mask('000.000.000.000.000,00', { reverse: true });
+
+    if ($('#inSDp').val() != "")
+        $('#inListaSubDepto').val($('#inSDp').val());
+    if ($('#inFb').val() != "")
+        $('#inListaFabricantes').val($('#inFb').val());
+    if ($('#inProm').val() != "")
+        $('#inListaPromo').val($('#inProm').val());
+    if ($('#inOps').val() != "")
+        $('#inListaOpcoes').val($('#inOps').val());
+
     //BOTÃO NOVO CADASTRO
     $(document).on("click", "#btn-cadastrar", function () {
         debugger;
@@ -103,10 +115,10 @@
 
         //Validando o formulário
         var qtdCamposVazios = 0;
-        var $inputsObrigatorios = $('.obrigatorio');
+        var $inputsObrigatorios = $('.obg');
         $inputsObrigatorios.each(function () {
             $(this).css({ "border": "1px solid #ccc", "padding": "2px" });
-            if ($(this).hasClass("obrigatorio")) {
+            if ($(this).hasClass("obg")) {
                 if ($(this).val() == "" || parseFloat($(this).val().replace(".", "").replace(".", "").replace(".", "").replace(",", ".")) == 0) {
                     $(this).css({ "border": "1px solid #F00", "padding": "2px" });
                     qtdCamposVazios++;
@@ -119,22 +131,17 @@
             var msg = "";
             var obj = {};
 
-            ////Obtendo o valores
-            //obj['cenCusCodigo'] = $("#CenCusCodigo").val();
-            //obj['frenteServIndiceFilho'] = $("#FreSerIndice").val();
-            //obj['frenteServFilho'] = $("#freSerCodigo").val();
-            //obj['orcCodItemContrato'] = $("#orcCodigo").val();
-            //obj['indiceItemContrato'] = $("#OrcSerIndice").val();
-            //obj['codServItemContrato'] = $("#orcSerCodigo").val();
-            //obj['iteConEmpCodigoItemContrato'] = $("#iteConEmpCodigo").val();
-            //obj['saldoApurado'] = $("#qtdaUm").val();
-            //obj['quantidadeNew'] = $("#qtdaDois").val();
-            //obj['descAtivPrincPai'] = $("#descAtividadePrincipal").val();
-            //obj['unidAtivPrinc'] = $("#unidDois").val();
-            //obj['fatorXPrinc'] = $("#fatorX").val();
-            //obj['previstoAtivPrinc'] = $("#hHPrevDois").val().replace(".", ",");
-            //obj['ConEmpCodigo'] = $("#conEmpCodigo").val();
-            //obj['AtiCodigoPai'] = $("#freSerCodigoPai").val();
+            //Obtendo o valores
+            obj['iPEC'] = $('#inIdP').val();
+            obj['descricao_ProdutoEmpresaCliente'] = $("#inNomeProduto").val();
+            obj['tipoEmbalagem_ProdutoEmpresaCliente'] = $("#inEmbalagem").val();
+            obj['pesoEmbalagem_ProdutoEmpresaCliente'] = $("#inPeso").val();
+            obj['unidadePesoEmbalagem_ProdutoEmpresaCliente'] = $("#inUnidade").val();
+            obj['valorVenda_ProdutoEmpresaCliente'] = $("#inVlrVenda").val();
+            obj['id_SubDepartamentoEmpresaCliente'] = $("#inListaSubDepto").val();
+            obj['id_EmpresaFabricantesMarcas'] = $("#inListaFabricantes").val();
+            obj['id_PromocaoVendaEmpresaCliente'] = $("#inListaPromo").val();
+            obj['ativoInativo_ProdutoEmpresaCliente'] = $("#inListaOpcoes").val();   
 
             $.ajax({
                 type: "POST",
