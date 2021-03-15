@@ -61,9 +61,9 @@ namespace ClienteMercado.Infra.Repositories
                             "DEC.descricao_DepartamentoEmpresaCliente AS nomeDepartamentoEmpresa, DEC.ativoInativo_DepartamentoEmpresaCliente " +
                             "FROM Departamento_EmpresaCliente DEC " +
                             "WHERE DEC.id_EmpresaCliente = " + idEmpresa;
-                var listaCuponsDesconto = _contexto.Database.SqlQuery<ListaDepartamentosEmpresaViewModel>(query).ToList();
+                var listaDeptos = _contexto.Database.SqlQuery<ListaDepartamentosEmpresaViewModel>(query).ToList();
 
-                return listaCuponsDesconto;
+                return listaDeptos;
             }
             catch (Exception e)
             {

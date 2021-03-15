@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,14 @@ namespace ClienteMercado.Domain.Services
         public List<SubDepartamento_EmpresaCliente> ListaSubDepartamentosEmpresa()
         {
             return drepository.ListaSubDepartamentosEmpresa();
+        }
+
+        /// <summary>
+        /// CARREGAR LISTA de SUB-DEPTO da EMPRESA CLIENTE - GRID
+        /// </summary>
+        public List<ListaSubDeptosEmpresaViewModel> BuscarListaSubDepartamentosEmpresa()
+        {
+            return drepository.BuscarListaSubDepartamentosEmpresa();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
 using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,26 @@ namespace ClienteMercado.Infra.Repositories
 
                     _contexto.SaveChanges();
                 }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// CARREGAR LISTA de SUB-DEPTO da EMPRESA CLIENTE - GRID
+        /// </summary>
+        public List<ListaSubDeptosEmpresaViewModel> BuscarListaSubDepartamentosEmpresa()
+        {
+            try
+            {
+                var query = "SELECT SD.id_SubDepartamentoEmpresaCliente, SD.id_DepartamentoEmpresaCliente, " +
+                            "SD.descricao_SubDepartamentoEmpresaCliente AS nomeSubDepartamentoEmpresa, SD.ativoInativo_SubDepartamentoEmpresaCliente " +
+                            "FROM SubDepartamento_EmpresaCliente SD";
+                var listaSubDeptos = _contexto.Database.SqlQuery<ListaSubDeptosEmpresaViewModel>(query).ToList();
+
+                return listaSubDeptos;
             }
             catch (Exception e)
             {

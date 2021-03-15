@@ -254,35 +254,36 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listDeptos;
         }
 
-        public ActionResult BuscarListaSubDeptosEmpresa(int idPedido)
+        public ActionResult BuscarListaSubDeptosEmpresa()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NSubDepartamentoEmpresaService serviceSubDepartamentoEmpresa = new NSubDepartamentoEmpresaService();
+                NDepartamentoEmpresaClienteService serviceDepartamentoEmpresa = new NDepartamentoEmpresaClienteService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+                List<ListaSubDeptosEmpresaViewModel> listaSubDeptosEmpresa = serviceSubDepartamentoEmpresa.BuscarListaSubDepartamentosEmpresa();
 
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                for (int i = 0; i < listaSubDeptosEmpresa.Count; i++)
                 {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaSubDeptosEmpresa[i].idSubDepartamentoEmpresa= listaSubDeptosEmpresa[i].id_SubDepartamentoEmpresaCliente.ToString();
+                    Departamento_EmpresaCliente dadosDeptoEmpresa = 
+                        serviceDepartamentoEmpresa.ConsultarDadosDeptoEmpresa(
+                            new Departamento_EmpresaCliente
+                                {
+                                    id_DepartamentoEmpresaCliente = listaSubDeptosEmpresa[i].id_DepartamentoEmpresaCliente
+                                }
+                            );
+                    listaSubDeptosEmpresa[i].nomeDepartamentoEmpresa = dadosDeptoEmpresa.descricao_DepartamentoEmpresaCliente;
+                    listaSubDeptosEmpresa[i].ativoInativoSubDeptoEmpresa = listaSubDeptosEmpresa[i].ativoInativo_SubDepartamentoEmpresaCliente ? "Sim" : "Não";
                 }
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaSubDeptosEmpresa,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaSubDeptosEmpresa.Count,
+                        total = listaSubDeptosEmpresa.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);
