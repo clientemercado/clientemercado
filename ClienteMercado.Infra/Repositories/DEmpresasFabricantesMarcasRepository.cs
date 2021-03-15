@@ -94,6 +94,26 @@ namespace ClienteMercado.Infra.Repositories
         /// ALTERAR DADOS FABRICANTE MARCA
         /// </summary>
         /// <returns></returns>
+        public List<ListaFabricantesMarcasViewModel> BuscarListaDeFabricantesEMarcas()
+        {
+            try
+            {
+                var query = "SELECT FM.id_EmpresaFabricantesMarcas, FM.descricao_EmpresaFabricantesMarcas AS nomeFabricanteMarca " +
+                            "FROM Empresa_FabricantesMarcas FM ";
+                var listaEmpFabricantesMarcas = _contexto.Database.SqlQuery<ListaFabricantesMarcasViewModel>(query).ToList();
+
+                return listaEmpFabricantesMarcas;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// ALTERAR DADOS FABRICANTE MARCA
+        /// </summary>
+        /// <returns></returns>
         public void AlterarDadosEmpresaFabricanteMarca(Empresa_FabricantesMarcas obj)
         {
             try

@@ -71,10 +71,18 @@ namespace ClienteMercado.Domain.Services
         /// CARREGAR LISTA de EMPRESAS FABRICANTES e MARCAS
         /// </summary>
         /// <returns></returns>
-
         public List<Empresa_FabricantesMarcas> ListaGeralFabricantesEMarcas()
         {
             return dRepository.ListaGeralFabricantesEMarcas();
+        }
+
+        /// <summary>
+        /// CARREGAR LISTA de EMPRESAS FABRICANTES e MARCAS - GRID
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaFabricantesMarcasViewModel> BuscarListaDeFabricantesEMarcas()
+        {
+            return dRepository.BuscarListaDeFabricantesEMarcas();
         }
     }
 }

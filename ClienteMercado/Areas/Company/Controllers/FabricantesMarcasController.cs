@@ -220,35 +220,27 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaFabricantesMarcas(int idPedido)
+        public ActionResult BuscarListaFabricantesMarcas()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NEmpresasFabricantesMarcasService serviceEmpresaFabricanteMarca = new NEmpresasFabricantesMarcasService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+                List<ListaFabricantesMarcasViewModel> listaFabricantesMarcas = 
+                    serviceEmpresaFabricanteMarca.BuscarListaDeFabricantesEMarcas();
 
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                for (int i = 0; i < listaFabricantesMarcas.Count; i++)
                 {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaFabricantesMarcas[i].idFabricanteMarca = listaFabricantesMarcas[i].id_EmpresaFabricantesMarcas.ToString();
                 }
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaFabricantesMarcas,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaFabricantesMarcas.Count,
+                        total = listaFabricantesMarcas.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);

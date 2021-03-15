@@ -359,10 +359,6 @@ namespace ClienteMercado.Areas.Company.Controllers
 
         public ActionResult BuscarListaClientesEmpresa()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
                 NUsuarioEmpresaService serviceClientesEmpresa = new NUsuarioEmpresaService();
