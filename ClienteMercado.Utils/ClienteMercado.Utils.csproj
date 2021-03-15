@@ -126,6 +126,7 @@
     <Compile Include="ViewModel\ListaItensDoPedidoViewModel.cs" />
     <Compile Include="ViewModel\ListaLocalidadesAtendidasViewModel.cs" />
     <Compile Include="ViewModel\ListaMeiosPagtoViewModel.cs" />
+    <Compile Include="ViewModel\ListaPedidosClientesViewModel.cs" />
     <Compile Include="ViewModel\ListaPorCotacaoJaCalculadoOTotalRespondidoUsuarioCotanteViewModel.cs" />
     <Compile Include="ViewModel\ListaPorItemCotadoJaCalculadoUsuarioCotanteViewModel.cs" />
     <Compile Include="ViewModel\ListaPorItemCotadoJaCalculadoUsuarioEmpresaCotanteViewModel.cs" />

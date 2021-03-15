@@ -36,5 +36,13 @@ namespace ClienteMercado.Domain.Services
         {
             return drepository.BuscarListaDeProdutosDoPedido(idPedido);
         }
+
+        /// <summary>
+        /// CARREGAR LISTA de PEDIDOS EMPRESA - GRID
+        /// </summary>
+        public List<ListaPedidosClientesViewModel> BuscarListaDePedidosClientes()
+        {
+            return drepository.BuscarListaDePedidosClientes();
+        }
     }
 }

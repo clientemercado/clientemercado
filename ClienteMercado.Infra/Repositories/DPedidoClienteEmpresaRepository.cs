@@ -40,6 +40,29 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         /// <summary>
+        /// CARREGAR LISTA de PEDIDOS EMPRESA - GRID
+        /// </summary>
+        public List<ListaPedidosClientesViewModel> BuscarListaDePedidosClientes()
+        {
+            try
+            {
+                var query = "SELECT PE.id_PedidoClienteEmpresaCliente, PE.codControlePedido_PedidoClienteEmpresaCliente AS codControlePedido, " +
+                            "CE.nome_ClienteEmpresaCliente AS nomeClientePedido, PE.valorPedido_PedidoClienteEmpresaCliente, " + 
+                            "PE.pedidoEntregue_PedidoClienteEmpresaCliente " +
+                            "FROM PedidoCliente_EmpresaCliente PE " +
+                            "INNER JOIN Cliente_EmpresaCliente CE ON(CE.id_ClienteEmpresaCliente = PE.id_ClienteEmpresaCliente) " +
+                            "WHERE PE.id_EmpresaCliente = " + idEmpresa;
+                var listaPedidos = _contexto.Database.SqlQuery<ListaPedidosClientesViewModel>(query).ToList();
+
+                return listaPedidos;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// CARREGAR LISTA de PRODUTOS do PEDIDO
         /// </summary>
         public List<ListaItensDoPedidoViewModel> BuscarListaDeProdutosDoPedido(int idPedido)
