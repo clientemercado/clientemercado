@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,14 @@ namespace ClienteMercado.Domain.Services
         public void AlterarDadosLocalidadeAtuacaoEmpresa(Localidade_CidadeEmpresaCliente obj)
         {
             drepository.AlterarDadosLocalidadeAtuacaoEmpresa(obj);
+        }
+
+        /// <summary>
+        /// CARREGAR LISTA de LOCALIDADES de ATUAÇÃO da EMPRESA -  GRID
+        /// </summary>  
+        public List<ListaLocalidadesAtendidasViewModel> BuscarListaDeLocalidadesEmpresa()
+        {
+            return drepository.BuscarListaDeLocalidadesEmpresa();
         }
     }
 }

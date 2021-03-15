@@ -256,35 +256,33 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listCitys;
         }
 
-        public ActionResult BuscarListaLocalidadesAtuacaoEmpresa(int idPedido)
+        public ActionResult BuscarListaLocalidadesAtuacaoEmpresa()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NLocalidadesAtendidasEmpresaService serviceLocalidadesEmpresa = new NLocalidadesAtendidasEmpresaService();
+                NCidadesService serviceCidadeEmpresaCliente = new NCidadesService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+                List<ListaLocalidadesAtendidasViewModel> listaLocalidades = serviceLocalidadesEmpresa.BuscarListaDeLocalidadesEmpresa();
 
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                for (int i = 0; i < listaLocalidades.Count; i++)
                 {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaLocalidades[i].idLocalidade = listaLocalidades[i].id_LocalidadeCidadeEmpresaCliente.ToString();
+                    Cidade_EmpresaCliente dadosCidadeEmpresa = 
+                        serviceCidadeEmpresaCliente.ConsultarDadosCidadeEmpresaCliente(
+                            new Cidade_EmpresaCliente { id_CidadeEmpresaCliente = Convert.ToInt32(listaLocalidades[i].id_CidadeEmpresaCliente) }
+                        );
+                    listaLocalidades[i].cidadeLocalidade = 
+                        (dadosCidadeEmpresa.cidade_CidadeEmpresaCliente + "-" + dadosCidadeEmpresa.uf_CidadeEmpresaCliente).ToUpper();
                 }
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaLocalidades,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaLocalidades.Count,
+                        total = listaLocalidades.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);
