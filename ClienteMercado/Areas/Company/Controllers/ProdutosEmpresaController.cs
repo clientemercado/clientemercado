@@ -350,35 +350,29 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listOpcoes;
         }
 
-        public ActionResult BuscarListaProdutosEmpresa(int idPedido)
+        public ActionResult BuscarListaProdutosEmpresa()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NProdutoEmpresaService serviceProdutoEmpresa = new NProdutoEmpresaService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+                List<ListaProdutosEmpresaViewModel> listaProdutosEmpresa = serviceProdutoEmpresa.BuscarListaDeProdutosDaEmpresa();
 
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                for (int i = 0; i < listaProdutosEmpresa.Count; i++)
                 {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaProdutosEmpresa[i].idCodProduto = listaProdutosEmpresa[i].id_ProdutoEmpresaCliente.ToString();
+                    listaProdutosEmpresa[i].valorVendaProduto = listaProdutosEmpresa[i].valorVenda_ProdutoEmpresaCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaProdutosEmpresa[i].pesoProduto = listaProdutosEmpresa[i].pesoEmbalagem_ProdutoEmpresaCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaProdutosEmpresa[i].ativoInativoProduto = listaProdutosEmpresa[i].ativoInativo_ProdutoEmpresaCliente ? "Sim" : "Não";
                 }
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaProdutosEmpresa,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaProdutosEmpresa.Count,
+                        total = listaProdutosEmpresa.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);

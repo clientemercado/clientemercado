@@ -1,5 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace ClienteMercado.Infra.Repositories
 {
     public class DProdutoEmpresaRepository : RepositoryBase<Produto_EmpresaCliente>
     {
+        int? idEmpresa = Sessao.IdEmpresaUsuario;
+
         /// <summary>
         /// GRAVAR NOVO PRODUTO da EMPRESA CLIENTE
         /// </summary>
@@ -44,6 +48,35 @@ namespace ClienteMercado.Infra.Repositories
                     .FirstOrDefault(m => (m.id_ProdutoEmpresaCliente == obj.id_ProdutoEmpresaCliente));
 
                 return dadosDoProduto;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// BUSCAR LISTA de PRODUTOS da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaProdutosEmpresaViewModel> BuscarListaDeProdutosDaEmpresa()
+        {
+            try
+            {
+                var query = "SELECT PE.id_ProdutoEmpresaCliente, PE.descricao_ProdutoEmpresaCliente AS nomeProduto, " + 
+                            "DE.descricao_DepartamentoEmpresaCliente AS departamentoProduto, SD.descricao_SubDepartamentoEmpresaCliente AS subDepartamentoProduto, " +
+                            "EF.descricao_EmpresaFabricantesMarcas AS fabricanteMarcaProduto, PR.nomeOferta_PromocaoVendaEmpresaCliente AS promocaoVigenteProduto, " +
+                            "PE.descricao_ProdutoEmpresaCliente AS nomeProduto, PE.tipoEmbalagem_ProdutoEmpresaCliente AS tipoEmbalagemProduto, PE.pesoEmbalagem_ProdutoEmpresaCliente, " +
+                            "PE.unidadePesoEmbalagem_ProdutoEmpresaCliente AS unidadeProduto, PE.valorVenda_ProdutoEmpresaCliente, PE.ativoInativo_ProdutoEmpresaCliente " +
+                            "FROM  Produto_EmpresaCliente PE " +
+                            "INNER JOIN SubDepartamento_EmpresaCliente SD ON(SD.id_SubDepartamentoEmpresaCliente = PE.id_SubDepartamentoEmpresaCliente) " +
+                            "INNER JOIN Departamento_EmpresaCliente DE ON(DE.id_DepartamentoEmpresaCliente = SD.id_DepartamentoEmpresaCliente) " +
+                            "INNER JOIN Empresa_FabricantesMarcas EF ON(EF.id_EmpresaFabricantesMarcas = PE.id_EmpresaFabricantesMarcas) " +
+                            "INNER JOIN PromocaoVenda_EmpresaCliente PR ON(PR.id_PromocaoVendaEmpresaCliente = PE.id_PromocaoVendaEmpresaCliente) " +
+                            "WHERE PE.id_EmpresaCliente = " + idEmpresa;
+                var listaProdutosEmpresa = _contexto.Database.SqlQuery<ListaProdutosEmpresaViewModel>(query).ToList();
+
+                return listaProdutosEmpresa;
             }
             catch (Exception e)
             {

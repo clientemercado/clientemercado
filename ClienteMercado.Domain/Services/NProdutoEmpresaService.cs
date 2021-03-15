@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,15 @@ namespace ClienteMercado.Domain.Services
         public void AlterarDadosProdutoEmpresa(Produto_EmpresaCliente obj)
         {
             drepository.AlterarDadosProdutoEmpresa(obj);
+        }
+
+        /// <summary>
+        /// BUSCAR LISTA de PRODUTOS da EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaProdutosEmpresaViewModel> BuscarListaDeProdutosDaEmpresa()
+        {
+            return drepository.BuscarListaDeProdutosDaEmpresa();
         }
     }
 }
