@@ -220,35 +220,26 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListameiosPagamentoEmpresa(int idPedido)
+        public ActionResult BuscarListaMeiosPagamentoEmpresa()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NMeiosPagamentoAEmpresaClienteService serviceDepartamentoEmpresa = new NMeiosPagamentoAEmpresaClienteService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+                List<ListaMeiosPagtoViewModel> listaMeiosPgto = serviceDepartamentoEmpresa.BuscarListaMeiosDePagamento();
 
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                for (int i = 0; i < listaMeiosPgto.Count; i++)
                 {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaMeiosPgto[i].idMeioPagto = listaMeiosPgto[i].id_MeiosPagamentoEmpresaCliente.ToString();
                 }
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaMeiosPgto,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaMeiosPgto.Count,
+                        total = listaMeiosPgto.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);

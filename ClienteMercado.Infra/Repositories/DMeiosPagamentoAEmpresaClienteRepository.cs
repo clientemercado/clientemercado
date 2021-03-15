@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,25 @@ namespace ClienteMercado.Infra.Repositories
                     _contexto.meiosPagamento_empresaCliente.FirstOrDefault(m => (m.id_MeiosPagamentoEmpresaCliente == obj.id_MeiosPagamentoEmpresaCliente));
 
                 return dadosMeioPgtoEmpresa;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// BUSCAR LISTA MEIOS PGTO da EMPRESA - GRID
+        /// </summary>
+        public List<ListaMeiosPagtoViewModel> BuscarListaMeiosDePagamento()
+        {
+            try
+            {
+                var query = "SELECT MP.id_MeiosPagamentoEmpresaCliente, MP.descricao_MeiosPagamentoEmpresaCliente AS nomeMeioPagto " +
+                            "FROM MeiosPagamento_EmpresaCliente MP ";
+                var listaMeiosPagto = _contexto.Database.SqlQuery<ListaMeiosPagtoViewModel>(query).ToList();
+
+                return listaMeiosPagto;
             }
             catch (Exception e)
             {

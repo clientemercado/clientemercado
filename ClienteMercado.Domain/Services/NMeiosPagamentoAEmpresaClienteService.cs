@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,14 @@ namespace ClienteMercado.Domain.Services
         public void AlterarDadosMeioPgtoEmpresa(MeiosPagamento_EmpresaCliente obj)
         {
             drepository.AlterarDadosMeioPgtoEmpresa(obj);
+        }
+
+        /// <summary>
+        /// BUSCAR LISTA MEIOS PGTO da EMPRESA - GRID
+        /// </summary>
+        public List<ListaMeiosPagtoViewModel> BuscarListaMeiosDePagamento()
+        {
+            return drepository.BuscarListaMeiosDePagamento();
         }
     }
 }
