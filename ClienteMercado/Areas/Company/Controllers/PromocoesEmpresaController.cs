@@ -240,7 +240,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         public ActionResult BuscarListaPromocoesEmpresa(int idPedido)
         {
             /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
+            MODIFICAR CÓDIGO DE BUSCA ABAIXO... CONTINUAR AQUI... CRIAR MODELO LISTA VIEW MODEL... CONTINUAR AQUI...
              */
 
             try
