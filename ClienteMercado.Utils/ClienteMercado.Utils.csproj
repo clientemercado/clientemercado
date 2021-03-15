@@ -115,6 +115,7 @@
     <Compile Include="ViewModel\ListaDeIdsDeEmpresasQueAnexaramACotacaoViewModel.cs" />
     <Compile Include="ViewModel\ListaDeItensCotadosViewModel.cs" />
     <Compile Include="ViewModel\ListaDeItensDaCotacaoIndividualViewModel.cs" />
+    <Compile Include="ViewModel\ListaDepartamentosEmpresaViewModel.cs" />
     <Compile Include="ViewModel\ListaDeParticipacoesDaEmpresaEmCentraisDeComprasViewModel.cs" />
     <Compile Include="ViewModel\ListaDeProdutosDaCotacaoViewModel.cs" />
     <Compile Include="ViewModel\ListaEstilizadaDeEmpresasViewModel.cs" />
