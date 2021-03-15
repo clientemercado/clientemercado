@@ -280,35 +280,21 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listEstados;
         }
 
-        public ActionResult BuscarListaCidadesAtuacaoEmpresa(int idPedido)
+        public ActionResult BuscarListaCidadesAtuacaoEmpresa()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NCidadesService serviceCidadeEmpresaCliente = new NCidadesService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
-
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
-                {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                }
+                List<ListaCidadesAtuacaoEmpresaViewModel> listaCidadesAtuacao = serviceCidadeEmpresaCliente.BuscarListaDeCidadesAtuacaoEmpresa();
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaCidadesAtuacao,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaCidadesAtuacao.Count,
+                        total = listaCidadesAtuacao.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);

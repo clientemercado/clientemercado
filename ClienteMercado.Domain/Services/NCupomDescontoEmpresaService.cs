@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,14 @@ namespace ClienteMercado.Domain.Services
         public void AlterarDadosCupomDescontosEmpresa(CupomDesconto_EmpresaCliente obj)
         {
             drepository.AlterarDadosCupomDescontosEmpresa(obj);
+        }
+
+        /// <summary>
+        /// ALTERAR DADOS da CUPOM DESCONTOS da EMPRESA CLIENTE
+        /// </summary>
+        public List<ListaCuponsDescontoViewModel> BuscarListaDeCuponsDesconto()
+        {
+            return drepository.BuscarListaDeCuponsDesconto();
         }
     }
 }

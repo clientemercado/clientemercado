@@ -97,7 +97,9 @@
     <Compile Include="ViewModel\DadosDaCentralComprasViewModel.cs" />
     <Compile Include="ViewModel\ItemASerCanceladoOPedidoDetalhesViewModel.cs" />
     <Compile Include="ViewModel\ListaCentraisComprasViewModel.cs" />
+    <Compile Include="ViewModel\ListaCidadesAtuacaoEmpresaViewModel.cs" />
     <Compile Include="ViewModel\ListaClientesEmpresaViewModel.cs" />
+    <Compile Include="ViewModel\ListaCuponsDescontoViewModel.cs" />
     <Compile Include="ViewModel\ListaDadosDeLocalizacaoViewModel.cs" />
     <Compile Include="ViewModel\ListaDadosEmpresasEUsuariosParaContatoEMensagensViewModel.cs" />
     <Compile Include="ViewModel\ListaDeCidadesViewModel.cs" />

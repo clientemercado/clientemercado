@@ -188,7 +188,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     int anoAtual = dataHoje.Year;
 
                     //----------------------------------------------------------------------------------------------------------------
-                    //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
+                    //TRECHO ESSENCIAL PRA EXIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();

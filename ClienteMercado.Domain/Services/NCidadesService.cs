@@ -51,5 +51,13 @@ namespace ClienteMercado.Domain.Services
         {
             return dRepository.BuscarListaCidadesEmpresa();
         }
+
+        /// <summary>
+        /// BUSCAR LISTA de CIDADES de ATUAÇÂO da EMPRESA CLIENTE
+        /// </summary>
+        public List<ListaCidadesAtuacaoEmpresaViewModel> BuscarListaDeCidadesAtuacaoEmpresa()
+        {
+            return dRepository.BuscarListaDeCidadesAtuacaoEmpresa();
+        }
     }
 }

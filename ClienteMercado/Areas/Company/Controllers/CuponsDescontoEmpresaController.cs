@@ -236,35 +236,43 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaCuponsDescontoEmpresa(int idPedido)
+        public ActionResult BuscarListaCuponsDescontoEmpresa()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NCupomDescontoEmpresaService serviceCuponDesconto = new NCupomDescontoEmpresaService();
+                NUsuarioEmpresaService serviceUsuarioEmpCliente = new NUsuarioEmpresaService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+                List<ListaCuponsDescontoViewModel> listaCuponsDesconto = serviceCuponDesconto.BuscarListaDeCuponsDesconto();
 
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                for (int i = 0; i < listaCuponsDesconto.Count; i++)
                 {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaCuponsDesconto[i].dataCadastroCupon = Convert.ToDateTime(listaCuponsDesconto[i].dataCadastroCupon_CupomDescontoEmpresaCliente).ToString("dd/MM/yyyy");
+                    listaCuponsDesconto[i].dataValidade = Convert.ToDateTime(listaCuponsDesconto[i].dataValidade_CupomDescontoEmpresaCliente).ToString("dd/MM/yyyy");
+                    listaCuponsDesconto[i].percentualDesconto = listaCuponsDesconto[i].percentualDesconto_CupomDescontoEmpresaCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaCuponsDesconto[i].ativoInativo = listaCuponsDesconto[i].ativoInativo_CupomDescontoEmpresaCliente ? "Sim" : "Não";
+                    Usuario_EmpresaCliente dadosUsuFuncEmpresa =
+                        serviceUsuarioEmpCliente.ConsultarDadosUsuarioEmpresaCliente(
+                            new Usuario_EmpresaCliente { 
+                                id_UsuarioEmpresaCliente = Convert.ToInt32(listaCuponsDesconto[i].idUsuarioCadastrouCupon_CupomDescontoEmpresaCliente) 
+                            });
+                    listaCuponsDesconto[i].usuarioCadastrouCupon = dadosUsuFuncEmpresa.nome_UsuarioEmpresaCliente;
+                    Usuario_EmpresaCliente dadosUsuFuncEmpresa2 =
+                        serviceUsuarioEmpCliente.ConsultarDadosUsuarioEmpresaCliente(
+                            new Usuario_EmpresaCliente
+                            {
+                                id_UsuarioEmpresaCliente = Convert.ToInt32(listaCuponsDesconto[i].idUsuarioAtivou_CupomDescontoEmpresaCliente)
+                            });
+                    listaCuponsDesconto[i].usuarioAtivouCupon = dadosUsuFuncEmpresa2.nome_UsuarioEmpresaCliente;
                 }
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaCuponsDesconto,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaCuponsDesconto.Count,
+                        total = listaCuponsDesconto.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);

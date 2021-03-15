@@ -75,6 +75,27 @@ namespace ClienteMercado.Infra.Repositories
         /// <summary>
         /// BUSCAR LISTA de CIDADES de ATUAÇÂO da EMPRESA CLIENTE
         /// </summary>
+        public List<ListaCidadesAtuacaoEmpresaViewModel> BuscarListaDeCidadesAtuacaoEmpresa()
+        {
+            try
+            {
+                var query = "SELECT CAE.id_CidadeEmpresaCliente AS idCidadeEmpresaCliente, CAE.cidade_CidadeEmpresaCliente AS cidadeEempresaCliente, " + "" +
+                            "CAE.uf_CidadeEmpresaCliente AS ufCidadeEmpresaCliente, CAE.pais_CidadeEmpresaCliente AS paisCidadeEmpresaCliente " +
+                            "FROM Cidade_EmpresaCliente CAE " +
+                            "WHERE CAE.id_EmpresaCliente =  " + idEmpresa;
+                var listaCidades = _contexto.Database.SqlQuery<ListaCidadesAtuacaoEmpresaViewModel>(query).ToList();
+
+                return listaCidades;
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// BUSCAR LISTA de CIDADES de ATUAÇÂO da EMPRESA CLIENTE
+        /// </summary>
         public List<Cidade_EmpresaCliente> BuscarListaCidadesEmpresa()
         {
             try

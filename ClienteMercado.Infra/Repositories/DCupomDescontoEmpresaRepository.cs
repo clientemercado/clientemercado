@@ -1,5 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
+using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace ClienteMercado.Infra.Repositories
 {
     public class DCupomDescontoEmpresaRepository : RepositoryBase<CupomDesconto_EmpresaCliente>
     {
+        int? idEmpresa = Sessao.IdEmpresaUsuario;
+
         /// <summary>
         /// GRAVAR NOVA CUPOM da EMPRESA CLIENTE
         /// </summary>
@@ -60,6 +64,29 @@ namespace ClienteMercado.Infra.Repositories
                 }
             }
             catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// ALTERAR DADOS da CUPOM DESCONTOS da EMPRESA CLIENTE
+        /// </summary>
+        public List<ListaCuponsDescontoViewModel> BuscarListaDeCuponsDesconto()
+        {
+            try
+            {
+                var query = "SELECT CD.id_CuponDescontoEmpresaCliente AS idCuponDescontoEmpresaCliente, CD.nomeCupom_CupomDescontoEmpresaCliente AS nomeCupom, " +
+                            "CD.dataCadastroCupon_CupomDescontoEmpresaClientE, CD.dataValidade_CupomDescontoEmpresaCliente, " +
+                            "CD.percentualDesconto_CupomDescontoEmpresaCliente, CD.ativoInativo_CupomDescontoEmpresaCliente, " +
+                            "CD.idUsuarioCadastrouCupon_CupomDescontoEmpresaCliente, CD.idUsuarioAtivou_CupomDescontoEmpresaCliente " +
+                            "FROM CupomDesconto_EmpresaCliente CD " +
+                            "WHERE CD.id_EmpresaCliente = " + idEmpresa;
+                var listaCuponsDesconto = _contexto.Database.SqlQuery<ListaCuponsDescontoViewModel>(query).ToList();
+
+                return listaCuponsDesconto;
+            }
+            catch (Exception e)
             {
                 throw e;
             }
