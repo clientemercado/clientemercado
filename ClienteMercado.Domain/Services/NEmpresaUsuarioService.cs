@@ -302,5 +302,14 @@ namespace ClienteMercado.Domain.Services
         {
             dempresausuario.AlterarDadosEmpresaCliente(obj);
         }
+
+        /// <summary>
+        /// BUSCAR LISTA DE EMPRESAS CLIENTES - GRID
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaEmpresasClientesViewModel> BuscarListaDeEmpresasClientes()
+        {
+            return dempresausuario.BuscarListaDeEmpresasClientes();
+        }
     }
 }

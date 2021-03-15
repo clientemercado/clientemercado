@@ -335,35 +335,28 @@ namespace ClienteMercado.Areas.Company.Controllers
             return strResult + strString;
         }
 
-        public ActionResult BuscarListaEmpresasCliente(int idPedido)
+        public ActionResult BuscarListaEmpresasCliente()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... 
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+                List<ListaEmpresasClientesViewModel> listaEmpresasCliente = serviceEmpresaCliente.BuscarListaDeEmpresasClientes();
 
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                for (int i = 0; i < listaEmpresasCliente.Count; i++)
                 {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaEmpresasCliente[i].idEmpresa = listaEmpresasCliente[i].id_EmpresaCliente.ToString();
+                    listaEmpresasCliente[i].dataCadastroEmpresa = Convert.ToDateTime(listaEmpresasCliente[i].dataCadastro_EmpresaCliente).ToString("dd/MM/yyyy");
+                    listaEmpresasCliente[i].ativaInativaEmpresa = listaEmpresasCliente[i].ativaInativa_EmpresaCliente ? "Sim" : "Não";
                 }
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaEmpresasCliente,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaEmpresasCliente.Count,
+                        total = listaEmpresasCliente.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);

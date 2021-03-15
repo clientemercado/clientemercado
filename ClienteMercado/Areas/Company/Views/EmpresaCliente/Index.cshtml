@@ -62,12 +62,12 @@
                                 <thead class="flip-content">
                                     <tr>
                                         <th data-formatter="link0" data-width="4%" data-header-align="center" data-align="center">&nbsp;</th>
-                                        <th data-column-id="itemPedido" data-width="20%" data-formatter="link1" data-header-align="center">Produto</th>
-                                        <th data-column-id="quantidadeItemPedido" data-width="10%" data-align="right" data-formatter="link2" data-header-align="center">Quant.</th>
-                                        <th data-column-id="valorUnitarioItemPedido" data-width="10%" data-align="right" data-formatter="link3" data-header-align="center">R$ Unit.</th>
-                                        <th data-column-id="totalProdutoComprado" data-width="10%" data-align="right" data-formatter="link4" data-header-align="center">R$ Total</th>
-                                        <th data-column-id="dataEntregaItemPedido" data-width="10%" data-align="right" data-formatter="link5" data-header-align="center">Data Entrega</th>
-                                        <th data-column-id="motivoNaoEntregaDotemPedido" data-width="46%" data-formatter="link6" data-header-align="center">Observações</th>
+                                        <th data-column-id="nomeRazaoSocialEmpresa" data-width="25%" data-formatter="link1" data-header-align="left">&nbsp;Razao Social</th>
+                                        <th data-column-id="nomeFantasiaEmpresa" data-width="25%" data-align="left" data-formatter="link2" data-header-align="left">Nome Fantasia</th>
+                                        <th data-column-id="cidadeEmpresa" data-width="15%" data-align="left" data-formatter="link3" data-header-align="center">Cidade</th>
+                                        <th data-column-id="dataCadastroEmpresa" data-width="10%" data-align="right" data-formatter="link4" data-header-align="center">Dt Cadastro</th>
+                                        <th data-column-id="ativaInativaEmpresa" data-width="5%" data-align="right" data-formatter="link5" data-header-align="center">Ativa</th>
+                                        <th data-column-id="" data-width="16%" data-formatter="link6" data-header-align="">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -110,25 +110,25 @@
             keepSelection: true,
             formatters: {
                 "link0": function (column, row) {
-                    return "<input type='checkbox' name='checkbox' id='" + row.id_ClienteEmpresaCliente + "' class='itemcotado' title='' value='" + row.id_ClienteEmpresaCliente + "'>";
+                    return "<input type='checkbox' name='checkbox' id='" + row.idEmpresa + "' class='itemcotado' title='' value='" + row.idEmpresa + "'>";
                 },
                 "link1": function (column, row) {
-                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.nomeClienteEmpresa + "</a>";
+                    return "<a href=\"@Url.Action("AlterarDados", "EmpresaCliente")?id=" + row.idEmpresa + "\">" + row.nomeRazaoSocialEmpresa + "</a>";
                 },
                 "link2": function (column, row) {
-                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.enderecoClienteEmpresa + "</a>";
+                    return "<a href=\"@Url.Action("AlterarDados", "EmpresaCliente")?id=" + row.idEmpresa + "\">" + row.nomeFantasiaEmpresa + "</a>";
                 },
                 "link3": function (column, row) {
-                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.cidadeClienteEmpresa + "</a>";
+                    return "<a href=\"@Url.Action("AlterarDados", "EmpresaCliente")?id=" + row.idEmpresa + "\">" + row.cidadeEmpresa + "</a>";
                 },
                 "link4": function (column, row) {
-                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.dataCadastroClienteEmpresa + "</a>";
+                    return "<a href=\"@Url.Action("AlterarDados", "EmpresaCliente")?id=" + row.idEmpresa + "\">" + row.dataCadastroEmpresa + "</a>";
                 },
                 "link5": function (column, row) {
-                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.quantidadePedidosApp + "</a>";
+                    return "<a href=\"@Url.Action("AlterarDados", "EmpresaCliente")?id=" + row.idEmpresa + "\">" + row.ativaInativaEmpresa + "</a>";
                 },
                 "link6": function (column, row) {
-                    return "<a href=\"@Url.Action("AlterarDados", "CadastroClientesEmpresa")?id=" + row.id_ClienteEmpresaCliente + "\">" + row.totalvalorPedidoApp + "</a>";
+                    return "";
                 }
             }
         }).on("loaded.rs.jquery.bootgrid", function () {

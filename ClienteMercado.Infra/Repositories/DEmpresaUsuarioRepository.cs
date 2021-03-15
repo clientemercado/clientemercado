@@ -276,6 +276,28 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         /// <summary>
+        /// BUSCAR LISTA DE EMPRESAS CLIENTES - GRID
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaEmpresasClientesViewModel> BuscarListaDeEmpresasClientes()
+        {
+            try
+            {
+                var query = "SELECT EC.id_EmpresaCliente, EC.razaoSocial_EmpresaCliente AS nomeRazaoSocialEmpresa, " + 
+                            "EC.nomeFantasia_EmpresaCliente AS nomeFantasiaEmpresa, (EC.cidade_EmpresaCliente + '-' + EC.uf_EmpresaCliente) AS cidadeEmpresa, " +
+                            "EC.dataCadastro_EmpresaCliente, EC.ativaInativa_EmpresaCliente " +
+                            "FROM EmpresaCliente EC";
+                var listaEmpresasClientes = _contexto.Database.SqlQuery<ListaEmpresasClientesViewModel>(query).ToList();
+
+                return listaEmpresasClientes;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// ALTERAÇÃO DE DADOS DA EMPRESA CLIENTE
         /// </summary>
         public void AlterarDadosEmpresaCliente(EmpresaCliente obj)

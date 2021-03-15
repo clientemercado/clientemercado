@@ -118,6 +118,7 @@
     <Compile Include="ViewModel\ListaDepartamentosEmpresaViewModel.cs" />
     <Compile Include="ViewModel\ListaDeParticipacoesDaEmpresaEmCentraisDeComprasViewModel.cs" />
     <Compile Include="ViewModel\ListaDeProdutosDaCotacaoViewModel.cs" />
+    <Compile Include="ViewModel\ListaEmpresasClientesViewModel.cs" />
     <Compile Include="ViewModel\ListaEstilizadaDeEmpresasViewModel.cs" />
     <Compile Include="ViewModel\ListaIdsDeEmpresasFornecedorasCotadas.cs" />
     <Compile Include="ViewModel\ListaItensCotadosRespondidosPeloFornecedorViewModel.cs" />
