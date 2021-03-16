@@ -237,35 +237,30 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaPromocoesEmpresa(int idPedido)
+        public ActionResult BuscarListaPromocoesEmpresa()
         {
-            /*
-            MODIFICAR CÓDIGO DE BUSCA ABAIXO... CONTINUAR AQUI... CRIAR MODELO LISTA VIEW MODEL... CONTINUAR AQUI...
-             */
-
             try
             {
-                NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
+                NPromocoesEmpresaService servicePromocoesEmpresa = new NPromocoesEmpresaService();
 
-                List<ListaItensDoPedidoViewModel> listaProdutosPedido = servicePedidoCliente.BuscarListaDeProdutosDoPedido(idPedido);
+                List<ListaPromocoesEmpresaViewModel> listaPromocoesEmpresa = servicePromocoesEmpresa.BuscarListaDePromocoesDaEmpresa();
 
-                for (int i = 0; i < listaProdutosPedido.Count; i++)
+                for (int i = 0; i < listaPromocoesEmpresa.Count; i++)
                 {
-                    listaProdutosPedido[i].quantidadeItemPedido = listaProdutosPedido[i].quantidade_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].dataEntregaItemPedido =
-                        Convert.ToDateTime(listaProdutosPedido[i].dataEntregaItemPedido_ProdutosPedidoCliente).ToString("dd/MM/yyyy");
-                    listaProdutosPedido[i].valorUnitarioItemPedido = listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
-                    listaProdutosPedido[i].totalProdutoComprado =
-                        (listaProdutosPedido[i].quantidade_ProdutosPedidoCliente * listaProdutosPedido[i].valorUnitario_ProdutosPedidoCliente).ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaPromocoesEmpresa[i].idPromocaoVenda = listaPromocoesEmpresa[i].id_PromocaoVendaEmpresaCliente.ToString();
+                    listaPromocoesEmpresa[i].percentualOffOferta = listaPromocoesEmpresa[i].percentualOffOferta_PromocaoVendaEmpresaCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
+                    listaPromocoesEmpresa[i].dataCadastroOferta = Convert.ToDateTime(listaPromocoesEmpresa[i].dataCadastroOferta_PromocaoVendaEmpresaCliente).ToString("dd/MM/yyyy");
+                    listaPromocoesEmpresa[i].dataValidadeOferta = Convert.ToDateTime(listaPromocoesEmpresa[i].dataValidade_PromocaoVendaEmpresaCliente).ToString("dd/MM/yyyy");
+                    listaPromocoesEmpresa[i].ativaInativaOferta = listaPromocoesEmpresa[i].ativoInativo_PromocaoVendaEmpresaCliente ? "Sim" : "Não";
                 }
 
                 return Json(
                     new
                     {
-                        rows = listaProdutosPedido,
+                        rows = listaPromocoesEmpresa,
                         current = 1,
-                        rowCount = listaProdutosPedido.Count,
-                        total = listaProdutosPedido.Count,
+                        rowCount = listaPromocoesEmpresa.Count,
+                        total = listaPromocoesEmpresa.Count,
                         dadosCarregados = "Ok"
                     },
                     JsonRequestBehavior.AllowGet);

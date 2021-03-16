@@ -21,8 +21,8 @@ namespace ClienteMercado.Data.Entities
 
         [MaxLength(120)]
         public string linkBuscaOferta_PromocaoVendaEmpresaCliente { get; set; }
-        public DateTime? dataCadastroOferta_PromocaoVendaEmpresaCliente { get; set; }
-        public DateTime? dataValidade_PromocaoVendaEmpresaCliente { get; set; }
+        public DateTime dataCadastroOferta_PromocaoVendaEmpresaCliente { get; set; }
+        public DateTime dataValidade_PromocaoVendaEmpresaCliente { get; set; }
         public int? idUsuarioCadastrouOferta_PromocaoVendaEmpresaCliente { get; set; }
         public bool ativoInativo_PromocaoVendaEmpresaCliente { get; set; }
         public DateTime? dataInativou_PromocaoVendaEmpresaCliente { get; set; }

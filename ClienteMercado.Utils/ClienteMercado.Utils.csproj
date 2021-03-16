@@ -132,6 +132,7 @@
     <Compile Include="ViewModel\ListaPorItemCotadoJaCalculadoUsuarioEmpresaCotanteViewModel.cs" />
     <Compile Include="ViewModel\ListaProdutosEmpresaViewModel.cs" />
     <Compile Include="ViewModel\ListaProdutoUnicoCotadoPorEmpresaViewModel.cs" />
+    <Compile Include="ViewModel\ListaPromocoesEmpresaViewModel.cs" />
     <Compile Include="ViewModel\ListaSubDeptosEmpresaViewModel.cs" />
     <Compile Include="ViewModel\PrecosDaCotacaoAnalisadaViewModel.cs" />
   </ItemGroup>

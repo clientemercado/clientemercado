@@ -1,6 +1,7 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Base;
 using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,28 @@ namespace ClienteMercado.Infra.Repositories
                     _contexto.promocaoVenda_empresaCliente.Where(m => (m.id_EmpresaCliente == idEmpresa)).ToList();
 
                 return listaPromocoes;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// CARREGA LISTA de PROMOCOES ATIVAS PRATICADAS pela EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaPromocoesEmpresaViewModel> BuscarListaDePromocoesDaEmpresa()
+        {
+            try
+            {
+                var query = "SELECT PV.id_PromocaoVendaEmpresaCliente, PV.nomeOferta_PromocaoVendaEmpresaCliente AS nomeOferta, PV.percentualOffOferta_PromocaoVendaEmpresaCliente, " +
+                            "PV.dataCadastroOferta_PromocaoVendaEmpresaCliente, PV.dataValidade_PromocaoVendaEmpresaCliente, PV.ativoInativo_PromocaoVendaEmpresaCliente " +
+                            "FROM PromocaoVenda_EmpresaCliente PV " +
+                            "WHERE PV.id_EmpresaCliente = " + idEmpresa;
+                var listaPromocoesEmpresa = _contexto.Database.SqlQuery<ListaPromocoesEmpresaViewModel>(query).ToList();
+
+                return listaPromocoesEmpresa;
             }
             catch (Exception e)
             {

@@ -1,5 +1,6 @@
 ﻿using ClienteMercado.Data.Entities;
 using ClienteMercado.Infra.Repositories;
+using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,15 @@ namespace ClienteMercado.Domain.Services
         public List<PromocaoVenda_EmpresaCliente> ListaPromocoesDaEmpresa()
         {
             return drepository.ListaPromocoesDaEmpresa();
+        }
+
+        /// <summary>
+        /// CARREGA LISTA de PROMOCOES ATIVAS PRATICADAS pela EMPRESA
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaPromocoesEmpresaViewModel> BuscarListaDePromocoesDaEmpresa()
+        {
+            return drepository.BuscarListaDePromocoesDaEmpresa();
         }
     }
 }
