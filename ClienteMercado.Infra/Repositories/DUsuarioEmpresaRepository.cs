@@ -112,6 +112,30 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         /// <summary>
+        /// CARREGA LISTA de USUÁRIOS FUNCIONÁRIOS EMPRESA - GRID
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaUsuariosEmpresaViewModel> BuscarListaDeUsuariosFuncDaEmpresa()
+        {
+            try
+            {
+                var query = "SELECT UE.id_UsuarioEmpresaCliente, UE.nome_UsuarioEmpresaCliente AS nomeusuarioEmpresa, " + 
+                            "UE.telefone1_UsuarioEmpresaCliente AS fone1ContatoUsuarioEmpresa, UE.eMail1_UsuarioEmpresaCliente AS eMail1UsuarioEmpresa, " +
+                            "UE.dataCadastro_UsuarioEmpresaCliente, (UE.cidade_UsuarioEmpresaCliente + '-' + UE.uf_UsuarioEmpresaCliente) " +
+                            "AS cidadeUsuarioEmpresa, UE.ativoInativo_UsuarioEmpresaCliente " +
+                            "FROM Usuario_EmpresaCliente UE " +
+                            "WHERE UE.id_EmpresaCliente = " + idEmpresa;
+                var listaUsuariosFuncEmpresa = _contexto.Database.SqlQuery<ListaUsuariosEmpresaViewModel>(query).ToList();
+
+                return listaUsuariosFuncEmpresa;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// CARREGA LISTA de CLIENTES da EMPRESA
         /// </summary>
         /// <returns></returns>

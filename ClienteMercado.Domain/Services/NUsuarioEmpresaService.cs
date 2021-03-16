@@ -126,5 +126,14 @@ namespace ClienteMercado.Domain.Services
         {
             return dusuarioempresa.BuscarListaDeUsuariosClientesEmpresa();
         }
+
+        /// <summary>
+        /// CARREGA LISTA de USUÁRIOS FUNCIONÁRIOS EMPRESA - GRID
+        /// </summary>
+        /// <returns></returns>
+        public List<ListaUsuariosEmpresaViewModel> BuscarListaDeUsuariosFuncDaEmpresa()
+        {
+            return dusuarioempresa.BuscarListaDeUsuariosFuncDaEmpresa();
+        }
     }
 }
