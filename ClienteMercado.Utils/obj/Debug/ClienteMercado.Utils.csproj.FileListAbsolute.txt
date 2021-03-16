@@ -54,6 +54,7 @@ C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Utils\obj\Debug\ClienteMe
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Utils\obj\Debug\ClienteMercado.Utils.csproj.CopyComplete
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Utils\obj\Debug\ClienteMercado.Utils.dll
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Utils\obj\Debug\ClienteMercado.Utils.pdb
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\ClienteMercado.Data.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\ClienteMercado.Utils.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\ClienteMercado.Utils.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\ClienteMercado.Utils.pdb
@@ -67,7 +68,6 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\Sys
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\System.Web.WebPages.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\EntityFramework.dll
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\ClienteMercado.Data.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\ClienteMercado.Data.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\System.Web.Helpers.xml
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Utils\bin\Debug\System.Web.Mvc.xml

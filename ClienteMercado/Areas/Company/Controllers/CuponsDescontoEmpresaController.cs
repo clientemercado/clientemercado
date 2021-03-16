@@ -245,12 +245,10 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 List<ListaCuponsDescontoViewModel> listaCuponsDesconto = serviceCuponDesconto.BuscarListaDeCuponsDesconto();
 
-                //------------------------------------------------------------
                 if (String.IsNullOrEmpty(descricaoFiltro) == false)
                 {
                     listaCuponsDesconto = listaCuponsDesconto.Where(m => (m.nomeCupom.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
                 }
-                //------------------------------------------------------------
 
                 for (int i = 0; i < listaCuponsDesconto.Count; i++)
                 {

@@ -16,6 +16,13 @@
         window.location.href = url1;
     });
 
+    //BOTÃO EXCLUIR
+    $(document).on("click", "#btn-excluir", function () {
+        debugger;
+
+        swal({ title: "ATENÇÃO:\n\nFUNCIONALIDE em CONSTRUÇÃO!!!", type: "warning", confirmButtonColor: "#337ab7" });
+    });
+
     //BOTÃO VOLTAR PÁGINA ANTERIOR
     $(document).on("click", "#btn-voltar", function () {
         debugger;

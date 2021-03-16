@@ -18,6 +18,13 @@
         window.location.href = url2;
     });
 
+    //BOTÃO EXCLUIR
+    $(document).on("click", "#btn-excluir", function () {
+        debugger;
+
+        swal({ title: "ATENÇÃO:\n\nFUNCIONALIDE em CONSTRUÇÃO!!!", type: "warning", confirmButtonColor: "#337ab7" });
+    });
+
     //BOTÃO DE GRAVAÇÃO DO NOVO REGISTRO --> TESTAR
     $("#btn-gravar").click(function (e) {
         debugger;
