@@ -236,7 +236,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaCuponsDescontoEmpresa()
+        public ActionResult BuscarListaCuponsDescontoEmpresa(string descricaoFiltro)
         {
             try
             {
@@ -244,6 +244,13 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NUsuarioEmpresaService serviceUsuarioEmpCliente = new NUsuarioEmpresaService();
 
                 List<ListaCuponsDescontoViewModel> listaCuponsDesconto = serviceCuponDesconto.BuscarListaDeCuponsDesconto();
+
+                //------------------------------------------------------------
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaCuponsDesconto = listaCuponsDesconto.Where(m => (m.nomeCupom.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
+                //------------------------------------------------------------
 
                 for (int i = 0; i < listaCuponsDesconto.Count; i++)
                 {

@@ -225,13 +225,18 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaDepartamentosEmpresa()
+        public ActionResult BuscarListaDepartamentosEmpresa(string descricaoFiltro)
         {
             try
             {
                 NDepartamentoEmpresaClienteService serviceDepartamentoEmpresa = new NDepartamentoEmpresaClienteService();
 
                 List<ListaDepartamentosEmpresaViewModel> listaDeptosEmpresa = serviceDepartamentoEmpresa.BuscarListaDepartamentosEmpresa();
+
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaDeptosEmpresa = listaDeptosEmpresa.Where(m => (m.nomeDepartamentoEmpresa.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
 
                 for (int i = 0; i < listaDeptosEmpresa.Count; i++)
                 {

@@ -347,13 +347,18 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
-        public ActionResult BuscarListaDePedidosClientes()
+        public ActionResult BuscarListaDePedidosClientes(string descricaoFiltro)
         {
             try
             {
                 NPedidoClienteEmpresaService servicePedidoCliente = new NPedidoClienteEmpresaService();
 
                 List<ListaPedidosClientesViewModel> listaPedidosEmpresa = servicePedidoCliente.BuscarListaDePedidosClientes();
+
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaPedidosEmpresa = listaPedidosEmpresa.Where(m => (m.nomeClientePedido.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
 
                 for (int i = 0; i < listaPedidosEmpresa.Count; i++)
                 {

@@ -280,13 +280,18 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listEstados;
         }
 
-        public ActionResult BuscarListaCidadesAtuacaoEmpresa()
+        public ActionResult BuscarListaCidadesAtuacaoEmpresa(string descricaoFiltro)
         {
             try
             {
                 NCidadesService serviceCidadeEmpresaCliente = new NCidadesService();
 
                 List<ListaCidadesAtuacaoEmpresaViewModel> listaCidadesAtuacao = serviceCidadeEmpresaCliente.BuscarListaDeCidadesAtuacaoEmpresa();
+
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaCidadesAtuacao = listaCidadesAtuacao.Where(m => (m.cidadeEempresaCliente.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
 
                 return Json(
                     new

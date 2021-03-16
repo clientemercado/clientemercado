@@ -357,13 +357,20 @@ namespace ClienteMercado.Areas.Company.Controllers
             return strResult + strString;
         }
 
-        public ActionResult BuscarListaClientesEmpresa()
+        public ActionResult BuscarListaClientesEmpresa(string descricaoFiltro)
         {
             try
             {
                 NUsuarioEmpresaService serviceClientesEmpresa = new NUsuarioEmpresaService();
 
                 List<ListaClientesEmpresaViewModel> listaClientesEmpresa = serviceClientesEmpresa.BuscarListaDeUsuariosClientesEmpresa();
+
+                //------------------------------------------------------------
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaClientesEmpresa = listaClientesEmpresa.Where(m => (m.nomeClienteEmpresa.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
+                //------------------------------------------------------------
 
                 for (int i = 0; i < listaClientesEmpresa.Count; i++)
                 {

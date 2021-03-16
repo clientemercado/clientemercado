@@ -72,7 +72,7 @@ namespace ClienteMercado.Infra.Repositories
                             "INNER JOIN SubDepartamento_EmpresaCliente SD ON(SD.id_SubDepartamentoEmpresaCliente = PE.id_SubDepartamentoEmpresaCliente) " +
                             "INNER JOIN Departamento_EmpresaCliente DE ON(DE.id_DepartamentoEmpresaCliente = SD.id_DepartamentoEmpresaCliente) " +
                             "INNER JOIN Empresa_FabricantesMarcas EF ON(EF.id_EmpresaFabricantesMarcas = PE.id_EmpresaFabricantesMarcas) " +
-                            "INNER JOIN PromocaoVenda_EmpresaCliente PR ON(PR.id_PromocaoVendaEmpresaCliente = PE.id_PromocaoVendaEmpresaCliente) " +
+                            "LEFT JOIN PromocaoVenda_EmpresaCliente PR ON(PR.id_PromocaoVendaEmpresaCliente = PE.id_PromocaoVendaEmpresaCliente) " +
                             "WHERE PE.id_EmpresaCliente = " + idEmpresa;
                 var listaProdutosEmpresa = _contexto.Database.SqlQuery<ListaProdutosEmpresaViewModel>(query).ToList();
 

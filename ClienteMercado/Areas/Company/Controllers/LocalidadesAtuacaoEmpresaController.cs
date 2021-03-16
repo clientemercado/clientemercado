@@ -256,7 +256,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listCitys;
         }
 
-        public ActionResult BuscarListaLocalidadesAtuacaoEmpresa()
+        public ActionResult BuscarListaLocalidadesAtuacaoEmpresa(string descricaoFiltro)
         {
             try
             {
@@ -264,6 +264,11 @@ namespace ClienteMercado.Areas.Company.Controllers
                 NCidadesService serviceCidadeEmpresaCliente = new NCidadesService();
 
                 List<ListaLocalidadesAtendidasViewModel> listaLocalidades = serviceLocalidadesEmpresa.BuscarListaDeLocalidadesEmpresa();
+
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaLocalidades = listaLocalidades.Where(m => (m.nomeLocalidade.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
 
                 for (int i = 0; i < listaLocalidades.Count; i++)
                 {

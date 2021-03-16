@@ -220,7 +220,7 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaFabricantesMarcas()
+        public ActionResult BuscarListaFabricantesMarcas(string descricaoFiltro)
         {
             try
             {
@@ -228,6 +228,11 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 List<ListaFabricantesMarcasViewModel> listaFabricantesMarcas = 
                     serviceEmpresaFabricanteMarca.BuscarListaDeFabricantesEMarcas();
+
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaFabricantesMarcas = listaFabricantesMarcas.Where(m => (m.nomeFabricanteMarca.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
 
                 for (int i = 0; i < listaFabricantesMarcas.Count; i++)
                 {

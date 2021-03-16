@@ -350,7 +350,7 @@ namespace ClienteMercado.Areas.Company.Controllers
             return listOpcoes;
         }
 
-        public ActionResult BuscarListaProdutosEmpresa()
+        public ActionResult BuscarListaProdutosEmpresa(string descricaoFiltro)
         {
             try
             {
@@ -358,12 +358,18 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 List<ListaProdutosEmpresaViewModel> listaProdutosEmpresa = serviceProdutoEmpresa.BuscarListaDeProdutosDaEmpresa();
 
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaProdutosEmpresa = listaProdutosEmpresa.Where(m => (m.nomeProduto.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
+
                 for (int i = 0; i < listaProdutosEmpresa.Count; i++)
                 {
                     listaProdutosEmpresa[i].idCodProduto = listaProdutosEmpresa[i].id_ProdutoEmpresaCliente.ToString();
                     listaProdutosEmpresa[i].valorVendaProduto = listaProdutosEmpresa[i].valorVenda_ProdutoEmpresaCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
                     listaProdutosEmpresa[i].pesoProduto = listaProdutosEmpresa[i].pesoEmbalagem_ProdutoEmpresaCliente.ToString("C2", CultureInfo.CurrentCulture).Replace("R$ ", "");
                     listaProdutosEmpresa[i].ativoInativoProduto = listaProdutosEmpresa[i].ativoInativo_ProdutoEmpresaCliente ? "Sim" : "Não";
+                    listaProdutosEmpresa[i].promocaoVigenteProduto = listaProdutosEmpresa[i].promocaoVigenteProduto != null ? listaProdutosEmpresa[i].promocaoVigenteProduto : "";
                 }
 
                 return Json(

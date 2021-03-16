@@ -220,13 +220,18 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaMeiosPagamentoEmpresa()
+        public ActionResult BuscarListaMeiosPagamentoEmpresa(string descricaoFiltro)
         {
             try
             {
                 NMeiosPagamentoAEmpresaClienteService serviceDepartamentoEmpresa = new NMeiosPagamentoAEmpresaClienteService();
 
                 List<ListaMeiosPagtoViewModel> listaMeiosPgto = serviceDepartamentoEmpresa.BuscarListaMeiosDePagamento();
+
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaMeiosPgto = listaMeiosPgto.Where(m => (m.nomeMeioPagto.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
 
                 for (int i = 0; i < listaMeiosPgto.Count; i++)
                 {

@@ -196,11 +196,16 @@
             );
         }
     });
+
+    //BOTÃO PESQUISAR
+    $(document).on("click", "#btn-pesquisar", function () {
+        debugger;
+
+        if ($('#inPesquisar').val() != "")  {
+            $('#gridClientesEmpresa').bootgrid('reload');
+        }
+        else {
+            swal({ title: "ATENÇÃO:\n\nDigite ALGO no campo do FILTRO para pesquisar.", type: "warning", confirmButtonColor: "#337ab7" });
+        }
+    });
 });
-
-function opLnk(id) {
-    debugger;
-
-    //REDIRECIONAR PARA TELA DE EDIÇÃO
-    window.location.href = "/Company/CadastroClientesEmpresa/AlterarDados?id=" + idRegistroGerado;
-}

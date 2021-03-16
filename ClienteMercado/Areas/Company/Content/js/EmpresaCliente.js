@@ -196,4 +196,15 @@
         }
     });
 
+    //BOTÃO PESQUISAR
+    $(document).on("click", "#btn-pesquisar", function () {
+        debugger;
+
+        if ($('#inPesquisar').val() != "") {
+            $('#gridEmpresasClientes').bootgrid('reload');
+        }
+        else {
+            swal({ title: "ATENÇÃO:\n\nDigite ALGO no campo do FILTRO para pesquisar.", type: "warning", confirmButtonColor: "#337ab7" });
+        }
+    });
 });

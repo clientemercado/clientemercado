@@ -237,13 +237,18 @@ namespace ClienteMercado.Areas.Company.Controllers
         }
         //----------------------------------------------------------------------------------
 
-        public ActionResult BuscarListaPromocoesEmpresa()
+        public ActionResult BuscarListaPromocoesEmpresa(string descricaoFiltro)
         {
             try
             {
                 NPromocoesEmpresaService servicePromocoesEmpresa = new NPromocoesEmpresaService();
 
                 List<ListaPromocoesEmpresaViewModel> listaPromocoesEmpresa = servicePromocoesEmpresa.BuscarListaDePromocoesDaEmpresa();
+
+                if (String.IsNullOrEmpty(descricaoFiltro) == false)
+                {
+                    listaPromocoesEmpresa = listaPromocoesEmpresa.Where(m => (m.nomeOferta.ToUpper().Contains(descricaoFiltro.ToUpper()))).ToList();
+                }
 
                 for (int i = 0; i < listaPromocoesEmpresa.Count; i++)
                 {

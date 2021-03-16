@@ -166,4 +166,16 @@
             );
         }
     });
+
+    //BOTÃO PESQUISAR
+    $("#btn-pesquisar").click(function (e) {
+        debugger;
+
+        if ($('#inPesquisar').val() != "") {
+            $('#gridCidades').bootgrid('reload');
+        }
+        else {
+            swal({ title: "ATENÇÃO:\n\nDigite ALGO no campo do FILTRO para pesquisar.", type: "warning", confirmButtonColor: "#337ab7" });
+        }
+    });
 });
