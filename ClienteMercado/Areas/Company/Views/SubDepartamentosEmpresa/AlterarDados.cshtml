@@ -32,9 +32,12 @@
                         <button id="btn-voltar" class="btn btn-primary" title="Voltar"><i class="fas fa-arrow-left"></i> Voltar</button>
                     </div>
                     <div class="col-md-1">
+                        <button id="btn-cadastrar" class="btn btn-primary" title="Cadastrar"><i class="far fa-file"></i> Cadastrar</button>
+                    </div>
+                    <div class="col-md-1">
                         <button id="btn-alterar" class="btn btn-primary" title="Gravar"><i class="fa fa-save"></i> Gravar</button>
                     </div>
-                    <div class="col-md-10">&nbsp;</div>
+                    <div class="col-md-9">&nbsp;</div>
                 </div>
             </div>
             <!-- BEGIN FORM-->
@@ -74,4 +77,5 @@
     <!-- END VALIDATION STATES-->
 </div>
 
+@Html.Hidden("Url1", @Url.Action("Cadastro", "SubDepartamentosEmpresa", new { area = "Company" }))
 @Html.Hidden("Url2", @Url.Action("Index", "SubDepartamentosEmpresa", new { area = "Company" }))
