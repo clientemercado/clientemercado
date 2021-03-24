@@ -1,4 +1,3 @@
-C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.Infra.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.Domain.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.Domain.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.Domain.pdb
@@ -17,6 +16,7 @@ C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\Sy
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\EntityFramework.dll
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.Data.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.Data.dll.config
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.Infra.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.Infra.dll.config
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.UI.Core.pdb
 C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Domain\bin\Debug\ClienteMercado.UI.Core.dll.config

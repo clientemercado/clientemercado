@@ -130,7 +130,8 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                 dadosNewLocalidadesEmpresa.id_CidadeEmpresaCliente = obj.id_CidadeEmpresaCliente;
                 dadosNewLocalidadesEmpresa.nomeLocalidade_LocalidadeCidadeEmpresaCliente= obj.nomeLocalidade_LocalidadeCidadeEmpresaCliente;
-                dadosNewLocalidadesEmpresa.cepLocalidade_LocalidadeCidadeEmpresaCliente = obj.cepLocalidade_LocalidadeCidadeEmpresaCliente;
+                dadosNewLocalidadesEmpresa.cepLocalidade_LocalidadeCidadeEmpresaCliente = 
+                    obj.cepLocalidade_LocalidadeCidadeEmpresaCliente.Replace(".","").Trim();
                 //dadosNewLocalidadesEmpresa.latitude_logitude_cep_UsuarioEmpresaCliente = obj.uf_UsuarioEmpresaCliente;
 
                 //GRAVAR NOVA LOCALIDADE de ATUAÇÃO da EMPRESA CLIENTE
