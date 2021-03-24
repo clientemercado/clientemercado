@@ -92,7 +92,7 @@ namespace ClienteMercado.Infra.Repositories
         /// <summary>
         /// ALTERAR DADOS do DEPTO da EMPRESA
         /// </summary>
-        public void AlterarDadosDeptoEmpresa(Departamento_EmpresaCliente obj)
+        public Departamento_EmpresaCliente AlterarDadosDeptoEmpresa(Departamento_EmpresaCliente obj)
         {
             try
             {
@@ -105,8 +105,13 @@ namespace ClienteMercado.Infra.Repositories
                     dadosDeptoEmpresa.descricao_DepartamentoEmpresaCliente = obj.descricao_DepartamentoEmpresaCliente;
                     //dadosDeptoEmpresa.ativoInativo_DepartamentoEmpresaCliente = obj.ativoInativo_DepartamentoEmpresaCliente;
 
+                    if (obj.imagem_DepartamentoEmpresaCliente != "")
+                        dadosDeptoEmpresa.imagem_DepartamentoEmpresaCliente = obj.imagem_DepartamentoEmpresaCliente;
+
                     _contexto.SaveChanges();
                 }
+
+                return dadosDeptoEmpresa;
             }
             catch (System.Exception e)
             {

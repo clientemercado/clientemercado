@@ -23,6 +23,7 @@ namespace ClienteMercado.Data.Entities
         public bool ativoInativo_DepartamentoEmpresaCliente { get; set; }
         public DateTime? dataInativou_DepartamentoEmpresaCliente { get; set; }
         public int? idUsuarioInativou_DepartamentoEmpresaCliente { get; set; }
+        public string imagem_DepartamentoEmpresaCliente { get; set; }
 
 
         [ForeignKey("id_EmpresaCliente")]

@@ -32,9 +32,9 @@ namespace ClienteMercado.Domain.Services
         /// <summary>
         /// ALTERAR DADOS do DEPTO da EMPRESA
         /// </summary>
-        public void AlterarDadosDeptoEmpresa(Departamento_EmpresaCliente obj)
+        public Departamento_EmpresaCliente AlterarDadosDeptoEmpresa(Departamento_EmpresaCliente obj)
         {
-            drepository.AlterarDadosDeptoEmpresa(obj);
+            return drepository.AlterarDadosDeptoEmpresa(obj);
         }
 
         /// <summary>

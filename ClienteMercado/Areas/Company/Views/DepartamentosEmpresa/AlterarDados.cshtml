@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
@@ -45,7 +46,7 @@
                         <div class="col-md-12">
                             <div class="col-md-5"><font color="#3297E0">Nome Departamento:</font></div>
                             <div class="col-md-2"><font color="#3297E0">Ativar:</font></div>
-                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-3"><font color="#3297E0">LogoMarca:</font></div>
                             <div class="col-md-2">&nbsp;</div>
                         </div>
                         <div class="col-md-12">
@@ -56,7 +57,20 @@
                                 <!-- OBS: ACERTAR: IMPLEMENTAR CHECK BOX PARA ATIVAR/DESATIVAR DEPTO -->
                                 @*<input type="text" id="inAtivarDesativar" data-required="1" size="" class="form-control cadastro obg data" placeholder="" value="" />*@
                             </div>
-                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-3">
+                                @{
+                                    string caminhoImagem = (string.IsNullOrEmpty(Model.imagem_DepartamentoEmpresaCliente)) ? "https://www.placehold.it/200x120/EFEFEF/AAAAAA&amp;text=Foto+Centro+de+Custo" : Url.Content("~/Content/imagensDeptos/" + Model.imagem_DepartamentoEmpresaCliente);
+                                }
+                                <div class="fileinput-new thumbnail" style="width: 220px; height: 180px;margin: 0;">
+                                    <img src="@caminhoImagem" id="logoMarcaDepto" alt="" style='width: 220px; height: 170px;'>
+                                </div>
+                                <div style="margin: 0 auto;"><label for="">&nbsp;</label></div>
+                                <div class="btn btn-primary fileinput-button" style="align-content: center;">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <input id="fileupload" type="file" title="Carregar Logomarca" class="form-control" onblur="" name="files[]" multiple>
+                                </div>
+                                @*<div class="col-md-10 progress" id="barra_progresso" style="width: 48%; display:none">&nbsp;</div>*@
+                            </div>
                             <div class="col-md-2">&nbsp;</div>
                         </div>
                     </div>
@@ -67,6 +81,7 @@
             <!-- END FORM-->
 
             <input type="hidden" id="inIEC" value="@Model.iDEC" />
+            <input type="hidden" id="inNomeImagem" value="" />
         </div>
     </div>
     <!-- END VALIDATION STATES-->

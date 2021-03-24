@@ -2,10 +2,14 @@
 using ClienteMercado.Domain.Services;
 using ClienteMercado.UI.Core.ViewModel;
 using ClienteMercado.Utils.Net;
+using ClienteMercado.Utils.Utilitarios;
 using ClienteMercado.Utils.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -179,7 +183,9 @@ namespace ClienteMercado.Areas.Company.Controllers
 
                     dadosDaEmpresaClienteEUsuario.iDEC = dadosDeptoEmpresa.id_DepartamentoEmpresaCliente;
                     dadosDaEmpresaClienteEUsuario.descricao_DepartamentoEmpresaCliente = dadosDeptoEmpresa.descricao_DepartamentoEmpresaCliente;
-                    dadosDaEmpresaClienteEUsuario.ativoInativo_DepartamentoEmpresaCliente = dadosDeptoEmpresa.ativoInativo_DepartamentoEmpresaCliente.ToString();
+                    dadosDaEmpresaClienteEUsuario.ativoInativo_DepartamentoEmpresaCliente = 
+                        dadosDeptoEmpresa.ativoInativo_DepartamentoEmpresaCliente.ToString();
+                    dadosDaEmpresaClienteEUsuario.imagem_DepartamentoEmpresaCliente = dadosDeptoEmpresa.imagem_DepartamentoEmpresaCliente;
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS
@@ -214,9 +220,9 @@ namespace ClienteMercado.Areas.Company.Controllers
                 //dadosDeptoEmpresaAlterar.ativoInativo_DepartamentoEmpresaCliente = true;
 
                 //ALTERAR DADOS do DEPTO da EMPRESA
-                serviceDepartamentoEmpresa.AlterarDadosDeptoEmpresa(dadosDeptoEmpresaAlterar);
+                dadosDeptoEmpresaAlterar = serviceDepartamentoEmpresa.AlterarDadosDeptoEmpresa(dadosDeptoEmpresaAlterar);
 
-                return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "ok", idRegistroAtualizado = dadosDeptoEmpresaAlterar.id_DepartamentoEmpresaCliente }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception erro)
             {
@@ -261,5 +267,87 @@ namespace ClienteMercado.Areas.Company.Controllers
             }
         }
 
+
+        //========================================================================
+        //GRAVAR IMAGEM LOGOMARCA da EQUIPE de TRABALHO
+        public ActionResult GravarImagemLogoMarcaDepto(int idDepto, string imagem, string nome, string extensao)
+        {
+            string[] extensoesValidas = new string[] { "image/jpg", "image/jpeg", "image/png", "image/JPG", "image/JPEG", "image/PNG" };
+
+            var status = new { status = "ok" };
+
+            //Se foi carregada alguma foto
+            if (nome != null)
+            {
+                if (!extensoesValidas.Contains(extensao))
+                {
+                    //IMAGEM de upload NÃO É VÁLIDA
+                    status = new { status = "Nok" };
+                }
+                else
+                {
+                    string caminhoImagemPh = AppDomain.CurrentDomain.BaseDirectory.ToString(); //Pega o caminho físico do PROJETO, para ser usado na montagem do caminho real de armaz.
+
+                    //Montando o caminho de armazenamento a ser confirmada existência
+                    caminhoImagemPh = (caminhoImagemPh + "Content/imagensDeptos/");
+
+                    //Verifica se a estrutura de pastas de armazenamento está criada. Se não existir, cria imediatamente
+                    DirectoryInfo dirEmpresa = new DirectoryInfo(caminhoImagemPh);
+
+                    //Cria as PASTAS
+                    if (dirEmpresa.Exists == false)
+                    {
+                        //Criando a pasta para armazenar as imagens
+                        dirEmpresa.Create();
+                    }
+
+                    //Pesquisando dados do DEPARTAMENTO
+
+                    NDepartamentoEmpresaClienteService serviceDeptos = new NDepartamentoEmpresaClienteService();
+                    Departamento_EmpresaCliente dadosDepto = 
+                        serviceDeptos.ConsultarDadosDeptoEmpresa(new Departamento_EmpresaCliente { id_DepartamentoEmpresaCliente =  idDepto});
+                    string logomarca = dadosDepto.imagem_DepartamentoEmpresaCliente;
+
+                    //Exclui a imagem se já existir
+                    if (!string.IsNullOrEmpty(logomarca))
+                    {
+                        string caminhoImagem = (caminhoImagemPh + logomarca);
+
+                        //Verifica se a imagem existe na pasta
+                        DirectoryInfo dirImagem = new DirectoryInfo(caminhoImagem);
+
+                        //Verificando se existe a imagem
+                        if (dirEmpresa.Exists == true)
+                        {
+                            //Exclui a imagem
+                            FileInfo arquivoADeletar = new FileInfo(Server.MapPath("~/Content/imagensDeptos/" + logomarca));
+                            arquivoADeletar.Delete();
+                        }
+                    }
+
+                    //Processo de gravação da nova Imagem
+                    //string novoNomeDoArquivo = CodificarNomeDeArquivo.renomearComHash(nome);
+                    string novoNomeDoArquivo = nome;
+                    //novoNomeDoArquivo = codEquipe.ToString() + "_" + novoNomeDoArquivo;
+                    string convert = imagem.Replace("data:" + extensao + ";base64,", String.Empty);
+
+                    byte[] image64 = Convert.FromBase64String(convert);
+                    string savedFileName = Path.Combine(Server.MapPath("~/Content/imagensDeptos/"), Path.GetFileName(novoNomeDoArquivo));
+                    using (var ms = new MemoryStream(image64))
+                    {
+                        Image img = Image.FromStream(ms);
+                        //System.Drawing.Image img = image.GetThumbnailImage(500, 500, null, IntPtr.Zero);
+                        img.Save(savedFileName, ImageFormat.Jpeg);
+                    }
+
+                    //Atualiza o nome da Logomarca no banco
+                    dadosDepto.imagem_DepartamentoEmpresaCliente = novoNomeDoArquivo;
+                    serviceDeptos.AlterarDadosDeptoEmpresa(dadosDepto);
+                }
+            }
+
+            return Json(status, "text/x-json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
+        }
+        //========================================================================
     }
 }

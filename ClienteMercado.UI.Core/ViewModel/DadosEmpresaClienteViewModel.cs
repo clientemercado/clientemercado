@@ -53,6 +53,7 @@ namespace ClienteMercado.UI.Core.ViewModel
 
         public string descricao_DepartamentoEmpresaCliente { get; set; }
         public string ativoInativo_DepartamentoEmpresaCliente { get; set; }
+        public string imagem_DepartamentoEmpresaCliente { get; set; }
 
         public string descricao_SubDepartamentoEmpresaCliente { get; set; }
         public int id_DepartamentoEmpresaCliente { get; set; }

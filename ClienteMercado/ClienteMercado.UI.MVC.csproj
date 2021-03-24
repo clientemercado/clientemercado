@@ -4979,6 +4979,7 @@
     <Folder Include="Areas\Utilitarios\Controllers\" />
     <Folder Include="Areas\Utilitarios\Models\" />
     <Folder Include="Areas\Utilitarios\Views\Shared\" />
+    <Folder Include="Content\imagensDeptos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

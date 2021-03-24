@@ -65,6 +65,48 @@
                     debugger;
 
                     if (data.status == "ok") {
+                        var idRegistroGerado = data.idRegistroGerado;
+
+                        //--------------------------------------------------------------------------
+                        //GRAVAR IMAGEM
+                        if ($('#inNomeImagem').val() != "") {
+                            //Gravando a imagem
+                            $.ajax({
+                                type: "POST",
+                                url: "/DepartamentosEmpresa/GravarImagemLogoMarcaDepto",
+                                dataType: "json",
+                                data: {
+                                    'idDepto': idRegistroGerado, 'imagem': $("#logoMarcaDepto").attr("src"), 'nome': $("#logoMarcaDepto").attr("nome"), 'extensao': $("#logoMarcaDepto").attr("extensao")
+                                },
+                                success: function (data) {
+                                    $.unblockUI();
+
+                                    if (data.status == "Nok") {
+                                        swal({ title: "O arquivo selecionado não possui um formato válido!", text: "Os seguintes formatos são aceitos: .jpg .jpeg .png", type: "warning", confirmButtonColor: "#337ab7" });
+                                    }
+                                    else {
+                                        new PNotify({
+                                            title: 'SUCESSO!',
+                                            text: 'IMAGEM do DEPARTAMETO GRAVADA com SUCESSO!!',
+                                            type: 'success',
+                                            styling: 'bootstrap3',
+                                            icons: 'bootstrap3',
+                                            addclass: 'customsuccess',
+                                            animateSpeed: 'fast',
+                                            mouseReset: true,
+                                            Buttons: { closer: true }
+                                        });
+                                    }
+                                },
+                                error: function (result) {
+                                    $.unblockUI();
+
+                                    swal({ title: "Ocorreu algum erro na gravação da IMAGEM! \nTente novamente.", type: "error", confirmButtonColor: "#337ab7" });
+                                }
+                            });
+                        }
+                        //--------------------------------------------------------------------------
+
                         new PNotify({
                             title: 'SUCESSO!',
                             text: 'DADOS GRAVADOS com SUCESSO!!',
@@ -76,8 +118,6 @@
                             mouseReset: true,
                             Buttons: { closer: true }
                         });
-
-                        var idRegistroGerado = data.idRegistroGerado;
 
                         //REDIRECIONAR PARA TELA DE EDIÇÃO
                         window.location.href = "/Company/DepartamentosEmpresa/AlterarDados?id=" + idRegistroGerado;
@@ -138,6 +178,48 @@
                     debugger;
 
                     if (data.status == "ok") {
+                        var idRegistroAtualizado = data.idRegistroAtualizado;
+
+                        //--------------------------------------------------------------------------
+                        //GRAVAR IMAGEM
+                        if ($('#inNomeImagem').val() != "") {
+                            //Gravando a imagem
+                            $.ajax({
+                                type: "POST",
+                                url: "/DepartamentosEmpresa/GravarImagemLogoMarcaDepto",
+                                dataType: "json",
+                                data: {
+                                    'idDepto': idRegistroAtualizado, 'imagem': $("#logoMarcaDepto").attr("src"), 'nome': $("#logoMarcaDepto").attr("nome"), 'extensao': $("#logoMarcaDepto").attr("extensao")
+                                },
+                                success: function (data) {
+                                    $.unblockUI();
+
+                                    if (data.status == "Nok") {
+                                        swal({ title: "O arquivo selecionado não possui um formato válido!", text: "Os seguintes formatos são aceitos: .jpg .jpeg .png", type: "warning", confirmButtonColor: "#337ab7" });
+                                    }
+                                    else {
+                                        new PNotify({
+                                            title: 'SUCESSO!',
+                                            text: 'IMAGEM do DEPARTAMENTO GRAVADA com SUCESSO!!',
+                                            type: 'success',
+                                            styling: 'bootstrap3',
+                                            icons: 'bootstrap3',
+                                            addclass: 'customsuccess',
+                                            animateSpeed: 'fast',
+                                            mouseReset: true,
+                                            Buttons: { closer: true }
+                                        });
+                                    }
+                                },
+                                error: function (result) {
+                                    $.unblockUI();
+
+                                    swal({ title: "Ocorreu algum erro na gravação da IMAGEM! \nTente novamente.", type: "error", confirmButtonColor: "#337ab7" });
+                                }
+                            });
+                        }
+                        //--------------------------------------------------------------------------
+
                         new PNotify({
                             title: 'SUCESSO!',
                             text: 'DADOS ATUALIZADOS com SUCESSO!!',
@@ -177,4 +259,27 @@
             swal({ title: "ATENÇÃO:\n\nDigite ALGO no campo do FILTRO para pesquisar.", type: "warning", confirmButtonColor: "#337ab7" });
         }
     });
+
+    //=======================================================
+    //Carrega a imagem
+    $("#fileupload").change(function (event) {
+        debugger;
+
+        var reader = new FileReader();
+
+        $(reader).load(function (event) {
+
+            $("#logoMarcaDepto").attr("src", event.target.result);
+            var extension = event.target.result.replace(/^.*\./, '');
+            //console.log(extension);
+        });
+
+        reader.readAsDataURL(event.target.files[0]);
+
+        $("#logoMarcaDepto").attr("extensao", event.target.files[0].type);
+        $("#logoMarcaDepto").attr("nome", event.target.files[0].name);
+
+        $('#inNomeImagem').val(event.target.files[0].name);
+    });
+    //=======================================================
 });
