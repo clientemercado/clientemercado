@@ -96,6 +96,7 @@ namespace ClienteMercado.UI.Core.ViewModel
         public string unidadePesoEmbalagem_ProdutoEmpresaCliente { get; set; }
         public string valorVenda_ProdutoEmpresaCliente { get; set; }
         public int? id_SubDepartamentoEmpresaCliente { get; set; }
+        public int? idUltimoDepartamentoRegsSubDepto { get; set; }
         public int? id_EmpresaFabricantesMarcas { get; set; }
         public int? id_PromocaoVendaEmpresaCliente { get; set; }
         public string ativoInativo_ProdutoEmpresaCliente { get; set; }

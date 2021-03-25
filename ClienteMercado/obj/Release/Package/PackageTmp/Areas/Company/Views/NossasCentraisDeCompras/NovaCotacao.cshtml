@@ -47,7 +47,7 @@
         }
 
     .ui-pnotify {
-        top: 100px; /*Replace the 25px with the top that you need*/
+        top: 100px;
         right: 25px;
         position: absolute;
         height: auto;
@@ -122,7 +122,7 @@
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" id="inVoltarCotacoesCC" class="btn default button-previous"><i class="fas fa-arrow-left"></i> Voltar</a>
+                            <a href="#" id="inVoltarCotacoesCC" class="btn default button-previous"><i class="fas fa-arrow-left"></i></i> Voltar</a>
                             <a href="#" id="inBtnAdicionar" class="btn blue button-submit" style="display:none;" title="Adicionar Produto na Cotação"><i class="fas fa-plus"></i> Adicionar Produto</a>
                             &nbsp;&nbsp;
                             <a href="#" id="inDescartarProdutosCotados" class="btn btn-warning btn-large" style="display:none;">Limpar Cotação <i class="fa fa-refresh"></i></a>
@@ -203,7 +203,7 @@
                                     <th data-column-id="unidadeProdutoCotado" data-width="5%">Unid.</th>
                                     <th data-column-id="embalagemProduto" data-align="right" data-width="7%">Embalagem</th>
                                     <th data-column-id="valorDoProdutoCotado" data-width="5%" data-align="right">R$ Valor</th>
-                                    <th data-formatter="commands" data-align="center" data-width="8%">&nbsp;</th>
+                                    <th data-formatter="commands" data-width="8%" data-align="center">&nbsp;Status</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -238,6 +238,12 @@
     jQuery(document).ready(function () {
         debugger;
 
+        /*
+         CONTINUAR AQUI...
+
+            - NA COLUNA STATUS, ATUALIZAR O STATUS QUE HJ SÓ MOSTRA 'EM COTAÇÃO'
+         */
+
         $('#inDataEncerramento').val($('#inDataSugeridaTermino').val());
 
         $(".data").mask("99/99/9999");
@@ -259,13 +265,13 @@
             }
         }
 
-        if ($('#inCotacaoAnexada').val() == "nao") {
-            $("#inBtnAdicionar").attr("disabled", false);
-            $(".cotacao").prop("disabled", false);
-        } else {
-            $("#inBtnAdicionar").attr("disabled", true);
-            $(".cotacao").prop("disabled", true);
-        }
+        //if ($('#inCotacaoAnexada').val() == "nao") {
+        //    $("#inBtnAdicionar").attr("disabled", false);
+        //    $(".cotacao").prop("disabled", false);
+        //} else {
+        //    $("#inBtnAdicionar").attr("disabled", true);
+        //    $(".cotacao").prop("disabled", true);
+        //} 
 
         //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
         var grid = $('#gridItensDaCotacaoIndividual').bootgrid({
@@ -546,7 +552,7 @@
             }*@
             });
         //----------------------------------------------------------
-    });
+        });
 
         //CHECAR a DATA de ENCERRAMENTO da COTAÇÃO
         $("#inDataEncerramento").blur(function () {

@@ -88,6 +88,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     //TRECHO ESSENCIAL PRA EIBIÇÃO DOS DADOS DA EMPRESA CLIENTE E USUÁRIO LOGADOS
                     NEmpresaUsuarioService serviceEmpresaCliente = new NEmpresaUsuarioService();
                     NUsuarioEmpresaService serviceUsuEmpresaCliente = new NUsuarioEmpresaService();
+                    NSubDepartamentoEmpresaService serviceSubDepartamentoEmpresa = new NSubDepartamentoEmpresaService();
                     DadosEmpresaClienteViewModel dadosDaEmpresaClienteEUsuario = new DadosEmpresaClienteViewModel();
 
                     EmpresaCliente dadosEmpresaLogada =
@@ -100,6 +101,7 @@ namespace ClienteMercado.Areas.Company.Controllers
                     dadosDaEmpresaClienteEUsuario.nomeUsuarioEmpresaLogada = dadosUsuEmpresaLogada.nome_UsuarioEmpresaCliente;
 
                     dadosDaEmpresaClienteEUsuario.ListagemDepartamentos = ListagemDepartamentos();
+                    dadosDaEmpresaClienteEUsuario.idUltimoDepartamentoRegsSubDepto = serviceSubDepartamentoEmpresa.ConsultarIdUltimoDeptoRegistradoNosSubDeptos();
                     //----------------------------------------------------------------------------------------------------------------
 
                     //VIEWBAGS

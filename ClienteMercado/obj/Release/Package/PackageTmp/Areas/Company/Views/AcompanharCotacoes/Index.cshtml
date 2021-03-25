@@ -73,11 +73,11 @@
                             <table id="gridNossasCentraisDeCompras" class="table table-bordered table-striped table-condensed flip-content">
                                 <thead class="flip-content">
                                     <tr>
-                                        @*<th><input type="checkbox" class="icheck"></th>*@
+                                        <th data-column-id="numeroDaCC" data-width="6%" data-formatter="link0">Nº</th>
                                         <th data-column-id="nomeCentralCompras" data-width="30%" data-formatter="link1">Central Compras</th>
-                                        <th data-column-id="ramoAtividadeCentralCompras" data-width="20%" data-formatter="link2">Ramo Atividade</th>
+                                        <th data-column-id="ramoAtividadeCentralCompras" data-width="25%" data-formatter="link2">Ramo Atividade</th>
                                         <th data-column-id="quantasEmpresas" data-width="6%" data-align="right" data-formatter="link3">Part.</th>
-                                        <th data-column-id="cidadeDaCentralCompras" data-width="26%" data-formatter="link4">Cidade</th>
+                                        <th data-column-id="cidadeDaCentralCompras" data-width="15%" data-formatter="link4">Cidade</th>
                                         <th data-column-id="ufDaCentralCompras" data-width="5%" data-align="center" data-formatter="link5">UF</th>
                                         <th data-column-id="statusCentralCompras" data-width="13%" data-align="center" data-formatter="status">Status</th>
                                     </tr>
@@ -123,6 +123,15 @@
                     var value = row.statusCentralCompras,
                     label = (value === "ATIVA") ? "success" : "danger";
                     return "<span class='label label-" + label + "'><b>" + value + "</b></span>";
+                },
+                "link0": function(column, row)
+                {
+                    if (row.statusCentralCompras != "CONVITE") {
+                        return "<a href=\"@Url.Action("CotacoesDaCentralDeCompras", "AcompanharCotacoes")?cCC=" + row.ID_CENTRAL_COMPRAS + "\">" + row.idCC + "</a>";
+                    }
+                    else {
+                        return row.idCC;
+                    }
                 },
                 "link1": function (column, row) {
                     if (row.statusCentralCompras != "CONVITE") {
@@ -241,7 +250,6 @@
             else {
                 swal({ title: "ATENÇÃO:\n\nInforme uma DESCRIÇÃO da Central de Compras ou um RAMO de ATIVIDADE para pesquisar.", type: "warning", confirmButtonColor: "#337ab7" });
             }
-
         });
 
         //CLIQUE do GRUPO de ATIVIDADES

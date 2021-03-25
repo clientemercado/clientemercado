@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "SuperMarket_On";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.css" />
+
+<link href="~/Areas/Company/Content/css/index.css" rel="stylesheet" />
+<script src="~/Areas/Company/Content/js/DepartamentosEmpresa.js"></script>
+
+<div class="row">
+    <!-- BEGIN VALIDATION STATES-->
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                Cadastro - Departamentos da Empresa
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button id="btn-voltar" class="btn btn-primary" title="Voltar"><i class="fas fa-arrow-left"></i> Voltar</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-gravar" class="btn btn-primary" title="Gravar"><i class="fa fa-save"></i> Gravar</button>
+                    </div>
+                    <div class="col-md-10">&nbsp;</div>
+                </div>
+            </div>
+            <!-- BEGIN FORM-->
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-5"><font color="#3297E0">Nome Departamento:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">Ativar:</font></div>
+                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-2">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <input type="text" id="inNomeDepto" data-required="1" size="" class="form-control obg" placeholder="" value="" />
+                            </div>
+                            <div class="col-md-2"> <!-- OBS: ACERTAR: IMPLEMENTAR CHECK BOX PARA ATIVAR/DESATIVAR DEPTO -->
+                                @*<input type="text" id="inAtivarDesativar" data-required="1" size="" class="form-control obg data" placeholder="" value="" />*@
+                            </div>
+                            <div class="col-md-3">
+                                @{
+                                    string caminhoImagem = (string.IsNullOrEmpty(Model.imagem_DepartamentoEmpresaCliente)) ? "https://www.placehold.it/200x120/EFEFEF/AAAAAA&amp;text=Foto+Centro+de+Custo" : Url.Content("~/Content/imagensDeptos/" + Model.imagem_DepartamentoEmpresaCliente);
+                                }
+                                <div class="fileinput-new thumbnail" style="width: 220px; height: 180px;margin: 0;">
+                                    <img src="@caminhoImagem" id="logoMarcaDepto" alt="" style='width: 220px; height: 170px;'>
+                                </div>
+                                <div style="margin: 0 auto;"><label for="">&nbsp;</label></div>
+                                <div class="btn btn-primary fileinput-button" style="align-content: center;">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <input id="fileupload" type="file" title="Carregar Logomarca" class="form-control" onblur="" name="files[]" multiple>
+                                </div>
+                                @*<div class="col-md-10 progress" id="barra_progresso" style="width: 48%; display:none">&nbsp;</div>*@
+                            </div>
+                            <div class="col-md-2">&nbsp;</div>
+                        </div>
+                    </div>
+                    <!-- ================================================================================= -->
+                </div>
+            </form>
+            <!-- END FORM-->
+
+            @*<input type="hidden" id="inRecarregaGrid" value="0" />*@
+        </div>
+    </div>
+    <!-- END VALIDATION STATES-->
+</div>
+
+@Html.Hidden("Url2", @Url.Action("Index", "DepartamentosEmpresa", new { area = "Company" }))
+@Html.Hidden("Url3", @Url.Action("AlterarDados", "DepartamentosEmpresa", new { area = "Company" }))
+
+

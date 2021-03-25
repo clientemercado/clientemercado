@@ -52,5 +52,13 @@ namespace ClienteMercado.Domain.Services
         {
             return drepository.BuscarListaSubDepartamentosEmpresa();
         }
+
+        /// <summary>
+        /// BUSCAR ID DO ÚLTIMO DEPTO REGISTRADO PARA O SUB-DEPTO
+        /// </summary>
+        public int? ConsultarIdUltimoDeptoRegistradoNosSubDeptos()
+        {
+            return drepository.ConsultarIdUltimoDeptoRegistradoNosSubDeptos();
+        }
     }
 }

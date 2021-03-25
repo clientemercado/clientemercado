@@ -54,7 +54,7 @@
         <div class="portlet-body form">
             <form class="form-horizontal">
                 <div class="form-body"> <!-- CONTINUAR AQUI - ACERTAR ESSE RETORNO NO BOTÃO VOLTAR -->
-                    <a href="@Url.Action("DataLocation", "Configuration_registry")" class="btn default button-previous"><i class="fas fa-arrow-left"></i> Voltar</a>
+                    <a href="@Url.Action("DataLocation", "Configuration_registry")" class="btn default button-previous"><i class="fas fa-arrow-left"></i></i> Voltar</a>
                     <hr />
                     <div class="form-group">
                         <div class="col-md-12">@*<font color="#3297E0"><h4><b>Como sua empresa pretende atuar no Cliente Mercado:</b></h4></font>*@
@@ -65,7 +65,7 @@
                             <ul>
                                 <li><h4>Ao aceitar os termos de uso, sua data para uso gratuito iniciará hoje <b>@ViewBag.dataHojeFormatada</b> e finalizará em <b>@ViewBag.dataVencimentoPeriodoGratuito;</b></h4></li>
                                 <li><h4>Sua empresa poderá atuar em nossa plataforma nesse período, como empresa <b>COMPRADORA</b> ou empresa <b>FORNECEDORA</b> ou ambos (<b>COMPRADORA</b> e <b>FORNECEDORA</b>);</h4></li>
-                                <li><h4>Após o término do <b>período de gratuidade</b> em <b>@ViewBag.dataVencimentoPeriodoGratuito</b>, caso você opte por continuar a usar a plataforma, (<b>após sua confirmação</b>) lhe será cobrada uma taxa mensal de R$ 50,00, a ser paga via Boleto Bancário (+ taxa boleto) ou Cartão de Crédito;</h4></li>
+                                <li><h4>Após o término do <b>período de gratuidade</b> em <b>@ViewBag.dataVencimentoPeriodoGratuito</b>, caso você opte por continuar a usar a plataforma, (<b>após sua confirmação</b>) lhe será cobrada uma taxa mensal de <b>R$ 150,00</b>, a ser paga via <b>Boleto Bancário</b> (+ taxa boleto), <b>Cartão de Crédito</b> ou <b>PicPay</b>;</h4></li>
                                 <li><h4>Reinteramos que esta <b>plataforma</b> é uma <b>ferramenta profissional</b> de <b>uso pago</b>, que <b>visa trazer economia para sua empresa através das Compras em Grupo</b>, diminuindo dessa forma o seu preço final para o consumidor e tornando sua empresa mais competitiva no mercado onde atua.</h4></li>
                             </ul>
                         </div>

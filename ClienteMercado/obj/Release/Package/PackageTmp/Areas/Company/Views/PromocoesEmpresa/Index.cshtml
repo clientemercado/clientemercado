@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "SuperMarket_On";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.css" />
+
+<link href="~/Areas/Company/Content/css/index.css" rel="stylesheet" />
+<script src="~/Areas/Company/Content/js/PromocoesEmpresa.js"></script>
+
+<div class="row">
+    <!-- BEGIN VALIDATION STATES-->
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                Cadastro e Manutenção de Dados - Promoções da Empresa
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button id="btn-cadastrar" class="btn btn-primary" title="Cadastrar"><i class="far fa-file"></i> Cadastrar</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-excluir" class="btn btn-danger" title="Excluir"><i class="far fa-trash-alt"></i> Excluir</button>
+                    </div>
+                    <div class="col-md-10">&nbsp;</div>
+                </div>
+            </div>
+            <!-- BEGIN FORM-->
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-8"><font color="#3297E0"><b>Empresa:</b></font></div>
+                            <div class="col-md-4">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-8">
+                                <input type="text" name="name" id="inPesquisar" data-required="1" size="10" class="form-control" placeholder="Descrição..." />
+                            </div>
+                            <div class="col-md-4">
+                                <button id="btn-pesquisar" class="btn blue" title="Pesquisar conforme dados selecionados"><i class="fas fa-search"></i> Pesquisar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <!-- OBS: ACERTAR: ADAPTAR GRID DO BOOTGRID CONFORME TELA ALTERAÇÃO DE PEDIDOS -->
+                    <div class="form-group">
+                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table id="gridPromocoesEmpresa" class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th data-formatter="link0" data-width="4%" data-header-align="center" data-align="center">&nbsp;</th>
+                                        <th data-column-id="nomeOferta" data-width="26%" data-formatter="link1" data-header-align="left">&nbsp;Nome Oferta</th>
+                                        <th data-column-id="percentualOffOferta" data-width="10%" data-align="right" data-formatter="link2" data-header-align="center">% Desc.</th>
+                                        <th data-column-id="dataCadastroOferta" data-width="13%" data-align="right" data-formatter="link3" data-header-align="center">Cadastrado em</th>
+                                        <th data-column-id="dataValidadeOferta" data-width="10%" data-align="right" data-formatter="link4" data-header-align="center">Valido até</th>
+                                        <th data-column-id="ativaInativaOferta" data-width="5%" data-align="center" data-formatter="link5" data-header-align="center">Ativa</th>
+                                        <th data-column-id="" data-width="32%" data-formatter="link6" data-header-align="center">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- ================================================================================= -->
+                </div>
+            </form>
+            <!-- END FORM-->
+
+            <input type="hidden" id="inRecarregaGrid" value="0" />
+        </div>
+    </div>
+    <!-- END VALIDATION STATES-->
+</div>
+
+@Html.Hidden("Url1", @Url.Action("Cadastro", "PromocoesEmpresa", new { area = "Company" }))
+
+<script>
+    $(document).ready(function () {
+        //=================================================================
+        //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
+        var grid = $('#gridPromocoesEmpresa').bootgrid({
+            ajax: true,
+            navigation: 0, //CABEÇALHO: 2 - Exibe só RODAPÉ
+            columnSelection: false, //SELETOR de COLUNA: True - Habilita / False - Desabilita
+            url: "/PromocoesEmpresa/BuscarListaPromocoesEmpresa",
+            post: function () {
+                /* PARÂMETROS a serem enviados na REQUISIÇÃO AJAX */
+                debugger;
+
+                return {
+                    'descricaoFiltro': $('#inPesquisar').val()
+                };
+            },
+            selection: true,
+            multiSelect: true,
+            rowSelect: true,
+            keepSelection: true,
+            formatters: {
+                "link0": function (column, row) {
+                    return "<input type='checkbox' name='checkbox' id='" + row.idPromocaoVenda + "' class='itemcotado' title='' value='" + row.idPromocaoVenda + "'>";
+                },
+                "link1": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "PromocoesEmpresa")?id=" + row.idPromocaoVenda + "\">" + row.nomeOferta + "</a>";
+                },
+                "link2": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "PromocoesEmpresa")?id=" + row.idPromocaoVenda + "\">" + row.percentualOffOferta + "</a>";
+                },
+                "link3": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "PromocoesEmpresa")?id=" + row.idPromocaoVenda + "\">" + row.dataCadastroOferta + "</a>";
+                },
+                "link4": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "PromocoesEmpresa")?id=" + row.idPromocaoVenda + "\">" + row.dataValidadeOferta + "</a>";
+                },
+                "link5": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "PromocoesEmpresa")?id=" + row.idPromocaoVenda + "\">" + row.ativaInativaOferta + "</a>";
+                },
+                "link6": function (column, row) {
+                    return "";
+                }
+            }
+        }).on("loaded.rs.jquery.bootgrid", function () {
+            /* Executa depois que os dados são carregados e renderizados */
+
+        });
+        //=================================================================
+    });
+</script>

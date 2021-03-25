@@ -58,6 +58,26 @@ namespace ClienteMercado.Infra.Repositories
         }
 
         /// <summary>
+        /// BUSCAR ID DO ÚLTIMO DEPTO REGISTRADO PARA O SUB-DEPTO
+        /// </summary>
+        public int? ConsultarIdUltimoDeptoRegistradoNosSubDeptos()
+        {
+            try
+            {
+                var query = "SELECT TOP 1 SD.* " +
+                            "FROM SubDepartamento_EmpresaCliente SD " +
+                            "ORDER BY SD.id_DepartamentoEmpresaCliente DESC";
+                List<SubDepartamento_EmpresaCliente> listaSubDeptos = _contexto.Database.SqlQuery<SubDepartamento_EmpresaCliente>(query).ToList();
+
+                return listaSubDeptos[0].id_DepartamentoEmpresaCliente;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// CARREGAR LISTA de SUB-DEPTO da EMPRESA CLIENTE - GRID
         /// </summary>
         public List<ListaSubDeptosEmpresaViewModel> BuscarListaSubDepartamentosEmpresa()

@@ -10,3 +10,15 @@ C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Data\obj\Release\ClienteM
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Data\obj\Release\ClienteMercado.Data.csproj.CopyComplete
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Data\obj\Release\ClienteMercado.Data.dll
 C:\COMPRARCOM\REPOSITORY\clientemercado\ClienteMercado.Data\obj\Release\ClienteMercado.Data.pdb
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Release\ClienteMercado.Data.dll.config
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Release\ClienteMercado.Data.dll
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Release\ClienteMercado.Data.pdb
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Release\EntityFramework.dll
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Release\EntityFramework.xml
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Release\ClienteMercado.Data.csprojAssemblyReference.cache
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Release\ClienteMercado.Data.csproj.CoreCompileInputs.cache
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Release\ClienteMercado.Data.csproj.CopyComplete
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Release\ClienteMercado.Data.dll
+C:\Users\Edwilson\Source\Repos\clientemercado\ClienteMercado.Data\obj\Release\ClienteMercado.Data.pdb

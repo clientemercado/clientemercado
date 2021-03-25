@@ -12,7 +12,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Acesso/Views/Registration_company/Index.cshtml">
-      <publishTime>05/19/2019 15:18:51</publishTime>
+      <publishTime>03/04/2021 16:25:46</publishTime>
     </File>
     <File Include="Areas/Acesso/Views/Web.config">
       <publishTime>09/28/2018 17:14:02</publishTime>
@@ -23,38 +23,98 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/CadastroUsuario/Views/Web.config">
       <publishTime>09/28/2018 17:14:37</publishTime>
     </File>
+    <File Include="Areas/Company/Content/css/index.css">
+      <publishTime>03/06/2021 11:38:40</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/CadastroClientesEmpresa.js">
+      <publishTime>03/16/2021 15:45:51</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/CidadesAtuacaoEmpresa.js">
+      <publishTime>03/16/2021 15:48:15</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/CuponsDescontoEmpresa.js">
+      <publishTime>03/16/2021 15:48:15</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/DepartamentosEmpresa.js">
+      <publishTime>03/24/2021 14:39:12</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/EmpresaCliente.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/FabricantesMarcas.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/LocalidadesAtuacaoEmpresa.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/MeiosPagamentoEmpresa.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/PedidosClientes.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/ProdutosEmpresa.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/PromocoesEmpresa.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/SubDepartamentosEmpresa.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
+    <File Include="Areas/Company/Content/js/UsuarioEmpresaCliente.js">
+      <publishTime>03/16/2021 15:48:14</publishTime>
+    </File>
     <File Include="Areas/Company/Views/AcompanharCotacoes/AnalisarRespostaDoFornecedor.cshtml">
-      <publishTime>10/09/2019 19:05:31</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/AcompanharCotacoes/CotacoesDaCentralDeCompras.cshtml">
-      <publishTime>09/14/2019 17:01:49</publishTime>
+      <publishTime>03/06/2021 16:47:58</publishTime>
     </File>
     <File Include="Areas/Company/Views/AcompanharCotacoes/Index.cshtml">
-      <publishTime>07/02/2019 13:07:41</publishTime>
+      <publishTime>02/02/2021 13:53:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/AcompanharCotacoes/MapaDaCotacao.cshtml">
-      <publishTime>09/28/2019 15:25:12</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/AcompanharCotacoes/VisualizarItensCotadosPorEmpresa.cshtml">
-      <publishTime>09/30/2019 13:52:15</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CadastroClientesEmpresa/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CadastroClientesEmpresa/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CadastroClientesEmpresa/Index.cshtml">
+      <publishTime>03/16/2021 15:54:28</publishTime>
     </File>
     <File Include="Areas/Company/Views/CentraisDeCompras/CotacoesDaCentralDeComprasSistema.cshtml">
-      <publishTime>07/02/2019 13:05:37</publishTime>
+      <publishTime>03/06/2021 16:47:58</publishTime>
     </File>
     <File Include="Areas/Company/Views/CentraisDeCompras/Index.cshtml">
       <publishTime>07/02/2019 13:03:43</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CidadesAtuacaoEmpresa/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CidadesAtuacaoEmpresa/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CidadesAtuacaoEmpresa/Index.cshtml">
+      <publishTime>03/16/2021 15:54:40</publishTime>
     </File>
     <File Include="Areas/Company/Views/Configuracoes/Index.cshtml">
       <publishTime>11/01/2018 08:47:08</publishTime>
     </File>
     <File Include="Areas/Company/Views/Configuration_registry/DataLocation.cshtml">
-      <publishTime>06/29/2019 13:32:14</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/Configuration_registry/Index.cshtml">
       <publishTime>06/29/2019 13:28:27</publishTime>
     </File>
     <File Include="Areas/Company/Views/Configuration_registry/PaymentData.cshtml">
-      <publishTime>06/29/2019 13:33:45</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/Configuration_registry/Politica.cshtml">
       <publishTime>05/25/2019 15:58:02</publishTime>
@@ -69,46 +129,148 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2018 13:35:00</publishTime>
     </File>
     <File Include="Areas/Company/Views/CotacoesEnviadas/Index.cshtml">
-      <publishTime>12/04/2018 18:29:27</publishTime>
+      <publishTime>03/04/2021 16:25:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/CotacoesEnviadas/VisualizarCotacaoEnviada.cshtml">
-      <publishTime>12/04/2018 14:22:22</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/CotacoesRecebidas/EmpresasParticipantesCentralCompras.cshtml">
       <publishTime>12/06/2018 07:59:18</publishTime>
     </File>
+    <File Include="Areas/Company/Views/CotacoesRecebidas/EmpresasParticipantesDaCotacaoCentralCompras.cshtml">
+      <publishTime>03/06/2021 16:47:46</publishTime>
+    </File>
     <File Include="Areas/Company/Views/CotacoesRecebidas/Index.cshtml">
-      <publishTime>12/04/2018 18:45:20</publishTime>
+      <publishTime>02/04/2021 09:13:32</publishTime>
     </File>
     <File Include="Areas/Company/Views/CotacoesRecebidas/VisualizarResponderCotacao.cshtml">
-      <publishTime>12/06/2018 07:34:07</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CuponsDescontoEmpresa/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CuponsDescontoEmpresa/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/CuponsDescontoEmpresa/Index.cshtml">
+      <publishTime>03/16/2021 15:54:57</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/DepartamentosEmpresa/AlterarDados.cshtml">
+      <publishTime>03/24/2021 13:21:45</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/DepartamentosEmpresa/Cadastro.cshtml">
+      <publishTime>03/24/2021 13:54:05</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/DepartamentosEmpresa/Index.cshtml">
+      <publishTime>03/16/2021 15:55:10</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/EmpresaCliente/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/EmpresaCliente/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/EmpresaCliente/Index.cshtml">
+      <publishTime>03/16/2021 15:55:22</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/FabricantesMarcas/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/FabricantesMarcas/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/FabricantesMarcas/Index.cshtml">
+      <publishTime>03/16/2021 15:55:40</publishTime>
     </File>
     <File Include="Areas/Company/Views/Home/Index.cshtml">
-      <publishTime>11/01/2018 08:49:20</publishTime>
+      <publishTime>03/05/2021 12:54:36</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/LocalidadesAtuacaoEmpresa/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/LocalidadesAtuacaoEmpresa/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/LocalidadesAtuacaoEmpresa/Index.cshtml">
+      <publishTime>03/16/2021 15:56:09</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/MeiosPagamentoEmpresa/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/MeiosPagamentoEmpresa/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/MeiosPagamentoEmpresa/Index.cshtml">
+      <publishTime>03/16/2021 15:56:05</publishTime>
     </File>
     <File Include="Areas/Company/Views/NossasCentraisDeCompras/AnalisarEnviarCotacao.cshtml">
-      <publishTime>09/20/2019 18:26:13</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/NossasCentraisDeCompras/CotacoesDaCentralDeCompras.cshtml">
-      <publishTime>09/01/2019 14:01:43</publishTime>
+      <publishTime>03/06/2021 16:47:58</publishTime>
     </File>
     <File Include="Areas/Company/Views/NossasCentraisDeCompras/Index.cshtml">
-      <publishTime>06/30/2019 14:08:43</publishTime>
+      <publishTime>02/02/2021 14:12:55</publishTime>
     </File>
     <File Include="Areas/Company/Views/NossasCentraisDeCompras/NovaCentralDeCompras.cshtml">
       <publishTime>11/06/2018 13:48:47</publishTime>
     </File>
     <File Include="Areas/Company/Views/NossasCentraisDeCompras/NovaCotacao.cshtml">
-      <publishTime>08/31/2019 18:08:03</publishTime>
+      <publishTime>03/06/2021 16:47:58</publishTime>
     </File>
     <File Include="Areas/Company/Views/NossasCentraisDeCompras/VisualizarCotacao.cshtml">
-      <publishTime>08/22/2019 18:49:34</publishTime>
+      <publishTime>03/06/2021 16:47:46</publishTime>
     </File>
     <File Include="Areas/Company/Views/NovaCentralDeCompras/ConvidarEmpresasCentralDeCompras.cshtml">
       <publishTime>07/28/2019 16:10:37</publishTime>
     </File>
     <File Include="Areas/Company/Views/NovaCentralDeCompras/CriarCentralDeCompras.cshtml">
       <publishTime>06/29/2019 14:25:27</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/PedidosClientes/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:37</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/PedidosClientes/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:38</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/PedidosClientes/Index.cshtml">
+      <publishTime>03/16/2021 16:01:21</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/ProdutosEmpresa/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:37</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/ProdutosEmpresa/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:37</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/ProdutosEmpresa/Index.cshtml">
+      <publishTime>03/16/2021 15:57:34</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/PromocoesEmpresa/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:37</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/PromocoesEmpresa/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:37</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/PromocoesEmpresa/Index.cshtml">
+      <publishTime>03/16/2021 15:56:49</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/SubDepartamentosEmpresa/AlterarDados.cshtml">
+      <publishTime>03/24/2021 18:15:32</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/SubDepartamentosEmpresa/Cadastro.cshtml">
+      <publishTime>03/24/2021 18:18:49</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/SubDepartamentosEmpresa/Index.cshtml">
+      <publishTime>03/24/2021 18:44:40</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/UsuarioEmpresaCliente/AlterarDados.cshtml">
+      <publishTime>03/16/2021 16:10:37</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/UsuarioEmpresaCliente/Cadastro.cshtml">
+      <publishTime>03/16/2021 16:10:37</publishTime>
+    </File>
+    <File Include="Areas/Company/Views/UsuarioEmpresaCliente/Index.cshtml">
+      <publishTime>03/16/2021 15:57:33</publishTime>
     </File>
     <File Include="Areas/Company/Views/Web.config">
       <publishTime>10/07/2018 15:46:47</publishTime>
@@ -129,55 +291,55 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/11/2014 13:57:44</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Data.dll">
-      <publishTime>10/11/2019 17:04:11</publishTime>
+      <publishTime>03/25/2021 07:56:41</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Data.dll.config">
       <publishTime>09/30/2018 16:39:03</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Data.pdb">
-      <publishTime>10/11/2019 17:04:11</publishTime>
+      <publishTime>03/25/2021 07:56:41</publishTime>
     </File>
     <File Include="bin/ClienteMercado.dll">
-      <publishTime>10/11/2019 17:04:15</publishTime>
+      <publishTime>03/25/2021 07:56:47</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Domain.dll">
-      <publishTime>10/11/2019 17:04:13</publishTime>
+      <publishTime>03/25/2021 07:56:44</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Domain.dll.config">
       <publishTime>02/25/2019 14:31:48</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Domain.pdb">
-      <publishTime>10/11/2019 17:04:13</publishTime>
+      <publishTime>03/25/2021 07:56:44</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Infra.dll">
-      <publishTime>10/11/2019 17:04:12</publishTime>
+      <publishTime>03/25/2021 07:56:44</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Infra.dll.config">
       <publishTime>12/11/2018 08:01:51</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Infra.pdb">
-      <publishTime>10/11/2019 17:04:12</publishTime>
+      <publishTime>03/25/2021 07:56:44</publishTime>
     </File>
     <File Include="bin/ClienteMercado.pdb">
-      <publishTime>10/11/2019 17:04:15</publishTime>
+      <publishTime>03/25/2021 07:56:47</publishTime>
     </File>
     <File Include="bin/ClienteMercado.UI.Core.dll">
-      <publishTime>10/11/2019 17:04:12</publishTime>
+      <publishTime>03/25/2021 07:56:42</publishTime>
     </File>
     <File Include="bin/ClienteMercado.UI.Core.dll.config">
       <publishTime>12/11/2018 08:01:51</publishTime>
     </File>
     <File Include="bin/ClienteMercado.UI.Core.pdb">
-      <publishTime>10/11/2019 17:04:12</publishTime>
+      <publishTime>03/25/2021 07:56:42</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Utils.dll">
-      <publishTime>10/11/2019 17:04:11</publishTime>
+      <publishTime>03/25/2021 07:56:42</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Utils.dll.config">
       <publishTime>10/01/2018 08:05:22</publishTime>
     </File>
     <File Include="bin/ClienteMercado.Utils.pdb">
-      <publishTime>10/11/2019 17:04:11</publishTime>
+      <publishTime>03/25/2021 07:56:42</publishTime>
     </File>
     <File Include="bin/Content/imagensProdutosAlternativos/teste.txt">
       <publishTime>08/19/2016 10:36:05</publishTime>
@@ -249,7 +411,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2015 08:52:14</publishTime>
     </File>
     <File Include="Content/assets/admin/layout/css/layout.css">
-      <publishTime>04/21/2015 08:52:14</publishTime>
+      <publishTime>03/04/2021 16:23:05</publishTime>
     </File>
     <File Include="Content/assets/admin/layout/css/themes/blue.css">
       <publishTime>04/21/2015 08:52:14</publishTime>
@@ -444,7 +606,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2015 08:52:14</publishTime>
     </File>
     <File Include="Content/assets/admin/layout2/css/layout.css">
-      <publishTime>04/21/2015 08:52:14</publishTime>
+      <publishTime>03/04/2021 16:23:05</publishTime>
     </File>
     <File Include="Content/assets/admin/layout2/css/themes/blue.css">
       <publishTime>04/21/2015 08:52:14</publishTime>
@@ -783,7 +945,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2015 08:52:14</publishTime>
     </File>
     <File Include="Content/assets/admin/layout4/css/layout.css">
-      <publishTime>04/21/2015 08:52:14</publishTime>
+      <publishTime>03/04/2021 16:23:05</publishTime>
     </File>
     <File Include="Content/assets/admin/layout4/css/themes/default.css">
       <publishTime>04/21/2015 08:52:14</publishTime>
@@ -1374,7 +1536,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2015 08:52:14</publishTime>
     </File>
     <File Include="Content/assets/admin/pages/scripts/components-pickers.js">
-      <publishTime>04/21/2015 08:52:14</publishTime>
+      <publishTime>03/04/2021 16:25:47</publishTime>
     </File>
     <File Include="Content/assets/admin/pages/scripts/contact-us.js">
       <publishTime>04/21/2015 08:52:14</publishTime>
@@ -9243,7 +9405,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2015 08:52:14</publishTime>
     </File>
     <File Include="Content/assets/global/plugins/datatables/extensions/Scroller/examples/data/2500.txt">
-      <publishTime>04/21/2015 08:52:14</publishTime>
+      <publishTime>03/04/2021 16:25:50</publishTime>
     </File>
     <File Include="Content/assets/global/plugins/datatables/extensions/Scroller/examples/data/ssp.php">
       <publishTime>04/21/2015 08:52:14</publishTime>
@@ -10191,7 +10353,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2015 08:52:14</publishTime>
     </File>
     <File Include="Content/assets/global/plugins/icheck/demo/css/montserrat-bold.svg">
-      <publishTime>04/21/2015 08:52:14</publishTime>
+      <publishTime>05/22/2020 23:02:03</publishTime>
     </File>
     <File Include="Content/assets/global/plugins/icheck/demo/css/montserrat-bold.ttf">
       <publishTime>04/21/2015 08:52:14</publishTime>
@@ -10203,7 +10365,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2015 08:52:14</publishTime>
     </File>
     <File Include="Content/assets/global/plugins/icheck/demo/css/montserrat-regular.svg">
-      <publishTime>04/21/2015 08:52:14</publishTime>
+      <publishTime>05/22/2020 23:02:03</publishTime>
     </File>
     <File Include="Content/assets/global/plugins/icheck/demo/css/montserrat-regular.ttf">
       <publishTime>04/21/2015 08:52:14</publishTime>
@@ -14214,7 +14376,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/25/2015 07:45:26</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>05/15/2019 13:27:49</publishTime>
+      <publishTime>03/04/2021 16:25:59</publishTime>
     </File>
     <File Include="Views/Login/Lembrete.cshtml">
       <publishTime>09/10/2015 09:27:55</publishTime>
@@ -14226,40 +14388,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/11/2014 13:57:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout-Others-Home-Confirmacao.cshtml">
-      <publishTime>10/04/2018 07:59:01</publishTime>
+      <publishTime>03/08/2020 15:11:21</publishTime>
     </File>
     <File Include="Views/Shared/_Layout-Others-Home-Politica.cshtml">
-      <publishTime>05/25/2019 16:55:30</publishTime>
+      <publishTime>03/04/2021 16:25:52</publishTime>
     </File>
     <File Include="Views/Shared/_Layout-Others-Home-Termos.cshtml">
-      <publishTime>05/25/2019 16:01:44</publishTime>
+      <publishTime>03/08/2020 15:11:21</publishTime>
     </File>
     <File Include="Views/Shared/_Layout-Others-Home.cshtml">
-      <publishTime>10/04/2018 07:59:01</publishTime>
+      <publishTime>03/08/2020 15:11:21</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/21/2019 14:00:07</publishTime>
+      <publishTime>03/08/2021 19:45:54</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout_CM.cshtml">
+      <publishTime>03/04/2021 16:25:52</publishTime>
     </File>
     <File Include="Views/Shared/_Layout_configuration.cshtml">
-      <publishTime>05/21/2019 14:19:17</publishTime>
+      <publishTime>03/04/2021 16:25:53</publishTime>
     </File>
     <File Include="Views/Shared/_Layout_Confirma_Novo_Login.cshtml">
-      <publishTime>10/04/2018 07:59:01</publishTime>
+      <publishTime>03/08/2020 15:11:21</publishTime>
     </File>
     <File Include="Views/Shared/_Layout_internas.cshtml">
-      <publishTime>10/04/2018 07:59:01</publishTime>
+      <publishTime>03/08/2020 15:11:21</publishTime>
     </File>
     <File Include="Views/Shared/_Layout_internas2.cshtml">
       <publishTime>10/04/2018 08:04:33</publishTime>
     </File>
     <File Include="Views/Shared/_Layout_internas_cotante.cshtml">
-      <publishTime>10/04/2018 08:00:14</publishTime>
+      <publishTime>03/08/2020 15:11:21</publishTime>
     </File>
     <File Include="Views/Shared/_Layout_internas_profissional.cshtml">
-      <publishTime>10/04/2018 08:01:45</publishTime>
+      <publishTime>03/08/2020 15:11:21</publishTime>
     </File>
     <File Include="Views/Shared/_Layout_Login.cshtml">
-      <publishTime>05/08/2019 15:10:59</publishTime>
+      <publishTime>03/08/2020 15:11:21</publishTime>
     </File>
     <File Include="Views/UsuarioCotante/AcompanharCotacoesEnviadasUsuarioCotante.cshtml">
       <publishTime>09/29/2018 15:30:39</publishTime>
@@ -14313,7 +14478,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/09/2018 14:03:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/11/2019 17:04:20</publishTime>
+      <publishTime>03/25/2021 07:57:00</publishTime>
     </File>
   </ItemGroup>
 </Project>

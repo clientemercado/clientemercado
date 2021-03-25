@@ -3,8 +3,13 @@
     var url2 = $('#Url2').val();
     var url3 = $('#Url3').val();
 
+    if ($('#inUDSD').val() != "")
+        $('#inListaDepartamentos').val($('#inUDSD').val());
+
     if ($('#inDept').val() != "")
         $('#inListaDepartamentos').val($('#inDept').val());
+
+    $('#inNomeSubDepto').focus();
 
     //BOTÃO NOVO CADASTRO
     $(document).on("click", "#btn-cadastrar", function () {

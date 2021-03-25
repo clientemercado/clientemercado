@@ -1,0 +1,115 @@
+﻿@model ClienteMercado.UI.Core.ViewModel.DadosEmpresaClienteViewModel
+
+@{
+    ViewBag.Title = "SuperMarket_On";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.css" />
+
+<link href="~/Areas/Company/Content/css/index.css" rel="stylesheet" />
+<script src="~/Areas/Company/Content/js/ProdutosEmpresa.js"></script>
+
+<div class="row">
+    <!-- BEGIN VALIDATION STATES-->
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                Alterar Cadastro - Produtos da Empresa
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button id="btn-voltar" class="btn btn-primary" title="Voltar"><i class="fas fa-arrow-left"></i> Voltar</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-alterar" class="btn btn-primary" title="Gravar"><i class="fa fa-save"></i> Gravar</button>
+                    </div>
+                    <div class="col-md-10">&nbsp;</div>
+                </div>
+            </div>
+            <!-- BEGIN FORM-->
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-6"><font color="#3297E0">Produto:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">Embalagem:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">Peso:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">Unidade:</font></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <!-- OBS: ACERTAR: IMPLEMENTAR VALIDAÇÃO DO CPF -->
+                                <input type="text" id="inNomeProduto" data-required="1" size="10" class="form-control obg" placeholder="" value="@Model.descricao_ProdutoEmpresaCliente" />
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="inEmbalagem" data-required="1" size="10" class="form-control obg" placeholder="" value="@Model.tipoEmbalagem_ProdutoEmpresaCliente" />
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="inPeso" data-required="1" size="10" class="form-control obg monetario" placeholder="" value="@Model.pesoEmbalagem_ProdutoEmpresaCliente" />
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="inUnidade" data-required="1" size="10" class="form-control obg" placeholder="" value="@Model.unidadePesoEmbalagem_ProdutoEmpresaCliente" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3"><font color="#3297E0">Sub-Depto:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Fabricante / Marca:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Aplicar Promo:</font></div>
+                            <div class="col-md-3">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                @Html.DropDownList("inListaSubDepto", Model.ListagemSubDepartamentos, new { @class = "form-control obg", @id = "inListaSubDepto", style = "", @tabindex = "" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.DropDownList("inListaFabricantes", Model.ListagemFabricantesMarcas, new { @class = "form-control obg", @id = "inListaFabricantes", style = "", @tabindex = "" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.DropDownList("inListaPromo", Model.ListagemPromocoesAtivas, new { @class = "form-control", @id = "inListaPromo", style = "", @tabindex = "" })
+                            </div>
+                            <div class="col-md-3">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2"><font color="#3297E0">R$ Venda:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">Ativar:</font></div>
+                            <div class="col-md-1">&nbsp;</div>
+                            <div class="col-md-7">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <!-- OBS: ACERTAR: IMPLEMENTAR VALIDAÇÃO DO CPF -->
+                                <input type="text" id="inVlrVenda" data-required="1" size="10" class="form-control obg monetario" placeholder="" value="@Model.valorVenda_ProdutoEmpresaCliente" />
+                            </div>
+                            <div class="col-md-1">
+                                @Html.DropDownList("inListaOpcoes", Model.ListagemOpcoesSimNao, new { @class = "form-control obg", @id = "inListaOpcoes", style = "", @tabindex = "" })
+                            </div>
+                            <div class="col-md-7">&nbsp;</div>
+                        </div>
+                    </div>
+                    <!-- ================================================================================= -->
+                </div>
+            </form>
+            <!-- END FORM-->
+
+            <input type="hidden" id="inIdP" value="@Model.iPEC" />
+            <input type="hidden" id="inSDp" value="@Model.id_SubDepartamentoEmpresaCliente" />
+            <input type="hidden" id="inFb" value="@Model.id_EmpresaFabricantesMarcas" />
+            <input type="hidden" id="inProm" value="@Model.id_PromocaoVendaEmpresaCliente" />
+            <input type="hidden" id="inOps" value="@Model.ativoInativo_ProdutoEmpresaCliente" />
+        </div>
+    </div>
+    <!-- END VALIDATION STATES-->
+</div>
+
+@Html.Hidden("Url2", @Url.Action("Index", "ProdutosEmpresa", new { area = "Company" }))

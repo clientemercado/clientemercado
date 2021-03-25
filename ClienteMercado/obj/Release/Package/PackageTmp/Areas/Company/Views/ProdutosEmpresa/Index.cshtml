@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "SuperMarket_On";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.css" />
+
+<link href="~/Areas/Company/Content/css/index.css" rel="stylesheet" />
+<script src="~/Areas/Company/Content/js/ProdutosEmpresa.js"></script>
+
+<div class="row">
+    <!-- BEGIN VALIDATION STATES-->
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                Cadastro e Manutenção de Dados - Produtos da Empresa
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button id="btn-cadastrar" class="btn btn-primary" title="Cadastrar"><i class="far fa-file"></i> Cadastrar</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-excluir" class="btn btn-danger" title="Excluir"><i class="far fa-trash-alt"></i> Excluir</button>
+                    </div>
+                    <div class="col-md-10">&nbsp;</div>
+                </div>
+            </div>
+            <!-- BEGIN FORM-->
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-8"><font color="#3297E0"><b>Empresa:</b></font></div>
+                            <div class="col-md-4">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-8">
+                                <input type="text" name="name" id="inPesquisar" data-required="1" size="10" class="form-control" placeholder="Descrição..." />
+                            </div>
+                            <div class="col-md-4">
+                                <button id="btn-pesquisar" class="btn blue" title="Pesquisar conforme dados selecionados"><i class="fas fa-search"></i> Pesquisar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <!-- OBS: ACERTAR: ADAPTAR GRID DO BOOTGRID CONFORME TELA ALTERAÇÃO DE PEDIDOS -->
+                    <div class="form-group">
+                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table id="gridProdutosEmpresa" class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th data-formatter="link0" data-width="4%" data-header-align="center" data-align="center">&nbsp;</th>
+                                        <th data-column-id="nomeProduto" data-width="20%" data-formatter="link1" data-header-align="left">&nbsp;Produto</th>
+                                        <th data-column-id="fabricanteMarcaProduto" data-width="10%" data-formatter="link2" data-header-align="left">&nbsp;Fabricante</th>
+                                        <th data-column-id="tipoEmbalagemProduto" data-width="5%" data-align="right" data-formatter="link3" data-header-align="center">Emb.</th>
+                                        <th data-column-id="pesoProduto" data-width="5%" data-align="right" data-formatter="link4" data-header-align="center">Peso</th>
+                                        <th data-column-id="unidadeProduto" data-width="5%" data-align="right" data-formatter="link5" data-header-align="center">Unid</th>
+                                        <th data-column-id="valorVendaProduto" data-width="7%" data-align="right" data-formatter="link6" data-header-align="center">R$ Venda</th>
+                                        <th data-column-id="departamentoProduto" data-width="10%" data-formatter="link7" data-header-align="left">Departamento</th>
+                                        <th data-column-id="subDepartamentoProduto" data-width="15%" data-align="left" data-formatter="link8" data-header-align="left">&nbsp;Sub-Departamento</th>
+                                        <th data-column-id="promocaoVigenteProduto" data-width="10%" data-align="left" data-formatter="link9" data-header-align="center">Promoção</th>
+                                        <th data-column-id="ativoInativoProduto" data-width="5%" data-formatter="link10" data-align="center" data-header-align="center">Ativo</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- ================================================================================= -->
+                </div>
+            </form>
+            <!-- END FORM-->
+
+            <input type="hidden" id="inRecarregaGrid" value="0" />
+        </div>
+    </div>
+    <!-- END VALIDATION STATES-->
+</div>
+
+@Html.Hidden("Url1", @Url.Action("Cadastro", "ProdutosEmpresa", new { area = "Company" }))
+
+<script>
+    $(document).ready(function () {
+        //=================================================================
+        //CONSULTA os DADOS e CARREGA o GRID ao entrar na página
+        var grid = $('#gridProdutosEmpresa').bootgrid({
+            ajax: true,
+            navigation: 0, //CABEÇALHO: 2 - Exibe só RODAPÉ
+            columnSelection: false, //SELETOR de COLUNA: True - Habilita / False - Desabilita
+            url: "/ProdutosEmpresa/BuscarListaProdutosEmpresa",
+            post: function () {
+                /* PARÂMETROS a serem enviados na REQUISIÇÃO AJAX */
+                debugger;
+
+                return {
+                    'descricaoFiltro': $('#inPesquisar').val()
+                };
+            },
+            selection: true,
+            multiSelect: true,
+            rowSelect: true,
+            keepSelection: true,
+            formatters: {
+                "link0": function (column, row) {
+                    return "<input type='checkbox' name='checkbox' id='" + row.idCodProduto + "' class='itemcotado' title='' value='" + row.idCodProduto + "'>";
+                },
+                "link1": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.nomeProduto + "</a>";
+                },
+                "link2": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.fabricanteMarcaProduto + "</a>";
+                },
+                "link3": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.tipoEmbalagemProduto + "</a>";
+                },
+                "link4": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.pesoProduto + "</a>";
+                },
+                "link5": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.unidadeProduto + "</a>";
+                },
+                "link6": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.valorVendaProduto + "</a>";
+                },
+                "link7": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.departamentoProduto + "</a>";
+                },
+                "link8": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.subDepartamentoProduto + "</a>";
+                },
+                "link9": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.promocaoVigenteProduto + "</a>";
+                },
+                "link10": function (column, row) {
+                    return "<a href=\"@Url.Action("AlterarDados", "ProdutosEmpresa")?id=" + row.idCodProduto + "\">" + row.ativoInativoProduto + "</a>";
+                }
+            }
+        }).on("loaded.rs.jquery.bootgrid", function () {
+            /* Executa depois que os dados são carregados e renderizados */
+
+        });
+        //=================================================================
+    });
+</script>

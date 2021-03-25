@@ -1,0 +1,149 @@
+﻿@model ClienteMercado.UI.Core.ViewModel.DadosEmpresaClienteViewModel
+
+@{
+    ViewBag.Title = "SuperMarket_On";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.buttons.css" />
+
+<link href="~/Areas/Company/Content/css/index.css" rel="stylesheet" />
+<script src="~/Areas/Company/Content/js/PedidosClientes.js"></script>
+
+<div class="row">
+    <!-- BEGIN VALIDATION STATES-->
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                Alterar Cadastro - Pedidos da Empresa
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button id="btn-voltar" class="btn btn-primary" title="Voltar"><i class="fas fa-arrow-left"></i> Voltar</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-alterar" class="btn btn-primary" title="Gravar"><i class="fa fa-save"></i> Gravar</button>
+                    </div>
+                    <div class="col-md-10">&nbsp;</div>
+                </div>
+            </div>
+            <!-- BEGIN FORM-->
+            <form action="#" class="form-horizontal">
+                <div class="form-body">
+                    @*<h4><b><font color="#3297E0">Dados Pedido Cliente:</font></b></h4>
+                    <hr />*@
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2"><font color="#3297E0">Nº Pedido:</font></div>
+                            <div class="col-md-10">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <input type="text" id="inNumPedControle" data-required="1" size="10" class="form-control" placeholder="" value="@Model.inCodControlePedidoClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-10">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5"><font color="#3297E0">Cliente:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Cidade:</font></div>
+                            <div class="col-md-1"><font color="#3297E0">UF:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Localidade:</font></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <input type="text" id="inNomeCliente" data-required="1" size="10" class="form-control" placeholder="" value="@Model.nomeClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="inCidade" data-required="1" size="10" class="form-control" placeholder="" value="@Model.cidadeClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-1">
+                                <input type="text" id="inUF" data-required="1" size="10" class="form-control" placeholder="" value="@Model.ufClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="inlocalidade" data-required="1" size="10" class="form-control" placeholder="" value="@Model.localidadeClienteEntrega" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5"><font color="#3297E0">Modo Pagamento:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Cupom Desc. aplicado:</font></div>
+                            <div class="col-md-1">&nbsp;</div>
+                            <div class="col-md-3">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <input type="text" id="inModoPag" data-required="1" size="10" class="form-control" placeholder="" value="@Model.modoPagamentoClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="tel" id="inCupom" data-required="1" size="10" class="form-control telefone" placeholder="" value="@Model.cuponDescontoClienteEntrega" readonly />
+                            </div>
+                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-3">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2"><font color="#3297E0">Vlr Pedido:</font></div>
+                            <div class="col-md-1"><font color="#3297E0">Entregue:</font></div>
+                            <div class="col-md-2"><font color="#3297E0">Data entrega:</font></div>
+                            <div class="col-md-3"><font color="#3297E0">Quem entregou:</font></div>
+                            <div class="col-md-4">&nbsp;</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <input type="text" id="inVlrPedido" data-required="1" size="" class="form-control monetario" placeholder="" value="@Model.valorPedido_PedidoClienteEmpresaCliente" />
+                            </div>
+                            <div class="col-md-1">
+                                @Html.DropDownList("inListaOpcoes", Model.ListagemOpcoesSimNao, new { @class = "form-control obg", @id = "inListaOpcoes", style = "", @tabindex = "" })
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="inPedDataEntrega" data-required="1" size="" class="form-control data" placeholder="" value="@Model.dataEntregaPedido_ClienteEmpresaCliente" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="inUsuEntrega" data-required="1" size="" class="form-control" placeholder="" value="@Model.nomeUsuarioFuncionarioEntrega" onclick="verificaCampo();" />
+                                <input type="text" id="inUsuEntrega_" data-required="1" style="display:none;" class="form-control" placeholder="" value="" onclick="verificaCampo();" />
+                                <input type="hidden" id="inIdUsuEntrega" value="@Model.idUsuarioEmpresaEntregou_ClienteEmpresaCliente" />
+                            </div>
+                            <div class="col-md-4">&nbsp;</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                        <div class="portlet-body flip-scroll col-md-12">
+                            <table id="gridItensPedido" class="table table-bordered table-striped table-condensed flip-content">
+                                <thead class="flip-content">
+                                    <tr>
+                                        <th data-formatter="link0" data-width="4%" data-header-align="center" data-align="center">&nbsp;</th>
+                                        <th data-column-id="itemPedido" data-width="20%" data-formatter="link1" data-header-align="center">Produto</th>
+                                        <th data-column-id="quantidadeItemPedido" data-width="10%" data-align="right" data-formatter="link2" data-header-align="center">Quant.</th>
+                                        <th data-column-id="valorUnitarioItemPedido" data-width="10%" data-align="right" data-formatter="link3" data-header-align="center">R$ Unit.</th>
+                                        <th data-column-id="totalProdutoComprado" data-width="10%" data-align="right" data-formatter="link4" data-header-align="center">R$ Total</th>
+                                        <th data-column-id="dataEntregaItemPedido" data-width="10%" data-align="right" data-formatter="link5" data-header-align="center">Data Entrega</th>
+                                        <th data-column-id="motivoNaoEntregaDotemPedido" data-width="46%" data-formatter="link6" data-header-align="center">Observações</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- ================================================================================= -->
+                </div>
+            </form>
+            <!-- END FORM-->
+
+            <input type="hidden" id="inIdPed" value="@Model.idPedidoCliente" />
+            <input type="hidden" id="inEntr" value="@Model.pedidoEntregue_PedidoClienteEmpresaCliente" />
+        </div>
+    </div>
+    <!-- END VALIDATION STATES-->
+</div>
+
+@Html.Hidden("Url2", @Url.Action("Index", "PedidosClientes", new { area = "Company" }))
